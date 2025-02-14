@@ -12,11 +12,29 @@ export default async function Page() {
     <main className="flex flex-col items-center gap-8 px-6 py-8">
       <h1 className="font-serif text-6xl font-extrabold">{`SUWO's History`}</h1>
 
-      {data.map(({ year }) => (
-        <Link key={year} href={`/history/${year}`}>
-          {year}
-        </Link>
-      ))}
+      <div className="flex flex-col items-center">
+        {data
+          .map(({ year }) => year)
+          .join(' - ')
+          .split(' ')
+          .map((item, index) => {
+            if (item == '-') {
+              return <hr key={index} className="h-12 w-px bg-gray-100" />
+            }
+
+            const year = parseInt(item)
+
+            return (
+              <Link
+                key={year}
+                href={`/history/${year}`}
+                className="p-1 text-xl"
+              >
+                {year}
+              </Link>
+            )
+          })}
+      </div>
     </main>
   )
 }
