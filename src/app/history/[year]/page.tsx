@@ -22,7 +22,8 @@ export default async function Page({ params }: PageProps) {
 
 export const generateStaticParams = async () => {
   const sql = getQueryBuilder()
-  const data: Table<Pick<History, 'year'>> = await sql`SELECT year FROM history`
+  const data: Table<Pick<History, 'year'>> =
+    await sql`SELECT year FROM history ORDER BY year DESC`
 
   return data.map(({ year }) => ({
     year: year?.toString(),
