@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
-import { cn } from '@/utils/cn'
+import { cn } from '@/cn'
 
 import './globals.css'
 
