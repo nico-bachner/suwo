@@ -1,12 +1,18 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Limelight, Raleway } from 'next/font/google'
 
 import { cn } from '@/cn'
 
 import '../globals.css'
 
-const fontSans = Inter({
+const fontSans = Raleway({
   variable: '--font-sans',
+  subsets: ['latin'],
+})
+
+const fontSerif = Limelight({
+  weight: '400',
+  variable: '--font-serif',
   subsets: ['latin'],
 })
 
@@ -21,7 +27,13 @@ type LayoutProps = Readonly<{
 
 const Layout = ({ children }: LayoutProps) => (
   <html lang="en">
-    <body className={cn('bg-gray-950 antialiased', fontSans.variable)}>
+    <body
+      className={cn(
+        'bg-gray-950 font-sans text-gray-100 antialiased',
+        fontSans.variable,
+        fontSerif.variable,
+      )}
+    >
       {children}
     </body>
   </html>
