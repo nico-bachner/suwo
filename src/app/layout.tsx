@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 
 import { cn } from '@/cn'
 
-import './globals.css'
+import '../globals.css'
 
 const fontSans = Inter({
   variable: '--font-sans',
@@ -21,7 +21,9 @@ type LayoutProps = Readonly<{
 
 const Layout = ({ children }: LayoutProps) => (
   <html lang="en">
-    <body className={cn('antialiased', fontSans.variable)}>{children}</body>
+    <body className={cn('bg-gray-950 antialiased', fontSans.variable)}>
+      {children}
+    </body>
   </html>
 )
 
