@@ -1,33 +1,27 @@
 @import 'tailwindcss';
 
-@layer base {
-  .prose {
-    @apply text-gray-300;
-  }
+/* Headings */
+.prose > h1,
+.prose > h2,
+.prose > h3 {
+  @apply font-bold text-gray-100;
+  margin-block: 1.5em 0.9em;
+}
+.prose > h1 + *,
+.prose > h2 + *,
+.prose > h3 + * {
+  margin-block-start: 0;
+}
+.prose > h1:first-child,
+.prose > h2:first-child,
+.prose > h3:first-child {
+  margin-block-start: 0;
+}
 
-  /* Headings */
-  .prose > h1,
-  .prose > h2,
-  .prose > h3 {
-    @apply font-bold text-gray-100;
-    margin-block: 1.5em 0.9em;
-  }
-  .prose > h1 + *,
-  .prose > h2 + *,
-  .prose > h3 + * {
-    margin-block-start: 0;
-  }
-  .prose > h1:first-child,
-  .prose > h2:first-child,
-  .prose > h3:first-child {
-    margin-block-start: 0;
-  }
-
-  /* Body Text */
-  .prose > p {
-    @apply max-w-prose;
-  }
-  .prose > p:not(:last-child) {
-    margin-block-end: 1.2em;
-  }
+/* Body Text */
+.prose > p {
+  @apply max-w-prose text-gray-300;
+}
+.prose > p:not(:last-child) {
+  margin-block-end: 1.2em;
 }
