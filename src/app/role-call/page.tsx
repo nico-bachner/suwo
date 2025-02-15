@@ -16,10 +16,12 @@ export default async function Page({ searchParams }: PageProps) {
 
   if (!year || !semester || !week) {
     return (
-      <main className="flex flex-col items-center gap-6 p-6">
-        <h1 className="font-serif text-4xl font-extrabold">Role Call</h1>
-        <p className="text-xl">Please select a year, semester, and week.</p>
-        <pre className="rounded-md bg-gray-800 px-4 py-3">
+      <main className="prose">
+        <h1>Role Call</h1>
+
+        <p>Please select a year, semester, and week.</p>
+
+        <pre>
           <code>/role-call?year=2025&semester=1&week=1</code>
         </pre>
       </main>

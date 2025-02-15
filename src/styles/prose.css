@@ -1,3 +1,7 @@
+.prose {
+  @apply w-full;
+}
+
 /* Headings */
 .prose > h1,
 .prose > h2,
@@ -52,4 +56,12 @@
 .prose > ul > li {
   padding-inline-start: 0.4em;
   margin-block: 0.6em;
+}
+
+.prose > pre {
+  @apply w-max max-w-full overflow-scroll rounded-md bg-gray-800 px-4 py-3;
+}
+
+.prose > pre code {
+  @apply text-gray-100;
 }
