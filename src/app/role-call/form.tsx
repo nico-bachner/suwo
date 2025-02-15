@@ -1,8 +1,8 @@
 import { Switch } from 'radix-ui'
 
+import { Submit } from '@/components/submit'
 import { RoleCall, Table } from '@/db'
 import { getQueryBuilder } from '@/neon'
-import { Submit } from '@/submit'
 
 type FormProps = {
   year: number

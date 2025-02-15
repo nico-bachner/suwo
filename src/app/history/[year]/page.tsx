@@ -1,4 +1,4 @@
-import { ContentPage } from '@/content_page'
+import { ContentPage } from '@/components/content_page'
 import { History, Table } from '@/db'
 import { getQueryBuilder } from '@/neon'
 
