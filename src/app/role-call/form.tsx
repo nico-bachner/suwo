@@ -43,7 +43,7 @@ export const Form = async ({ year, semester, week, id, name }: FormProps) => {
       <div className="flex flex-1 flex-col items-center justify-between gap-2 px-4 py-2 sm:flex-row">
         <span className="flex-1">{name}</span>
 
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row items-center gap-2">
           <span>Not Present</span>
           <Switch.Root
             name="present"
