@@ -14,7 +14,7 @@ type NavbarProps = {
 }
 
 export const Navbar = ({ className }: NavbarProps) => (
-  <nav className={cn('w-full bg-gray-950/50 py-4 backdrop-blur-lg', className)}>
+  <nav className={cn('w-full bg-gray-950/80 py-4 backdrop-blur-lg', className)}>
     <div className="mx-auto flex w-full max-w-screen-md flex-row items-center">
       <Link href="/" className="flex-1">
         <Image src={logo} alt="The SUWO logo" className="h-10 w-12" />
