@@ -7,6 +7,7 @@ import { Dialog, VisuallyHidden } from 'radix-ui'
 import { useState } from 'react'
 
 import { cn } from '@/cn'
+import { InstagramIcon } from '@/icons/Instagram'
 
 export const Menu = () => {
   const [open, setOpen] = useState(false)
@@ -36,8 +37,10 @@ export const Menu = () => {
       <Dialog.Trigger>
         <Bars3BottomRightIcon className="h-8 w-8 stroke-gray-100 stroke-1 sm:hidden" />
       </Dialog.Trigger>
+
       <Dialog.Portal>
-        <Dialog.Content className="fixed inset-0 z-10 flex flex-col gap-8 bg-gray-950 p-6">
+        <Dialog.Overlay className="fixed inset-0" />
+        <Dialog.Content className="fixed inset-0 z-10 flex flex-col gap-20 bg-gray-950 p-6">
           <VisuallyHidden.Root asChild>
             <Dialog.Title>SUWO</Dialog.Title>
           </VisuallyHidden.Root>
@@ -50,6 +53,16 @@ export const Menu = () => {
             <NavbarLink href="/about">About</NavbarLink>
             <NavbarLink href="/history">History</NavbarLink>
             <NavbarLink href="/join">Join</NavbarLink>
+          </div>
+
+          <div className="flex flex-row justify-center gap-4">
+            <a
+              href="https://www.instagram.com/suwo.syd/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <InstagramIcon className="h-6 w-6 stroke-gray-100 stroke-1" />
+            </a>
           </div>
         </Dialog.Content>
       </Dialog.Portal>

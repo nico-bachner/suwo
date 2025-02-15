@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { cn } from '@/cn'
+import { InstagramIcon } from '@/icons/Instagram'
 import logo from '@/images/logo.png'
 
 import { Menu } from './client/menu'
@@ -27,6 +28,13 @@ export const Navbar = ({ className }: NavbarProps) => (
         <Link href="/join" className="text-gray-100 hover:text-white">
           Join
         </Link>
+        <a
+          href="https://www.instagram.com/suwo.syd/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <InstagramIcon className="h-6 w-6 stroke-gray-100 stroke-1" />
+        </a>
       </div>
 
       <Menu />
