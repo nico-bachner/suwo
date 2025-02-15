@@ -8,6 +8,7 @@ import { useState } from 'react'
 
 import { cn } from '@/cn'
 import { InstagramIcon } from '@/icons/Instagram'
+import { YouTubeIcon } from '@/icons/YouTube'
 
 export const Menu = () => {
   const [open, setOpen] = useState(false)
@@ -24,7 +25,7 @@ export const Menu = () => {
       href={href}
       onClick={() => setOpen(false)}
       className={cn(
-        'text-xl text-gray-100',
+        'text-2xl text-gray-100',
         href == pathname && 'text-yellow-400',
       )}
     >
@@ -40,7 +41,7 @@ export const Menu = () => {
 
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0" />
-        <Dialog.Content className="fixed inset-0 z-10 flex flex-col gap-20 bg-gray-950 p-6">
+        <Dialog.Content className="fixed inset-0 z-10 flex flex-col justify-between bg-gray-950 p-6 pb-[20vh]">
           <VisuallyHidden.Root asChild>
             <Dialog.Title>SUWO</Dialog.Title>
           </VisuallyHidden.Root>
@@ -61,7 +62,14 @@ export const Menu = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <InstagramIcon className="h-6 w-6 stroke-gray-100 stroke-1" />
+              <InstagramIcon className="h-10 w-10 stroke-gray-100 stroke-1" />
+            </a>
+            <a
+              href="https://www.youtube.com/user/SydneyUniWindOrch"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <YouTubeIcon className="h-10 w-10 stroke-gray-100 stroke-1" />
             </a>
           </div>
         </Dialog.Content>

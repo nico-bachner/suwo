@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { cn } from '@/cn'
 import { InstagramIcon } from '@/icons/Instagram'
+import { YouTubeIcon } from '@/icons/YouTube'
 import logo from '@/images/logo.png'
 
 import { Menu } from './client/menu'
@@ -13,12 +14,12 @@ type NavbarProps = {
 
 export const Navbar = ({ className }: NavbarProps) => (
   <nav className={cn('w-full bg-gray-950/50 py-4 backdrop-blur-lg', className)}>
-    <div className="mx-auto flex w-full max-w-screen-md flex-row items-center justify-between">
-      <Link href="/">
+    <div className="mx-auto flex w-full max-w-screen-md flex-row items-center">
+      <Link href="/" className="flex-1">
         <Image src={logo} alt="The SUWO logo" className="h-10 w-12" />
       </Link>
 
-      <div className="hidden flex-1 flex-row items-center justify-end gap-4 sm:flex">
+      <div className="hidden flex-1 flex-row items-center justify-center gap-4 sm:flex">
         <Link href="/about" className="text-gray-100 hover:text-white">
           About
         </Link>
@@ -28,6 +29,16 @@ export const Navbar = ({ className }: NavbarProps) => (
         <Link href="/join" className="text-gray-100 hover:text-white">
           Join
         </Link>
+      </div>
+
+      <div className="hidden flex-1 flex-row items-center justify-end gap-4 sm:flex">
+        <a
+          href="https://www.youtube.com/user/SydneyUniWindOrch"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <YouTubeIcon className="h-6 w-6 stroke-gray-100 stroke-1" />
+        </a>
         <a
           href="https://www.instagram.com/suwo.syd/"
           target="_blank"
