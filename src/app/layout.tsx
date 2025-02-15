@@ -4,7 +4,7 @@ import { Limelight, Raleway } from 'next/font/google'
 import { cn } from '@/cn'
 import { Navbar } from '@/components/navbar'
 
-import '../globals.css'
+import '../styles/globals.css'
 
 const fontSans = Raleway({
   variable: '--font-sans',
@@ -35,7 +35,7 @@ const Layout = ({ children }: LayoutProps) => (
         fontSerif.variable,
       )}
     >
-      <Navbar className="sticky top-0 my-6 sm:my-12" />
+      <Navbar className="sticky top-0" />
 
       {children}
     </body>
