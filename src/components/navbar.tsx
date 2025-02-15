@@ -16,7 +16,21 @@ export const Navbar = ({ className }: NavbarProps) => (
         <Image src={logo} alt="The SUWO logo" className="h-10 w-[167px]" />
       </Link>
 
-      <Bars3BottomRightIcon className="h-8 w-8 stroke-gray-300 sm:hidden" />
+      <div className="hidden flex-1 flex-row items-center justify-end gap-4 sm:flex">
+        <Link href="/about" className="text-gray-100 hover:text-white">
+          About
+        </Link>
+        <Link href="/history" className="text-gray-100 hover:text-white">
+          History
+        </Link>
+        <Link href="/join" className="text-gray-100 hover:text-white">
+          Join
+        </Link>
+      </div>
+
+      <button>
+        <Bars3BottomRightIcon className="h-7 w-7 stroke-gray-300 sm:hidden" />
+      </button>
     </div>
   </nav>
 )

@@ -9,7 +9,7 @@ export default async function Page() {
     await sql`SELECT year FROM history ORDER BY year DESC`
 
   return (
-    <main className="flex flex-col items-center gap-8 px-6 py-8">
+    <main className="flex flex-col items-center gap-12">
       <h1 className="font-serif text-6xl font-extrabold">{`SUWO's History`}</h1>
 
       <div className="flex flex-col items-center">

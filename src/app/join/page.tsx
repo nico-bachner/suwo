@@ -1,8 +1,6 @@
-import { ContentPage } from '@/components/content_page'
-
 export default function Page() {
   return (
-    <ContentPage>
+    <main className="prose">
       <h1>Join</h1>
       <p>
         SUWO is a community band based at the University of Sydney. We are
@@ -68,6 +66,6 @@ export default function Page() {
         some level of experience in symphonic band repertoire. However, this is
         not a requirement, and are happy to accommodate players of all levels.
       </p>
-    </ContentPage>
+    </main>
   )
 }

@@ -30,7 +30,7 @@ export default async function Page({ searchParams }: PageProps) {
   const members: Table<Member> = await sql`SELECT * FROM members`
 
   return (
-    <main className="flex flex-col items-center gap-6 p-6">
+    <main className="flex flex-col items-center gap-6">
       <h1 className="font-serif text-2xl font-extrabold sm:text-3xl lg:text-4xl">
         Role Call – Week {week}
       </h1>

@@ -30,14 +30,16 @@ const Layout = ({ children }: LayoutProps) => (
   <html lang="en">
     <body
       className={cn(
-        'flex min-h-screen flex-col items-center bg-gray-950 px-6 font-sans text-gray-100 antialiased',
+        'bg-gray-950 font-sans text-gray-100 antialiased',
         fontSans.variable,
         fontSerif.variable,
       )}
     >
-      <Navbar className="sticky top-0" />
+      <div className="flex min-h-screen flex-col items-center gap-8 px-6 pb-20 sm:gap-12">
+        <Navbar className="sticky top-0" />
 
-      {children}
+        {children}
+      </div>
     </body>
   </html>
 )
