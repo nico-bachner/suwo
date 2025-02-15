@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { cn } from '@/cn'
+import { FacebookIcon } from '@/icons/Facebook'
 import { InstagramIcon } from '@/icons/Instagram'
 import { YouTubeIcon } from '@/icons/YouTube'
 import logo from '@/images/logo.png'
@@ -38,6 +39,13 @@ export const Navbar = ({ className }: NavbarProps) => (
           rel="noopener noreferrer"
         >
           <YouTubeIcon className="h-6 w-6 stroke-gray-100 stroke-1" />
+        </a>
+        <a
+          href="https://www.facebook.com/sydneyuniversitywindorchestra"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FacebookIcon className="h-6 w-6 stroke-gray-100 stroke-1" />
         </a>
         <a
           href="https://www.instagram.com/suwo.syd/"
