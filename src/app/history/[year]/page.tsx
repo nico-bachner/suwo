@@ -1,3 +1,4 @@
+import { ContentPage } from '@/content_page'
 import { History, Table } from '@/db'
 import { getQueryBuilder } from '@/neon'
 
@@ -13,10 +14,10 @@ export default async function Page({ params }: PageProps) {
     await sql`SELECT * FROM history WHERE year = ${year}`
 
   return (
-    <main className="prose p-6">
-      <h2 className="text-2xl">{year}</h2>
+    <ContentPage>
+      <h1>{year}</h1>
       <p>{data[0].content}</p>
-    </main>
+    </ContentPage>
   )
 }
 
