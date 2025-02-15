@@ -1,6 +1,6 @@
 import { Switch } from 'radix-ui'
 
-import { Submit } from '@/components/submit'
+import { Submit } from '@/components/client/submit'
 import { RoleCall, Table } from '@/db'
 import { getQueryBuilder } from '@/neon'
 
