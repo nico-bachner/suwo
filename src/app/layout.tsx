@@ -1,10 +1,8 @@
-import { Bars3BottomRightIcon } from '@heroicons/react/24/outline'
 import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
-import Image from 'next/image'
 
 import { cn } from '@/cn'
-import logo from '@/images/logo.png'
+import { Navbar } from '@/components/navbar'
 
 import '../globals.css'
 
@@ -37,13 +35,7 @@ const Layout = ({ children }: LayoutProps) => (
         fontSerif.variable,
       )}
     >
-      <nav className="sticky top-0 my-6 w-full bg-gray-950/50 p-4 backdrop-blur-lg sm:my-12">
-        <nav className="mx-auto flex w-full max-w-screen-md flex-row items-center justify-between">
-          <Image src={logo} alt="The SUWO logo" className="h-10 w-[167px]" />
-
-          <Bars3BottomRightIcon className="h-8 w-8 stroke-gray-300" />
-        </nav>
-      </nav>
+      <Navbar className="sticky top-0 my-6 sm:my-12" />
 
       {children}
     </body>
