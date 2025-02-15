@@ -2,6 +2,14 @@
   @apply w-full;
 }
 
+/* Text */
+.prose > h1,
+.prose > h2,
+.prose > h3,
+.prose > p {
+  @apply mx-auto max-w-screen-sm;
+}
+
 /* Headings */
 .prose > h1,
 .prose > h2,
@@ -31,7 +39,7 @@
 
 /* Body Text */
 .prose > p {
-  @apply max-w-prose text-gray-300;
+  @apply text-gray-300;
 }
 .prose > p:not(:last-child) {
   margin-block-end: 1.2em;
@@ -59,7 +67,7 @@
 }
 
 .prose > pre {
-  @apply w-max max-w-full overflow-scroll rounded-md bg-gray-800 px-4 py-3;
+  @apply mx-auto w-full max-w-screen-sm overflow-scroll rounded-md bg-gray-800 px-4 py-3;
 }
 
 .prose > pre code {
