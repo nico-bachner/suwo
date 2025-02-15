@@ -56,7 +56,7 @@ export const Navbar = ({ className }: NavbarProps) => (
         </a>
       </div>
 
-      <Menu />
+      <Menu className="sm:hidden" />
     </div>
   </nav>
 )

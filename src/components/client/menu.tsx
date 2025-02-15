@@ -11,7 +11,11 @@ import { FacebookIcon } from '@/icons/Facebook'
 import { InstagramIcon } from '@/icons/Instagram'
 import { YouTubeIcon } from '@/icons/YouTube'
 
-export const Menu = () => {
+type MenuProps = {
+  className?: string
+}
+
+export const Menu = ({ className }: MenuProps) => {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
 
@@ -36,8 +40,8 @@ export const Menu = () => {
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger>
-        <Bars3BottomRightIcon className="h-8 w-8 stroke-gray-100 stroke-1 sm:hidden" />
+      <Dialog.Trigger className={className}>
+        <Bars3BottomRightIcon className="h-8 w-8 stroke-gray-100 stroke-1" />
       </Dialog.Trigger>
 
       <Dialog.Portal>
