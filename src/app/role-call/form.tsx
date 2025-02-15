@@ -2,6 +2,7 @@ import { Switch } from 'radix-ui'
 
 import { RoleCall, Table } from '@/db'
 import { getQueryBuilder } from '@/neon'
+import { Submit } from '@/submit'
 
 type FormProps = {
   year: number
@@ -56,9 +57,7 @@ export const Form = async ({ year, semester, week, id, name }: FormProps) => {
         </div>
       </div>
 
-      <button type="submit" className="bg-gray-500 px-4 py-2">
-        Confirm
-      </button>
+      <Submit className="bg-gray-500 px-4 py-2" />
     </form>
   )
 }
