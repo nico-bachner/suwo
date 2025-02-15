@@ -30,10 +30,10 @@ export default async function Page({ searchParams }: PageProps) {
   const members: Table<Member> = await sql`SELECT * FROM members`
 
   return (
-    <main className="flex flex-col items-center gap-6">
-      <h1 className="font-serif text-2xl font-extrabold sm:text-3xl lg:text-4xl">
-        Role Call – Week {week}
-      </h1>
+    <main className="flex w-full flex-col items-center">
+      <div className="prose">
+        <h1>Role Call – Week {week}</h1>
+      </div>
 
       <div className="flex w-full max-w-screen-sm flex-col">
         {members.map(({ id, name }) => (
