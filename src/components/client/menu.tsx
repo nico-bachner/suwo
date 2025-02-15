@@ -42,7 +42,7 @@ export const Menu = () => {
 
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0" />
-        <Dialog.Content className="fixed inset-0 z-10 flex flex-col justify-between bg-gray-950 p-6 pb-[20vh]">
+        <Dialog.Content className="fixed inset-0 z-10 flex flex-col justify-between bg-gray-950/75 p-6 pb-[20vh] backdrop-blur-lg">
           <VisuallyHidden.Root asChild>
             <Dialog.Title>SUWO</Dialog.Title>
           </VisuallyHidden.Root>
