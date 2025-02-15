@@ -31,7 +31,7 @@ export default async function Page({ searchParams }: PageProps) {
 
   return (
     <main className="flex flex-col items-center gap-6 p-6">
-      <h1 className="font-serif text-4xl font-extrabold">
+      <h1 className="font-serif text-2xl font-extrabold sm:text-3xl lg:text-4xl">
         Role Call – Week {week}
       </h1>
 
