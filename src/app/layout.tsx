@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
 
 import { cn } from '@/cn'
-import { Navbar } from '@/components/navbar'
+import { Navbar } from '@/components/ui/navbar'
 
 import '../styles/globals.css'
 

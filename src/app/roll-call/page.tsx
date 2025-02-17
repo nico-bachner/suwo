@@ -3,17 +3,14 @@ import { Checkbox } from 'radix-ui'
 
 import { Submit } from '@/components/client/submit'
 import { TextInput } from '@/components/ui/text_input'
-import { Member, Table } from '@/db'
 import { getQueryBuilder } from '@/neon'
+import { Member, Table, Week } from '@/types/db'
+import { SearchParams } from '@/types/next'
 
 import { Row } from './row'
 
 type PageProps = {
-  searchParams: Promise<{
-    year?: string
-    semester?: string
-    week?: string
-  }>
+  searchParams: SearchParams<Week>
 }
 
 export default async function Page({ searchParams }: PageProps) {

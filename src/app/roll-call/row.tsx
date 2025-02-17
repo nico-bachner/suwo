@@ -1,8 +1,8 @@
 import { Switch } from 'radix-ui'
 
 import { Submit } from '@/components/client/submit'
-import { Member, RollCall, Table, Week } from '@/db'
 import { getQueryBuilder } from '@/neon'
+import { Member, RollCall, Table, Week } from '@/types/db'
 
 export const Row = async ({
   year,

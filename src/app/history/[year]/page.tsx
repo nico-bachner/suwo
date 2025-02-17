@@ -1,8 +1,9 @@
-import { History, Table } from '@/db'
 import { getQueryBuilder } from '@/neon'
+import { History, Table } from '@/types/db'
+import { Params } from '@/types/next'
 
 type PageProps = {
-  params: Promise<{ year: string }>
+  params: Params<Pick<History, 'year'>>
 }
 
 export default async function Page({ params }: PageProps) {
