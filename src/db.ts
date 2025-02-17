@@ -1,5 +1,11 @@
 export type Table<T> = T[]
 
+export type Week = {
+  year?: number
+  semester?: number
+  week?: number
+}
+
 export type History = {
   year?: number
   content?: string
@@ -7,8 +13,9 @@ export type History = {
 
 export type Member = {
   id?: number
-  name?: string
   usu?: number
+  family_name?: string
+  given_name?: string
 }
 
 export type RoleCall = {

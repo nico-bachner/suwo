@@ -38,14 +38,14 @@ export default async function Page({ searchParams }: PageProps) {
       </div>
 
       <div className="flex w-full max-w-screen-sm flex-col">
-        {members.map(({ id, name }) => (
+        {members.map(({ id, ...member }) => (
           <Form
             key={id}
             year={parseInt(year)}
             semester={parseInt(semester)}
             week={parseInt(week)}
             id={id}
-            name={name}
+            {...member}
           />
         ))}
       </div>

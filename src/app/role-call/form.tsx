@@ -1,18 +1,17 @@
 import { Switch } from 'radix-ui'
 
 import { Submit } from '@/components/client/submit'
-import { RoleCall, Table } from '@/db'
+import { Member, RoleCall, Table, Week } from '@/db'
 import { getQueryBuilder } from '@/neon'
 
-type FormProps = {
-  year: number
-  semester: number
-  week: number
-  id?: number
-  name?: string
-}
-
-export const Form = async ({ year, semester, week, id, name }: FormProps) => {
+export const Form = async ({
+  year,
+  semester,
+  week,
+  id,
+  family_name,
+  given_name,
+}: Member & Week) => {
   const sql = getQueryBuilder()
   const role_call: Table<RoleCall> =
     await sql`SELECT present FROM role_call WHERE year = ${year} AND semester = ${semester} AND week = ${week} and member = ${id}`
@@ -42,7 +41,9 @@ export const Form = async ({ year, semester, week, id, name }: FormProps) => {
       className="flex flex-row odd:bg-gray-800"
     >
       <div className="flex flex-1 flex-col items-center justify-between gap-2 px-4 py-2 sm:flex-row">
-        <span className="flex-1">{name}</span>
+        <span className="flex-1">
+          {given_name} {family_name}
+        </span>
 
         <div className="flex flex-row items-center gap-2">
           <span>Not Present</span>
