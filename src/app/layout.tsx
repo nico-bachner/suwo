@@ -36,7 +36,7 @@ const Layout = ({ children }: LayoutProps) => (
         fontSerif.variable,
       )}
     >
-      <div className="flex min-h-svh flex-col items-center gap-8 px-6 pb-20 sm:gap-12">
+      <div className="flex min-h-svh flex-col gap-8 px-6 pb-20 sm:gap-12">
         <Navbar className="sticky top-0" />
 
         {children}
