@@ -31,7 +31,7 @@ const Layout = ({ children }: LayoutProps) => (
   <html lang="en">
     <body
       className={cn(
-        'bg-gray-950 font-sans text-gray-100 antialiased',
+        'bg-gray-950 font-sans text-gray-100 antialiased scheme-dark',
         fontSans.variable,
         fontSerif.variable,
       )}

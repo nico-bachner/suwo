@@ -4,7 +4,7 @@ import { Submit } from '@/components/client/submit'
 import { Member, RoleCall, Table, Week } from '@/db'
 import { getQueryBuilder } from '@/neon'
 
-export const Form = async ({
+export const Row = async ({
   year,
   semester,
   week,
