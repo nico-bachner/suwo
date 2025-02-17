@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
 
@@ -40,6 +41,8 @@ const Layout = ({ children }: LayoutProps) => (
 
         {children}
       </div>
+
+      <Analytics />
     </body>
   </html>
 )
