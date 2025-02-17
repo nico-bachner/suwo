@@ -2,6 +2,7 @@ import { CheckIcon } from '@heroicons/react/24/outline'
 import { Checkbox } from 'radix-ui'
 
 import { Submit } from '@/components/client/submit'
+import { TextInput } from '@/components/ui/text_input'
 import { Member, Table } from '@/db'
 import { getQueryBuilder } from '@/neon'
 
@@ -64,63 +65,34 @@ export default async function Page({ searchParams }: PageProps) {
         className="flex w-full max-w-screen-sm flex-col gap-4"
       >
         <div className="flex flex-col gap-4 sm:flex-row">
-          <div className="flex flex-1 flex-col gap-1">
-            <label htmlFor="given-name" className="text-sm text-gray-300">
-              Given Name
-            </label>
-            <input
-              type="text"
-              name="given-name"
-              id="given-name"
-              autoComplete="given-name"
-              className="rounded border border-gray-500 bg-gray-900 px-2 py-1"
-            />
-          </div>
-          <div className="flex flex-1 flex-col gap-1">
-            <label htmlFor="family-name" className="text-sm text-gray-300">
-              Family Name
-            </label>
-            <input
-              type="text"
-              name="family-name"
-              id="family-name"
-              autoComplete="family-name"
-              className="rounded border border-gray-500 bg-gray-900 px-2 py-1"
-            />
-          </div>
+          <TextInput
+            name="given-name"
+            label="Given Name"
+            autoComplete="given-name"
+            required
+            className="flex-1"
+          />
+          <TextInput
+            name="family-name"
+            label="Family Name"
+            autoComplete="family-name"
+            className="flex-1"
+          />
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="usu" className="text-sm text-gray-300">
-            USU Number
-          </label>
-          <input
-            id="usu"
-            name="usu"
-            type="text"
-            inputMode="numeric"
-            className="rounded border border-gray-500 bg-gray-900 px-2 py-1"
-          />
-        </div>
-        <div className="flex flex-col gap-1">
-          <label htmlFor="email" className="text-sm text-gray-300">
-            Email Address
-          </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            className="rounded border border-gray-500 bg-gray-900 px-2 py-1"
-          />
-        </div>
+        <TextInput name="usu" label="USU Number" inputMode="numeric" />
+
+        <TextInput type="email" name="email" label="Email Address" />
+
         <div className="flex flex-row items-center justify-center gap-4">
           <label htmlFor="mailing-list" className="text-sm text-gray-300">
             Sign up for weekly rehearsal updates
           </label>
+
           <Checkbox.Root
             name="mailing-list"
             id="mailing-list"
-            className="flex h-6 w-6 items-center justify-center rounded border border-gray-500 bg-gray-900"
+            className="flex h-5 w-5 items-center justify-center rounded border border-gray-500 bg-gray-900"
           >
             <Checkbox.Indicator>
               <CheckIcon className="h-5 w-5 stroke-gray-300" />

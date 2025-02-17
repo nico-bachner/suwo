@@ -2,12 +2,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { cn } from '@/cn'
+import { Menu } from '@/components/client/menu'
 import { FacebookIcon } from '@/icons/Facebook'
 import { InstagramIcon } from '@/icons/Instagram'
 import { YouTubeIcon } from '@/icons/YouTube'
 import logo from '@/images/logo.png'
-
-import { Menu } from './client/menu'
 
 type NavbarProps = {
   className?: string
