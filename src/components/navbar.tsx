@@ -5,7 +5,7 @@ import { cn } from '@/cn'
 import { FacebookIcon } from '@/icons/Facebook'
 import { InstagramIcon } from '@/icons/Instagram'
 import { YouTubeIcon } from '@/icons/YouTube'
-import logo from '@/images/logo_without_background.png'
+import logo from '@/images/logo.png'
 
 import { Menu } from './client/menu'
 
