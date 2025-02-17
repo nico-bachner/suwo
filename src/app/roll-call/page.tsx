@@ -21,12 +21,12 @@ export default async function Page({ searchParams }: PageProps) {
   if (!year || !semester || !week) {
     return (
       <main className="prose">
-        <h1>Role Call</h1>
+        <h1>Roll Call</h1>
 
         <p>Please select a year, semester, and week.</p>
 
         <pre>
-          <code>/role-call?year=2025&semester=1&week=1</code>
+          <code>/roll-call?year=2025&semester=1&week=1</code>
         </pre>
       </main>
     )
@@ -37,7 +37,7 @@ export default async function Page({ searchParams }: PageProps) {
 
   return (
     <main className="prose flex w-full flex-col items-center">
-      <h1>Role Call – Week {week}</h1>
+      <h1>Roll Call – Week {week}</h1>
 
       <div className="flex w-full max-w-screen-sm flex-col">
         {members.map(({ id, ...member }) => (

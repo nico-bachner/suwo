@@ -18,7 +18,7 @@ export type Member = {
   given_name?: string
 }
 
-export type RoleCall = {
+export type RollCall = {
   year?: number
   semester?: number
   week?: number
