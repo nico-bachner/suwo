@@ -11,7 +11,7 @@ export default async function Page() {
   return (
     <main className="flex flex-col items-center">
       <div className="prose">
-        <h1>{`SUWO's History`}</h1>
+        <h1 className="text-center">{`SUWO's History`}</h1>
       </div>
 
       <div className="flex flex-col items-center">
