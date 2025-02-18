@@ -1,6 +1,5 @@
 import { CheckIcon } from '@heroicons/react/24/outline'
-import { Checkbox } from 'radix-ui'
-import { Dialog } from 'radix-ui'
+import { Checkbox, Dialog, VisuallyHidden } from 'radix-ui'
 import QRCode from 'react-qr-code'
 
 import { Submit } from '@/components/client/submit'
@@ -38,20 +37,19 @@ export default async function Page({ searchParams }: PageProps) {
   return (
     <main className="prose flex w-full flex-col items-center gap-1">
       <h1>Roll Call – Week {week}</h1>
+
       <Dialog.Root>
-        <Dialog.Trigger asChild>
-          <button className="cursor-pointer rounded bg-gray-800 px-4 py-2 transition-colors hover:bg-gray-700">
-            Show QR Code
-          </button>
+        <Dialog.Trigger className="cursor-pointer rounded bg-gray-800 px-4 py-2 transition-colors hover:bg-gray-700">
+          Show QR Code
         </Dialog.Trigger>
-        <Dialog.Overlay className="fixed inset-0 bg-black opacity-50" />
-        <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded bg-gray-800 p-4">
-          <Dialog.Title>QR Code</Dialog.Title>
-          <Dialog.Description>
-            {"QR code for this week's roll call"}
-          </Dialog.Description>
+        <Dialog.Overlay className="fixed inset-0 bg-black/80 backdrop-blur" />
+        <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded bg-gray-800">
+          <VisuallyHidden.Root>
+            <Dialog.Title>QR Code</Dialog.Title>
+          </VisuallyHidden.Root>
           <QRCode
             value={`${process.env.NEXT_PUBLIC_URL}/roll-call${searchParams.toString()}`}
+            className="h-auto w-[80vw] max-w-96"
           />
         </Dialog.Content>
       </Dialog.Root>
