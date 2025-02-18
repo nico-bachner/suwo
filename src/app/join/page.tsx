@@ -44,7 +44,9 @@ export default function Page() {
         <br />
         19 Carillon Ave, Newtown NSW 2042
         <br />
-        <a href="https://www.google.com/maps/place/Gillespie+Hall+-+St+Andrew's+College+CG5G/@-33.8898771,151.1854906,17z/data=!3m1!4b1!4m6!3m5!1s0x6b12b1af5537cc19:0x2dcf6e63ca183361!8m2!3d-33.8898771!4d151.1854906!16s%2Fg%2F11gy07j87q?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D">Google Maps</a>
+        <a href="https://www.google.com/maps/place/Gillespie+Hall+-+St+Andrew's+College+CG5G/@-33.8898771,151.1854906,17z/data=!3m1!4b1!4m6!3m5!1s0x6b12b1af5537cc19:0x2dcf6e63ca183361!8m2!3d-33.8898771!4d151.1854906!16s%2Fg%2F11gy07j87q?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D">
+          Google Maps
+        </a>
       </p>
 
       <h2>Membership Fees</h2>
