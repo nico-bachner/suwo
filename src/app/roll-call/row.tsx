@@ -1,4 +1,5 @@
 import { CheckIcon } from '@heroicons/react/24/outline'
+import { revalidatePath } from 'next/cache'
 
 import { Submit } from '@/components/client/submit'
 import { getQueryBuilder } from '@/neon'
@@ -33,9 +34,11 @@ export const Row = async ({
                   SET present = ${roll_call[0]?.present ? false : true}
                   WHERE year = ${year} AND semester = ${semester} AND week = ${week} AND member = ${id}
                 `
+          revalidatePath('/roll-call')
         } else {
           console.log('inserting')
           await sql`INSERT INTO roll_call VALUES (${year}, ${semester}, ${week}, ${id}, ${true})`
+          revalidatePath('/roll-call')
         }
       }}
       className="flex flex-row odd:bg-gray-800"
