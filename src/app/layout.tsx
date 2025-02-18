@@ -27,24 +27,24 @@ type LayoutProps = Readonly<{
   children: React.ReactNode
 }>
 
-const Layout = ({ children }: LayoutProps) => (
-  <html lang="en">
-    <body
-      className={cn(
-        'bg-gray-950 font-sans text-gray-100 antialiased scheme-dark',
-        fontSans.variable,
-        fontSerif.variable,
-      )}
-    >
-      <div className="flex min-h-svh flex-col gap-8 px-6 pb-20 sm:gap-12">
-        <Navbar className="sticky top-0" />
+export default function Layout({ children }: LayoutProps) {
+  return (
+    <html lang="en">
+      <body
+        className={cn(
+          'bg-gray-950 font-sans text-gray-100 antialiased scheme-dark',
+          fontSans.variable,
+          fontSerif.variable,
+        )}
+      >
+        <div className="flex min-h-svh flex-col gap-8 px-6 pb-20 sm:gap-12">
+          <Navbar className="sticky top-0" />
 
-        {children}
-      </div>
+          {children}
+        </div>
 
-      <Analytics />
-    </body>
-  </html>
-)
-
-export default Layout
+        <Analytics />
+      </body>
+    </html>
+  )
+}
