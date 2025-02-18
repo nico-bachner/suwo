@@ -20,7 +20,7 @@ export const Row = async ({
   return (
     <form
       key={id}
-      action={async (formData: FormData) => {
+      action={async () => {
         'use server'
         const sql = getQueryBuilder()
 

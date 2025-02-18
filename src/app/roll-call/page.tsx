@@ -48,17 +48,10 @@ export default async function Page({ searchParams }: PageProps) {
         <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded bg-gray-800 p-4">
           <Dialog.Title>QR Code</Dialog.Title>
           <Dialog.Description>
-            QR code for this week's roll call
+            {"QR code for this week's roll call"}
           </Dialog.Description>
           <QRCode
-            value={
-              'https://suwo.vercel.app/roll-call?year=' +
-              year +
-              '&semester=' +
-              semester +
-              '&week=' +
-              week
-            }
+            value={`${process.env.NEXT_PUBLIC_URL}/roll-call${searchParams.toString()}`}
           />
         </Dialog.Content>
       </Dialog.Root>
