@@ -1,15 +1,14 @@
 'use client'
 
 import { Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { Dialog, VisuallyHidden } from 'radix-ui'
 import { useState } from 'react'
 
-import { cn } from '@/cn'
 import { FacebookIcon } from '@/icons/Facebook'
 import { InstagramIcon } from '@/icons/Instagram'
 import { YouTubeIcon } from '@/icons/YouTube'
+
+import { NavbarLink } from './navbar_link'
 
 type MenuProps = {
   className?: string
@@ -17,26 +16,10 @@ type MenuProps = {
 
 export const Menu = ({ className }: MenuProps) => {
   const [open, setOpen] = useState(false)
-  const pathname = usePathname()
 
-  const NavbarLink = ({
-    children,
-    href,
-  }: {
-    children: React.ReactNode
-    href: string
-  }) => (
-    <Link
-      href={href}
-      onClick={() => setOpen(false)}
-      className={cn(
-        'text-2xl text-gray-100',
-        href == pathname && 'text-yellow-400',
-      )}
-    >
-      {children}
-    </Link>
-  )
+  const close = () => {
+    setOpen(false)
+  }
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
@@ -56,9 +39,15 @@ export const Menu = ({ className }: MenuProps) => {
           </Dialog.Close>
 
           <div className="flex flex-col items-center gap-6">
-            <NavbarLink href="/about">About</NavbarLink>
-            <NavbarLink href="/history">History</NavbarLink>
-            <NavbarLink href="/join">Join</NavbarLink>
+            <NavbarLink href="/about" onClick={close} className="text-2xl">
+              About
+            </NavbarLink>
+            <NavbarLink href="/history" onClick={close} className="text-2xl">
+              History
+            </NavbarLink>
+            <NavbarLink href="/join" onClick={close} className="text-2xl">
+              Join
+            </NavbarLink>
           </div>
 
           <div className="flex flex-row justify-center gap-4">

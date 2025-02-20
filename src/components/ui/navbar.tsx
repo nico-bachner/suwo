@@ -8,6 +8,8 @@ import { InstagramIcon } from '@/icons/Instagram'
 import { YouTubeIcon } from '@/icons/YouTube'
 import logo from '@/images/logo.png'
 
+import { NavbarLink } from '../client/navbar_link'
+
 type NavbarProps = {
   className?: string
 }
@@ -20,15 +22,9 @@ export const Navbar = ({ className }: NavbarProps) => (
       </Link>
 
       <div className="hidden flex-1 flex-row items-center justify-center gap-4 sm:flex">
-        <Link href="/about" className="text-gray-100 hover:text-white">
-          About
-        </Link>
-        <Link href="/history" className="text-gray-100 hover:text-white">
-          History
-        </Link>
-        <Link href="/join" className="text-gray-100 hover:text-white">
-          Join
-        </Link>
+        <NavbarLink href="/about">About</NavbarLink>
+        <NavbarLink href="/history">History</NavbarLink>
+        <NavbarLink href="/join">Join</NavbarLink>
       </div>
 
       <div className="hidden flex-1 flex-row items-center justify-end gap-4 sm:flex">
