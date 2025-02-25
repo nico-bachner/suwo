@@ -1,5 +1,6 @@
 'use client'
 
+import { ArrowUpTrayIcon } from '@heroicons/react/24/outline'
 import { useActionState } from 'react'
 
 import { CheckboxInput } from '@/components/ui/checkbox_input'
@@ -65,8 +66,12 @@ export const NewMemberForm = () => {
         />
       </div>
 
-      <SubmitButton disabled={pending} className="mt-4 sm:col-start-2">
-        Add yourself to the roll call
+      <SubmitButton
+        disabled={pending}
+        className="mt-4 flex flex-row items-center justify-center gap-2 sm:col-start-2"
+      >
+        <ArrowUpTrayIcon className="h-5 w-5 stroke-gray-300" />
+        Add to members list
       </SubmitButton>
     </form>
   )
