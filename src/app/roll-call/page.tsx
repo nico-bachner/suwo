@@ -28,7 +28,8 @@ export default async function Page({ searchParams }: PageProps) {
   }
 
   const sql = getQueryBuilder()
-  const members: Table<Member> = await sql`SELECT * FROM members`
+  const members: Table<Member> =
+    await sql`SELECT * FROM members ORDER BY (family_name, given_name)`
 
   return (
     <main className="prose flex w-full flex-col items-center gap-1">
