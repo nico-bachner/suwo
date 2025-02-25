@@ -19,9 +19,9 @@ export const NewMemberForm = () => {
   return (
     <form
       action={formAction}
-      className="flex w-full max-w-screen-sm flex-col gap-6"
+      className="flex w-full max-w-screen-sm flex-col gap-8"
     >
-      <div className="flex flex-col gap-6 sm:flex-row">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <TextInput
           errors={state?.errors.fieldErrors.given_name}
           name="given-name"
@@ -37,29 +37,30 @@ export const NewMemberForm = () => {
           autoComplete="family-name"
           className="flex-1"
         />
-      </div>
 
-      <TextInput
-        errors={state?.errors.fieldErrors.usu}
-        name="usu"
-        label="USU Number"
-        inputMode="numeric"
-      />
-
-      <div className="flex flex-col gap-4">
         <TextInput
-          errors={state?.errors.fieldErrors.email}
-          type="email"
-          name="email"
-          label="Email Address"
+          errors={state?.errors.fieldErrors.usu}
+          name="usu"
+          label="USU Number"
+          inputMode="numeric"
+          className="sm:col-span-2"
         />
 
-        <CheckboxInput
-          name="mailing-list"
-          label="Sign up for weekly rehearsal updates"
-          defaultChecked={true}
-          className="pl-2"
-        />
+        <div className="flex flex-col gap-4 sm:col-span-2">
+          <TextInput
+            errors={state?.errors.fieldErrors.email}
+            type="email"
+            name="email"
+            label="Email Address"
+          />
+
+          <CheckboxInput
+            name="mailing-list"
+            label="Sign up for weekly rehearsal updates"
+            defaultChecked={true}
+            className="pl-2"
+          />
+        </div>
       </div>
 
       <SubmitButton disabled={pending} className="self-end">
