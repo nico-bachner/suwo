@@ -65,7 +65,7 @@ export const NewMemberForm = () => {
         />
       </div>
 
-      <SubmitButton disabled={pending} className="sm:col-start-2">
+      <SubmitButton disabled={pending} className="mt-4 sm:col-start-2">
         Add yourself to the roll call
       </SubmitButton>
     </form>
