@@ -1,3 +1,4 @@
+import { QrCodeIcon } from '@heroicons/react/24/outline'
 import { Dialog, VisuallyHidden } from 'radix-ui'
 import ReactQRCode from 'react-qr-code'
 
@@ -12,11 +13,11 @@ export const QRCode = ({ value, className }: QRCodeProps) => (
   <Dialog.Root>
     <Dialog.Trigger
       className={cn(
-        'cursor-pointer rounded bg-gray-800/80 px-4 py-2 backdrop-blur transition-colors hover:bg-gray-700/80',
+        'cursor-pointer rounded bg-gray-800/80 p-1 backdrop-blur transition-colors hover:bg-gray-700/80',
         className,
       )}
     >
-      Show QR Code
+      <QrCodeIcon className="h-10 w-10 stroke-gray-300" />
     </Dialog.Trigger>
     <Dialog.Overlay className="fixed inset-0 bg-black/80 backdrop-blur" />
     <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded bg-gray-800">
