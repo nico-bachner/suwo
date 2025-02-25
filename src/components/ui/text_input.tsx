@@ -16,8 +16,8 @@ export const TextInput = ({
   className,
   ...props
 }: TextInputProps) => (
-  <div className={cn('flex flex-col gap-1', className)}>
-    <label htmlFor={name} className="text-sm text-gray-300">
+  <div className={cn('flex flex-col', className)}>
+    <label htmlFor={name} className="px-2 py-1 text-sm text-gray-300">
       {label}
     </label>
 
@@ -25,12 +25,12 @@ export const TextInput = ({
       type={type}
       name={name}
       id={name}
-      className="rounded border border-gray-500 bg-gray-900 px-2 py-1"
+      className="rounded-md border border-gray-500 bg-gray-950 px-2 py-1 focus:border-gray-300 focus:outline-none"
       {...props}
     />
 
     {errors?.map((error) => (
-      <p key={error} className="text-sm text-red-500">
+      <p key={error} className="px-2 py-1 text-sm text-red-500">
         {error}
       </p>
     ))}

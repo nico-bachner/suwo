@@ -3,6 +3,7 @@
 import { useActionState } from 'react'
 
 import { CheckboxInput } from '@/components/ui/checkbox_input'
+import { SubmitButton } from '@/components/ui/submit_button'
 import { TextInput } from '@/components/ui/text_input'
 
 import { createNewMember } from './create_new_member'
@@ -18,9 +19,9 @@ export const NewMemberForm = () => {
   return (
     <form
       action={formAction}
-      className="flex w-full max-w-screen-sm flex-col gap-4"
+      className="flex w-full max-w-screen-sm flex-col gap-6"
     >
-      <div className="flex flex-col gap-4 sm:flex-row">
+      <div className="flex flex-col gap-6 sm:flex-row">
         <TextInput
           errors={state?.errors.fieldErrors.given_name}
           name="given-name"
@@ -45,25 +46,25 @@ export const NewMemberForm = () => {
         inputMode="numeric"
       />
 
-      <TextInput
-        errors={state?.errors.fieldErrors.email}
-        type="email"
-        name="email"
-        label="Email Address"
-      />
+      <div className="flex flex-col gap-4">
+        <TextInput
+          errors={state?.errors.fieldErrors.email}
+          type="email"
+          name="email"
+          label="Email Address"
+        />
 
-      <CheckboxInput
-        name="mailing-list"
-        label="Sign up for weekly rehearsal updates"
-      />
+        <CheckboxInput
+          name="mailing-list"
+          label="Sign up for weekly rehearsal updates"
+          defaultChecked={true}
+          className="pl-2"
+        />
+      </div>
 
-      <button
-        type="submit"
-        disabled={pending}
-        className="mt-6 cursor-pointer rounded bg-gray-800 px-4 py-2 transition-colors hover:bg-gray-700"
-      >
-        Submit
-      </button>
+      <SubmitButton disabled={pending} className="self-end">
+        Add yourself to the roll call
+      </SubmitButton>
     </form>
   )
 }
