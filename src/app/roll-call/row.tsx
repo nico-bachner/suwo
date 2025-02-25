@@ -57,19 +57,17 @@ export const Row = async ({
       }}
       className="flex flex-row items-center odd:bg-gray-800"
     >
-      <div className="flex flex-1 flex-col items-center justify-between gap-2 px-4 py-2 sm:flex-row">
-        <span className="flex flex-row items-center gap-2">
-          {given_name} {family_name}
-          {roll_call[0]?.present ? (
-            <CheckIcon className="h-5 w-5 stroke-green-300" />
-          ) : null}
-        </span>
-      </div>
-      {!roll_call[0]?.present && (
-        <button type="submit" className="cursor-pointer px-4 py-2">
+      <p className="flex-1 px-4 py-2">
+        {given_name} {family_name}
+      </p>
+
+      <button type="submit" className="cursor-pointer px-4 py-2">
+        {roll_call[0]?.present ? (
+          <CheckIcon className="h-5 w-5 stroke-green-300" />
+        ) : (
           <PlusIcon className="h-5 w-5 stroke-gray-300" />
-        </button>
-      )}
+        )}
+      </button>
     </form>
   )
 }
