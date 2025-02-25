@@ -1,16 +1,18 @@
 'use client'
 
-import { CheckIcon } from '@heroicons/react/24/outline'
-import { Checkbox } from 'radix-ui'
 import { useActionState } from 'react'
 
+import { CheckboxInput } from '@/components/ui/checkbox_input'
 import { TextInput } from '@/components/ui/text_input'
 
 import { createNewMember } from './create_new_member'
 
 export const NewMemberForm = () => {
   const [state, formAction, pending] = useActionState(createNewMember, {
-    errors: [],
+    errors: {
+      formErrors: [],
+      fieldErrors: {},
+    },
   })
 
   return (
@@ -20,6 +22,7 @@ export const NewMemberForm = () => {
     >
       <div className="flex flex-col gap-4 sm:flex-row">
         <TextInput
+          errors={state?.errors.fieldErrors.given_name}
           name="given-name"
           label="Given Name"
           autoComplete="given-name"
@@ -27,6 +30,7 @@ export const NewMemberForm = () => {
           className="flex-1"
         />
         <TextInput
+          errors={state?.errors.fieldErrors.family_name}
           name="family-name"
           label="Family Name"
           autoComplete="family-name"
@@ -34,27 +38,24 @@ export const NewMemberForm = () => {
         />
       </div>
 
-      <TextInput name="usu" label="USU Number" inputMode="numeric" />
+      <TextInput
+        errors={state?.errors.fieldErrors.usu}
+        name="usu"
+        label="USU Number"
+        inputMode="numeric"
+      />
 
-      <TextInput type="email" name="email" label="Email Address" />
+      <TextInput
+        errors={state?.errors.fieldErrors.email}
+        type="email"
+        name="email"
+        label="Email Address"
+      />
 
-      <div className="flex flex-row items-center justify-center gap-4">
-        <label htmlFor="mailing-list" className="text-sm text-gray-300">
-          Sign up for weekly rehearsal updates
-        </label>
-
-        <Checkbox.Root
-          name="mailing-list"
-          id="mailing-list"
-          className="flex h-5 w-5 items-center justify-center rounded border border-gray-500 bg-gray-900"
-        >
-          <Checkbox.Indicator>
-            <CheckIcon className="h-5 w-5 stroke-gray-300" />
-          </Checkbox.Indicator>
-        </Checkbox.Root>
-      </div>
-
-      {state?.errors.map(({ message }) => <p key={message}>{message}</p>)}
+      <CheckboxInput
+        name="mailing-list"
+        label="Sign up for weekly rehearsal updates"
+      />
 
       <button
         type="submit"

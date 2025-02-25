@@ -1,6 +1,7 @@
 import { cn } from '@/cn'
 
 type TextInputProps = React.ComponentProps<'input'> & {
+  errors?: string[]
   type?: 'text' | 'email'
   name: string
   label: string
@@ -8,6 +9,7 @@ type TextInputProps = React.ComponentProps<'input'> & {
 }
 
 export const TextInput = ({
+  errors,
   type = 'text',
   name,
   label,
@@ -26,5 +28,11 @@ export const TextInput = ({
       className="rounded border border-gray-500 bg-gray-900 px-2 py-1"
       {...props}
     />
+
+    {errors?.map((error) => (
+      <p key={error} className="text-sm text-red-500">
+        {error}
+      </p>
+    ))}
   </div>
 )

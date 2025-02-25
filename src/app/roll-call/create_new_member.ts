@@ -11,7 +11,9 @@ const schema = z.object({
   usu: z
     .number({ coerce: true })
     .int()
-    .refine((id) => `${id}`.length == 7),
+    .refine((id) => `${id}`.length == 7, {
+      message: 'USU number must be 7 digits',
+    }),
   email: z.string().email(),
   mailing_list: z.boolean(),
 })
@@ -30,7 +32,7 @@ export const createNewMember = async (
 
   if (!success) {
     return {
-      errors: error.issues,
+      errors: error.flatten(),
     }
   }
 
