@@ -14,7 +14,7 @@ export const Row = async ({
 }: Member & Week) => {
   const sql = getQueryBuilder()
 
-  const roll_call: Table<RollCall> = await sql`
+  const roll_call: Table<Pick<RollCall, 'present'>> = await sql`
     SELECT present 
     FROM roll_call 
     WHERE year = ${year} 
@@ -22,6 +22,9 @@ export const Row = async ({
     AND week = ${week} 
     AND member = ${id}
   `
+
+  const existsEntryInRoleCall = roll_call[0] != undefined
+  const isPresent = roll_call[0]?.present ?? false
 
   return (
     <form
@@ -31,18 +34,10 @@ export const Row = async ({
 
         const sql = getQueryBuilder()
 
-        const roll_call: Table<RollCall> = await sql`
-          SELECT * FROM roll_call 
-          WHERE year = ${year} 
-          AND semester = ${semester} 
-          AND week = ${week} 
-          AND member = ${id}
-        `
-
-        if (roll_call.length > 0) {
+        if (existsEntryInRoleCall) {
           await sql`
             UPDATE roll_call
-            SET present = ${roll_call[0]?.present ? false : true}
+            SET present = true
             WHERE year = ${year} AND semester = ${semester} AND week = ${week} AND member = ${id}
           `
 
@@ -50,7 +45,7 @@ export const Row = async ({
         } else {
           await sql`
             INSERT INTO roll_call
-            VALUES (${year}, ${semester}, ${week}, ${id}, ${true})
+            VALUES (${year}, ${semester}, ${week}, ${id}, true)
           `
           revalidatePath('/roll-call')
         }
@@ -62,7 +57,7 @@ export const Row = async ({
       </p>
 
       <button type="submit" className="cursor-pointer px-4 py-2">
-        {roll_call[0]?.present ? (
+        {isPresent ? (
           <CheckIcon className="h-5 w-5 stroke-green-300" />
         ) : (
           <PlusIcon className="h-5 w-5 stroke-gray-300" />
