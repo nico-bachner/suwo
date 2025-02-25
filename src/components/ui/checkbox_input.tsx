@@ -19,11 +19,11 @@ export const CheckboxInput = ({
     <Checkbox.Root
       id={name}
       name={name}
-      className="flex h-5 w-5 items-center justify-center rounded border border-gray-500 bg-gray-950 focus:border-gray-300 focus:outline-none"
+      className="flex h-5 w-5 cursor-pointer items-center justify-center rounded border border-gray-500 bg-gray-950 focus:border-gray-300 focus:outline-none"
       {...props}
     >
       <Checkbox.Indicator>
-        <CheckIcon className="h-5 w-5 stroke-gray-500" />
+        <CheckIcon className="h-5 w-5 stroke-gray-300" />
       </Checkbox.Indicator>
     </Checkbox.Root>
 
