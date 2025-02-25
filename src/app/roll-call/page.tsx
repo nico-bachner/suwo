@@ -1,6 +1,5 @@
 import { CheckIcon } from '@heroicons/react/24/outline'
-import { Checkbox, Dialog, VisuallyHidden } from 'radix-ui'
-import QRCode from 'react-qr-code'
+import { Checkbox } from 'radix-ui'
 
 import { Submit } from '@/components/client/submit'
 import { TextInput } from '@/components/ui/text_input'
@@ -8,6 +7,7 @@ import { getQueryBuilder } from '@/neon'
 import { Member, Table, Week } from '@/types/db'
 import { SearchParams } from '@/types/next'
 
+import { QRCode } from './qr_code'
 import { Row } from './row'
 
 type PageProps = {
@@ -38,21 +38,10 @@ export default async function Page({ searchParams }: PageProps) {
     <main className="prose flex w-full flex-col items-center gap-1">
       <h1>Roll Call – Week {week}</h1>
 
-      <Dialog.Root>
-        <Dialog.Trigger className="cursor-pointer rounded bg-gray-800 px-4 py-2 transition-colors hover:bg-gray-700">
-          Show QR Code
-        </Dialog.Trigger>
-        <Dialog.Overlay className="fixed inset-0 bg-black/80 backdrop-blur" />
-        <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded bg-gray-800">
-          <VisuallyHidden.Root>
-            <Dialog.Title>QR Code</Dialog.Title>
-          </VisuallyHidden.Root>
-          <QRCode
-            value={`${process.env.NEXT_PUBLIC_URL}/roll-call${searchParams.toString()}`}
-            className="h-auto w-[80vw] max-w-96"
-          />
-        </Dialog.Content>
-      </Dialog.Root>
+      <QRCode
+        value={`${process.env.NEXT_PUBLIC_URL}/roll-call${searchParams.toString()}`}
+        className="fixed right-4 bottom-4"
+      />
 
       <div className="flex w-full max-w-screen-sm flex-col">
         {members.map(({ id, ...member }) => (
