@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 
-import { create_new_member } from '@/db/create_new_member'
+import { getQueryBuilder } from '@/db/query'
 
 const schema = z.object({
   family_name: z.string().max(30),
@@ -36,7 +36,12 @@ export const createNewMember = async (
     }
   }
 
-  await create_new_member(data)
+  const sql = getQueryBuilder()
+
+  await sql`
+    INSERT INTO members (family_name, given_name, usu, email, mailing_list) 
+    VALUES (${data.family_name}, ${data.given_name}, ${data.usu}, ${data.email}, ${data.mailing_list})
+  `
 
   revalidatePath('/roll-call')
 }
