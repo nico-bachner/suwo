@@ -35,11 +35,6 @@ export default async function Page({ searchParams }: PageProps) {
 
   return (
     <main className="prose flex w-full flex-col items-center gap-1">
-      <QRCode
-        value={`${process.env.NEXT_PUBLIC_URL}/roll-call${searchParams.toString()}`}
-        className="fixed right-4 bottom-4"
-      />
-
       <h1>Roll Call – Week {week}</h1>
 
       <div className="flex w-full max-w-screen-sm flex-col">
@@ -59,6 +54,11 @@ export default async function Page({ searchParams }: PageProps) {
       <p>Enter your details below:</p>
 
       <NewMemberForm />
+
+      <QRCode
+        value={`${process.env.NEXT_PUBLIC_URL}/roll-call${searchParams.toString()}`}
+        className="fixed right-4 bottom-4"
+      />
     </main>
   )
 }
