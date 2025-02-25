@@ -1,5 +1,5 @@
-import { getQueryBuilder } from '@/neon'
-import { Member, Table, Week } from '@/types/db'
+import { getQueryBuilder } from '@/db/query'
+import { Member, Table, Week } from '@/db/types'
 import { SearchParams } from '@/types/next'
 
 import { NewMemberForm } from './new_member_form'

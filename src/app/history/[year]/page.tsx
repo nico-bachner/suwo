@@ -1,5 +1,5 @@
-import { getQueryBuilder } from '@/neon'
-import { History, Table } from '@/types/db'
+import { getQueryBuilder } from '@/db/query'
+import { History, Table } from '@/db/types'
 import { Params } from '@/types/next'
 
 type PageProps = {

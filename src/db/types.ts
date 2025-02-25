@@ -13,9 +13,11 @@ export type History = {
 
 export type Member = {
   id?: number
-  usu?: number
   family_name?: string
   given_name?: string
+  usu?: number
+  email?: string
+  mailing_list?: boolean
 }
 
 export type RollCall = {

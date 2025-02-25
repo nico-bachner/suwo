@@ -2,8 +2,8 @@ import { CheckIcon } from '@heroicons/react/24/outline'
 import { revalidatePath } from 'next/cache'
 
 import { Submit } from '@/components/client/submit'
-import { getQueryBuilder } from '@/neon'
-import { Member, RollCall, Table, Week } from '@/types/db'
+import { getQueryBuilder } from '@/db/query'
+import { Member, RollCall, Table, Week } from '@/db/types'
 
 export const Row = async ({
   year,
@@ -14,30 +14,45 @@ export const Row = async ({
   given_name,
 }: Member & Week) => {
   const sql = getQueryBuilder()
-  const roll_call: Table<RollCall> =
-    await sql`SELECT present FROM roll_call WHERE year = ${year} AND semester = ${semester} AND week = ${week} and member = ${id}`
+
+  const roll_call: Table<RollCall> = await sql`
+    SELECT present 
+    FROM roll_call 
+    WHERE year = ${year} 
+    AND semester = ${semester} 
+    AND week = ${week} 
+    AND member = ${id}
+  `
 
   return (
     <form
       key={id}
       action={async () => {
         'use server'
+
         const sql = getQueryBuilder()
 
-        const roll_call: Table<RollCall> =
-          await sql`SELECT * FROM roll_call WHERE year = ${year} AND semester = ${semester} AND week = ${week} and member = ${id}`
+        const roll_call: Table<RollCall> = await sql`
+          SELECT * FROM roll_call 
+          WHERE year = ${year} 
+          AND semester = ${semester} 
+          AND week = ${week} 
+          AND member = ${id}
+        `
 
         if (roll_call.length > 0) {
-          console.log('updating')
           await sql`
-                  UPDATE roll_call
-                  SET present = ${roll_call[0]?.present ? false : true}
-                  WHERE year = ${year} AND semester = ${semester} AND week = ${week} AND member = ${id}
-                `
+            UPDATE roll_call
+            SET present = ${roll_call[0]?.present ? false : true}
+            WHERE year = ${year} AND semester = ${semester} AND week = ${week} AND member = ${id}
+          `
+
           revalidatePath('/roll-call')
         } else {
-          console.log('inserting')
-          await sql`INSERT INTO roll_call VALUES (${year}, ${semester}, ${week}, ${id}, ${true})`
+          await sql`
+            INSERT INTO roll_call
+            VALUES (${year}, ${semester}, ${week}, ${id}, ${true})
+          `
           revalidatePath('/roll-call')
         }
       }}

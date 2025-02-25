@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
-import { getQueryBuilder } from '@/neon'
-import { History, Table } from '@/types/db'
+import { getQueryBuilder } from '@/db/query'
+import { History, Table } from '@/db/types'
 
 export default async function Page() {
   const sql = getQueryBuilder()
