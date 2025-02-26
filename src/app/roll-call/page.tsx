@@ -35,7 +35,11 @@ export default async function Page({ searchParams }: PageProps) {
 
   return (
     <main className="prose flex w-full flex-col items-center gap-1">
-      <h1>Roll Call – Week {week}</h1>
+      <h1>
+        Roll Call
+        <br />
+        Week {week}
+      </h1>
 
       <div className="flex w-full max-w-screen-sm flex-col">
         {members.map(({ id, ...member }) => (
