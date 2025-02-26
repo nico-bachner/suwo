@@ -6,12 +6,15 @@ export default function Page() {
   return (
     <main className="mx-auto flex w-full max-w-screen-md flex-1 flex-col items-stretch justify-center gap-12 sm:gap-20">
       <h1 className="text-center font-serif text-3xl sm:text-5xl">
-        The University of Sydney Wind Orchestra
+        The University of Sydney
+        <br />
+        Wind Orchestra
       </h1>
 
       <div className="grid gap-8 sm:grid-cols-3">
         <div className="flex flex-col items-center gap-4 sm:items-start">
-          <p className="text-2xl">Come see us at the O-week stand!</p>{' '}
+          <p className="text-lg sm:text-xl">Come see us at the O-week stand!</p>
+
           <a
             href="https://usu.edu.au/clubs/wind-orchestra/"
             target="_blank"
