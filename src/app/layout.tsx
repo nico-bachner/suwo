@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
 
 import { cn } from '@/cn'
+import { Footer } from '@/components/ui/footer'
 import { Navbar } from '@/components/ui/navbar'
 
 import '../styles/globals.css'
@@ -37,10 +38,12 @@ export default function Layout({ children }: LayoutProps) {
           fontSerif.variable,
         )}
       >
-        <div className="flex min-h-svh flex-col gap-8 px-6 pb-24 sm:gap-12">
+        <div className="flex min-h-svh flex-col gap-8 sm:gap-12">
           <Navbar className="sticky top-0" />
 
-          {children}
+          <div className="flex-1 px-6">{children}</div>
+
+          <Footer />
         </div>
 
         <Analytics />
