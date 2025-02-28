@@ -1,4 +1,5 @@
 import { Client, isFullBlock } from '@notionhq/client'
+import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import { notFound } from 'next/navigation'
 
 import { Params } from '@/types/next'
@@ -33,14 +34,21 @@ export default async function Page({ params }: PageProps) {
     block_id: page.id,
   })
 
+  const getTitle = (page: PageObjectResponse) => {
+    const { Title, Year } = page.properties
+
+    if (Title.type == 'title' && Title.title.length > 0) {
+      return Title.title[0].plain_text
+    }
+
+    if (Year.type == 'number') {
+      return Year.number
+    }
+  }
+
   return (
     <main className="prose">
-      <h1>
-        {(page.properties['Title'].type == 'title' &&
-          page.properties['Title'].title[0].plain_text) ??
-          (page.properties['Year'].type == 'number' &&
-            page.properties['Year'].number)}
-      </h1>
+      <h1>{getTitle(page)}</h1>
 
       {results.map((block) => {
         if (!isFullBlock(block)) {
