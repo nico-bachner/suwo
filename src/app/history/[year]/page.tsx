@@ -36,9 +36,12 @@ export default async function Page({ params }: PageProps) {
   return (
     <main className="prose">
       <h1>
-        {page.properties['Year'].type == 'number' &&
-          page.properties['Year'].number}
+        {(page.properties['Title'].type == 'title' &&
+          page.properties['Title'].title[0].plain_text) ??
+          (page.properties['Year'].type == 'number' &&
+            page.properties['Year'].number)}
       </h1>
+
       {results.map((block) => {
         if (!isFullBlock(block)) {
           return null
