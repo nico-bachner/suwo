@@ -60,7 +60,7 @@ export default async function Page({ searchParams }: PageProps) {
       <NewMemberForm />
 
       <QRCode
-        value={`${process.env.NEXT_PUBLIC_URL}/roll-call${searchParams.toString()}`}
+        value={`${process.env.NEXT_PUBLIC_URL}/roll-call?year=${year}&semester=${semester}&week=${week}`}
         className="fixed right-4 bottom-4"
       />
     </main>
