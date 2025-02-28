@@ -6,11 +6,6 @@ export type Week = {
   week?: number
 }
 
-export type History = {
-  year?: number
-  content?: string
-}
-
 export type Member = {
   id?: number
   family_name?: string

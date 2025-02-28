@@ -1,24 +1,10 @@
 import { Client, isFullPage } from '@notionhq/client'
 import Link from 'next/link'
 
+import { getHistory } from './get_history'
+
 export default async function Page() {
-  if (!process.env.NOTION_HISTORY_DATABASE_ID) {
-    throw new Error('Missing NOTION_HISTORY_DATABASE_ID')
-  }
-
-  const { databases } = new Client({
-    auth: process.env.NOTION_TOKEN,
-  })
-
-  const { results } = await databases.query({
-    database_id: process.env.NOTION_HISTORY_DATABASE_ID,
-    sorts: [
-      {
-        property: 'Year',
-        direction: 'descending',
-      },
-    ],
-  })
+  const data = await getHistory()
 
   return (
     <main className="flex flex-col items-center">
@@ -27,8 +13,7 @@ export default async function Page() {
       </div>
 
       <div className="flex flex-col items-center">
-        {results
-          .filter((row) => isFullPage(row))
+        {data
           .map(
             ({ properties }) =>
               properties['Year'].type == 'number' && properties['Year'].number,
