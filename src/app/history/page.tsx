@@ -1,14 +1,44 @@
+import { Client, isFullDatabase } from '@notionhq/client'
 import Link from 'next/link'
 
 import { getHistory } from './get_history'
 
+const getPageMetadata = async () => {
+  if (!process.env.NOTION_HISTORY_DATABASE_ID) {
+    throw new Error('Missing NOTION_HISTORY_DATABASE_ID')
+  }
+
+  const { databases } = new Client({
+    auth: process.env.NOTION_TOKEN,
+  })
+
+  const page = await databases.retrieve({
+    database_id: process.env.NOTION_HISTORY_DATABASE_ID,
+  })
+
+  if (isFullDatabase(page)) {
+    return {
+      title: page.title[0].plain_text,
+      description: page.description[0].plain_text,
+    }
+  }
+
+  return {
+    title: "SUWO's History",
+  }
+}
+
+export const generateMetadata = async () => await getPageMetadata()
+
 export default async function Page() {
+  const { title, description } = await getPageMetadata()
   const data = await getHistory()
 
   return (
-    <main className="flex flex-col items-center">
-      <div className="prose">
-        <h1 className="text-center">{`SUWO's History`}</h1>
+    <main className="flex flex-col items-center gap-12">
+      <div className="prose text-center">
+        <h1>{title}</h1>
+        <p>{description}</p>
       </div>
 
       <div className="flex flex-col items-center">
