@@ -1,15 +1,38 @@
 import { Client, isFullBlock } from '@notionhq/client'
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { Params } from '@/types/next'
 
 import { getHistory } from '../get_history'
+import { getTitle } from './get_title'
 
 type PageProps = {
   params: Params<{
     year: string
   }>
+}
+
+export const generateMetadata = async ({
+  params,
+}: PageProps): Promise<Metadata> => {
+  const data = await getHistory()
+  const { year } = await params
+
+  const page = data.find(
+    ({ properties }) =>
+      properties['Year'].type == 'number' &&
+      properties['Year'].number == parseInt(year),
+  )
+
+  if (!page) {
+    return notFound()
+  }
+
+  return {
+    title: getTitle(page),
+  }
 }
 
 export default async function Page({ params }: PageProps) {
@@ -33,18 +56,6 @@ export default async function Page({ params }: PageProps) {
   const { results } = await blocks.children.list({
     block_id: page.id,
   })
-
-  const getTitle = (page: PageObjectResponse) => {
-    const { Title, Year } = page.properties
-
-    if (Title.type == 'title' && Title.title.length > 0) {
-      return Title.title[0].plain_text
-    }
-
-    if (Year.type == 'number') {
-      return Year.number
-    }
-  }
 
   return (
     <main className="prose">
