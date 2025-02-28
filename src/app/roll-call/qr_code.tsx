@@ -13,7 +13,7 @@ export const QRCode = ({ value, className }: QRCodeProps) => (
   <Dialog.Root>
     <Dialog.Trigger
       className={cn(
-        'cursor-pointer rounded bg-gray-800/80 p-1 backdrop-blur transition-colors hover:bg-gray-700/80',
+        'cursor-pointer rounded bg-gray-800/80 p-1 backdrop-blur transition-colors hover:bg-gray-700/80 focus:bg-gray-700/80 focus:outline-none',
         className,
       )}
     >

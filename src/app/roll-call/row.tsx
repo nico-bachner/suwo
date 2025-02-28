@@ -56,13 +56,16 @@ export const Row = async ({
         {given_name} {family_name}
       </p>
 
-      <button type="submit" className="cursor-pointer px-4 py-2">
-        {isPresent ? (
-          <CheckIcon className="h-5 w-5 stroke-green-300" />
-        ) : (
+      {isPresent ? (
+        <CheckIcon className="box-content h-5 w-5 stroke-green-300 px-4 py-2" />
+      ) : (
+        <button
+          type="submit"
+          className="cursor-pointer px-4 py-2 focus:ring-2 focus:ring-gray-500 focus:outline-none"
+        >
           <PlusIcon className="h-5 w-5 stroke-gray-300" />
-        )}
-      </button>
+        </button>
+      )}
     </form>
   )
 }
