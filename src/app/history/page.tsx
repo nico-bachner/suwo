@@ -16,15 +16,17 @@ const getPageMetadata = async () => {
     database_id: process.env.NOTION_HISTORY_DATABASE_ID,
   })
 
-  if (isFullDatabase(page)) {
-    return {
-      title: page.title[0].plain_text,
-      description: page.description[0].plain_text,
-    }
+  if (!isFullDatabase(page)) {
+    throw new Error('History database is malformed')
+  }
+
+  if (!page.title) {
+    throw new Error('Missing title for History database')
   }
 
   return {
-    title: "SUWO's History",
+    title: page.title[0].plain_text,
+    description: page.description[0].plain_text,
   }
 }
 
