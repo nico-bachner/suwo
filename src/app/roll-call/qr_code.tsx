@@ -20,7 +20,7 @@ export const QRCode = ({ value, className }: QRCodeProps) => (
       <QrCodeIcon className="h-10 w-10 stroke-gray-300" />
     </Dialog.Trigger>
     <Dialog.Overlay className="fixed inset-0 bg-black/80 backdrop-blur" />
-    <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded bg-gray-800">
+    <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded bg-gray-800 focus:outline-none">
       <VisuallyHidden.Root>
         <Dialog.Title>QR Code</Dialog.Title>
       </VisuallyHidden.Root>
