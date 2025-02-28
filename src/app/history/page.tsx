@@ -29,34 +29,26 @@ export default async function Page() {
       <div className="flex flex-col items-center">
         {results
           .filter((row) => isFullPage(row))
-          .map((row) => {
-            const yearColumn = row.properties['Year']
-
-            if (yearColumn.type != 'number') {
-              throw new Error('Year is not a title')
-            }
-
-            return yearColumn.number
-          })
+          .map(
+            ({ properties }) =>
+              properties['Year'].type == 'number' && properties['Year'].number,
+          )
+          .filter((number) => number)
           .join(' - ')
           .split(' ')
-          .map((item, index) => {
-            if (item == '-') {
-              return <hr key={index} className="h-12 w-px bg-gray-100" />
-            }
-
-            const year = parseInt(item)
-
-            return (
+          .map((value, index) =>
+            value == '-' ? (
+              <hr key={index} className="h-12 w-px bg-gray-100" />
+            ) : (
               <Link
-                key={year}
-                href={`/history/${year}`}
+                key={value}
+                href={`/history/${value}`}
                 className="p-1 text-xl"
               >
-                {year}
+                {value}
               </Link>
-            )
-          })}
+            ),
+          )}
       </div>
     </main>
   )
