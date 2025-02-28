@@ -1,4 +1,3 @@
-import { Client, isFullPage } from '@notionhq/client'
 import Link from 'next/link'
 
 import { getHistory } from './get_history'
