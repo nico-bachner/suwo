@@ -1,5 +1,4 @@
 import { Client, isFullDatabase } from '@notionhq/client'
-import { Metadata } from 'next'
 
 export const getPageMetadata = async () => {
   if (!process.env.NOTION_HISTORY_DATABASE_ID) {

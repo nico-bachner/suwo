@@ -1,5 +1,4 @@
 import { Client, isFullBlock } from '@notionhq/client'
-import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 

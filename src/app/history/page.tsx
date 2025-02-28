@@ -1,4 +1,3 @@
-import { Client, isFullDatabase } from '@notionhq/client'
 import { Metadata } from 'next'
 import Link from 'next/link'
 
