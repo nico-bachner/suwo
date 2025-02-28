@@ -41,7 +41,7 @@ export default async function Page() {
   const data = await getHistory()
 
   return (
-    <main className="flex flex-col items-center gap-12">
+    <main className="flex flex-col items-center gap-20">
       <div className="prose text-center">
         <h1>{title}</h1>
         <p>{description}</p>
