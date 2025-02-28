@@ -1,3 +1,5 @@
+import { headers } from 'next/headers'
+
 import { getQueryBuilder } from '@/db/query'
 import { Member, Table, Week } from '@/db/types'
 import { SearchParams } from '@/types/next'
@@ -11,6 +13,8 @@ type PageProps = {
 }
 
 export default async function Page({ searchParams }: PageProps) {
+  const headersList = await headers()
+  const host = headersList.get('host')
   const { year, semester, week } = await searchParams
 
   if (!year || !semester || !week) {
@@ -60,7 +64,7 @@ export default async function Page({ searchParams }: PageProps) {
       <NewMemberForm />
 
       <QRCode
-        value={`${process.env.NEXT_PUBLIC_URL}/roll-call?year=${year}&semester=${semester}&week=${week}`}
+        value={`${host}/roll-call?year=${year}&semester=${semester}&week=${week}`}
         className="fixed right-4 bottom-4"
       />
     </main>
