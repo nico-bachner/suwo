@@ -7,6 +7,7 @@ import { SearchParams } from '@/types/next'
 import { NewMemberForm } from './new_member_form'
 import { QRCodeDialog } from './qr_code_dialog'
 import { Row } from './row'
+import { TextInput } from '@/components/ui/text_input'
 
 type PageProps = {
   searchParams: SearchParams<Week>
@@ -23,10 +24,12 @@ export default async function Page({ searchParams }: PageProps) {
         <h1>Roll Call</h1>
 
         <p>Please select a year, semester, and week.</p>
-
-        <pre>
-          <code>/roll-call?year=2025&semester=1&week=1</code>
-        </pre>
+        <form className="prose flex w-full flex-col items-center gap-1">
+          <TextInput name='year' label='Year' inputMode="numeric" min={2025} defaultValue={2025}/>
+          <TextInput name='semester' label='Semester' inputMode="numeric" min={1} max={2} defaultValue={1}/>
+          <TextInput name='week' label='Week' inputMode="numeric" min={1} max={13} defaultValue={1}/>
+          <button className='cursor-pointer'>Select</button>
+        </form>
       </main>
     )
   }
