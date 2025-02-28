@@ -1,17 +1,16 @@
-import { Client, isFullPageOrDatabase } from '@notionhq/client'
-import { RichTextItemResponse } from '@notionhq/client/build/src/api-endpoints'
+import { Client, isFullPage } from '@notionhq/client'
 import Link from 'next/link'
 
 export default async function Page() {
-  const notion = new Client({
-    auth: process.env.NOTION_TOKEN,
-  })
-
   if (!process.env.NOTION_HISTORY_DATABASE_ID) {
     throw new Error('Missing NOTION_HISTORY_DATABASE_ID')
   }
 
-  const { results } = await notion.databases.query({
+  const { databases } = new Client({
+    auth: process.env.NOTION_TOKEN,
+  })
+
+  const { results } = await databases.query({
     database_id: process.env.NOTION_HISTORY_DATABASE_ID,
     sorts: [
       {
@@ -28,31 +27,36 @@ export default async function Page() {
       </div>
 
       <div className="flex flex-col items-center">
-        {results.map((row) => {
-          if (!isFullPageOrDatabase(row)) {
-            throw new Error('Not a full page or database')
-          }
+        {results
+          .filter((row) => isFullPage(row))
+          .map((row) => {
+            const yearColumn = row.properties['Year']
 
-          const yearColumn = row.properties['Year']
+            if (yearColumn.type != 'number') {
+              throw new Error('Year is not a title')
+            }
 
-          if (yearColumn.type != 'title') {
-            throw new Error('Year is not a title')
-          }
+            return yearColumn.number
+          })
+          .join(' - ')
+          .split(' ')
+          .map((item, index) => {
+            if (item == '-') {
+              return <hr key={index} className="h-12 w-px bg-gray-100" />
+            }
 
-          if (!yearColumn.title.length) {
-            throw new Error('Year title is not a single element')
-          }
+            const year = parseInt(item)
 
-          const [text] = yearColumn.title as RichTextItemResponse[]
-
-          const year = text.plain_text
-
-          return (
-            <Link key={year} href={`/history/${year}`} className="p-1 text-xl">
-              {year}
-            </Link>
-          )
-        })}
+            return (
+              <Link
+                key={year}
+                href={`/history/${year}`}
+                className="p-1 text-xl"
+              >
+                {year}
+              </Link>
+            )
+          })}
       </div>
     </main>
   )
