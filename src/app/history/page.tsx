@@ -24,6 +24,10 @@ const getPageMetadata = async () => {
     throw new Error('Missing title for History database')
   }
 
+  if (!page.description) {
+    throw new Error('Missing description for History database')
+  }
+
   return {
     title: page.title[0].plain_text,
     description: page.description[0].plain_text,
