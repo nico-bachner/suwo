@@ -39,7 +39,7 @@ export default function Layout({ children }: LayoutProps) {
         )}
       >
         <div className="flex min-h-svh flex-col gap-8 sm:gap-12">
-          <Navbar className="sticky top-0" />
+          <Navbar className="sticky top-0 px-6" />
 
           <div className="flex-1 px-6">{children}</div>
 
