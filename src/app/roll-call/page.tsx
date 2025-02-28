@@ -5,7 +5,7 @@ import { Member, Table, Week } from '@/db/types'
 import { SearchParams } from '@/types/next'
 
 import { NewMemberForm } from './new_member_form'
-import { QRCode } from './qr_code'
+import { QRCodeDialog } from './qr_code_dialog'
 import { Row } from './row'
 
 type PageProps = {
@@ -63,7 +63,7 @@ export default async function Page({ searchParams }: PageProps) {
 
       <NewMemberForm />
 
-      <QRCode
+      <QRCodeDialog
         value={`${host}/roll-call?year=${year}&semester=${semester}&week=${week}`}
         className="fixed right-4 bottom-4"
       />

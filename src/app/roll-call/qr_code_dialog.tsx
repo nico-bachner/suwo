@@ -9,7 +9,7 @@ type QRCodeProps = {
   className?: string
 }
 
-export const QRCode = ({ value, className }: QRCodeProps) => (
+export const QRCodeDialog = ({ value, className }: QRCodeProps) => (
   <Dialog.Root>
     <Dialog.Trigger
       className={cn(
