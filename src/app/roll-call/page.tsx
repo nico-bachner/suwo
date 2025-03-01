@@ -4,6 +4,7 @@ import { getQueryBuilder } from '@/db/query'
 import { Member, RollCall, Table, Week } from '@/db/types'
 import { SearchParams } from '@/types/next'
 
+import { MembersList } from './members_list'
 import { NewMemberForm } from './new_member_form'
 import { QRCodeDialog } from './qr_code_dialog'
 import { Row } from './row'
@@ -54,18 +55,12 @@ export default async function Page({ searchParams }: PageProps) {
         Week {week}
       </h1>
 
-      <div className="flex w-full max-w-screen-sm flex-col">
-        {members.map(({ id, ...member }) => (
-          <Row
-            key={id}
-            id={id}
-            {...member}
-            year={parseInt(year)}
-            semester={parseInt(semester)}
-            week={parseInt(week)}
-          />
-        ))}
-      </div>
+      <MembersList
+        data={members}
+        year={parseInt(year)}
+        semester={parseInt(semester)}
+        week={parseInt(week)}
+      />
 
       <h2>Not in the list?</h2>
       <p>Enter your details below:</p>
