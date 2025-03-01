@@ -43,7 +43,9 @@ export default function Layout({ children }: LayoutProps) {
 
           <div className="flex-1 px-6">{children}</div>
 
-          <Footer />
+          <div className="px-6">
+            <Footer />
+          </div>
         </div>
 
         <Analytics />
