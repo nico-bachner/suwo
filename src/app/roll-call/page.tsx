@@ -1,7 +1,7 @@
 import { headers } from 'next/headers'
 
 import { getQueryBuilder } from '@/db/query'
-import { Member, Table, Week } from '@/db/types'
+import { Member, RollCall, Table, Week } from '@/db/types'
 import { SearchParams } from '@/types/next'
 
 import { NewMemberForm } from './new_member_form'
@@ -32,7 +32,7 @@ export default async function Page({ searchParams }: PageProps) {
   }
 
   const sql = getQueryBuilder()
-  const members: Table<Member> = await sql`
+  const members: Table<RollCall & Member> = await sql`
     SELECT *
     FROM (
       SELECT *

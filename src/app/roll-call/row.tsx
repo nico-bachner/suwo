@@ -12,7 +12,7 @@ export const Row = async ({
   family_name,
   given_name,
   present,
-}: RollCall & Member) => (
+}: RollCall & Member & Week) => (
   <form
     key={id}
     action={async () => {
