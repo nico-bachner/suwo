@@ -47,7 +47,7 @@ export default async function Page({ searchParams }: PageProps) {
   `
 
   return (
-    <main className="prose flex w-full flex-col items-center gap-1">
+    <main className="prose flex w-full flex-col items-center gap-6">
       <h1>
         Roll Call
         <br />
