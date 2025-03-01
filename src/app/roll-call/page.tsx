@@ -7,7 +7,6 @@ import { SearchParams } from '@/types/next'
 import { MembersList } from './members_list'
 import { NewMemberForm } from './new_member_form'
 import { QRCodeDialog } from './qr_code_dialog'
-import { Row } from './row'
 
 type PageProps = {
   searchParams: SearchParams<Week>
