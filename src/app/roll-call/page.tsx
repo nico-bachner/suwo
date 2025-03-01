@@ -33,7 +33,16 @@ export default async function Page({ searchParams }: PageProps) {
 
   const sql = getQueryBuilder()
   const members: Table<Member> = await sql`
-    SELECT * FROM members
+    SELECT *
+    FROM (
+      SELECT *
+      FROM roll_call
+      WHERE year = ${year} 
+      AND semester = ${semester} 
+      AND week = ${week}
+    ) as roll_call
+    RIGHT JOIN members
+    ON roll_call.member = members.id
     ORDER BY family_name, given_name
   `
 
@@ -49,11 +58,11 @@ export default async function Page({ searchParams }: PageProps) {
         {members.map(({ id, ...member }) => (
           <Row
             key={id}
+            id={id}
+            {...member}
             year={parseInt(year)}
             semester={parseInt(semester)}
             week={parseInt(week)}
-            id={id}
-            {...member}
           />
         ))}
       </div>
