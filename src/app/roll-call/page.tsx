@@ -7,6 +7,7 @@ import { SearchParams } from '@/types/next'
 import { MembersList } from './members_list'
 import { NewMemberForm } from './new_member_form'
 import { QRCodeDialog } from './qr_code_dialog'
+import { TextInput } from '@/components/ui/text_input'
 
 type PageProps = {
   searchParams: SearchParams<Week>
@@ -23,10 +24,12 @@ export default async function Page({ searchParams }: PageProps) {
         <h1>Roll Call</h1>
 
         <p>Please select a year, semester, and week.</p>
-
-        <pre>
-          <code>/roll-call?year=2025&semester=1&week=1</code>
-        </pre>
+        <form className="prose flex w-full flex-col items-center gap-1">
+          <TextInput name='year' label='Year' inputMode="numeric" min={2025} defaultValue={2025}/>
+          <TextInput name='semester' label='Semester' inputMode="numeric" min={1} max={2} defaultValue={1}/>
+          <TextInput name='week' label='Week' inputMode="numeric" min={1} max={13} defaultValue={1}/>
+          <button className='cursor-pointer'>Select</button>
+        </form>
       </main>
     )
   }
@@ -53,6 +56,16 @@ export default async function Page({ searchParams }: PageProps) {
         <br />
         Week {week}
       </h1>
+      <div>
+        <form className="prose flex w-full flex-row items-center gap-1">
+          {parseInt(week) > 1 &&<button className='cursor-pointer' name='week' value={parseInt(week)-1}>◀</button>}
+          <span>Week: {week}</span>
+          {parseInt(week) <= 13 && <button name='week' value={parseInt(week)+1} className='cursor-pointer'>▶</button> }
+          <input type="hidden" name="year" value={year} />
+          <input type="hidden" name="semester" value={semester} />
+
+        </form>
+      </div>
 
       <MembersList
         data={members}
