@@ -56,6 +56,16 @@ export default async function Page({ searchParams }: PageProps) {
         <br />
         Week {week}
       </h1>
+      <div>
+        <form className="prose flex w-full flex-row items-center gap-1">
+          {parseInt(week) > 1 &&<button className='cursor-pointer' name='week' value={parseInt(week)-1}>◀</button>}
+          <span>Week: {week}</span>
+          {parseInt(week) <= 13 && <button name='week' value={parseInt(week)+1} className='cursor-pointer'>▶</button> }
+          <input type="hidden" name="year" value={year} />
+          <input type="hidden" name="semester" value={semester} />
+
+        </form>
+      </div>
 
       <MembersList
         data={members}
