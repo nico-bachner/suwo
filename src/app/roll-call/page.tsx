@@ -1,12 +1,12 @@
 import { headers } from 'next/headers'
 
 import { getQueryBuilder } from '@/db/query'
-import { Member, Table, Week } from '@/db/types'
+import { Member, RollCall, Table, Week } from '@/db/types'
 import { SearchParams } from '@/types/next'
 
+import { MembersList } from './members_list'
 import { NewMemberForm } from './new_member_form'
 import { QRCodeDialog } from './qr_code_dialog'
-import { Row } from './row'
 import { TextInput } from '@/components/ui/text_input'
 
 type PageProps = {
@@ -35,31 +35,34 @@ export default async function Page({ searchParams }: PageProps) {
   }
 
   const sql = getQueryBuilder()
-  const members: Table<Member> = await sql`
-    SELECT * FROM members
+  const members: Table<RollCall & Member> = await sql`
+    SELECT *
+    FROM (
+      SELECT *
+      FROM roll_call
+      WHERE year = ${year} 
+      AND semester = ${semester} 
+      AND week = ${week}
+    ) as roll_call
+    RIGHT JOIN members
+    ON roll_call.member = members.id
     ORDER BY family_name, given_name
   `
 
   return (
-    <main className="prose flex w-full flex-col items-center gap-1">
+    <main className="prose flex w-full flex-col items-center gap-6">
       <h1>
         Roll Call
         <br />
         Week {week}
       </h1>
 
-      <div className="flex w-full max-w-screen-sm flex-col">
-        {members.map(({ id, ...member }) => (
-          <Row
-            key={id}
-            year={parseInt(year)}
-            semester={parseInt(semester)}
-            week={parseInt(week)}
-            id={id}
-            {...member}
-          />
-        ))}
-      </div>
+      <MembersList
+        data={members}
+        year={parseInt(year)}
+        semester={parseInt(semester)}
+        week={parseInt(week)}
+      />
 
       <h2>Not in the list?</h2>
       <p>Enter your details below:</p>

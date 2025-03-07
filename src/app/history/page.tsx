@@ -1,41 +1,45 @@
+import { Metadata } from 'next'
 import Link from 'next/link'
 
-import { getQueryBuilder } from '@/db/query'
-import { History, Table } from '@/db/types'
+import { getHistory } from './get_history'
+import { getPageMetadata } from './get_metadata'
+
+export const generateMetadata = async (): Promise<Metadata> =>
+  await getPageMetadata()
 
 export default async function Page() {
-  const sql = getQueryBuilder()
-  const data: Table<Pick<History, 'year'>> =
-    await sql`SELECT year FROM history ORDER BY year DESC`
+  const { title, description } = await getPageMetadata()
+  const data = await getHistory()
 
   return (
-    <main className="flex flex-col items-center">
-      <div className="prose">
-        <h1 className="text-center">{`SUWO's History`}</h1>
+    <main className="flex flex-col items-center gap-20">
+      <div className="prose text-center">
+        <h1>{title}</h1>
+        <p>{description}</p>
       </div>
 
       <div className="flex flex-col items-center">
         {data
-          .map(({ year }) => year)
+          .map(
+            ({ properties }) =>
+              properties['Year'].type == 'number' && properties['Year'].number,
+          )
+          .filter((number) => number)
           .join(' - ')
           .split(' ')
-          .map((item, index) => {
-            if (item == '-') {
-              return <hr key={index} className="h-12 w-px bg-gray-100" />
-            }
-
-            const year = parseInt(item)
-
-            return (
+          .map((value, index) =>
+            value == '-' ? (
+              <hr key={index} className="h-12 w-px bg-gray-100" />
+            ) : (
               <Link
-                key={year}
-                href={`/history/${year}`}
+                key={value}
+                href={`/history/${value}`}
                 className="p-1 text-xl"
               >
-                {year}
+                {value}
               </Link>
-            )
-          })}
+            ),
+          )}
       </div>
     </main>
   )
