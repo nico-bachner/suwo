@@ -1,5 +1,8 @@
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { headers } from 'next/headers'
+import Link from 'next/link'
 
+import { TextInput } from '@/components/ui/text_input'
 import { getQueryBuilder } from '@/db/query'
 import { Member, RollCall, Table, Week } from '@/db/types'
 import { SearchParams } from '@/types/next'
@@ -7,7 +10,8 @@ import { SearchParams } from '@/types/next'
 import { MembersList } from './members_list'
 import { NewMemberForm } from './new_member_form'
 import { QRCodeDialog } from './qr_code_dialog'
-import { TextInput } from '@/components/ui/text_input'
+
+const MAX_WEEK = 13
 
 type PageProps = {
   searchParams: SearchParams<Week>
@@ -25,10 +29,30 @@ export default async function Page({ searchParams }: PageProps) {
 
         <p>Please select a year, semester, and week.</p>
         <form className="prose flex w-full flex-col items-center gap-1">
-          <TextInput name='year' label='Year' inputMode="numeric" min={2025} defaultValue={2025}/>
-          <TextInput name='semester' label='Semester' inputMode="numeric" min={1} max={2} defaultValue={1}/>
-          <TextInput name='week' label='Week' inputMode="numeric" min={1} max={13} defaultValue={1}/>
-          <button className='cursor-pointer'>Select</button>
+          <TextInput
+            name="year"
+            label="Year"
+            inputMode="numeric"
+            min={2025}
+            defaultValue={2025}
+          />
+          <TextInput
+            name="semester"
+            label="Semester"
+            inputMode="numeric"
+            min={1}
+            max={2}
+            defaultValue={1}
+          />
+          <TextInput
+            name="week"
+            label="Week"
+            inputMode="numeric"
+            min={1}
+            max={13}
+            defaultValue={1}
+          />
+          <button className="cursor-pointer">Select</button>
         </form>
       </main>
     )
@@ -56,16 +80,32 @@ export default async function Page({ searchParams }: PageProps) {
         <br />
         Week {week}
       </h1>
-      <div>
-        <form className="prose flex w-full flex-row items-center gap-1">
-          {parseInt(week) > 1 &&<button className='cursor-pointer' name='week' value={parseInt(week)-1}>◀</button>}
-          <span>Week: {week}</span>
-          {parseInt(week) <= 13 && <button name='week' value={parseInt(week)+1} className='cursor-pointer'>▶</button> }
-          <input type="hidden" name="year" value={year} />
-          <input type="hidden" name="semester" value={semester} />
 
-        </form>
-      </div>
+      <nav className="mx-auto flex w-full max-w-screen-sm flex-row justify-between">
+        {week && parseInt(week) > 1 && (
+          <Link
+            href={`/roll-call?year=${year}&semester=${semester}&week=${parseInt(week) - 1}`}
+            className="flex flex-row items-center rounded-md hover:bg-gray-900"
+          >
+            <ChevronLeftIcon className="box-content h-5 w-5 stroke-gray-300 p-2" />
+            <span className="py-2 pr-4 text-gray-300">
+              Week {parseInt(week) - 1}
+            </span>
+          </Link>
+        )}
+
+        {week && parseInt(week) < 13 && (
+          <Link
+            href={`/roll-call?year=${year}&semester=${semester}&week=${parseInt(week) + 1}`}
+            className="flex flex-row items-center rounded-md hover:bg-gray-900"
+          >
+            <span className="py-2 pl-4 text-gray-300">
+              Week {parseInt(week) + 1}
+            </span>
+            <ChevronRightIcon className="box-content h-5 w-5 stroke-gray-300 p-2" />
+          </Link>
+        )}
+      </nav>
 
       <MembersList
         data={members}
