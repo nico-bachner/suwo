@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { TextInput } from '@/components/ui/text_input'
 import { getQueryBuilder } from '@/db/query'
-import { Member, RollCall, Table, Week } from '@/db/types'
+import { Instrument, Member, RollCall, Table, Week } from '@/db/types'
 import { SearchParams } from '@/types/next'
 
 import { MembersList } from './members_list'
@@ -73,6 +73,12 @@ export default async function Page({ searchParams }: PageProps) {
     ORDER BY family_name, given_name
   `
 
+  const instruments = (await sql`
+    SELECT name, family
+    FROM instruments
+    ORDER BY family, name
+  `) as Table<Instrument>
+
   return (
     <main className="prose flex w-full flex-col items-center gap-6">
       <h1>
@@ -117,7 +123,7 @@ export default async function Page({ searchParams }: PageProps) {
       <h2>Not in the list?</h2>
       <p>Enter your details below:</p>
 
-      <NewMemberForm />
+      <NewMemberForm instruments={instruments} />
 
       <QRCodeDialog
         value={`${host}/roll-call?year=${year}&semester=${semester}&week=${week}`}

@@ -22,3 +22,8 @@ export type RollCall = {
   member?: number
   present?: boolean
 }
+
+export type Instrument = {
+  name: string
+  family: string
+}

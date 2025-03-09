@@ -4,12 +4,19 @@ import { ArrowUpTrayIcon } from '@heroicons/react/24/outline'
 import { useActionState } from 'react'
 
 import { CheckboxInput } from '@/components/ui/checkbox_input'
+import { Select } from '@/components/ui/select/select'
+import { SelectItem } from '@/components/ui/select/select_item'
 import { SubmitButton } from '@/components/ui/submit_button'
 import { TextInput } from '@/components/ui/text_input'
+import { Instrument, Table } from '@/db/types'
 
 import { createNewMember } from './create_new_member'
 
-export const NewMemberForm = () => {
+type NewMemberFormProps = {
+  instruments: Table<Instrument>
+}
+
+export const NewMemberForm = ({ instruments }: NewMemberFormProps) => {
   const [state, formAction, pending] = useActionState(createNewMember, {
     errors: {
       formErrors: [],
@@ -39,15 +46,24 @@ export const NewMemberForm = () => {
         placeholder='e.g. "Phelps"'
         className="flex-1"
       />
-
       <TextInput
         errors={state?.errors.fieldErrors.usu}
         name="usu"
         label="USU Number"
         inputMode="numeric"
         placeholder='e.g. "1234567"'
-        className="sm:col-span-2"
       />
+      <Select
+        name="instrument"
+        label="Instrument"
+        placeholder="Select Instrument..."
+      >
+        {instruments.map(({ name }) => (
+          <SelectItem key={name} value={name}>
+            {name}
+          </SelectItem>
+        ))}
+      </Select>
 
       <div className="flex flex-col gap-4 sm:col-span-2">
         <TextInput
