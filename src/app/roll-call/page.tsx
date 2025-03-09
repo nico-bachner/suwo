@@ -94,7 +94,7 @@ export default async function Page({ searchParams }: PageProps) {
           </Link>
         )}
 
-        {week && parseInt(week) < 13 && (
+        {week && parseInt(week) < MAX_WEEK && (
           <Link
             href={`/roll-call?year=${year}&semester=${semester}&week=${parseInt(week) + 1}`}
             className="flex flex-row items-center rounded-md hover:bg-gray-900"
