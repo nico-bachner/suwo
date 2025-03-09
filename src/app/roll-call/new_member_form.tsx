@@ -51,6 +51,7 @@ export const NewMemberForm = ({ instruments }: NewMemberFormProps) => {
         name="usu"
         label="USU Number"
         inputMode="numeric"
+        required
         placeholder='e.g. "1234567"'
       />
       <Select
@@ -71,6 +72,7 @@ export const NewMemberForm = ({ instruments }: NewMemberFormProps) => {
           type="email"
           name="email"
           label="Email Address"
+          required
           placeholder='e.g. "name@example.com"'
         />
 
