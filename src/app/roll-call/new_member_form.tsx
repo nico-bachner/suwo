@@ -89,7 +89,7 @@ export const NewMemberForm = ({ instruments }: NewMemberFormProps) => {
         className="mt-4 flex flex-row items-center justify-center gap-2 sm:col-start-2"
       >
         <ArrowUpTrayIcon className="h-5 w-5 stroke-gray-300" />
-        Add to members list
+        Add member
       </SubmitButton>
     </form>
   )

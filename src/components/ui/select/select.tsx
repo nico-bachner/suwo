@@ -29,7 +29,7 @@ export const Select = ({
     <RadixSelect.Root {...props}>
       <RadixSelect.Trigger
         id={name}
-        className="flex w-fit items-center justify-center gap-2 rounded-md border border-gray-500 px-4 py-2 focus:outline-none"
+        className="flex items-center justify-center gap-2 rounded-md border border-gray-500 px-4 py-2 focus:outline-none data-placeholder:text-gray-500"
       >
         <RadixSelect.Value
           placeholder={placeholder}
