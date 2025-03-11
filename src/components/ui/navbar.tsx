@@ -25,7 +25,7 @@ export const Navbar = ({ className }: NavbarProps) => (
         <NavbarLink href="/about">About</NavbarLink>
         <NavbarLink href="/history">History</NavbarLink>
         <NavbarLink href="/join">Join</NavbarLink>
-        <NavbarLink href="/roll-call">Roll Call</NavbarLink>
+        <NavbarLink href="/roll-call/current">Roll Call</NavbarLink>
       </div>
 
       <div className="hidden flex-1 flex-row items-center justify-end gap-4 sm:flex">
