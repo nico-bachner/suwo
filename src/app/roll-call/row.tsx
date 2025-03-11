@@ -23,9 +23,10 @@ export const Row = async ({
       const sql = getQueryBuilder()
 
       await sql`
-            INSERT INTO roll_call
-            VALUES (${year}, ${semester}, ${week}, ${id}, true)
-          `
+        INSERT INTO roll_call
+        VALUES (${year}, ${semester}, ${week}, ${id}, true)
+      `
+
       revalidatePath('/roll-call')
     }}
     className="flex flex-row items-center odd:bg-gray-800"

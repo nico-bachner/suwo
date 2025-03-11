@@ -30,6 +30,7 @@ export const MembersList = async ({
             INSERT INTO roll_call
             VALUES (${year}, ${semester}, ${week}, ${id})
           `
+
           revalidatePath('/roll-call')
         }}
         className="flex flex-row items-center odd:bg-gray-800"
