@@ -59,10 +59,12 @@ export default async function Page({ searchParams }: PageProps) {
   }
 
   const sql = getQueryBuilder()
-  const members: Table<RollCall & Member> = await sql`
+  const members: Table<Member & { present?: boolean }> = await sql`
     SELECT *
     FROM (
-      SELECT *
+      SELECT 
+        member, 
+        TRUE AS present
       FROM roll_call
       WHERE year = ${year} 
       AND semester = ${semester} 

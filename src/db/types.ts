@@ -21,7 +21,6 @@ export type RollCall = {
   semester?: number
   week?: number
   member?: number
-  present?: boolean
 }
 
 export type Instrument = {

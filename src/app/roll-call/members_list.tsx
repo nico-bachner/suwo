@@ -2,10 +2,10 @@ import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { revalidatePath } from 'next/cache'
 
 import { getQueryBuilder } from '@/db/query'
-import { Member, RollCall, Table } from '@/db/types'
+import { Member, Table } from '@/db/types'
 
 type MembersListProps = {
-  data: Table<RollCall & Member>
+  data: Table<Member & { present?: boolean }>
   year: number
   semester: number
   week: number
@@ -27,9 +27,9 @@ export const MembersList = async ({
           const sql = getQueryBuilder()
 
           await sql`
-              INSERT INTO roll_call
-              VALUES (${year}, ${semester}, ${week}, ${id})
-            `
+            INSERT INTO roll_call
+            VALUES (${year}, ${semester}, ${week}, ${id})
+          `
           revalidatePath('/roll-call')
         }}
         className="flex flex-row items-center odd:bg-gray-800"
