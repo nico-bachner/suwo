@@ -7,6 +7,11 @@ import { getQueryBuilder } from '@/db/query'
 import { Instrument, Member, RollCall, Table, Week } from '@/db/types'
 import { SearchParams } from '@/types/next'
 
+import {
+  getCurrentSemester,
+  getCurrentWeek,
+  getCurrentYear,
+} from './get_current_week'
 import { MembersList } from './members_list'
 import { NewMemberForm } from './new_member_form'
 import { QRCodeDialog } from './qr_code_dialog'
@@ -20,9 +25,19 @@ type PageProps = {
 export default async function Page({ searchParams }: PageProps) {
   const headersList = await headers()
   const host = headersList.get('host')
-  const { year, semester, week } = await searchParams
+  const {
+    year: yearParam,
+    semester: semesterParam,
+    week: weekParam,
+  } = await searchParams
 
-  if (!year || !semester || !week) {
+  const year = yearParam ? parseInt(yearParam) : getCurrentYear()
+  const semester = semesterParam
+    ? parseInt(semesterParam)
+    : getCurrentSemester()
+  const week = weekParam ? parseInt(weekParam) : await getCurrentWeek()
+
+  if (semester < 1 || semester > 2 || week < 1 || week > MAX_WEEK) {
     return (
       <main className="prose">
         <h1>Roll Call</h1>
@@ -87,38 +102,33 @@ export default async function Page({ searchParams }: PageProps) {
         Week {week}
       </h1>
 
-      <nav className="mx-auto flex w-full max-w-screen-sm flex-row justify-between">
-        {week && parseInt(week) > 1 && (
+      <nav className="mx-auto flex w-full max-w-screen-sm flex-row justify-between gap-4">
+        {week > 1 ? (
           <Link
-            href={`/roll-call?year=${year}&semester=${semester}&week=${parseInt(week) - 1}`}
+            href={`/roll-call?year=${year}&semester=${semester}&week=${week - 1}`}
             className="flex flex-row items-center rounded-md hover:bg-gray-900"
           >
             <ChevronLeftIcon className="box-content h-5 w-5 stroke-gray-300 p-2" />
-            <span className="py-2 pr-4 text-gray-300">
-              Week {parseInt(week) - 1}
-            </span>
+            <span className="py-2 pr-4 text-gray-300">Week {week - 1}</span>
           </Link>
+        ) : (
+          <div></div>
         )}
 
-        {week && parseInt(week) < MAX_WEEK && (
+        {week < MAX_WEEK ? (
           <Link
-            href={`/roll-call?year=${year}&semester=${semester}&week=${parseInt(week) + 1}`}
+            href={`/roll-call?year=${year}&semester=${semester}&week=${week + 1}`}
             className="flex flex-row items-center rounded-md hover:bg-gray-900"
           >
-            <span className="py-2 pl-4 text-gray-300">
-              Week {parseInt(week) + 1}
-            </span>
+            <span className="py-2 pl-4 text-gray-300">Week {week + 1}</span>
             <ChevronRightIcon className="box-content h-5 w-5 stroke-gray-300 p-2" />
           </Link>
+        ) : (
+          <div></div>
         )}
       </nav>
 
-      <MembersList
-        data={members}
-        year={parseInt(year)}
-        semester={parseInt(semester)}
-        week={parseInt(week)}
-      />
+      <MembersList data={members} year={year} semester={semester} week={week} />
 
       <h2>Not in the list?</h2>
       <p>Enter your details below:</p>
