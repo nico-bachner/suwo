@@ -11,6 +11,7 @@ function weeksBetween(d1: Date, d2: Date) {
     return Math.floor((d2.getTime() - d1.getTime()) / (7 * 24 * 60 * 60 * 1000));
 }
 
+export const revalidate = 60 * 60 * 24; // 24 hours
 export default async function Page() {
 
     try {
