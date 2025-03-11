@@ -37,8 +37,6 @@ export const createNewMember = async (
     mailing_list: formData.get('mailing-list') == 'on',
   })
 
-  console.log(data, success, error)
-
   if (!success) {
     return {
       errors: error.flatten(),
