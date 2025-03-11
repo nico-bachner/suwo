@@ -102,29 +102,25 @@ export default async function Page({ searchParams }: PageProps) {
         Week {week}
       </h1>
 
-      <nav className="mx-auto flex w-full max-w-screen-sm flex-row justify-between gap-4">
-        {week > 1 ? (
+      <nav className="mx-auto grid w-full max-w-screen-sm grid-cols-2 gap-4">
+        {week > 1 && (
           <Link
             href={`/roll-call?year=${year}&semester=${semester}&week=${week - 1}`}
-            className="flex flex-row items-center rounded-md hover:bg-gray-900"
+            className="col-start-1 flex flex-row items-center rounded-md hover:bg-gray-900"
           >
             <ChevronLeftIcon className="box-content h-5 w-5 stroke-gray-300 p-2" />
             <span className="py-2 pr-4 text-gray-300">Week {week - 1}</span>
           </Link>
-        ) : (
-          <div></div>
         )}
 
-        {week < MAX_WEEK ? (
+        {week < MAX_WEEK && (
           <Link
             href={`/roll-call?year=${year}&semester=${semester}&week=${week + 1}`}
-            className="flex flex-row items-center rounded-md hover:bg-gray-900"
+            className="col-start-2 flex flex-row items-center rounded-md hover:bg-gray-900"
           >
             <span className="py-2 pl-4 text-gray-300">Week {week + 1}</span>
             <ChevronRightIcon className="box-content h-5 w-5 stroke-gray-300 p-2" />
           </Link>
-        ) : (
-          <div></div>
         )}
       </nav>
 
