@@ -47,19 +47,21 @@ export const NewMemberForm = ({ instruments }: NewMemberFormProps) => {
         placeholder='e.g. "Phelps"'
         className="flex-1"
       />
+
       <TextInput
         errors={state?.errors.fieldErrors.usu}
         name="usu"
         label="USU Number"
         inputMode="numeric"
-        required
         placeholder='e.g. "1234567"'
       />
+
       <Select
         form="new-member-form"
         name="instrument"
         label="Instrument"
         placeholder="Select Instrument..."
+        required
       >
         {instruments.map(({ name }) => (
           <SelectItem key={name} value={name}>

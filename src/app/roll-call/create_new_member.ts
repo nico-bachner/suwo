@@ -10,12 +10,16 @@ const schema = z.object({
   family_name: z.string().max(30),
   given_name: z.string().min(1).max(30),
   instrument: z.string().min(1).max(30),
-  usu: z
-    .number({ coerce: true })
-    .int()
-    .refine((id) => `${id}`.length == 7, {
-      message: 'USU number must be 7 digits',
-    }),
+  usu: z.nullable(
+    z
+      .string()
+      .regex(/^\d+$/, {
+        message: 'USU number must contain only digits',
+      })
+      .length(7, {
+        message: 'USU number, if provided, must be 7 digits',
+      }),
+  ),
   email: z.string().email(),
   mailing_list: z.boolean(),
 })
@@ -28,10 +32,12 @@ export const createNewMember = async (
     family_name: formData.get('family-name'),
     given_name: formData.get('given-name'),
     instrument: formData.get('instrument'),
-    usu: formData.get('usu'),
+    usu: formData.get('usu') == '' ? null : formData.get('usu'),
     email: formData.get('email'),
     mailing_list: formData.get('mailing-list') == 'on',
   })
+
+  console.log(data, success, error)
 
   if (!success) {
     return {
