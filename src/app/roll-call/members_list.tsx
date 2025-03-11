@@ -1,14 +1,8 @@
-import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline';
-import { revalidatePath } from 'next/cache';
+import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
+import { revalidatePath } from 'next/cache'
 
-
-
-import { getQueryBuilder } from '@/db/query';
-import { Member, RollCall, Table } from '@/db/types';
-
-
-
-
+import { getQueryBuilder } from '@/db/query'
+import { Member, RollCall, Table } from '@/db/types'
 
 type MembersListProps = {
   data: Table<RollCall & Member>
@@ -40,8 +34,11 @@ export const MembersList = async ({
         }}
         className="flex flex-row items-center odd:bg-gray-800"
       >
-        <p className="flex-1 px-4 py-2">
-          {given_name} {family_name} {instrument ? `(${instrument})` : ''}
+        <p className="flex flex-1 flex-row gap-2 px-4 py-2 font-bold">
+          <span className="text-gray-300">
+            {given_name} {family_name}
+          </span>
+          <span className="text-gray-500">{instrument}</span>
         </p>
 
         {present ? (
