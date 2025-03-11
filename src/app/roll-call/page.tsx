@@ -60,7 +60,7 @@ export default async function Page({ searchParams }: PageProps) {
 
   const sql = getQueryBuilder()
   const members: Table<Member & { present?: boolean }> = await sql`
-    SELECT *
+    SELECT id, given_name, family_name, instrument, present
     FROM (
       SELECT 
         member, 
