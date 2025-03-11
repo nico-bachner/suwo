@@ -8,7 +8,7 @@ type SelectItemProps = {
 
 export const SelectItem = ({ children, ...props }: SelectItemProps) => (
   <Select.Item
-    className="flex items-center gap-2 select-none hover:outline-none"
+    className="flex cursor-pointer items-center gap-2 border-r-4 select-none hover:bg-gray-800 hover:outline-none"
     {...props}
   >
     <Select.ItemText>{children}</Select.ItemText>
