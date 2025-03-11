@@ -13,42 +13,41 @@ function weeksBetween(d1: Date, d2: Date) {
 
 export default async function Page() {
 
-    const currentYear = new Date().getFullYear();
-    const currentSemester = new Date().getMonth() < 7 ? 1 : 2;
-    const keyDatesJson = await fetch(`https://www.sydney.edu.au/content/dam/students/files/university-calendar/${currentYear}.json`)
-    const keyDates: ApiResponse = await keyDatesJson.json()
+    try {
+        const currentYear = new Date().getFullYear();
+        const currentSemester = new Date().getMonth() < 7 ? 1 : 2;
+        const keyDatesJson = await fetch(`https://www.sydney.edu.au/content/dam/students/files/university-calendar/${currentYear}.json`)
+        const keyDates: ApiResponse = await keyDatesJson.json()
 
-    const currentSemesterResponse = keyDates.find(obj => obj.hasOwnProperty(`${currentYear}-s${currentSemester}c-teaching-dates`));
-    
-    const currentSemesterBreakResponse = keyDates.find(obj => obj.hasOwnProperty(`${currentYear}-s${currentSemester}c-break`));
-    if(!currentSemesterResponse || !currentSemesterBreakResponse) {
-        return (
-            <main className="prose">
-                <h1>Latest Roll Call</h1>
-                <p>There are no key dates for the current semester</p>
-            </main>
-        )
-    }
-    const currentSemesterObject = currentSemesterResponse[`${currentYear}-s${currentSemester}c-teaching-dates`]
-    const currentSemesterBreakObject = currentSemesterBreakResponse[`${currentYear}-s${currentSemester}c-break`]
+        const currentSemesterResponse = keyDates.find(obj => obj.hasOwnProperty(`${currentYear}-s${currentSemester}c-teaching-dates`));
+        
+        const currentSemesterBreakResponse = keyDates.find(obj => obj.hasOwnProperty(`${currentYear}-s${currentSemester}c-break`));
+        if(!currentSemesterResponse || !currentSemesterBreakResponse) {
+            return (
+                <main className="prose">
+                    <h1>Latest Roll Call</h1>
+                    <p>There are no key dates for the current semester</p>
+                </main>
+            )
+        }
+        const currentSemesterObject = currentSemesterResponse[`${currentYear}-s${currentSemester}c-teaching-dates`]
+        const currentSemesterBreakObject = currentSemesterBreakResponse[`${currentYear}-s${currentSemester}c-break`]
 
-    const currentDate = new Date()
-    let currentWeek = 1 + weeksBetween(new Date(currentSemesterObject.startDate), currentDate);
-    if (currentDate > new Date(currentSemesterBreakObject.startDate)) {
-        currentWeek--;
+        const currentDate = new Date();
+        let currentWeek = 1 + weeksBetween(new Date(currentSemesterObject.startDate), currentDate);
+        if (currentDate > new Date(currentSemesterBreakObject.startDate)) {
+            currentWeek--;
+        }
+        if (currentWeek > 13) {
+            currentWeek = 13;
+        }
+        if (currentWeek < 1) {
+            currentWeek = 1;
+        }
+        redirect(`/roll-call?year=${currentYear}&semester=${currentSemester}&week=${currentWeek}`);
     }
-    if (currentWeek > 13) {
-        currentWeek = 13;
+    catch (e) {
+        redirect(`/roll-call`);
     }
-    if (currentWeek < 1) {
-        currentWeek = 1;
-    }
-    redirect(`/roll-call?year=${currentYear}&semester=${currentSemester}&week=${currentWeek}`)
-    return (
-        <main className="prose">
-            <h1>Latest Roll Call</h1>
-            <p>Current Week: {currentWeek}</p>
 
-        </main>
-    )
 }
