@@ -47,7 +47,7 @@ export default async function Page({ searchParams }: PageProps) {
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((i) => (
             <Link
               key={i}
-              href={`/roll-call?year=${year}&semester=${semester}&week=${i + 1}`}
+              href={`/roll-call?year=${year}&semester=${semester}&week=${i}`}
               className="flex h-16 w-16 items-center justify-center rounded-md bg-gray-900 text-xl hover:bg-gray-800"
             >
               {i}
