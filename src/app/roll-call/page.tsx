@@ -3,7 +3,7 @@ import { headers } from 'next/headers'
 import Link from 'next/link'
 
 import { getQueryBuilder } from '@/db/query'
-import { Instrument, Member, RollCall, Table, Week } from '@/db/types'
+import { Instrument, Member, Table, Week } from '@/db/types'
 import { SearchParams } from '@/types/next'
 
 import {
