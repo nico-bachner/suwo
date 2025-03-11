@@ -7,8 +7,8 @@ import { getQueryBuilder } from '@/db/query'
 import { Member } from '@/db/types'
 
 const schema = z.object({
-  family_name: z.string().max(30),
-  given_name: z.string().min(1).max(30),
+  family_name: z.string().max(30).trim(),
+  given_name: z.string().min(1).max(30).trim(),
   instrument: z.string().min(1).max(30),
   usu: z.nullable(
     z

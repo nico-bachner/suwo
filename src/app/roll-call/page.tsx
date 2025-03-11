@@ -70,7 +70,7 @@ export default async function Page({ searchParams }: PageProps) {
     ) as roll_call
     RIGHT JOIN members
     ON roll_call.member = members.id
-    ORDER BY family_name, given_name
+    ORDER BY given_name, family_name
   `
 
   const instruments = (await sql`
