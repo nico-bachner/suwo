@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 
 import { getQueryBuilder } from '@/db/query'
+import { Member } from '@/db/types'
 
 const schema = z.object({
   family_name: z.string().max(30),
@@ -40,10 +41,20 @@ export const createNewMember = async (
 
   const sql = getQueryBuilder()
 
-  await sql`
+  const members: Member[] =
+    await sql`SELECT * FROM members WHERE email = ${data.email}`
+  if (members.length > 1) {
+    console.log('Something has gone very wrong')
+  } else if (members.length == 1) {
+    await sql`
+      UPDATE members set family_name = ${data.family_name}, given_name = ${data.given_name}, instrument = ${data.instrument}, usu = ${data.usu}, mailing_list = ${data.mailing_list} WHERE email = ${data.email}
+    `
+  } else {
+    await sql`
     INSERT INTO members (family_name, given_name, instrument, usu, email, mailing_list) 
     VALUES (${data.family_name}, ${data.given_name}, ${data.instrument}, ${data.usu}, ${data.email}, ${data.mailing_list})
   `
+  }
 
   revalidatePath('/roll-call')
 }

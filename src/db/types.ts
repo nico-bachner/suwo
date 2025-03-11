@@ -12,6 +12,7 @@ export type Member = {
   given_name?: string
   usu?: number
   email?: string
+  instrument?: string
   mailing_list?: boolean
 }
 

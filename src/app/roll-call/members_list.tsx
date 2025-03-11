@@ -1,8 +1,14 @@
-import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
-import { revalidatePath } from 'next/cache'
+import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { revalidatePath } from 'next/cache';
 
-import { getQueryBuilder } from '@/db/query'
-import { Member, RollCall, Table } from '@/db/types'
+
+
+import { getQueryBuilder } from '@/db/query';
+import { Member, RollCall, Table } from '@/db/types';
+
+
+
+
 
 type MembersListProps = {
   data: Table<RollCall & Member>
@@ -18,7 +24,7 @@ export const MembersList = async ({
   week,
 }: MembersListProps) => (
   <div className="flex w-full max-w-screen-sm flex-col">
-    {data.map(({ id, given_name, family_name, present }) => (
+    {data.map(({ id, given_name, family_name, present, instrument }) => (
       <form
         key={id}
         action={async () => {
@@ -35,7 +41,7 @@ export const MembersList = async ({
         className="flex flex-row items-center odd:bg-gray-800"
       >
         <p className="flex-1 px-4 py-2">
-          {given_name} {family_name}
+          {given_name} {family_name} {instrument ? `(${instrument})` : ''}
         </p>
 
         {present ? (
