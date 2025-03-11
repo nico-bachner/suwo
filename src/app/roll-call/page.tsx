@@ -106,7 +106,7 @@ export default async function Page({ searchParams }: PageProps) {
         {week > 1 && (
           <Link
             href={`/roll-call?year=${year}&semester=${semester}&week=${week - 1}`}
-            className="col-start-1 flex flex-row items-center rounded-md hover:bg-gray-900"
+            className="col-start-1 flex flex-row items-center justify-self-start rounded-md hover:bg-gray-900"
           >
             <ChevronLeftIcon className="box-content h-5 w-5 stroke-gray-300 p-2" />
             <span className="py-2 pr-4 text-gray-300">Week {week - 1}</span>
@@ -116,7 +116,7 @@ export default async function Page({ searchParams }: PageProps) {
         {week < MAX_WEEK && (
           <Link
             href={`/roll-call?year=${year}&semester=${semester}&week=${week + 1}`}
-            className="col-start-2 flex flex-row items-center rounded-md hover:bg-gray-900"
+            className="col-start-2 flex flex-row items-center justify-self-end rounded-md hover:bg-gray-900"
           >
             <span className="py-2 pl-4 text-gray-300">Week {week + 1}</span>
             <ChevronRightIcon className="box-content h-5 w-5 stroke-gray-300 p-2" />
