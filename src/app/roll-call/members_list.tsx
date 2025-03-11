@@ -28,7 +28,7 @@ export const MembersList = async ({
 
           await sql`
               INSERT INTO roll_call
-              VALUES (${year}, ${semester}, ${week}, ${id}, true)
+              VALUES (${year}, ${semester}, ${week}, ${id})
             `
           revalidatePath('/roll-call')
         }}
