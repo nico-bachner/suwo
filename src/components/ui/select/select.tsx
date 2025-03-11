@@ -3,18 +3,14 @@ import { Select as RadixSelect } from 'radix-ui'
 
 import { cn } from '@/cn'
 
-type SelectProps = {
-  formId: string
-  children: React.ReactNode
+type SelectProps = React.ComponentProps<typeof RadixSelect.Root> & {
   errors?: string[]
-  name: string
   label: string
   placeholder: string
   className?: string
 }
 
 export const Select = ({
-  formId,
   children,
   errors,
   name,
@@ -28,7 +24,7 @@ export const Select = ({
       {label}
     </label>
 
-    <RadixSelect.Root {...props} form={formId} name={name}>
+    <RadixSelect.Root {...props} name={name}>
       <RadixSelect.Trigger
         id={name}
         className="flex items-center justify-center gap-2 rounded-md border border-gray-500 px-4 py-2 focus:outline-none data-placeholder:text-gray-500"

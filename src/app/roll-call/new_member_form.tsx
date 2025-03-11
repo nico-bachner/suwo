@@ -26,7 +26,7 @@ export const NewMemberForm = ({ instruments }: NewMemberFormProps) => {
 
   return (
     <form
-      id='new-member-form'
+      id="new-member-form"
       action={formAction}
       className="grid w-full max-w-screen-sm grid-cols-1 gap-4 sm:grid-cols-2"
     >
@@ -56,7 +56,7 @@ export const NewMemberForm = ({ instruments }: NewMemberFormProps) => {
         placeholder='e.g. "1234567"'
       />
       <Select
-        formId="new-member-form"
+        form="new-member-form"
         name="instrument"
         label="Instrument"
         placeholder="Select Instrument..."

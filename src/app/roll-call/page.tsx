@@ -2,7 +2,6 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { headers } from 'next/headers'
 import Link from 'next/link'
 
-import { TextInput } from '@/components/ui/text_input'
 import { getQueryBuilder } from '@/db/query'
 import { Instrument, Member, RollCall, Table, Week } from '@/db/types'
 import { SearchParams } from '@/types/next'
@@ -42,33 +41,19 @@ export default async function Page({ searchParams }: PageProps) {
       <main className="prose">
         <h1>Roll Call</h1>
 
-        <p>Please select a year, semester, and week.</p>
-        <form className="prose flex w-full flex-col items-center gap-1">
-          <TextInput
-            name="year"
-            label="Year"
-            inputMode="numeric"
-            min={2025}
-            defaultValue={2025}
-          />
-          <TextInput
-            name="semester"
-            label="Semester"
-            inputMode="numeric"
-            min={1}
-            max={2}
-            defaultValue={1}
-          />
-          <TextInput
-            name="week"
-            label="Week"
-            inputMode="numeric"
-            min={1}
-            max={13}
-            defaultValue={1}
-          />
-          <button className="cursor-pointer">Select</button>
-        </form>
+        <p>Please select a week:</p>
+
+        <div className="mx-auto flex w-full max-w-screen-sm flex-row flex-wrap gap-1">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((i) => (
+            <Link
+              key={i}
+              href={`/roll-call?year=${year}&semester=${semester}&week=${i + 1}`}
+              className="flex h-16 w-16 items-center justify-center rounded-md bg-gray-900 text-xl hover:bg-gray-800"
+            >
+              {i}
+            </Link>
+          ))}
+        </div>
       </main>
     )
   }
