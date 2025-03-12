@@ -1,4 +1,8 @@
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline'
+import {
+  ChevronDownIcon,
+  ChevronUpDownIcon,
+  ChevronUpIcon,
+} from '@heroicons/react/24/outline'
 import { Select as RadixSelect } from 'radix-ui'
 
 import { cn } from '@/cn'
@@ -27,7 +31,7 @@ export const Select = ({
     <RadixSelect.Root {...props} name={name}>
       <RadixSelect.Trigger
         id={name}
-        className="flex items-center justify-center gap-2 rounded-md border border-gray-500 px-4 py-2 focus:outline-none data-placeholder:text-gray-500"
+        className="flex items-center justify-between gap-2 rounded-md border border-gray-500 px-4 py-2 focus:outline-none data-placeholder:text-gray-500"
       >
         <RadixSelect.Value
           placeholder={placeholder}
@@ -35,21 +39,21 @@ export const Select = ({
         />
 
         <RadixSelect.Icon>
-          <ChevronDownIcon className="h-5 w-5 stroke-gray-500" />
+          <ChevronUpDownIcon className="h-6 w-6 stroke-gray-500" />
         </RadixSelect.Icon>
       </RadixSelect.Trigger>
 
       <RadixSelect.Portal>
         <RadixSelect.Content className="relative overflow-hidden rounded-md border border-gray-500 bg-gray-950">
-          <RadixSelect.ScrollUpButton className="absolute top-0 z-10 flex w-full flex-row items-center justify-center bg-gray-950/80 backdrop-blur">
+          <RadixSelect.ScrollUpButton className="absolute top-0 z-10 flex w-full flex-row items-center justify-center bg-gray-950/80 py-1 backdrop-blur">
             <ChevronUpIcon className="h-5 w-5 stroke-gray-300" />
           </RadixSelect.ScrollUpButton>
 
-          <RadixSelect.Viewport className="p-2">
+          <RadixSelect.Viewport className="p-1">
             {children}
           </RadixSelect.Viewport>
 
-          <RadixSelect.ScrollDownButton className="absolute bottom-0 z-10 flex w-full flex-row items-center justify-center bg-gray-950/80 backdrop-blur">
+          <RadixSelect.ScrollDownButton className="absolute bottom-0 z-10 flex w-full flex-row items-center justify-center bg-gray-950/80 py-1 backdrop-blur">
             <ChevronDownIcon className="h-5 w-5 stroke-gray-300" />
           </RadixSelect.ScrollDownButton>
         </RadixSelect.Content>
