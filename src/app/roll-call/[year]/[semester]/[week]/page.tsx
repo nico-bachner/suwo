@@ -5,9 +5,10 @@ import { redirect } from 'next/navigation'
 
 import { MAX_WEEK } from '@/config'
 import { getQueryBuilder } from '@/db/query'
-import { Instrument, Member, Table, Week } from '@/db/types'
+import { Member, Table, Week } from '@/db/types'
 import { Params } from '@/types/next'
 
+import { getInstruments } from './get_instruments'
 import { MembersList } from './members_list'
 import { NewMemberForm } from './new_member_form'
 import { QRCodeDialog } from './qr_code_dialog'
@@ -54,11 +55,7 @@ export default async function Page({ params }: PageProps) {
     ORDER BY given_name, family_name
   `
 
-  const instruments = (await sql`
-    SELECT name, family
-    FROM instruments
-    ORDER BY family, name
-  `) as Table<Instrument>
+  const instruments = await getInstruments()
 
   return (
     <main className="prose flex w-full flex-col items-center gap-6">

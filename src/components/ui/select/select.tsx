@@ -24,7 +24,10 @@ export const Select = ({
   ...props
 }: SelectProps) => (
   <div className={cn('flex flex-col', className)}>
-    <label htmlFor={name} className="px-2 py-1 text-sm text-gray-300">
+    <label
+      htmlFor={name}
+      className="px-2 py-1 text-sm text-gray-300 select-none"
+    >
       {label}
     </label>
 

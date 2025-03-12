@@ -28,72 +28,75 @@ export const NewMemberForm = ({ instruments }: NewMemberFormProps) => {
     <form
       id="new-member-form"
       action={formAction}
-      className="grid w-full max-w-screen-sm grid-cols-1 gap-4 sm:grid-cols-2"
+      className="flex w-full max-w-screen-sm flex-col gap-4"
     >
-      <TextInput
-        errors={state?.errors.fieldErrors.given_name}
-        name="given-name"
-        label="Given Name"
-        autoComplete="given-name"
-        placeholder='e.g. "Ambrose"'
-        required
-        className="flex-1"
-      />
-      <TextInput
-        errors={state?.errors.fieldErrors.family_name}
-        name="family-name"
-        label="Family Name"
-        autoComplete="family-name"
-        placeholder='e.g. "Phelps"'
-        className="flex-1"
-      />
-
-      <TextInput
-        errors={state?.errors.fieldErrors.usu}
-        name="usu"
-        label="USU Number"
-        inputMode="numeric"
-        placeholder='e.g. "1234567"'
-      />
-
-      <Select
-        form="new-member-form"
-        name="instrument"
-        label="Instrument"
-        placeholder="Select Instrument..."
-        required
-      >
-        {instruments.map(({ name }) => (
-          <SelectItem key={name} value={name}>
-            {name}
-          </SelectItem>
-        ))}
-      </Select>
-
-      <div className="flex flex-col gap-4 sm:col-span-2">
+      <div className="flex flex-col gap-4 sm:flex-row">
         <TextInput
-          errors={state?.errors.fieldErrors.email}
-          type="email"
-          name="email"
-          label="Email Address"
+          errors={state?.errors.fieldErrors.given_name}
+          name="given-name"
+          label="Given Name"
+          autoComplete="given-name"
+          placeholder='e.g. "Ambrose"'
           required
-          placeholder='e.g. "name@example.com"'
+          className="flex-1"
         />
 
-        <CheckboxInput
-          name="mailing-list"
-          label="Sign up for weekly rehearsal updates"
-          defaultChecked={true}
-          className="pl-2"
+        <TextInput
+          errors={state?.errors.fieldErrors.family_name}
+          name="family-name"
+          label="Family Name"
+          autoComplete="family-name"
+          placeholder='e.g. "Phelps"'
+          className="flex-1"
         />
       </div>
+
+      <TextInput
+        errors={state?.errors.fieldErrors.email}
+        type="email"
+        name="email"
+        label="Email Address"
+        required
+        placeholder='e.g. "name@example.com"'
+      />
+
+      <div className="flex flex-col gap-4 sm:flex-row">
+        <TextInput
+          errors={state?.errors.fieldErrors.usu}
+          name="usu"
+          label="USU Number"
+          inputMode="numeric"
+          placeholder='e.g. "1234567"'
+          className="flex-1"
+        />
+
+        <Select
+          form="new-member-form"
+          name="instrument"
+          label="Instrument"
+          placeholder="Select Instrument..."
+        >
+          {instruments.map(({ name }) => (
+            <SelectItem key={name} value={name}>
+              {name}
+            </SelectItem>
+          ))}
+        </Select>
+      </div>
+
+      <CheckboxInput
+        name="mailing-list"
+        label="Sign up for weekly rehearsal updates"
+        defaultChecked={true}
+        className="mt-4 self-center"
+      />
 
       <SubmitButton
         disabled={pending}
         className="mt-4 flex flex-row items-center justify-center gap-2 sm:col-start-2"
       >
-        <ArrowUpTrayIcon className="h-5 w-5 stroke-gray-300" />
-        Add member
+        <ArrowUpTrayIcon className="h-5 w-5 stroke-gray-300 stroke-2" />
+        <span className="font-bold">Add member</span>
       </SubmitButton>
     </form>
   )

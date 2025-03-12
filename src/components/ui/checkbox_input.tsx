@@ -27,7 +27,7 @@ export const CheckboxInput = ({
       </Checkbox.Indicator>
     </Checkbox.Root>
 
-    <label htmlFor={name} className="text-sm text-gray-300">
+    <label htmlFor={name} className="text-sm text-gray-300 select-none">
       {label}
     </label>
   </div>

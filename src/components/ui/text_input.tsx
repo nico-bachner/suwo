@@ -13,12 +13,21 @@ export const TextInput = ({
   type = 'text',
   name,
   label,
+  required,
   className,
   ...props
 }: TextInputProps) => (
   <div className={cn('flex flex-col', className)}>
-    <label htmlFor={name} className="px-2 py-1 text-sm text-gray-300">
-      {label}
+    <label
+      htmlFor={name}
+      className="px-2 py-1 text-sm text-gray-300 select-none"
+    >
+      {label}{' '}
+      {required && (
+        <span className={cn(errors && errors.length > 0 && 'text-red-500')}>
+          *
+        </span>
+      )}
     </label>
 
     <input
