@@ -5,6 +5,7 @@ export type Member = {
   given_name: string
   family_name: string | null
   email: string
+  password: string
   usu: number | null
   instrument: string | null
   mailing_list: boolean
