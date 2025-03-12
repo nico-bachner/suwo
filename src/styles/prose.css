@@ -45,7 +45,11 @@
   margin-block-end: 1.2em;
 }
 
-.prose a {
+.prose > h1 a,
+.prose > h2 a,
+.prose > h3 a,
+.prose > p a,
+.prose > li a {
   @apply text-blue-400;
 }
 
