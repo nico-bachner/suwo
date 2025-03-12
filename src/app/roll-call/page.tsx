@@ -31,7 +31,7 @@ export default async function Page() {
           (week) => (
             <Link
               key={week}
-              href={`/roll-call?year=${year}&semester=${semester}&week=${week}`}
+              href={`/roll-call/${year}/${semester}/${week}`}
               className="flex h-16 w-16 items-center justify-center rounded-md bg-gray-900 text-xl hover:bg-gray-800"
             >
               {week}

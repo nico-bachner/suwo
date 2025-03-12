@@ -95,7 +95,7 @@ export default async function Page({ params }: PageProps) {
       <NewMemberForm instruments={instruments} />
 
       <QRCodeDialog
-        value={`${host}/roll-call?year=${year}&semester=${semester}&week=${week}`}
+        value={`${host}/roll-call/${year}/${semester}/${week}`}
         className="fixed right-4 bottom-4"
       />
     </main>
