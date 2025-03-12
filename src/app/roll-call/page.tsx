@@ -86,7 +86,7 @@ export default async function Page({ searchParams }: PageProps) {
       <h1>
         Roll Call
         <br />
-        Week {week}
+        <span className="text-gray-500">Week {week}</span>
       </h1>
 
       <nav className="mx-auto grid w-full max-w-screen-sm grid-cols-2 gap-4">
