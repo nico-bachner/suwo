@@ -1,7 +1,6 @@
 import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
-import { revalidatePath } from 'next/cache'
 
-import { getQueryBuilder } from '@/lib/db/query'
+import { createRollCallEntry } from '@/lib/db/queries/create_roll_call_entry'
 import { Member, Table } from '@/lib/db/types'
 
 type MembersListProps = {
@@ -11,12 +10,7 @@ type MembersListProps = {
   week: number
 }
 
-export const MembersList = ({
-  data,
-  year,
-  semester,
-  week,
-}: MembersListProps) => (
+export const MembersList = ({ data, ...rollCall }: MembersListProps) => (
   <div className="flex w-full max-w-screen-sm flex-col">
     {data.map(({ id, given_name, family_name, present, instrument }) => (
       <form
@@ -24,14 +18,10 @@ export const MembersList = ({
         action={async () => {
           'use server'
 
-          const sql = getQueryBuilder()
-
-          await sql`
-            INSERT INTO roll_call
-            VALUES (${year}, ${semester}, ${week}, ${id})
-          `
-
-          revalidatePath('/roll-call')
+          await createRollCallEntry({
+            ...rollCall,
+            member: id,
+          })
         }}
         className="flex flex-row items-center odd:bg-gray-800"
       >
