@@ -1,17 +1,22 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
+import {
+  CheckIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  PlusIcon,
+} from '@heroicons/react/24/outline'
 import { headers } from 'next/headers'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 import { QRCodeDialog } from '@/components/ui/qr_code_dialog'
 import { MAX_WEEK } from '@/config'
+import { createRollCallEntry } from '@/lib/db/queries/create_roll_call_entry'
 import { getInstruments } from '@/lib/db/queries/get_instruments'
-import { getQueryBuilder } from '@/lib/db/query'
-import { Member, RollCall, Table } from '@/lib/db/types'
+import { getRollCallEntriesByWeek } from '@/lib/db/queries/get_roll_call_entries_by_week'
+import { RollCall } from '@/lib/db/types'
 import { Params } from '@/types/next'
 
 import { NewMemberForm } from './create_member_form'
-import { MembersList } from './members_list'
 
 type PageProps = {
   params: Params<Pick<RollCall, 'year' | 'semester' | 'week'>>
@@ -38,24 +43,12 @@ export default async function Page({ params }: PageProps) {
     redirect(`/roll-call`)
   }
 
-  const sql = getQueryBuilder()
-  const members = (await sql`
-    SELECT id, given_name, family_name, instrument, present
-    FROM (
-      SELECT 
-        member, 
-        TRUE AS present
-      FROM roll_call
-      WHERE year = ${year} 
-      AND semester = ${semester} 
-      AND week = ${week}
-    ) as roll_call
-    RIGHT JOIN members
-    ON roll_call.member = members.id
-    ORDER BY given_name, family_name
-  `) as Table<Member & { present?: boolean }>
-
   const instruments = await getInstruments()
+  const rollCallEntries = await getRollCallEntriesByWeek({
+    year,
+    semester,
+    week,
+  })
 
   return (
     <main className="prose flex w-full flex-col items-center gap-6">
@@ -87,7 +80,44 @@ export default async function Page({ params }: PageProps) {
         )}
       </nav>
 
-      <MembersList data={members} year={year} semester={semester} week={week} />
+      <div className="flex w-full max-w-screen-sm flex-col">
+        {rollCallEntries.map(
+          ({ id, given_name, family_name, present, instrument }) => (
+            <form
+              key={id}
+              action={async () => {
+                'use server'
+
+                await createRollCallEntry({
+                  year,
+                  semester,
+                  week,
+                  member: id,
+                })
+              }}
+              className="flex flex-row items-center odd:bg-gray-800"
+            >
+              <p className="flex flex-1 flex-row gap-2 px-4 font-bold">
+                <span className="text-gray-300">
+                  {given_name} {family_name}
+                </span>
+                <span className="text-gray-500">{instrument}</span>
+              </p>
+
+              {present ? (
+                <CheckIcon className="box-content h-6 w-6 stroke-green-300 px-4 py-3" />
+              ) : (
+                <button
+                  type="submit"
+                  className="cursor-pointer px-4 py-3 focus:ring-2 focus:ring-gray-500 focus:outline-none"
+                >
+                  <PlusIcon className="h-6 w-6 stroke-gray-300" />
+                </button>
+              )}
+            </form>
+          ),
+        )}
+      </div>
 
       <h2>Not in the list?</h2>
       <p>Enter your details below:</p>
