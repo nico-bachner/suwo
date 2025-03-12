@@ -60,6 +60,15 @@ export const NewMemberForm = ({ instruments }: NewMemberFormProps) => {
         placeholder='e.g. "name@example.com"'
       />
 
+      <TextInput
+        errors={state?.errors.fieldErrors.password}
+        type="password"
+        name="password"
+        label="Password"
+        required
+        placeholder='e.g. "I<3SUWO25"'
+      />
+
       <div className="flex flex-col gap-4 sm:flex-row">
         <TextInput
           errors={state?.errors.fieldErrors.usu}
