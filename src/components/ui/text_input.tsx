@@ -1,5 +1,7 @@
 import { cn } from '@/cn'
 
+import { InputLabel } from './input_label'
+
 type TextInputProps = React.ComponentProps<'input'> & {
   errors?: string[]
   type?: 'text' | 'email'
@@ -17,18 +19,8 @@ export const TextInput = ({
   className,
   ...props
 }: TextInputProps) => (
-  <div className={cn('flex flex-col', className)}>
-    <label
-      htmlFor={name}
-      className="px-2 py-1 text-sm text-gray-300 select-none"
-    >
-      {label}{' '}
-      {required && (
-        <span className={cn(errors && errors.length > 0 && 'text-red-500')}>
-          *
-        </span>
-      )}
-    </label>
+  <div className={cn('flex flex-col gap-1', className)}>
+    <InputLabel label={label} htmlFor={name} required={required} />
 
     <input
       type={type}
@@ -38,10 +30,6 @@ export const TextInput = ({
       {...props}
     />
 
-    {errors?.map((error) => (
-      <p key={error} className="px-2 py-1 text-sm text-red-500">
-        {error}
-      </p>
-    ))}
+    {errors && <p className="px-2 text-sm text-red-500">{errors[0]}</p>}
   </div>
 )

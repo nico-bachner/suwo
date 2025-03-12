@@ -7,8 +7,11 @@ import { Select as RadixSelect } from 'radix-ui'
 
 import { cn } from '@/cn'
 
+import { InputLabel } from '../input_label'
+
 type SelectProps = React.ComponentProps<typeof RadixSelect.Root> & {
   errors?: string[]
+  name: string
   label: string
   placeholder: string
   className?: string
@@ -20,18 +23,14 @@ export const Select = ({
   name,
   label,
   placeholder,
+  required,
   className,
   ...props
 }: SelectProps) => (
-  <div className={cn('flex flex-col', className)}>
-    <label
-      htmlFor={name}
-      className="px-2 py-1 text-sm text-gray-300 select-none"
-    >
-      {label}
-    </label>
+  <div className={cn('flex flex-col gap-1', className)}>
+    <InputLabel label={label} htmlFor={name} required={required} />
 
-    <RadixSelect.Root {...props} name={name}>
+    <RadixSelect.Root name={name} {...props}>
       <RadixSelect.Trigger
         id={name}
         className="flex items-center justify-between gap-2 rounded-md border border-gray-500 px-4 py-2 focus:border-gray-300 focus:outline-none data-placeholder:text-gray-500"
@@ -63,10 +62,6 @@ export const Select = ({
       </RadixSelect.Portal>
     </RadixSelect.Root>
 
-    {errors?.map((error) => (
-      <p key={error} className="px-2 py-1 text-sm text-red-500">
-        {error}
-      </p>
-    ))}
+    {errors && <p className="px-2 text-sm text-red-500">{errors[0]}</p>}
   </div>
 )
