@@ -5,8 +5,7 @@ import { z } from 'zod'
 
 import { getQueryBuilder } from '@/db/query'
 import { Member } from '@/db/types'
-
-import { getInstruments } from './get_instruments'
+import { getInstruments } from '@/lib/get_instruments'
 
 export const createNewMember = async (
   previousState: unknown,
