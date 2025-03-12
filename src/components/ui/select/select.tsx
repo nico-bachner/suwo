@@ -31,7 +31,7 @@ export const Select = ({
     <RadixSelect.Root {...props} name={name}>
       <RadixSelect.Trigger
         id={name}
-        className="flex items-center justify-between gap-2 rounded-md border border-gray-500 px-4 py-2 focus:outline-none data-placeholder:text-gray-500"
+        className="flex items-center justify-between gap-2 rounded-md border border-gray-500 px-4 py-2 focus:border-gray-300 focus:outline-none data-placeholder:text-gray-500"
       >
         <RadixSelect.Value
           placeholder={placeholder}
