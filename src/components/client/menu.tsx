@@ -48,6 +48,9 @@ export const Menu = ({ className }: MenuProps) => {
             <NavbarLink href="/join" onClick={close} className="text-2xl">
               Join
             </NavbarLink>
+            <NavbarLink href="/roll-call" onClick={close} className="text-2xl">
+              Roll Call
+            </NavbarLink>
           </div>
 
           <div className="flex flex-row justify-center gap-4">
