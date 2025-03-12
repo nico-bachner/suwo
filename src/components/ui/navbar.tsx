@@ -21,11 +21,16 @@ export const Navbar = ({ className }: NavbarProps) => (
         <Image src={logo} alt="The SUWO logo" className="h-12 w-12" />
       </Link>
 
-      <div className="hidden flex-1 flex-row items-center justify-center gap-4 sm:flex">
+      <div className="hidden flex-3 flex-row items-center justify-center gap-4 sm:flex">
         <NavbarLink href="/about">About</NavbarLink>
         <NavbarLink href="/history">History</NavbarLink>
-        <NavbarLink href="/join">Join</NavbarLink>
+        <NavbarLink
+          href={`https://calendar.google.com/calendar/u/0?cid=${process.env.GOOGLE_CALENDAR_ID}`}
+        >
+          Calendar
+        </NavbarLink>
         <NavbarLink href="/roll-call">Roll Call</NavbarLink>
+        <NavbarLink href="/join">Join</NavbarLink>
       </div>
 
       <div className="hidden flex-1 flex-row items-center justify-end gap-4 sm:flex">

@@ -45,11 +45,18 @@ export const Menu = ({ className }: MenuProps) => {
             <NavbarLink href="/history" onClick={close} className="text-2xl">
               History
             </NavbarLink>
-            <NavbarLink href="/join" onClick={close} className="text-2xl">
-              Join
+            <NavbarLink
+              href={`https://calendar.google.com/calendar/u/0?cid=${process.env.GOOGLE_CALENDAR_ID}`}
+              onClick={close}
+              className="text-2xl"
+            >
+              Calendar
             </NavbarLink>
             <NavbarLink href="/roll-call" onClick={close} className="text-2xl">
               Roll Call
+            </NavbarLink>
+            <NavbarLink href="/join" onClick={close} className="text-2xl">
+              Join
             </NavbarLink>
           </div>
 
