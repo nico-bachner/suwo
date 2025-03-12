@@ -1,7 +1,7 @@
-import { cn } from '@/cn'
 import { FacebookIcon } from '@/icons/Facebook'
 import { InstagramIcon } from '@/icons/Instagram'
 import { YouTubeIcon } from '@/icons/YouTube'
+import { cn } from '@/lib/cn'
 
 type NavbarProps = {
   className?: string

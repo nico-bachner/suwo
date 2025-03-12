@@ -8,7 +8,7 @@ import { Select } from '@/components/ui/select/select'
 import { SelectItem } from '@/components/ui/select/select_item'
 import { SubmitButton } from '@/components/ui/submit_button'
 import { TextInput } from '@/components/ui/text_input'
-import { Instrument, Table } from '@/db/types'
+import { Instrument, Table } from '@/lib/db/types'
 
 import { createNewMember } from './create_member_form_action'
 

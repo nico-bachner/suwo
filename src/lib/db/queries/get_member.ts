@@ -1,5 +1,5 @@
-import { getQueryBuilder } from '@/db/query'
-import { Member } from '@/db/types'
+import { getQueryBuilder } from '@/lib/db/query'
+import { Member } from '@/lib/db/types'
 
 export const getMemberByID = async (id: number) => {
   const sql = getQueryBuilder()

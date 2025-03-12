@@ -1,5 +1,5 @@
-import { getQueryBuilder } from '@/db/query'
-import { Member } from '@/db/types'
+import { getQueryBuilder } from '@/lib/db/query'
+import { Member } from '@/lib/db/types'
 
 export const createMember = async ({
   given_name,

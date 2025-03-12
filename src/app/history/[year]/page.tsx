@@ -2,8 +2,8 @@ import { Client, isFullBlock } from '@notionhq/client'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { getHistory } from '@/notion/get_history'
-import { getTitle } from '@/notion/get_title'
+import { getHistory } from '@/lib/notion/get_history'
+import { getTitle } from '@/lib/notion/get_title'
 import { Params } from '@/types/next'
 
 type PageProps = {

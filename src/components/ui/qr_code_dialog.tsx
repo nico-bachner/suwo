@@ -2,7 +2,7 @@ import { QrCodeIcon } from '@heroicons/react/24/outline'
 import { Dialog, VisuallyHidden } from 'radix-ui'
 import ReactQRCode from 'react-qr-code'
 
-import { cn } from '@/cn'
+import { cn } from '@/lib/cn'
 
 type QRCodeProps = {
   value: string

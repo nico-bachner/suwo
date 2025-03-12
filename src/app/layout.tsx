@@ -2,9 +2,9 @@ import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
 
-import { cn } from '@/cn'
 import { Footer } from '@/components/ui/footer'
 import { Navbar } from '@/components/ui/navbar'
+import { cn } from '@/lib/cn'
 
 import '../styles/globals.css'
 

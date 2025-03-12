@@ -5,7 +5,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { Select as RadixSelect } from 'radix-ui'
 
-import { cn } from '@/cn'
+import { cn } from '@/lib/cn'
 
 import { InputLabel } from '../input_label'
 

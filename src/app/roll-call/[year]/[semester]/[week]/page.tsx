@@ -5,9 +5,9 @@ import { redirect } from 'next/navigation'
 
 import { QRCodeDialog } from '@/components/ui/qr_code_dialog'
 import { MAX_WEEK } from '@/config'
-import { getInstruments } from '@/db/queries/get_instruments'
-import { getQueryBuilder } from '@/db/query'
-import { Member, RollCall, Table } from '@/db/types'
+import { getInstruments } from '@/lib/db/queries/get_instruments'
+import { getQueryBuilder } from '@/lib/db/query'
+import { Member, RollCall, Table } from '@/lib/db/types'
 import { Params } from '@/types/next'
 
 import { NewMemberForm } from './create_member_form'

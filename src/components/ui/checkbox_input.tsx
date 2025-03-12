@@ -1,7 +1,7 @@
 import { CheckIcon } from '@heroicons/react/24/outline'
 import { Checkbox } from 'radix-ui'
 
-import { cn } from '@/cn'
+import { cn } from '@/lib/cn'
 
 type CheckboxInputProps = React.ComponentProps<typeof Checkbox.Root> & {
   name: string

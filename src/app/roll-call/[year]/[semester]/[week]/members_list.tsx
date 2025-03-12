@@ -1,8 +1,8 @@
 import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { revalidatePath } from 'next/cache'
 
-import { getQueryBuilder } from '@/db/query'
-import { Member, Table } from '@/db/types'
+import { getQueryBuilder } from '@/lib/db/query'
+import { Member, Table } from '@/lib/db/types'
 
 type MembersListProps = {
   data: Table<Member & { present?: boolean }>

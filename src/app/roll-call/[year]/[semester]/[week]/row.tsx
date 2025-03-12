@@ -1,8 +1,8 @@
 import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { revalidatePath } from 'next/cache'
 
-import { getQueryBuilder } from '@/db/query'
-import { Member, RollCall } from '@/db/types'
+import { getQueryBuilder } from '@/lib/db/query'
+import { Member, RollCall } from '@/lib/db/types'
 
 type RowProps = Member & RollCall & { present?: boolean }
 
