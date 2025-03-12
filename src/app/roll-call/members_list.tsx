@@ -1,5 +1,6 @@
 import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { revalidatePath } from 'next/cache'
+import Link from 'next/link'
 
 import { getQueryBuilder } from '@/db/query'
 import { Member, Table } from '@/db/types'
@@ -35,7 +36,7 @@ export const MembersList = async ({
         }}
         className="flex flex-row items-center odd:bg-gray-800"
       >
-        <p className="flex flex-1 flex-row gap-2 px-4 py-2 font-bold">
+        <p className="flex flex-1 flex-row gap-2 px-4 font-bold">
           <span className="text-gray-300">
             {given_name} {family_name}
           </span>
@@ -43,13 +44,13 @@ export const MembersList = async ({
         </p>
 
         {present ? (
-          <CheckIcon className="box-content h-5 w-5 stroke-green-300 px-4 py-2" />
+          <CheckIcon className="box-content h-6 w-6 stroke-green-300 px-4 py-3" />
         ) : (
           <button
             type="submit"
-            className="cursor-pointer px-4 py-2 focus:ring-2 focus:ring-gray-500 focus:outline-none"
+            className="cursor-pointer px-4 py-3 focus:ring-2 focus:ring-gray-500 focus:outline-none"
           >
-            <PlusIcon className="h-5 w-5 stroke-gray-300" />
+            <PlusIcon className="h-6 w-6 stroke-gray-300" />
           </button>
         )}
       </form>
