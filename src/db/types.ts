@@ -1,26 +1,25 @@
 export type Table<T> = T[]
 
-export type Week = {
-  year?: number
-  semester?: number
-  week?: number
-}
-
 export type Member = {
-  id?: number
+  id: number
+  given_name: string
   family_name?: string
-  given_name?: string
+  email: string
   usu?: number
-  email?: string
   instrument?: string
   mailing_list?: boolean
 }
 
+export type Profile = Pick<
+  Member,
+  'id' | 'given_name' | 'family_name' | 'instrument'
+>
+
 export type RollCall = {
-  year?: number
-  semester?: number
-  week?: number
-  member?: number
+  year: number
+  semester: number
+  week: number
+  member: number
 }
 
 export type Instrument = {

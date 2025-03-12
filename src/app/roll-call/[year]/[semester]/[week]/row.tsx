@@ -2,9 +2,9 @@ import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { revalidatePath } from 'next/cache'
 
 import { getQueryBuilder } from '@/db/query'
-import { Member, Week } from '@/db/types'
+import { Member, RollCall } from '@/db/types'
 
-type RowProps = Week & Member & { present?: boolean }
+type RowProps = Member & RollCall & { present?: boolean }
 
 export const Row = async ({
   year,

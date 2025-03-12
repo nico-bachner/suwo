@@ -19,6 +19,10 @@ export const generateMetadata = async ({
   const data = await getHistory()
   const { year } = await params
 
+  if (!year) {
+    notFound()
+  }
+
   const page = data.find(
     ({ properties }) =>
       properties['Year'].type == 'number' &&
@@ -37,6 +41,10 @@ export const generateMetadata = async ({
 export default async function Page({ params }: PageProps) {
   const data = await getHistory()
   const { year } = await params
+
+  if (!year) {
+    notFound()
+  }
 
   const page = data.find(
     ({ properties }) =>

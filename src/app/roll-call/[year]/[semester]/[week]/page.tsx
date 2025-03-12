@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 
 import { MAX_WEEK } from '@/config'
 import { getQueryBuilder } from '@/db/query'
-import { Member, Table, Week } from '@/db/types'
+import { Member, RollCall, Table } from '@/db/types'
 import { getInstruments } from '@/lib/get_instruments'
 import { Params } from '@/types/next'
 
@@ -14,7 +14,7 @@ import { NewMemberForm } from './new_member_form'
 import { QRCodeDialog } from './qr_code_dialog'
 
 type PageProps = {
-  params: Params<Week>
+  params: Params<Pick<RollCall, 'year' | 'semester' | 'week'>>
 }
 
 export default async function Page({ params }: PageProps) {
@@ -39,7 +39,7 @@ export default async function Page({ params }: PageProps) {
   }
 
   const sql = getQueryBuilder()
-  const members: Table<Member & { present?: boolean }> = await sql`
+  const members = (await sql`
     SELECT id, given_name, family_name, instrument, present
     FROM (
       SELECT 
@@ -53,7 +53,7 @@ export default async function Page({ params }: PageProps) {
     RIGHT JOIN members
     ON roll_call.member = members.id
     ORDER BY given_name, family_name
-  `
+  `) as Table<Member & { present?: boolean }>
 
   const instruments = await getInstruments()
 

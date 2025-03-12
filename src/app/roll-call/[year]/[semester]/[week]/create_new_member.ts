@@ -4,8 +4,8 @@ import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 
 import { getQueryBuilder } from '@/db/query'
-import { Member } from '@/db/types'
 import { getInstruments } from '@/lib/get_instruments'
+import { getMemberByEmail } from '@/lib/get_member'
 
 export const createNewMember = async (
   previousState: unknown,
@@ -75,12 +75,10 @@ export const createNewMember = async (
     }
   }
 
+  const member = await getMemberByEmail(data.email)
   const sql = getQueryBuilder()
 
-  const members: Member[] =
-    await sql`SELECT * FROM members WHERE email = ${data.email}`
-
-  if (members.length > 0) {
+  if (member) {
     await sql`
       UPDATE members
       SET
