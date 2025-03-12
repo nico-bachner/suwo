@@ -4,6 +4,7 @@ import { Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Dialog, VisuallyHidden } from 'radix-ui'
 import { useState } from 'react'
 
+import { FACEBOOK, INSTAGRAM, YOUTUBE } from '@/config'
 import { FacebookIcon } from '@/icons/Facebook'
 import { InstagramIcon } from '@/icons/Instagram'
 import { YouTubeIcon } from '@/icons/YouTube'
@@ -61,25 +62,13 @@ export const Menu = ({ className }: MenuProps) => {
           </div>
 
           <div className="flex flex-row justify-center gap-4">
-            <a
-              href="https://www.youtube.com/user/SydneyUniWindOrch"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={YOUTUBE} target="_blank" rel="noopener noreferrer">
               <YouTubeIcon className="h-10 w-10 stroke-gray-100 stroke-1" />
             </a>
-            <a
-              href="https://www.facebook.com/sydneyuniversitywindorchestra"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={FACEBOOK} target="_blank" rel="noopener noreferrer">
               <FacebookIcon className="h-10 w-10 stroke-gray-100 stroke-1" />
             </a>
-            <a
-              href="https://www.instagram.com/suwo.syd/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={INSTAGRAM} target="_blank" rel="noopener noreferrer">
               <InstagramIcon className="h-10 w-10 stroke-gray-100 stroke-1" />
             </a>
           </div>
