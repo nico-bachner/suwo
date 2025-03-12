@@ -11,7 +11,7 @@ type MembersListProps = {
   week: number
 }
 
-export const MembersList = async ({
+export const MembersList = ({
   data,
   year,
   semester,

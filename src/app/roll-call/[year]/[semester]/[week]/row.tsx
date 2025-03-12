@@ -6,7 +6,7 @@ import { Member, RollCall } from '@/db/types'
 
 type RowProps = Member & RollCall & { present?: boolean }
 
-export const Row = async ({
+export const Row = ({
   year,
   semester,
   week,

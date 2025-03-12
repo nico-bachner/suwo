@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 
+import { getMemberByID } from '@/db/queries/get_member'
 import { Member } from '@/db/types'
-import { getMemberByID } from '@/lib/get_member'
 import { Params } from '@/types/next'
 
 type PageProps = {

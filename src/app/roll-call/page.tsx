@@ -2,12 +2,11 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 import { MAX_WEEK } from '@/config'
-
 import {
   getCurrentSemester,
   getCurrentWeek,
   getCurrentYear,
-} from './get_current_week'
+} from '@/lib/get_current_week'
 
 export const revalidate = 86400 // 1 day
 

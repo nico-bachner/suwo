@@ -1,4 +1,4 @@
-import { getInstruments } from '@/lib/get_instruments'
+import { getInstruments } from '@/db/queries/get_instruments'
 
 export const GET = async () => {
   const instruments = await getInstruments()

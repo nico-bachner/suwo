@@ -3,15 +3,15 @@ import { headers } from 'next/headers'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
+import { QRCodeDialog } from '@/components/ui/qr_code_dialog'
 import { MAX_WEEK } from '@/config'
+import { getInstruments } from '@/db/queries/get_instruments'
 import { getQueryBuilder } from '@/db/query'
 import { Member, RollCall, Table } from '@/db/types'
-import { getInstruments } from '@/lib/get_instruments'
 import { Params } from '@/types/next'
 
+import { NewMemberForm } from './create_member_form'
 import { MembersList } from './members_list'
-import { NewMemberForm } from './new_member_form'
-import { QRCodeDialog } from './qr_code_dialog'
 
 type PageProps = {
   params: Params<Pick<RollCall, 'year' | 'semester' | 'week'>>

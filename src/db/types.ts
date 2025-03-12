@@ -3,11 +3,11 @@ export type Table<T> = T[]
 export type Member = {
   id: number
   given_name: string
-  family_name?: string
+  family_name: string | null
   email: string
-  usu?: number
-  instrument?: string
-  mailing_list?: boolean
+  usu: number | null
+  instrument: string | null
+  mailing_list: boolean
 }
 
 export type Profile = Pick<

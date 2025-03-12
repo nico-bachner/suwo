@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 
-import { getHistory } from './get_history'
-import { getPageMetadata } from './get_metadata'
+import { getHistory } from '@/notion/get_history'
+import { getPageMetadata } from '@/notion/get_metadata'
 
 export const generateMetadata = async (): Promise<Metadata> =>
   await getPageMetadata()

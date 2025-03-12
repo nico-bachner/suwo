@@ -10,7 +10,7 @@ import { SubmitButton } from '@/components/ui/submit_button'
 import { TextInput } from '@/components/ui/text_input'
 import { Instrument, Table } from '@/db/types'
 
-import { createNewMember } from './create_new_member'
+import { createNewMember } from './create_member_form_action'
 
 type NewMemberFormProps = {
   instruments: Table<Instrument>

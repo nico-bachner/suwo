@@ -3,9 +3,10 @@
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 
+import { createMember } from '@/db/queries/create_member'
+import { getInstruments } from '@/db/queries/get_instruments'
+import { getMemberByEmail } from '@/db/queries/get_member'
 import { getQueryBuilder } from '@/db/query'
-import { getInstruments } from '@/lib/get_instruments'
-import { getMemberByEmail } from '@/lib/get_member'
 
 export const createNewMember = async (
   previousState: unknown,
@@ -90,10 +91,10 @@ export const createNewMember = async (
       WHERE email = ${data.email}
     `
   } else {
-    await sql`
-      INSERT INTO members (given_name, family_name, email, usu, instrument, mailing_list) 
-      VALUES (${data.given_name}, ${data.family_name}, ${data.email}, ${data.usu}, ${data.instrument}, ${data.mailing_list})
-    `
+    await createMember({
+      ...data,
+      usu: data.usu ? parseInt(data.usu) : null,
+    })
   }
 
   revalidatePath('/roll-call')
