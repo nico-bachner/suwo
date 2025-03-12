@@ -1,6 +1,5 @@
 import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { revalidatePath } from 'next/cache'
-import Link from 'next/link'
 
 import { getQueryBuilder } from '@/db/query'
 import { Member, Table } from '@/db/types'
