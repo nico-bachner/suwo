@@ -3,6 +3,7 @@ import { headers } from 'next/headers'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
+import { MAX_WEEK } from '@/config'
 import { getQueryBuilder } from '@/db/query'
 import { Instrument, Member, Table, Week } from '@/db/types'
 import { Params } from '@/types/next'
@@ -10,8 +11,6 @@ import { Params } from '@/types/next'
 import { MembersList } from './members_list'
 import { NewMemberForm } from './new_member_form'
 import { QRCodeDialog } from './qr_code_dialog'
-
-const MAX_WEEK = 13
 
 type PageProps = {
   params: Params<Week>
