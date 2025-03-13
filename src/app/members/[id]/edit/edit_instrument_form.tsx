@@ -22,7 +22,9 @@ export const EditInstrumentForm = ({
   const [state, formAction, pending] = useActionState(
     editInstrumentFormAction,
     {
-      instrument,
+      data: {
+        instrument,
+      },
       errors: {
         formErrors: [],
         fieldErrors: {},
@@ -40,7 +42,7 @@ export const EditInstrumentForm = ({
         form="edit-instrument-form"
         name="instrument"
         label="Instrument"
-        defaultValue={state.instrument ?? undefined}
+        defaultValue={state.data.instrument ?? undefined}
         placeholder="Select Instrument..."
       >
         {instruments.map(({ name }) => (

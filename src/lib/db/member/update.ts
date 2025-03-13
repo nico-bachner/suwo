@@ -37,9 +37,6 @@ export const updateMemberInstument = async (
 
   const sql = getQueryBuilder()
 
-  console.log('session.id', session.id)
-  console.log('instrument', instrument)
-
   await sql`
     UPDATE members
     SET
