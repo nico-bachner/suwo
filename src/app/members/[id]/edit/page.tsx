@@ -2,10 +2,13 @@ import { notFound, redirect } from 'next/navigation'
 
 import { SubmitButton } from '@/components/ui/submit_button'
 import { TextInput } from '@/components/ui/text_input'
+import { getInstruments } from '@/lib/db/instruments/get'
 import { getMemberByID } from '@/lib/db/member/get'
 import { getSession } from '@/lib/db/session'
 import { Member } from '@/lib/db/types'
 import { Params } from '@/lib/types'
+
+import { EditInstrumentForm } from './edit_instrument_form'
 
 type PageProps = {
   params: Params<Pick<Member, 'id'>>
@@ -30,7 +33,8 @@ export default async function Page({ params }: PageProps) {
     redirect(`/members/${id}`)
   }
 
-  const { given_name, family_name } = await getMemberByID(id)
+  const { given_name, family_name, instrument } = await getMemberByID(id)
+  const instruments = await getInstruments()
 
   return (
     <main className="prose">
@@ -62,6 +66,8 @@ export default async function Page({ params }: PageProps) {
 
           <SubmitButton>Save</SubmitButton>
         </form>
+
+        <EditInstrumentForm instrument={instrument} instruments={instruments} />
       </div>
     </main>
   )
