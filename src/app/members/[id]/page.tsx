@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 
 import { getMemberByID } from '@/lib/db/member/get'
 import { Member } from '@/lib/db/types'
-import { Params } from '@/types/next'
+import { Params } from '@/lib/types'
 
 type PageProps = {
   params: Params<Pick<Member, 'id'>>

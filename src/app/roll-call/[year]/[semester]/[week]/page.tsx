@@ -14,7 +14,7 @@ import { getInstruments } from '@/lib/db/instruments/get'
 import { createRollCallEntry } from '@/lib/db/roll_call_entry/create'
 import { getRollCallEntriesByWeek } from '@/lib/db/roll_call_entry/get'
 import { RollCall } from '@/lib/db/types'
-import { Params } from '@/types/next'
+import { Params } from '@/lib/types'
 
 import { NewMemberForm } from './create_member_form'
 

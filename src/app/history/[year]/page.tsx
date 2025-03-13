@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 
 import { getHistory } from '@/lib/notion/get_history'
 import { getTitle } from '@/lib/notion/get_title'
-import { Params } from '@/types/next'
+import { Params } from '@/lib/types'
 
 type PageProps = {
   params: Params<{
