@@ -1,7 +1,10 @@
 import { hash } from 'argon2'
+import { redirect } from 'next/navigation'
 
 import { getQueryBuilder } from '@/lib/db/query'
 import { Member } from '@/lib/db/types'
+
+import { createSession } from '../session'
 
 export const createMember = async ({
   given_name,
@@ -16,7 +19,7 @@ export const createMember = async ({
 
   const hashedPassword = await hash(password)
 
-  await sql`
+  const data = await sql`
     INSERT INTO members (
       given_name,
       family_name,
@@ -36,4 +39,14 @@ export const createMember = async ({
       ${mailing_list}
     )
   `
+
+  const user = data[0] as Member
+
+  if (!user) {
+    throw new Error('An error occurred while creating an account.')
+  }
+
+  await createSession(user.id)
+
+  redirect(`/members/${user.id}`)
 }
