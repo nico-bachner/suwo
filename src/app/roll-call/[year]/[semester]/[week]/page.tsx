@@ -10,9 +10,9 @@ import { redirect } from 'next/navigation'
 
 import { QRCodeDialog } from '@/components/ui/qr_code_dialog'
 import { MAX_WEEK } from '@/config'
-import { createRollCallEntry } from '@/lib/db/queries/create_roll_call_entry'
-import { getInstruments } from '@/lib/db/queries/get_instruments'
-import { getRollCallEntriesByWeek } from '@/lib/db/queries/get_roll_call_entries_by_week'
+import { getInstruments } from '@/lib/db/instruments/get'
+import { createRollCallEntry } from '@/lib/db/roll_call_entry/create'
+import { getRollCallEntriesByWeek } from '@/lib/db/roll_call_entry/get'
 import { RollCall } from '@/lib/db/types'
 import { Params } from '@/types/next'
 

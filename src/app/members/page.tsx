@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { getMembers } from '@/lib/db/queries/get_members'
+import { getMembers } from '@/lib/db/members/get'
 
 export default async function Page() {
   const members = await getMembers()

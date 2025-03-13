@@ -3,10 +3,10 @@
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 
-import { createMember } from '@/lib/db/queries/create_member'
-import { getInstruments } from '@/lib/db/queries/get_instruments'
-import { getMemberByEmail } from '@/lib/db/queries/get_member'
-import { updateMemberByEmail } from '@/lib/db/queries/update_member'
+import { getInstruments } from '@/lib/db/instruments/get'
+import { createMember } from '@/lib/db/member/create'
+import { getMemberByEmail } from '@/lib/db/member/get'
+import { updateMemberByEmail } from '@/lib/db/member/update'
 
 export const createNewMember = async (
   previousState: unknown,

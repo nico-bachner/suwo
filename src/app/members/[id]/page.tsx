@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 
-import { getMemberByID } from '@/lib/db/queries/get_member'
+import { getMemberByID } from '@/lib/db/member/get'
 import { Member } from '@/lib/db/types'
 import { Params } from '@/types/next'
 
