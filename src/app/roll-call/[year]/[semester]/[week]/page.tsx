@@ -10,13 +10,10 @@ import { redirect } from 'next/navigation'
 
 import { QRCodeDialog } from '@/components/ui/qr_code_dialog'
 import { MAX_WEEK } from '@/config'
-import { getInstruments } from '@/lib/db/instruments/get'
 import { createRollCallEntry } from '@/lib/db/roll_call_entry/create'
 import { getRollCallEntriesByWeek } from '@/lib/db/roll_call_entry/get'
 import { RollCall } from '@/lib/db/types'
 import { Params } from '@/lib/types'
-
-import { NewMemberForm } from './create_member_form'
 
 type PageProps = {
   params: Params<Pick<RollCall, 'year' | 'semester' | 'week'>>
@@ -43,7 +40,6 @@ export default async function Page({ params }: PageProps) {
     redirect(`/roll-call`)
   }
 
-  const instruments = await getInstruments()
   const rollCallEntries = await getRollCallEntriesByWeek({
     year,
     semester,
@@ -120,9 +116,10 @@ export default async function Page({ params }: PageProps) {
       </div>
 
       <h2>Not in the list?</h2>
-      <p>Enter your details below:</p>
 
-      <NewMemberForm instruments={instruments} />
+      <p>
+        <Link href="/signup">Sign up now</Link>
+      </p>
 
       <QRCodeDialog
         value={`${host}/roll-call/${year}/${semester}/${week}`}
