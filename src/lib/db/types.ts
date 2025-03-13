@@ -1,4 +1,9 @@
 export type Table<T> = T[]
+type Public<T, K extends keyof T> = {
+  [P in K]: T[P]
+} & {
+  [P in Exclude<keyof T, K>]: null
+}
 
 export type Member = {
   id: number
@@ -11,7 +16,7 @@ export type Member = {
   mailing_list: boolean
 }
 
-export type Profile = Pick<
+export type Profile = Public<
   Member,
   'id' | 'given_name' | 'family_name' | 'instrument'
 >

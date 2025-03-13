@@ -17,7 +17,8 @@ export default async function Page({ params }: PageProps) {
 
   const id = parseInt(decodeURIComponent(idParam))
 
-  const { given_name, family_name, instrument } = await getMemberByID(id)
+  const { given_name, family_name, email, usu, instrument } =
+    await getMemberByID(id)
 
   return (
     <main className="prose">
@@ -25,10 +26,8 @@ export default async function Page({ params }: PageProps) {
         {given_name} {family_name}
       </h1>
 
-      {/* TODO: Auth protected route */}
-      {/* <p>{email}</p> */}
-
-      {/* <p>{usu}</p> */}
+      <p>{email}</p>
+      <p>{usu}</p>
 
       <p>{instrument}</p>
     </main>

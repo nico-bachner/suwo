@@ -1,5 +1,6 @@
 import { JWTPayload, SignJWT, jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
+import { cache } from 'react'
 
 const secretKey = process.env.SESSION_SECRET
 const encodedKey = new TextEncoder().encode(secretKey)
@@ -13,15 +14,11 @@ export async function encrypt(payload: JWTPayload) {
 }
 
 export async function decrypt(session: string | undefined = '') {
-  try {
-    const { payload } = await jwtVerify(session, encodedKey, {
-      algorithms: ['HS256'],
-    })
+  const { payload } = await jwtVerify(session, encodedKey, {
+    algorithms: ['HS256'],
+  })
 
-    return payload
-  } catch (error) {
-    console.log('Failed to verify session')
-  }
+  return payload
 }
 
 export async function createSession(id: number) {
@@ -37,3 +34,39 @@ export async function createSession(id: number) {
     path: '/',
   })
 }
+
+export const getSession = cache(
+  async (): Promise<
+    | {
+        isAuth: true
+        id: number
+      }
+    | {
+        isAuth: false
+      }
+  > => {
+    const cookieStore = await cookies()
+
+    const sessionCookie = cookieStore.get('session')
+
+    if (!sessionCookie) {
+      return {
+        isAuth: false,
+      }
+    }
+
+    const decryptedSessionCookie = await decrypt(sessionCookie.value)
+    const id = parseInt(decryptedSessionCookie.id as string)
+
+    if (!id) {
+      return {
+        isAuth: false,
+      }
+    }
+
+    return {
+      isAuth: true,
+      id,
+    }
+  },
+)
