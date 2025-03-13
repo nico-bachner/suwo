@@ -7,15 +7,8 @@ import { updateMemberInstument } from '@/lib/db/member/update'
 import { Member } from '@/lib/db/types'
 
 type InstrumentFormActionState = {
-  data: {
-    instrument: Member['instrument']
-  }
-  errors: typeToFlattenedError<
-    {
-      instrument: Member['instrument']
-    },
-    string
-  >
+  data: Pick<Member, 'instrument'>
+  errors: typeToFlattenedError<Pick<Member, 'instrument'>, string>
 }
 
 export const editInstrumentFormAction = async (
