@@ -12,7 +12,7 @@ export type Member = {
   email: string
   password: string
   usu: number | null
-  instrument: string | null
+  instrument: Instrument['name'] | null
   mailing_list: boolean
 }
 
