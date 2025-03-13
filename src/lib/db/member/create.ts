@@ -38,6 +38,7 @@ export const createMember = async ({
       ${instrument},
       ${mailing_list}
     )
+    RETURNING id
   `
 
   const user = data[0] as Member
