@@ -6,7 +6,7 @@ import { z } from 'zod'
 import { createMember } from '@/lib/db/queries/create_member'
 import { getInstruments } from '@/lib/db/queries/get_instruments'
 import { getMemberByEmail } from '@/lib/db/queries/get_member'
-import { getQueryBuilder } from '@/lib/db/query'
+import { updateMemberByEmail } from '@/lib/db/queries/update_member'
 
 export const createNewMember = async (
   previousState: unknown,
@@ -77,19 +77,12 @@ export const createNewMember = async (
   }
 
   const member = await getMemberByEmail(data.email)
-  const sql = getQueryBuilder()
 
   if (member) {
-    await sql`
-      UPDATE members
-      SET
-        given_name = ${data.given_name},
-        family_name = ${data.family_name},
-        usu = ${data.usu},
-        instrument = ${data.instrument},
-        mailing_list = ${data.mailing_list}
-      WHERE email = ${data.email}
-    `
+    await updateMemberByEmail({
+      ...data,
+      usu: data.usu ? parseInt(data.usu) : null,
+    })
   } else {
     await createMember({
       ...data,
