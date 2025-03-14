@@ -37,7 +37,7 @@ export const PageLayout = ({
       'lg:max-w-screen-lg lg:flex-row lg:justify-between',
     )}
   >
-    <nav className="flex flex-col gap-8 p-6 lg:sticky lg:top-0 lg:max-h-svh lg:w-64">
+    <nav className="flex flex-col gap-8 p-6 lg:sticky lg:top-0 lg:max-h-svh lg:w-80">
       <div className="flex flex-col gap-4">
         <div className="flex flex-row items-center justify-between gap-4 bg-gray-950">
           <Link href="/">
@@ -53,9 +53,9 @@ export const PageLayout = ({
               href={parent.href}
               className="flex cursor-pointer flex-row items-center rounded-full transition-colors select-none hover:bg-gray-900 focus:bg-gray-900 focus:outline-none"
             >
-              <ChevronLeftIcon className="box-content h-6 w-6 stroke-gray-300 p-2" />
+              <ChevronLeftIcon className="box-content h-6 w-6 stroke-gray-300 p-3" />
 
-              <span className="py-2 pr-4 text-gray-300">{parent.title}</span>
+              <span className="py-2 pr-6 text-gray-300">{parent.title}</span>
             </Link>
           )}
 
