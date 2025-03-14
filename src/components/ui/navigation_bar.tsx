@@ -5,8 +5,8 @@ import { cn } from '@/lib/cn'
 
 type NavigationBarProps = {
   parent?: {
+    title: string
     href: string
-    message?: string
   }
   title: string
   action?: React.ReactNode
@@ -19,20 +19,31 @@ export const NavigationBar = ({
   action,
   className,
 }: NavigationBarProps) => (
-  <div className={cn('grid grid-cols-4 items-center gap-4', className)}>
+  <div
+    className={cn(
+      'grid grid-cols-2 grid-rows-2 items-center gap-4 max-sm:-mx-2 sm:grid-cols-4',
+      className,
+    )}
+  >
     {parent && (
       <Link
         href={parent.href}
-        className="col-start-1 w-fit cursor-pointer justify-self-start rounded-full transition-colors select-none hover:bg-gray-800 focus:bg-gray-800 focus:outline-none"
+        className="col-start-1 flex w-fit cursor-pointer flex-row items-center justify-self-start rounded-full transition-colors select-none hover:bg-gray-800 focus:bg-gray-800 focus:outline-none"
       >
         <ChevronLeftIcon className="box-content h-6 w-6 stroke-gray-300 p-2" />
+
+        <span className="pr-4 text-gray-300">{parent.title}</span>
       </Link>
     )}
 
-    <h1 className="col-span-2 col-start-2 line-clamp-1 justify-self-center text-center font-serif text-3xl font-extrabold text-gray-100 sm:text-4xl">
+    <h1 className="col-span-2 line-clamp-1 font-serif text-3xl font-extrabold text-gray-100 max-sm:px-4 sm:col-start-2 sm:justify-self-center sm:text-4xl">
       {title}
     </h1>
 
-    {action && <div className="col-start-4 justify-self-end">{action}</div>}
+    {action && (
+      <div className="col-start-2 row-start-1 justify-self-end sm:col-start-4">
+        {action}
+      </div>
+    )}
   </div>
 )

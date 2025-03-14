@@ -29,6 +29,7 @@ export default async function Page({ params }: PageProps) {
     <main className="prose mx-auto flex w-full max-w-screen-sm flex-col gap-8">
       <NavigationBar
         parent={{
+          title: `Back to Members`,
           href: `/members`,
         }}
         title={`${given_name} ${family_name}`}
