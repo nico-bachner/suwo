@@ -18,9 +18,6 @@ export const createMemberFormAction = async (
   previousState: CreateMemberFormActionState,
   formData: FormData,
 ): Promise<CreateMemberFormActionState> => {
-  console.log('previousState', previousState)
-  console.log('formData', formData)
-
   const instruments = await getInstruments()
 
   const schema = z.object({
