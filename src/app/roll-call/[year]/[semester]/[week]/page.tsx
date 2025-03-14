@@ -8,6 +8,7 @@ import { headers } from 'next/headers'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
+import { Button } from '@/components/ui/button'
 import { PageLayout } from '@/components/ui/page_layout'
 import { QRCodeDialog } from '@/components/ui/qr_code_dialog'
 import { MAX_WEEK } from '@/config'
@@ -116,9 +117,9 @@ export default async function Page({ params }: PageProps) {
 
       <h2>Not in the list?</h2>
 
-      <p>
+      <Button asChild variant="secondary" className="mt-4">
         <Link href="/join">Join now</Link>
-      </p>
+      </Button>
 
       <QRCodeDialog
         value={`${host}/roll-call/${year}/${semester}/${week}`}

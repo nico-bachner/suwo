@@ -2,6 +2,7 @@
 
 import { useActionState } from 'react'
 
+import { Button } from '@/components/ui/button'
 import { CheckboxInput } from '@/components/ui/checkbox_input'
 import { Select } from '@/components/ui/select/select'
 import { SelectItem } from '@/components/ui/select/select_item'
@@ -115,9 +116,9 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
         className="mt-4 self-center"
       />
 
-      <SubmitButton disabled={pending} className="mt-4">
+      <Button variant="primary" disabled={pending} className="mt-4">
         Join
-      </SubmitButton>
+      </Button>
     </form>
   )
 }

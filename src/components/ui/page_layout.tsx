@@ -10,6 +10,7 @@ import { cn } from '@/lib/cn'
 
 import { Menu } from '../client/menu'
 import { NavbarLink } from '../client/navbar_link'
+import { Button } from './button'
 import { SocialLink } from './social_link'
 
 type PageLayoutProps = {
@@ -75,18 +76,18 @@ export const PageLayout = async ({
 
         {!isAuth && (
           <div className="flex flex-row gap-2 max-lg:hidden">
-            <NavbarLink variant="secondary" href="/login" className="flex-1">
-              Log In
-            </NavbarLink>
-            <NavbarLink variant="primary" href="/join" className="flex-1">
-              Join
-            </NavbarLink>
+            <Button variant="secondary" asChild className="flex-1">
+              <Link href="/login">Log In</Link>
+            </Button>
+            <Button variant="primary" asChild className="flex-1">
+              <Link href="/join">Join</Link>
+            </Button>
           </div>
         )}
 
         <div className="flex flex-col max-lg:hidden">
           {NAV_LINKS.map(({ href, label }) => (
-            <NavbarLink key={href} variant="tertiary" href={href}>
+            <NavbarLink key={href} href={href}>
               {label}
             </NavbarLink>
           ))}
