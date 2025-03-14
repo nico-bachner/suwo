@@ -1,6 +1,6 @@
 import { getInstruments } from '@/lib/db/instruments/get'
 
-import { NewMemberForm } from './create_member_form'
+import { CreateMemberForm } from './create_member_form'
 
 export default async function Page() {
   const instruments = await getInstruments()
@@ -11,7 +11,7 @@ export default async function Page() {
 
       <p>Please enter your details below</p>
 
-      <NewMemberForm instruments={instruments} />
+      <CreateMemberForm instruments={instruments} />
     </main>
   )
 }

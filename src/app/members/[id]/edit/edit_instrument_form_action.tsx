@@ -8,7 +8,7 @@ import { Member } from '@/lib/db/types'
 
 type InstrumentFormActionState = {
   data: Pick<Member, 'instrument'>
-  errors: typeToFlattenedError<Pick<Member, 'instrument'>, string>
+  errors: typeToFlattenedError<InstrumentFormActionState['data'], string>
 }
 
 export const editInstrumentFormAction = async (
@@ -48,7 +48,7 @@ export const editInstrumentFormAction = async (
   await updateMemberInstument(data.instrument)
 
   return {
-    data,
+    ...previousState,
     errors: {
       formErrors: [],
       fieldErrors: {},
