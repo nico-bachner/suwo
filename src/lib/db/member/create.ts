@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { getQueryBuilder } from '@/lib/db/query'
 import { Member } from '@/lib/db/types'
 
-import { createSession } from '../session'
+import { createSession } from '../../auth/session'
 
 export const createMember = async ({
   given_name,

@@ -1,7 +1,7 @@
 import { getQueryBuilder } from '@/lib/db/query'
 import { Member } from '@/lib/db/types'
 
-import { getSession } from '../session'
+import { getSession } from '../../auth/session'
 
 export const updateMemberByEmail = async ({
   given_name,

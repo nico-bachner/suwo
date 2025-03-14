@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
 
 import { PageLayout } from '@/components/ui/page_layout'
+import { getSession } from '@/lib/auth/session'
 import { getMemberByID } from '@/lib/db/member/get'
-import { getSession } from '@/lib/db/session'
 import { Member } from '@/lib/db/types'
 import { Params } from '@/lib/types'
 

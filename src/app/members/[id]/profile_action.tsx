@@ -5,8 +5,11 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import { Popover } from 'radix-ui'
+
+import { logOut } from '@/lib/auth/log_out'
+import { deleteSession } from '@/lib/auth/session'
 
 type ProfileActionProps = {
   id: number
@@ -37,7 +40,10 @@ export const ProfileAction = ({ id }: ProfileActionProps) => {
           >
             Edit Profile
           </Link>
-          <button className="cursor-pointer rounded-md bg-red-500/20 px-4 py-2 text-start hover:bg-red-500/30 focus:bg-red-500/30 focus:outline-none">
+          <button
+            onClick={logOut}
+            className="cursor-pointer rounded-md bg-red-500/20 px-4 py-2 text-start hover:bg-red-500/30 focus:bg-red-500/30 focus:outline-none"
+          >
             Log Out
           </button>
         </Popover.Content>

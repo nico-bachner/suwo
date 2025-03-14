@@ -1,7 +1,7 @@
 import { getQueryBuilder } from '@/lib/db/query'
 import { Member, Profile } from '@/lib/db/types'
 
-import { getSession } from '../session'
+import { getSession } from '../../auth/session'
 
 export const getMemberByID = async (id: number): Promise<Member | Profile> => {
   const session = await getSession()
