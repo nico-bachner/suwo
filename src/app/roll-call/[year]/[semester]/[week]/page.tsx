@@ -122,7 +122,7 @@ export default async function Page({ params }: PageProps) {
 
       <QRCodeDialog
         value={`${host}/roll-call/${year}/${semester}/${week}`}
-        className="sticky right-4 bottom-20 self-end"
+        className="sticky right-4 self-end max-lg:bottom-20 lg:fixed lg:top-12 lg:right-12"
       />
     </PageLayout>
   )
