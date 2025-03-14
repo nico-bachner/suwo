@@ -1,12 +1,13 @@
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 
 import { PageLayout } from '@/components/ui/page_layout'
 import { getSession } from '@/lib/auth/session'
+import { getInstruments } from '@/lib/db/instruments/get'
 import { getMemberByID } from '@/lib/db/member/get'
 import { Member } from '@/lib/db/types'
 import { Params } from '@/lib/types'
 
-import { ProfileAction } from './profile_action'
+import { EditInstrumentForm } from './edit_instrument_form'
 
 type PageProps = {
   params: Params<Pick<Member, 'id'>>
@@ -22,22 +23,28 @@ export default async function Page({ params }: PageProps) {
   const id = parseInt(decodeURIComponent(idParam))
 
   const session = await getSession()
-  const { given_name, family_name, email, usu, instrument } =
-    await getMemberByID(id)
+
+  if (!session.isAuth) {
+    redirect(`/login`)
+  }
+
+  if (session.id !== id) {
+    redirect(`/members/${id}`)
+  }
+
+  const { instrument } = await getMemberByID(id)
+  const instruments = await getInstruments()
 
   return (
     <PageLayout
       parent={{
-        title: `Back to Members`,
-        href: `/members`,
+        title: `Back to Profile`,
+        href: `/members/${id}`,
       }}
-      title={`${given_name} ${family_name}`}
-      subtitle={instrument ?? undefined}
-      action={session.isAuth && session.id === id && <ProfileAction id={id} />}
+      title="Edit Profile"
+      className="flex flex-col gap-6"
     >
-      <p>{instrument}</p>
-      <p>{email}</p>
-      <p>{usu}</p>
+      <EditInstrumentForm instrument={instrument} instruments={instruments} />
     </PageLayout>
   )
 }
