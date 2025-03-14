@@ -18,10 +18,6 @@ type NavbarProps = {
 export const Navbar = ({ className }: NavbarProps) => (
   <nav className={cn('w-full bg-gray-950/80 py-2 backdrop-blur-lg', className)}>
     <div className="mx-auto flex w-full max-w-screen-md flex-row items-center">
-      <Link href="/" className="flex-1">
-        <Image src={logo} alt="The SUWO logo" className="h-12 w-12" />
-      </Link>
-
       <div className="hidden flex-3 flex-row items-center justify-center gap-4 sm:flex">
         <NavbarLink href="/about">About</NavbarLink>
         <NavbarLink href="/history">History</NavbarLink>
@@ -45,8 +41,6 @@ export const Navbar = ({ className }: NavbarProps) => (
           <InstagramIcon className="h-6 w-6 stroke-gray-100 stroke-1" />
         </a>
       </div>
-
-      <Menu className="sm:hidden" />
     </div>
   </nav>
 )

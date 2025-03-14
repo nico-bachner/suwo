@@ -1,19 +1,14 @@
 import Link from 'next/link'
 
-import { NavigationBar } from '@/components/ui/navigation_bar'
+import { PageLayout } from '@/components/ui/page_layout'
 import { getMembers } from '@/lib/db/members/get'
 
 export default async function Page() {
   const members = await getMembers()
 
   return (
-    <main className="prose flex flex-col gap-8">
-      <NavigationBar
-        title="Members"
-        className="mx-auto w-full max-w-screen-sm"
-      />
-
-      <div className="mx-auto grid w-full max-w-screen-lg grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+    <PageLayout title="Members" className="mx-auto w-full max-w-screen-sm">
+      <div className="grid grid-cols-2 gap-2">
         {members.map(({ id, given_name, family_name, instrument }) => (
           <Link
             key={id}
@@ -28,6 +23,6 @@ export default async function Page() {
           </Link>
         ))}
       </div>
-    </main>
+    </PageLayout>
   )
 }

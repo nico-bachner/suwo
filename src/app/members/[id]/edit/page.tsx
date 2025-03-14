@@ -1,6 +1,6 @@
 import { notFound, redirect } from 'next/navigation'
 
-import { NavigationBar } from '@/components/ui/navigation_bar'
+import { NavigationBar } from '@/components/ui/page_layout'
 import { getInstruments } from '@/lib/db/instruments/get'
 import { getMemberByID } from '@/lib/db/member/get'
 import { getSession } from '@/lib/db/session'
