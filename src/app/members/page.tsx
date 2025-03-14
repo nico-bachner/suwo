@@ -35,43 +35,48 @@ export default async function Page() {
     {} as Record<Instrument['name'], Profile[]>,
   )
 
-  console.log(instrumentsByFamily)
-  console.log(membersByInstrument)
-
   return (
     <PageLayout title="Members" className="prose">
-      {Object.keys(instrumentsByFamily).map((family) => (
-        <Fragment key={family}>
-          {/* <h2>{family}</h2> Re-add when we have enough members */}
+      {Object.keys(instrumentsByFamily)
+        .filter((family) =>
+          // Only show families with members
+          instrumentsByFamily[family].find(
+            (instrument) => membersByInstrument[instrument],
+          ),
+        )
+        .sort((family) =>
+          instrumentsByFamily[family].reduce(
+            (acc, instrument) => acc + membersByInstrument[instrument]?.length,
+            0,
+          ),
+        )
+        .map((family) => (
+          <Fragment key={family}>
+            <h2>{family}</h2>
 
-          {instrumentsByFamily[family].map(
-            (instrument) =>
-              membersByInstrument[instrument] && (
-                <Fragment key={instrument}>
-                  <h3>{instrument}</h3>
+            <div className="grid grid-cols-2 gap-2">
+              {instrumentsByFamily[family].map(
+                (instrument) =>
+                  membersByInstrument[instrument] &&
+                  membersByInstrument[instrument].map(
+                    ({ id, given_name, family_name, instrument }) => (
+                      <Link
+                        key={id}
+                        href={`/members/${id}`}
+                        className="flex flex-col rounded-lg bg-gray-900 px-4 py-2 font-bold"
+                      >
+                        <span className="text-gray-300">
+                          {given_name} {family_name}
+                        </span>
 
-                  <div className="grid grid-cols-2 gap-2">
-                    {membersByInstrument[instrument].map(
-                      ({ id, given_name, family_name, instrument }) => (
-                        <Link
-                          key={id}
-                          href={`/members/${id}`}
-                          className="flex flex-col rounded-lg bg-gray-900 px-4 py-2 font-bold"
-                        >
-                          <span className="text-gray-300">
-                            {given_name} {family_name}
-                          </span>
-
-                          <span className="text-gray-500">{instrument}</span>
-                        </Link>
-                      ),
-                    )}
-                  </div>
-                </Fragment>
-              ),
-          )}
-        </Fragment>
-      ))}
+                        <span className="text-gray-500">{instrument}</span>
+                      </Link>
+                    ),
+                  ),
+              )}
+            </div>
+          </Fragment>
+        ))}
     </PageLayout>
   )
 }
