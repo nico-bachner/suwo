@@ -10,7 +10,7 @@ export default async function Page() {
       <LoginForm />
 
       <p className="text-right text-sm text-gray-300">
-        Don't have an account?{' '}
+        {"Don't have an account? "}
         <Link href="/join" className="font-bold text-blue-500 hover:underline">
           Sign up instead
         </Link>
