@@ -85,7 +85,7 @@ export const PageLayout = async ({
           </div>
         )}
 
-        <div className="flex flex-col max-lg:hidden">
+        <div className="flex flex-col gap-1 max-lg:hidden">
           {NAV_LINKS.map(({ href, label }) => (
             <NavbarLink key={href} href={href}>
               {label}
