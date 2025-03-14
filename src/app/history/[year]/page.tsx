@@ -2,6 +2,7 @@ import { Client, isFullBlock } from '@notionhq/client'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import { PageLayout } from '@/components/ui/page_layout'
 import { getHistory } from '@/lib/notion/get_history'
 import { getTitle } from '@/lib/notion/get_title'
 import { Params } from '@/lib/types'
@@ -64,9 +65,7 @@ export default async function Page({ params }: PageProps) {
   })
 
   return (
-    <main className="prose">
-      <h1>{getTitle(page)}</h1>
-
+    <PageLayout title={getTitle(page) ?? year} className="prose">
       {results.map((block) => {
         if (!isFullBlock(block)) {
           return null
@@ -91,7 +90,7 @@ export default async function Page({ params }: PageProps) {
             return null
         }
       })}
-    </main>
+    </PageLayout>
   )
 }
 
