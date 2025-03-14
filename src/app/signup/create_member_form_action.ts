@@ -8,7 +8,7 @@ import { createMember } from '@/lib/db/member/create'
 import { getMemberByEmail } from '@/lib/db/member/get'
 import { updateMemberByEmail } from '@/lib/db/member/update'
 
-export const createNewMember = async (
+export const createMemberFormAction = async (
   previousState: unknown,
   formData: FormData,
 ) => {

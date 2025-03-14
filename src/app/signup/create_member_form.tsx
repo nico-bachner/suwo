@@ -10,14 +10,14 @@ import { SubmitButton } from '@/components/ui/submit_button'
 import { TextInput } from '@/components/ui/text_input'
 import { Instrument, Table } from '@/lib/db/types'
 
-import { createNewMember } from './create_member_form_action'
+import { createMemberFormAction } from './create_member_form_action'
 
-type NewMemberFormProps = {
+type CreateMemberFormProps = {
   instruments: Table<Instrument>
 }
 
-export const NewMemberForm = ({ instruments }: NewMemberFormProps) => {
-  const [state, formAction, pending] = useActionState(createNewMember, {
+export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
+  const [state, formAction, pending] = useActionState(createMemberFormAction, {
     errors: {
       formErrors: [],
       fieldErrors: {},
