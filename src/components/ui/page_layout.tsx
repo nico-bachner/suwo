@@ -3,14 +3,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Separator } from 'radix-ui'
 
-import { FacebookIcon } from '@/icons/Facebook'
-import { InstagramIcon } from '@/icons/Instagram'
-import { YouTubeIcon } from '@/icons/YouTube'
+import { NAV_LINKS, SOCIAL_LINKS } from '@/config'
 import logo from '@/images/logo.png'
 import { cn } from '@/lib/cn'
 
 import { Menu } from '../client/menu'
 import { NavbarLink } from '../client/navbar_link'
+import { SocialLink } from './social_link'
 
 type PageLayoutProps = {
   children?: React.ReactNode
@@ -40,7 +39,7 @@ export const PageLayout = ({
   >
     <nav className="flex flex-col gap-8 p-6 lg:sticky lg:top-0 lg:max-h-svh lg:w-64">
       <div className="flex flex-col gap-4">
-        <div className="flex flex-row items-center justify-between gap-4">
+        <div className="flex flex-row items-center justify-between gap-4 bg-gray-950">
           <Link href="/">
             <Image src={logo} alt="The SUWO logo" className="h-12 w-12" />
           </Link>
@@ -71,40 +70,17 @@ export const PageLayout = ({
       </div>
 
       <div className="flex flex-col max-lg:hidden">
-        <NavbarLink href="/about">About</NavbarLink>
-        <NavbarLink href="/history">History</NavbarLink>
-        <NavbarLink
-          href={`https://calendar.google.com/calendar/u/0?cid=${process.env.GOOGLE_CALENDAR_ID}`}
-        >
-          Calendar
-        </NavbarLink>
-        <NavbarLink href="/members">Members</NavbarLink>
-        <NavbarLink href="/roll-call">Roll Call</NavbarLink>
-        <NavbarLink href="/join">Join</NavbarLink>
+        {NAV_LINKS.map(({ href, label }) => (
+          <NavbarLink key={href} href={href}>
+            {label}
+          </NavbarLink>
+        ))}
       </div>
 
       <div className="flex flex-row items-center gap-4 max-lg:hidden">
-        <a
-          href="https://www.youtube.com/user/SydneyUniWindOrch"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <YouTubeIcon className="h-6 w-6 stroke-gray-300 stroke-1" />
-        </a>
-        <a
-          href="https://www.facebook.com/sydneyuniversitywindorchestra"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FacebookIcon className="h-6 w-6 stroke-gray-300 stroke-1" />
-        </a>
-        <a
-          href="https://www.instagram.com/suwo.syd/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <InstagramIcon className="h-6 w-6 stroke-gray-300 stroke-1" />
-        </a>
+        {SOCIAL_LINKS.map(({ href, icon }) => (
+          <SocialLink key={href} icon={icon} href={href} />
+        ))}
       </div>
     </nav>
 
@@ -117,27 +93,9 @@ export const PageLayout = ({
         <p>Follow our socials</p>
 
         <div className="flex flex-row items-center gap-4">
-          <a
-            href="https://www.youtube.com/user/SydneyUniWindOrch"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <YouTubeIcon className="h-6 w-6 stroke-gray-300 stroke-1" />
-          </a>
-          <a
-            href="https://www.facebook.com/sydneyuniversitywindorchestra"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FacebookIcon className="h-6 w-6 stroke-gray-300 stroke-1" />
-          </a>
-          <a
-            href="https://www.instagram.com/suwo.syd/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <InstagramIcon className="h-6 w-6 stroke-gray-300 stroke-1" />
-          </a>
+          {SOCIAL_LINKS.map(({ href, icon }) => (
+            <SocialLink key={href} icon={icon} href={href} />
+          ))}
         </div>
       </section>
     </div>

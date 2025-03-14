@@ -1,15 +1,14 @@
 'use client'
 
 import { Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Dialog, VisuallyHidden } from 'radix-ui'
 import { useState } from 'react'
 
-import { FACEBOOK, INSTAGRAM, YOUTUBE } from '@/config'
-import { FacebookIcon } from '@/icons/Facebook'
-import { InstagramIcon } from '@/icons/Instagram'
-import { YouTubeIcon } from '@/icons/YouTube'
-
-import { NavbarLink } from './navbar_link'
+import { SocialLink } from '@/components/ui/social_link'
+import { NAV_LINKS, SOCIAL_LINKS } from '@/config'
+import { cn } from '@/lib/cn'
 
 type MenuProps = {
   className?: string
@@ -17,10 +16,7 @@ type MenuProps = {
 
 export const Menu = ({ className }: MenuProps) => {
   const [open, setOpen] = useState(false)
-
-  const close = () => {
-    setOpen(false)
-  }
+  const pathname = usePathname()
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
@@ -40,37 +36,29 @@ export const Menu = ({ className }: MenuProps) => {
           </Dialog.Close>
 
           <div className="flex flex-col items-center gap-6">
-            <NavbarLink href="/about" onClick={close} className="text-2xl">
-              About
-            </NavbarLink>
-            <NavbarLink href="/history" onClick={close} className="text-2xl">
-              History
-            </NavbarLink>
-            <NavbarLink
-              href={`https://calendar.google.com/calendar/u/0?cid=${process.env.GOOGLE_CALENDAR_ID}`}
-              onClick={close}
-              className="text-2xl"
-            >
-              Calendar
-            </NavbarLink>
-            <NavbarLink href="/roll-call" onClick={close} className="text-2xl">
-              Roll Call
-            </NavbarLink>
-            <NavbarLink href="/join" onClick={close} className="text-2xl">
-              Join
-            </NavbarLink>
+            {NAV_LINKS.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                onClick={() => {
+                  setOpen(false)
+                }}
+                className={cn(
+                  'text-xl',
+                  pathname.split('/')[1] == href.split('/')[1]
+                    ? 'text-amber-300'
+                    : 'text-gray-300 hover:text-gray-100',
+                )}
+              >
+                {label}
+              </Link>
+            ))}
           </div>
 
-          <div className="flex flex-row justify-center gap-4">
-            <a href={YOUTUBE} target="_blank" rel="noopener noreferrer">
-              <YouTubeIcon className="h-10 w-10 stroke-gray-100 stroke-1" />
-            </a>
-            <a href={FACEBOOK} target="_blank" rel="noopener noreferrer">
-              <FacebookIcon className="h-10 w-10 stroke-gray-100 stroke-1" />
-            </a>
-            <a href={INSTAGRAM} target="_blank" rel="noopener noreferrer">
-              <InstagramIcon className="h-10 w-10 stroke-gray-100 stroke-1" />
-            </a>
+          <div className="flex flex-row items-center gap-4 self-center">
+            {SOCIAL_LINKS.map(({ href, icon }) => (
+              <SocialLink key={href} icon={icon} href={href} size="lg" />
+            ))}
           </div>
         </Dialog.Content>
       </Dialog.Portal>
