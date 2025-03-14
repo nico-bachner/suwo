@@ -19,10 +19,6 @@ export const NAV_LINKS = [
     label: 'Roll Call',
   },
   {
-    href: '/join',
-    label: 'Join',
-  },
-  {
     href: `https://calendar.google.com/calendar/u/0?cid=${process.env.GOOGLE_CALENDAR_ID}`,
     label: 'Calendar',
   },
