@@ -51,7 +51,7 @@ export default async function Page({ params }: PageProps) {
     <PageLayout
       title="Roll Call"
       subtitle={`Week ${week}`}
-      className="flex flex-col items-center gap-6"
+      className="prose flex flex-col items-center gap-6"
     >
       <div className="flex w-full max-w-screen-sm flex-col">
         {rollCallEntries.map(
@@ -92,7 +92,7 @@ export default async function Page({ params }: PageProps) {
         )}
       </div>
 
-      <nav className="sticky bottom-0 mx-auto grid w-full max-w-screen-sm grid-cols-2 gap-4 bg-gray-950 p-4">
+      <nav className="sticky bottom-0 mx-auto grid w-full max-w-screen-sm grid-cols-2 gap-4 bg-gray-950/90 p-4 backdrop-blur-lg">
         {week > 1 && (
           <Link
             href={`/roll-call/${year}/${semester}/${week - 1}`}
@@ -117,7 +117,7 @@ export default async function Page({ params }: PageProps) {
       <h2>Not in the list?</h2>
 
       <p>
-        <Link href="/signup">Sign up now</Link>
+        <Link href="/join">Join now</Link>
       </p>
 
       <QRCodeDialog
