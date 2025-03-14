@@ -4,7 +4,7 @@ import { cn } from '@/lib/cn'
 
 const variants = {
   primary:
-    'bg-amber-900 text-gray-300 hover:bg-amber-700 hover:text-gray-100 focus:bg-amber-800',
+    'bg-amber-900 text-gray-300 hover:bg-amber-800 hover:text-gray-100 focus:bg-amber-800',
   secondary:
     'bg-gray-900 text-gray-300 hover:bg-gray-800 hover:text-gray-100 focus:bg-gray-800',
   tertiary:
