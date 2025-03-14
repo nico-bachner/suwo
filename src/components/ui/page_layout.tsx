@@ -33,7 +33,7 @@ export const PageLayout = async ({
   action,
   className,
 }: PageLayoutProps) => {
-  const { isAuth } = await getSession()
+  const { id } = await getSession()
 
   return (
     <div
@@ -74,12 +74,18 @@ export const PageLayout = async ({
           </h1>
         </div>
 
-        {!isAuth && (
+        {id ? (
           <div className="flex flex-row gap-2 max-lg:hidden">
-            <Button variant="secondary" asChild className="flex-1">
+            <Button asChild variant="secondary" className="flex-1">
+              <Link href={`/members/${id}`}>My Profile</Link>
+            </Button>
+          </div>
+        ) : (
+          <div className="flex flex-row gap-2 max-lg:hidden">
+            <Button asChild variant="secondary" className="flex-1">
               <Link href="/login">Log In</Link>
             </Button>
-            <Button variant="primary" asChild className="flex-1">
+            <Button asChild variant="primary" className="flex-1">
               <Link href="/join">Join</Link>
             </Button>
           </div>
