@@ -51,7 +51,7 @@ export const PageLayout = ({
           {parent && (
             <Link
               href={parent.href}
-              className="flex cursor-pointer flex-row items-center rounded-full transition-colors select-none hover:bg-gray-800 focus:bg-gray-800 focus:outline-none"
+              className="flex cursor-pointer flex-row items-center rounded-full transition-colors select-none hover:bg-gray-900 focus:bg-gray-900 focus:outline-none"
             >
               <ChevronLeftIcon className="box-content h-6 w-6 stroke-gray-300 p-2" />
 
