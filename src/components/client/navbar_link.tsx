@@ -20,13 +20,16 @@ export const NavbarLink = ({
 }: NavbarLinkProps) => {
   const pathname = usePathname()
 
+  const topLevelPath = pathname.split('/')[1]
+  const topLevelHref = href.split('/')[1]
+
   return (
     <Link
       href={href}
       onClick={onClick}
       className={cn(
         'rounded-lg px-4 py-2 text-lg font-bold text-gray-300 hover:bg-gray-800 hover:text-gray-100',
-        href == pathname && 'bg-gray-900 text-gray-100',
+        topLevelHref == topLevelPath && 'bg-gray-900 text-gray-100',
         className,
       )}
     >

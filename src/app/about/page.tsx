@@ -1,9 +1,10 @@
 import Link from 'next/link'
 
+import { PageLayout } from '@/components/ui/page_layout'
+
 export default function Page() {
   return (
-    <main className="prose">
-      <h1>About</h1>
+    <PageLayout title="About" className="prose">
       <p>
         Sydney University Wind Orchestra (SUWO) is a multi-award-winning concert
         band, performing a variety of repertoire throughout the year in
@@ -48,6 +49,6 @@ export default function Page() {
         </a>{' '}
         Clubs and Societies program.
       </p>
-    </main>
+    </PageLayout>
   )
 }

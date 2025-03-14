@@ -1,7 +1,8 @@
+import { PageLayout } from '@/components/ui/page_layout'
+
 export default function Page() {
   return (
-    <main className="prose">
-      <h1>Join</h1>
+    <PageLayout title="Join" className="prose">
       <p>
         SUWO is a community band based at the University of Sydney. We are
         always seeking new members, whether you’re fresh out of high school or
@@ -70,6 +71,6 @@ export default function Page() {
         some level of experience in symphonic band repertoire. However, this is
         not a requirement, and are happy to accommodate players of all levels.
       </p>
-    </main>
+    </PageLayout>
   )
 }

@@ -32,6 +32,7 @@ export default async function Page({ params }: PageProps) {
         href: `/members`,
       }}
       title={`${given_name} ${family_name}`}
+      subtitle={instrument ?? undefined}
       action={
         session.isAuth &&
         session.id === id && (
