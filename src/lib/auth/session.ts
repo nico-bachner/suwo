@@ -31,6 +31,7 @@ export const getSession = cache(
       }
     | {
         isAuth: false
+        id: null
       }
   > => {
     const cookieStore = await cookies()
@@ -40,6 +41,7 @@ export const getSession = cache(
     if (!sessionCookie) {
       return {
         isAuth: false,
+        id: null,
       }
     }
 
@@ -49,6 +51,7 @@ export const getSession = cache(
     if (!id) {
       return {
         isAuth: false,
+        id: null,
       }
     }
 
