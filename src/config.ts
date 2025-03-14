@@ -11,6 +11,10 @@ export const NAV_LINKS = [
     label: 'History',
   },
   {
+    href: '/members',
+    label: 'Members',
+  },
+  {
     href: '/roll-call',
     label: 'Roll Call',
   },

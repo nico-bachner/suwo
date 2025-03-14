@@ -1,5 +1,5 @@
 import { getQueryBuilder } from '@/lib/db/query'
-import { Member, Table } from '@/lib/db/types'
+import { Profile, Table } from '@/lib/db/types'
 
 export const getMembers = async () => {
   const sql = getQueryBuilder()
@@ -10,7 +10,5 @@ export const getMembers = async () => {
     ORDER BY given_name, family_name
   `
 
-  return members as Table<
-    Pick<Member, 'id' | 'given_name' | 'family_name' | 'instrument'>
-  >
+  return members as Table<Profile>
 }
