@@ -1,6 +1,5 @@
 'use client'
 
-import { ArrowUpTrayIcon } from '@heroicons/react/24/outline'
 import { useActionState } from 'react'
 
 import { CheckboxInput } from '@/components/ui/checkbox_input'
@@ -116,12 +115,8 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
         className="mt-4 self-center"
       />
 
-      <SubmitButton
-        disabled={pending}
-        className="mt-4 flex flex-row items-center justify-center gap-2 sm:col-start-2"
-      >
-        <ArrowUpTrayIcon className="h-5 w-5 stroke-gray-300 stroke-2" />
-        <span className="font-bold">Add member</span>
+      <SubmitButton disabled={pending} className="mt-4">
+        Join
       </SubmitButton>
     </form>
   )
