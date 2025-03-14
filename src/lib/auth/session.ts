@@ -1,29 +1,11 @@
-import { JWTPayload, SignJWT, jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
 import { cache } from 'react'
 
-const secretKey = process.env.SESSION_SECRET
-const encodedKey = new TextEncoder().encode(secretKey)
+import { createJWT, verifyJWT } from './jwt'
 
-export async function encrypt(payload: JWTPayload) {
-  return new SignJWT(payload)
-    .setProtectedHeader({ alg: 'HS256' })
-    .setIssuedAt()
-    .setExpirationTime('7d')
-    .sign(encodedKey)
-}
-
-export async function decrypt(session: string | undefined = '') {
-  const { payload } = await jwtVerify(session, encodedKey, {
-    algorithms: ['HS256'],
-  })
-
-  return payload
-}
-
-export async function createSession(id: number) {
+export const createSession = async (id: number) => {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-  const session = await encrypt({ id, expiresAt })
+  const session = await createJWT({ id, expiresAt })
   const cookieStore = await cookies()
 
   cookieStore.set('session', session, {
@@ -33,6 +15,12 @@ export async function createSession(id: number) {
     sameSite: 'lax',
     path: '/',
   })
+}
+
+export const deleteSession = async () => {
+  const cookieStore = await cookies()
+
+  cookieStore.delete('session')
 }
 
 export const getSession = cache(
@@ -55,7 +43,7 @@ export const getSession = cache(
       }
     }
 
-    const decryptedSessionCookie = await decrypt(sessionCookie.value)
+    const decryptedSessionCookie = await verifyJWT(sessionCookie.value)
     const id = parseInt(decryptedSessionCookie.id as string)
 
     if (!id) {
