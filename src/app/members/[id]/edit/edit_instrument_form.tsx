@@ -1,6 +1,5 @@
 'use client'
 
-import { ArrowPathIcon } from '@heroicons/react/24/outline'
 import { useActionState } from 'react'
 
 import { Select } from '@/components/ui/select/select'
@@ -56,8 +55,7 @@ export const EditInstrumentForm = ({
         disabled={pending}
         className="flex flex-row items-center justify-center gap-2 self-end"
       >
-        <ArrowPathIcon className="h-6 w-6 stroke-gray-300" />
-        <span className="font-bold">Update instrument</span>
+        Update instrument
       </SubmitButton>
     </form>
   )

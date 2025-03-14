@@ -3,11 +3,11 @@ import { InstagramIcon } from '@/icons/Instagram'
 import { YouTubeIcon } from '@/icons/YouTube'
 import { cn } from '@/lib/cn'
 
-type NavbarProps = {
+type FooterProps = {
   className?: string
 }
 
-export const Footer = ({ className }: NavbarProps) => (
+export const Footer = ({ className }: FooterProps) => (
   <section
     className={cn(
       'mx-auto flex w-full max-w-screen-sm flex-col items-center gap-4 border-t border-gray-500 p-8',

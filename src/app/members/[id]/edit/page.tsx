@@ -1,7 +1,6 @@
 import { notFound, redirect } from 'next/navigation'
 
-import { SubmitButton } from '@/components/ui/submit_button'
-import { TextInput } from '@/components/ui/text_input'
+import { NavigationBar } from '@/components/ui/navigation_bar'
 import { getInstruments } from '@/lib/db/instruments/get'
 import { getMemberByID } from '@/lib/db/member/get'
 import { getSession } from '@/lib/db/session'
@@ -33,40 +32,19 @@ export default async function Page({ params }: PageProps) {
     redirect(`/members/${id}`)
   }
 
-  const { given_name, family_name, instrument } = await getMemberByID(id)
+  const { instrument } = await getMemberByID(id)
   const instruments = await getInstruments()
 
   return (
-    <main className="prose">
-      <h1>Edit Profile</h1>
+    <main className="prose mx-auto flex w-full max-w-screen-sm flex-col gap-6">
+      <NavigationBar
+        parent={{
+          href: `/members/${id}`,
+        }}
+        title="Edit Profile"
+      />
 
-      <div className="mx-auto flex w-full max-w-screen-sm flex-col gap-4">
-        <form className="flex flex-row items-end gap-4">
-          <TextInput
-            defaultValue={given_name}
-            name="given-name"
-            label="Given Name"
-            autoComplete="given-name"
-            placeholder='e.g. "Ambrose"'
-            className="flex-1"
-          />
-
-          <SubmitButton>Save</SubmitButton>
-        </form>
-
-        <form className="flex flex-row items-end gap-4">
-          <TextInput
-            defaultValue={family_name ?? undefined}
-            name="family-name"
-            label="Family Name"
-            autoComplete="family-name"
-            placeholder='e.g. "Phelps"'
-            className="mx-auto w-full max-w-screen-sm"
-          />
-
-          <SubmitButton>Save</SubmitButton>
-        </form>
-
+      <div className="flex flex-col gap-4">
         <EditInstrumentForm instrument={instrument} instruments={instruments} />
       </div>
     </main>
