@@ -51,7 +51,7 @@ export default async function Page({ params }: PageProps) {
     <PageLayout
       title="Roll Call"
       subtitle={`Week ${week}`}
-      className="prose flex flex-col items-center gap-6"
+      className="prose flex flex-col gap-6"
     >
       <div className="flex w-full max-w-screen-sm flex-col">
         {rollCallEntries.map(
@@ -122,7 +122,7 @@ export default async function Page({ params }: PageProps) {
 
       <QRCodeDialog
         value={`${host}/roll-call/${year}/${semester}/${week}`}
-        className="fixed right-4 bottom-4"
+        className="sticky right-4 bottom-20 self-end"
       />
     </PageLayout>
   )
