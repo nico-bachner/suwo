@@ -2,6 +2,7 @@
 
 import { useActionState } from 'react'
 
+import { Button } from '@/components/ui/button'
 import { SubmitButton } from '@/components/ui/submit_button'
 import { TextInput } from '@/components/ui/text_input'
 
@@ -45,9 +46,9 @@ export const LoginForm = () => {
         errors={state?.errors.fieldErrors.password}
       />
 
-      <SubmitButton disabled={pending} className="mt-4">
-        Log in
-      </SubmitButton>
+      <Button variant="primary" disabled={pending} className="mt-4">
+        Log In
+      </Button>
     </form>
   )
 }
