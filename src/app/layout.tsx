@@ -2,8 +2,6 @@ import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
 
-import { Footer } from '@/components/ui/footer'
-import { Navbar } from '@/components/ui/navbar'
 import { cn } from '@/lib/cn'
 
 import '../styles/globals.css'
@@ -38,15 +36,7 @@ export default function Layout({ children }: LayoutProps) {
           fontSerif.variable,
         )}
       >
-        <div className="flex min-h-svh flex-col gap-8 sm:gap-12">
-          <Navbar className="sticky top-0 px-6" />
-
-          <div className="flex-1 px-6">{children}</div>
-
-          <div className="px-6">
-            <Footer />
-          </div>
-        </div>
+        {children}
 
         <Analytics />
       </body>

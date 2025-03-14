@@ -25,8 +25,8 @@ export const NavbarLink = ({
       href={href}
       onClick={onClick}
       className={cn(
-        'text-gray-300 hover:text-gray-100',
-        href == pathname && 'text-yellow-300 hover:text-yellow-100',
+        'rounded-lg px-4 py-2 text-lg font-bold text-gray-300 hover:bg-gray-800 hover:text-gray-100',
+        href == pathname && 'bg-gray-900 text-gray-100',
         className,
       )}
     >
