@@ -1,17 +1,26 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { z } from 'zod'
+import { typeToFlattenedError, z } from 'zod'
 
 import { getInstruments } from '@/lib/db/instruments/get'
 import { createMember } from '@/lib/db/member/create'
 import { getMemberByEmail } from '@/lib/db/member/get'
 import { updateMemberByEmail } from '@/lib/db/member/update'
+import { Member } from '@/lib/db/types'
+
+type CreateMemberFormActionState = {
+  data: Omit<Member, 'id'>
+  errors: typeToFlattenedError<CreateMemberFormActionState['data'], string>
+}
 
 export const createMemberFormAction = async (
-  previousState: unknown,
+  previousState: CreateMemberFormActionState,
   formData: FormData,
-) => {
+): Promise<CreateMemberFormActionState> => {
+  console.log('previousState', previousState)
+  console.log('formData', formData)
+
   const instruments = await getInstruments()
 
   const schema = z.object({
@@ -89,6 +98,7 @@ export const createMemberFormAction = async (
 
   if (!success) {
     return {
+      ...previousState,
       errors: error.flatten(),
     }
   }
@@ -108,4 +118,12 @@ export const createMemberFormAction = async (
   }
 
   revalidatePath('/roll-call')
+
+  return {
+    ...previousState,
+    errors: {
+      formErrors: [],
+      fieldErrors: {},
+    },
+  }
 }
