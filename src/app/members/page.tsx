@@ -25,8 +25,6 @@ export default async function Page() {
     {} as Record<Instrument['name'], Profile[]>,
   )
 
-  console.log(membersByInstrument)
-
   return (
     <PageLayout title="Members" className="prose">
       {Object.keys(membersByInstrument).map((instrument) => (
