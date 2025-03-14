@@ -3,7 +3,6 @@
 import { useActionState } from 'react'
 
 import { Button } from '@/components/ui/button'
-import { SubmitButton } from '@/components/ui/submit_button'
 import { TextInput } from '@/components/ui/text_input'
 
 import { loginFormAction } from './login_form_action'

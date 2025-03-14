@@ -2,9 +2,9 @@
 
 import { useActionState } from 'react'
 
+import { Button } from '@/components/ui/button'
 import { Select } from '@/components/ui/select/select'
 import { SelectItem } from '@/components/ui/select/select_item'
-import { SubmitButton } from '@/components/ui/submit_button'
 import { Instrument, Member, Table } from '@/lib/db/types'
 
 import { editInstrumentFormAction } from './edit_instrument_form_action'
@@ -51,12 +51,9 @@ export const EditInstrumentForm = ({
         ))}
       </Select>
 
-      <SubmitButton
-        disabled={pending}
-        className="flex flex-row items-center justify-center gap-2 self-end"
-      >
-        Update instrument
-      </SubmitButton>
+      <Button variant="primary" disabled={pending} className="self-end">
+        Log In
+      </Button>
     </form>
   )
 }

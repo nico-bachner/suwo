@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button'
 import { CheckboxInput } from '@/components/ui/checkbox_input'
 import { Select } from '@/components/ui/select/select'
 import { SelectItem } from '@/components/ui/select/select_item'
-import { SubmitButton } from '@/components/ui/submit_button'
 import { TextInput } from '@/components/ui/text_input'
 import { Instrument, Table } from '@/lib/db/types'
 
