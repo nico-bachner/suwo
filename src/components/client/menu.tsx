@@ -9,13 +9,14 @@ import { useState } from 'react'
 import { SocialLink } from '@/components/ui/social_link'
 import { LINKS, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
 import { cn } from '@/lib/cn'
+import { Member } from '@/lib/db/types'
 
 type MenuProps = {
-  isAuth: boolean
+  id?: Member['id']
   className?: string
 }
 
-export const Menu = ({ isAuth, className }: MenuProps) => {
+export const MobileMenu = ({ id, className }: MenuProps) => {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
 
@@ -56,7 +57,28 @@ export const Menu = ({ isAuth, className }: MenuProps) => {
             ))}
           </div>
 
-          {!isAuth && (
+          {id ? (
+            <div className="flex flex-col items-center gap-6">
+              <Link
+                href={`/members/${id}/edit`}
+                onClick={() => {
+                  setOpen(false)
+                }}
+                className="text-xl font-medium text-gray-300"
+              >
+                Edit Profile
+              </Link>
+              <Link
+                href={`/members/${id}`}
+                onClick={() => {
+                  setOpen(false)
+                }}
+                className="text-xl font-medium text-gray-300"
+              >
+                View Profile
+              </Link>
+            </div>
+          ) : (
             <div className="flex flex-col items-center gap-6">
               <Link
                 href={LINKS.LOG_IN.href}

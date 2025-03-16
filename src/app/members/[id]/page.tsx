@@ -34,10 +34,6 @@ export default async function Page({ params }: PageProps) {
       title={`${given_name} ${family_name}`}
       subtitle={instrument ?? undefined}
       action={session.isAuth && session.id === id && <ProfileAction id={id} />}
-    >
-      <p>{instrument}</p>
-      <p>{email}</p>
-      <p>{usu}</p>
-    </PageLayout>
+    />
   )
 }

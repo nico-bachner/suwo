@@ -8,7 +8,7 @@ import logo from '@/images/logo.png'
 import { getSession } from '@/lib/auth/session'
 import { cn } from '@/lib/cn'
 
-import { Menu } from '../client/menu'
+import { MobileMenu } from '../client/menu'
 import { NavbarLink } from '../client/navbar_link'
 import { Button } from './button'
 import { SocialLink } from './social_link'
@@ -33,7 +33,7 @@ export const PageLayout = async ({
   action,
   className,
 }: PageLayoutProps) => {
-  const { isAuth, id } = await getSession()
+  const { id } = await getSession()
 
   return (
     <div
@@ -49,7 +49,7 @@ export const PageLayout = async ({
               <Image src={logo} alt="The SUWO logo" className="h-12 w-12" />
             </Link>
 
-            <Menu isAuth={isAuth} className="lg:hidden" />
+            <MobileMenu id={id ?? undefined} className="lg:hidden" />
           </div>
 
           <div className="-mx-2 flex flex-row items-center justify-between gap-2">
@@ -77,7 +77,10 @@ export const PageLayout = async ({
         {id ? (
           <div className="flex flex-row gap-2 max-lg:hidden">
             <Button asChild variant="secondary" className="flex-1">
-              <Link href={`/members/${id}`}>My Profile</Link>
+              <Link href={`/members/${id}/edit`}>Edit Profile</Link>
+            </Button>
+            <Button asChild variant="secondary" className="flex-1">
+              <Link href={`/members/${id}`}>View Profile</Link>
             </Button>
           </div>
         ) : (
