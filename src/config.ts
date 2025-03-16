@@ -30,6 +30,10 @@ export const LINKS = {
     href: `https://calendar.google.com/calendar/u/0?cid=${process.env.GOOGLE_CALENDAR_ID}`,
     label: 'Calendar',
   },
+  SETTINGS: {
+    href: '/settings',
+    label: 'Settings',
+  },
   LOG_IN: {
     href: '/login',
     label: 'Log In',

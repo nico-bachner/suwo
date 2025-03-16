@@ -1,6 +1,7 @@
 import { notFound, redirect } from 'next/navigation'
 
 import { PageLayout } from '@/components/ui/page_layout'
+import { LINKS } from '@/config'
 import { getSession } from '@/lib/auth/session'
 import { getInstruments } from '@/lib/db/instruments/get'
 import { getMemberByID } from '@/lib/db/member/get_member_by_id'
@@ -25,7 +26,7 @@ export default async function Page({ params }: PageProps) {
   const session = await getSession()
 
   if (!session.isAuth) {
-    redirect(`/login`)
+    redirect(LINKS.LOG_IN.href)
   }
 
   if (session.id !== id) {

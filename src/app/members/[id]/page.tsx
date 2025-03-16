@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { PageLayout } from '@/components/ui/page_layout'
+import { LINKS } from '@/config'
 import { getSession } from '@/lib/auth/session'
 import { getMemberByID } from '@/lib/db/member/get_member_by_id'
 import { Member } from '@/lib/db/types'
@@ -28,8 +29,8 @@ export default async function Page({ params }: PageProps) {
   return (
     <PageLayout
       parent={{
-        title: `All Members`,
-        href: `/members`,
+        title: LINKS.MEMBERS.label,
+        href: LINKS.MEMBERS.href,
       }}
       title={`${given_name} ${family_name}`}
       subtitle={instrument ?? undefined}

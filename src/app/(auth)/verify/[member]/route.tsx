@@ -1,6 +1,7 @@
 import { notFound, redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
 
+import { LINKS } from '@/config'
 import { createSession } from '@/lib/auth/session'
 import { VerificationToken } from '@/lib/db/types'
 import { verifyToken } from '@/lib/db/verification_token/verify_token'
@@ -31,5 +32,5 @@ export const GET = async (req: NextRequest, { params }: PageProps) => {
 
   await createSession(parseInt(member))
 
-  redirect(`/members/${member}/edit`)
+  redirect(LINKS.SETTINGS.href)
 }
