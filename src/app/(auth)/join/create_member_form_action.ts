@@ -5,8 +5,8 @@ import { typeToFlattenedError, z } from 'zod'
 
 import { getInstruments } from '@/lib/db/instruments/get'
 import { createMember } from '@/lib/db/member/create'
-import { getMemberByEmail } from '@/lib/db/member/get'
 import { updateMemberByEmail } from '@/lib/db/member/update'
+import { verifyEmailExists } from '@/lib/db/member/verify_email_exists'
 import { Member } from '@/lib/db/types'
 
 type CreateMemberFormActionState = {
@@ -100,13 +100,16 @@ export const createMemberFormAction = async (
     }
   }
 
-  const member = await getMemberByEmail(data.email)
+  const member = await verifyEmailExists(data.email)
 
   if (member) {
-    await updateMemberByEmail({
-      ...data,
-      usu: data.usu ? parseInt(data.usu) : null,
-    })
+    return {
+      ...previousState,
+      errors: {
+        formErrors: ['Member already exists. Please log in instead.'],
+        fieldErrors: {},
+      },
+    }
   } else {
     await createMember({
       ...data,

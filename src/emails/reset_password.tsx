@@ -1,9 +1,7 @@
-type EmailTemplateProps = {
-  name: string
-}
+type ResetPasswordTemplateProps = {}
 
-export const EmailTemplate = ({ name }: EmailTemplateProps) => (
+export const ResetPasswordTemplate = ({}: ResetPasswordTemplateProps) => (
   <div>
-    <h1>Welcome, {name}!</h1>
+    <h1>Reset Your Password</h1>
   </div>
 )

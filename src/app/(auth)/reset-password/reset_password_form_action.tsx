@@ -2,8 +2,9 @@
 
 import { typeToFlattenedError, z } from 'zod'
 
-import { EmailTemplate } from '@/emails/reset_password'
-import { getMemberByEmail } from '@/lib/db/member/get'
+import { SHORT_NAME } from '@/config'
+import { ResetPasswordTemplate } from '@/emails/reset_password'
+import { verifyEmailExists } from '@/lib/db/member/verify_email_exists'
 import { Member } from '@/lib/db/types'
 import { emails } from '@/lib/resend'
 
@@ -31,7 +32,7 @@ export const resetPasswordFormAction = async (
     }
   }
 
-  const member = await getMemberByEmail(data.email)
+  const member = await verifyEmailExists(data.email)
 
   if (!member) {
     return {
@@ -45,11 +46,14 @@ export const resetPasswordFormAction = async (
     }
   } else {
     const { error } = await emails.send({
-      from: 'Acme <onboarding@resend.dev>',
-      to: [data.email],
+      from: SHORT_NAME + ' ' + '<' + process.env.RESEND_DOMAIN + '>',
+      to: [data.email, 'delivered@resend.dev'],
       subject: 'Reset Password',
-      react: <EmailTemplate name={member.given_name} />,
+      react: <ResetPasswordTemplate />,
     })
+
+    console.log('Email sent:', data.email)
+    console.log('Email from:', `${SHORT_NAME} < ${process.env.RESEND_DOMAIN} >`)
 
     console.log('Email error:', error)
 

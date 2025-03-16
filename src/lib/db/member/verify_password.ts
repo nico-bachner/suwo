@@ -11,12 +11,9 @@ export const verifyPassword = async ({
   const sql = getQueryBuilder()
 
   const members = await sql`
-    SELECT 
-      password
-    FROM 
-      members
-    WHERE 
-      email = ${email}
+    SELECT password
+    FROM members
+    WHERE email = ${email}
   `
 
   const { password: hashedPassword } = members[0] as Member

@@ -37,17 +37,3 @@ export const getMemberByID = async (id: number): Promise<Member | Profile> => {
 
   return members[0] as Profile
 }
-
-export const getMemberByEmail = async (email: string) => {
-  const sql = getQueryBuilder()
-
-  const members = await sql`
-    SELECT *
-    FROM members
-    WHERE email = ${email}
-  `
-
-  if (members.length > 0) {
-    return members[0] as Member | Profile
-  }
-}

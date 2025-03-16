@@ -1,6 +1,14 @@
 import { FacebookIcon, InstagramIcon, YouTubeIcon } from '@/icons'
 
+// for copy
+export const FULL_NAME = 'The University of Sydney Wind Orchestra'
+export const SHORT_NAME = 'Sydney University Wind Orchestra'
+export const ACRONYM = 'SUWO'
+
+// for Roll Call
 export const MAX_WEEK = 13
+
+// for Navigation
 export const NAV_LINKS = [
   {
     href: '/about',

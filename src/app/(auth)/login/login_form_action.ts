@@ -4,8 +4,9 @@ import { redirect } from 'next/navigation'
 import { typeToFlattenedError, z } from 'zod'
 
 import { createSession } from '@/lib/auth/session'
-import { getMemberByEmail } from '@/lib/db/member/get'
-import { verifyPassword } from '@/lib/db/member/verifyPassword'
+import { getIDFromEmail } from '@/lib/db/member/get_id_from_email'
+import { verifyEmailExists } from '@/lib/db/member/verify_email_exists'
+import { verifyPassword } from '@/lib/db/member/verify_password'
 import { Member } from '@/lib/db/types'
 
 type LoginFormActionState = {
@@ -34,9 +35,9 @@ export const loginFormAction = async (
     }
   }
 
-  const member = await getMemberByEmail(data.email)
+  const id = await getIDFromEmail(data.email)
 
-  if (!member) {
+  if (!id) {
     return {
       ...previousState,
       errors: {
@@ -50,9 +51,9 @@ export const loginFormAction = async (
     const passwordMatch = await verifyPassword(data)
 
     if (passwordMatch) {
-      await createSession(member.id)
+      await createSession(id)
 
-      redirect(`/members/${member.id}`)
+      redirect(`/members/${id}`)
     }
 
     return {
