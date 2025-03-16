@@ -1,11 +1,15 @@
 'use server'
 
+import { randomBytes } from 'crypto'
 import { typeToFlattenedError, z } from 'zod'
 
 import { SHORT_NAME } from '@/config'
 import { ResetPasswordTemplate } from '@/emails/reset_password'
-import { verifyEmailExists } from '@/lib/db/member/verify_email_exists'
+import { BASE_URL } from '@/lib/base_url'
+import { getIDFromEmail } from '@/lib/db/member/get_id_from_email'
+import { getQueryBuilder } from '@/lib/db/query'
 import { Member } from '@/lib/db/types'
+import { createVerificationToken } from '@/lib/db/verification_token/create'
 import { emails } from '@/lib/resend'
 
 type ResetPasswordFormActionState = {
@@ -32,9 +36,9 @@ export const resetPasswordFormAction = async (
     }
   }
 
-  const member = await verifyEmailExists(data.email)
+  const id = await getIDFromEmail(data.email)
 
-  if (!member) {
+  if (!id) {
     return {
       ...previousState,
       errors: {
@@ -45,11 +49,17 @@ export const resetPasswordFormAction = async (
       },
     }
   } else {
+    const { token } = await createVerificationToken(id)
+
     await emails.send({
       from: `${SHORT_NAME} ${'<' + `reset-password@${process.env.RESEND_DOMAIN}` + '>'}`,
       to: [data.email, 'delivered@resend.dev'],
       subject: 'Reset Password',
-      react: <ResetPasswordTemplate link="" />,
+      react: (
+        <ResetPasswordTemplate
+          link={`${BASE_URL}/verify-email/${id}?token=${token}`}
+        />
+      ),
     })
 
     return {

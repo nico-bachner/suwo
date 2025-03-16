@@ -5,6 +5,12 @@ type Public<T, K extends keyof T> = {
   [P in Exclude<keyof T, K>]: null
 }
 
+export type VerificationToken = {
+  member: number
+  token: string
+  created_at: Date
+}
+
 export type Member = {
   id: number
   given_name: string
