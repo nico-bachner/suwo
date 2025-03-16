@@ -2,7 +2,6 @@
 
 import { useActionState } from 'react'
 
-import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { Select } from '@/components/ui/select/select'
 import { SelectItem } from '@/components/ui/select/select_item'
@@ -33,7 +32,13 @@ export const EditInstrumentForm = ({
   )
 
   return (
-    <Form id="edit-instrument-form" action={formAction}>
+    <Form
+      id="edit-instrument-form"
+      action={formAction}
+      errors={state.errors.formErrors}
+      pending={pending}
+      message="Update Instrument"
+    >
       <Select
         form="edit-instrument-form"
         name="instrument"
@@ -47,10 +52,6 @@ export const EditInstrumentForm = ({
           </SelectItem>
         ))}
       </Select>
-
-      <Button variant="secondary" disabled={pending} className="self-end">
-        Update Instrument
-      </Button>
     </Form>
   )
 }

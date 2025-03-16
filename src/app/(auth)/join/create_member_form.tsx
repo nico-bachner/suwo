@@ -2,7 +2,6 @@
 
 import { useActionState } from 'react'
 
-import { Button } from '@/components/ui/button'
 import { CheckboxInput } from '@/components/ui/checkbox_input'
 import { Form } from '@/components/ui/form'
 import { Select } from '@/components/ui/select/select'
@@ -38,6 +37,8 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
       id="new-member-form"
       action={formAction}
       errors={state.errors.formErrors}
+      pending={pending}
+      message="Join"
     >
       <div className="flex flex-col gap-4 sm:flex-row">
         <TextInput
@@ -115,10 +116,6 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
         defaultChecked={state.data.mailing_list}
         className="mt-4 self-center"
       />
-
-      <Button variant="primary" disabled={pending} className="mt-4">
-        Join
-      </Button>
     </Form>
   )
 }

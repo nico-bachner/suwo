@@ -43,9 +43,12 @@ export default async function Page({ params }: PageProps) {
         href: `/members/${id}`,
       }}
       title="Edit Profile"
-      className="flex flex-col gap-6"
+      className="prose"
     >
+      <h2>Password</h2>
       <EditPasswordForm />
+
+      <h2>Instrument</h2>
       <EditInstrumentForm instrument={instrument} instruments={instruments} />
     </PageLayout>
   )

@@ -28,7 +28,7 @@ export const Button = ({
   return (
     <Component
       className={cn(
-        'cursor-pointer rounded-md px-4 py-2.5 text-center font-semibold transition-colors select-none focus:outline-none',
+        'flex cursor-pointer flex-row items-center justify-center rounded-md px-4 py-2.5 font-semibold transition-colors select-none focus:outline-none',
         variants[variant],
         className,
       )}

@@ -2,7 +2,6 @@
 
 import { useActionState } from 'react'
 
-import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { TextInput } from '@/components/ui/text_input'
 
@@ -24,6 +23,8 @@ export const ResetPasswordForm = () => {
       id="new-member-form"
       action={formAction}
       errors={state.errors.formErrors}
+      pending={pending}
+      message="Reset Password"
     >
       <TextInput
         type="email"
@@ -34,10 +35,6 @@ export const ResetPasswordForm = () => {
         defaultValue={state.data.email ?? undefined}
         errors={state.errors.fieldErrors.email}
       />
-
-      <Button variant="primary" disabled={pending} className="mt-4">
-        Reset Password
-      </Button>
     </Form>
   )
 }

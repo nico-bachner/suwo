@@ -2,7 +2,6 @@
 
 import { useActionState } from 'react'
 
-import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { TextInput } from '@/components/ui/text_input'
 
@@ -25,6 +24,8 @@ export const LoginForm = () => {
       id="new-member-form"
       action={formAction}
       errors={state.errors.formErrors}
+      pending={pending}
+      message="Log In"
     >
       <TextInput
         type="email"
@@ -45,10 +46,6 @@ export const LoginForm = () => {
         defaultValue={state.data.password ?? undefined}
         errors={state.errors.fieldErrors.password}
       />
-
-      <Button variant="primary" disabled={pending} className="mt-4">
-        Log In
-      </Button>
     </Form>
   )
 }

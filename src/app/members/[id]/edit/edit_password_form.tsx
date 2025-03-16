@@ -2,7 +2,6 @@
 
 import { useActionState } from 'react'
 
-import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { TextInput } from '@/components/ui/text_input'
 
@@ -20,7 +19,12 @@ export const EditPasswordForm = () => {
   })
 
   return (
-    <Form action={formAction}>
+    <Form
+      action={formAction}
+      errors={state.errors.formErrors}
+      pending={pending}
+      message="Update Password"
+    >
       <TextInput
         type="password"
         name="password"
@@ -29,10 +33,6 @@ export const EditPasswordForm = () => {
         defaultValue={state.data.password ?? undefined}
         errors={state.errors.fieldErrors.password}
       />
-
-      <Button variant="secondary" disabled={pending} className="self-end">
-        Update Password
-      </Button>
     </Form>
   )
 }
