@@ -8,6 +8,7 @@ import { Member } from '@/lib/db/types'
 import { Params } from '@/lib/types'
 
 import { EditInstrumentForm } from './edit_instrument_form'
+import { EditPasswordForm } from './edit_password_form'
 
 type PageProps = {
   params: Params<Pick<Member, 'id'>>
@@ -44,6 +45,7 @@ export default async function Page({ params }: PageProps) {
       title="Edit Profile"
       className="flex flex-col gap-6"
     >
+      <EditPasswordForm />
       <EditInstrumentForm instrument={instrument} instruments={instruments} />
     </PageLayout>
   )

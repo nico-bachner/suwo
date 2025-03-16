@@ -3,6 +3,7 @@
 import { useActionState } from 'react'
 
 import { Button } from '@/components/ui/button'
+import { Form } from '@/components/ui/form'
 import { Select } from '@/components/ui/select/select'
 import { SelectItem } from '@/components/ui/select/select_item'
 import { Instrument, Member, Table } from '@/lib/db/types'
@@ -32,11 +33,7 @@ export const EditInstrumentForm = ({
   )
 
   return (
-    <form
-      id="edit-instrument-form"
-      action={formAction}
-      className="flex flex-col gap-4"
-    >
+    <Form id="edit-instrument-form" action={formAction}>
       <Select
         form="edit-instrument-form"
         name="instrument"
@@ -51,9 +48,9 @@ export const EditInstrumentForm = ({
         ))}
       </Select>
 
-      <Button variant="primary" disabled={pending} className="self-end">
-        Log In
+      <Button variant="secondary" disabled={pending} className="self-end">
+        Update Instrument
       </Button>
-    </form>
+    </Form>
   )
 }
