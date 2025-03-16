@@ -33,7 +33,7 @@ export default async function Page({ params }: PageProps) {
     redirect(`/members/${id}`)
   }
 
-  const { instrument } = await getMemberByID(id)
+  const { given_name, family_name, instrument } = await getMemberByID(id)
   const instruments = await getInstruments()
 
   return (
@@ -42,7 +42,8 @@ export default async function Page({ params }: PageProps) {
         title: `Back to Profile`,
         href: `/members/${id}`,
       }}
-      title="Edit Profile"
+      title={`${given_name} ${family_name}`}
+      subtitle={instrument ?? undefined}
       className="prose"
     >
       <h2>Password</h2>

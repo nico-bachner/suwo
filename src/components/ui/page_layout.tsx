@@ -67,7 +67,7 @@ export const PageLayout = async ({
             {action}
           </div>
 
-          <h1 className="font-serif text-3xl font-extrabold sm:text-4xl">
+          <h1 className="font-serif text-3xl font-bold sm:text-4xl">
             <span className="text-gray-100">{title}</span>
             <br />
             <span className="text-gray-500">{subtitle}</span>
