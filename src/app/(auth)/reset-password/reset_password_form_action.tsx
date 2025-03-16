@@ -46,16 +46,11 @@ export const resetPasswordFormAction = async (
     }
   } else {
     const { error } = await emails.send({
-      from: SHORT_NAME + ' ' + '<' + process.env.RESEND_DOMAIN + '>',
+      from: `${SHORT_NAME} ${'<' + `reset-password@${process.env.RESEND_DOMAIN}` + '>'}`,
       to: [data.email, 'delivered@resend.dev'],
       subject: 'Reset Password',
       react: <ResetPasswordTemplate link="" />,
     })
-
-    console.log('Email sent:', data.email)
-    console.log('Email from:', `${SHORT_NAME} < ${process.env.RESEND_DOMAIN} >`)
-
-    console.log('Email error:', error)
 
     return {
       ...previousState,
