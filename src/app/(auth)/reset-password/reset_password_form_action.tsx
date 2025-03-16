@@ -45,7 +45,7 @@ export const resetPasswordFormAction = async (
       },
     }
   } else {
-    const { error } = await emails.send({
+    await emails.send({
       from: `${SHORT_NAME} ${'<' + `reset-password@${process.env.RESEND_DOMAIN}` + '>'}`,
       to: [data.email, 'delivered@resend.dev'],
       subject: 'Reset Password',
