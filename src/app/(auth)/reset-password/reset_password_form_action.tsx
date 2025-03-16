@@ -49,7 +49,7 @@ export const resetPasswordFormAction = async (
       from: SHORT_NAME + ' ' + '<' + process.env.RESEND_DOMAIN + '>',
       to: [data.email, 'delivered@resend.dev'],
       subject: 'Reset Password',
-      react: <ResetPasswordTemplate />,
+      react: <ResetPasswordTemplate link="" />,
     })
 
     console.log('Email sent:', data.email)

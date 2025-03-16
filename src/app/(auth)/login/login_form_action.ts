@@ -5,7 +5,6 @@ import { typeToFlattenedError, z } from 'zod'
 
 import { createSession } from '@/lib/auth/session'
 import { getIDFromEmail } from '@/lib/db/member/get_id_from_email'
-import { verifyEmailExists } from '@/lib/db/member/verify_email_exists'
 import { verifyPassword } from '@/lib/db/member/verify_password'
 import { Member } from '@/lib/db/types'
 

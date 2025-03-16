@@ -4,6 +4,7 @@ import { useActionState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { CheckboxInput } from '@/components/ui/checkbox_input'
+import { Form } from '@/components/ui/form'
 import { Select } from '@/components/ui/select/select'
 import { SelectItem } from '@/components/ui/select/select_item'
 import { TextInput } from '@/components/ui/text_input'
@@ -33,10 +34,10 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
   })
 
   return (
-    <form
+    <Form
       id="new-member-form"
       action={formAction}
-      className="flex w-full max-w-screen-sm flex-col gap-4"
+      errors={state.errors.formErrors}
     >
       <div className="flex flex-col gap-4 sm:flex-row">
         <TextInput
@@ -46,7 +47,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           placeholder='e.g. "Ambrose"'
           required
           defaultValue={state.data.given_name ?? undefined}
-          errors={state?.errors.fieldErrors.given_name}
+          errors={state.errors.fieldErrors.given_name}
           className="flex-1"
         />
 
@@ -56,7 +57,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           autoComplete="family-name"
           placeholder='e.g. "Phelps"'
           defaultValue={state.data.family_name ?? undefined}
-          errors={state?.errors.fieldErrors.family_name}
+          errors={state.errors.fieldErrors.family_name}
           className="flex-1"
         />
       </div>
@@ -68,7 +69,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
         required
         placeholder='e.g. "name@example.com"'
         defaultValue={state.data.email ?? undefined}
-        errors={state?.errors.fieldErrors.email}
+        errors={state.errors.fieldErrors.email}
       />
 
       <TextInput
@@ -78,7 +79,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
         required
         placeholder='e.g. "I<3SUWO25"'
         defaultValue={state.data.password ?? undefined}
-        errors={state?.errors.fieldErrors.password}
+        errors={state.errors.fieldErrors.password}
       />
 
       <div className="flex flex-col gap-4 sm:flex-row">
@@ -88,7 +89,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           inputMode="numeric"
           placeholder='e.g. "1234567"'
           defaultValue={state.data.usu ?? undefined}
-          errors={state?.errors.fieldErrors.usu}
+          errors={state.errors.fieldErrors.usu}
           className="flex-1"
         />
 
@@ -97,7 +98,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           name="instrument"
           label="Instrument"
           defaultValue={state.data.instrument ?? undefined}
-          errors={state?.errors.fieldErrors.instrument}
+          errors={state.errors.fieldErrors.instrument}
           placeholder="Select Instrument..."
         >
           {instruments.map(({ name }) => (
@@ -118,6 +119,6 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
       <Button variant="primary" disabled={pending} className="mt-4">
         Join
       </Button>
-    </form>
+    </Form>
   )
 }
