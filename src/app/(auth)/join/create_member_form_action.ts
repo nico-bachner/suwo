@@ -1,6 +1,5 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
 import { typeToFlattenedError, z } from 'zod'
 
 import { getInstruments } from '@/lib/db/instruments/get'
@@ -115,8 +114,6 @@ export const createMemberFormAction = async (
       usu: data.usu ? parseInt(data.usu) : null,
     })
   }
-
-  revalidatePath('/roll-call')
 
   return {
     ...previousState,
