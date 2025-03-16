@@ -3,21 +3,13 @@ import { Member, Profile } from '@/lib/db/types'
 
 import { getSession } from '../../auth/session'
 
-export const getMemberByID = async (id: number): Promise<Member | Profile> => {
+export const getMemberByID = async (id: number) => {
   const session = await getSession()
   const sql = getQueryBuilder()
 
   if (session.isAuth && session.id === id) {
     const members = await sql`
-      SELECT 
-        id,
-        given_name,
-        family_name,
-        email,
-        password,
-        usu,
-        instrument,
-        mailing_list
+      SELECT *
       FROM members
       WHERE id = ${id}
     `

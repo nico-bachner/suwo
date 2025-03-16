@@ -56,11 +56,11 @@ export const PageLayout = async ({
             {parent && (
               <Link
                 href={parent.href}
-                className="flex cursor-pointer flex-row items-center rounded-full transition-colors select-none hover:bg-gray-900 focus:bg-gray-900 focus:outline-none"
+                className="flex cursor-pointer flex-row items-center rounded-full p-2 text-gray-300 transition-colors select-none hover:text-gray-100 focus:text-gray-100 focus:outline-none"
               >
-                <ChevronLeftIcon className="box-content h-6 w-6 stroke-gray-300 p-3" />
+                <ChevronLeftIcon className="h-6 w-6" />
 
-                <span className="py-2 pr-6 text-gray-300">{parent.title}</span>
+                <span className="px-2 font-medium">{parent.title}</span>
               </Link>
             )}
 
@@ -77,10 +77,10 @@ export const PageLayout = async ({
         {id ? (
           <div className="flex flex-row gap-2 max-lg:hidden">
             <Button asChild variant="secondary" className="flex-1">
-              <Link href={`/members/${id}/edit`}>Edit Profile</Link>
+              <Link href={`/members/${id}`}>Profile</Link>
             </Button>
             <Button asChild variant="secondary" className="flex-1">
-              <Link href={`/members/${id}`}>View Profile</Link>
+              <Link href="/settings">Settings</Link>
             </Button>
           </div>
         ) : (

@@ -3,12 +3,11 @@ import { notFound, redirect } from 'next/navigation'
 import { PageLayout } from '@/components/ui/page_layout'
 import { getSession } from '@/lib/auth/session'
 import { getInstruments } from '@/lib/db/instruments/get'
-import { getMemberByID } from '@/lib/db/member/get'
+import { getMemberByID } from '@/lib/db/member/get_member_by_id'
 import { Member } from '@/lib/db/types'
 import { Params } from '@/lib/types'
 
 import { EditInstrumentForm } from './edit_instrument_form'
-import { EditPasswordForm } from './edit_password_form'
 
 type PageProps = {
   params: Params<Pick<Member, 'id'>>
@@ -39,16 +38,13 @@ export default async function Page({ params }: PageProps) {
   return (
     <PageLayout
       parent={{
-        title: `Back to Profile`,
+        title: `View Profile`,
         href: `/members/${id}`,
       }}
       title={`${given_name} ${family_name}`}
       subtitle={instrument ?? undefined}
       className="prose"
     >
-      <h2>Password</h2>
-      <EditPasswordForm />
-
       <h2>Instrument</h2>
       <EditInstrumentForm instrument={instrument} instruments={instruments} />
     </PageLayout>

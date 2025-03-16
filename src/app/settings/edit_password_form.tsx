@@ -29,7 +29,7 @@ export const EditPasswordForm = () => {
       <TextInput
         type="password"
         name="password"
-        label="Password"
+        label="New Password"
         placeholder='e.g. "I<3SUWO25"'
         defaultValue={state.data.password ?? undefined}
         errors={state.errors.fieldErrors.password}

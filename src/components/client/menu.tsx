@@ -66,16 +66,16 @@ export const MobileMenu = ({ id, className }: MenuProps) => {
                 }}
                 className="text-xl font-medium text-gray-300"
               >
-                Edit Profile
+                Profile
               </Link>
               <Link
-                href={`/members/${id}`}
+                href="/settings"
                 onClick={() => {
                   setOpen(false)
                 }}
                 className="text-xl font-medium text-gray-300"
               >
-                View Profile
+                Settings
               </Link>
             </div>
           ) : (
