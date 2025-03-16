@@ -24,6 +24,7 @@ export const EditPasswordForm = () => {
       errors={state.errors.formErrors}
       pending={pending}
       message="Update Password"
+      variant="secondary"
     >
       <TextInput
         type="password"

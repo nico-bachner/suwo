@@ -38,6 +38,7 @@ export const EditInstrumentForm = ({
       errors={state.errors.formErrors}
       pending={pending}
       message="Update Instrument"
+      variant="secondary"
     >
       <Select
         form="edit-instrument-form"
