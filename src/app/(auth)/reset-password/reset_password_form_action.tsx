@@ -49,16 +49,14 @@ export const resetPasswordFormAction = async (
   } else {
     const { token } = await createVerificationToken(id)
 
+    const verificationLink = `${BASE_URL}/verify/${id}?token=${token}`
+
     await emails.send({
       from: `${SHORT_NAME} ${'<' + `reset-password@${process.env.RESEND_DOMAIN}` + '>'}`,
       to: [data.email, 'delivered@resend.dev'],
       subject: 'Reset Password',
-      text: `Click the link below to reset your password:\n\n${BASE_URL}/verify/${id}?token=${token}`,
-      react: (
-        <ResetPasswordTemplate
-          link={`${BASE_URL}/verify/${id}?token=${token}`}
-        />
-      ),
+      text: `Click the link below to reset your password:\n\n${verificationLink}`,
+      react: <ResetPasswordTemplate link={verificationLink} />,
     })
 
     return {
