@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Separator } from 'radix-ui'
 
-import { NAV_LINKS, SOCIAL_LINKS } from '@/config'
+import { NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
 import logo from '@/images/logo.png'
 import { getSession } from '@/lib/auth/session'
 import { cn } from '@/lib/cn'
@@ -33,7 +33,7 @@ export const PageLayout = async ({
   action,
   className,
 }: PageLayoutProps) => {
-  const { id } = await getSession()
+  const { isAuth, id } = await getSession()
 
   return (
     <div
@@ -49,7 +49,7 @@ export const PageLayout = async ({
               <Image src={logo} alt="The SUWO logo" className="h-12 w-12" />
             </Link>
 
-            <Menu className="lg:hidden" />
+            <Menu isAuth={isAuth} className="lg:hidden" />
           </div>
 
           <div className="-mx-2 flex flex-row items-center justify-between gap-2">
@@ -100,7 +100,7 @@ export const PageLayout = async ({
         </div>
 
         <div className="flex flex-row items-center gap-4 max-lg:hidden">
-          {SOCIAL_LINKS.map(({ href, icon }) => (
+          {NAV_SOCIAL_LINKS.map(({ href, icon }) => (
             <SocialLink key={href} icon={icon} href={href} />
           ))}
         </div>
@@ -115,7 +115,7 @@ export const PageLayout = async ({
           <p>Follow our socials</p>
 
           <div className="flex flex-row items-center gap-4">
-            {SOCIAL_LINKS.map(({ href, icon }) => (
+            {NAV_SOCIAL_LINKS.map(({ href, icon }) => (
               <SocialLink key={href} icon={icon} href={href} />
             ))}
           </div>

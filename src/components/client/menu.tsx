@@ -7,14 +7,15 @@ import { Dialog, VisuallyHidden } from 'radix-ui'
 import { useState } from 'react'
 
 import { SocialLink } from '@/components/ui/social_link'
-import { NAV_LINKS, SOCIAL_LINKS } from '@/config'
+import { LINKS, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
 import { cn } from '@/lib/cn'
 
 type MenuProps = {
+  isAuth: boolean
   className?: string
 }
 
-export const Menu = ({ className }: MenuProps) => {
+export const Menu = ({ isAuth, className }: MenuProps) => {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
 
@@ -26,12 +27,12 @@ export const Menu = ({ className }: MenuProps) => {
 
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0" />
-        <Dialog.Content className="fixed inset-0 z-10 flex flex-col justify-between bg-gray-950/80 p-6 pb-[20vh] backdrop-blur-lg">
+        <Dialog.Content className="fixed inset-0 z-10 flex flex-col justify-evenly bg-gray-950/80 p-6 backdrop-blur-lg">
           <VisuallyHidden.Root asChild>
             <Dialog.Title>SUWO</Dialog.Title>
           </VisuallyHidden.Root>
 
-          <Dialog.Close className="self-end">
+          <Dialog.Close className="absolute top-6 right-6 cursor-pointer rounded-lg p-1 focus:bg-gray-900 focus:outline-none">
             <XMarkIcon className="h-8 w-8 stroke-gray-100 stroke-1" />
           </Dialog.Close>
 
@@ -46,7 +47,7 @@ export const Menu = ({ className }: MenuProps) => {
                 className={cn(
                   'text-xl',
                   pathname.split('/')[1] == href.split('/')[1]
-                    ? 'text-amber-300'
+                    ? 'text-amber-300 hover:text-amber-100'
                     : 'text-gray-300 hover:text-gray-100',
                 )}
               >
@@ -55,8 +56,31 @@ export const Menu = ({ className }: MenuProps) => {
             ))}
           </div>
 
+          {!isAuth && (
+            <div className="flex flex-col items-center gap-6">
+              <Link
+                href={LINKS.LOG_IN.href}
+                onClick={() => {
+                  setOpen(false)
+                }}
+                className="text-xl font-medium text-gray-300"
+              >
+                {LINKS.LOG_IN.label}
+              </Link>
+              <Link
+                href={LINKS.JOIN.href}
+                onClick={() => {
+                  setOpen(false)
+                }}
+                className="text-xl font-medium text-gray-300"
+              >
+                {LINKS.JOIN.label}
+              </Link>
+            </div>
+          )}
+
           <div className="flex flex-row items-center gap-4 self-center">
-            {SOCIAL_LINKS.map(({ href, icon }) => (
+            {NAV_SOCIAL_LINKS.map(({ href, icon }) => (
               <SocialLink key={href} icon={icon} href={href} size="lg" />
             ))}
           </div>
