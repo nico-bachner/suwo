@@ -53,9 +53,10 @@ export const resetPasswordFormAction = async (
       from: `${SHORT_NAME} ${'<' + `reset-password@${process.env.RESEND_DOMAIN}` + '>'}`,
       to: [data.email, 'delivered@resend.dev'],
       subject: 'Reset Password',
+      text: `Click the link below to reset your password:\n\n${BASE_URL}/verify/${id}?token=${token}`,
       react: (
         <ResetPasswordTemplate
-          link={`${BASE_URL}/verify-email/${id}?token=${token}`}
+          link={`${BASE_URL}/verify/${id}?token=${token}`}
         />
       ),
     })
