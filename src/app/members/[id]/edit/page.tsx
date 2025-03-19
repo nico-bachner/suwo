@@ -1,6 +1,7 @@
 import { notFound, redirect } from 'next/navigation'
 
 import { PageLayout } from '@/components/ui/page_layout'
+import { SettingsSection } from '@/components/ui/settings_section'
 import { LINKS } from '@/config'
 import { getSession } from '@/lib/auth/session'
 import { getInstruments } from '@/lib/db/instruments/get'
@@ -42,10 +43,14 @@ export default async function Page({ params }: PageProps) {
       }}
       title={`${given_name} ${family_name}`}
       subtitle={instrument ?? undefined}
-      className="prose"
+      className="flex flex-col gap-12"
     >
-      <h2>Instrument</h2>
-      <EditInstrumentForm instrument={instrument} instruments={instruments} />
+      <SettingsSection
+        title="Instrument"
+        description="This is the instrument you usually play during SUWO rehearsals. If you play multiple instruments, choose the one you play most often."
+      >
+        <EditInstrumentForm instrument={instrument} instruments={instruments} />
+      </SettingsSection>
     </PageLayout>
   )
 }
