@@ -17,7 +17,6 @@ export const editCommunicationsFormAction = async (
   const schema = z.object({
     mailing_list: z.boolean(),
   })
-  console.log(formData)
 
   const { data, success, error } = await schema.safeParseAsync({
     mailing_list: formData.get('mailing-list') == 'on',
