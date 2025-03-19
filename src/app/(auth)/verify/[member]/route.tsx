@@ -24,7 +24,10 @@ export const GET = async (req: NextRequest, { params }: PageProps) => {
     return Response.json({ message: 'Please provide a token' })
   }
 
-  const isValidToken = await verifyToken(token)
+  const isValidToken = await verifyToken({
+    member: parseInt(member),
+    token,
+  })
 
   if (!isValidToken) {
     return Response.json({ message: 'Invalid token' })
