@@ -23,8 +23,7 @@ export default async function Page({ params }: PageProps) {
   const id = parseInt(decodeURIComponent(idParam))
 
   const session = await getSession()
-  const { given_name, family_name, email, usu, instrument } =
-    await getMemberByID(id)
+  const { given_name, family_name, instrument } = await getMemberByID(id)
 
   return (
     <PageLayout
