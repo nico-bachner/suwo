@@ -6,15 +6,15 @@ import { getInstruments } from '@/lib/db/instruments/get'
 import { updateMemberInstument } from '@/lib/db/member/update'
 import { Member } from '@/lib/db/types'
 
-type InstrumentFormActionState = {
+type ActionState = {
   data: Pick<Member, 'instrument'>
-  errors: typeToFlattenedError<InstrumentFormActionState['data'], string>
+  errors: typeToFlattenedError<ActionState['data'], string>
 }
 
-export const editInstrumentFormAction = async (
-  previousState: InstrumentFormActionState,
+export const selectInstrumentFormAction = async (
+  previousState: ActionState,
   formData: FormData,
-): Promise<InstrumentFormActionState> => {
+): Promise<ActionState> => {
   const instruments = await getInstruments()
 
   const schema = z.object({

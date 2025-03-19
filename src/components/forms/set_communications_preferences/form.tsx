@@ -6,15 +6,15 @@ import { Form } from '@/components/ui/form'
 import { SwitchInput } from '@/components/ui/switch_input'
 import { Member } from '@/lib/db/types'
 
-import { editCommunicationsFormAction } from './communications_form_action'
+import { setCommunicationsPreferencesFormAction } from './form_action'
 
-type CommunicationsFormProps = Pick<Member, 'mailing_list'>
+type SetCommunicationsPreferencesFormProps = Pick<Member, 'mailing_list'>
 
-export const CommunicationsForm = ({
+export const SetCommunicationsPreferencesForm = ({
   mailing_list,
-}: CommunicationsFormProps) => {
+}: SetCommunicationsPreferencesFormProps) => {
   const [state, formAction, pending] = useActionState(
-    editCommunicationsFormAction,
+    setCommunicationsPreferencesFormAction,
     {
       data: {
         mailing_list,

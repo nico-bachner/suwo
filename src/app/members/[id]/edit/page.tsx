@@ -1,15 +1,13 @@
 import { notFound, redirect } from 'next/navigation'
 
+import { SelectInstrument } from '@/components/forms/select_instrument'
 import { PageLayout } from '@/components/ui/page_layout'
 import { SettingsSection } from '@/components/ui/settings_section'
 import { LINKS } from '@/config'
 import { getSession } from '@/lib/auth/session'
-import { getInstruments } from '@/lib/db/instruments/get'
 import { getMember } from '@/lib/db/member/get_member'
 import { Member } from '@/lib/db/types'
 import { Params } from '@/lib/types'
-
-import { EditInstrumentForm } from './edit_instrument_form'
 
 type PageProps = {
   params: Params<Pick<Member, 'id'>>
@@ -33,7 +31,6 @@ export default async function Page({ params }: PageProps) {
   }
 
   const { given_name, family_name, instrument } = await getMember()
-  const instruments = await getInstruments()
 
   return (
     <PageLayout
@@ -49,7 +46,7 @@ export default async function Page({ params }: PageProps) {
         title="Instrument"
         description="This is the instrument you usually play during SUWO rehearsals. If you play multiple instruments, choose the one you play most often."
       >
-        <EditInstrumentForm instrument={instrument} instruments={instruments} />
+        <SelectInstrument />
       </SettingsSection>
     </PageLayout>
   )

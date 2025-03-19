@@ -5,18 +5,21 @@ import { useActionState } from 'react'
 import { Form } from '@/components/ui/form'
 import { TextInput } from '@/components/ui/text_input'
 
-import { editPasswordFormAction } from './edit_password_form_action'
+import { updatePasswordFormAction } from './form_action'
 
-export const EditPasswordForm = () => {
-  const [state, formAction, pending] = useActionState(editPasswordFormAction, {
-    data: {
-      password: '',
+export const UpdatePasswordForm = () => {
+  const [state, formAction, pending] = useActionState(
+    updatePasswordFormAction,
+    {
+      data: {
+        password: '',
+      },
+      errors: {
+        formErrors: [],
+        fieldErrors: {},
+      },
     },
-    errors: {
-      formErrors: [],
-      fieldErrors: {},
-    },
-  })
+  )
 
   return (
     <Form

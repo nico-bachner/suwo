@@ -5,15 +5,15 @@ import { typeToFlattenedError, z } from 'zod'
 import { updateMemberPassword } from '@/lib/db/member/update_password'
 import { Member } from '@/lib/db/types'
 
-type PasswordFormActionState = {
+type ActionState = {
   data: Pick<Member, 'password'>
-  errors: typeToFlattenedError<PasswordFormActionState['data'], string>
+  errors: typeToFlattenedError<ActionState['data'], string>
 }
 
-export const editPasswordFormAction = async (
-  previousState: PasswordFormActionState,
+export const updatePasswordFormAction = async (
+  previousState: ActionState,
   formData: FormData,
-): Promise<PasswordFormActionState> => {
+): Promise<ActionState> => {
   const schema = z.object({
     password: z
       .string()

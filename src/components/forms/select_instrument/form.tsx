@@ -7,19 +7,19 @@ import { Select } from '@/components/ui/select/select'
 import { SelectItem } from '@/components/ui/select/select_item'
 import { Instrument, Member, Table } from '@/lib/db/types'
 
-import { editInstrumentFormAction } from './edit_instrument_form_action'
+import { selectInstrumentFormAction } from './form_action'
 
-type EditInstrumentFormProps = {
+type SelectInstrumentFormProps = {
   instrument: Member['instrument']
   instruments: Table<Instrument>
 }
 
-export const EditInstrumentForm = ({
+export const SelectInstrumentForm = ({
   instrument,
   instruments,
-}: EditInstrumentFormProps) => {
+}: SelectInstrumentFormProps) => {
   const [state, formAction, pending] = useActionState(
-    editInstrumentFormAction,
+    selectInstrumentFormAction,
     {
       data: {
         instrument,
