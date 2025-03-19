@@ -12,7 +12,7 @@ export default async function Page() {
   return (
     <PageLayout title="Settings" className="flex flex-col gap-12">
       <section className="prose">
-        <h2>Communicatios</h2>
+        <h2>Communications</h2>
         <p>Choose what communications you would like to receive from us.</p>
         <CommunicationsForm mailing_list={mailing_list} />
       </section>
