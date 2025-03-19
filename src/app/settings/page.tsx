@@ -9,8 +9,8 @@ export default async function Page() {
   return (
     <PageLayout title="Settings" className="flex flex-col gap-12">
       <SettingsSection
-        title="Communications"
-        description="Choose what communications you would like to receive from us. If you're not sure, we recommend keeping all options selected."
+        title="Communication Preferences"
+        description="We send weekly emails to all SUWO members to keep you up to date with event scheduling and administrative issues. You can use the form below to set your communications preferences."
       >
         <SetCommunicationsPreferences />
       </SettingsSection>
