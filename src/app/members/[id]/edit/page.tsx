@@ -4,7 +4,7 @@ import { PageLayout } from '@/components/ui/page_layout'
 import { LINKS } from '@/config'
 import { getSession } from '@/lib/auth/session'
 import { getInstruments } from '@/lib/db/instruments/get'
-import { getMemberByID } from '@/lib/db/member/get_member_by_id'
+import { getMember } from '@/lib/db/member/get_member'
 import { Member } from '@/lib/db/types'
 import { Params } from '@/lib/types'
 
@@ -21,19 +21,17 @@ export default async function Page({ params }: PageProps) {
     notFound()
   }
 
-  const id = parseInt(decodeURIComponent(idParam))
+  const { id } = await getSession()
 
-  const session = await getSession()
-
-  if (!session.isAuth) {
+  if (!id) {
     redirect(LINKS.LOG_IN.href)
   }
 
-  if (session.id !== id) {
+  if (id != parseInt(decodeURIComponent(idParam))) {
     redirect(`/members/${id}`)
   }
 
-  const { given_name, family_name, instrument } = await getMemberByID(id)
+  const { given_name, family_name, instrument } = await getMember()
   const instruments = await getInstruments()
 
   return (
