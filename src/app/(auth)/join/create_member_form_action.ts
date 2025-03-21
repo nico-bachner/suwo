@@ -1,17 +1,21 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
-import { z } from 'zod'
+import { typeToFlattenedError, z } from 'zod'
 
 import { getInstruments } from '@/lib/db/instruments/get'
 import { createMember } from '@/lib/db/member/create'
-import { getMemberByEmail } from '@/lib/db/member/get'
-import { updateMemberByEmail } from '@/lib/db/member/update'
+import { verifyEmailExists } from '@/lib/db/member/verify_email_exists'
+import { Member } from '@/lib/db/types'
 
-export const createNewMember = async (
-  previousState: unknown,
+type CreateMemberFormActionState = {
+  data: Omit<Member, 'id'>
+  errors: typeToFlattenedError<CreateMemberFormActionState['data'], string>
+}
+
+export const createMemberFormAction = async (
+  previousState: CreateMemberFormActionState,
   formData: FormData,
-) => {
+): Promise<CreateMemberFormActionState> => {
   const instruments = await getInstruments()
 
   const schema = z.object({
@@ -32,7 +36,23 @@ export const createNewMember = async (
         })
         .trim(),
     ),
-    email: z.string().email(),
+    email: z.string().email().trim(),
+    password: z
+      .string()
+      .min(8, { message: 'Password must be at least 8 characters long' })
+      .regex(/[a-z]/, {
+        message: 'Password must contain at least one lowercase letter.',
+      })
+      .regex(/[A-Z]/, {
+        message: 'Password must contain at least one uppercase letter.',
+      })
+      .regex(/[0-9]/, {
+        message: 'Password must contain at least one number.',
+      })
+      .regex(/[^a-zA-Z0-9]/, {
+        message: 'Password must contain at least one special character.',
+      })
+      .trim(),
     usu: z.nullable(
       z
         .string()
@@ -64,6 +84,7 @@ export const createNewMember = async (
     family_name:
       formData.get('family-name') == '' ? null : formData.get('family-name'),
     email: formData.get('email'),
+    password: formData.get('password'),
     usu: formData.get('usu') == '' ? null : formData.get('usu'),
     instrument:
       formData.get('instrument') == '' ? null : formData.get('instrument'),
@@ -72,17 +93,21 @@ export const createNewMember = async (
 
   if (!success) {
     return {
+      ...previousState,
       errors: error.flatten(),
     }
   }
 
-  const member = await getMemberByEmail(data.email)
+  const member = await verifyEmailExists(data.email)
 
   if (member) {
-    await updateMemberByEmail({
-      ...data,
-      usu: data.usu ? parseInt(data.usu) : null,
-    })
+    return {
+      ...previousState,
+      errors: {
+        formErrors: ['Member already exists. Please log in instead.'],
+        fieldErrors: {},
+      },
+    }
   } else {
     await createMember({
       ...data,
@@ -90,5 +115,11 @@ export const createNewMember = async (
     })
   }
 
-  revalidatePath('/roll-call')
+  return {
+    ...previousState,
+    errors: {
+      formErrors: [],
+      fieldErrors: {},
+    },
+  }
 }

@@ -8,15 +8,14 @@ import { headers } from 'next/headers'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
+import { Button } from '@/components/ui/button'
+import { PageLayout } from '@/components/ui/page_layout'
 import { QRCodeDialog } from '@/components/ui/qr_code_dialog'
 import { MAX_WEEK } from '@/config'
-import { getInstruments } from '@/lib/db/instruments/get'
+import { getRollCallEntriesByWeek } from '@/lib/db/roll_call_entries/by_week'
 import { createRollCallEntry } from '@/lib/db/roll_call_entry/create'
-import { getRollCallEntriesByWeek } from '@/lib/db/roll_call_entry/get'
 import { RollCall } from '@/lib/db/types'
 import { Params } from '@/lib/types'
-
-import { NewMemberForm } from './create_member_form'
 
 type PageProps = {
   params: Params<Pick<RollCall, 'year' | 'semester' | 'week'>>
@@ -43,7 +42,6 @@ export default async function Page({ params }: PageProps) {
     redirect(`/roll-call`)
   }
 
-  const instruments = await getInstruments()
   const rollCallEntries = await getRollCallEntriesByWeek({
     year,
     semester,
@@ -51,35 +49,11 @@ export default async function Page({ params }: PageProps) {
   })
 
   return (
-    <main className="prose flex w-full flex-col items-center gap-6">
-      <h1>
-        Roll Call
-        <br />
-        <span className="text-gray-500">Week {week}</span>
-      </h1>
-
-      <nav className="mx-auto grid w-full max-w-screen-sm grid-cols-2 gap-4">
-        {week > 1 && (
-          <Link
-            href={`/roll-call/${year}/${semester}/${week - 1}`}
-            className="col-start-1 flex flex-row items-center justify-self-start rounded-md hover:bg-gray-900"
-          >
-            <ChevronLeftIcon className="box-content h-5 w-5 stroke-gray-300 p-2" />
-            <span className="py-2 pr-4 text-gray-300">Week {week - 1}</span>
-          </Link>
-        )}
-
-        {week < MAX_WEEK && (
-          <Link
-            href={`/roll-call/${year}/${semester}/${week + 1}`}
-            className="col-start-2 flex flex-row items-center justify-self-end rounded-md hover:bg-gray-900"
-          >
-            <span className="py-2 pl-4 text-gray-300">Week {week + 1}</span>
-            <ChevronRightIcon className="box-content h-5 w-5 stroke-gray-300 p-2" />
-          </Link>
-        )}
-      </nav>
-
+    <PageLayout
+      title="Roll Call"
+      subtitle={`Week ${week} (${rollCallEntries.filter(({ present }) => present).length})`}
+      className="prose flex flex-col gap-6"
+    >
       <div className="flex w-full max-w-screen-sm flex-col">
         {rollCallEntries.map(
           ({ id, given_name, family_name, present, instrument }) => (
@@ -119,15 +93,38 @@ export default async function Page({ params }: PageProps) {
         )}
       </div>
 
-      <h2>Not in the list?</h2>
-      <p>Enter your details below:</p>
+      <nav className="sticky bottom-0 mx-auto grid w-full max-w-screen-sm grid-cols-2 gap-4 bg-gray-950/90 p-4 backdrop-blur-lg">
+        {week > 1 && (
+          <Link
+            href={`/roll-call/${year}/${semester}/${week - 1}`}
+            className="col-start-1 flex flex-row items-center justify-self-start rounded-md hover:bg-gray-900"
+          >
+            <ChevronLeftIcon className="box-content h-5 w-5 stroke-gray-300 p-2" />
+            <span className="py-2 pr-4 text-gray-300">Week {week - 1}</span>
+          </Link>
+        )}
 
-      <NewMemberForm instruments={instruments} />
+        {week < MAX_WEEK && (
+          <Link
+            href={`/roll-call/${year}/${semester}/${week + 1}`}
+            className="col-start-2 flex flex-row items-center justify-self-end rounded-md hover:bg-gray-900"
+          >
+            <span className="py-2 pl-4 text-gray-300">Week {week + 1}</span>
+            <ChevronRightIcon className="box-content h-5 w-5 stroke-gray-300 p-2" />
+          </Link>
+        )}
+      </nav>
+
+      <h2>Not in the list?</h2>
+
+      <Button asChild variant="secondary" className="mt-4">
+        <Link href="/join">Join now</Link>
+      </Button>
 
       <QRCodeDialog
         value={`${host}/roll-call/${year}/${semester}/${week}`}
-        className="fixed right-4 bottom-4"
+        className="sticky right-4 self-end max-lg:bottom-20 lg:fixed lg:top-12 lg:right-12"
       />
-    </main>
+    </PageLayout>
   )
 }

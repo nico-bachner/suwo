@@ -15,7 +15,7 @@
 .prose > h2,
 .prose > h3 {
   @apply text-gray-100;
-  margin-block: 1.5em 0.9em;
+  margin-block: 1.5em 1em;
 }
 .prose > h1 + *,
 .prose > h2 + *,
@@ -28,13 +28,13 @@
   margin-block-start: 0;
 }
 .prose > h1 {
-  @apply font-serif text-4xl font-extrabold sm:text-5xl;
+  @apply font-serif text-3xl font-bold sm:text-5xl;
 }
 .prose > h2 {
-  @apply font-serif text-3xl font-bold sm:text-4xl;
+  @apply font-serif text-2xl font-semibold sm:text-3xl;
 }
 .prose > h3 {
-  @apply font-serif text-2xl font-semibold sm:text-3xl;
+  @apply font-serif text-xl font-medium sm:text-2xl;
 }
 
 /* Body Text */
