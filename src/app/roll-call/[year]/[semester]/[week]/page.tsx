@@ -12,8 +12,8 @@ import { Button } from '@/components/ui/button'
 import { PageLayout } from '@/components/ui/page_layout'
 import { QRCodeDialog } from '@/components/ui/qr_code_dialog'
 import { MAX_WEEK } from '@/config'
+import { getRollCallEntriesByWeek } from '@/lib/db/roll_call_entries/by_week'
 import { createRollCallEntry } from '@/lib/db/roll_call_entry/create'
-import { getRollCallEntriesByWeek } from '@/lib/db/roll_call_entry/get'
 import { RollCall } from '@/lib/db/types'
 import { Params } from '@/lib/types'
 
@@ -51,7 +51,7 @@ export default async function Page({ params }: PageProps) {
   return (
     <PageLayout
       title="Roll Call"
-      subtitle={`Week ${week}`}
+      subtitle={`Week ${week} (${rollCallEntries.filter(({ present }) => present).length})`}
       className="prose flex flex-col gap-6"
     >
       <div className="flex w-full max-w-screen-sm flex-col">
