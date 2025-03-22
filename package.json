@@ -11,8 +11,8 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^0.10.4",
-    "@notionhq/client": "^2.2.16",
-    "@react-email/components": "^0.0.33",
+    "@notionhq/client": "^2.3.0",
+    "@react-email/components": "^0.0.34",
     "@vercel/analytics": "^1.5.0",
     "argon2": "^0.41.1",
     "jose": "^6.0.10",
@@ -26,18 +26,18 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.0",
-    "@tailwindcss/postcss": "^4.0.9",
+    "@eslint/eslintrc": "^3.3.1",
+    "@tailwindcss/postcss": "^4.0.15",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-    "@types/node": "^20.17.19",
-    "@types/react": "^19.0.10",
+    "@types/node": "^22.13.11",
+    "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
-    "eslint": "^9.21.0",
-    "eslint-config-next": "^15.2.0",
+    "eslint": "^9.23.0",
+    "eslint-config-next": "^15.2.3",
     "postcss": "^8.5.3",
-    "prettier": "^3.5.2",
+    "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "tailwindcss": "^4.0.9",
-    "typescript": "^5.7.3"
+    "tailwindcss": "^4.0.15",
+    "typescript": "^5.8.2"
   }
 }
