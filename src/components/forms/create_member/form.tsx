@@ -17,26 +17,20 @@ type CreateMemberFormProps = {
 
 export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
   const [state, action, pending] = useActionState(formAction, {
-    data: {
-      given_name: '',
-      family_name: null,
-      email: '',
-      password: '',
-      usu: null,
-      instrument: null,
-      mailing_list: true,
-    },
-    errors: {
-      formErrors: [],
-      fieldErrors: {},
-    },
+    given_name: { success: true, data: '' },
+    family_name: { success: true, data: undefined },
+    email: { success: true, data: '' },
+    password: { success: true, data: undefined },
+    usu: { success: true, data: undefined },
+    instrument: { success: true, data: undefined },
+    mailing_list: { success: true, data: true },
   })
 
   return (
     <Form
       id="new-member-form"
       action={action}
-      errors={state.errors.formErrors}
+      errors={state.email.error?.issues?.map((issue) => issue.message)}
       pending={pending}
       message="Join"
     >
@@ -47,8 +41,8 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           autoComplete="given-name"
           placeholder='e.g. "Ambrose"'
           required
-          defaultValue={state.data.given_name}
-          errors={state.errors.fieldErrors.given_name}
+          defaultValue={state.given_name.data}
+          errors={state.given_name.error?.issues}
           className="flex-1"
         />
 
@@ -57,8 +51,8 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           label="Family Name"
           autoComplete="family-name"
           placeholder='e.g. "Phelps"'
-          defaultValue={state.data.family_name ?? undefined}
-          errors={state.errors.fieldErrors.family_name}
+          defaultValue={state.family_name?.data}
+          errors={state.family_name?.error?.issues}
           className="flex-1"
         />
       </div>
@@ -70,8 +64,8 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
         autoComplete="new-email"
         required
         placeholder='e.g. "name@example.com"'
-        defaultValue={state.data.email}
-        errors={state.errors.fieldErrors.email}
+        defaultValue={state.email.data}
+        errors={state.email.error?.issues}
       />
 
       <TextInput
@@ -81,8 +75,8 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
         autoComplete="new-password"
         required
         placeholder='e.g. "I<3SUWO25"'
-        defaultValue={state.data.password}
-        errors={state.errors.fieldErrors.password}
+        defaultValue={state.password?.data}
+        errors={state.password?.error?.issues}
       />
 
       <div className="flex flex-col gap-4 sm:flex-row">
@@ -91,8 +85,8 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           label="USU Number"
           inputMode="numeric"
           placeholder='e.g. "1234567"'
-          defaultValue={state.data.usu ?? undefined}
-          errors={state.errors.fieldErrors.usu}
+          defaultValue={state.usu?.data}
+          errors={state.usu?.error?.issues}
           className="flex-1"
         />
 
@@ -100,8 +94,8 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           form="new-member-form"
           name="instrument"
           label="Instrument"
-          defaultValue={state.data.instrument ?? undefined}
-          errors={state.errors.fieldErrors.instrument}
+          defaultValue={state.instrument?.data}
+          errors={state.instrument?.error?.issues}
           placeholder="Select Instrument..."
         >
           {instruments.map(({ name }) => (
@@ -115,7 +109,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
       <CheckboxInput
         name="mailing-list"
         label="Sign up for weekly rehearsal updates"
-        defaultChecked={state.data.mailing_list}
+        defaultChecked={state.mailing_list.data}
         className="mt-4 self-center"
       />
     </Form>
