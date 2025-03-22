@@ -8,7 +8,6 @@ import { Select } from '@/components/ui/select/select'
 import { SelectItem } from '@/components/ui/select/select_item'
 import { TextInput } from '@/components/ui/text_input'
 import { Instrument, Member, Table } from '@/lib/db/types'
-import { ActionState } from '@/lib/zod/types'
 
 import { formAction } from './form_action'
 
@@ -17,10 +16,7 @@ type CreateMemberFormProps = {
 }
 
 export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
-  const [state, action, pending] = useActionState<
-    ActionState<Omit<Member, 'id'>>,
-    FormData
-  >(formAction, {
+  const [state, action, pending] = useActionState(formAction, {
     given_name: { success: true, data: '' },
     family_name: { success: true, data: '' },
     email: { success: true, data: '' },
