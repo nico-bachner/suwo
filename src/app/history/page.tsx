@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 
+import { Divider } from '@/components/ui/divider'
 import { PageLayout } from '@/components/ui/page_layout'
 import { getHistory } from '@/lib/notion/get_history'
 import { getPageMetadata } from '@/lib/notion/get_metadata'
@@ -24,7 +25,11 @@ export default async function Page() {
         .split(' ')
         .map((value, index) =>
           value == '-' ? (
-            <hr key={index} className="h-12 w-px bg-gray-100" />
+            <Divider
+              key={index}
+              orientation="vertical"
+              className="h-12 bg-gray-500"
+            />
           ) : (
             <Link
               key={value}

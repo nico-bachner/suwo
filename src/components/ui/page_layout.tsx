@@ -11,6 +11,7 @@ import { cn } from '@/lib/cn'
 import { MobileMenu } from '../client/menu'
 import { NavbarLink } from '../client/navbar_link'
 import { Button } from './button'
+import { Divider } from './divider'
 import { SocialLink } from './social_link'
 
 type PageLayoutProps = {
@@ -42,7 +43,7 @@ export const PageLayout = async ({
         'lg:max-w-screen-lg lg:flex-row lg:justify-between',
       )}
     >
-      <nav className="flex flex-col gap-8 p-6 lg:sticky lg:top-0 lg:max-h-svh lg:w-80">
+      <nav className="flex flex-col gap-8 p-6 lg:sticky lg:top-0 lg:h-screen lg:max-h-svh lg:w-80">
         <div className="flex flex-col gap-4">
           <div className="flex flex-row items-center justify-between gap-4 bg-gray-950">
             <Link href="/">
@@ -94,7 +95,7 @@ export const PageLayout = async ({
           </div>
         )}
 
-        <div className="flex flex-col gap-1 max-lg:hidden">
+        <div className="flex flex-1 flex-col gap-1 max-lg:hidden">
           {NAV_LINKS.map(({ href, label }) => (
             <NavbarLink key={href} href={href}>
               {label}
@@ -102,7 +103,9 @@ export const PageLayout = async ({
           ))}
         </div>
 
-        <div className="flex flex-row items-center gap-4 max-lg:hidden">
+        <Divider />
+
+        <div className="flex flex-row items-center justify-center gap-6 max-lg:hidden">
           {NAV_SOCIAL_LINKS.map(({ href, icon }) => (
             <SocialLink key={href} icon={icon} href={href} />
           ))}

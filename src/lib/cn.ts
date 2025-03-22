@@ -1,5 +1,9 @@
+import { twMerge } from 'tailwind-merge'
+
 export const cn = (...args: unknown[]) =>
-  args
-    .filter((x) => typeof x === 'string')
-    .join(' ')
-    .trim()
+  twMerge(
+    args
+      .filter((x) => typeof x === 'string')
+      .join(' ')
+      .trim(),
+  )
