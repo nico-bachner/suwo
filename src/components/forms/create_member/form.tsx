@@ -17,18 +17,33 @@ type CreateMemberFormProps = {
 
 export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
   const [state, action, pending] = useActionState(formAction, {
-    data: {
-      given_name: '',
-      family_name: null,
-      email: '',
-      password: '',
-      usu: null,
-      instrument: null,
-      mailing_list: true,
+    given_name: {
+      success: true,
+      data: '',
     },
-    errors: {
-      formErrors: [],
-      fieldErrors: {},
+    family_name: {
+      success: true,
+      data: '',
+    },
+    email: {
+      success: true,
+      data: '',
+    },
+    password: {
+      success: true,
+      data: '',
+    },
+    usu: {
+      success: true,
+      data: undefined,
+    },
+    instrument: {
+      success: true,
+      data: '',
+    },
+    mailing_list: {
+      success: true,
+      data: false,
     },
   })
 
@@ -36,7 +51,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
     <Form
       id="new-member-form"
       action={action}
-      errors={state.errors.formErrors}
+      errors={undefined}
       pending={pending}
       message="Join"
     >
@@ -47,8 +62,8 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           autoComplete="given-name"
           placeholder='e.g. "Ambrose"'
           required
-          defaultValue={state.data.given_name ?? undefined}
-          errors={state.errors.fieldErrors.given_name}
+          defaultValue={state.given_name.data}
+          error={state.given_name.error}
           className="flex-1"
         />
 
@@ -57,8 +72,8 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           label="Family Name"
           autoComplete="family-name"
           placeholder='e.g. "Phelps"'
-          defaultValue={state.data.family_name ?? undefined}
-          errors={state.errors.fieldErrors.family_name}
+          defaultValue={state.family_name?.data}
+          error={state.family_name?.error}
           className="flex-1"
         />
       </div>
@@ -70,8 +85,8 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
         autoComplete="new-email"
         required
         placeholder='e.g. "name@example.com"'
-        defaultValue={state.data.email ?? undefined}
-        errors={state.errors.fieldErrors.email}
+        defaultValue={state.email.data}
+        error={state.email.error}
       />
 
       <TextInput
@@ -81,8 +96,8 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
         autoComplete="new-password"
         required
         placeholder='e.g. "I<3SUWO25"'
-        defaultValue={state.data.password ?? undefined}
-        errors={state.errors.fieldErrors.password}
+        defaultValue={state.password?.data}
+        error={state.password?.error}
       />
 
       <div className="flex flex-col gap-4 sm:flex-row">
@@ -91,8 +106,8 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           label="USU Number"
           inputMode="numeric"
           placeholder='e.g. "1234567"'
-          defaultValue={state.data.usu ?? undefined}
-          errors={state.errors.fieldErrors.usu}
+          defaultValue={state.usu?.data}
+          error={state.usu?.error}
           className="flex-1"
         />
 
@@ -100,8 +115,8 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           form="new-member-form"
           name="instrument"
           label="Instrument"
-          defaultValue={state.data.instrument ?? undefined}
-          errors={state.errors.fieldErrors.instrument}
+          defaultValue={state.instrument?.data}
+          error={state.instrument?.error}
           placeholder="Select Instrument..."
         >
           {instruments.map(({ name }) => (
@@ -115,7 +130,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
       <CheckboxInput
         name="mailing-list"
         label="Sign up for weekly rehearsal updates"
-        defaultChecked={state.data.mailing_list}
+        defaultChecked={state.mailing_list.data}
         className="mt-4 self-center"
       />
     </Form>
