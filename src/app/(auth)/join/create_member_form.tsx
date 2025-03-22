@@ -67,6 +67,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
         type="email"
         name="email"
         label="Email Address"
+        autoComplete="new-email"
         required
         placeholder='e.g. "name@example.com"'
         defaultValue={state.data.email ?? undefined}
@@ -77,6 +78,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
         type="password"
         name="password"
         label="Password"
+        autoComplete="new-password"
         required
         placeholder='e.g. "I<3SUWO25"'
         defaultValue={state.data.password ?? undefined}
