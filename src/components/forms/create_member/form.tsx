@@ -7,7 +7,8 @@ import { Form } from '@/components/ui/form'
 import { Select } from '@/components/ui/select/select'
 import { SelectItem } from '@/components/ui/select/select_item'
 import { TextInput } from '@/components/ui/text_input'
-import { Instrument, Table } from '@/lib/db/types'
+import { Instrument, Member, Table } from '@/lib/db/types'
+import { ActionState } from '@/lib/zod/types'
 
 import { formAction } from './form_action'
 
@@ -16,42 +17,24 @@ type CreateMemberFormProps = {
 }
 
 export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
-  const [state, action, pending] = useActionState(formAction, {
-    given_name: {
-      success: true,
-      data: '',
-    },
-    family_name: {
-      success: true,
-      data: '',
-    },
-    email: {
-      success: true,
-      data: '',
-    },
-    password: {
-      success: true,
-      data: '',
-    },
-    usu: {
-      success: true,
-      data: undefined,
-    },
-    instrument: {
-      success: true,
-      data: '',
-    },
-    mailing_list: {
-      success: true,
-      data: false,
-    },
+  const [state, action, pending] = useActionState<
+    ActionState<Omit<Member, 'id'>>,
+    FormData
+  >(formAction, {
+    given_name: { success: true, data: '' },
+    family_name: { success: true, data: '' },
+    email: { success: true, data: '' },
+    password: { success: true, data: '' },
+    usu: { success: true, data: undefined },
+    instrument: { success: true, data: '' },
+    mailing_list: { success: true, data: false },
   })
 
   return (
     <Form
       id="new-member-form"
       action={action}
-      errors={undefined}
+      errors={state.email.error?.issues?.map((issue) => issue.message)}
       pending={pending}
       message="Join"
     >
@@ -63,7 +46,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           placeholder='e.g. "Ambrose"'
           required
           defaultValue={state.given_name.data}
-          error={state.given_name.error}
+          errors={state.given_name.error?.issues}
           className="flex-1"
         />
 
@@ -73,7 +56,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           autoComplete="family-name"
           placeholder='e.g. "Phelps"'
           defaultValue={state.family_name?.data}
-          error={state.family_name?.error}
+          errors={state.family_name?.error?.issues}
           className="flex-1"
         />
       </div>
@@ -86,7 +69,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
         required
         placeholder='e.g. "name@example.com"'
         defaultValue={state.email.data}
-        error={state.email.error}
+        errors={state.email.error?.issues}
       />
 
       <TextInput
@@ -97,7 +80,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
         required
         placeholder='e.g. "I<3SUWO25"'
         defaultValue={state.password?.data}
-        error={state.password?.error}
+        errors={state.password?.error?.issues}
       />
 
       <div className="flex flex-col gap-4 sm:flex-row">
@@ -107,7 +90,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           inputMode="numeric"
           placeholder='e.g. "1234567"'
           defaultValue={state.usu?.data}
-          error={state.usu?.error}
+          errors={state.usu?.error?.issues}
           className="flex-1"
         />
 
@@ -116,7 +99,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           name="instrument"
           label="Instrument"
           defaultValue={state.instrument?.data}
-          error={state.instrument?.error}
+          errors={state.instrument?.error?.issues}
           placeholder="Select Instrument..."
         >
           {instruments.map(({ name }) => (
