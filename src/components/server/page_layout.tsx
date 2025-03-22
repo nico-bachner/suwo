@@ -43,7 +43,7 @@ export const PageLayout = async ({
         'lg:max-w-screen-lg lg:flex-row lg:justify-between',
       )}
     >
-      <nav className="flex flex-col gap-8 p-6 lg:sticky lg:top-0 lg:h-screen lg:max-h-svh lg:w-80">
+      <nav className="flex flex-col gap-8 overflow-y-scroll p-6 lg:sticky lg:top-0 lg:h-screen lg:max-h-svh lg:w-80">
         <div className="flex flex-col gap-4">
           <div className="flex flex-row items-center justify-between gap-4 bg-gray-950">
             <Link href="/">
