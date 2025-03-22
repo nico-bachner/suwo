@@ -8,15 +8,15 @@ import { getIDFromEmail } from '@/lib/db/member/get_id_from_email'
 import { verifyPassword } from '@/lib/db/member/verify_password'
 import { Member } from '@/lib/db/types'
 
-type LoginFormActionState = {
+type ActionState = {
   data: Pick<Member, 'email' | 'password'>
-  errors: typeToFlattenedError<LoginFormActionState['data'], string>
+  errors: typeToFlattenedError<ActionState['data'], string>
 }
 
-export const loginFormAction = async (
-  previousState: LoginFormActionState,
+export const formAction = async (
+  previousState: ActionState,
   formData: FormData,
-): Promise<LoginFormActionState> => {
+): Promise<ActionState> => {
   const schema = z.object({
     email: z.string().email().trim(),
     password: z.string().trim(),

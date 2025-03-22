@@ -7,15 +7,15 @@ import { createMember } from '@/lib/db/member/create'
 import { verifyEmailExists } from '@/lib/db/member/verify_email_exists'
 import { Member } from '@/lib/db/types'
 
-type CreateMemberFormActionState = {
+type ActionState = {
   data: Omit<Member, 'id'>
-  errors: typeToFlattenedError<CreateMemberFormActionState['data'], string>
+  errors: typeToFlattenedError<ActionState['data'], string>
 }
 
-export const createMemberFormAction = async (
-  previousState: CreateMemberFormActionState,
+export const formAction = async (
+  previousState: ActionState,
   formData: FormData,
-): Promise<CreateMemberFormActionState> => {
+): Promise<ActionState> => {
   const instruments = await getInstruments()
 
   const schema = z.object({

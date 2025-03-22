@@ -6,29 +6,26 @@ import { Form } from '@/components/ui/form'
 import { SwitchInput } from '@/components/ui/switch_input'
 import { Member } from '@/lib/db/types'
 
-import { setCommunicationsPreferencesFormAction } from './form_action'
+import { formAction } from './form_action'
 
 type SetCommunicationsPreferencesFormProps = Pick<Member, 'mailing_list'>
 
 export const SetCommunicationsPreferencesForm = ({
   mailing_list,
 }: SetCommunicationsPreferencesFormProps) => {
-  const [state, formAction, pending] = useActionState(
-    setCommunicationsPreferencesFormAction,
-    {
-      data: {
-        mailing_list,
-      },
-      errors: {
-        formErrors: [],
-        fieldErrors: {},
-      },
+  const [state, action, pending] = useActionState(formAction, {
+    data: {
+      mailing_list,
     },
-  )
+    errors: {
+      formErrors: [],
+      fieldErrors: {},
+    },
+  })
 
   return (
     <Form
-      action={formAction}
+      action={action}
       errors={state.errors.formErrors}
       pending={pending}
       message="Update Communications Preference"

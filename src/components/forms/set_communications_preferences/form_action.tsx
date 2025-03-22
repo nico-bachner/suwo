@@ -10,7 +10,7 @@ type ActionState = {
   errors: typeToFlattenedError<ActionState['data'], string>
 }
 
-export const setCommunicationsPreferencesFormAction = async (
+export const formAction = async (
   previousState: ActionState,
   formData: FormData,
 ): Promise<ActionState> => {

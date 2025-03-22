@@ -1,6 +1,5 @@
+import { ResetPasswordForm } from '@/components/forms/reset_password/form'
 import { PageLayout } from '@/components/server/page_layout'
-
-import { ResetPasswordForm } from './reset_password_form'
 
 export default async function Page() {
   return (

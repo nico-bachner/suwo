@@ -10,7 +10,7 @@ type ActionState = {
   errors: typeToFlattenedError<ActionState['data'], string>
 }
 
-export const updatePasswordFormAction = async (
+export const formAction = async (
   previousState: ActionState,
   formData: FormData,
 ): Promise<ActionState> => {

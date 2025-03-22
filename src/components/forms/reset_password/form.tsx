@@ -5,10 +5,10 @@ import { useActionState } from 'react'
 import { Form } from '@/components/ui/form'
 import { TextInput } from '@/components/ui/text_input'
 
-import { resetPasswordFormAction } from './reset_password_form_action'
+import { formAction } from './form_action'
 
 export const ResetPasswordForm = () => {
-  const [state, formAction, pending] = useActionState(resetPasswordFormAction, {
+  const [state, action, pending] = useActionState(formAction, {
     data: {
       email: '',
     },
@@ -21,7 +21,7 @@ export const ResetPasswordForm = () => {
   return (
     <Form
       id="new-member-form"
-      action={formAction}
+      action={action}
       errors={state.errors.formErrors}
       pending={pending}
       message="Reset Password"

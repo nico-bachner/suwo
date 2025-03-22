@@ -7,7 +7,7 @@ import { Select } from '@/components/ui/select/select'
 import { SelectItem } from '@/components/ui/select/select_item'
 import { Instrument, Member, Table } from '@/lib/db/types'
 
-import { selectInstrumentFormAction } from './form_action'
+import { formAction } from './form_action'
 
 type SelectInstrumentFormProps = {
   instrument: Member['instrument']
@@ -18,23 +18,20 @@ export const SelectInstrumentForm = ({
   instrument,
   instruments,
 }: SelectInstrumentFormProps) => {
-  const [state, formAction, pending] = useActionState(
-    selectInstrumentFormAction,
-    {
-      data: {
-        instrument,
-      },
-      errors: {
-        formErrors: [],
-        fieldErrors: {},
-      },
+  const [state, action, pending] = useActionState(formAction, {
+    data: {
+      instrument,
     },
-  )
+    errors: {
+      formErrors: [],
+      fieldErrors: {},
+    },
+  })
 
   return (
     <Form
       id="edit-instrument-form"
-      action={formAction}
+      action={action}
       errors={state.errors.formErrors}
       pending={pending}
       message="Update Instrument"

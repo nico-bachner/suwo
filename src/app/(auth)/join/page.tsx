@@ -1,16 +1,12 @@
 import Link from 'next/link'
 
+import { CreateMember } from '@/components/forms/create_member'
 import { PageLayout } from '@/components/server/page_layout'
-import { getInstruments } from '@/lib/db/instruments/get'
-
-import { CreateMemberForm } from './create_member_form'
 
 export default async function Page() {
-  const instruments = await getInstruments()
-
   return (
     <PageLayout title="Join" className="flex flex-col gap-4">
-      <CreateMemberForm instruments={instruments} />
+      <CreateMember />
 
       <p className="text-right text-sm text-gray-300">
         Already have an account?{' '}

@@ -9,14 +9,14 @@ import { SelectItem } from '@/components/ui/select/select_item'
 import { TextInput } from '@/components/ui/text_input'
 import { Instrument, Table } from '@/lib/db/types'
 
-import { createMemberFormAction } from './create_member_form_action'
+import { formAction } from './form_action'
 
 type CreateMemberFormProps = {
   instruments: Table<Instrument>
 }
 
 export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
-  const [state, formAction, pending] = useActionState(createMemberFormAction, {
+  const [state, action, pending] = useActionState(formAction, {
     data: {
       given_name: '',
       family_name: null,
@@ -35,7 +35,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
   return (
     <Form
       id="new-member-form"
-      action={formAction}
+      action={action}
       errors={state.errors.formErrors}
       pending={pending}
       message="Join"

@@ -10,15 +10,15 @@ import { Member } from '@/lib/db/types'
 import { createVerificationToken } from '@/lib/db/verification_token/create'
 import { emails } from '@/lib/resend'
 
-type ResetPasswordFormActionState = {
+type ActionState = {
   data: Pick<Member, 'email'>
-  errors: typeToFlattenedError<ResetPasswordFormActionState['data'], string>
+  errors: typeToFlattenedError<ActionState['data'], string>
 }
 
-export const resetPasswordFormAction = async (
-  previousState: ResetPasswordFormActionState,
+export const formAction = async (
+  previousState: ActionState,
   formData: FormData,
-): Promise<ResetPasswordFormActionState> => {
+): Promise<ActionState> => {
   const schema = z.object({
     email: z.string().email().trim(),
   })
