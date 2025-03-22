@@ -10,6 +10,10 @@ export const MAX_WEEK = 13
 
 // for Navigation
 export const LINKS = {
+  HOME: {
+    href: '/',
+    label: 'Home',
+  },
   ABOUT: {
     href: '/about',
     label: 'About',
@@ -60,6 +64,7 @@ export const SOCIAL_LINKS = {
 }
 
 export const NAV_LINKS = [
+  LINKS.HOME,
   LINKS.ABOUT,
   LINKS.HISTORY,
   LINKS.MEMBERS,
