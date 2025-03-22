@@ -9,6 +9,8 @@ const variants = {
     'bg-gray-900 text-gray-300 hover:bg-gray-800 hover:text-gray-100 focus:bg-gray-800',
   tertiary:
     'text-gray-300 hover:bg-gray-900 hover:text-gray-100 focus:bg-gray-900',
+  danger:
+    'bg-red-900 text-gray-300 hover:bg-red-800 hover:text-gray-100 focus:bg-red-800',
 }
 
 type ButtonProps = React.ComponentProps<'button'> & {

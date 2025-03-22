@@ -22,7 +22,7 @@ export default async function Page() {
         <UpdatePassword />
       </SettingsSection>
 
-      <Button variant="secondary" onClick={logOut}>
+      <Button variant="danger" onClick={logOut}>
         Log Out
       </Button>
     </PageLayout>
