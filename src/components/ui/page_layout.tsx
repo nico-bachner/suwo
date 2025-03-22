@@ -103,7 +103,7 @@ export const PageLayout = async ({
           ))}
         </div>
 
-        <Divider />
+        <Divider className="max-lg:hidden" />
 
         <div className="flex flex-row items-center justify-center gap-6 max-lg:hidden">
           {NAV_SOCIAL_LINKS.map(({ href, icon }) => (
