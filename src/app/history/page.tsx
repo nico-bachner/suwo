@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 
+import { PageLayout } from '@/components/server/page_layout'
 import { Divider } from '@/components/ui/divider'
-import { PageLayout } from '@/components/ui/page_layout'
 import { getHistory } from '@/lib/notion/get_history'
 import { getPageMetadata } from '@/lib/notion/get_metadata'
 

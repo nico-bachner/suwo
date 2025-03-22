@@ -2,7 +2,7 @@ import { PencilIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import { PageLayout } from '@/components/ui/page_layout'
+import { PageLayout } from '@/components/server/page_layout'
 import { LINKS } from '@/config'
 import { getSession } from '@/lib/auth/session'
 import { getMemberByID } from '@/lib/db/member/get_member_by_id'

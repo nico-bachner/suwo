@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Fragment } from 'react'
 
-import { PageLayout } from '@/components/ui/page_layout'
+import { PageLayout } from '@/components/server/page_layout'
 import { getInstruments } from '@/lib/db/instruments/get'
 import { getMembersWithInstruments } from '@/lib/db/members/get'
 import { Instrument, Profile } from '@/lib/db/types'

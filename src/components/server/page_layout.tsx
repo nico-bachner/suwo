@@ -10,9 +10,9 @@ import { cn } from '@/lib/cn'
 
 import { MobileMenu } from '../client/menu'
 import { NavbarLink } from '../client/navbar_link'
-import { Button } from './button'
-import { Divider } from './divider'
-import { SocialLink } from './social_link'
+import { Button } from '../ui/button'
+import { Divider } from '../ui/divider'
+import { SocialLink } from '../ui/social_link'
 
 type PageLayoutProps = {
   children?: React.ReactNode

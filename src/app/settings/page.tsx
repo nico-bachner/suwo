@@ -1,7 +1,7 @@
 import { SetCommunicationsPreferences } from '@/components/forms/set_communications_preferences'
 import { UpdatePassword } from '@/components/forms/update_password'
+import { PageLayout } from '@/components/server/page_layout'
 import { Button } from '@/components/ui/button'
-import { PageLayout } from '@/components/ui/page_layout'
 import { SettingsSection } from '@/components/ui/settings_section'
 import { logOut } from '@/lib/auth/log_out'
 

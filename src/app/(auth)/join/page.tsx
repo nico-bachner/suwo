@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { PageLayout } from '@/components/ui/page_layout'
+import { PageLayout } from '@/components/server/page_layout'
 import { getInstruments } from '@/lib/db/instruments/get'
 
 import { CreateMemberForm } from './create_member_form'

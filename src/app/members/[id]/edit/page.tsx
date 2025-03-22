@@ -1,7 +1,7 @@
 import { notFound, redirect } from 'next/navigation'
 
 import { SelectInstrument } from '@/components/forms/select_instrument'
-import { PageLayout } from '@/components/ui/page_layout'
+import { PageLayout } from '@/components/server/page_layout'
 import { SettingsSection } from '@/components/ui/settings_section'
 import { LINKS } from '@/config'
 import { getSession } from '@/lib/auth/session'

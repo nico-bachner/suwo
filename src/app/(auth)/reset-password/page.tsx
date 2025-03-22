@@ -1,4 +1,4 @@
-import { PageLayout } from '@/components/ui/page_layout'
+import { PageLayout } from '@/components/server/page_layout'
 
 import { ResetPasswordForm } from './reset_password_form'
 

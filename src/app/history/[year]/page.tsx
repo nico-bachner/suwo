@@ -2,7 +2,7 @@ import { Client, isFullBlock } from '@notionhq/client'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { PageLayout } from '@/components/ui/page_layout'
+import { PageLayout } from '@/components/server/page_layout'
 import { getHistory } from '@/lib/notion/get_history'
 import { getTitle } from '@/lib/notion/get_title'
 import { Params } from '@/lib/types'

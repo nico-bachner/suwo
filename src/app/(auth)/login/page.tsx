@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { PageLayout } from '@/components/ui/page_layout'
+import { PageLayout } from '@/components/server/page_layout'
 
 import { LoginForm } from './login_form'
 
