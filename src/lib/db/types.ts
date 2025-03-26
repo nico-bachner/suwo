@@ -1,4 +1,5 @@
 export type Table<T> = T[]
+
 type Public<T, K extends keyof T> = {
   [P in K]: T[P]
 } & {
@@ -14,11 +15,11 @@ export type VerificationToken = {
 export type Member = {
   id: number
   given_name: string
-  family_name: string | null
+  family_name?: string
   email: string
-  password: string
-  usu: number | null
-  instrument: Instrument['name'] | null
+  password?: string
+  usu?: number
+  instrument?: Instrument['name']
   mailing_list: boolean
 }
 

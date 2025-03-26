@@ -1,9 +1,11 @@
+import { ZodIssue } from 'zod'
+
 import { cn } from '@/lib/cn'
 
 import { InputLabel } from './input_label'
 
 type TextInputProps = React.ComponentProps<'input'> & {
-  errors?: string[]
+  errors?: ZodIssue[]
   type?: 'text' | 'email' | 'password'
   name: string
   label: string
@@ -30,6 +32,10 @@ export const TextInput = ({
       {...props}
     />
 
-    {errors && <p className="px-2 text-sm text-red-500">{errors[0]}</p>}
+    {errors?.map(({ message }) => (
+      <p key={message} className="px-2 text-sm text-red-500">
+        {message}
+      </p>
+    ))}
   </div>
 )
