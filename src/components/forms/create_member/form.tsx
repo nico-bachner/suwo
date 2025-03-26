@@ -18,12 +18,12 @@ type CreateMemberFormProps = {
 export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
   const [state, action, pending] = useActionState(formAction, {
     given_name: { success: true, data: '' },
-    family_name: { success: true, data: '' },
+    family_name: { success: true, data: undefined },
     email: { success: true, data: '' },
-    password: { success: true, data: '' },
+    password: { success: true, data: undefined },
     usu: { success: true, data: undefined },
-    instrument: { success: true, data: '' },
-    mailing_list: { success: true, data: false },
+    instrument: { success: true, data: undefined },
+    mailing_list: { success: true, data: true },
   })
 
   return (
