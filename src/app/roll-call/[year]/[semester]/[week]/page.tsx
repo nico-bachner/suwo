@@ -8,8 +8,8 @@ import { headers } from 'next/headers'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
+import { CreateMemberFromRollCall } from '@/components/forms/roll_call'
 import { PageLayout } from '@/components/server/page_layout'
-import { Button } from '@/components/ui/button'
 import { QRCodeDialog } from '@/components/ui/qr_code_dialog'
 import { MAX_WEEK } from '@/config'
 import { getRollCallEntriesByWeek } from '@/lib/db/roll_call_entries/by_week'
@@ -117,9 +117,7 @@ export default async function Page({ params }: PageProps) {
 
       <h2>Not in the list?</h2>
 
-      <Button asChild variant="secondary" className="mt-4">
-        <Link href="/join">Join now</Link>
-      </Button>
+      <CreateMemberFromRollCall />
 
       <QRCodeDialog
         value={`${host}/roll-call/${year}/${semester}/${week}`}
