@@ -7,7 +7,7 @@ import { Form } from '@/components/ui/form'
 import { Select } from '@/components/ui/select/select'
 import { SelectItem } from '@/components/ui/select/select_item'
 import { TextInput } from '@/components/ui/text_input'
-import { Instrument, Member, Table } from '@/lib/db/types'
+import { Instrument, Table } from '@/lib/db/types'
 
 import { formAction } from './form_action'
 

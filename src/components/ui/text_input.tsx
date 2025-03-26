@@ -33,7 +33,9 @@ export const TextInput = ({
     />
 
     {errors?.map(({ message }) => (
-      <p className="px-2 text-sm text-red-500">{message}</p>
+      <p key={message} className="px-2 text-sm text-red-500">
+        {message}
+      </p>
     ))}
   </div>
 )
