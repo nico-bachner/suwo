@@ -22,5 +22,5 @@ export const verifyPassword = async ({
     return false
   }
 
-  return verify(hashedPassword  , password)
+  return verify(hashedPassword, password)
 }

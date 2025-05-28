@@ -23,7 +23,7 @@
     "react-qr-code": "^2.0.15",
     "resend": "^4.5.1",
     "tailwind-merge": "^3.3.0",
-    "zod": "^3.25.33"
+    "zod": "^3.25.34"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",

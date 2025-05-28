@@ -20,7 +20,7 @@ export const formAction = async (
   const schema = z.object({
     email: z.string().email().trim(),
     password: z.string().trim().min(6, {
-      message: 'Password must be at least 6 characters long.'
+      message: 'Password must be at least 6 characters long.',
     }),
   })
 
