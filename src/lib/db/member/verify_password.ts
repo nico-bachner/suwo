@@ -18,5 +18,9 @@ export const verifyPassword = async ({
 
   const { password: hashedPassword } = members[0] as Member
 
-  return verify(hashedPassword, password)
+  if (!hashedPassword) {
+    return false
+  }
+
+  return verify(hashedPassword  , password)
 }

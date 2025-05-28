@@ -19,7 +19,9 @@ export const formAction = async (
 ): Promise<ActionState> => {
   const schema = z.object({
     email: z.string().email().trim(),
-    password: z.string().trim(),
+    password: z.string().trim().min(6, {
+      message: 'Password must be at least 6 characters long.'
+    }),
   })
 
   const { data, success, error } = await schema.safeParseAsync({
