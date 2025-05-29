@@ -1,5 +1,14 @@
 import { FacebookIcon, InstagramIcon, YouTubeIcon } from '@/icons'
 
+// Resend
+export const RESEND_DOMAIN = 'transactional.suwo.org.au'
+
+// Notion pages
+export const NOTION_HISTORY_DB_ID = '1a68056f6788801d8c00c5c62188d987'
+
+// Google Calendar
+export const GOOGLE_CALENDAR_ID = ''
+
 // for copy
 export const FULL_NAME = 'The University of Sydney Wind Orchestra'
 export const SHORT_NAME = 'Sydney University Wind Orchestra'
@@ -31,7 +40,7 @@ export const LINKS = {
     label: 'Roll Call',
   },
   CALENDAR: {
-    href: `https://calendar.google.com/calendar/u/0?cid=${process.env.GOOGLE_CALENDAR_ID}`,
+    href: `https://calendar.google.com/calendar/u/0?cid=${GOOGLE_CALENDAR_ID}`,
     label: 'Calendar',
   },
   SETTINGS: {

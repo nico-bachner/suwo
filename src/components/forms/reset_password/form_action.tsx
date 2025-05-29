@@ -2,7 +2,7 @@
 
 import { typeToFlattenedError, z } from 'zod'
 
-import { SHORT_NAME } from '@/config'
+import { RESEND_DOMAIN, SHORT_NAME } from '@/config'
 import { ResetPasswordTemplate } from '@/emails/reset_password'
 import { BASE_URL } from '@/lib/base_url'
 import { getIDFromEmail } from '@/lib/db/member/get_id_from_email'
@@ -52,7 +52,7 @@ export const formAction = async (
     const verificationLink = `${BASE_URL}/verify/${id}?token=${token}`
 
     await emails.send({
-      from: `${SHORT_NAME} ${'<' + `reset-password@${process.env.RESEND_DOMAIN}` + '>'}`,
+      from: `${SHORT_NAME} ${'<' + `reset-password@${RESEND_DOMAIN}` + '>'}`,
       to: [data.email],
       subject: 'Reset Password',
       text: `Click the link below to reset your password:\n\n${verificationLink}`,
