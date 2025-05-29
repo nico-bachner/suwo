@@ -4,21 +4,21 @@ The University of Sydney Wind Orchestra's Website
 
 ## Contributing
 
-- Clone the repository
+- Clone [this repository](https://github.com/nico-bachner/suwo)
   ```bash
   gh repo clone nico-bachner/suwo
   ```
-- Install `pnpm` if you don't already have it installed
+- Install [`pnpm`](https://pnpm.io) if you don't already have it installed
   ```bash
   brew install pnpm
   ```
-- Install [@antfu/ni](https://github.com/antfu-collective/ni) (optional)
+- Install [`@antfu/ni`](https://github.com/antfu-collective/ni) (optional)
   ```bash
   pnpm i -g @antfu/ni
   ```
 - Install dependencies
 
-  ```
+  ```bash
   # using @antfu/ni
   ni
 
@@ -28,7 +28,7 @@ The University of Sydney Wind Orchestra's Website
 
 - Run the dev server
 
-  ```
+  ```bash
   # using @antfu/ni
   nr dev
 
