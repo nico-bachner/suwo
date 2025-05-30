@@ -18,11 +18,13 @@ export const getCurrentWeek = async () => {
   const keyDates: Record<string, KeyDate>[] = await keyDatesJson.json()
 
   const currentSemesterResponse = keyDates.find((obj) =>
-    obj.hasOwnProperty(`${currentYear}-s${currentSemester}c-teaching-dates`),
+    Object.keys(obj).includes(
+      `${currentYear}-s${currentSemester}c-teaching-dates`,
+    ),
   )
 
   const currentSemesterBreakResponse = keyDates.find((obj) =>
-    obj.hasOwnProperty(`${currentYear}-s${currentSemester}c-break`),
+    Object.keys(obj).includes(`${currentYear}-s${currentSemester}c-break`),
   )
 
   if (!currentSemesterResponse || !currentSemesterBreakResponse) {

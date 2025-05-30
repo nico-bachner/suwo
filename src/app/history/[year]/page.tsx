@@ -81,11 +81,10 @@ export default async function Page({ params }: PageProps) {
               <h3 key={block.id}>{block.heading_2.rich_text[0].plain_text}</h3>
             )
           case 'paragraph':
-            if (block.paragraph.rich_text.length > 0) {
-              return (
-                <p key={block.id}>{block.paragraph.rich_text[0].plain_text}</p>
-              )
-            }
+            return (
+              <p key={block.id}>{block.paragraph.rich_text[0].plain_text}</p>
+            )
+
           default:
             return null
         }

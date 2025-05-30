@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write **/*.{ts,tsx,md,json,js,mjs}"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -16,28 +17,27 @@
     "@vercel/analytics": "^1.5.0",
     "argon2": "^0.43.0",
     "jose": "^6.0.11",
-    "next": "^15.3.2",
+    "next": "^15.3.3",
     "radix-ui": "^1.4.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-qr-code": "^2.0.15",
     "resend": "^4.5.1",
     "tailwind-merge": "^3.3.0",
-    "zod": "^3.25.34"
+    "zod": "^3.25.41"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.27.0",
     "@tailwindcss/postcss": "^4.1.8",
-    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-    "@types/node": "^22.15.24",
+    "@types/node": "^22.15.27",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
     "eslint": "^9.27.0",
-    "eslint-config-next": "^15.3.2",
-    "postcss": "^8.5.3",
+    "postcss": "^8.5.4",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^4.1.8",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.33.0"
   }
 }
