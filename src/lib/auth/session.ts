@@ -5,15 +5,18 @@ import { createJWT, verifyJWT } from './jwt'
 
 export const createSession = async (id: number) => {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-  const session = await createJWT({ id, expiresAt })
+  const session = await createJWT({
+    id,
+    expiresAt,
+  })
   const cookieStore = await cookies()
 
   cookieStore.set('session', session, {
-    httpOnly: true,
-    secure: true,
     expires: expiresAt,
-    sameSite: 'lax',
+    httpOnly: true,
     path: '/',
+    sameSite: 'lax',
+    secure: true,
   })
 }
 
@@ -46,18 +49,18 @@ export const getSession = cache(
     }
 
     const decryptedSessionCookie = await verifyJWT(sessionCookie.value)
-    const id = parseInt(decryptedSessionCookie.id as string)
+    const id = parseInt(decryptedSessionCookie.id as string, 10)
 
     if (!id) {
       return {
-        isAuth: false,
         id: null,
+        isAuth: false,
       }
     }
 
     return {
-      isAuth: true,
       id,
+      isAuth: true,
     }
   },
 )

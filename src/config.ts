@@ -9,15 +9,15 @@ export const NOTION_HISTORY_DB_ID = '1a68056f6788801d8c00c5c62188d987'
 // Google Calendar
 export const GOOGLE_CALENDAR_ID = ''
 
-// for copy
+// For copy
 export const FULL_NAME = 'The University of Sydney Wind Orchestra'
 export const SHORT_NAME = 'Sydney University Wind Orchestra'
 export const ACRONYM = 'SUWO'
 
-// for Roll Call
+// For Roll Call
 export const MAX_WEEK = 13
 
-// for Navigation
+// For Navigation
 export const LINKS = {
   HOME: {
     href: '/',

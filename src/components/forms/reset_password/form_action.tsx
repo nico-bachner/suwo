@@ -40,31 +40,30 @@ export const formAction = async (
     return {
       ...previousState,
       errors: {
-        formErrors: [],
         fieldErrors: {
           email: ['Wrong email.'],
         },
-      },
-    }
-  } else {
-    const { token } = await createVerificationToken(id)
-
-    const verificationLink = `${BASE_URL}/verify/${id}?token=${token}`
-
-    await emails.send({
-      from: `${SHORT_NAME} ${'<' + `reset-password@${RESEND_DOMAIN}` + '>'}`,
-      to: [data.email],
-      subject: 'Reset Password',
-      text: `Click the link below to reset your password:\n\n${verificationLink}`,
-      react: <ResetPasswordTemplate link={verificationLink} />,
-    })
-
-    return {
-      ...previousState,
-      errors: {
         formErrors: [],
-        fieldErrors: {},
       },
     }
+  }
+  const { token } = await createVerificationToken(id)
+
+  const verificationLink = `${BASE_URL}/verify/${id}?token=${token}`
+
+  await emails.send({
+    from: `${SHORT_NAME} <reset-password@${RESEND_DOMAIN}>`,
+    to: [data.email],
+    subject: 'Reset Password',
+    text: `Click the link below to reset your password:\n\n${verificationLink}`,
+    react: <ResetPasswordTemplate link={verificationLink} />,
+  })
+
+  return {
+    ...previousState,
+    errors: {
+      fieldErrors: {},
+      formErrors: [],
+    },
   }
 }

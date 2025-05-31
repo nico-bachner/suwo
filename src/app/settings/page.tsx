@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { SettingsSection } from '@/components/ui/settings_section'
 import { logOut } from '@/lib/auth/log_out'
 
-export default async function Page() {
+export default function Page() {
   return (
     <PageLayout title="Settings" className="flex flex-col gap-12">
       <SettingsSection

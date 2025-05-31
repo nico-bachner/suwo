@@ -40,23 +40,23 @@ export const formAction = async (
     password: z
       .string()
       .min(8, { message: 'Password must be at least 8 characters long' })
-      .regex(/[a-z]/, {
+      .regex(/[a-z]/u, {
         message: 'Password must contain at least one lowercase letter.',
       })
-      .regex(/[A-Z]/, {
+      .regex(/[A-Z]/u, {
         message: 'Password must contain at least one uppercase letter.',
       })
-      .regex(/[0-9]/, {
+      .regex(/[0-9]/u, {
         message: 'Password must contain at least one number.',
       })
-      .regex(/[^a-zA-Z0-9]/, {
+      .regex(/[^a-zA-Z0-9]/u, {
         message: 'Password must contain at least one special character.',
       })
       .trim(),
     usu: z.nullable(
       z
         .string()
-        .regex(/^\d+$/, {
+        .regex(/^\d+$/u, {
           message: 'USU number, if provided, must contain only digits',
         })
         .length(7, {
@@ -108,12 +108,12 @@ export const formAction = async (
         fieldErrors: {},
       },
     }
-  } else {
-    await createMember({
-      ...data,
-      usu: data.usu ? parseInt(data.usu) : null,
-    })
   }
+
+  await createMember({
+    ...data,
+    usu: data.usu ? parseInt(data.usu, 10) : null,
+  })
 
   return {
     ...previousState,

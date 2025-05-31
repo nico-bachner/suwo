@@ -1,5 +1,11 @@
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 
+/**
+ * Extracts the title from a Notion page object.
+ *
+ * @param page - The Notion page object.
+ * @returns - The title of the page or undefined if not found.
+ */
 export const getTitle = (page: PageObjectResponse) => {
   const { Title, Year } = page.properties
 

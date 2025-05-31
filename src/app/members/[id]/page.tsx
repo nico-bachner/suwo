@@ -20,7 +20,7 @@ export default async function Page({ params }: PageProps) {
     notFound()
   }
 
-  const id = parseInt(decodeURIComponent(idParam))
+  const id = parseInt(decodeURIComponent(idParam), 10)
 
   const session = await getSession()
   const { given_name, family_name, instrument } = await getMemberByID(id)

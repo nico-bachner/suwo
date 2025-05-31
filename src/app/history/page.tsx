@@ -4,13 +4,13 @@ import Link from 'next/link'
 import { PageLayout } from '@/components/server/page_layout'
 import { Divider } from '@/components/ui/divider'
 import { getHistory } from '@/lib/notion/get_history'
-import { getPageMetadata } from '@/lib/notion/get_metadata'
+import { getHistoryPageMetadata } from '@/lib/notion/get_history_page_metadata'
 
 export const generateMetadata = async (): Promise<Metadata> =>
-  await getPageMetadata()
+  await getHistoryPageMetadata()
 
 export default async function Page() {
-  const { title } = await getPageMetadata()
+  const { title } = await getHistoryPageMetadata()
   const data = await getHistory()
 
   return (
@@ -18,7 +18,7 @@ export default async function Page() {
       {data
         .map(
           ({ properties }) =>
-            properties['Year'].type == 'number' && properties['Year'].number,
+            properties.Year.type == 'number' && properties.Year.number,
         )
         .filter((number) => number)
         .join(' - ')

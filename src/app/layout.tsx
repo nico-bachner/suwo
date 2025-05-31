@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'

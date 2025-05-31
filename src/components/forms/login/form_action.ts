@@ -48,23 +48,22 @@ export const formAction = async (
         },
       },
     }
-  } else {
-    const passwordMatch = await verifyPassword(data)
+  }
+  const passwordMatch = await verifyPassword(data)
 
-    if (passwordMatch) {
-      await createSession(id)
+  if (passwordMatch) {
+    await createSession(id)
 
-      redirect(`/members/${id}`)
-    }
+    redirect(`/members/${id}`)
+  }
 
-    return {
-      ...previousState,
-      errors: {
-        formErrors: [],
-        fieldErrors: {
-          password: ['Wrong password.'],
-        },
+  return {
+    ...previousState,
+    errors: {
+      formErrors: [],
+      fieldErrors: {
+        password: ['Wrong password.'],
       },
-    }
+    },
   }
 }

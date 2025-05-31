@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { CreateMember } from '@/components/forms/create_member'
 import { PageLayout } from '@/components/server/page_layout'
 
-export default async function Page() {
+export default function Page() {
   return (
     <PageLayout title="Join" className="flex flex-col gap-4">
       <CreateMember />

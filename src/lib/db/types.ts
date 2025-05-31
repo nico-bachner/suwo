@@ -11,6 +11,11 @@ export type VerificationToken = {
   created_at: Date
 }
 
+export type Instrument = {
+  name: string
+  family: string
+}
+
 export type Member = {
   id: number
   given_name: string
@@ -32,9 +37,4 @@ export type RollCall = {
   semester: number
   week: number
   member: number
-}
-
-export type Instrument = {
-  name: string
-  family: string
 }

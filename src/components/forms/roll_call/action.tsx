@@ -46,7 +46,7 @@ export const formAction = async (
     usu: z.nullable(
       z
         .string()
-        .regex(/^\d+$/, {
+        .regex(/^\d+$/u, {
           message: 'USU number, if provided, must contain only digits',
         })
         .length(7, {
@@ -93,29 +93,28 @@ export const formAction = async (
     return {
       ...previousState,
       errors: {
-        formErrors: ['Member already exists. Please check the list again.'],
         fieldErrors: {},
+        formErrors: ['Member already exists. Please check the list again.'],
       },
     }
-  } else {
-    const { id } = await createMemberFromRollCall({
-      ...data,
-      usu: data.usu ? parseInt(data.usu) : null,
-    })
-
-    await createRollCallEntry({
-      year: getCurrentYear(),
-      semester: getCurrentSemester(),
-      week: await getCurrentWeek(),
-      member: id,
-    })
   }
+  const { id } = await createMemberFromRollCall({
+    ...data,
+    usu: data.usu ? parseInt(data.usu, 10) : null,
+  })
+
+  await createRollCallEntry({
+    member: id,
+    year: getCurrentYear(),
+    semester: getCurrentSemester(),
+    week: await getCurrentWeek(),
+  })
 
   return {
     ...previousState,
     errors: {
-      formErrors: [],
       fieldErrors: {},
+      formErrors: [],
     },
   }
 }

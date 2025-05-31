@@ -25,7 +25,7 @@ export const GET = async (req: NextRequest, { params }: PageProps) => {
   }
 
   const isValidToken = await verifyToken({
-    member: parseInt(member),
+    member: parseInt(member, 10),
     token,
   })
 
@@ -33,7 +33,7 @@ export const GET = async (req: NextRequest, { params }: PageProps) => {
     return Response.json({ message: 'Invalid token' })
   }
 
-  await createSession(parseInt(member))
+  await createSession(parseInt(member, 10))
 
   redirect(LINKS.SETTINGS.href)
 }

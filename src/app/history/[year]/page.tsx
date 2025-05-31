@@ -25,8 +25,8 @@ export const generateMetadata = async ({
 
   const page = data.find(
     ({ properties }) =>
-      properties['Year'].type == 'number' &&
-      properties['Year'].number == parseInt(year),
+      properties.Year.type == 'number' &&
+      properties.Year.number == parseInt(year, 10),
   )
 
   if (!page) {
@@ -48,8 +48,8 @@ export default async function Page({ params }: PageProps) {
 
   const page = data.find(
     ({ properties }) =>
-      properties['Year'].type == 'number' &&
-      properties['Year'].number == parseInt(year),
+      properties.Year.type == 'number' &&
+      properties.Year.number == parseInt(year, 10),
   )
 
   if (!page) {
@@ -99,7 +99,7 @@ export const generateStaticParams = async () => {
   return data
     .map(
       ({ properties }) =>
-        properties['Year'].type == 'number' && properties['Year'].number,
+        properties.Year.type == 'number' && properties.Year.number,
     )
     .filter((number) => number)
     .map((year) => ({

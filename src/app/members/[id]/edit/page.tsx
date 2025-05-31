@@ -26,7 +26,7 @@ export default async function Page({ params }: PageProps) {
     redirect(LINKS.LOG_IN.href)
   }
 
-  if (id != parseInt(decodeURIComponent(idParam))) {
+  if (id != parseInt(decodeURIComponent(idParam), 10)) {
     redirect(`/members/${id}`)
   }
 

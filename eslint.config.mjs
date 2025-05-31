@@ -3,6 +3,24 @@ import { defineConfig } from 'eslint/config'
 import tseslint from 'typescript-eslint'
 
 export default defineConfig([
-  js.configs.recommended,
+  js.configs.all,
   tseslint.configs.recommended,
+  {
+    files: ['**/*.{ts,tsx}', '**/*.{js,mjs}'],
+    rules: {
+      camelcase: 'off',
+      'consistent-return': 'off',
+      eqeqeq: 'off',
+      'id-length': ['warn', { min: 2, max: 30, exceptions: ['_'] }],
+      'max-lines-per-function': ['warn', 100],
+      'max-statements': 'warn',
+      'no-magic-numbers': 'off',
+      'no-shadow': 'off',
+      'no-ternary': 'off',
+      'no-undefined': 'off',
+      'one-var': 'off',
+      'sort-imports': 'off',
+      'sort-keys': 'off',
+    },
+  },
 ])

@@ -34,9 +34,9 @@ export default async function Page({ params }: PageProps) {
     redirect(`/roll-call`)
   }
 
-  const year = parseInt(decodeURIComponent(yearParam))
-  const semester = parseInt(decodeURIComponent(semesterParam))
-  const week = parseInt(decodeURIComponent(weekParam))
+  const year = parseInt(decodeURIComponent(yearParam), 10)
+  const semester = parseInt(decodeURIComponent(semesterParam), 10)
+  const week = parseInt(decodeURIComponent(weekParam), 10)
 
   if (semester < 1 || semester > 2 || week < 1 || week > MAX_WEEK) {
     redirect(`/roll-call`)
