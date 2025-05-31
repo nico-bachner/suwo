@@ -4,8 +4,7 @@ import { useActionState } from 'react'
 
 import { Checkbox } from '@/components/ui/checkbox'
 import { Form } from '@/components/ui/form'
-import { Select } from '@/components/ui/select/select'
-import { SelectItem } from '@/components/ui/select/select_item'
+import { Select, SelectItem } from '@/components/ui/select'
 import { TextInput } from '@/components/ui/text_input'
 import { Instrument, Table } from '@/lib/db/types'
 

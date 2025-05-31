@@ -3,8 +3,7 @@
 import { useActionState } from 'react'
 
 import { Form } from '@/components/ui/form'
-import { Select } from '@/components/ui/select/select'
-import { SelectItem } from '@/components/ui/select/select_item'
+import { Select, SelectItem } from '@/components/ui/select'
 import { Instrument, Member, Table } from '@/lib/db/types'
 
 import { formAction } from './form_action'
