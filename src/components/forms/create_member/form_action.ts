@@ -25,11 +25,11 @@ export const formAction: Action<Omit<Member, 'id'>> = async (_, formData) => {
 
   if (
     !state.given_name.success ||
-    (state.family_name && !state.family_name?.success) ||
+    !state.family_name.success ||
     !state.email.success ||
-    (state.password && !state.password?.success) ||
-    (state.usu && !state.usu?.success) ||
-    (state.instrument && !state.instrument?.success) ||
+    !state.password.success ||
+    !state.usu.success ||
+    !state.instrument.success ||
     !state.mailing_list.success
   ) {
     return state

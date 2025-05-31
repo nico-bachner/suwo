@@ -30,7 +30,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
     <Form
       id="new-member-form"
       action={action}
-      errors={state.email.error?.issues?.map((issue) => issue.message)}
+      errors={state.email.error?.issues.map((issue) => issue.message)}
       pending={pending}
       message="Join"
     >
