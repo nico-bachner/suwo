@@ -30,6 +30,7 @@ export default defineConfig([
       'one-var': 'off',
       'sort-imports': 'off',
       'sort-keys': 'off',
+      '@typescript-eslint/no-unnecessary-condition': 'warn',
       '@typescript-eslint/restrict-template-expressions': [
         'error',
         {
