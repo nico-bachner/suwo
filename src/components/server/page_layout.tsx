@@ -1,7 +1,6 @@
 import { ChevronLeftIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Separator } from 'radix-ui'
 
 import { NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
 import logo from '@/images/logo.png'
@@ -115,7 +114,7 @@ export const PageLayout = async ({
       <div className="mx-auto flex w-full max-w-screen-sm flex-1 flex-col gap-12 px-6 pt-2 pb-12 lg:pt-12">
         <main className={cn('flex-1', className)}>{children}</main>
 
-        <Separator.Root className="h-px w-full bg-gray-700 lg:hidden" />
+        <Divider className="lg:hidden" />
 
         <section className="flex flex-col items-center gap-4 lg:hidden">
           <p>Follow our socials</p>
