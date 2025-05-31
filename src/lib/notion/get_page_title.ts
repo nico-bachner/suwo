@@ -6,7 +6,7 @@ import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
  * @param page - The Notion page object.
  * @returns - The title of the page or undefined if not found.
  */
-export const getTitle = (page: PageObjectResponse) => {
+export const getPageTitle = (page: PageObjectResponse) => {
   const { Title, Year } = page.properties
 
   if (Title.type == 'title' && Title.title.length > 0) {

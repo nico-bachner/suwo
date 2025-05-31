@@ -12,7 +12,7 @@ import { emails } from '@/lib/resend'
 
 type ActionState = {
   data: Pick<Member, 'email'>
-  errors: typeToFlattenedError<ActionState['data'], string>
+  errors: typeToFlattenedError<ActionState['data']>
 }
 
 export const formAction = async (

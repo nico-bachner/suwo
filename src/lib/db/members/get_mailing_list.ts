@@ -13,5 +13,5 @@ export const getMailingList = async () => {
 
   const members = entries as Table<Pick<Member, 'email'>>
 
-  return members.map(({ email }) => email) as Member['email'][]
+  return members.map(({ email }) => email)
 }

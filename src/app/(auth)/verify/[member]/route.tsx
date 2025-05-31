@@ -5,10 +5,10 @@ import { LINKS } from '@/config'
 import { createSession } from '@/lib/auth/session'
 import { VerificationToken } from '@/lib/db/types'
 import { verifyToken } from '@/lib/db/verification_token/verify_token'
-import { Params } from '@/lib/types'
+import { NextParams } from '@/lib/types'
 
 type PageProps = {
-  params: Params<Pick<VerificationToken, 'member'>>
+  params: NextParams<Pick<VerificationToken, 'member'>>
 }
 
 export const GET = async (req: NextRequest, { params }: PageProps) => {

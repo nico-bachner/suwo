@@ -15,10 +15,10 @@ import { MAX_WEEK } from '@/config'
 import { getRollCallEntriesByWeek } from '@/lib/db/roll_call_entries/by_week'
 import { createRollCallEntry } from '@/lib/db/roll_call_entry/create'
 import { RollCall } from '@/lib/db/types'
-import { Params } from '@/lib/types'
+import { NextParams } from '@/lib/types'
 
 type PageProps = {
-  params: Params<Pick<RollCall, 'year' | 'semester' | 'week'>>
+  params: NextParams<Pick<RollCall, 'year' | 'semester' | 'week'>>
 }
 
 export default async function Page({ params }: PageProps) {

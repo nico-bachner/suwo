@@ -7,7 +7,7 @@ import { Member } from '@/lib/db/types'
 
 type ActionState = {
   data: Pick<Member, 'password'>
-  errors: typeToFlattenedError<ActionState['data'], string>
+  errors: typeToFlattenedError<ActionState['data']>
 }
 
 export const formAction = async (

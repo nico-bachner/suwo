@@ -32,7 +32,7 @@ export const ResetPasswordForm = () => {
         label="Email Address"
         required
         placeholder='e.g. "name@example.com"'
-        defaultValue={state.data.email ?? undefined}
+        defaultValue={state.data.email}
         errors={state.errors.fieldErrors.email}
       />
     </Form>

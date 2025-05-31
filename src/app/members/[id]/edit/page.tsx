@@ -7,10 +7,10 @@ import { LINKS } from '@/config'
 import { getSession } from '@/lib/auth/session'
 import { getMember } from '@/lib/db/member/get_member'
 import { Member } from '@/lib/db/types'
-import { Params } from '@/lib/types'
+import { NextParams } from '@/lib/types'
 
 type PageProps = {
-  params: Params<Pick<Member, 'id'>>
+  params: NextParams<Pick<Member, 'id'>>
 }
 
 export default async function Page({ params }: PageProps) {

@@ -4,7 +4,16 @@ import tseslint from 'typescript-eslint'
 
 export default defineConfig([
   js.configs.all,
-  tseslint.configs.recommended,
+  tseslint.configs.strictTypeChecked,
+  {
+    files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
   {
     files: ['**/*.{ts,tsx}', '**/*.{js,mjs}'],
     rules: {
@@ -21,6 +30,18 @@ export default defineConfig([
       'one-var': 'off',
       'sort-imports': 'off',
       'sort-keys': 'off',
+      '@typescript-eslint/restrict-template-expressions': [
+        'error',
+        {
+          allowNumber: true,
+        },
+      ],
+      '@typescript-eslint/no-misused-promises': [
+        'error',
+        {
+          checksVoidReturn: false,
+        },
+      ],
     },
   },
 ])

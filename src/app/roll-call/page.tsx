@@ -17,7 +17,9 @@ export default async function Page() {
   const week = await getCurrentWeek()
 
   if (week >= 1 && week <= MAX_WEEK) {
-    return redirect(`/roll-call/${year}/${semester}/${week}`)
+    return redirect(
+      `/roll-call/${year}/${semester.toString()}/${week.toString()}`,
+    )
   }
 
   // Fallback ui in case the USYD api goes down or changes structure

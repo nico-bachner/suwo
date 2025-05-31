@@ -33,7 +33,7 @@ export const LoginForm = () => {
         label="Email Address"
         required
         placeholder='e.g. "name@example.com"'
-        defaultValue={state.data.email ?? undefined}
+        defaultValue={state.data.email}
         errors={state.errors.fieldErrors.email}
       />
 
@@ -43,7 +43,7 @@ export const LoginForm = () => {
         label="Password"
         required
         placeholder='e.g. "I<3SUWO25"'
-        defaultValue={state.data.password ?? undefined}
+        defaultValue={state.data.password}
         errors={state.errors.fieldErrors.password}
       />
     </Form>

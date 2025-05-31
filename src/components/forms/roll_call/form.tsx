@@ -49,7 +49,7 @@ export const CreateMemberFromRollCallForm = ({
           autoComplete="given-name"
           placeholder='e.g. "Ambrose"'
           required
-          defaultValue={state.data.given_name ?? undefined}
+          defaultValue={state.data.given_name}
           errors={state.errors.fieldErrors.given_name}
           className="flex-1"
         />
@@ -72,7 +72,7 @@ export const CreateMemberFromRollCallForm = ({
         autoComplete="new-email"
         required
         placeholder='e.g. "name@example.com"'
-        defaultValue={state.data.email ?? undefined}
+        defaultValue={state.data.email}
         errors={state.errors.fieldErrors.email}
       />
 

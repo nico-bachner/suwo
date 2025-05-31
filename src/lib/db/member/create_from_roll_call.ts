@@ -31,7 +31,7 @@ export const createMemberFromRollCall = async ({
     RETURNING id
   `
 
-  const user = data[0] as Member
+  const user = data[0] as Member | undefined
 
   if (!user) {
     throw new Error('An error occurred while creating an account.')

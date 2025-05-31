@@ -1,7 +1,7 @@
-export type Params<T> = Promise<{
+export type NextParams<T> = Promise<{
   [key in keyof T]?: string
 }>
 
-export type SearchParams<T> = Promise<{
+export type NextSearchParams<T> = Promise<{
   [key in keyof T]?: string
 }>

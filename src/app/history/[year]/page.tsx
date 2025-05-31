@@ -4,13 +4,29 @@ import { notFound } from 'next/navigation'
 
 import { PageLayout } from '@/components/server/page_layout'
 import { getHistory } from '@/lib/notion/get_history'
-import { getTitle } from '@/lib/notion/get_title'
-import { Params } from '@/lib/types'
+import { getPageTitle } from '@/lib/notion/get_page_title'
+import { NextParams } from '@/lib/types'
+
+type Params = {
+  year: string
+}
+
+export const generateStaticParams = async (): Promise<Params[]> => {
+  const data = await getHistory()
+
+  return data
+    .map(
+      ({ properties }) =>
+        properties.Year.type == 'number' && properties.Year.number,
+    )
+    .filter((number): number is number => Boolean(number))
+    .map((year) => ({
+      year: year.toString(),
+    }))
+}
 
 type PageProps = {
-  params: Params<{
-    year: string
-  }>
+  params: NextParams<Params>
 }
 
 export const generateMetadata = async ({
@@ -34,7 +50,7 @@ export const generateMetadata = async ({
   }
 
   return {
-    title: getTitle(page),
+    title: getPageTitle(page),
   }
 }
 
@@ -65,7 +81,7 @@ export default async function Page({ params }: PageProps) {
   })
 
   return (
-    <PageLayout title={getTitle(page) ?? year} className="prose">
+    <PageLayout title={getPageTitle(page) ?? year} className="prose">
       {results.map((block) => {
         if (!isFullBlock(block)) {
           return null
@@ -91,18 +107,4 @@ export default async function Page({ params }: PageProps) {
       })}
     </PageLayout>
   )
-}
-
-export const generateStaticParams = async () => {
-  const data = await getHistory()
-
-  return data
-    .map(
-      ({ properties }) =>
-        properties.Year.type == 'number' && properties.Year.number,
-    )
-    .filter((number) => number)
-    .map((year) => ({
-      year: year?.toString(),
-    }))
 }

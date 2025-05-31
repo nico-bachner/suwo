@@ -1,15 +1,11 @@
-import { Client, isFullPage } from '@notionhq/client'
+import { isFullPage } from '@notionhq/client'
 
 import { NOTION_HISTORY_DB_ID } from '@/config'
 
-export const getHistory = async () => {
-  if (!NOTION_HISTORY_DB_ID) {
-    throw new Error('Missing NOTION_HISTORY_DATABASE_ID')
-  }
+import { getNotionClient } from './get_notion_client'
 
-  const { databases } = new Client({
-    auth: process.env.NOTION_TOKEN,
-  })
+export const getHistory = async () => {
+  const { databases } = getNotionClient()
 
   const { results } = await databases.query({
     database_id: NOTION_HISTORY_DB_ID,

@@ -1,3 +1,5 @@
+import { fetchJSON } from './fetch_json'
+
 export const getCurrentYear = () => new Date().getFullYear()
 export const getCurrentSemester = () => (new Date().getMonth() < 7 ? 1 : 2)
 
@@ -11,11 +13,9 @@ export const getCurrentWeek = async () => {
   const currentYear = getCurrentYear()
   const currentSemester = getCurrentSemester()
 
-  const keyDatesJson = await fetch(
+  const keyDates = await fetchJSON<Record<string, KeyDate>[]>(
     `https://www.sydney.edu.au/content/dam/students/files/university-calendar/${currentYear}.json`,
   )
-
-  const keyDates: Record<string, KeyDate>[] = await keyDatesJson.json()
 
   const currentSemesterResponse = keyDates.find((obj) =>
     Object.keys(obj).includes(

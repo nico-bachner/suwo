@@ -15,7 +15,7 @@ import {
 
 type ActionState = {
   data: Omit<Member, 'id'>
-  errors: typeToFlattenedError<ActionState['data'], string>
+  errors: typeToFlattenedError<ActionState['data']>
 }
 
 export const formAction = async (
