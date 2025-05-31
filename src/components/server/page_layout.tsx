@@ -49,7 +49,7 @@ export const PageLayout = async ({
               <Image src={logo} alt="The SUWO logo" className="h-12 w-12" />
             </Link>
 
-            <MobileMenu id={id ?? undefined} className="lg:hidden" />
+            <MobileMenu userId={id ?? undefined} className="lg:hidden" />
           </div>
 
           <div className="-mx-2 flex flex-row items-center justify-between gap-2">
