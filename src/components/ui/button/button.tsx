@@ -1,9 +1,9 @@
-import { Slot } from 'radix-ui'
+import { Root } from '@radix-ui/react-slot'
 
 import { cn } from '@/lib/cn'
 
-import { getVariant } from './get_variant'
 import { ButtonProps } from './types'
+import { getVariant } from './utils/get_variant'
 
 export const Button = ({
   children,
@@ -12,7 +12,7 @@ export const Button = ({
   className,
   ...props
 }: ButtonProps) => {
-  const Component = asChild ? Slot.Root : 'button'
+  const Component = asChild ? Root : 'button'
 
   return (
     <Component
