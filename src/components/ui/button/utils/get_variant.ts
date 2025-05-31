@@ -1,4 +1,4 @@
-import { ButtonVariant } from './types'
+import { ButtonVariant } from '../types'
 
 export const getVariant = (variant: ButtonVariant) => {
   switch (variant) {

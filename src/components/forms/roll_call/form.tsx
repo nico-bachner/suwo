@@ -2,7 +2,7 @@
 
 import { useActionState } from 'react'
 
-import { CheckboxInput } from '@/components/ui/checkbox_input'
+import { Checkbox } from '@/components/ui/checkbox'
 import { Form } from '@/components/ui/form'
 import { Select } from '@/components/ui/select/select'
 import { SelectItem } from '@/components/ui/select/select_item'
@@ -103,7 +103,7 @@ export const CreateMemberFromRollCallForm = ({
         </Select>
       </div>
 
-      <CheckboxInput
+      <Checkbox
         name="mailing-list"
         label="Sign up for weekly rehearsal updates"
         defaultChecked={state.data.mailing_list}
