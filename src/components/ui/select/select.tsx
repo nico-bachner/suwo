@@ -4,13 +4,14 @@ import {
   ChevronUpIcon,
 } from '@heroicons/react/24/outline'
 import { Select as RadixSelect } from 'radix-ui'
+import { ZodIssue } from 'zod'
 
 import { cn } from '@/lib/cn'
 
 import { InputLabel } from '../input_label'
 
 type SelectProps = React.ComponentProps<typeof RadixSelect.Root> & {
-  errors?: string[]
+  errors?: ZodIssue[]
   name: string
   label: string
   placeholder: string
@@ -62,6 +63,10 @@ export const Select = ({
       </RadixSelect.Portal>
     </RadixSelect.Root>
 
-    {errors && <p className="px-2 text-sm text-red-500">{errors[0]}</p>}
+    {errors?.map(({ message }) => (
+      <p key={message} className="px-2 text-sm text-red-500">
+        {message}
+      </p>
+    ))}
   </div>
 )
