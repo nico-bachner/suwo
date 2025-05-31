@@ -10,6 +10,7 @@ const config = {
   importOrderSeparation: true,
   plugins: [
     '@trivago/prettier-plugin-sort-imports',
+    'prettier-plugin-jsdoc',
     'prettier-plugin-tailwindcss',
   ],
 }
