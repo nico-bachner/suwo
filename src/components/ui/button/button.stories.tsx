@@ -3,11 +3,10 @@ import type { Meta, StoryObj } from '@storybook/nextjs'
 import { Button } from './button'
 
 /**
- * A button component that can be used in various styles and contexts. It
- * supports different variants such as primary, secondary, tertiary, and
- * danger.
+ * Can be used in various styles and contexts. Supports different variants such
+ * as primary, secondary, tertiary, and danger.
  *
- * You can also enable pass the `asChild` prop to render it as a different HTML
+ * You can also pass the `asChild` prop to render it as a different HTML
  * element. This is especially useful when you want to use a button as a link or
  * another component without adding unnecessary elements to the DOM.
  */

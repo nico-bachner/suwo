@@ -3,10 +3,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs'
 import { Select } from './select'
 import { SelectItem } from './select_item'
 
-/**
- * A select component that can be used to separate content in a layout. It
- * supports horizontal and vertical orientations.
- */
+/** Allows users to choose from a list of options. */
 const meta: Meta<typeof Select> = {
   title: 'Select',
   component: Select,

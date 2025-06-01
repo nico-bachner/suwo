@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from '@storybook/nextjs'
 import { Divider } from './divider'
 
 /**
- * A divider component that can be used to separate content in a layout. It
- * supports horizontal and vertical orientations.
+ * Can be used to separate content in a layout. Supports horizontal and vertical
+ * orientations.
  */
 const meta: Meta<typeof Divider> = {
   title: 'Divider',
