@@ -12,6 +12,7 @@ import { Button } from './button'
  * another component without adding unnecessary elements to the DOM.
  */
 const meta: Meta<typeof Button> = {
+  title: 'Button',
   component: Button,
 }
 

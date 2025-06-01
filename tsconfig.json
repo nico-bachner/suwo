@@ -27,8 +27,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".storybook/main.ts",
-    ".storybook/preview.ts"
+    ".storybook/**.ts",
+    ".storybook/**.tsx"
   ],
   "exclude": ["node_modules"]
 }
