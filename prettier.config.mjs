@@ -1,6 +1,7 @@
 /**
- * see https://prettier.io/docs/configuration
- * @type {import("prettier").Config}
+ * See https://prettier.io/docs/configuration
+ *
+ * @type {import('prettier').Config}
  */
 const config = {
   semi: false,

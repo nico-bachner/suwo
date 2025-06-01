@@ -5,7 +5,7 @@ import { SelectItem } from './select_item'
 
 /** Allows users to choose from a list of options. */
 const meta: Meta<typeof Select> = {
-  title: 'Select',
+  title: 'Components/Select',
   component: Select,
 }
 

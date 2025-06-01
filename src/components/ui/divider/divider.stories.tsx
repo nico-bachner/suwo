@@ -7,7 +7,7 @@ import { Divider } from './divider'
  * orientations.
  */
 const meta: Meta<typeof Divider> = {
-  title: 'Divider',
+  title: 'Components/Divider',
   component: Divider,
 }
 

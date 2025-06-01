@@ -7,7 +7,7 @@ import { Switch } from './switch'
  * enabled/disabled.
  */
 const meta: Meta<typeof Switch> = {
-  title: 'Switch',
+  title: 'Components/Switch',
   component: Switch,
 }
 

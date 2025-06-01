@@ -9,7 +9,7 @@ import { Checkbox } from './checkbox'
  * Requires a label for better accessibility and user understanding.
  */
 const meta: Meta<typeof Checkbox> = {
-  title: 'Checkbox',
+  title: 'Components/Checkbox',
   component: Checkbox,
 }
 
