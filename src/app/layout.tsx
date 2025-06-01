@@ -32,7 +32,7 @@ export default function Layout({ children }: LayoutProps) {
     <html lang="en">
       <body
         className={cn(
-          'bg-gray-950 font-sans text-gray-100 antialiased scheme-dark',
+          'bg-neutral-5 text-neutral-2 font-sans antialiased scheme-dark',
           fontSans.variable,
           fontSerif.variable,
         )}

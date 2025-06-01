@@ -13,7 +13,7 @@ export const Divider = ({
 }: DividerProps) => (
   <Root
     decorative={decorative}
-    className={cn('bg-gray-700', getOrientation(orientation), className)}
+    className={cn('bg-neutral-4', getOrientation(orientation), className)}
     {...props}
   />
 )

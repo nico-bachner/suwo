@@ -10,7 +10,7 @@ const preview: Preview = {
   decorators: [
     (Story) => (
       // Matches the config in src/app/layout.tsx
-      <div className="bg-gray-950 p-12 font-sans text-gray-100 antialiased scheme-dark">
+      <div className="bg-neutral-5 text-neutral-2 p-12 font-sans antialiased scheme-dark">
         <Story />
       </div>
     ),

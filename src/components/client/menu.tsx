@@ -26,13 +26,13 @@ export const MobileMenu = ({ userId }: MenuProps) => {
     <Dialog
       title="SUWO"
       trigger={
-        <Bars3BottomRightIcon className="h-8 w-8 stroke-gray-100 stroke-1" />
+        <Bars3BottomRightIcon className="stroke-neutral-1 h-8 w-8 stroke-1 lg:hidden" />
       }
       open={open}
       onOpenChange={setOpen}
       className="inset-0 flex flex-col justify-evenly p-6"
     >
-      <Close className="absolute top-6 right-6 cursor-pointer rounded-lg p-1 focus:bg-gray-900 focus:outline-none">
+      <Close className="focus:bg-neutral-4 absolute top-6 right-6 cursor-pointer rounded-lg p-1 focus:outline-none">
         <XMarkIcon className="h-8 w-8 stroke-gray-100 stroke-1" />
       </Close>
 

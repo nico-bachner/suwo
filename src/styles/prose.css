@@ -14,7 +14,7 @@
 .prose > h1,
 .prose > h2,
 .prose > h3 {
-  @apply text-gray-100;
+  color: var(--color-neutral-1);
   margin-block: 1.5em 1em;
 }
 .prose > h1 + *,
@@ -39,7 +39,7 @@
 
 /* Body Text */
 .prose > p {
-  @apply text-gray-300;
+  color: var(--color-neutral-2);
 }
 .prose > p:not(:last-child) {
   margin-block-end: 1.2em;
@@ -50,7 +50,7 @@
 .prose > h3 a,
 .prose > p a,
 .prose > li a {
-  @apply text-blue-400;
+  @apply text-primary-3 hover:text-primary-2 transition-colors;
 }
 
 /* Lists */
@@ -69,12 +69,4 @@
 .prose > ul > li {
   padding-inline-start: 0.4em;
   margin-block: 0.6em;
-}
-
-.prose > pre {
-  @apply mx-auto w-full max-w-screen-sm overflow-scroll rounded-md bg-gray-800 px-4 py-3;
-}
-
-.prose > pre code {
-  @apply text-gray-100;
 }

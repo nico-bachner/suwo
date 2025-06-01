@@ -38,7 +38,7 @@ export default async function Page() {
             <Divider
               key={index}
               orientation="vertical"
-              className="h-12 bg-gray-500"
+              className="bg-primary-3 h-12"
             />
           ) : (
             <Link

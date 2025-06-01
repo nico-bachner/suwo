@@ -8,9 +8,6 @@ import {
   getCurrentYear,
 } from '@/lib/get_current_week'
 
-// Set cache stale time to 1 day (86400 seconds)
-export const revalidate = 86400
-
 export default async function Page() {
   const year = getCurrentYear()
   const semester = getCurrentSemester()
@@ -35,7 +32,7 @@ export default async function Page() {
             <Link
               key={week}
               href={`/roll-call/${year}/${semester}/${week}`}
-              className="flex h-16 w-16 items-center justify-center rounded-md bg-gray-900 text-xl hover:bg-gray-800"
+              className="bg-neutral-5 hover:bg-neutral-4 flex h-16 w-16 items-center justify-center rounded-md text-xl"
             >
               {week}
             </Link>

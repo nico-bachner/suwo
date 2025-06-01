@@ -20,8 +20,10 @@ export const NavbarLink = ({ children, href, className }: NavbarLinkProps) => {
     <Link
       href={href}
       className={cn(
-        'rounded-lg px-4 py-2 text-lg font-bold text-gray-300 hover:bg-gray-900 hover:text-gray-100 focus:bg-gray-900 focus:outline-none',
-        isActive && 'bg-gray-900 text-gray-100',
+        'rounded-lg px-4 py-2 text-lg font-bold transition-colors',
+        'hover:bg-primary-4 hover:text-primary-2',
+        'focus:bg-primary-4 focus:text-primary-2 focus:outline-none',
+        isActive && 'bg-primary-4 text-primary-2',
         className,
       )}
     >
