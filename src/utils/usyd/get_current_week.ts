@@ -1,8 +1,20 @@
+import { MAX_WEEK } from '@/config'
+
 import { fetchJSON } from '../fetch_json'
 import { getCurrentYear } from './get_current_year'
 import { getMidsemBreak } from './get_midsem_break'
 import { getTeachingDates } from './get_teaching_dates'
 import { KeyDate } from './types'
+
+const getMidsemAdjustedWeek = (currentWeek: number, midsemStartDate: Date) => {
+  const currentDate = new Date()
+
+  if (currentDate.getTime() > midsemStartDate.getTime()) {
+    return Math.floor(currentWeek)
+  }
+
+  return Math.ceil(currentWeek)
+}
 
 export const getCurrentWeek = async () => {
   const currentYear = getCurrentYear()
@@ -14,19 +26,21 @@ export const getCurrentWeek = async () => {
   const { startDate: teachingDatesStartDate } = getTeachingDates(keyDates)
   const { startDate: midsemStartDate } = getMidsemBreak(keyDates)
 
-  const currentDate = new Date()
-
   if (!teachingDatesStartDate || !midsemStartDate) {
     return undefined
   }
 
-  const weeksBetween =
+  const currentDate = new Date()
+
+  const currentWeek =
     (currentDate.getTime() - teachingDatesStartDate.getTime()) /
     (7 * 24 * 60 * 60 * 1000)
 
-  if (currentDate.getTime() > midsemStartDate.getTime()) {
-    return Math.floor(weeksBetween)
+  const midsemAdjustedWeek = getMidsemAdjustedWeek(currentWeek, midsemStartDate)
+
+  if (midsemAdjustedWeek > MAX_WEEK) {
+    return undefined
   }
 
-  return Math.ceil(weeksBetween)
+  return midsemAdjustedWeek
 }
