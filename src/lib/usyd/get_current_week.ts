@@ -1,6 +1,6 @@
 import { MAX_WEEK } from '@/config'
 
-import { fetchJSON } from '../fetch_json'
+import { fetchJSON } from '../../utils/fetch_json'
 import { getCurrentYear } from './get_current_year'
 import { getMidsemBreak } from './get_midsem_break'
 import { getTeachingDates } from './get_teaching_dates'

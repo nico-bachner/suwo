@@ -3,10 +3,10 @@ import { redirect } from 'next/navigation'
 
 import { PageLayout } from '@/components/server/page_layout'
 import { MAX_WEEK } from '@/config'
-import { getCurrentSemester } from '@/utils/usyd/get_current_semester'
-import { getCurrentWeek } from '@/utils/usyd/get_current_week'
-import { getCurrentYear } from '@/utils/usyd/get_current_year'
-import { getSemesterNumber } from '@/utils/usyd/get_semester_number'
+import { getCurrentSemester } from '@/lib/usyd/get_current_semester'
+import { getCurrentWeek } from '@/lib/usyd/get_current_week'
+import { getCurrentYear } from '@/lib/usyd/get_current_year'
+import { getSemesterNumber } from '@/lib/usyd/get_semester_number'
 
 export default async function Page() {
   const year = getCurrentYear()

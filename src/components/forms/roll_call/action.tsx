@@ -7,9 +7,9 @@ import { createMemberFromRollCall } from '@/lib/db/member/create_from_roll_call'
 import { verifyEmailExists } from '@/lib/db/member/verify_email_exists'
 import { createRollCallEntry } from '@/lib/db/roll_call_entry/create'
 import { Member } from '@/lib/db/types'
-import { getCurrentSemester } from '@/utils/usyd/get_current_semester'
-import { getCurrentWeek } from '@/utils/usyd/get_current_week'
-import { getCurrentYear } from '@/utils/usyd/get_current_year'
+import { getCurrentSemester } from '@/lib/usyd/get_current_semester'
+import { getCurrentWeek } from '@/lib/usyd/get_current_week'
+import { getCurrentYear } from '@/lib/usyd/get_current_year'
 
 type ActionState = {
   data: Omit<Member, 'id'>

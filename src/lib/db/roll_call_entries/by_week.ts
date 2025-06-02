@@ -1,6 +1,6 @@
 import { getQueryBuilder } from '@/lib/db/query'
 import { Member, RollCall, Table } from '@/lib/db/types'
-import { getSemesterNumber } from '@/utils/usyd/get_semester_number'
+import { getSemesterNumber } from '@/lib/usyd/get_semester_number'
 
 export const getRollCallEntriesByWeek = async ({
   year,
