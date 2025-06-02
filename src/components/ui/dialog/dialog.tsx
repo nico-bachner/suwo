@@ -8,7 +8,7 @@ import {
 } from '@radix-ui/react-dialog'
 import { Root as VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
-import { cn } from '@/lib/cn'
+import { cn } from '@/utils/cn'
 
 import { DialogProps } from './types'
 

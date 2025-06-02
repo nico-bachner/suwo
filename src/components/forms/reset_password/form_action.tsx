@@ -4,11 +4,11 @@ import { typeToFlattenedError, z } from 'zod'
 
 import { RESEND_DOMAIN, SHORT_NAME } from '@/config'
 import { ResetPasswordTemplate } from '@/emails/reset_password'
-import { BASE_URL } from '@/lib/base_url'
 import { getIDFromEmail } from '@/lib/db/member/get_id_from_email'
 import { Member } from '@/lib/db/types'
 import { createVerificationToken } from '@/lib/db/verification_token/create'
 import { emails } from '@/lib/resend'
+import { BASE_URL } from '@/utils/base_url'
 
 type ActionState = {
   data: Pick<Member, 'email'>

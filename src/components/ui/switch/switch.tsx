@@ -1,6 +1,6 @@
 import { Root, Thumb } from '@radix-ui/react-switch'
 
-import { cn } from '@/lib/cn'
+import { cn } from '@/utils/cn'
 
 import { SwitchProps } from './types'
 

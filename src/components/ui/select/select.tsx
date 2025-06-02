@@ -15,7 +15,7 @@ import {
   Viewport,
 } from '@radix-ui/react-select'
 
-import { cn } from '@/lib/cn'
+import { cn } from '@/utils/cn'
 
 import { InputLabel } from '../input_label'
 import { SelectProps } from './types'

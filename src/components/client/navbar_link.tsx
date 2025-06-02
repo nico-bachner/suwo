@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { cn } from '@/lib/cn'
+import { cn } from '@/utils/cn'
 
 type NavbarLinkProps = {
   children: React.ReactNode

@@ -1,6 +1,6 @@
 import { Root } from '@radix-ui/react-separator'
 
-import { cn } from '@/lib/cn'
+import { cn } from '@/utils/cn'
 
 import { DividerProps } from './types'
 import { getOrientation } from './utils/get_orientation'

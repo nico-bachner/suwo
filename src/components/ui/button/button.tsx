@@ -1,6 +1,6 @@
 import { Root } from '@radix-ui/react-slot'
 
-import { cn } from '@/lib/cn'
+import { cn } from '@/utils/cn'
 
 import { ButtonProps } from './types'
 import { getVariant } from './utils/get_variant'

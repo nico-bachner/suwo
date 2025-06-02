@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
 import logo from '@/images/logo.png'
 import { getSession } from '@/lib/auth/session'
-import { cn } from '@/lib/cn'
+import { cn } from '@/utils/cn'
 
 import { MobileMenu } from '../client/menu'
 import { NavbarLink } from '../client/navbar_link'

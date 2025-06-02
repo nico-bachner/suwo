@@ -3,7 +3,7 @@ import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
 
-import { cn } from '@/lib/cn'
+import { cn } from '@/utils/cn'
 
 import '../styles/globals.css'
 

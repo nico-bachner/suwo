@@ -7,11 +7,9 @@ import { createMemberFromRollCall } from '@/lib/db/member/create_from_roll_call'
 import { verifyEmailExists } from '@/lib/db/member/verify_email_exists'
 import { createRollCallEntry } from '@/lib/db/roll_call_entry/create'
 import { Member } from '@/lib/db/types'
-import {
-  getCurrentSemester,
-  getCurrentWeek,
-  getCurrentYear,
-} from '@/lib/get_current_week'
+import { getCurrentSemester } from '@/utils/usyd/get_current_semester'
+import { getCurrentWeek } from '@/utils/usyd/get_current_week'
+import { getCurrentYear } from '@/utils/usyd/get_current_year'
 
 type ActionState = {
   data: Omit<Member, 'id'>
@@ -103,12 +101,16 @@ export const formAction = async (
     usu: data.usu ? parseInt(data.usu, 10) : null,
   })
 
-  await createRollCallEntry({
-    member: id,
-    year: getCurrentYear(),
-    semester: getCurrentSemester(),
-    week: await getCurrentWeek(),
-  })
+  const currentWeek = await getCurrentWeek()
+
+  if (currentWeek) {
+    await createRollCallEntry({
+      member: id,
+      year: getCurrentYear(),
+      semester: getCurrentSemester(),
+      week: currentWeek,
+    })
+  }
 
   return {
     ...previousState,

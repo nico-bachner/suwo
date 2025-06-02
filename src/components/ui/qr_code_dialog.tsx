@@ -1,7 +1,7 @@
 import { QrCodeIcon } from '@heroicons/react/24/outline'
 import ReactQRCode from 'react-qr-code'
 
-import { cn } from '@/lib/cn'
+import { cn } from '@/utils/cn'
 
 import { Dialog } from './dialog'
 

@@ -8,8 +8,8 @@ import { useState } from 'react'
 
 import { SocialLink } from '@/components/ui/social_link'
 import { LINKS, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
-import { cn } from '@/lib/cn'
 import { Member } from '@/lib/db/types'
+import { cn } from '@/utils/cn'
 
 import { Dialog } from '../ui/dialog'
 

@@ -5,7 +5,7 @@ import { LINKS } from '@/config'
 import { createSession } from '@/lib/auth/session'
 import { VerificationToken } from '@/lib/db/types'
 import { verifyToken } from '@/lib/db/verification_token/verify_token'
-import { NextParams } from '@/lib/types'
+import { NextParams } from '@/lib/next/types'
 
 type PageProps = {
   params: NextParams<Pick<VerificationToken, 'member'>>

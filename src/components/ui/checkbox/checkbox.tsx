@@ -1,7 +1,7 @@
 import { CheckIcon } from '@heroicons/react/24/outline'
 import { Indicator, Root } from '@radix-ui/react-checkbox'
 
-import { cn } from '@/lib/cn'
+import { cn } from '@/utils/cn'
 
 import { CheckboxProps } from './types'
 

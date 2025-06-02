@@ -1,5 +1,5 @@
 import { SpinnerIcon } from '@/icons/Spinner'
-import { cn } from '@/lib/cn'
+import { cn } from '@/utils/cn'
 
 type SpinnerProps = {
   className?: string

@@ -3,9 +3,9 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { PageLayout } from '@/components/server/page_layout'
+import { NextParams } from '@/lib/next/types'
 import { getHistory } from '@/lib/notion/get_history'
 import { getPageTitle } from '@/lib/notion/get_page_title'
-import { NextParams } from '@/lib/types'
 
 type Params = {
   year: string

@@ -7,7 +7,7 @@ import { LINKS } from '@/config'
 import { getSession } from '@/lib/auth/session'
 import { getMemberByID } from '@/lib/db/member/get_member_by_id'
 import { Member } from '@/lib/db/types'
-import { NextParams } from '@/lib/types'
+import { NextParams } from '@/lib/next/types'
 
 type PageProps = {
   params: NextParams<Pick<Member, 'id'>>

@@ -1,5 +1,6 @@
 import { getQueryBuilder } from '@/lib/db/query'
 import { Member, RollCall, Table } from '@/lib/db/types'
+import { getSemesterNumber } from '@/utils/usyd/get_semester_number'
 
 export const getRollCallEntriesByWeek = async ({
   year,
@@ -7,6 +8,12 @@ export const getRollCallEntriesByWeek = async ({
   week,
 }: Omit<RollCall, 'member'>) => {
   const sql = getQueryBuilder()
+
+  if (semester == 'B') {
+    throw new Error('Cannot use roll call during the break')
+  }
+
+  const semesterNumber = getSemesterNumber(semester)
 
   const rollCallEntries = await sql`
     SELECT
@@ -22,7 +29,7 @@ export const getRollCallEntriesByWeek = async ({
           TRUE AS present
         FROM roll_call
         WHERE year = ${year}
-        AND semester = ${semester}
+        AND semester = ${semesterNumber}
         AND week = ${week}
       )
       AS roll_call
