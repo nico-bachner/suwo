@@ -12,26 +12,45 @@ export default async function Page() {
 
   const instrumentsByFamily = instruments.reduce<
     Record<Instrument['family'], Instrument['name'][]>
-  >(
-    (accInstrumentsByFamily, { name, family }) => ({
+  >((accInstrumentsByFamily, { name, family }) => {
+    const familyExists = Object.keys(accInstrumentsByFamily).includes(family)
+
+    if (!familyExists) {
+      return {
+        ...accInstrumentsByFamily,
+        [family]: [name],
+      }
+    }
+
+    return {
       ...accInstrumentsByFamily,
       [family]: [...accInstrumentsByFamily[family], name],
-    }),
-    {},
-  )
+    }
+  }, {})
 
   const membersByInstrument = members.reduce<
     Record<Instrument['name'], Profile[]>
-  >((accMembersByInstrument, { instrument, ...member }) => {
-    if (!instrument) {
+  >((accMembersByInstrument, member) => {
+    if (!member.instrument) {
       return accMembersByInstrument
+    }
+
+    const instrumentExists = Object.keys(accMembersByInstrument).includes(
+      member.instrument,
+    )
+
+    if (!instrumentExists) {
+      return {
+        ...accMembersByInstrument,
+        [member.instrument]: [member],
+      }
     }
 
     return {
       ...accMembersByInstrument,
-      [instrument]: [
-        ...accMembersByInstrument[instrument],
-        { instrument, ...member } as Profile,
+      [member.instrument]: [
+        ...accMembersByInstrument[member.instrument],
+        member,
       ],
     }
   }, {})
@@ -41,7 +60,7 @@ export default async function Page() {
       {Object.keys(instrumentsByFamily)
         .sort((family) =>
           instrumentsByFamily[family].reduce(
-            (acc, instrument) => acc + membersByInstrument[instrument].length,
+            (acc, instrument) => acc + membersByInstrument[instrument]?.length,
             0,
           ),
         )
@@ -51,7 +70,7 @@ export default async function Page() {
 
             <div className="grid grid-cols-2 gap-2">
               {instrumentsByFamily[family].map((instrument) =>
-                membersByInstrument[instrument].map(
+                membersByInstrument[instrument]?.map(
                   ({ id, given_name, family_name, instrument }) => (
                     <Link
                       key={id}
