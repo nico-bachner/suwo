@@ -2,7 +2,7 @@ import { ChevronLeftIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { ICON, LINKS, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
+import { IMAGES, LINKS, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
 import { getCurrentWeekRollCallPath } from '@/features/roll_call/get_current_week_roll_call_path'
 import { getSession } from '@/lib/auth/session'
 import { cn } from '@/utils/cn'
@@ -48,7 +48,7 @@ export const PageLayout = async ({
         <div className="flex flex-col gap-4">
           <div className="flex flex-row items-center justify-between gap-4 bg-gray-950">
             <Link href="/">
-              <Image {...ICON} className="h-12 w-12" />
+              <Image {...IMAGES.ICON} className="h-12 w-12" />
             </Link>
 
             <MobileMenu userId={id ?? undefined} />
