@@ -1,10 +1,10 @@
 import { redirect } from 'next/navigation'
 
-import { MAX_WEEK } from '@/config'
+import { LINKS, MAX_WEEK } from '@/config'
+import { CurrentWeekRollCallScreen } from '@/features/roll_call'
 import { getRollCallEntriesByWeek } from '@/lib/db/roll_call_entries/by_week'
 import { RollCall } from '@/lib/db/types'
 import { NextParams } from '@/lib/next/types'
-import { RollCallScreen } from '@/screens/roll_call'
 
 type PageProps = {
   params: NextParams<Pick<RollCall, 'year' | 'semester' | 'week'>>
@@ -18,7 +18,7 @@ export default async function Page({ params }: PageProps) {
   } = await params
 
   if (!yearParam || !semesterParam || !weekParam) {
-    redirect(`/roll-call`)
+    redirect(LINKS.ROLL_CALL.href)
   }
 
   const year = parseInt(decodeURIComponent(yearParam), 10)
@@ -26,7 +26,7 @@ export default async function Page({ params }: PageProps) {
   const week = parseInt(decodeURIComponent(weekParam), 10)
 
   if ((semester != 'S1' && semester != 'S2') || week < 1 || week > MAX_WEEK) {
-    redirect(`/roll-call`)
+    redirect(LINKS.ROLL_CALL.href)
   }
 
   const rollCallEntries = await getRollCallEntriesByWeek({
@@ -36,7 +36,7 @@ export default async function Page({ params }: PageProps) {
   })
 
   return (
-    <RollCallScreen
+    <CurrentWeekRollCallScreen
       year={year}
       semester={semester}
       week={week}

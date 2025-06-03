@@ -2,7 +2,8 @@ import { ChevronLeftIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
+import { LINKS, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
+import { getCurrentWeekRollCallPath } from '@/features/roll_call/get_current_week_roll_call_path'
 import logo from '@/images/logo.png'
 import { getSession } from '@/lib/auth/session'
 import { cn } from '@/utils/cn'
@@ -25,6 +26,7 @@ type PageLayoutProps = {
   className?: string
 }
 
+// eslint-disable-next-line max-lines-per-function
 export const PageLayout = async ({
   children,
   parent,
@@ -34,6 +36,7 @@ export const PageLayout = async ({
   className,
 }: PageLayoutProps) => {
   const { id } = await getSession()
+  const currentWeekRollCallPath = await getCurrentWeekRollCallPath()
 
   return (
     <div
@@ -95,11 +98,21 @@ export const PageLayout = async ({
         )}
 
         <div className="flex flex-1 flex-col gap-1 max-lg:hidden">
-          {NAV_LINKS.map(({ href, label }) => (
-            <NavbarLink key={href} href={href}>
-              {label}
-            </NavbarLink>
-          ))}
+          {NAV_LINKS.map(({ href, label }) => {
+            if (href === LINKS.ROLL_CALL.href) {
+              return (
+                <NavbarLink key={href} href={currentWeekRollCallPath ?? href}>
+                  {label}
+                </NavbarLink>
+              )
+            }
+
+            return (
+              <NavbarLink key={href} href={href}>
+                {label}
+              </NavbarLink>
+            )
+          })}
         </div>
 
         <Divider className="max-lg:hidden" />
