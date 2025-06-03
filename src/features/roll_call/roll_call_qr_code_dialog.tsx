@@ -3,7 +3,7 @@ import ReactQRCode from 'react-qr-code'
 
 import { cn } from '@/utils/cn'
 
-import { Dialog } from '../../components/ui/dialog'
+import { Dialog } from '../../design_system/dialog'
 
 type RollCallQRCodeProps = {
   value: string

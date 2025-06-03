@@ -2,8 +2,8 @@
 
 import { useActionState } from 'react'
 
-import { Form } from '@/components/ui/form'
-import { Switch } from '@/components/ui/switch/switch'
+import { Form } from '@/design_system/form'
+import { Switch } from '@/design_system/switch/switch'
 import { Member } from '@/lib/db/types'
 
 import { formAction } from './form_action'

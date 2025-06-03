@@ -1,8 +1,8 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 
-import { Button } from '@/components/ui/button'
 import { MAX_WEEK } from '@/config'
+import { Button } from '@/design_system/button'
 
 import { RollCallDate } from './types'
 

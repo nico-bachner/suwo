@@ -2,8 +2,8 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 
 import { PageLayout } from '@/components/server/page_layout'
-import { Divider } from '@/components/ui/divider'
 import { NOTION_HISTORY_DB_ID } from '@/config'
+import { Divider } from '@/design_system/divider'
 import { getHistory } from '@/lib/notion/get_history'
 import { getNotionDB } from '@/lib/notion/get_notion_db'
 

@@ -2,8 +2,8 @@
 
 import { useActionState } from 'react'
 
-import { Form } from '@/components/ui/form'
-import { TextInput } from '@/components/ui/text_input'
+import { Form } from '@/design_system/form'
+import { TextInput } from '@/design_system/text_input'
 
 import { formAction } from './form_action'
 

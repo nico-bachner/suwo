@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:sb": "storybook dev -p 6006 --no-open",
     "build": "next build",
+    "build:sb": "storybook build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write **/*.{ts,tsx,md,json,js,mjs}",
-    "storybook": "storybook dev -p 6006 --no-open",
-    "build-storybook": "storybook build"
+    "format": "prettier --write **/*.{ts,tsx,md,json,js,mjs}"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

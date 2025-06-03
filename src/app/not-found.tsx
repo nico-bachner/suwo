@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { PageLayout } from '@/components/server/page_layout'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/design_system/button'
 
 export default function Page() {
   return (

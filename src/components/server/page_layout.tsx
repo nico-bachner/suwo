@@ -7,11 +7,11 @@ import { getCurrentWeekRollCallPath } from '@/features/roll_call/get_current_wee
 import { getSession } from '@/lib/auth/session'
 import { cn } from '@/utils/cn'
 
+import { Button } from '../../design_system/button'
+import { Divider } from '../../design_system/divider'
+import { SocialLink } from '../../design_system/social_link'
 import { MobileMenu } from '../client/menu'
 import { NavbarLink } from '../client/navbar_link'
-import { Button } from '../ui/button'
-import { Divider } from '../ui/divider'
-import { SocialLink } from '../ui/social_link'
 
 type PageLayoutProps = {
   children?: React.ReactNode

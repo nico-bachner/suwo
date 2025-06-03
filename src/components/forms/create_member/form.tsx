@@ -2,10 +2,10 @@
 
 import { useActionState } from 'react'
 
-import { Checkbox } from '@/components/ui/checkbox'
-import { Form } from '@/components/ui/form'
-import { Select, SelectItem } from '@/components/ui/select'
-import { TextInput } from '@/components/ui/text_input'
+import { Checkbox } from '@/design_system/checkbox'
+import { Form } from '@/design_system/form'
+import { Select, SelectItem } from '@/design_system/select'
+import { TextInput } from '@/design_system/text_input'
 import { Instrument, Table } from '@/lib/db/types'
 
 import { formAction } from './form_action'

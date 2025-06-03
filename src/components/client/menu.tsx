@@ -6,12 +6,12 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
-import { SocialLink } from '@/components/ui/social_link'
 import { LINKS, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
+import { SocialLink } from '@/design_system/social_link'
 import { Member } from '@/lib/db/types'
 import { cn } from '@/utils/cn'
 
-import { Dialog } from '../ui/dialog'
+import { Dialog } from '../../design_system/dialog'
 
 type MenuProps = {
   userId?: Member['id']
