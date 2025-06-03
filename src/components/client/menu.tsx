@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
 import { LINKS, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
-import { SocialLink } from '@/design_system/social_link'
+import { Icon } from '@/design_system/icon'
 import { Member } from '@/lib/db/types'
 import { cn } from '@/utils/cn'
 
@@ -102,7 +102,9 @@ export const MobileMenu = ({ userId }: MenuProps) => {
 
       <div className="flex flex-row items-center gap-4 self-center">
         {NAV_SOCIAL_LINKS.map(({ href, icon }) => (
-          <SocialLink key={href} icon={icon} href={href} size="lg" />
+          <a href={href} target="_blank" rel="noopener noreferrer">
+            <Icon icon={icon} size="lg" className="stroke-neutral-2 stroke-1" />
+          </a>
         ))}
       </div>
     </Dialog>

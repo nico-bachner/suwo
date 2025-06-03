@@ -3,13 +3,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { IMAGES, LINKS, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
+import { Icon } from '@/design_system/icon'
 import { getCurrentWeekRollCallPath } from '@/features/roll_call/get_current_week_roll_call_path'
 import { getSession } from '@/lib/auth/session'
 import { cn } from '@/utils/cn'
 
 import { Button } from '../../design_system/button'
 import { Divider } from '../../design_system/divider'
-import { SocialLink } from '../../design_system/social_link'
 import { MobileMenu } from '../client/menu'
 import { NavbarLink } from '../client/navbar_link'
 
@@ -118,7 +118,13 @@ export const PageLayout = async ({
 
         <div className="flex flex-row items-center justify-center gap-6 max-lg:hidden">
           {NAV_SOCIAL_LINKS.map(({ href, icon }) => (
-            <SocialLink key={href} icon={icon} href={href} />
+            <a href={href} target="_blank" rel="noopener noreferrer">
+              <Icon
+                icon={icon}
+                size="md"
+                className="stroke-neutral-2 stroke-1"
+              />
+            </a>
           ))}
         </div>
       </nav>
@@ -133,7 +139,13 @@ export const PageLayout = async ({
 
           <div className="flex flex-row items-center gap-4">
             {NAV_SOCIAL_LINKS.map(({ href, icon }) => (
-              <SocialLink key={href} icon={icon} href={href} />
+              <a href={href} target="_blank" rel="noopener noreferrer">
+                <Icon
+                  icon={icon}
+                  size="md"
+                  className="stroke-neutral-2 stroke-1"
+                />
+              </a>
             ))}
           </div>
         </section>
