@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
 
+import { QueryProvider } from '@/lib/query/query_provider'
 import { cn } from '@/utils/cn'
 
 import '../styles/globals.css'
@@ -37,7 +38,7 @@ export default function Layout({ children }: LayoutProps) {
           fontSerif.variable,
         )}
       >
-        {children}
+        <QueryProvider>{children}</QueryProvider>
 
         <Analytics />
       </body>
