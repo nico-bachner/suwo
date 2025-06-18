@@ -14,11 +14,21 @@ export default meta
 export const Default: StoryObj<typeof Select> = {
   args: {
     children: [
-      <SelectItem value="item_1">Item 1</SelectItem>,
-      <SelectItem value="item_2">Item 2</SelectItem>,
-      <SelectItem value="item_3">Item 3</SelectItem>,
-      <SelectItem value="item_4">Item 4</SelectItem>,
-      <SelectItem value="item_5">Item 5</SelectItem>,
+      <SelectItem key={1} value="item_1">
+        Item 1
+      </SelectItem>,
+      <SelectItem key={2} value="item_2">
+        Item 2
+      </SelectItem>,
+      <SelectItem key={3} value="item_3">
+        Item 3
+      </SelectItem>,
+      <SelectItem key={4} value="item_4">
+        Item 4
+      </SelectItem>,
+      <SelectItem key={5} value="item_5">
+        Item 5
+      </SelectItem>,
     ],
   },
 }

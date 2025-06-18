@@ -25,7 +25,6 @@ type PageLayoutProps = {
   className?: string
 }
 
-// eslint-disable-next-line max-lines-per-function
 export const PageLayout = async ({
   children,
   parent,
@@ -118,7 +117,7 @@ export const PageLayout = async ({
 
         <div className="flex flex-row items-center justify-center gap-6 max-lg:hidden">
           {NAV_SOCIAL_LINKS.map(({ href, icon }) => (
-            <a href={href} target="_blank" rel="noopener noreferrer">
+            <a key={href} href={href} target="_blank" rel="noopener noreferrer">
               <Icon
                 icon={icon}
                 size="md"
@@ -139,7 +138,12 @@ export const PageLayout = async ({
 
           <div className="flex flex-row items-center gap-4">
             {NAV_SOCIAL_LINKS.map(({ href, icon }) => (
-              <a href={href} target="_blank" rel="noopener noreferrer">
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Icon
                   icon={icon}
                   size="md"

@@ -102,7 +102,7 @@ export const MobileMenu = ({ userId }: MenuProps) => {
 
       <div className="flex flex-row items-center gap-4 self-center">
         {NAV_SOCIAL_LINKS.map(({ href, icon }) => (
-          <a href={href} target="_blank" rel="noopener noreferrer">
+          <a key={href} href={href} target="_blank" rel="noopener noreferrer">
             <Icon icon={icon} size="lg" className="stroke-neutral-2 stroke-1" />
           </a>
         ))}
