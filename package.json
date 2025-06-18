@@ -9,7 +9,7 @@
     "build:sb": "storybook build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write **/*.{ts,tsx,md,json,js,mjs}"
+    "format": "prettier --write ./"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
