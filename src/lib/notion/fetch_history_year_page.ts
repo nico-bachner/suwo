@@ -1,7 +1,7 @@
-import { getHistory } from './get_history'
+import { fetchHistory } from './fetch_history'
 
-export const getHistoryYearPage = async (year?: string) => {
-  const data = await getHistory()
+export const fetchHistoryYearPage = async (year?: string) => {
+  const data = await fetchHistory()
 
   if (!year) {
     return null

@@ -4,8 +4,8 @@ import Link from 'next/link'
 import { PageLayout } from '@/components/server/page_layout'
 import { NOTION_HISTORY_DB_ID } from '@/config'
 import { Divider } from '@/design_system/divider'
-import { getHistory } from '@/lib/notion/get_history'
-import { getNotionDB } from '@/lib/notion/get_notion_db'
+import { fetchHistory } from '@/lib/notion/fetch_history'
+import { getNotionDB } from '@/lib/notion/fetch_notion_db'
 
 export const generateMetadata = async (): Promise<Metadata> => {
   const { title, description } = await getNotionDB(NOTION_HISTORY_DB_ID)
@@ -18,7 +18,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 export default async function Page() {
   const { title } = await getNotionDB(NOTION_HISTORY_DB_ID)
-  const data = await getHistory()
+  const data = await fetchHistory()
 
   return (
     <PageLayout

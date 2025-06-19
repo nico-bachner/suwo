@@ -4,7 +4,7 @@ import { NOTION_HISTORY_DB_ID } from '@/config'
 
 import { getNotionClient } from './get_notion_client'
 
-export const getHistory = async () => {
+export const fetchHistory = async () => {
   const { databases } = getNotionClient()
 
   const { results } = await databases.query({
