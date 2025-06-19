@@ -3,6 +3,7 @@ import { FacebookIcon, InstagramIcon, YouTubeIcon } from '@/icons'
 import { getBaseURL } from './utils/get_base_url'
 
 export const BASE_URL = getBaseURL()
+export const API_INDENT_SIZE = 2
 
 // Resend
 export const RESEND_DOMAIN = 'transactional.suwo.org.au'
