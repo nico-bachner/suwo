@@ -1,4 +1,4 @@
-import { Client, isFullBlock } from '@notionhq/client'
+import { isFullBlock } from '@notionhq/client'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -6,6 +6,7 @@ import { PageLayout } from '@/components/server/page_layout'
 import { NextParams } from '@/lib/next/types'
 import { fetchHistory } from '@/lib/notion/fetch_history'
 import { fetchHistoryYearPage } from '@/lib/notion/fetch_history_year_page'
+import { getNotionClient } from '@/lib/notion/get_notion_client'
 import { getPageTitle } from '@/lib/notion/get_page_title'
 
 type Params = {
@@ -53,9 +54,7 @@ export default async function Page({ params }: PageProps) {
     return notFound()
   }
 
-  const { blocks } = new Client({
-    auth: process.env.NOTION_TOKEN,
-  })
+  const { blocks } = getNotionClient()
 
   const { results } = await blocks.children.list({
     block_id: page.id,
