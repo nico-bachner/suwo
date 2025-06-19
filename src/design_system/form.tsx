@@ -1,13 +1,15 @@
+import { ComponentProps } from 'react'
+
 import { cn } from '@/utils/cn'
 
 import { Button } from './button'
 import { Spinner } from './spinner'
 
-type FormProps = React.ComponentProps<'form'> & {
+type FormProps = ComponentProps<'form'> & {
   errors?: string[]
   message?: string
   pending?: boolean
-  variant?: React.ComponentProps<typeof Button>['variant']
+  variant?: ComponentProps<typeof Button>['variant']
   className?: string
 }
 

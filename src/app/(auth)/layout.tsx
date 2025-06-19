@@ -1,9 +1,10 @@
 import { redirect } from 'next/navigation'
+import { ReactNode } from 'react'
 
 import { getSession } from '@/lib/auth/session'
 
 type LayoutProps = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export default async function Layout({ children }: LayoutProps) {

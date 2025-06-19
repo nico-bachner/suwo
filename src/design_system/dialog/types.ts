@@ -1,12 +1,12 @@
 import { Root } from '@radix-ui/react-dialog'
-import { ComponentProps } from 'react'
+import { ComponentProps, ReactNode } from 'react'
 
 export type DialogProps = Pick<
   ComponentProps<typeof Root>,
   'open' | 'onOpenChange'
 > & {
-  trigger?: React.ReactNode
-  children?: React.ReactNode
+  trigger?: ReactNode
+  children?: ReactNode
   title: string
   className?: string
 }

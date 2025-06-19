@@ -2,19 +2,10 @@ import { MAX_WEEK } from '@/config'
 
 import { fetchJSON } from '../../utils/fetch_json'
 import { getCurrentYear } from './get_current_year'
+import { getMidsemAdjustedWeek } from './get_midsem_adjusted_week'
 import { getMidsemBreak } from './get_midsem_break'
 import { getTeachingDates } from './get_teaching_dates'
 import { KeyDate } from './types'
-
-const getMidsemAdjustedWeek = (currentWeek: number, midsemStartDate: Date) => {
-  const currentDate = new Date()
-
-  if (currentDate.getTime() > midsemStartDate.getTime()) {
-    return Math.floor(currentWeek)
-  }
-
-  return Math.ceil(currentWeek)
-}
 
 export const getCurrentWeek = async () => {
   const currentYear = getCurrentYear()

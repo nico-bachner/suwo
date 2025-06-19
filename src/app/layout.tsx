@@ -2,6 +2,7 @@
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
+import { ReactNode } from 'react'
 
 import { cn } from '@/utils/cn'
 
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
 }
 
 type LayoutProps = Readonly<{
-  children: React.ReactNode
+  children: ReactNode
 }>
 
 export default function Layout({ children }: LayoutProps) {

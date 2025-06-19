@@ -1,10 +1,12 @@
+import { SVGAttributes } from 'react'
+
 export const SpinnerIcon = ({
   fill = 'none',
   strokeWidth = 2,
   strokeLinecap = 'round',
   strokeLinejoin = 'round',
   ...props
-}: React.SVGAttributes<SVGSVGElement>) => (
+}: SVGAttributes<SVGSVGElement>) => (
   <svg
     viewBox="0 0 24 24"
     fill={fill}

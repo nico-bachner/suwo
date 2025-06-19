@@ -1,8 +1,10 @@
+import { ComponentProps } from 'react'
+
 import { cn } from '@/utils/cn'
 
 import { InputLabel } from './input_label'
 
-type TextInputProps = React.ComponentProps<'input'> & {
+type TextInputProps = ComponentProps<'input'> & {
   errors?: string[]
   type?: 'text' | 'email' | 'password'
   name: string

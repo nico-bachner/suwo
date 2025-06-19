@@ -1,5 +1,7 @@
+import { ReactNode } from 'react'
+
 type SettingsSectionProps = {
-  children: React.ReactNode
+  children: ReactNode
   title: string
   description: string
 }

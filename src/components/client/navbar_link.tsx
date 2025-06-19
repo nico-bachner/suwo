@@ -2,11 +2,12 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { ReactNode } from 'react'
 
 import { cn } from '@/utils/cn'
 
 type NavbarLinkProps = {
-  children: React.ReactNode
+  children: ReactNode
   href: string
   className?: string
 }

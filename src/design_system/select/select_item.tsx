@@ -1,8 +1,9 @@
 import { CheckIcon } from '@heroicons/react/24/outline'
 import { Item, ItemIndicator, ItemText } from '@radix-ui/react-select'
+import { ReactNode } from 'react'
 
 type SelectItemProps = {
-  children: React.ReactNode
+  children: ReactNode
   value: string
 }
 

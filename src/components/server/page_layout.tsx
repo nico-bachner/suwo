@@ -1,6 +1,7 @@
 import { ChevronLeftIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ReactNode } from 'react'
 
 import { IMAGES, LINKS, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
 import { Icon } from '@/design_system/icon'
@@ -14,14 +15,14 @@ import { MobileMenu } from '../client/menu'
 import { NavbarLink } from '../client/navbar_link'
 
 type PageLayoutProps = {
-  children?: React.ReactNode
+  children?: ReactNode
   parent?: {
     title: string
     href: string
   }
   title: string
   subtitle?: string
-  action?: React.ReactNode
+  action?: ReactNode
   className?: string
 }
 
