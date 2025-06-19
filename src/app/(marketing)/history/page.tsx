@@ -3,24 +3,19 @@ import Link from 'next/link'
 
 import { PageLayout } from '@/components/server/page_layout'
 import { Divider } from '@/design_system/divider'
-import { fetchHistory } from '@/lib/notion/fetch_history'
 import { fetchHistoryPageMetadata } from '@/lib/notion/fetch_history_page_metadata'
+import { fetchHistoryYears } from '@/lib/notion/fetch_history_years'
 
 export const generateMetadata = async (): Promise<Metadata> =>
   await fetchHistoryPageMetadata()
 
 export default async function Page() {
   const { title } = await fetchHistoryPageMetadata()
-  const data = await fetchHistory()
+  const years = await fetchHistoryYears()
 
   return (
     <PageLayout title={title} className="flex flex-col items-center">
-      {data
-        .map(
-          ({ properties }) =>
-            properties.Year.type == 'number' && properties.Year.number,
-        )
-        .filter((number) => number)
+      {years
         .join(' - ')
         .split(' ')
         .map((value, index) =>

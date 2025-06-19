@@ -4,8 +4,8 @@ import { notFound } from 'next/navigation'
 
 import { PageLayout } from '@/components/server/page_layout'
 import { NextParams } from '@/lib/next/types'
-import { fetchHistory } from '@/lib/notion/fetch_history'
 import { fetchHistoryYearPage } from '@/lib/notion/fetch_history_year_page'
+import { fetchHistoryYears } from '@/lib/notion/fetch_history_years'
 import { getNotionClient } from '@/lib/notion/get_notion_client'
 import { getPageTitle } from '@/lib/notion/get_page_title'
 
@@ -14,17 +14,11 @@ type Params = {
 }
 
 export const generateStaticParams = async (): Promise<Params[]> => {
-  const data = await fetchHistory()
+  const years = await fetchHistoryYears()
 
-  return data
-    .map(
-      ({ properties }) =>
-        properties.Year.type == 'number' && properties.Year.number,
-    )
-    .filter((number): number is number => Boolean(number))
-    .map((year) => ({
-      year: year.toString(),
-    }))
+  return years.map((year) => ({
+    year: year.toString(),
+  }))
 }
 
 type PageProps = {
