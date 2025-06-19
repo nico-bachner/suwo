@@ -19,7 +19,7 @@ export default async function Page() {
         .join(' - ')
         .split(' ')
         .map((value, index) =>
-          value == '-' ? (
+          value === '-' ? (
             <Divider
               key={index}
               orientation="vertical"

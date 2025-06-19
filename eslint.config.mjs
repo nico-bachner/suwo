@@ -39,7 +39,6 @@ export default [
       'array-callback-return': 'error',
       'arrow-body-style': 'error',
       'block-scoped-var': 'error',
-      camelcase: 'warn',
       'capitalized-comments': 'error',
       'class-methods-use-this': 'error',
       complexity: 'error',
@@ -146,7 +145,12 @@ export default [
       'no-lonely-if': 'error',
       'no-loop-func': 'error',
       'no-loss-of-precision': 'error',
-      'no-magic-numbers': 'warn',
+      'no-magic-numbers': [
+        'warn',
+        {
+          ignoreArrayIndexes: true,
+        },
+      ],
       'no-misleading-character-class': 'error',
       'no-multi-assign': 'error',
       'no-multi-str': 'error',
