@@ -1,4 +1,4 @@
-const getBaseURL = () => {
+export const getBaseURL = () => {
   switch (process.env.VERCEL_ENV) {
     case 'production':
     case 'preview':
@@ -14,5 +14,3 @@ const getBaseURL = () => {
       return 'http://localhost:3000'
   }
 }
-
-export const BASE_URL = getBaseURL()

@@ -1,7 +1,7 @@
 import { CreateMemberFromRollCall } from '@/components/forms/roll_call'
 import { PageLayout } from '@/components/server/page_layout'
+import { BASE_URL } from '@/config'
 import { RollCallQRCodeDialog } from '@/features/roll_call/roll_call_qr_code_dialog'
-import { BASE_URL } from '@/utils/base_url'
 
 import { RollCallEntry } from './roll_call_entry'
 import { RollCallNavigation } from './roll_call_navigation'

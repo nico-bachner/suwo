@@ -2,8 +2,8 @@
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
-import { ReactNode } from 'react'
 
+import { LayoutProps } from '@/types'
 import { cn } from '@/utils/cn'
 
 import '../styles/globals.css'
@@ -23,10 +23,6 @@ export const metadata: Metadata = {
   title: 'SUWO',
   description: 'The Sydney University Wind Orchestra',
 }
-
-type LayoutProps = Readonly<{
-  children: ReactNode
-}>
 
 export default function Layout({ children }: LayoutProps) {
   return (
