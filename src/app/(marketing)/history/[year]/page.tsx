@@ -1,4 +1,3 @@
-import { isFullBlock } from '@notionhq/client'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -6,7 +5,7 @@ import { PageLayout } from '@/components/server/page_layout'
 import { NextParams } from '@/lib/next/types'
 import { fetchHistoryYearPage } from '@/lib/notion/fetch_history_year_page'
 import { fetchHistoryYears } from '@/lib/notion/fetch_history_years'
-import { getNotionClient } from '@/lib/notion/get_notion_client'
+import { fetchNotionPageContent } from '@/lib/notion/fetch_page_content'
 import { getPageTitle } from '@/lib/notion/get_page_title'
 
 type Params = {
@@ -48,19 +47,11 @@ export default async function Page({ params }: PageProps) {
     return notFound()
   }
 
-  const { blocks } = getNotionClient()
-
-  const { results } = await blocks.children.list({
-    block_id: page.id,
-  })
+  const content = await fetchNotionPageContent(page.id)
 
   return (
     <PageLayout title={getPageTitle(page) ?? year} className="prose">
-      {results.map((block) => {
-        if (!isFullBlock(block)) {
-          return null
-        }
-
+      {content.map((block) => {
         switch (block.type) {
           case 'heading_1':
             return (
