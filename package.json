@@ -35,6 +35,7 @@
     "zod": "^3.25.67"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^15.3.4",
     "@storybook/addon-docs": "^9.0.12",
     "@storybook/nextjs": "^9.0.12",
     "@tailwindcss/postcss": "^4.1.10",

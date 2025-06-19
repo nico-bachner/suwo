@@ -1,3 +1,4 @@
+import pluginNext from '@next/eslint-plugin-next'
 import pluginTypeScript from '@typescript-eslint/eslint-plugin'
 import parserTypeScript from '@typescript-eslint/parser'
 import pluginReact from 'eslint-plugin-react'
@@ -15,6 +16,7 @@ export default [
       typescript: pluginTypeScript,
       react: pluginReact,
       'react-hooks': pluginReactHooks,
+      next: pluginNext,
     },
     languageOptions: {
       parser: parserTypeScript,
@@ -363,6 +365,32 @@ export default [
       'react/require-render-return': 'error',
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'error',
+
+      /** Next.js */
+      'next/google-font-display': 'warn',
+      'next/google-font-preconnect': 'warn',
+      'next/next-script-for-ga': 'warn',
+      'next/no-async-client-component': 'warn',
+      'next/no-before-interactive-script-outside-document': 'warn',
+      'next/no-css-tags': 'warn',
+      'next/no-head-element': 'warn',
+      'next/no-html-link-for-pages': 'warn',
+      'next/no-img-element': 'warn',
+      'next/no-page-custom-font': 'warn',
+      'next/no-styled-jsx-in-document': 'warn',
+      'next/no-sync-scripts': 'warn',
+      'next/no-title-in-document-head': 'warn',
+      'next/no-typos': 'warn',
+      'next/no-unwanted-polyfillio': 'warn',
+      'next/inline-script-id': 'error',
+      'next/no-assign-module-variable': 'error',
+      'next/no-document-import-in-page': 'error',
+      'next/no-duplicate-head': 'error',
+      'next/no-head-import-in-document': 'error',
+      'next/no-script-component-in-head': 'error',
+      // Core Web Vitals
+      'next/no-html-link-for-pages': 'error',
+      'next/no-sync-scripts': 'error',
     },
   },
 ]
