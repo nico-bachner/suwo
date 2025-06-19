@@ -2,7 +2,7 @@ import { isFullDatabase } from '@notionhq/client'
 
 import { getNotionClient } from './get_notion_client'
 
-export const getNotionDB = async (databaseId: string) => {
+export const fetchNotionDatabase = async (databaseId: string) => {
   const client = getNotionClient()
 
   const database = await client.databases.retrieve({

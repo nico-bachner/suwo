@@ -2,29 +2,19 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 
 import { PageLayout } from '@/components/server/page_layout'
-import { NOTION_HISTORY_DB_ID } from '@/config'
 import { Divider } from '@/design_system/divider'
 import { fetchHistory } from '@/lib/notion/fetch_history'
-import { getNotionDB } from '@/lib/notion/fetch_notion_db'
+import { fetchHistoryPageMetadata } from '@/lib/notion/fetch_history_page_metadata'
 
-export const generateMetadata = async (): Promise<Metadata> => {
-  const { title, description } = await getNotionDB(NOTION_HISTORY_DB_ID)
-
-  return {
-    title: title[0].plain_text,
-    description: description[0].plain_text,
-  }
-}
+export const generateMetadata = async (): Promise<Metadata> =>
+  await fetchHistoryPageMetadata()
 
 export default async function Page() {
-  const { title } = await getNotionDB(NOTION_HISTORY_DB_ID)
+  const { title } = await fetchHistoryPageMetadata()
   const data = await fetchHistory()
 
   return (
-    <PageLayout
-      title={title[0].plain_text}
-      className="flex flex-col items-center"
-    >
+    <PageLayout title={title} className="flex flex-col items-center">
       {data
         .map(
           ({ properties }) =>
