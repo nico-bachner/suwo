@@ -38,7 +38,7 @@ export default async function Page({ params }: PageProps) {
         title: `View Profile`,
         href: `/members/${id}`,
       }}
-      title={`${given_name} ${family_name}`}
+      title={family_name ? `${given_name} ${family_name}` : given_name}
       subtitle={instrument ?? undefined}
       className="flex flex-col gap-12"
     >

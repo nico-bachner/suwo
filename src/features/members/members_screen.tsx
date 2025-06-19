@@ -16,6 +16,7 @@ export const MembersScreen = ({
 
         <div className="grid grid-cols-2 gap-2">
           {instrumentsByFamily[family].map((instrument) =>
+            // eslint-disable-next-line typescript/no-unnecessary-condition
             membersByInstrument[instrument.name]?.map(
               ({ id, given_name, family_name, instrument }) => (
                 <Link

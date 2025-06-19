@@ -31,7 +31,7 @@ export default async function Page({ params }: PageProps) {
         title: LINKS.MEMBERS.label,
         href: LINKS.MEMBERS.href,
       }}
-      title={`${given_name} ${family_name}`}
+      title={family_name ? `${given_name} ${family_name}` : given_name}
       subtitle={instrument ?? undefined}
       action={
         session.id == id && (
