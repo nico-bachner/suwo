@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
@@ -8,11 +7,13 @@ import { cn } from '@/utils/cn'
 
 import '../styles/globals.css'
 
+// eslint-disable-next-line new-cap
 const fontSans = Raleway({
   variable: '--font-sans',
   subsets: ['latin'],
 })
 
+// eslint-disable-next-line new-cap
 const fontSerif = Limelight({
   weight: '400',
   variable: '--font-serif',
