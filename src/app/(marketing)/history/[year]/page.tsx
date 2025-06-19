@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { PageLayout } from '@/components/server/page_layout'
 import { NextParams } from '@/lib/next/types'
 import { getHistory } from '@/lib/notion/get_history'
+import { getHistoryYearPage } from '@/lib/notion/get_history_year_page'
 import { getPageTitle } from '@/lib/notion/get_page_title'
 
 type Params = {
@@ -32,18 +33,8 @@ type PageProps = {
 export const generateMetadata = async ({
   params,
 }: PageProps): Promise<Metadata> => {
-  const data = await getHistory()
   const { year } = await params
-
-  if (!year) {
-    notFound()
-  }
-
-  const page = data.find(
-    ({ properties }) =>
-      properties.Year.type == 'number' &&
-      properties.Year.number == parseInt(year, 10),
-  )
+  const page = await getHistoryYearPage(year)
 
   if (!page) {
     return notFound()
@@ -55,18 +46,8 @@ export const generateMetadata = async ({
 }
 
 export default async function Page({ params }: PageProps) {
-  const data = await getHistory()
   const { year } = await params
-
-  if (!year) {
-    notFound()
-  }
-
-  const page = data.find(
-    ({ properties }) =>
-      properties.Year.type == 'number' &&
-      properties.Year.number == parseInt(year, 10),
-  )
+  const page = await getHistoryYearPage(year)
 
   if (!page) {
     return notFound()

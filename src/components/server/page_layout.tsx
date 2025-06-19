@@ -20,7 +20,7 @@ type PageLayoutProps = {
     title: string
     href: string
   }
-  title: string
+  title?: string
   subtitle?: string
   action?: ReactNode
   className?: string
