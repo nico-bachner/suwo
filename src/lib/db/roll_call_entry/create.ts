@@ -11,10 +11,6 @@ export const createRollCallEntry = async ({
 }: RollCall) => {
   const sql = getQueryBuilder()
 
-  if (semester == 'B') {
-    throw new Error('Cannot use roll call during the break')
-  }
-
   await sql`
     INSERT INTO roll_call (
       year,

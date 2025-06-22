@@ -1,7 +1,6 @@
 import { LINKS } from '@/config'
 import { fetchCurrentWeek } from '@/lib/usyd/fetch_current_week'
-import { getCurrentSemester } from '@/lib/usyd/get_current_semester'
-import { getCurrentYear } from '@/lib/usyd/get_current_year'
+import { getCurrentSemester, getCurrentYear } from '@/utils/date_manupulation'
 
 export const fetchCurrentWeekRollCallPath = async () => {
   const year = getCurrentYear()
@@ -9,11 +8,8 @@ export const fetchCurrentWeekRollCallPath = async () => {
   const week = await fetchCurrentWeek()
 
   if (week) {
-    return [
-      LINKS.ROLL_CALL.href,
-      year.toString(),
-      currentSemester,
-      week.toString(),
-    ].join('/')
+    const rollCallPath = [LINKS.ROLL_CALL.href, year, currentSemester]
+
+    return rollCallPath.join('/')
   }
 }

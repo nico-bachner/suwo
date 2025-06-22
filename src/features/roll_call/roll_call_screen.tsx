@@ -2,9 +2,7 @@ import Link from 'next/link'
 
 import { PageLayout } from '@/components/server/page_layout'
 import { MAX_WEEK } from '@/config'
-import { getCurrentSemester } from '@/lib/usyd/get_current_semester'
-import { getCurrentYear } from '@/lib/usyd/get_current_year'
-import { getSemesterNumber } from '@/lib/usyd/get_semester_number'
+import { getCurrentSemester, getCurrentYear } from '@/utils/date_manupulation'
 
 export const RollCallScreen = () => {
   const currentYear = getCurrentYear()
@@ -15,10 +13,9 @@ export const RollCallScreen = () => {
       <p className="text-center text-5xl font-bold">Come back next semester!</p>
 
       <p>
-        We are currently on break after our semester{' '}
-        {getSemesterNumber(currentSemester)} concert. Come back next semester,
-        or review the semester {getSemesterNumber(currentSemester)} roll calls
-        linked below.
+        We are currently on break after our semester {currentSemester} concert.
+        Come back next semester, or review the semester {currentSemester} roll
+        calls linked below.
       </p>
 
       <div className="mx-auto flex w-full max-w-screen-sm flex-row flex-wrap gap-1">

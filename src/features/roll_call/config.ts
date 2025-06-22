@@ -1,4 +1,4 @@
-import { Semester } from '@/lib/db/types'
+import { Semester } from '@/utils/date_manupulation'
 
 export const routes = {
   ROLL_CALL: '/roll-call',

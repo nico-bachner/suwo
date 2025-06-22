@@ -8,8 +8,7 @@ import { verifyEmailExists } from '@/lib/db/member/verify_email_exists'
 import { createRollCallEntry } from '@/lib/db/roll_call_entry/create'
 import { Member } from '@/lib/db/types'
 import { fetchCurrentWeek } from '@/lib/usyd/fetch_current_week'
-import { getCurrentSemester } from '@/lib/usyd/get_current_semester'
-import { getCurrentYear } from '@/lib/usyd/get_current_year'
+import { getCurrentSemester, getCurrentYear } from '@/utils/date_manupulation'
 
 type ActionState = {
   data: Omit<Member, 'id'>

@@ -1,3 +1,5 @@
+import { Semester } from '@/utils/date_manupulation'
+
 export type Table<T> = T[]
 type Public<T, K extends keyof T> = {
   [P in K]: T[P]
@@ -31,8 +33,6 @@ export type Profile = Public<
   Member,
   'id' | 'given_name' | 'family_name' | 'instrument'
 >
-
-export type Semester = 'S1' | 'S2' | 'B'
 
 export type RollCall = {
   year: number

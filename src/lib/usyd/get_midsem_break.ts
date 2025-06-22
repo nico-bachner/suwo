@@ -1,21 +1,13 @@
-import { getCurrentSemester } from './get_current_semester'
-import { getCurrentYear } from './get_current_year'
-import { getSemesterNumber } from './get_semester_number'
+import { getCurrentYear } from '@/utils/date_manupulation'
+
+import { getCurrentSemesterSessionCode } from './get_current_semester_session_code'
 import { KeyDate } from './types'
 
 export const getMidsemBreak = (keyDates: Record<string, KeyDate>[]) => {
   const currentYear = getCurrentYear()
-  const currentSemester = getCurrentSemester()
-  const currentSemesterNumber = getSemesterNumber(currentSemester)
+  const currentSemesterSessionCode = getCurrentSemesterSessionCode()
 
-  if (!currentSemesterNumber) {
-    return {
-      startDate: undefined,
-      endDate: undefined,
-    }
-  }
-
-  const keyDateKey = `${currentYear}-s${currentSemesterNumber}c-break`
+  const keyDateKey = `${currentYear}-${currentSemesterSessionCode}-break`
 
   const keyDate = keyDates.find((obj) => Object.keys(obj).includes(keyDateKey))
 
