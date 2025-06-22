@@ -81,13 +81,6 @@ export default [
       ],
       'max-nested-callbacks': 'error',
       'max-params': 'error',
-      'max-statements': [
-        'error',
-        10,
-        {
-          ignoreTopLevelFunctions: true,
-        },
-      ],
       'new-cap': 'error',
       'no-alert': 'error',
       'no-async-promise-executor': 'error',
