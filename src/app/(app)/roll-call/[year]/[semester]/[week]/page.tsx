@@ -1,11 +1,12 @@
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
-import { LINKS, MAX_WEEK } from '@/config'
+import { LINKS } from '@/config'
 import { CurrentWeekRollCallScreen } from '@/features/roll_call'
 import { getRollCallEntriesByWeek } from '@/lib/db/roll_call_entries/by_week'
 import { RollCall } from '@/lib/db/types'
 import { NextParams } from '@/lib/next/types'
+import { isValidWeek } from '@/lib/usyd/is_valid_week'
 import { Semester } from '@/utils/date_manupulation'
 
 type PageProps = {
@@ -29,7 +30,7 @@ export default async function Page({ params }: PageProps) {
     .safeParse(parseInt(decodeURIComponent(semesterParam), 10))
   const week = parseInt(decodeURIComponent(weekParam), 10)
 
-  if (!success || week < 1 || week > MAX_WEEK) {
+  if (!success || isValidWeek(week)) {
     redirect(LINKS.ROLL_CALL.href)
   }
 

@@ -19,9 +19,6 @@ export const FULL_NAME = 'The University of Sydney Wind Orchestra'
 export const SHORT_NAME = 'Sydney University Wind Orchestra'
 export const ACRONYM = 'SUWO'
 
-// For Roll Call
-export const MAX_WEEK = 13
-
 // Static Assets
 export const IMAGES = {
   ICON: {
