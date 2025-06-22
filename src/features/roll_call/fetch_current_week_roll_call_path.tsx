@@ -1,12 +1,12 @@
 import { LINKS } from '@/config'
+import { fetchCurrentWeek } from '@/lib/usyd/fetch_current_week'
 import { getCurrentSemester } from '@/lib/usyd/get_current_semester'
-import { getCurrentWeek } from '@/lib/usyd/get_current_week'
 import { getCurrentYear } from '@/lib/usyd/get_current_year'
 
-export const getCurrentWeekRollCallPath = async () => {
+export const fetchCurrentWeekRollCallPath = async () => {
   const year = getCurrentYear()
   const currentSemester = getCurrentSemester()
-  const week = await getCurrentWeek()
+  const week = await fetchCurrentWeek()
 
   if (week) {
     return [

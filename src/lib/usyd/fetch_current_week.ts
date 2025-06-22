@@ -7,7 +7,10 @@ import { getMidsemBreak } from './get_midsem_break'
 import { getTeachingDates } from './get_teaching_dates'
 import { KeyDate } from './types'
 
-export const getCurrentWeek = async () => {
+// eslint-disable-next-line no-magic-numbers
+const MILLISECONDS_IN_A_WEEK = 7 * 24 * 60 * 60 * 1000
+
+export const fetchCurrentWeek = async () => {
   const currentYear = getCurrentYear()
 
   const keyDates = await fetchJSON<Record<string, KeyDate>[]>(
@@ -18,19 +21,19 @@ export const getCurrentWeek = async () => {
   const { startDate: midsemStartDate } = getMidsemBreak(keyDates)
 
   if (!teachingDatesStartDate || !midsemStartDate) {
-    return undefined
+    return null
   }
 
   const currentDate = new Date()
 
   const currentWeek =
     (currentDate.getTime() - teachingDatesStartDate.getTime()) /
-    (7 * 24 * 60 * 60 * 1000)
+    MILLISECONDS_IN_A_WEEK
 
   const midsemAdjustedWeek = getMidsemAdjustedWeek(currentWeek, midsemStartDate)
 
   if (midsemAdjustedWeek > MAX_WEEK) {
-    return undefined
+    return null
   }
 
   return midsemAdjustedWeek

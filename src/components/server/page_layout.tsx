@@ -5,7 +5,7 @@ import { ReactNode } from 'react'
 
 import { IMAGES, LINKS, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
 import { Icon } from '@/design_system/icon'
-import { getCurrentWeekRollCallPath } from '@/features/roll_call/get_current_week_roll_call_path'
+import { fetchCurrentWeekRollCallPath } from '@/features/roll_call/fetch_current_week_roll_call_path'
 import { getSession } from '@/lib/auth/session'
 import { cn } from '@/utils/cn'
 
@@ -35,7 +35,7 @@ export const PageLayout = async ({
   className,
 }: PageLayoutProps) => {
   const { id } = await getSession()
-  const currentWeekRollCallPath = await getCurrentWeekRollCallPath()
+  const currentWeekRollCallPath = await fetchCurrentWeekRollCallPath()
 
   return (
     <div
