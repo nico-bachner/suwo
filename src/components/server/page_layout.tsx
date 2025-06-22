@@ -3,9 +3,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ReactNode } from 'react'
 
-import { IMAGES, LINKS, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
+import { IMAGES, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
 import { Icon } from '@/design_system/icon'
-import { fetchCurrentWeekRollCallPath } from '@/features/roll_call/fetch_current_week_roll_call_path'
 import { getSession } from '@/lib/auth/session'
 import { cn } from '@/utils/cn'
 
@@ -35,7 +34,6 @@ export const PageLayout = async ({
   className,
 }: PageLayoutProps) => {
   const { id } = await getSession()
-  const currentWeekRollCallPath = await fetchCurrentWeekRollCallPath()
 
   return (
     <div
@@ -97,21 +95,11 @@ export const PageLayout = async ({
         )}
 
         <div className="flex flex-1 flex-col gap-1 max-lg:hidden">
-          {NAV_LINKS.map(({ href, label }) => {
-            if (href === LINKS.ROLL_CALL.href) {
-              return (
-                <NavbarLink key={href} href={currentWeekRollCallPath ?? href}>
-                  {label}
-                </NavbarLink>
-              )
-            }
-
-            return (
-              <NavbarLink key={href} href={href}>
-                {label}
-              </NavbarLink>
-            )
-          })}
+          {NAV_LINKS.map(({ href, label }) => (
+            <NavbarLink key={href} href={href}>
+              {label}
+            </NavbarLink>
+          ))}
         </div>
 
         <Divider className="max-lg:hidden" />
