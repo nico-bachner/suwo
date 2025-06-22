@@ -1,8 +1,8 @@
-import { getMembersWithInstruments } from '@/lib/db/members/get'
+import { getActiveMembersWithInstruments } from '@/lib/db/members/get'
 import { Instrument, Profile } from '@/lib/db/types'
 
 export const getMembersByInstrument = async () => {
-  const members = await getMembersWithInstruments()
+  const members = await getActiveMembersWithInstruments()
 
   const membersByInstrument = members.reduce<
     Record<Instrument['name'], Profile[]>
