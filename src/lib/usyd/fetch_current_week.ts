@@ -1,6 +1,7 @@
 import { getCurrentYear } from '@/utils/date_manupulation'
 
 import { fetchJSON } from '../../utils/fetch_json'
+import { MAX_WEEK } from './config'
 import { getMidsemAdjustedWeek } from './get_midsem_adjusted_week'
 import { getMidsemBreak } from './get_midsem_break'
 import { getTeachingDates } from './get_teaching_dates'
@@ -26,6 +27,10 @@ export const fetchCurrentWeek = async () => {
     MILLISECONDS_IN_A_WEEK
 
   const midsemAdjustedWeek = getMidsemAdjustedWeek(currentWeek, midsemStartDate)
+
+  if (midsemAdjustedWeek > MAX_WEEK) {
+    return null
+  }
 
   return midsemAdjustedWeek
 }

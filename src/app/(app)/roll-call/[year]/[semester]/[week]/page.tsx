@@ -30,7 +30,7 @@ export default async function Page({ params }: PageProps) {
     .safeParse(parseInt(decodeURIComponent(semesterParam), 10))
   const week = parseInt(decodeURIComponent(weekParam), 10)
 
-  if (!success || isValidWeek(week)) {
+  if (!success || !isValidWeek(week)) {
     redirect(LINKS.ROLL_CALL.href)
   }
 
