@@ -71,14 +71,6 @@ export default [
       'max-classes-per-file': 'error',
       'max-depth': 'error',
       'max-lines': 'error',
-      'max-lines-per-function': [
-        'warn',
-        {
-          max: 50,
-          skipBlankLines: true,
-          skipComments: true,
-        },
-      ],
       'max-nested-callbacks': 'error',
       'max-params': 'error',
       'new-cap': 'error',
