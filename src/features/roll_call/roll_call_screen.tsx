@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { PageLayout } from '@/components/server/page_layout'
-import { MAX_WEEK } from '@/config'
+import { WEEKS } from '@/lib/usyd/config'
 import { getCurrentSemester, getCurrentYear } from '@/utils/date_manupulation'
 
 export const RollCallScreen = () => {
@@ -19,17 +19,15 @@ export const RollCallScreen = () => {
       </p>
 
       <div className="mx-auto flex w-full max-w-screen-sm flex-row flex-wrap gap-1">
-        {Array.from({ length: MAX_WEEK }, (_, index) => index + 1).map(
-          (week) => (
-            <Link
-              key={week}
-              href={`/roll-call/${currentYear.toString()}/${currentSemester}/${week}`}
-              className="bg-neutral-4 hover:bg-neutral-3 flex h-16 w-16 items-center justify-center rounded-md text-3xl transition-colors"
-            >
-              {week}
-            </Link>
-          ),
-        )}
+        {Array.from({ length: WEEKS }, (_, index) => index + 1).map((week) => (
+          <Link
+            key={week}
+            href={`/roll-call/${currentYear.toString()}/${currentSemester}/${week}`}
+            className="bg-neutral-4 hover:bg-neutral-3 flex h-16 w-16 items-center justify-center rounded-md text-3xl transition-colors"
+          >
+            {week}
+          </Link>
+        ))}
       </div>
     </PageLayout>
   )
