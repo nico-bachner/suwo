@@ -1,0 +1,52 @@
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["driverAdapters"]
+    output          = "../src/generated/prisma"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model user {
+    id         String   @id @default(uuid())
+    email      String   @unique
+    password   String
+    usu        String   @db.Char(7)
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+
+    verification_token verification_token[]
+    attendance         attendance[]
+    profile            profile[]
+}
+
+model profile {
+    user_id    String  @unique
+    first_name String?
+    last_name  String?
+    instrument String?
+    bio        String?
+    avatar     String?
+
+    user user @relation(fields: [user_id], references: [id])
+}
+
+model verification_token {
+    user_id    String
+    token      String   @unique
+    created_at DateTime @default(now())
+    expires_at DateTime
+
+    user user @relation(fields: [user_id], references: [id])
+}
+
+model attendance {
+    user_id String
+    date    DateTime @default(now())
+
+    user user @relation(fields: [user_id], references: [id])
+
+    @@unique([user_id, date])
+}
