@@ -1,4 +1,3 @@
-import { CreateMemberFromRollCall } from '@/components/forms/roll_call'
 import { PageLayout } from '@/components/server/page_layout'
 import { BASE_URL } from '@/config'
 import { RollCallQRCodeDialog } from '@/features/roll_call/roll_call_qr_code_dialog'
@@ -39,10 +38,6 @@ export const CurrentWeekRollCallScreen = ({
     </div>
 
     <RollCallNavigation year={year} semester={semester} week={week} />
-
-    <h2>Not in the list?</h2>
-
-    <CreateMemberFromRollCall />
 
     <RollCallQRCodeDialog
       value={`${BASE_URL}/roll-call/${year}/${semester}/${week}`}
