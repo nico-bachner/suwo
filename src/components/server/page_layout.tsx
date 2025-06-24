@@ -3,7 +3,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ReactNode } from 'react'
 
-import { IMAGES, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
+import {
+  IMAGES,
+  NAV_LINKS,
+  NAV_LINKS_LOGGED_IN,
+  NAV_SOCIAL_LINKS,
+} from '@/config'
 import { Icon } from '@/design_system/icon'
 import { getSession } from '@/lib/auth/session'
 import { cn } from '@/utils/cn'
@@ -35,6 +40,8 @@ export const PageLayout = async ({
 }: PageLayoutProps) => {
   const { id } = await getSession()
 
+  const userIsLoggedIn = true // Replace with actual logic when login is fixed
+  const links = userIsLoggedIn ? NAV_LINKS_LOGGED_IN : NAV_LINKS
   return (
     <div
       className={cn(
@@ -95,7 +102,7 @@ export const PageLayout = async ({
         )}
 
         <div className="flex flex-1 flex-col gap-1 max-lg:hidden">
-          {NAV_LINKS.map(({ href, label }) => (
+          {links.map(({ href, label }) => (
             <NavbarLink key={href} href={href}>
               {label}
             </NavbarLink>

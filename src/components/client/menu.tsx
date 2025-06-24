@@ -6,7 +6,12 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
-import { LINKS, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
+import {
+  LINKS,
+  NAV_LINKS,
+  NAV_LINKS_LOGGED_IN,
+  NAV_SOCIAL_LINKS,
+} from '@/config'
 import { Icon } from '@/design_system/icon'
 import { Member } from '@/lib/db/types'
 import { cn } from '@/utils/cn'
@@ -21,6 +26,8 @@ type MenuProps = {
 export const MobileMenu = ({ userId }: MenuProps) => {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
+  const userIsLoggedIn = true // Replace with actual logic when login is fixed
+  const links = userIsLoggedIn ? NAV_LINKS_LOGGED_IN : NAV_LINKS
 
   return (
     <Dialog
@@ -37,7 +44,7 @@ export const MobileMenu = ({ userId }: MenuProps) => {
       </Close>
 
       <div className="flex flex-col items-center gap-6">
-        {NAV_LINKS.map(({ href, label }) => (
+        {links.map(({ href, label }) => (
           <Link
             key={href}
             href={href}
