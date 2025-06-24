@@ -40,3 +40,39 @@ export type RollCall = {
   week: number
   member: number
 }
+
+export type Piece = {
+  id: string
+  title: string
+  composer: string
+  year: number
+  arranger?: string
+  notes?: string
+  date_purchased?: Date
+  expiry?: Date
+  price?: number
+}
+
+export type PracticePart = {
+  piece: string
+  url: string
+  instrument: string
+}
+export type PracticePartFull = {
+  id: string
+  piece: Piece
+  url: string
+  instrument: Instrument
+}
+
+export type Equipment = {
+  id: string
+  name: string
+  description?: string
+  inventory: number
+  condition?: string
+  condition_description?: string
+  acquisition_date?: Date
+  acquisition_price?: number
+  image?: string
+}

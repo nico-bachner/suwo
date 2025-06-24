@@ -73,6 +73,18 @@ export const LINKS = {
     href: '/join',
     label: 'Join',
   },
+  LIBRARY: {
+    href: '/library',
+    label: 'Library',
+  },
+  EQUIPMENT: {
+    href: '/equipment',
+    label: 'Equipment',
+  },
+  PRACTICE_PARTS: {
+    href: '/practice-parts',
+    label: 'Practice Parts',
+  },
 }
 
 export const SOCIAL_LINKS = {
@@ -98,5 +110,6 @@ export const NAV_LINKS = [
   LINKS.ROLL_CALL,
   LINKS.CALENDAR,
 ]
+export const NAV_LINKS_LOGGED_IN = [...NAV_LINKS, LINKS.LIBRARY, LINKS.EQUIPMENT, LINKS.PRACTICE_PARTS]
 
 export const NAV_SOCIAL_LINKS = Object.values(SOCIAL_LINKS)
