@@ -2,19 +2,19 @@ import { notFound, redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
 
 import { LINKS } from '@/config'
+import { VerificationToken } from '@/generated/prisma'
 import { createSession } from '@/lib/auth/session/create_session'
-import { VerificationToken } from '@/lib/db/types'
-import { verifyToken } from '@/lib/db/verification_token/verify_token'
 import { NextParams } from '@/lib/next/types'
+import prisma from '@/lib/prisma'
 
 type PageProps = {
-  params: NextParams<Pick<VerificationToken, 'member'>>
+  params: NextParams<Pick<VerificationToken, 'user_id'>>
 }
 
 export const GET = async (req: NextRequest, { params }: PageProps) => {
-  const { member } = await params
+  const { user_id } = await params
 
-  if (!member) {
+  if (!user_id) {
     return notFound()
   }
 
@@ -24,16 +24,23 @@ export const GET = async (req: NextRequest, { params }: PageProps) => {
     return Response.json({ message: 'Please provide a token' })
   }
 
-  const isValidToken = await verifyToken({
-    member: parseInt(member, 10),
-    token,
+  const verificationToken = await prisma.verificationToken.findUnique({
+    where: {
+      user_id,
+      token,
+      created_at: {
+        gte: new Date(Date.now() - 24 * 60 * 60 * 1000),
+      },
+    },
   })
 
-  if (!isValidToken) {
+  if (!verificationToken) {
     return Response.json({ message: 'Invalid token' })
   }
 
-  await createSession(parseInt(member, 10))
+  await createSession({
+    id: verificationToken.user_id,
+  })
 
   redirect(LINKS.SETTINGS.href)
 }
