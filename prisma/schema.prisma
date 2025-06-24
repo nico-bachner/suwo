@@ -44,11 +44,18 @@ model VerificationToken {
     user User @relation(fields: [user_id], references: [id])
 }
 
+enum Semester {
+    SEMESTER_1
+    SEMESTER_2
+}
+
 model Attendance {
-    user_id String
-    date    DateTime @default(now())
+    user_id  String
+    year     Int
+    semester Semester
+    week     Int      @db.SmallInt
 
     user User @relation(fields: [user_id], references: [id])
 
-    @@unique([user_id, date])
+    @@unique([user_id, year, semester, week])
 }
