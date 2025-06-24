@@ -2,13 +2,11 @@
 
 import { typeToFlattenedError, z } from 'zod'
 
-import { getInstruments } from '@/lib/db/instruments/get'
-import { createMember } from '@/lib/db/member/create'
-import { verifyEmailExists } from '@/lib/db/member/verify_email_exists'
-import { Member } from '@/lib/db/types'
+import { User } from '@/generated/prisma'
+import prisma from '@/lib/prisma'
 
 type ActionState = {
-  data: Omit<Member, 'id'>
+  data: Omit<User, 'id'>
   errors: typeToFlattenedError<ActionState['data']>
 }
 
@@ -16,7 +14,7 @@ export const formAction = async (
   previousState: ActionState,
   formData: FormData,
 ): Promise<ActionState> => {
-  const instruments = await getInstruments()
+  const instruments = await prisma.instrument.findMany()
 
   const schema = z.object({
     given_name: z
@@ -98,9 +96,13 @@ export const formAction = async (
     }
   }
 
-  const member = await verifyEmailExists(data.email)
+  const userExists = Boolean(
+    await prisma.user.findUnique({
+      where: { email: data.email },
+    }),
+  )
 
-  if (member) {
+  if (userExists) {
     return {
       ...previousState,
       errors: {
@@ -110,9 +112,32 @@ export const formAction = async (
     }
   }
 
-  await createMember({
-    ...data,
-    usu: data.usu ? parseInt(data.usu, 10) : null,
+  await prisma.user.create({
+    data: {
+      email: data.email,
+      password: data.password,
+      usu_number: data.usu,
+      Profile: {
+        create: {
+          given_name: data.given_name,
+          family_name: data.family_name,
+          instrument_name: data.instrument,
+        },
+      },
+      MailingListRecipient: {
+        create: {
+          email: data.email,
+        },
+      },
+    },
+  })
+
+  await prisma.profile.create({
+    data: {
+      user: {
+        connect: { email: data.email },
+      },
+    },
   })
 
   return {

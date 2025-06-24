@@ -13,13 +13,24 @@ model User {
     id         String   @id @default(uuid())
     email      String   @unique
     password   String
-    usu        String   @db.Char(7)
+    usu_number String?  @db.Char(7)
     created_at DateTime @default(now())
     updated_at DateTime @updatedAt
 
-    Profile           Profile?
-    VerificationToken VerificationToken[]
-    Attendance        Attendance[]
+    Profile              Profile?
+    VerificationToken    VerificationToken[]
+    Attendance           Attendance[]
+    UsuMembership        UsuMembership?
+    MailingListRecipient MailingListRecipient?
+}
+
+model UsuMembership {
+    user_id    String   @unique
+    number     String   @unique @db.Char(7)
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+
+    user User @relation(fields: [user_id], references: [id])
 }
 
 model Profile {
@@ -49,6 +60,8 @@ model MailingListRecipient {
     user_id    String?  @unique
     created_at DateTime @default(now())
     updated_at DateTime @updatedAt
+
+    user User? @relation(fields: [user_id], references: [id])
 }
 
 enum Semester {
