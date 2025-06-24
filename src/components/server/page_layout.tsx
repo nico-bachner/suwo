@@ -5,7 +5,7 @@ import { ReactNode } from 'react'
 
 import { IMAGES, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
 import { Icon } from '@/design_system/icon'
-import { getSession } from '@/lib/auth/session'
+import { getSession } from '@/lib/auth/session/get_session'
 import { cn } from '@/utils/cn'
 
 import { Button } from '../../design_system/button'

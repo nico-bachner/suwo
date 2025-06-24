@@ -27,6 +27,7 @@
     "@react-email/components": "^0.0.41",
     "@vercel/analytics": "^1.5.0",
     "argon2": "^0.43.0",
+    "dotenv": "^16.5.0",
     "jose": "^6.0.11",
     "next": "^15.3.4",
     "react": "^19.1.0",

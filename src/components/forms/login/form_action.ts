@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation'
 import { typeToFlattenedError, z } from 'zod'
 
-import { createSession } from '@/lib/auth/session'
+import { createSession } from '@/lib/auth/session/create_session'
 import { getIDFromEmail } from '@/lib/db/member/get_id_from_email'
 import { verifyPassword } from '@/lib/db/member/verify_password'
 import { Member } from '@/lib/db/types'

@@ -9,7 +9,7 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model user {
+model User {
     id         String   @id @default(uuid())
     email      String   @unique
     password   String
@@ -17,36 +17,38 @@ model user {
     created_at DateTime @default(now())
     updated_at DateTime @updatedAt
 
-    verification_token verification_token[]
-    attendance         attendance[]
-    profile            profile[]
+    verification_token VerificationToken[]
+    attendance         Attendance[]
+    profile            Profile[]
 }
 
-model profile {
-    user_id    String  @unique
-    first_name String?
-    last_name  String?
-    instrument String?
-    bio        String?
-    avatar     String?
+model Profile {
+    user_id      String  @unique
+    handle       String  @unique @default(uuid())
+    given_name   String?
+    family_name  String?
+    display_name String?
+    instrument   String?
+    bio          String?
+    avatar       String?
 
-    user user @relation(fields: [user_id], references: [id])
+    user User @relation(fields: [user_id], references: [id])
 }
 
-model verification_token {
+model VerificationToken {
     user_id    String
     token      String   @unique
     created_at DateTime @default(now())
     expires_at DateTime
 
-    user user @relation(fields: [user_id], references: [id])
+    user User @relation(fields: [user_id], references: [id])
 }
 
-model attendance {
+model Attendance {
     user_id String
     date    DateTime @default(now())
 
-    user user @relation(fields: [user_id], references: [id])
+    user User @relation(fields: [user_id], references: [id])
 
     @@unique([user_id, date])
 }

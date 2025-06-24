@@ -2,7 +2,7 @@ import { notFound, redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
 
 import { LINKS } from '@/config'
-import { createSession } from '@/lib/auth/session'
+import { createSession } from '@/lib/auth/session/create_session'
 import { VerificationToken } from '@/lib/db/types'
 import { verifyToken } from '@/lib/db/verification_token/verify_token'
 import { NextParams } from '@/lib/next/types'
