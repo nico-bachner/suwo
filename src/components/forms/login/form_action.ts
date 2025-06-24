@@ -1,15 +1,16 @@
 'use server'
 
+import { verify } from 'argon2'
 import { redirect } from 'next/navigation'
 import { typeToFlattenedError, z } from 'zod'
 
+import { routes } from '@/features/roll_call/config'
+import { User } from '@/generated/prisma'
 import { createSession } from '@/lib/auth/session/create_session'
-import { getIDFromEmail } from '@/lib/db/member/get_id_from_email'
-import { verifyPassword } from '@/lib/db/member/verify_password'
-import { Member } from '@/lib/db/types'
+import prisma from '@/lib/prisma'
 
 type ActionState = {
-  data: Pick<Member, 'email' | 'password'>
+  data: Pick<User, 'email' | 'password'>
   errors: typeToFlattenedError<ActionState['data']>
 }
 
@@ -36,9 +37,13 @@ export const formAction = async (
     }
   }
 
-  const id = await getIDFromEmail(data.email)
+  const user = await prisma.user.findUnique({
+    where: {
+      email: data.email,
+    },
+  })
 
-  if (!id) {
+  if (!user) {
     return {
       ...previousState,
       errors: {
@@ -49,12 +54,15 @@ export const formAction = async (
       },
     }
   }
-  const passwordMatch = await verifyPassword(data)
+
+  const passwordMatch = await verify(user.password, data.password)
 
   if (passwordMatch) {
-    await createSession(id)
+    await createSession({
+      id: user.id,
+    })
 
-    redirect(`/members/${id}`)
+    redirect(routes.ROLL_CALL)
   }
 
   return {
