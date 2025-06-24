@@ -1,10 +1,14 @@
 import { API_INDENT_SIZE } from '@/config'
-import { getMailingList } from '@/lib/db/members/get_mailing_list'
+import prisma from '@/lib/prisma'
 
 export const GET = async () => {
-  const emails = await getMailingList()
+  const mailingListRecipients = await prisma.mailingListRecipient.findMany()
+  const emails = mailingListRecipients.map(({ email }) => email)
 
-  const json = JSON.stringify(emails, null, API_INDENT_SIZE)
-
-  return new Response(json)
+  return new Response(JSON.stringify(emails, null, API_INDENT_SIZE), {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
 }
