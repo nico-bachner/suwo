@@ -17,22 +17,22 @@ model User {
     created_at DateTime @default(now())
     updated_at DateTime @updatedAt
 
-    verification_token VerificationToken[]
-    attendance         Attendance[]
-    profile            Profile[]
+    Profile           Profile?
+    VerificationToken VerificationToken[]
+    Attendance        Attendance[]
 }
 
 model Profile {
-    user_id      String  @unique
-    handle       String  @unique @default(uuid())
-    given_name   String?
-    family_name  String?
-    display_name String?
-    instrument   String?
-    bio          String?
-    avatar       String?
+    user_id         String  @unique
+    handle          String  @unique @default(uuid())
+    given_name      String?
+    family_name     String?
+    display_name    String?
+    instrument_name String?
+    bio             String?
 
-    user User @relation(fields: [user_id], references: [id])
+    user       User        @relation(fields: [user_id], references: [id])
+    instrument Instrument? @relation(fields: [instrument_name], references: [name])
 }
 
 model VerificationToken {
@@ -65,4 +65,12 @@ model Attendance {
     user User @relation(fields: [user_id], references: [id])
 
     @@unique([user_id, year, semester, week])
+}
+
+model Instrument {
+    name        String  @unique
+    slug        String  @unique
+    description String?
+
+    Profile Profile[]
 }
