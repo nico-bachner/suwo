@@ -43,22 +43,7 @@ export const formAction = async (
         .trim(),
     ),
     email: z.string().email().trim(),
-    password: z
-      .string()
-      .min(8, { message: 'Password must be at least 8 characters long' })
-      .regex(/[a-z]/u, {
-        message: 'Password must contain at least one lowercase letter.',
-      })
-      .regex(/[A-Z]/u, {
-        message: 'Password must contain at least one uppercase letter.',
-      })
-      .regex(/[0-9]/u, {
-        message: 'Password must contain at least one number.',
-      })
-      .regex(/[^a-zA-Z0-9]/u, {
-        message: 'Password must contain at least one special character.',
-      })
-      .trim(),
+    password: z.string(),
     usu: z.nullable(
       z
         .string()
