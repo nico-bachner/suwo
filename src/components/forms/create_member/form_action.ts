@@ -11,8 +11,8 @@ import prisma from '@/lib/prisma'
 
 type ActionState = {
   data: Pick<User, 'email' | 'password'> &
-    Pick<UsuMembership, 'number'> &
     Pick<Profile, 'given_name' | 'family_name' | 'instrument_name'> & {
+      usuNumber: UsuMembership['number'] | null
       isMailingListRecipient: boolean
     }
   errors: typeToFlattenedError<ActionState['data']>

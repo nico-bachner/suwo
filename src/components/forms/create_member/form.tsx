@@ -19,10 +19,10 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
     data: {
       email: '',
       password: '',
-      usu_number: null,
-      given_name: null,
+      given_name: '',
       family_name: null,
       instrument_name: null,
+      usuNumber: null,
       isMailingListRecipient: true,
     },
     errors: {
@@ -46,7 +46,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           autoComplete="given-name"
           placeholder='e.g. "Ambrose"'
           required
-          defaultValue={state.data.given_name ?? undefined}
+          defaultValue={state.data.given_name}
           errors={state.errors.fieldErrors.given_name}
           className="flex-1"
         />
@@ -90,8 +90,8 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           label="USU Number"
           inputMode="numeric"
           placeholder='e.g. "1234567"'
-          defaultValue={state.data.usu_number ?? undefined}
-          errors={state.errors.fieldErrors.usu_number}
+          defaultValue={state.data.usuNumber ?? undefined}
+          errors={state.errors.fieldErrors.usuNumber}
           className="flex-1"
         />
 
