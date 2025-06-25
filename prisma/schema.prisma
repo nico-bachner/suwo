@@ -30,7 +30,7 @@ model UsuMembership {
     created_at DateTime @default(now())
     updated_at DateTime @updatedAt
 
-    user User @relation(fields: [user_id], references: [id])
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 model Profile {
@@ -42,7 +42,7 @@ model Profile {
     instrument_name String?
     bio             String?
 
-    user       User        @relation(fields: [user_id], references: [id])
+    user       User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
     instrument Instrument? @relation(fields: [instrument_name], references: [name])
 }
 
@@ -52,7 +52,7 @@ model VerificationToken {
     created_at DateTime @default(now())
     expires_at DateTime
 
-    user User @relation(fields: [user_id], references: [id])
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 model MailingListRecipient {
@@ -61,7 +61,7 @@ model MailingListRecipient {
     created_at DateTime @default(now())
     updated_at DateTime @updatedAt
 
-    user User? @relation(fields: [user_id], references: [id])
+    user User? @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 enum Semester {
@@ -75,7 +75,7 @@ model Attendance {
     semester Semester
     week     Int      @db.SmallInt
 
-    user User @relation(fields: [user_id], references: [id])
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
     @@unique([user_id, year, semester, week])
 }
