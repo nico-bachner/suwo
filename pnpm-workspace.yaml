@@ -1,8 +1,10 @@
 onlyBuiltDependencies:
   - '@prisma/client'
+  - '@prisma/engines'
   - '@tailwindcss/oxide'
   - argon2
   - core-js-pure
   - esbuild
+  - prisma
   - sharp
   - unrs-resolver
