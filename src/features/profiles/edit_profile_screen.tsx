@@ -4,14 +4,14 @@ import { SettingsSection } from '@/design_system/settings_section'
 
 import { ProfileScreenProps } from './types'
 
-export const EditProfileScreen = ({ profile, session }: ProfileScreenProps) => (
+export const EditProfileScreen = ({ profile }: ProfileScreenProps) => (
   <PageLayout
     parent={{
       title: `View Profile`,
       href: `/members/${profile.handle}`,
     }}
-    title={profile.display_name}
-    subtitle={profile.instrument}
+    title={profile.display_name ?? undefined}
+    subtitle={profile.instrument_name ?? undefined}
     className="flex flex-col gap-12"
   >
     <SettingsSection

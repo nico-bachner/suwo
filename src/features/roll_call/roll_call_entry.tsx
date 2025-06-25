@@ -39,7 +39,7 @@ export const RollCallEntry = ({
   >
     <p className="flex flex-1 flex-row gap-2 px-4 font-bold">
       <span className="text-gray-300">{profile.display_name}</span>
-      <span className="text-gray-500">{profile.instrument}</span>
+      <span className="text-gray-500">{profile.instrument_name}</span>
     </p>
 
     {present ? (

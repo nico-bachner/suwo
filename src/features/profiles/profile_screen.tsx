@@ -13,7 +13,7 @@ export const ProfileScreen = ({ profile, session }: ProfileScreenProps) => (
       href: LINKS.MEMBERS.href,
     }}
     title={profile.display_name ?? undefined}
-    subtitle={profile.instrument ?? undefined}
+    subtitle={profile.instrument_name ?? undefined}
     action={
       session.id === profile.user_id && (
         <Link
