@@ -11,7 +11,7 @@ export default [
   },
   {
     files: ['./src/**/*.ts', './src/**/*.tsx'],
-    ignores: ['.next/**/*', 'storybook-static/**/*'],
+    ignores: ['.next/**/*', 'storybook-static/**/*', 'src/generated/**/*'],
     plugins: {
       typescript: pluginTypeScript,
       react: pluginReact,
