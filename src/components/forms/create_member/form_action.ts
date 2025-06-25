@@ -5,12 +5,13 @@ import { redirect } from 'next/navigation'
 import { typeToFlattenedError, z } from 'zod'
 
 import { routes } from '@/features/roll_call/config'
-import { Profile, User } from '@/generated/prisma'
+import { Profile, User, UsuMembership } from '@/generated/prisma'
 import { createSession } from '@/lib/auth/session/create_session'
 import prisma from '@/lib/prisma'
 
 type ActionState = {
-  data: Pick<User, 'email' | 'password' | 'usu_number'> &
+  data: Pick<User, 'email' | 'password'> &
+    Pick<UsuMembership, 'number'> &
     Pick<Profile, 'given_name' | 'family_name' | 'instrument_name'> & {
       isMailingListRecipient: boolean
     }
@@ -123,7 +124,6 @@ export const formAction = async (
     data: {
       email: data.email,
       password: await hash(data.password),
-      usu_number: data.usu,
       Profile: {
         create: {
           given_name: data.given_name,
@@ -139,13 +139,14 @@ export const formAction = async (
     },
   })
 
-  await prisma.profile.create({
-    data: {
-      user: {
-        connect: { email: data.email },
+  if (data.usu) {
+    await prisma.usuMembership.create({
+      data: {
+        user_id: user.id,
+        number: data.usu,
       },
-    },
-  })
+    })
+  }
 
   await createSession({
     id: user.id,
