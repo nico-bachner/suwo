@@ -1,9 +1,24 @@
-import { getMember } from '@/lib/db/member/get_member'
+import { getSession } from '@/lib/auth/session/get_session'
+import prisma from '@/lib/prisma'
 
 import { SetCommunicationsPreferencesForm } from './form'
 
 export const SetCommunicationsPreferences = async () => {
-  const { mailing_list } = await getMember()
+  const { id } = await getSession()
 
-  return <SetCommunicationsPreferencesForm mailing_list={mailing_list} />
+  if (!id) {
+    return null
+  }
+
+  const mailingListRecipient = await prisma.mailingListRecipient.findUnique({
+    where: {
+      user_id: id,
+    },
+  })
+
+  return (
+    <SetCommunicationsPreferencesForm
+      isMailingListRecipient={Boolean(mailingListRecipient)}
+    />
+  )
 }

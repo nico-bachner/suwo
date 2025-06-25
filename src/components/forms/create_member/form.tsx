@@ -6,24 +6,24 @@ import { Checkbox } from '@/design_system/checkbox'
 import { Form } from '@/design_system/form'
 import { Select, SelectItem } from '@/design_system/select'
 import { TextInput } from '@/design_system/text_input'
-import { Instrument, Table } from '@/lib/db/types'
+import { Instrument } from '@/generated/prisma'
 
 import { formAction } from './form_action'
 
 type CreateMemberFormProps = {
-  instruments: Table<Instrument>
+  instruments: Instrument[]
 }
 
 export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
   const [state, action, pending] = useActionState(formAction, {
     data: {
-      given_name: '',
-      family_name: null,
       email: '',
       password: '',
-      usu: null,
-      instrument: null,
-      mailing_list: true,
+      usu_number: null,
+      given_name: null,
+      family_name: null,
+      instrument_name: null,
+      isMailingListRecipient: true,
     },
     errors: {
       formErrors: [],
@@ -46,7 +46,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           autoComplete="given-name"
           placeholder='e.g. "Ambrose"'
           required
-          defaultValue={state.data.given_name}
+          defaultValue={state.data.given_name ?? undefined}
           errors={state.errors.fieldErrors.given_name}
           className="flex-1"
         />
@@ -90,8 +90,8 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           label="USU Number"
           inputMode="numeric"
           placeholder='e.g. "1234567"'
-          defaultValue={state.data.usu ?? undefined}
-          errors={state.errors.fieldErrors.usu}
+          defaultValue={state.data.usu_number ?? undefined}
+          errors={state.errors.fieldErrors.usu_number}
           className="flex-1"
         />
 
@@ -99,8 +99,8 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
           form="new-member-form"
           name="instrument"
           label="Instrument"
-          defaultValue={state.data.instrument ?? undefined}
-          errors={state.errors.fieldErrors.instrument}
+          defaultValue={state.data.instrument_name ?? undefined}
+          errors={state.errors.fieldErrors.instrument_name}
           placeholder="Select Instrument..."
         >
           {instruments.map(({ name }) => (
@@ -114,7 +114,7 @@ export const CreateMemberForm = ({ instruments }: CreateMemberFormProps) => {
       <Checkbox
         name="mailing-list"
         label="Sign up for weekly rehearsal updates"
-        defaultChecked={state.data.mailing_list}
+        defaultChecked={state.data.isMailingListRecipient}
         className="mt-4 self-center"
       />
     </Form>

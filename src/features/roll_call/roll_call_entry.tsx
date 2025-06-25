@@ -1,37 +1,45 @@
 import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
 
-import { createRollCallEntry } from '@/lib/db/roll_call_entry/create'
+import { Attendance, Profile } from '@/generated/prisma'
+import prisma from '@/lib/prisma'
 
-import { RollCallEntryProps } from './types'
+type RollCallEntryProps = {
+  year: Attendance['year']
+  semester: Attendance['semester']
+  week: Attendance['week']
+  profile: Profile
+  present: boolean
+}
 
 export const RollCallEntry = ({
-  id,
   year,
   semester,
   week,
-  given_name,
-  family_name,
-  instrument,
+  profile,
   present,
 }: RollCallEntryProps) => (
   <form
     action={async () => {
       'use server'
 
-      await createRollCallEntry({
-        year,
-        semester,
-        week,
-        member: id,
+      await prisma.attendance.create({
+        data: {
+          year,
+          semester,
+          week,
+          user: {
+            connect: {
+              id: profile.user_id,
+            },
+          },
+        },
       })
     }}
     className="flex flex-row items-center odd:bg-gray-800"
   >
     <p className="flex flex-1 flex-row gap-2 px-4 font-bold">
-      <span className="text-gray-300">
-        {given_name} {family_name}
-      </span>
-      <span className="text-gray-500">{instrument}</span>
+      <span className="text-gray-300">{profile.display_name}</span>
+      <span className="text-gray-500">{profile.instrument_name}</span>
     </p>
 
     {present ? (

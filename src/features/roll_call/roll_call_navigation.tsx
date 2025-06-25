@@ -2,11 +2,14 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 
 import { Button } from '@/design_system/button'
+import { Attendance } from '@/generated/prisma'
 import { MAX_WEEK, MIN_WEEK } from '@/lib/usyd/config'
 
-import { RollCallDate } from './types'
-
-export const RollCallNavigation = ({ year, semester, week }: RollCallDate) => (
+export const RollCallNavigation = ({
+  year,
+  semester,
+  week,
+}: Pick<Attendance, 'year' | 'semester' | 'week'>) => (
   <nav className="bg-neutral-5 sticky bottom-0 mx-auto grid w-full max-w-screen-sm grid-cols-2 gap-4 p-4 backdrop-blur-lg">
     {week > MIN_WEEK && (
       <Link

@@ -1,14 +1,20 @@
 'use server'
 
+import { hash } from 'argon2'
+import { redirect } from 'next/navigation'
 import { typeToFlattenedError, z } from 'zod'
 
-import { getInstruments } from '@/lib/db/instruments/get'
-import { createMember } from '@/lib/db/member/create'
-import { verifyEmailExists } from '@/lib/db/member/verify_email_exists'
-import { Member } from '@/lib/db/types'
+import { routes } from '@/features/roll_call/config'
+import { Profile, User, UsuMembership } from '@/generated/prisma'
+import { createSession } from '@/lib/auth/session/create_session'
+import prisma from '@/lib/prisma'
 
 type ActionState = {
-  data: Omit<Member, 'id'>
+  data: Pick<User, 'email' | 'password'> &
+    Pick<UsuMembership, 'number'> &
+    Pick<Profile, 'given_name' | 'family_name' | 'instrument_name'> & {
+      isMailingListRecipient: boolean
+    }
   errors: typeToFlattenedError<ActionState['data']>
 }
 
@@ -16,7 +22,7 @@ export const formAction = async (
   previousState: ActionState,
   formData: FormData,
 ): Promise<ActionState> => {
-  const instruments = await getInstruments()
+  const instruments = await prisma.instrument.findMany()
 
   const schema = z.object({
     given_name: z
@@ -98,9 +104,13 @@ export const formAction = async (
     }
   }
 
-  const member = await verifyEmailExists(data.email)
+  const userExists = Boolean(
+    await prisma.user.findUnique({
+      where: { email: data.email },
+    }),
+  )
 
-  if (member) {
+  if (userExists) {
     return {
       ...previousState,
       errors: {
@@ -110,16 +120,37 @@ export const formAction = async (
     }
   }
 
-  await createMember({
-    ...data,
-    usu: data.usu ? parseInt(data.usu, 10) : null,
+  const user = await prisma.user.create({
+    data: {
+      email: data.email,
+      password: await hash(data.password),
+      Profile: {
+        create: {
+          given_name: data.given_name,
+          family_name: data.family_name,
+          instrument_name: data.instrument,
+        },
+      },
+      MailingListRecipient: {
+        create: {
+          email: data.email,
+        },
+      },
+    },
   })
 
-  return {
-    ...previousState,
-    errors: {
-      formErrors: [],
-      fieldErrors: {},
-    },
+  if (data.usu) {
+    await prisma.usuMembership.create({
+      data: {
+        user_id: user.id,
+        number: data.usu,
+      },
+    })
   }
+
+  await createSession({
+    id: user.id,
+  })
+
+  redirect(routes.ROLL_CALL)
 }

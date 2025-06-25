@@ -1,8 +1,9 @@
+import { $Enums } from '@/generated/prisma'
+
 import { getCurrentMonth } from './get_current_month'
 import { Month } from './month'
-import { Semester } from './semester'
 
-export const getCurrentSemester = (): Semester => {
+export const getCurrentSemester = (): $Enums.Semester => {
   const currentMonth = getCurrentMonth()
 
   switch (currentMonth) {
@@ -12,13 +13,13 @@ export const getCurrentSemester = (): Semester => {
     case Month.April:
     case Month.May:
     case Month.June:
-      return Semester.SEMESTER_1
+      return $Enums.Semester.SEMESTER_1
     case Month.July:
     case Month.August:
     case Month.September:
     case Month.October:
     case Month.November:
     case Month.December:
-      return Semester.SEMESTER_2
+      return $Enums.Semester.SEMESTER_2
   }
 }

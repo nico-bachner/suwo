@@ -1,0 +1,164 @@
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["driverAdapters"]
+    output          = "../src/generated/prisma"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id         String   @id @default(uuid())
+    email      String   @unique
+    password   String
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+
+    Profile              Profile?
+    VerificationTokens   VerificationToken[]
+    Attendances          Attendance[]
+    UsuMembership        UsuMembership?
+    MailingListRecipient MailingListRecipient?
+    Payments             Payment[]
+    UserRole             UserRole[]
+}
+
+model UserRole {
+    user_id   String
+    role_name String
+
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    role Role @relation(fields: [role_name], references: [name], onUpdate: Cascade, onDelete: Cascade)
+
+    @@id([user_id, role_name])
+}
+
+model Payment {
+    user_id    String
+    amount     Float
+    created_at DateTime @default(now())
+
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@id([user_id, created_at])
+}
+
+model Privilege {
+    name          String          @id
+    created_at    DateTime        @default(now())
+    updated_at    DateTime        @updatedAt
+    RolePrivilege RolePrivilege[]
+}
+
+model Role {
+    name          String          @id
+    email         String?         @unique
+    description   String?
+    created_at    DateTime        @default(now())
+    updated_at    DateTime        @updatedAt
+    RolePrivilege RolePrivilege[]
+    UserRole      UserRole[]
+}
+
+model RolePrivilege {
+    role_name      String
+    privilege_name String
+
+    role      Role      @relation(fields: [role_name], references: [name], onUpdate: Cascade, onDelete: Cascade)
+    privilege Privilege @relation(fields: [privilege_name], references: [name], onUpdate: Cascade, onDelete: Cascade)
+
+    @@id([role_name, privilege_name])
+}
+
+model UsuMembership {
+    user_id    String   @id
+    number     String   @unique @db.Char(7)
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model Profile {
+    user_id         String  @id
+    handle          String  @unique @default(uuid())
+    given_name      String
+    family_name     String?
+    display_name    String?
+    instrument_name String?
+    bio             String?
+
+    user       User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    instrument Instrument? @relation(fields: [instrument_name], references: [name])
+}
+
+model VerificationToken {
+    user_id    String
+    token      String   @unique
+    created_at DateTime @default(now())
+    expires_at DateTime
+
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model MailingListRecipient {
+    user_id    String   @id
+    email      String   @unique
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+
+    user User? @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+enum Semester {
+    SEMESTER_1
+    SEMESTER_2
+}
+
+model Attendance {
+    user_id  String
+    year     Int
+    semester Semester
+    week     Int      @db.SmallInt
+
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@unique([user_id, year, semester, week])
+}
+
+model Instrument {
+    name        String  @unique
+    slug        String  @unique
+    description String?
+
+    Profiles Profile[]
+}
+
+model Equipment {
+    id                String   @id @default(uuid())
+    name              String
+    inventory         Int      @default(1)
+    condition         String   @default("OK")
+    acquisition_date  DateTime
+    acquisition_price Float?
+    description       String?
+
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+}
+
+model Library {
+    id                String    @id @default(uuid())
+    title             String
+    acquisition_date  DateTime
+    acquisition_price Float?
+    composer          String?
+    arranger          String?
+    notes             String?
+    lease_expiry      DateTime?
+
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+}

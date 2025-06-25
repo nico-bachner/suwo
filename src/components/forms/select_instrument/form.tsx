@@ -4,22 +4,21 @@ import { useActionState } from 'react'
 
 import { Form } from '@/design_system/form'
 import { Select, SelectItem } from '@/design_system/select'
-import { Instrument, Member, Table } from '@/lib/db/types'
+import { Instrument, Profile } from '@/generated/prisma'
 
 import { formAction } from './form_action'
 
-type SelectInstrumentFormProps = {
-  instrument: Member['instrument']
-  instruments: Table<Instrument>
+type SelectInstrumentFormProps = Pick<Profile, 'instrument_name'> & {
+  instruments: Instrument[]
 }
 
 export const SelectInstrumentForm = ({
-  instrument,
+  instrument_name,
   instruments,
 }: SelectInstrumentFormProps) => {
   const [state, action, pending] = useActionState(formAction, {
     data: {
-      instrument,
+      instrument_name,
     },
     errors: {
       formErrors: [],
@@ -40,7 +39,7 @@ export const SelectInstrumentForm = ({
         form="edit-instrument-form"
         name="instrument"
         label="Instrument"
-        defaultValue={state.data.instrument ?? undefined}
+        defaultValue={state.data.instrument_name ?? undefined}
         placeholder="Select Instrument..."
       >
         {instruments.map(({ name }) => (

@@ -2,15 +2,14 @@ import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 import { LINKS } from '@/config'
-import { CurrentWeekRollCallScreen } from '@/features/roll_call'
-import { getRollCallEntriesByWeek } from '@/lib/db/roll_call_entries/by_week'
-import { RollCall } from '@/lib/db/types'
+import { WeeklyAttendance } from '@/features/roll_call/weekly_attendance'
+import { $Enums, Attendance } from '@/generated/prisma'
 import { NextParams } from '@/lib/next/types'
+import prisma from '@/lib/prisma'
 import { isValidWeek } from '@/lib/usyd/is_valid_week'
-import { Semester } from '@/utils/date_manupulation'
 
 type PageProps = {
-  params: NextParams<Pick<RollCall, 'year' | 'semester' | 'week'>>
+  params: NextParams<Pick<Attendance, 'year' | 'semester' | 'week'>>
 }
 
 export default async function Page({ params }: PageProps) {
@@ -26,7 +25,7 @@ export default async function Page({ params }: PageProps) {
 
   const year = parseInt(decodeURIComponent(yearParam), 10)
   const { data: semester, success } = z
-    .nativeEnum(Semester)
+    .nativeEnum($Enums.Semester)
     .safeParse(parseInt(decodeURIComponent(semesterParam), 10))
   const week = parseInt(decodeURIComponent(weekParam), 10)
 
@@ -34,18 +33,22 @@ export default async function Page({ params }: PageProps) {
     redirect(LINKS.ROLL_CALL.href)
   }
 
-  const rollCallEntries = await getRollCallEntriesByWeek({
-    year,
-    semester,
-    week,
+  const profiles = await prisma.profile.findMany()
+  const attendances = await prisma.attendance.findMany({
+    where: {
+      year,
+      semester,
+      week,
+    },
   })
 
   return (
-    <CurrentWeekRollCallScreen
+    <WeeklyAttendance
       year={year}
       semester={semester}
       week={week}
-      rollCallEntries={rollCallEntries}
+      profiles={profiles}
+      attendances={attendances}
     />
   )
 }
