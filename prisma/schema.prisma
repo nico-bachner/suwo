@@ -35,7 +35,7 @@ model UsuMembership {
 model Profile {
     user_id         String  @id
     handle          String  @unique @default(uuid())
-    given_name      String?
+    given_name      String
     family_name     String?
     display_name    String?
     instrument_name String?

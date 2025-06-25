@@ -14,11 +14,11 @@ import { cn } from '@/utils/cn'
 import { Dialog } from '../../design_system/dialog'
 
 type MenuProps = {
-  profileHandle?: Profile['handle']
+  profile: Profile | null
   className?: string
 }
 
-export const MobileMenu = ({ profileHandle }: MenuProps) => {
+export const MobileMenu = ({ profile }: MenuProps) => {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
 
@@ -56,8 +56,17 @@ export const MobileMenu = ({ profileHandle }: MenuProps) => {
         ))}
       </div>
 
-      {profileHandle ? (
+      {profile ? (
         <div className="flex flex-col items-center gap-6">
+          <Link
+            href={`/members/${profile.handle}`}
+            onClick={() => {
+              setOpen(false)
+            }}
+            className="text-xl font-medium text-gray-300"
+          >
+            Profile
+          </Link>
           <Link
             href="/settings"
             onClick={() => {
