@@ -1,5 +1,6 @@
 'use server'
 
+import { hash } from 'argon2'
 import { redirect } from 'next/navigation'
 import { typeToFlattenedError, z } from 'zod'
 
@@ -121,7 +122,7 @@ export const formAction = async (
   const user = await prisma.user.create({
     data: {
       email: data.email,
-      password: data.password,
+      password: await hash(data.password),
       usu_number: data.usu,
       Profile: {
         create: {
