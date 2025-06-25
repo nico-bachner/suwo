@@ -5,6 +5,7 @@ import { PageLayout } from '@/components/server/page_layout'
 import { LINKS } from '@/config'
 
 import { ProfileScreenProps } from './types'
+import { getProfileScreenName } from './utils/get_profile_screen_name'
 
 export const ProfileScreen = ({ profile, session }: ProfileScreenProps) => (
   <PageLayout
@@ -12,13 +13,7 @@ export const ProfileScreen = ({ profile, session }: ProfileScreenProps) => (
       title: LINKS.MEMBERS.label,
       href: LINKS.MEMBERS.href,
     }}
-    title={
-      profile.display_name
-        ? profile.display_name
-        : profile.family_name
-          ? `${profile.given_name} ${profile.family_name}`
-          : profile.given_name
-    }
+    title={getProfileScreenName(profile)}
     subtitle={profile.instrument_name ?? undefined}
     action={
       session.id === profile.user_id && (
