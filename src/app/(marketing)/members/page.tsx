@@ -1,15 +1,8 @@
-import { MembersScreen } from '@/features/members'
-import { getInstrumentsByFamily } from '@/features/members/get_instruments_by_family'
-import { getMembersByInstrument } from '@/features/members/get_members_by_instrument'
+import { ProfilesScreen } from '@/features/profiles/profiles_screen'
+import prisma from '@/lib/prisma'
 
 export default async function Page() {
-  const membersByInstrument = await getMembersByInstrument()
-  const instrumentsByFamily = await getInstrumentsByFamily()
+  const profiles = await prisma.profile.findMany()
 
-  return (
-    <MembersScreen
-      instrumentsByFamily={instrumentsByFamily}
-      membersByInstrument={membersByInstrument}
-    />
-  )
+  return <ProfilesScreen profiles={profiles} />
 }

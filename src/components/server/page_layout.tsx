@@ -5,7 +5,8 @@ import { ReactNode } from 'react'
 
 import { IMAGES, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
 import { Icon } from '@/design_system/icon'
-import { getSession } from '@/lib/auth/session'
+import { getSession } from '@/lib/auth/session/get_session'
+import prisma from '@/lib/prisma'
 import { cn } from '@/utils/cn'
 
 import { Button } from '../../design_system/button'
@@ -35,6 +36,12 @@ export const PageLayout = async ({
 }: PageLayoutProps) => {
   const { id } = await getSession()
 
+  const profile = id
+    ? await prisma.profile.findUnique({
+        where: { user_id: id },
+      })
+    : null
+
   return (
     <div
       className={cn(
@@ -49,7 +56,7 @@ export const PageLayout = async ({
               <Image {...IMAGES.ICON} className="h-12 w-12" />
             </Link>
 
-            <MobileMenu userId={id ?? undefined} />
+            <MobileMenu profile={profile} />
           </div>
 
           <div className="-mx-2 flex flex-row items-center justify-between gap-2">
@@ -74,10 +81,10 @@ export const PageLayout = async ({
           </h1>
         </div>
 
-        {id ? (
+        {profile ? (
           <div className="flex flex-row gap-2 max-lg:hidden">
             <Button asChild variant="secondary" className="flex-1">
-              <Link href={`/members/${id}`}>Profile</Link>
+              <Link href={`/members/${profile.handle}`}>Profile</Link>
             </Button>
             <Button asChild variant="secondary" className="flex-1">
               <Link href="/settings">Settings</Link>

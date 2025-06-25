@@ -11,7 +11,7 @@ export default [
   },
   {
     files: ['./src/**/*.ts', './src/**/*.tsx'],
-    ignores: ['.next/**/*', 'storybook-static/**/*'],
+    ignores: ['.next/**/*', 'storybook-static/**/*', 'src/generated/**/*'],
     plugins: {
       typescript: pluginTypeScript,
       react: pluginReact,
@@ -137,7 +137,7 @@ export default [
       'no-multi-assign': 'error',
       'no-multi-str': 'error',
       'no-negated-condition': 'error',
-      'no-nested-ternary': 'error',
+      'no-nested-ternary': 'warn',
       'no-new': 'error',
       'no-new-func': 'error',
       'no-new-native-nonconstructor': 'error',

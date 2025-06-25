@@ -2,12 +2,12 @@
 
 import { typeToFlattenedError, z } from 'zod'
 
-import { getInstruments } from '@/lib/db/instruments/get'
-import { updateMemberInstument } from '@/lib/db/member/update'
-import { Member } from '@/lib/db/types'
+import { Profile } from '@/generated/prisma'
+import { getSession } from '@/lib/auth/session/get_session'
+import prisma from '@/lib/prisma'
 
 type ActionState = {
-  data: Pick<Member, 'instrument'>
+  data: Pick<Profile, 'instrument_name'>
   errors: typeToFlattenedError<ActionState['data']>
 }
 
@@ -15,10 +15,22 @@ export const formAction = async (
   previousState: ActionState,
   formData: FormData,
 ): Promise<ActionState> => {
-  const instruments = await getInstruments()
+  const { id } = await getSession()
+
+  if (!id) {
+    return {
+      ...previousState,
+      errors: {
+        formErrors: ['You must be logged in to select an instrument.'],
+        fieldErrors: {},
+      },
+    }
+  }
+
+  const instruments = await prisma.instrument.findMany()
 
   const schema = z.object({
-    instrument: z.nullable(
+    instrument_name: z.nullable(
       z
         .string()
         .min(1)
@@ -35,7 +47,7 @@ export const formAction = async (
 
   const { data, success, error } = await schema.safeParseAsync({
     instrument:
-      formData.get('instrument') == '' ? null : formData.get('instrument'),
+      formData.get('instrument') === '' ? null : formData.get('instrument'),
   })
 
   if (!success) {
@@ -45,7 +57,14 @@ export const formAction = async (
     }
   }
 
-  await updateMemberInstument(data.instrument)
+  await prisma.profile.update({
+    where: {
+      user_id: id,
+    },
+    data: {
+      instrument_name: data.instrument_name,
+    },
+  })
 
   return {
     ...previousState,
