@@ -8,17 +8,17 @@ import { useState } from 'react'
 
 import { LINKS, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
 import { Icon } from '@/design_system/icon'
-import { Member } from '@/lib/db/types'
+import { Profile } from '@/generated/prisma'
 import { cn } from '@/utils/cn'
 
 import { Dialog } from '../../design_system/dialog'
 
 type MenuProps = {
-  userId?: Member['id']
+  profileHandle?: Profile['handle']
   className?: string
 }
 
-export const MobileMenu = ({ userId }: MenuProps) => {
+export const MobileMenu = ({ profileHandle }: MenuProps) => {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
 
@@ -56,10 +56,10 @@ export const MobileMenu = ({ userId }: MenuProps) => {
         ))}
       </div>
 
-      {userId ? (
+      {profileHandle ? (
         <div className="flex flex-col items-center gap-6">
           <Link
-            href={`/members/${userId}/edit`}
+            href={`/members/${profileHandle}/edit`}
             onClick={() => {
               setOpen(false)
             }}
