@@ -1,8 +1,11 @@
 'use server'
 
+import { redirect } from 'next/navigation'
 import { typeToFlattenedError, z } from 'zod'
 
+import { routes } from '@/features/roll_call/config'
 import { Profile, User } from '@/generated/prisma'
+import { createSession } from '@/lib/auth/session/create_session'
 import prisma from '@/lib/prisma'
 
 type ActionState = {
@@ -115,7 +118,7 @@ export const formAction = async (
     }
   }
 
-  await prisma.user.create({
+  const user = await prisma.user.create({
     data: {
       email: data.email,
       password: data.password,
@@ -143,11 +146,9 @@ export const formAction = async (
     },
   })
 
-  return {
-    ...previousState,
-    errors: {
-      formErrors: [],
-      fieldErrors: {},
-    },
-  }
+  await createSession({
+    id: user.id,
+  })
+
+  redirect(routes.ROLL_CALL)
 }
