@@ -6,22 +6,24 @@ import { Attendance, Profile } from '@/generated/prisma'
 import { RollCallEntry } from './roll_call_entry'
 import { RollCallNavigation } from './roll_call_navigation'
 
-export const CurrentWeekRollCallScreen = ({
-  year,
-  semester,
-  week,
-  entries,
-  profiles,
-}: {
+type WeeklyAttendanceProps = {
   year: Attendance['year']
   semester: Attendance['semester']
   week: Attendance['week']
-  entries: Attendance[]
   profiles: Profile[]
-}) => (
+  attendances: Attendance[]
+}
+
+export const WeeklyAttendance = ({
+  year,
+  semester,
+  week,
+  profiles,
+  attendances,
+}: WeeklyAttendanceProps) => (
   <PageLayout
     title="Roll Call"
-    subtitle={`Week ${week} (${entries.length} present)`}
+    subtitle={`Week ${week} (${attendances.length} present)`}
     className="prose flex flex-col gap-6"
   >
     <div className="flex w-full max-w-screen-sm flex-col">
@@ -32,7 +34,9 @@ export const CurrentWeekRollCallScreen = ({
           semester={semester}
           week={week}
           profile={profile}
-          present={entries.some(({ user_id }) => user_id === profile.user_id)}
+          present={attendances.some(
+            ({ user_id }) => user_id === profile.user_id,
+          )}
         />
       ))}
     </div>

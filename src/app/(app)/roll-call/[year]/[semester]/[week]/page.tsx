@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 import { LINKS } from '@/config'
-import { CurrentWeekRollCallScreen } from '@/features/roll_call'
+import { WeeklyAttendance } from '@/features/roll_call/weekly_attendance'
 import { $Enums, Attendance } from '@/generated/prisma'
 import { NextParams } from '@/lib/next/types'
 import prisma from '@/lib/prisma'
@@ -34,8 +34,7 @@ export default async function Page({ params }: PageProps) {
   }
 
   const profiles = await prisma.profile.findMany()
-
-  const entries = await prisma.attendance.findMany({
+  const attendances = await prisma.attendance.findMany({
     where: {
       year,
       semester,
@@ -44,12 +43,12 @@ export default async function Page({ params }: PageProps) {
   })
 
   return (
-    <CurrentWeekRollCallScreen
+    <WeeklyAttendance
       year={year}
       semester={semester}
       week={week}
-      entries={entries}
       profiles={profiles}
+      attendances={attendances}
     />
   )
 }
