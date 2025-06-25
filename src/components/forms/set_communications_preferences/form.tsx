@@ -4,18 +4,19 @@ import { useActionState } from 'react'
 
 import { Form } from '@/design_system/form'
 import { Switch } from '@/design_system/switch/switch'
-import { Member } from '@/lib/db/types'
 
 import { formAction } from './form_action'
 
-type SetCommunicationsPreferencesFormProps = Pick<Member, 'mailing_list'>
+type SetCommunicationsPreferencesFormProps = {
+  isMailingListRecipient: boolean
+}
 
 export const SetCommunicationsPreferencesForm = ({
-  mailing_list,
+  isMailingListRecipient,
 }: SetCommunicationsPreferencesFormProps) => {
   const [state, action, pending] = useActionState(formAction, {
     data: {
-      mailing_list,
+      isMailingListRecipient,
     },
     errors: {
       formErrors: [],
@@ -34,7 +35,7 @@ export const SetCommunicationsPreferencesForm = ({
       <Switch
         name="mailing-list"
         label="Weekly Member Emails"
-        defaultChecked={state.data.mailing_list}
+        defaultChecked={state.data.isMailingListRecipient}
       />
     </Form>
   )
