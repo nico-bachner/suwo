@@ -14,7 +14,7 @@ model User {
     email      String   @unique
     password   String
     created_at DateTime @default(now())
-    updated_at DateTime @updatedAt
+    updated_at DateTime @default(now()) @updatedAt
 
     Profile              Profile?
     VerificationTokens   VerificationToken[]
@@ -48,7 +48,7 @@ model Payment {
 model Privilege {
     name          String          @id
     created_at    DateTime        @default(now())
-    updated_at    DateTime        @updatedAt
+    updated_at    DateTime        @default(now()) @updatedAt
     RolePrivilege RolePrivilege[]
 }
 
@@ -57,7 +57,7 @@ model Role {
     email         String?         @unique
     description   String?
     created_at    DateTime        @default(now())
-    updated_at    DateTime        @updatedAt
+    updated_at    DateTime        @default(now()) @updatedAt
     RolePrivilege RolePrivilege[]
     UserRole      UserRole[]
 }
@@ -76,7 +76,7 @@ model UsuMembership {
     user_id    String   @id
     number     String   @unique @db.Char(7)
     created_at DateTime @default(now())
-    updated_at DateTime @updatedAt
+    updated_at DateTime @default(now()) @updatedAt
 
     user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
@@ -107,7 +107,7 @@ model MailingListRecipient {
     user_id    String   @id
     email      String   @unique
     created_at DateTime @default(now())
-    updated_at DateTime @updatedAt
+    updated_at DateTime @default(now()) @updatedAt
 
     user User? @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
@@ -146,7 +146,7 @@ model Equipment {
     description       String?
 
     created_at DateTime @default(now())
-    updated_at DateTime @updatedAt
+    updated_at DateTime @default(now()) @updatedAt
 }
 
 model Library {
@@ -160,5 +160,5 @@ model Library {
     lease_expiry      DateTime?
 
     created_at DateTime @default(now())
-    updated_at DateTime @updatedAt
+    updated_at DateTime @default(now()) @updatedAt
 }
