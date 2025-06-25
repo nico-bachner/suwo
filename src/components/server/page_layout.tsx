@@ -6,7 +6,6 @@ import { ReactNode } from 'react'
 import { IMAGES, NAV_LINKS, NAV_SOCIAL_LINKS } from '@/config'
 import { Icon } from '@/design_system/icon'
 import { getSession } from '@/lib/auth/session/get_session'
-import prisma from '@/lib/prisma'
 import { cn } from '@/utils/cn'
 
 import { Button } from '../../design_system/button'
@@ -36,15 +35,6 @@ export const PageLayout = async ({
 }: PageLayoutProps) => {
   const { id } = await getSession()
 
-  const profile = await prisma.profile.findUnique({
-    where: {
-      user_id: id ?? undefined,
-    },
-    select: {
-      handle: true,
-    },
-  })
-
   return (
     <div
       className={cn(
@@ -59,7 +49,7 @@ export const PageLayout = async ({
               <Image {...IMAGES.ICON} className="h-12 w-12" />
             </Link>
 
-            <MobileMenu profileHandle={profile?.handle} />
+            <MobileMenu />
           </div>
 
           <div className="-mx-2 flex flex-row items-center justify-between gap-2">

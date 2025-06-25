@@ -59,15 +59,6 @@ export const MobileMenu = ({ profileHandle }: MenuProps) => {
       {profileHandle ? (
         <div className="flex flex-col items-center gap-6">
           <Link
-            href={`/members/${profileHandle}/edit`}
-            onClick={() => {
-              setOpen(false)
-            }}
-            className="text-xl font-medium text-gray-300"
-          >
-            Profile
-          </Link>
-          <Link
             href="/settings"
             onClick={() => {
               setOpen(false)
