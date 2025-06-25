@@ -2,11 +2,14 @@
 
 import { typeToFlattenedError, z } from 'zod'
 
-import { User } from '@/generated/prisma'
+import { Profile, User } from '@/generated/prisma'
 import prisma from '@/lib/prisma'
 
 type ActionState = {
-  data: Omit<User, 'id'>
+  data: Pick<User, 'email' | 'password' | 'usu_number'> &
+    Pick<Profile, 'given_name' | 'family_name' | 'instrument_name'> & {
+      isMailingListRecipient: boolean
+    }
   errors: typeToFlattenedError<ActionState['data']>
 }
 

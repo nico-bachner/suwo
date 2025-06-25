@@ -1,9 +1,9 @@
-import { getInstruments } from '@/lib/db/instruments/get'
+import prisma from '@/lib/prisma'
 
 import { CreateMemberForm } from './form'
 
 export const CreateMember = async () => {
-  const instruments = await getInstruments()
+  const instruments = await prisma.instrument.findMany()
 
   return <CreateMemberForm instruments={instruments} />
 }
