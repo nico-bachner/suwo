@@ -7,18 +7,21 @@ import { createSession } from '@/lib/auth/session/create_session'
 import { NextParams } from '@/lib/next/types'
 import prisma from '@/lib/prisma'
 
-type PageProps = {
-  params: NextParams<Pick<VerificationToken, 'user_id'>>
-}
-
-export const GET = async (req: NextRequest, { params }: PageProps) => {
+export const GET = async (
+  { nextUrl }: NextRequest,
+  {
+    params,
+  }: {
+    params: NextParams<Pick<VerificationToken, 'user_id'>>
+  },
+) => {
   const { user_id } = await params
 
   if (!user_id) {
     return notFound()
   }
 
-  const token = req.nextUrl.searchParams.get('token')
+  const token = nextUrl.searchParams.get('token')
 
   if (!token) {
     return Response.json({ message: 'Please provide a token' })

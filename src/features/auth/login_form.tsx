@@ -12,6 +12,8 @@ import { Password } from '@/lib/validations/password'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
+import { routes } from './routes'
+
 export const LoginForm = () => {
   const form = useForm({
     defaultValues: {
@@ -19,7 +21,7 @@ export const LoginForm = () => {
       password: '',
     },
     onSubmit: async ({ value }) => {
-      const response = await fetch('/api/login', {
+      const response = await fetch(routes.API_LOGIN, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,10 +1,11 @@
 import { verify } from 'argon2'
 import { z } from 'zod/v4'
 
-import { LoginDetails } from '@/features/auth/login/validation'
 import { createSession } from '@/lib/auth/session/create_session'
 import prisma from '@/lib/prisma'
 import { createResponse } from '@/utils/http/create_response'
+
+import { LoginDetails } from '../login_validation'
 
 export const POST = async (request: Request) => {
   const { data, error, success } = LoginDetails.safeParse(await request.json())
