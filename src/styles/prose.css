@@ -14,7 +14,7 @@
 .prose > h1,
 .prose > h2,
 .prose > h3 {
-  color: var(--color-neutral-1);
+  @apply text-neutral-1 font-serif;
   margin-block: 1.5em 1em;
 }
 .prose > h1 + *,
@@ -28,18 +28,18 @@
   margin-block-start: 0;
 }
 .prose > h1 {
-  @apply font-serif text-3xl font-bold sm:text-5xl;
+  @apply text-3xl font-bold sm:text-5xl;
 }
 .prose > h2 {
-  @apply font-serif text-2xl font-semibold sm:text-3xl;
+  @apply text-2xl font-semibold sm:text-3xl;
 }
 .prose > h3 {
-  @apply font-serif text-xl font-medium sm:text-2xl;
+  @apply text-xl font-medium sm:text-2xl;
 }
 
 /* Body Text */
 .prose > p {
-  color: var(--color-neutral-2);
+  @apply text-neutral-2 text-lg leading-relaxed;
 }
 .prose > p:not(:last-child) {
   margin-block-end: 1.2em;
@@ -50,7 +50,7 @@
 .prose > h3 a,
 .prose > p a,
 .prose > li a {
-  @apply text-primary-3 hover:text-primary-2 transition-colors;
+  @apply text-primary-2 hover:underline;
 }
 
 /* Lists */

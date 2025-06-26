@@ -23,7 +23,7 @@ export const RollCallNavigation = ({
 
     {week < MAX_WEEK && (
       <Button
-        variant="tertiary"
+        variant="secondary"
         asChild
         className="col-start-2 flex flex-row items-center justify-self-end"
       >
