@@ -3,13 +3,13 @@ import { ButtonVariant } from '../types'
 export const getVariant = (variant: ButtonVariant) => {
   switch (variant) {
     case 'primary':
-      return 'bg-primary-4 text-gray-300 hover:bg-primary-3 hover:text-gray-100 focus:bg-amber-700'
+      return 'bg-primary-5 text-neutral-2 hover:bg-primary-4 hover:text-neutral-1 focus:bg-primary-4'
     case 'secondary':
-      return 'bg-gray-900 text-gray-300 hover:bg-gray-800 hover:text-gray-100 focus:bg-gray-800'
+      return 'bg-neutral-5 text-neutral-2 hover:bg-neutral-4 hover:text-neutral-1 focus:bg-neutral-4'
     case 'tertiary':
-      return 'text-gray-300 hover:bg-gray-900 hover:text-gray-100 focus:bg-gray-900'
+      return 'text-neutral-4 bg-neutral-5 hover:bg-neutral-4 hover:text-neutral-1 focus:bg-neutral-4'
     case 'danger':
-      return 'bg-red-900 text-gray-300 hover:bg-red-800 hover:text-gray-100 focus:bg-red-800'
+      return 'bg-negative-4 text-neutral-2 hover:bg-negative-3 hover:text-neutral-1 focus:bg-negative-3'
     default:
       variant satisfies never
   }

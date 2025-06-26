@@ -9,10 +9,10 @@ export const Switch = ({ name, label, className, ...props }: SwitchProps) => (
     <Root
       id={name}
       name={name}
-      className="flex w-12 cursor-pointer items-center justify-start rounded-full bg-gray-950 p-1 focus:outline-none data-[state=checked]:justify-end data-[state=checked]:bg-green-600 data-[state=checked]:focus:bg-green-500 data-[state=unchecked]:bg-red-600 data-[state=unchecked]:focus:bg-red-500"
+      className="data-[state=unchecked]:bg-negative-4 data-[state=checked]:bg-positive-4 flex w-12 cursor-pointer items-center justify-start rounded-full p-1 focus:outline-none data-[state=checked]:justify-end"
       {...props}
     >
-      <Thumb className="h-5 w-5 rounded-full bg-white" />
+      <Thumb className="bg-neutral-2 h-5 w-5 rounded-full" />
     </Root>
 
     <label htmlFor={name} className="text-sm text-gray-300 select-none">

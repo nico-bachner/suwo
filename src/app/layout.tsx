@@ -7,13 +7,11 @@ import { cn } from '@/utils/cn'
 
 import '../styles/globals.css'
 
-// eslint-disable-next-line new-cap
 const fontSans = Raleway({
   variable: '--font-sans',
   subsets: ['latin'],
 })
 
-// eslint-disable-next-line new-cap
 const fontSerif = Limelight({
   weight: '400',
   variable: '--font-serif',
@@ -30,7 +28,7 @@ export default function Layout({ children }: LayoutProps) {
     <html lang="en">
       <body
         className={cn(
-          'bg-neutral-5 text-neutral-2 font-sans antialiased scheme-dark',
+          'bg-neutral-7 text-neutral-2 font-sans antialiased scheme-dark',
           fontSans.variable,
           fontSerif.variable,
         )}
