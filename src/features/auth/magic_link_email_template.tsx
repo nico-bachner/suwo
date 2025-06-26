@@ -10,40 +10,35 @@ import {
   Text,
 } from '@react-email/components'
 
-type ResetPasswordTemplateProps = {
+type MagicLinkTemplateProps = {
   link: string
 }
 
-export const ResetPasswordTemplate = ({ link }: ResetPasswordTemplateProps) => (
+export const MagicLinkEmailTemplate = ({ link }: MagicLinkTemplateProps) => (
   <Html>
     <Head />
 
     <Tailwind>
       <Body className="px-2 font-sans">
-        <Preview>Reset your password</Preview>
+        <Preview>Log in to your SUWO account</Preview>
 
         <Container>
           <Section>
             <Text>
-              Someone recently requested a password change for your SUWO
-              account. If this was you, you can set a new password here:
+              Someone recently attempted to login to your SUWO account. If this
+              was you, please click the button below to log in.
             </Text>
 
             <Button
               href={link}
               className="rounded-lg bg-amber-500 px-4 py-2 text-white"
             >
-              Reset password
+              Log in to your account
             </Button>
 
             <Text>
               This link will expire in 24 hours. If you need a new link, please
               fill in the form again.
-            </Text>
-
-            <Text>
-              If you don&apos;t want to change your password or didn&apos;t
-              request this, just ignore and delete this message.
             </Text>
           </Section>
         </Container>

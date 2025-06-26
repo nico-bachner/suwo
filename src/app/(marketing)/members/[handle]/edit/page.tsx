@@ -1,11 +1,11 @@
 import { forbidden, notFound, redirect } from 'next/navigation'
 
-import { LINKS } from '@/config'
 import { EditProfileScreen } from '@/features/profiles/edit_profile_screen'
 import { Profile } from '@/generated/prisma'
 import { getSession } from '@/lib/auth/session/get_session'
 import { NextParams } from '@/lib/next/types'
 import prisma from '@/lib/prisma'
+import { routes } from '@/routes'
 
 type PageProps = {
   params: NextParams<Pick<Profile, 'handle'>>
@@ -35,7 +35,7 @@ export default async function Page({ params }: PageProps) {
   const session = await getSession()
 
   if (!session.id) {
-    redirect(LINKS.LOG_IN.href)
+    redirect(routes.LOGIN)
   }
 
   if (session.id !== profile.user_id) {

@@ -80,22 +80,22 @@ export const MobileMenu = ({ profile }: MenuProps) => {
       ) : (
         <div className="flex flex-col items-center gap-6">
           <Link
-            href={LINKS.LOG_IN.href}
+            href={LINKS.LOGIN.href}
             onClick={() => {
               setOpen(false)
             }}
             className="text-xl font-medium text-gray-300"
           >
-            {LINKS.LOG_IN.label}
+            {LINKS.LOGIN.label}
           </Link>
           <Link
-            href={LINKS.JOIN.href}
+            href={LINKS.REGISTER.href}
             onClick={() => {
               setOpen(false)
             }}
             className="text-xl font-medium text-gray-300"
           >
-            {LINKS.JOIN.label}
+            {LINKS.REGISTER.label}
           </Link>
         </div>
       )}

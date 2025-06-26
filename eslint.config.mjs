@@ -70,7 +70,6 @@ export default [
       'max-lines': 'error',
       'max-nested-callbacks': 'error',
       'max-params': 'error',
-      'new-cap': 'error',
       'no-alert': 'error',
       'no-async-promise-executor': 'error',
       'no-await-in-loop': 'error',

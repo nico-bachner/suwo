@@ -65,13 +65,13 @@ export const LINKS = {
     href: '/settings',
     label: 'Settings',
   },
-  LOG_IN: {
+  LOGIN: {
     href: '/login',
     label: 'Log In',
   },
-  JOIN: {
+  REGISTER: {
     href: '/join',
-    label: 'Join',
+    label: 'Join SUWO',
   },
 }
 
