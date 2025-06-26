@@ -1,12 +1,12 @@
 import Link from 'next/link'
 
-import { Login } from '@/components/forms/login'
 import { PageLayout } from '@/components/server/page_layout'
+import { LoginForm } from '@/features/auth/login/login_form'
 
 export default function Page() {
   return (
     <PageLayout title="Log In" className="flex flex-col gap-4">
-      <Login />
+      <LoginForm />
 
       <p className="text-sm text-gray-300 lg:text-right">
         <Link

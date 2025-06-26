@@ -1,6 +1,6 @@
 import { getCurrentYear } from '@/utils/date_manupulation'
+import { fetchJSON } from '@/utils/http/fetch_json'
 
-import { fetchJSON } from '../../utils/fetch_json'
 import { MAX_WEEK } from './config'
 import { getMidsemAdjustedWeek } from './get_midsem_adjusted_week'
 import { getMidsemBreak } from './get_midsem_break'

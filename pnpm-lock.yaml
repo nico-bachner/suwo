@@ -44,6 +44,9 @@ importers:
       '@react-email/components':
         specifier: ^0.0.41
         version: 0.0.41(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@tanstack/react-form':
+        specifier: ^1.12.3
+        version: 1.12.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@vercel/analytics':
         specifier: ^1.5.0
         version: 1.5.0(next@15.3.4(@babel/core@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
@@ -83,16 +86,16 @@ importers:
         version: 15.3.4
       '@storybook/addon-docs':
         specifier: ^9.0.13
-        version: 9.0.13(@types/react@19.1.8)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))
+        version: 9.0.13(@types/react@19.1.8)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))
       '@storybook/nextjs':
         specifier: ^9.0.13
-        version: 9.0.13(esbuild@0.25.5)(next@15.3.4(@babel/core@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))(type-fest@2.19.0)(typescript@5.8.3)(webpack-hot-middleware@2.26.1)(webpack@5.99.9(esbuild@0.25.5))
+        version: 9.0.13(esbuild@0.25.5)(next@15.3.4(@babel/core@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))(type-fest@2.19.0)(typescript@5.8.3)(webpack-hot-middleware@2.26.1)(webpack@5.99.9(esbuild@0.25.5))
       '@tailwindcss/postcss':
         specifier: ^4.1.10
         version: 4.1.10
       '@trivago/prettier-plugin-sort-imports':
         specifier: ^5.2.2
-        version: 5.2.2(prettier@3.6.0)
+        version: 5.2.2(prettier@3.6.1)
       '@types/node':
         specifier: ^22.15.33
         version: 22.15.33
@@ -121,20 +124,20 @@ importers:
         specifier: ^8.5.6
         version: 8.5.6
       prettier:
-        specifier: ^3.6.0
-        version: 3.6.0
+        specifier: ^3.6.1
+        version: 3.6.1
       prettier-plugin-jsdoc:
         specifier: ^1.3.2
-        version: 1.3.2(prettier@3.6.0)
+        version: 1.3.2(prettier@3.6.1)
       prettier-plugin-tailwindcss:
         specifier: ^0.6.13
-        version: 0.6.13(@trivago/prettier-plugin-sort-imports@5.2.2(prettier@3.6.0))(prettier-plugin-jsdoc@1.3.2(prettier@3.6.0))(prettier@3.6.0)
+        version: 0.6.13(@trivago/prettier-plugin-sort-imports@5.2.2(prettier@3.6.1))(prettier-plugin-jsdoc@1.3.2(prettier@3.6.1))(prettier@3.6.1)
       prisma:
         specifier: ^6.10.1
         version: 6.10.1(typescript@5.8.3)
       storybook:
         specifier: ^9.0.13
-        version: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0)
+        version: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1)
       tailwindcss:
         specifier: ^4.1.10
         version: 4.1.10
@@ -885,8 +888,8 @@ packages:
     resolution: {integrity: sha512-qIbV0/JZr7iSDjqAc60IqbLdsj9GDt16xQtWD+B78d/HAlvysGdZZ6rpJHGAc2T0FQx1X6thsSPdnoiGKdNtdg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@eslint/core@0.15.0':
-    resolution: {integrity: sha512-b7ePw78tEWWkpgZCDYkbqDOP8dmM6qe+AOC6iuJqlq1R/0ahMAeH3qynpnqKFGkMltrp44ohV4ubGyvLX28tzw==}
+  '@eslint/core@0.15.1':
+    resolution: {integrity: sha512-bkOp+iumZCCbt1K1CmWf0R9pM5yKpDv+ZXtvSyQpudrI9kuFLp+bM2WOPXImuD/ceQuaa8f5pj93Y7zyECIGNA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/eslintrc@3.3.1':
@@ -901,8 +904,8 @@ packages:
     resolution: {integrity: sha512-RBMg5FRL0I0gs51M/guSAj5/e14VQ4tpZnQNWwuDT66P14I43ItmPfIZRhO9fUVIPOAQXU47atlywZ/czoqFPA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@eslint/plugin-kit@0.3.2':
-    resolution: {integrity: sha512-4SaFZCNfJqvk/kenHpI8xvN42DMaoycy4PzKc5otHxRswww1kAt82OlBuwRVLofCACCTZEcla2Ydxv8scMXaTg==}
+  '@eslint/plugin-kit@0.3.3':
+    resolution: {integrity: sha512-1+WqvgNMhmlAambTvT3KPtCl/Ibr68VldY2XY40SL1CE0ZXiakFR/cbTspaF5HsnpDMvcYYoJHfl4980NBjGag==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@floating-ui/core@1.7.1':
@@ -1170,8 +1173,8 @@ packages:
     resolution: {integrity: sha512-m7X9U6BG2+J+R1lSOdCiITLLrxm+cWlNI3HUFA92oLO77ObGNzaKdh8pMLqdZcshtkKuV84olNNXDfMc4FezBQ==}
     engines: {node: '>=10'}
 
-  '@pmmmwh/react-refresh-webpack-plugin@0.5.16':
-    resolution: {integrity: sha512-kLQc9xz6QIqd2oIYyXRUiAp79kGpFBm3fEM9ahfG1HI0WI5gdZ2OVHWdmZYnwODt7ISck+QuQ6sBPrtvUBML7Q==}
+  '@pmmmwh/react-refresh-webpack-plugin@0.5.17':
+    resolution: {integrity: sha512-tXDyE1/jzFsHXjhRZQ3hMl0IVhYe5qula43LDWIhVfjp9G/nT5OQY5AORVOrkEGAUltBJOfOWeETbmhm6kHhuQ==}
     engines: {node: '>= 10.13'}
     peerDependencies:
       '@types/webpack': 4.x || 5.x
@@ -1860,6 +1863,30 @@ packages:
   '@tailwindcss/postcss@4.1.10':
     resolution: {integrity: sha512-B+7r7ABZbkXJwpvt2VMnS6ujcDoR2OOcFaqrLIo1xbcdxje4Vf+VgJdBzNNbrAjBj/rLZ66/tlQ1knIGNLKOBQ==}
 
+  '@tanstack/form-core@1.12.3':
+    resolution: {integrity: sha512-H59XYP8Jxg8vT4IYIZa1BHkYiyiZqFcLSD2HpxefHP/vlG06/spCySVe/vGAP7IJgHHSAlEqBhQoy1Mg2ruTRA==}
+
+  '@tanstack/react-form@1.12.3':
+    resolution: {integrity: sha512-IlWLVKizjV+CzMgzaSac61bS4/UeSL2gceGOVIv+gKs2SriDIyylJd8AcqsKE/kNplm1K0NYXIF2Vk/re+JfOg==}
+    peerDependencies:
+      '@tanstack/react-start': ^1.112.0
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+      vinxi: ^0.5.0
+    peerDependenciesMeta:
+      '@tanstack/react-start':
+        optional: true
+      vinxi:
+        optional: true
+
+  '@tanstack/react-store@0.7.1':
+    resolution: {integrity: sha512-qUTEKdId6QPWGiWyKAPf/gkN29scEsz6EUSJ0C3HgLMgaqTAyBsQ2sMCfGVcqb+kkhEXAdjleCgH6LAPD6f2sA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  '@tanstack/store@0.7.1':
+    resolution: {integrity: sha512-PjUQKXEXhLYj2X5/6c1Xn/0/qKY0IVFxTJweopRfF26xfjVyb14yALydJrHupDh3/d+1WKmfEgZPBVCmDkzzwg==}
+
   '@testing-library/dom@10.4.0':
     resolution: {integrity: sha512-pemlzrSESWbdAloYml3bAJMEfNh1Z7EduzqPKprCH5S341frlpYnUEW0H72dLxa6IsYr+mPno20GiSm+h9dEdQ==}
     engines: {node: '>=18'}
@@ -2329,8 +2356,8 @@ packages:
   browserify-zlib@0.2.0:
     resolution: {integrity: sha512-Z942RysHXmJrhqk88FmKBVq/v5tqmSkDz7p54G/MGyjMnCFFnC79XWNbg+Vta8W6Wb2qtSZTSxIGkJrRpCFEiA==}
 
-  browserslist@4.25.0:
-    resolution: {integrity: sha512-PJ8gYKeS5e/whHBh8xrwYK+dAvEj7JXtz6uTucnMRB8OiGTsKccFekoRrjajPBHV8oOY+2tI4uxeceSimKwMFA==}
+  browserslist@4.25.1:
+    resolution: {integrity: sha512-KGj0KoOMXLpSNkkEI6Z6mShmQy0bc1I+T7K9N81k4WWMrfz+6fQ6es80B/YLAeRoKvjYE1YSHHOW1qe9xIVzHw==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
 
@@ -2369,8 +2396,8 @@ packages:
   camel-case@4.1.2:
     resolution: {integrity: sha512-gxGWBrTT1JuMx6R+o5PTXMmUnhnVzLQ9SNutD4YqKtI6ap897t3tKECYla6gCWEkplXnlNybEkZg9GEGxKFCgw==}
 
-  caniuse-lite@1.0.30001724:
-    resolution: {integrity: sha512-WqJo7p0TbHDOythNTqYujmaJTvtYRZrjpP8TCvH6Vb9CYJerJNKamKzIWOM4BkQatWj9H2lYulpdAQNBe7QhNA==}
+  caniuse-lite@1.0.30001726:
+    resolution: {integrity: sha512-VQAUIUzBiZ/UnlM28fSp2CRF3ivUn1BWEvxMcVTNwpw91Py1pGbPIyIKtd+tzct9C3ouceCVdGAXxZOpZAsgdw==}
 
   case-sensitive-paths-webpack-plugin@2.4.0:
     resolution: {integrity: sha512-roIFONhcxog0JSSWbvVAh3OocukmSgpqOH6YpMkCvav/ySIV3JKg4Dc8vYtQjYi/UxpNE36r/9v+VqTQqgkYmw==}
@@ -2563,6 +2590,9 @@ packages:
       supports-color:
         optional: true
 
+  decode-formdata@0.9.0:
+    resolution: {integrity: sha512-q5uwOjR3Um5YD+ZWPOF/1sGHVW9A5rCrRwITQChRXlmPkxDFBqCm4jNTIVdGHNH9OnR+V9MoZVgRhsFb+ARbUw==}
+
   decode-named-character-reference@1.2.0:
     resolution: {integrity: sha512-c6fcElNV6ShtZXmsgNgFFV5tVX2PaV4g+MOAkb8eXHvn6sryJBrZa9r0zV6+dtTyoCKxtDy5tyQ5ZwQuidtd+Q==}
 
@@ -2605,6 +2635,9 @@ packages:
 
   detect-node-es@1.1.0:
     resolution: {integrity: sha512-ypdmJU/TbBby2Dxibuv7ZLW3Bs1QEmM7nHjEANfohJLvE0XVujisn1qPJcZxg+qDucsr+bP6fLD1rPS3AhJ7EQ==}
+
+  devalue@5.1.1:
+    resolution: {integrity: sha512-maua5KUiapvEwiEAe+XnlZ3Rh0GD+qI1J/nb9vrJc3muPXvcF/8gXYTWF76+5DAqHyDUtOIImEuo0YKE9mshVw==}
 
   devlop@1.1.0:
     resolution: {integrity: sha512-RWmIqhcFf1lRYBvNmr7qTNuyCt/7/ns2jbpp1+PalgE/rDQcBT0fioSMUpJ93irlUhC5hrg4cYqe6U+0ImW0rA==}
@@ -2667,8 +2700,8 @@ packages:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
     engines: {node: '>= 0.4'}
 
-  electron-to-chromium@1.5.173:
-    resolution: {integrity: sha512-2bFhXP2zqSfQHugjqJIDFVwa+qIxyNApenmXTp9EjaKtdPrES5Qcn9/aSFy/NaP2E+fWG/zxKu/LBvY36p5VNQ==}
+  electron-to-chromium@1.5.175:
+    resolution: {integrity: sha512-Nqpef9mOVo7pZfl9NIUhj7tgtRTsMzCzRTJDP1ccim4Wb4YHOz3Le87uxeZq68OCNwau2iQ/X7UwdAZ3ReOkmg==}
 
   elliptic@6.6.1:
     resolution: {integrity: sha512-RaddvvMatK2LJHqFJ+YA4WysVN5Ita9E35botqIYspQ4TkRAlCicdzKOjlyv/1Za5RyTNn7di//eEV0uTAfe3g==}
@@ -3801,8 +3834,8 @@ packages:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
     engines: {node: '>=8'}
 
-  pathval@2.0.0:
-    resolution: {integrity: sha512-vE7JKRyES09KiunauX7nd2Q9/L7lhok4smP9RZTDeD4MVs72Dp2qNFVz39Nz5a0FVEW0BJR6C0DYrq6unoziZA==}
+  pathval@2.0.1:
+    resolution: {integrity: sha512-//nshmD55c46FuFw26xV/xFAaB5HF9Xdap7HJBBnrKdAd6/GxDBaNA1870O79+9ueg61cZLSVc+OaFlfmObYVQ==}
     engines: {node: '>= 14.16'}
 
   pbkdf2@3.1.3:
@@ -3979,8 +4012,8 @@ packages:
       prettier-plugin-svelte:
         optional: true
 
-  prettier@3.6.0:
-    resolution: {integrity: sha512-ujSB9uXHJKzM/2GBuE0hBOUgC77CN3Bnpqa+g80bkv3T3A93wL/xlzDATHhnhkzifz/UE2SNOvmbTz5hSkDlHw==}
+  prettier@3.6.1:
+    resolution: {integrity: sha512-5xGWRa90Sp2+x1dQtNpIpeOQpTDBs9cZDmA/qs2vDNN2i18PdapqY7CmBeyLlMuGqXJRIOPaCaVZTLNQRWUH/A==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -4644,6 +4677,11 @@ packages:
       '@types/react':
         optional: true
 
+  use-sync-external-store@1.5.0:
+    resolution: {integrity: sha512-Rb46I4cGGVBmjamjphe8L/UnvJD+uPPtTkNvX5mZgqdbavhI4EbgIWJiIHXJ8bc/i9EQGPRh4DwEURJ552Do0A==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
@@ -4810,7 +4848,7 @@ snapshots:
     dependencies:
       '@babel/compat-data': 7.27.5
       '@babel/helper-validator-option': 7.27.1
-      browserslist: 4.25.0
+      browserslist: 4.25.1
       lru-cache: 5.1.1
       semver: 6.3.1
 
@@ -5599,7 +5637,7 @@ snapshots:
     dependencies:
       '@types/json-schema': 7.0.15
 
-  '@eslint/core@0.15.0':
+  '@eslint/core@0.15.1':
     dependencies:
       '@types/json-schema': 7.0.15
 
@@ -5621,9 +5659,9 @@ snapshots:
 
   '@eslint/object-schema@2.1.6': {}
 
-  '@eslint/plugin-kit@0.3.2':
+  '@eslint/plugin-kit@0.3.3':
     dependencies:
-      '@eslint/core': 0.15.0
+      '@eslint/core': 0.15.1
       levn: 0.4.1
 
   '@floating-ui/core@1.7.1':
@@ -5824,7 +5862,7 @@ snapshots:
 
   '@phc/format@1.0.0': {}
 
-  '@pmmmwh/react-refresh-webpack-plugin@0.5.16(react-refresh@0.14.2)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1)(webpack@5.99.9(esbuild@0.25.5))':
+  '@pmmmwh/react-refresh-webpack-plugin@0.5.17(react-refresh@0.14.2)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1)(webpack@5.99.9(esbuild@0.25.5))':
     dependencies:
       ansi-html: 0.0.9
       core-js-pure: 3.43.0
@@ -6260,7 +6298,7 @@ snapshots:
   '@react-email/render@1.1.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       html-to-text: 9.0.5
-      prettier: 3.6.0
+      prettier: 3.6.1
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
       react-promise-suspense: 0.3.4
@@ -6286,22 +6324,22 @@ snapshots:
       domhandler: 5.0.3
       selderee: 0.11.0
 
-  '@storybook/addon-docs@9.0.13(@types/react@19.1.8)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))':
+  '@storybook/addon-docs@9.0.13(@types/react@19.1.8)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))':
     dependencies:
       '@mdx-js/react': 3.1.0(@types/react@19.1.8)(react@19.1.0)
-      '@storybook/csf-plugin': 9.0.13(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))
+      '@storybook/csf-plugin': 9.0.13(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))
       '@storybook/icons': 1.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@storybook/react-dom-shim': 9.0.13(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))
+      '@storybook/react-dom-shim': 9.0.13(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
-      storybook: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0)
+      storybook: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1)
       ts-dedent: 2.2.0
     transitivePeerDependencies:
       - '@types/react'
 
-  '@storybook/builder-webpack5@9.0.13(esbuild@0.25.5)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))(typescript@5.8.3)':
+  '@storybook/builder-webpack5@9.0.13(esbuild@0.25.5)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))(typescript@5.8.3)':
     dependencies:
-      '@storybook/core-webpack': 9.0.13(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))
+      '@storybook/core-webpack': 9.0.13(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))
       case-sensitive-paths-webpack-plugin: 2.4.0
       cjs-module-lexer: 1.4.3
       css-loader: 6.11.0(webpack@5.99.9(esbuild@0.25.5))
@@ -6309,7 +6347,7 @@ snapshots:
       fork-ts-checker-webpack-plugin: 8.0.0(typescript@5.8.3)(webpack@5.99.9(esbuild@0.25.5))
       html-webpack-plugin: 5.6.3(webpack@5.99.9(esbuild@0.25.5))
       magic-string: 0.30.17
-      storybook: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0)
+      storybook: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1)
       style-loader: 3.3.4(webpack@5.99.9(esbuild@0.25.5))
       terser-webpack-plugin: 5.3.14(esbuild@0.25.5)(webpack@5.99.9(esbuild@0.25.5))
       ts-dedent: 2.2.0
@@ -6326,14 +6364,14 @@ snapshots:
       - uglify-js
       - webpack-cli
 
-  '@storybook/core-webpack@9.0.13(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))':
+  '@storybook/core-webpack@9.0.13(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))':
     dependencies:
-      storybook: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0)
+      storybook: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1)
       ts-dedent: 2.2.0
 
-  '@storybook/csf-plugin@9.0.13(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))':
+  '@storybook/csf-plugin@9.0.13(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))':
     dependencies:
-      storybook: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0)
+      storybook: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1)
       unplugin: 1.16.1
 
   '@storybook/global@5.0.0': {}
@@ -6343,7 +6381,7 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
-  '@storybook/nextjs@9.0.13(esbuild@0.25.5)(next@15.3.4(@babel/core@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))(type-fest@2.19.0)(typescript@5.8.3)(webpack-hot-middleware@2.26.1)(webpack@5.99.9(esbuild@0.25.5))':
+  '@storybook/nextjs@9.0.13(esbuild@0.25.5)(next@15.3.4(@babel/core@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))(type-fest@2.19.0)(typescript@5.8.3)(webpack-hot-middleware@2.26.1)(webpack@5.99.9(esbuild@0.25.5))':
     dependencies:
       '@babel/core': 7.27.4
       '@babel/plugin-syntax-bigint': 7.8.3(@babel/core@7.27.4)
@@ -6358,10 +6396,10 @@ snapshots:
       '@babel/preset-react': 7.27.1(@babel/core@7.27.4)
       '@babel/preset-typescript': 7.27.1(@babel/core@7.27.4)
       '@babel/runtime': 7.27.6
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.16(react-refresh@0.14.2)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1)(webpack@5.99.9(esbuild@0.25.5))
-      '@storybook/builder-webpack5': 9.0.13(esbuild@0.25.5)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))(typescript@5.8.3)
-      '@storybook/preset-react-webpack': 9.0.13(esbuild@0.25.5)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))(typescript@5.8.3)
-      '@storybook/react': 9.0.13(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))(typescript@5.8.3)
+      '@pmmmwh/react-refresh-webpack-plugin': 0.5.17(react-refresh@0.14.2)(type-fest@2.19.0)(webpack-hot-middleware@2.26.1)(webpack@5.99.9(esbuild@0.25.5))
+      '@storybook/builder-webpack5': 9.0.13(esbuild@0.25.5)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))(typescript@5.8.3)
+      '@storybook/preset-react-webpack': 9.0.13(esbuild@0.25.5)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))(typescript@5.8.3)
+      '@storybook/react': 9.0.13(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))(typescript@5.8.3)
       '@types/semver': 7.7.0
       babel-loader: 9.2.1(@babel/core@7.27.4)(webpack@5.99.9(esbuild@0.25.5))
       css-loader: 6.11.0(webpack@5.99.9(esbuild@0.25.5))
@@ -6377,7 +6415,7 @@ snapshots:
       resolve-url-loader: 5.0.0
       sass-loader: 14.2.1(webpack@5.99.9(esbuild@0.25.5))
       semver: 7.7.2
-      storybook: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0)
+      storybook: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1)
       style-loader: 3.3.4(webpack@5.99.9(esbuild@0.25.5))
       styled-jsx: 5.1.7(@babel/core@7.27.4)(react@19.1.0)
       tsconfig-paths: 4.2.0
@@ -6403,9 +6441,9 @@ snapshots:
       - webpack-hot-middleware
       - webpack-plugin-serve
 
-  '@storybook/preset-react-webpack@9.0.13(esbuild@0.25.5)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))(typescript@5.8.3)':
+  '@storybook/preset-react-webpack@9.0.13(esbuild@0.25.5)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))(typescript@5.8.3)':
     dependencies:
-      '@storybook/core-webpack': 9.0.13(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))
+      '@storybook/core-webpack': 9.0.13(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))
       '@storybook/react-docgen-typescript-plugin': 1.0.6--canary.9.0c3f3b7.0(typescript@5.8.3)(webpack@5.99.9(esbuild@0.25.5))
       '@types/semver': 7.7.0
       find-up: 7.0.0
@@ -6415,7 +6453,7 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
       resolve: 1.22.10
       semver: 7.7.2
-      storybook: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0)
+      storybook: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1)
       tsconfig-paths: 4.2.0
       webpack: 5.99.9(esbuild@0.25.5)
     optionalDependencies:
@@ -6441,19 +6479,19 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@storybook/react-dom-shim@9.0.13(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))':
+  '@storybook/react-dom-shim@9.0.13(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))':
     dependencies:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
-      storybook: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0)
+      storybook: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1)
 
-  '@storybook/react@9.0.13(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))(typescript@5.8.3)':
+  '@storybook/react@9.0.13(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))(typescript@5.8.3)':
     dependencies:
       '@storybook/global': 5.0.0
-      '@storybook/react-dom-shim': 9.0.13(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0))
+      '@storybook/react-dom-shim': 9.0.13(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1))
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
-      storybook: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0)
+      storybook: 9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1)
     optionalDependencies:
       typescript: 5.8.3
 
@@ -6535,6 +6573,29 @@ snapshots:
       postcss: 8.5.6
       tailwindcss: 4.1.10
 
+  '@tanstack/form-core@1.12.3':
+    dependencies:
+      '@tanstack/store': 0.7.1
+
+  '@tanstack/react-form@1.12.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@tanstack/form-core': 1.12.3
+      '@tanstack/react-store': 0.7.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      decode-formdata: 0.9.0
+      devalue: 5.1.1
+      react: 19.1.0
+    transitivePeerDependencies:
+      - react-dom
+
+  '@tanstack/react-store@0.7.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@tanstack/store': 0.7.1
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+      use-sync-external-store: 1.5.0(react@19.1.0)
+
+  '@tanstack/store@0.7.1': {}
+
   '@testing-library/dom@10.4.0':
     dependencies:
       '@babel/code-frame': 7.27.1
@@ -6560,7 +6621,7 @@ snapshots:
     dependencies:
       '@testing-library/dom': 10.4.0
 
-  '@trivago/prettier-plugin-sort-imports@5.2.2(prettier@3.6.0)':
+  '@trivago/prettier-plugin-sort-imports@5.2.2(prettier@3.6.1)':
     dependencies:
       '@babel/generator': 7.27.5
       '@babel/parser': 7.27.5
@@ -6568,7 +6629,7 @@ snapshots:
       '@babel/types': 7.27.6
       javascript-natural-sort: 0.7.1
       lodash: 4.17.21
-      prettier: 3.6.0
+      prettier: 3.6.1
     transitivePeerDependencies:
       - supports-color
 
@@ -7120,12 +7181,12 @@ snapshots:
     dependencies:
       pako: 1.0.11
 
-  browserslist@4.25.0:
+  browserslist@4.25.1:
     dependencies:
-      caniuse-lite: 1.0.30001724
-      electron-to-chromium: 1.5.173
+      caniuse-lite: 1.0.30001726
+      electron-to-chromium: 1.5.175
       node-releases: 2.0.19
-      update-browserslist-db: 1.1.3(browserslist@4.25.0)
+      update-browserslist-db: 1.1.3(browserslist@4.25.1)
 
   buffer-from@1.1.2: {}
 
@@ -7166,7 +7227,7 @@ snapshots:
       pascal-case: 3.1.2
       tslib: 2.8.1
 
-  caniuse-lite@1.0.30001724: {}
+  caniuse-lite@1.0.30001726: {}
 
   case-sensitive-paths-webpack-plugin@2.4.0: {}
 
@@ -7176,7 +7237,7 @@ snapshots:
       check-error: 2.1.1
       deep-eql: 5.0.2
       loupe: 3.1.4
-      pathval: 2.0.0
+      pathval: 2.0.1
 
   chalk@3.0.0:
     dependencies:
@@ -7263,7 +7324,7 @@ snapshots:
 
   core-js-compat@3.43.0:
     dependencies:
-      browserslist: 4.25.0
+      browserslist: 4.25.1
 
   core-js-pure@3.43.0: {}
 
@@ -7387,6 +7448,8 @@ snapshots:
     dependencies:
       ms: 2.1.3
 
+  decode-formdata@0.9.0: {}
+
   decode-named-character-reference@1.2.0:
     dependencies:
       character-entities: 2.0.2
@@ -7423,6 +7486,8 @@ snapshots:
   detect-libc@2.0.4: {}
 
   detect-node-es@1.1.0: {}
+
+  devalue@5.1.1: {}
 
   devlop@1.1.0:
     dependencies:
@@ -7499,7 +7564,7 @@ snapshots:
       es-errors: 1.3.0
       gopd: 1.2.0
 
-  electron-to-chromium@1.5.173: {}
+  electron-to-chromium@1.5.175: {}
 
   elliptic@6.6.1:
     dependencies:
@@ -7729,7 +7794,7 @@ snapshots:
       '@eslint/core': 0.14.0
       '@eslint/eslintrc': 3.3.1
       '@eslint/js': 9.29.0
-      '@eslint/plugin-kit': 0.3.2
+      '@eslint/plugin-kit': 0.3.3
       '@humanfs/node': 0.16.6
       '@humanwhocodes/module-importer': 1.0.1
       '@humanwhocodes/retry': 0.4.3
@@ -8650,7 +8715,7 @@ snapshots:
       '@swc/counter': 0.1.3
       '@swc/helpers': 0.5.15
       busboy: 1.6.0
-      caniuse-lite: 1.0.30001724
+      caniuse-lite: 1.0.30001726
       postcss: 8.4.31
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
@@ -8864,7 +8929,7 @@ snapshots:
 
   path-type@4.0.0: {}
 
-  pathval@2.0.0: {}
+  pathval@2.0.1: {}
 
   pbkdf2@3.1.3:
     dependencies:
@@ -8968,23 +9033,23 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-jsdoc@1.3.2(prettier@3.6.0):
+  prettier-plugin-jsdoc@1.3.2(prettier@3.6.1):
     dependencies:
       binary-searching: 2.0.5
       comment-parser: 1.4.1
       mdast-util-from-markdown: 2.0.2
-      prettier: 3.6.0
+      prettier: 3.6.1
     transitivePeerDependencies:
       - supports-color
 
-  prettier-plugin-tailwindcss@0.6.13(@trivago/prettier-plugin-sort-imports@5.2.2(prettier@3.6.0))(prettier-plugin-jsdoc@1.3.2(prettier@3.6.0))(prettier@3.6.0):
+  prettier-plugin-tailwindcss@0.6.13(@trivago/prettier-plugin-sort-imports@5.2.2(prettier@3.6.1))(prettier-plugin-jsdoc@1.3.2(prettier@3.6.1))(prettier@3.6.1):
     dependencies:
-      prettier: 3.6.0
+      prettier: 3.6.1
     optionalDependencies:
-      '@trivago/prettier-plugin-sort-imports': 5.2.2(prettier@3.6.0)
-      prettier-plugin-jsdoc: 1.3.2(prettier@3.6.0)
+      '@trivago/prettier-plugin-sort-imports': 5.2.2(prettier@3.6.1)
+      prettier-plugin-jsdoc: 1.3.2(prettier@3.6.1)
 
-  prettier@3.6.0: {}
+  prettier@3.6.1: {}
 
   pretty-error@4.0.0:
     dependencies:
@@ -9435,7 +9500,7 @@ snapshots:
       es-errors: 1.3.0
       internal-slot: 1.1.0
 
-  storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.0):
+  storybook@9.0.13(@testing-library/dom@10.4.0)(prettier@3.6.1):
     dependencies:
       '@storybook/global': 5.0.0
       '@testing-library/jest-dom': 6.6.3
@@ -9449,7 +9514,7 @@ snapshots:
       semver: 7.7.2
       ws: 8.18.2
     optionalDependencies:
-      prettier: 3.6.0
+      prettier: 3.6.1
     transitivePeerDependencies:
       - '@testing-library/dom'
       - bufferutil
@@ -9716,9 +9781,9 @@ snapshots:
       acorn: 8.15.0
       webpack-virtual-modules: 0.6.2
 
-  update-browserslist-db@1.1.3(browserslist@4.25.0):
+  update-browserslist-db@1.1.3(browserslist@4.25.1):
     dependencies:
-      browserslist: 4.25.0
+      browserslist: 4.25.1
       escalade: 3.2.0
       picocolors: 1.1.1
 
@@ -9745,6 +9810,10 @@ snapshots:
       tslib: 2.8.1
     optionalDependencies:
       '@types/react': 19.1.8
+
+  use-sync-external-store@1.5.0(react@19.1.0):
+    dependencies:
+      react: 19.1.0
 
   util-deprecate@1.0.2: {}
 
@@ -9794,7 +9863,7 @@ snapshots:
       '@webassemblyjs/wasm-edit': 1.14.1
       '@webassemblyjs/wasm-parser': 1.14.1
       acorn: 8.15.0
-      browserslist: 4.25.0
+      browserslist: 4.25.1
       chrome-trace-event: 1.0.4
       enhanced-resolve: 5.18.2
       es-module-lexer: 1.7.0
