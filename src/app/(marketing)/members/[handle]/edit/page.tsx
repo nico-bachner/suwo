@@ -35,7 +35,7 @@ export default async function Page({ params }: PageProps) {
   const session = await getSession()
 
   if (!session.id) {
-    redirect(routes.LOGIN)
+    redirect(routes.LOGIN({}))
   }
 
   if (session.id !== profile.user_id) {

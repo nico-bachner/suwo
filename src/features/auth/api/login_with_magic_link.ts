@@ -6,12 +6,12 @@ import prisma from '@/lib/prisma'
 import { emails } from '@/lib/resend'
 import { createResponse } from '@/utils/http/create_response'
 
+import { LoginWithMagicLinkValidator } from '../login_with_magic_link_validator'
 import { MagicLinkEmailTemplate } from '../magic_link_email_template'
-import { MagicLinkDetails } from '../magic_link_validation'
 import { routes } from '../routes'
 
 export const POST = async (request: Request) => {
-  const { data, error, success } = MagicLinkDetails.safeParse(
+  const { data, error, success } = LoginWithMagicLinkValidator.safeParse(
     await request.json(),
   )
 
@@ -45,7 +45,7 @@ export const POST = async (request: Request) => {
 
   const verificationLink =
     BASE_URL +
-    routes.API_MAGIC_LINK_VALIDATE({
+    routes.API_VALIDATE_MAGIC_LINK({
       user_id: user.id,
       token,
     })

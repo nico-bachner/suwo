@@ -1,14 +1,17 @@
 import { VerificationToken } from '@/generated/prisma'
 
+import { LoginScreenSearchParams } from './login_screen_search_params_validator'
+
 export const routes = {
-  LOGIN: '/login',
   REGISTER: '/register',
-  API_LOGIN: '/api/auth/login',
+  LOGIN: ({ method }: LoginScreenSearchParams) =>
+    method ? `/login?method=${method}` : '/login',
   API_REGISTER: '/api/auth/register',
-  API_MAGIC_LINK: '/api/auth/magic-link',
-  API_MAGIC_LINK_VALIDATE: ({
+  API_LOGIN_WITH_PASSWORD: '/api/auth/login/password',
+  API_LOGIN_WITH_MAGIC_LINK: '/api/auth/login/magic-link',
+  API_VALIDATE_MAGIC_LINK: ({
     user_id,
     token,
   }: Pick<VerificationToken, 'user_id' | 'token'>) =>
-    `/api/auth/magic-link/validate/${encodeURIComponent(user_id)}?token=${encodeURIComponent(token)}`,
+    `/api/auth/validate-magic-link/${encodeURIComponent(user_id)}?token=${encodeURIComponent(token)}`,
 }

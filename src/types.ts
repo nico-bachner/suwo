@@ -4,6 +4,9 @@ export type LayoutProps = Readonly<{
   children: ReactNode
 }>
 
-export type NextParams<T> = Promise<T>
+export type PageProps = {
+  params: Promise<Record<string, string>>
+  searchParams: Promise<Record<string, string>>
+}
 
 export type GenerateStaticParams<T> = () => Promise<T[]>

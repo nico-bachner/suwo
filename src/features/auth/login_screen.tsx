@@ -1,26 +1,48 @@
 import Link from 'next/link'
 
-import { PageLayout } from '@/components/server/page_layout'
-import { LINKS } from '@/config'
-import { LoginForm } from '@/features/auth/login_form'
-import { MagicLinkForm } from '@/features/auth/magic_link_form'
+import { Button } from '@/design_system/button'
+import { LoginWithMagicLinkForm } from '@/features/auth/login_with_magic_link_form'
 
-export const LoginScreen = () => (
-  <PageLayout title="Log In" className="flex flex-col gap-4">
-    <LoginForm />
+import { LoginScreenSearchParams } from './login_screen_search_params_validator'
+import { LoginWithPasswordForm } from './login_with_password_form'
+import { routes } from './routes'
 
-    <p>OR</p>
+export const LoginScreen = ({ method }: LoginScreenSearchParams) => (
+  <div className="prose mx-auto max-w-screen-sm px-4 py-8">
+    <h1>Log In</h1>
 
-    <MagicLinkForm />
+    {method ? (
+      <div className="flex flex-col gap-4">
+        {method === 'MAGIC_LINK' ? (
+          <LoginWithMagicLinkForm />
+        ) : (
+          <LoginWithPasswordForm />
+        )}
 
-    <p className="text-sm text-gray-300 lg:text-right">
-      {"Don't have an account? "}
-      <Link
-        href={LINKS.REGISTER.href}
-        className="font-bold text-blue-500 hover:underline"
-      >
-        Sign up instead
-      </Link>
-    </p>
-  </PageLayout>
+        <p>
+          Don&apos;t have an account?{' '}
+          <Link
+            href={routes.REGISTER}
+            className="font-bold text-blue-500 hover:underline"
+          >
+            Register
+          </Link>{' '}
+          instead
+        </p>
+      </div>
+    ) : (
+      <div className="flex flex-col gap-4">
+        <Button asChild variant="primary">
+          <Link href={routes.LOGIN({ method: 'MAGIC_LINK' })}>
+            Log in with Magic Link
+          </Link>
+        </Button>
+        <Button variant="secondary">
+          <Link href={routes.LOGIN({ method: 'PASSWORD' })}>
+            Log in with Password
+          </Link>
+        </Button>
+      </div>
+    )}
+  </div>
 )
