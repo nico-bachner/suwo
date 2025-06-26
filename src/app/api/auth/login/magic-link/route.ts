@@ -1,1 +1,1 @@
-export * from '@/features/auth/api/login_with_magic_link'
+export * from '@/features/auth/login_with_magic_link_route'

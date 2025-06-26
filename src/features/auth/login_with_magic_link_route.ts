@@ -6,9 +6,9 @@ import prisma from '@/lib/prisma'
 import { emails } from '@/lib/resend'
 import { createResponse } from '@/utils/http/create_response'
 
-import { LoginWithMagicLinkValidator } from '../login_with_magic_link_validator'
-import { MagicLinkEmailTemplate } from '../magic_link_email_template'
-import { routes } from '../routes'
+import { LoginWithMagicLinkValidator } from './login_with_magic_link_validator'
+import { MagicLinkEmailTemplate } from './magic_link_email_template'
+import { routes } from './routes'
 
 export const POST = async (request: Request) => {
   const { data, error, success } = LoginWithMagicLinkValidator.safeParse(

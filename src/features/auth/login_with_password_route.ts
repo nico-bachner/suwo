@@ -5,7 +5,7 @@ import { createSession } from '@/lib/auth/session/create_session'
 import prisma from '@/lib/prisma'
 import { createResponse } from '@/utils/http/create_response'
 
-import { LoginWithPasswordValidator } from '../login_with_password_validator'
+import { LoginWithPasswordValidator } from './login_with_password_validator'
 
 export const POST = async (request: Request) => {
   const { data, error, success } = LoginWithPasswordValidator.safeParse(

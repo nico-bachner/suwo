@@ -1,1 +1,1 @@
-export * from '@/features/auth/api/validate_magic_link'
+export * from '@/features/auth/validate_magic_link'
