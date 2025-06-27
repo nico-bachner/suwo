@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 
-import { ProfileScreen } from '@/features/profiles/profile_screen'
+import { ProfileScreen } from '@/features/profile/profile_screen'
 import { Profile } from '@/generated/prisma'
 import { getSession } from '@/lib/auth/session/get_session'
 import { NextParams } from '@/lib/next/types'

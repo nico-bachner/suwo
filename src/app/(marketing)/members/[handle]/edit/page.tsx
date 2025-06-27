@@ -1,6 +1,6 @@
 import { forbidden, notFound, redirect } from 'next/navigation'
 
-import { EditProfileScreen } from '@/features/profiles/edit_profile_screen'
+import { EditProfileScreen } from '@/features/profile/edit_profile_screen'
 import { Profile } from '@/generated/prisma'
 import { getSession } from '@/lib/auth/session/get_session'
 import { NextParams } from '@/lib/next/types'

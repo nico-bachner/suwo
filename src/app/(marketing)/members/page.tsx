@@ -1,4 +1,4 @@
-import { ProfilesScreen } from '@/features/profiles/profiles_screen'
+import { ProfilesScreen } from '@/features/profile/profiles_screen'
 import prisma from '@/lib/prisma'
 
 export default async function Page() {

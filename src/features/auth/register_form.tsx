@@ -27,7 +27,7 @@ export const RegisterForm = ({ instruments }: RegisterFormProps) => {
       family_name: '',
       email: '',
       usu_number: '',
-      instrument: '',
+      instrument_name: '',
       mailing_list_preference: true,
     },
     onSubmit: async ({ value }) => {
@@ -201,15 +201,13 @@ export const RegisterForm = ({ instruments }: RegisterFormProps) => {
           )}
         </form.Field>
 
-        <form.Field name="instrument">
+        <form.Field name="instrument_name">
           {({ state, name, handleChange }) => (
             <Select
               name={name}
               value={state.value}
               label="Instrument"
-              onValueChange={(value) => {
-                handleChange(value)
-              }}
+              onValueChange={handleChange}
               placeholder="Select Instrument..."
             >
               {instruments.map(({ name }) => (
