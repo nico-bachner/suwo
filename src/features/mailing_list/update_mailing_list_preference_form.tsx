@@ -4,21 +4,24 @@ import { useForm } from '@tanstack/react-form'
 
 import { Button } from '@/design_system/button'
 import { Spinner } from '@/design_system/spinner'
-import { TextInput } from '@/design_system/text_input'
-import { PasswordValidator } from '@/lib/validators/password'
+import { Switch } from '@/design_system/switch'
+import { routes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-import { routes } from './routes'
+type UpdateMailingListPreferenceFormProps = {
+  mailingListPreference: boolean
+}
 
-export const UpdatePasswordForm = () => {
+export const UpdateMailingListPreferenceForm = ({
+  mailingListPreference,
+}: UpdateMailingListPreferenceFormProps) => {
   const form = useForm({
     defaultValues: {
-      email: '',
-      password: '',
+      mailing_list_preference: mailingListPreference,
     },
     onSubmit: async ({ value }) => {
-      const response = await fetch(routes.API_UPDATE_PASSWORD, {
+      const response = await fetch(routes.API_UPDATE_MAILING_LIST_PREFERENCE, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,7 +38,7 @@ export const UpdatePasswordForm = () => {
           break
         case StatusCode.OK:
           // eslint-disable-next-line no-alert, no-undef
-          alert('Password updated successfully.')
+          alert('Successfully updated mailing list preference')
           break
       }
     },
@@ -50,39 +53,17 @@ export const UpdatePasswordForm = () => {
       }}
       className="flex flex-col gap-1"
     >
-      <form.Field
-        name="password"
-        validators={{
-          onBlur: PasswordValidator,
-        }}
-      >
-        {({ state, name, handleBlur, handleChange }) => (
-          <TextInput
+      <form.Field name="mailing_list_preference">
+        {({ state, name, handleChange }) => (
+          <Switch
             name={name}
-            value={state.value}
-            type="password"
-            label="Password"
-            placeholder='e.g. "I<3SUWO25!"'
-            autoComplete="new-password"
-            errors={state.meta.errors
-              .map((error) => {
-                switch (typeof error) {
-                  case 'string':
-                    return error
-                  case 'object':
-                    return error.message
-                  default:
-                    return null
-                }
-              })
-              .filter((error) => error !== null)}
-            onBlur={handleBlur}
-            onChange={({ target }) => {
-              handleChange(target.value)
-            }}
+            label="Weekly Member Emails"
+            checked={state.value}
+            onCheckedChange={handleChange}
           />
         )}
       </form.Field>
+
       <form.Subscribe>
         {({ canSubmit, isSubmitting }) => (
           <Button variant="primary" disabled={!canSubmit} className="mt-4">

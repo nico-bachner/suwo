@@ -1,1 +1,1 @@
-export * from '@/features/mailing_list/api_route'
+export * from '@/features/mailing_list/mailing_list_recipients_route'
