@@ -1,8 +1,8 @@
 import { SetCommunicationsPreferences } from '@/components/forms/set_communications_preferences'
-import { UpdatePassword } from '@/components/forms/update_password'
 import { PageLayout } from '@/components/server/page_layout'
 import { Button } from '@/design_system/button'
 import { SettingsSection } from '@/design_system/settings_section'
+import { UpdatePasswordForm } from '@/features/auth/update_password_form'
 import { logOut } from '@/lib/auth/log_out'
 
 export default function Page() {
@@ -19,7 +19,7 @@ export default function Page() {
         title="Password"
         description="If you need to reset your password, you can do so here. We recommend using a password manager to generate a secure password and keep track of it."
       >
-        <UpdatePassword />
+        <UpdatePasswordForm />
       </SettingsSection>
 
       <Button variant="danger" onClick={logOut}>

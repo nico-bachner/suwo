@@ -1,0 +1,7 @@
+import * as z from 'zod/v4'
+
+const MAX_LENGTH = 128
+
+export const InstrumentNameValidator = z.string().max(MAX_LENGTH, {
+  message: `Instrument Name must be at most ${MAX_LENGTH} characters long`,
+})

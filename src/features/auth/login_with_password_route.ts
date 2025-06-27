@@ -28,7 +28,16 @@ export const POST = async (request: Request) => {
   if (!user) {
     return createResponse({
       status: 400,
-      body: { error: 'Email not in use' },
+      body: { error: `Email ${data.email} not in use` },
+    })
+  }
+
+  if (!user.password) {
+    return createResponse({
+      status: 400,
+      body: {
+        error: `Password not set for user ${user.email}.\n\nPlease login using magic link instead`,
+      },
     })
   }
 

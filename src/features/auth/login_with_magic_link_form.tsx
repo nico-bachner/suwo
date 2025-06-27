@@ -69,10 +69,10 @@ export const LoginWithMagicLinkForm = () => {
                   case 'object':
                     return error.message
                   default:
-                    return undefined
+                    return null
                 }
               })
-              .filter((error) => error !== undefined)}
+              .filter((error) => error !== null)}
             onBlur={handleBlur}
             onChange={({ target }) => {
               handleChange(target.value)
@@ -84,7 +84,7 @@ export const LoginWithMagicLinkForm = () => {
         {({ canSubmit, isSubmitting }) => (
           <Button variant="primary" disabled={!canSubmit} className="mt-4">
             {isSubmitting ? (
-              <Spinner className="h-6 w-6 stroke-gray-300" />
+              <Spinner className="stroke-neutral-3 h-6 w-6" />
             ) : (
               'Submit'
             )}

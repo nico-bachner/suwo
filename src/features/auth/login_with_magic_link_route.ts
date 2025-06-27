@@ -31,7 +31,7 @@ export const POST = async (request: Request) => {
   if (!user) {
     return createResponse({
       status: 400,
-      body: { error: 'Email not in use' },
+      body: { error: `Email ${data.email} not in use` },
     })
   }
 

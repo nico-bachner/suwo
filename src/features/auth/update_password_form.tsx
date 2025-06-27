@@ -7,21 +7,20 @@ import { LINKS } from '@/config'
 import { Button } from '@/design_system/button'
 import { Spinner } from '@/design_system/spinner'
 import { TextInput } from '@/design_system/text_input'
-import { EmailValidator } from '@/lib/validators/email'
 import { PasswordValidator } from '@/lib/validators/password'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
 import { routes } from './routes'
 
-export const LoginWithPasswordForm = () => {
+export const UpdatePasswordForm = () => {
   const form = useForm({
     defaultValues: {
       email: '',
       password: '',
     },
     onSubmit: async ({ value }) => {
-      const response = await fetch(routes.API_LOGIN_WITH_PASSWORD, {
+      const response = await fetch(routes.API_UPDATE_PASSWORD, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,38 +51,6 @@ export const LoginWithPasswordForm = () => {
       className="flex flex-col gap-1"
     >
       <form.Field
-        name="email"
-        validators={{
-          onBlur: EmailValidator,
-        }}
-      >
-        {({ state, name, handleBlur, handleChange }) => (
-          <TextInput
-            name={name}
-            value={state.value}
-            label="Email Address"
-            placeholder='e.g. "name@example.com"'
-            autoComplete="email"
-            errors={state.meta.errors
-              .map((error) => {
-                switch (typeof error) {
-                  case 'string':
-                    return error
-                  case 'object':
-                    return error.message
-                  default:
-                    return null
-                }
-              })
-              .filter((error) => error !== null)}
-            onBlur={handleBlur}
-            onChange={({ target }) => {
-              handleChange(target.value)
-            }}
-          />
-        )}
-      </form.Field>
-      <form.Field
         name="password"
         validators={{
           onBlur: PasswordValidator,
@@ -96,7 +63,7 @@ export const LoginWithPasswordForm = () => {
             type="password"
             label="Password"
             placeholder='e.g. "I<3SUWO25!"'
-            autoComplete="current-password"
+            autoComplete="new-password"
             errors={state.meta.errors
               .map((error) => {
                 switch (typeof error) {

@@ -14,4 +14,5 @@ export const routes = {
     token,
   }: Pick<VerificationToken, 'user_id' | 'token'>) =>
     `/api/auth/validate-magic-link/${encodeURIComponent(user_id)}?token=${encodeURIComponent(token)}`,
+  API_UPDATE_PASSWORD: '/api/auth/update-password',
 }
