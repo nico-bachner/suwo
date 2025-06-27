@@ -46,18 +46,20 @@ model Payment {
 }
 
 model Privilege {
-    name          String          @id
-    created_at    DateTime        @default(now())
-    updated_at    DateTime        @default(now()) @updatedAt
+    name       String   @id
+    created_at DateTime @default(now())
+    updated_at DateTime @default(now()) @updatedAt
+
     RolePrivilege RolePrivilege[]
 }
 
 model Role {
-    name          String          @id
-    email         String?         @unique
-    description   String?
-    created_at    DateTime        @default(now())
-    updated_at    DateTime        @default(now()) @updatedAt
+    name        String   @id
+    email       String?  @unique
+    description String?
+    created_at  DateTime @default(now())
+    updated_at  DateTime @default(now()) @updatedAt
+
     RolePrivilege RolePrivilege[]
     UserRole      UserRole[]
 }
@@ -133,7 +135,8 @@ model Instrument {
     slug        String  @unique
     description String?
 
-    Profiles Profile[]
+    Profiles      Profile[]
+    PracticeParts PracticePart[]
 }
 
 model Equipment {
@@ -144,9 +147,8 @@ model Equipment {
     acquisition_date  DateTime
     acquisition_price Float?
     description       String?
-
-    created_at DateTime @default(now())
-    updated_at DateTime @default(now()) @updatedAt
+    created_at        DateTime @default(now())
+    updated_at        DateTime @default(now()) @updatedAt
 }
 
 model Library {
@@ -158,7 +160,23 @@ model Library {
     arranger          String?
     notes             String?
     lease_expiry      DateTime?
+    created_at        DateTime  @default(now())
+    updated_at        DateTime  @default(now()) @updatedAt
 
-    created_at DateTime @default(now())
-    updated_at DateTime @default(now()) @updatedAt
+    PracticeParts PracticePart[]
+}
+
+model PracticePart {
+    id              String   @id @default(uuid())
+    instrument_name String
+    library_id      String
+    variant         String?
+    url             String
+    created_at      DateTime @default(now())
+    updated_at      DateTime @default(now()) @updatedAt
+
+    instrument Instrument @relation(fields: [instrument_name], references: [name], onDelete: Cascade)
+    library    Library    @relation(fields: [library_id], references: [id], onDelete: Cascade)
+
+    @@unique([instrument_name, library_id, variant])
 }
