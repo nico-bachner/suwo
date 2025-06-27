@@ -47,7 +47,7 @@ export const RegisterForm = ({ instruments }: RegisterFormProps) => {
           alert(`${jsonResponse.body.error}\n\nPlease try again`)
           break
         case StatusCode.OK:
-          redirect(routes.ROLL_CALL)
+          redirect(routes.SETTINGS)
       }
     },
   })

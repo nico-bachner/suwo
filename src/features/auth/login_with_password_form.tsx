@@ -3,16 +3,14 @@
 import { useForm } from '@tanstack/react-form'
 import { redirect } from 'next/navigation'
 
-import { LINKS } from '@/config'
 import { Button } from '@/design_system/button'
 import { Spinner } from '@/design_system/spinner'
 import { TextInput } from '@/design_system/text_input'
 import { EmailValidator } from '@/lib/validators/email'
 import { PasswordValidator } from '@/lib/validators/password'
+import { routes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
-
-import { routes } from './routes'
 
 export const LoginWithPasswordForm = () => {
   const form = useForm({
@@ -37,7 +35,7 @@ export const LoginWithPasswordForm = () => {
           alert(`${jsonResponse.body.error}\n\nPlease try again`)
           break
         case StatusCode.OK:
-          redirect(LINKS.SETTINGS.href)
+          redirect(routes.SETTINGS)
       }
     },
   })

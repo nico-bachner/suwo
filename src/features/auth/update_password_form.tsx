@@ -1,9 +1,7 @@
 'use client'
 
 import { useForm } from '@tanstack/react-form'
-import { redirect } from 'next/navigation'
 
-import { LINKS } from '@/config'
 import { Button } from '@/design_system/button'
 import { Spinner } from '@/design_system/spinner'
 import { TextInput } from '@/design_system/text_input'
@@ -36,7 +34,9 @@ export const UpdatePasswordForm = () => {
           alert(`${jsonResponse.body.error}\n\nPlease try again`)
           break
         case StatusCode.OK:
-          redirect(LINKS.SETTINGS.href)
+          // eslint-disable-next-line no-alert, no-undef
+          alert(`Password updated successfully.`)
+          break
       }
     },
   })

@@ -34,7 +34,7 @@ export const LoginWithMagicLinkForm = () => {
           break
         case StatusCode.OK:
           // eslint-disable-next-line no-alert, no-undef
-          alert(`Email with login link sent to ${value.email}.`)
+          alert(`Email with login link has been sent to ${value.email}.`)
       }
     },
   })
