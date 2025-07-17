@@ -11,7 +11,7 @@ export const RegisterValidator = z.object({
   given_name: GivenNameValidator,
   family_name: FamilyNameValidator.optional(),
   email: EmailValidator,
-  usu_number: UsuNumberValidator,
+  usu_number: UsuNumberValidator.optional(),
   instrument_name: InstrumentNameValidator.optional(),
   mailing_list_preference: MailingListPreferenceValidator.optional(),
 })
