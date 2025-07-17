@@ -1,3 +1,5 @@
+import { cache } from 'react'
+
 import { getCurrentYear } from '@/utils/date_manupulation'
 
 import { MAX_WEEK } from './config'
@@ -9,7 +11,7 @@ import { KeyDate } from './types'
 // eslint-disable-next-line no-magic-numbers
 const MILLISECONDS_IN_A_WEEK = 7 * 24 * 60 * 60 * 1000
 
-export const fetchCurrentWeek = async () => {
+export const fetchCurrentWeek = cache(async () => {
   const currentYear = getCurrentYear()
 
   const response = await fetch(
@@ -34,4 +36,4 @@ export const fetchCurrentWeek = async () => {
   }
 
   return midsemAdjustedWeek
-}
+})

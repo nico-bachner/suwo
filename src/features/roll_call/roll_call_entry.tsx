@@ -35,21 +35,21 @@ export const RollCallEntry = ({
         },
       })
     }}
-    className="flex flex-row items-center odd:bg-gray-800"
+    className="odd:bg-neutral-6 flex flex-row items-center"
   >
     <p className="flex flex-1 flex-row gap-2 px-4 font-bold">
-      <span className="text-gray-300">{profile.display_name}</span>
-      <span className="text-gray-500">{profile.instrument_name}</span>
+      <span className="text-neutral-2">{profile.display_name}</span>
+      <span className="text-neutral-3">{profile.instrument_name}</span>
     </p>
 
     {present ? (
-      <CheckIcon className="box-content h-6 w-6 stroke-green-300 px-4 py-3" />
+      <CheckIcon className="stroke-positive box-content h-6 w-6 px-4 py-3" />
     ) : (
       <button
         type="submit"
-        className="cursor-pointer px-4 py-3 focus:ring-2 focus:ring-gray-500 focus:outline-none"
+        className="focus:ring-neutral-4 cursor-pointer px-4 py-3 focus:ring-2 focus:outline-none"
       >
-        <PlusIcon className="h-6 w-6 stroke-gray-300" />
+        <PlusIcon className="h-6 w-6" />
       </button>
     )}
   </form>

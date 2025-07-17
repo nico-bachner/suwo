@@ -17,7 +17,7 @@ export const Button = ({
   return (
     <Component
       className={cn(
-        'flex transform cursor-pointer flex-row items-center justify-center rounded-md px-4 py-2.5 font-semibold transition-transform select-none hover:scale-105 focus:scale-105 focus:outline-none',
+        'flex transform cursor-pointer flex-row items-center justify-center gap-2 rounded-md px-4 py-2.5 font-semibold transition-transform select-none hover:scale-105 focus:scale-105 focus:outline-none',
         getVariant(variant),
         className,
       )}
