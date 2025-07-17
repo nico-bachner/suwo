@@ -2,6 +2,7 @@
 
 import { useForm } from '@tanstack/react-form'
 import { redirect } from 'next/navigation'
+import { z } from 'zod'
 
 import { Button } from '@/design_system/button'
 import { Checkbox } from '@/design_system/checkbox'
@@ -16,6 +17,8 @@ import { routes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
+import { RegisterValidator } from './register_validator'
+
 type RegisterFormProps = {
   instruments: Instrument[]
 }
@@ -26,10 +29,10 @@ export const RegisterForm = ({ instruments }: RegisterFormProps) => {
       given_name: '',
       family_name: '',
       email: '',
-      usu_number: '',
+      usu_number: undefined,
       instrument_name: '',
       mailing_list_preference: true,
-    },
+    } as z.infer<typeof RegisterValidator>,
     onSubmit: async ({ value }) => {
       const response = await fetch(routes.API_REGISTER, {
         method: 'POST',
@@ -170,7 +173,7 @@ export const RegisterForm = ({ instruments }: RegisterFormProps) => {
         <form.Field
           name="usu_number"
           validators={{
-            onBlur: FamilyNameValidator,
+            onBlur: FamilyNameValidator.optional(),
           }}
         >
           {({ state, name, handleBlur, handleChange }) => (
