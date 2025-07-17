@@ -1,6 +1,7 @@
 'use client'
 
 import { useForm } from '@tanstack/react-form'
+import { z } from 'zod'
 
 import { Button } from '@/design_system/button'
 import { Spinner } from '@/design_system/spinner'
@@ -10,13 +11,15 @@ import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
 import { routes } from './routes'
+import { UpdatePasswordValidator } from './update_password_validator'
+
+const defaultValues: z.infer<typeof UpdatePasswordValidator> = {
+  password: '',
+}
 
 export const UpdatePasswordForm = () => {
   const form = useForm({
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    defaultValues,
     onSubmit: async ({ value }) => {
       const response = await fetch(routes.API_UPDATE_PASSWORD, {
         method: 'POST',

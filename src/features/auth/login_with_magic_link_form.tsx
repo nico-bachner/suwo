@@ -1,6 +1,7 @@
 'use client'
 
 import { useForm } from '@tanstack/react-form'
+import { z } from 'zod'
 
 import { Button } from '@/design_system/button'
 import { Spinner } from '@/design_system/spinner'
@@ -9,13 +10,16 @@ import { EmailValidator } from '@/lib/validators/email'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
+import { LoginWithMagicLinkValidator } from './login_with_magic_link_validator'
 import { routes } from './routes'
+
+const defaultValues: z.infer<typeof LoginWithMagicLinkValidator> = {
+  email: '',
+}
 
 export const LoginWithMagicLinkForm = () => {
   const form = useForm({
-    defaultValues: {
-      email: '',
-    },
+    defaultValues,
     onSubmit: async ({ value }) => {
       const response = await fetch(routes.API_LOGIN_WITH_MAGIC_LINK, {
         method: 'POST',

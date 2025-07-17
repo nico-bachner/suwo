@@ -2,6 +2,7 @@
 
 import { useForm } from '@tanstack/react-form'
 import { redirect } from 'next/navigation'
+import { z } from 'zod'
 
 import { Button } from '@/design_system/button'
 import { Spinner } from '@/design_system/spinner'
@@ -12,12 +13,16 @@ import { routes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
+import { LoginWithPasswordValidator } from './login_with_password_validator'
+
+const defaultValues: z.infer<typeof LoginWithPasswordValidator> = {
+  email: '',
+  password: '',
+}
+
 export const LoginWithPasswordForm = () => {
   const form = useForm({
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    defaultValues,
     onSubmit: async ({ value }) => {
       const response = await fetch(routes.API_LOGIN_WITH_PASSWORD, {
         method: 'POST',
