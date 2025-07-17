@@ -23,16 +23,18 @@ type RegisterFormProps = {
   instruments: Instrument[]
 }
 
+const defaultValues: z.infer<typeof RegisterValidator> = {
+  given_name: '',
+  family_name: undefined,
+  email: '',
+  usu_number: undefined,
+  instrument_name: undefined,
+  mailing_list_preference: true,
+}
+
 export const RegisterForm = ({ instruments }: RegisterFormProps) => {
   const form = useForm({
-    defaultValues: {
-      given_name: '',
-      family_name: '',
-      email: '',
-      usu_number: undefined,
-      instrument_name: '',
-      mailing_list_preference: true,
-    } as z.infer<typeof RegisterValidator>,
+    defaultValues,
     onSubmit: async ({ value }) => {
       const response = await fetch(routes.API_REGISTER, {
         method: 'POST',
@@ -103,7 +105,7 @@ export const RegisterForm = ({ instruments }: RegisterFormProps) => {
         <form.Field
           name="family_name"
           validators={{
-            onBlur: FamilyNameValidator,
+            onBlur: FamilyNameValidator.optional(),
           }}
         >
           {({ state, name, handleBlur, handleChange }) => (
@@ -230,8 +232,14 @@ export const RegisterForm = ({ instruments }: RegisterFormProps) => {
             label="Sign up for weekly rehearsal updates"
             checked={state.value}
             onCheckedChange={(value) => {
-              if (value !== 'indeterminate') {
-                handleChange(value)
+              switch (value) {
+                case true:
+                case false:
+                  handleChange(value)
+                  break
+                default:
+                  handleChange(true)
+                  break
               }
             }}
             className="mt-4 self-center"
