@@ -14,9 +14,7 @@ type PageProps = {
 export default async function Page({ params }: PageProps) {
   const { handle: handleParam } = await params
 
-  /**
-   * If the profile doesn't exist, redirect to a 404 page.
-   */
+  /** If the profile doesn't exist, redirect to a 404 page. */
   if (!handleParam) {
     notFound()
   }
@@ -29,9 +27,7 @@ export default async function Page({ params }: PageProps) {
     notFound()
   }
 
-  /**
-   * Auth check
-   */
+  /** Auth check */
   const session = await getSession()
 
   if (!session.id) {
@@ -42,8 +38,5 @@ export default async function Page({ params }: PageProps) {
     forbidden()
   }
 
-
-  return (
-    <EditProfileScreen profile={profile} session={session} />
-  )
+  return <EditProfileScreen profile={profile} session={session} />
 }

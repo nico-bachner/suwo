@@ -1,20 +1,18 @@
 'use client'
 
-// Error boundaries must be Client Components
 import { useEffect } from 'react'
 
 import { Button } from '@/design_system/button'
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string }
+type ErrorProps = {
+  error: Error & {
+    digest?: string
+  }
   reset: () => void
-}) {
+}
+
+export default function Error({ error, reset }: ErrorProps) {
   useEffect(() => {
-    // Log the error to an error reporting service
-    // eslint-disable-next-line no-console, no-undef
     console.error(error)
   }, [error])
 

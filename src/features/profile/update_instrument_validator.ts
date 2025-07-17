@@ -1,4 +1,4 @@
-import * as z from 'zod/v4'
+import { z } from 'zod'
 
 import { InstrumentNameValidator } from '@/lib/validators/instrument_name'
 

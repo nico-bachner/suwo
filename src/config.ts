@@ -18,6 +18,7 @@ export const GOOGLE_CALENDAR_ID = ''
 export const FULL_NAME = 'The University of Sydney Wind Orchestra'
 export const SHORT_NAME = 'Sydney University Wind Orchestra'
 export const ACRONYM = 'SUWO'
+export const FOUNDING_YEAR = 2003
 
 // Static Assets
 export const IMAGES = {

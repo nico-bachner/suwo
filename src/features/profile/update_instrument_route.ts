@@ -1,4 +1,4 @@
-import { z } from 'zod/v4'
+import { z } from 'zod'
 
 import { getSession } from '@/lib/auth/session/get_session'
 import prisma from '@/lib/prisma'

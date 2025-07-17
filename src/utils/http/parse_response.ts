@@ -1,9 +1,10 @@
 /* eslint-disable typescript/no-unsafe-assignment */
-
 import { StatusCode } from './status_code'
 import { JSONResponse } from './types'
 
-export const parseResponse = async (response: Response): Promise<JSONResponse> => {
+export const parseResponse = async (
+  response: Response,
+): Promise<JSONResponse> => {
   switch (response.status) {
     case 200:
       return {

@@ -1,4 +1,4 @@
-import * as z from 'zod/v4'
+import { z } from 'zod'
 
 import { EmailValidator } from '@/lib/validators/email'
 import { FamilyNameValidator } from '@/lib/validators/family_name'

@@ -1,5 +1,5 @@
 import { randomBytes } from 'crypto'
-import { z } from 'zod/v4'
+import { z } from 'zod'
 
 import { BASE_URL, RESEND_DOMAIN, SHORT_NAME } from '@/config'
 import prisma from '@/lib/prisma'

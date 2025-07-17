@@ -1,4 +1,4 @@
-import * as z from 'zod/v4'
+import { z } from 'zod'
 
 const MIN_LENGTH = 2
 const MAX_LENGTH = 128

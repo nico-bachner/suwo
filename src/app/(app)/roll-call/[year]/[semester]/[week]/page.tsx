@@ -1,54 +1,37 @@
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
+import { FOUNDING_YEAR } from '@/config'
 import { WeeklyAttendance } from '@/features/roll_call/weekly_attendance'
 import { $Enums, Attendance } from '@/generated/prisma'
 import { NextParams } from '@/lib/next/types'
 import prisma from '@/lib/prisma'
-import { isValidWeek } from '@/lib/usyd/is_valid_week'
+import { MAX_WEEK, MIN_WEEK } from '@/lib/usyd/config'
 import { routes } from '@/routes'
 
 type PageProps = {
   params: NextParams<Pick<Attendance, 'year' | 'semester' | 'week'>>
 }
 
+const CurrentWeekValidator = z.object({
+  year: z.coerce.number().int().min(FOUNDING_YEAR),
+  semester: z.enum($Enums.Semester),
+  week: z.coerce.number().int().min(MIN_WEEK).max(MAX_WEEK),
+})
+
 export default async function Page({ params }: PageProps) {
-  const {
-    year: yearParam,
-    semester: semesterParam,
-    week: weekParam,
-  } = await params
+  const { data, success } = CurrentWeekValidator.safeParse(await params)
 
-  if (!yearParam || !semesterParam || !weekParam) {
-    redirect(routes.ROLL_CALL)
-  }
-
-  const year = parseInt(decodeURIComponent(yearParam), 10)
-  const { data: semester, success } = z
-    .nativeEnum($Enums.Semester)
-    .safeParse(semesterParam)
-  const week = parseInt(decodeURIComponent(weekParam), 10)
-
-  if (!success || !isValidWeek(week)) {
+  if (!success) {
     redirect(routes.ROLL_CALL)
   }
 
   const profiles = await prisma.profile.findMany()
   const attendances = await prisma.attendance.findMany({
-    where: {
-      year,
-      semester,
-      week,
-    },
+    where: data,
   })
 
   return (
-    <WeeklyAttendance
-      year={year}
-      semester={semester}
-      week={week}
-      profiles={profiles}
-      attendances={attendances}
-    />
+    <WeeklyAttendance {...data} profiles={profiles} attendances={attendances} />
   )
 }

@@ -1,5 +1,5 @@
 import { verify } from 'argon2'
-import { z } from 'zod/v4'
+import { z } from 'zod'
 
 import { createSession } from '@/lib/auth/session/create_session'
 import prisma from '@/lib/prisma'
