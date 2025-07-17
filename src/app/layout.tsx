@@ -4,7 +4,7 @@ import { Limelight, Raleway } from 'next/font/google'
 
 import { Navbar } from '@/features/navigation/navbar'
 import { getSession } from '@/lib/auth/session/get_session'
-import { LayoutProps } from '@/types'
+import { LayoutFileProps } from '@/types'
 import { cn } from '@/utils/cn'
 
 import '../styles/globals.css'
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   description: 'The Sydney University Wind Orchestra',
 }
 
-export default async function Layout({ children }: LayoutProps) {
+export default async function Layout({ children }: LayoutFileProps) {
   const session = await getSession()
 
   return (

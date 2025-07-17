@@ -7,11 +7,11 @@ import { NextParams } from '@/lib/next/types'
 import prisma from '@/lib/prisma'
 import { routes } from '@/routes'
 
-type PageProps = {
+type PageFileProps = {
   params: NextParams<Pick<Profile, 'handle'>>
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: PageFileProps) {
   const { handle: handleParam } = await params
 
   /** If the profile doesn't exist, redirect to a 404 page. */

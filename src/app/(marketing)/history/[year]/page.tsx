@@ -19,13 +19,13 @@ export const generateStaticParams = async (): Promise<Params[]> => {
   }))
 }
 
-type PageProps = {
+type PageFileProps = {
   params: NextParams<Params>
 }
 
 export const generateMetadata = async ({
   params,
-}: PageProps): Promise<Metadata> => {
+}: PageFileProps): Promise<Metadata> => {
   const { year } = await params
   const page = await fetchHistoryYearPage(year)
 
@@ -38,7 +38,7 @@ export const generateMetadata = async ({
   }
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: PageFileProps) {
   const { year } = await params
   const page = await fetchHistoryYearPage(year)
 

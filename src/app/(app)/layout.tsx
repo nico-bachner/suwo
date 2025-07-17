@@ -3,9 +3,9 @@ import { redirect } from 'next/navigation'
 import { getSession } from '@/lib/auth/session/get_session'
 import prisma from '@/lib/prisma'
 import { routes } from '@/routes'
-import { LayoutProps } from '@/types'
+import { LayoutFileProps } from '@/types'
 
-export default async function Layout({ children }: LayoutProps) {
+export default async function Layout({ children }: LayoutFileProps) {
   const { id } = await getSession()
 
   if (!id) {

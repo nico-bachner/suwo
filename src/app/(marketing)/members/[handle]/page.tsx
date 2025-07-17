@@ -6,11 +6,11 @@ import { getSession } from '@/lib/auth/session/get_session'
 import { NextParams } from '@/lib/next/types'
 import prisma from '@/lib/prisma'
 
-type PageProps = {
+type PageFileProps = {
   params: NextParams<Pick<Profile, 'handle'>>
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: PageFileProps) {
   const { handle: handleParam } = await params
 
   if (!handleParam) {

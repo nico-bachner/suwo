@@ -3,15 +3,9 @@
 import { useEffect } from 'react'
 
 import { Button } from '@/design_system/button'
+import { ErrorFileProps } from '@/types'
 
-type ErrorProps = {
-  error: Error & {
-    digest?: string
-  }
-  reset: () => void
-}
-
-export default function Error({ error, reset }: ErrorProps) {
+export default function Error({ error, reset }: ErrorFileProps) {
   useEffect(() => {
     console.error(error)
   }, [error])
