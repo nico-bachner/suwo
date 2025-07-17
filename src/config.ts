@@ -35,68 +35,20 @@ export const IMAGES = {
   },
 }
 
-// For Navigation
-export const LINKS = {
-  HOME: {
-    href: '/',
-    label: 'Home',
-  },
-  ABOUT: {
-    href: '/about',
-    label: 'About',
-  },
-  HISTORY: {
-    href: '/history',
-    label: 'History',
-  },
-  MEMBERS: {
-    href: '/members',
-    label: 'Members',
-  },
-  ROLL_CALL: {
-    href: '/roll-call',
-    label: 'Roll Call',
-  },
-  CALENDAR: {
-    href: `https://calendar.google.com/calendar/u/0?cid=${GOOGLE_CALENDAR_ID}`,
-    label: 'Calendar',
-  },
-  SETTINGS: {
-    href: '/settings',
-    label: 'Settings',
-  },
-  LOGIN: {
-    href: '/login',
-    label: 'Log In',
-  },
-  REGISTER: {
-    href: '/join',
-    label: 'Join SUWO',
-  },
-}
-
-export const SOCIAL_LINKS = {
-  YOUTUBE: {
+export const SOCIAL_LINKS = [
+  {
+    title: 'YouTube',
     icon: YouTubeIcon,
     href: 'https://www.youtube.com/user/SydneyUniWindOrch',
   },
-  FACEBOOK: {
+  {
+    title: 'Facebook',
     icon: FacebookIcon,
     href: 'https://www.facebook.com/sydneyuniversitywindorchestra',
   },
-  INSTAGRAM: {
+  {
+    title: 'Instagram',
     icon: InstagramIcon,
     href: 'https://www.instagram.com/suwo.syd/',
   },
-}
-
-export const NAV_LINKS = [
-  LINKS.HOME,
-  LINKS.ABOUT,
-  LINKS.HISTORY,
-  LINKS.MEMBERS,
-  LINKS.ROLL_CALL,
-  LINKS.CALENDAR,
 ]
-
-export const NAV_SOCIAL_LINKS = Object.values(SOCIAL_LINKS)

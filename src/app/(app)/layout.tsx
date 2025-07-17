@@ -9,7 +9,7 @@ export default async function Layout({ children }: LayoutProps) {
   const { id } = await getSession()
 
   if (!id) {
-    return redirect(routes.LOGIN({}))
+    return redirect(routes.LOGIN())
   }
 
   const profile = await prisma.profile.findUnique({

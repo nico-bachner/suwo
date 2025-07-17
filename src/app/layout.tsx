@@ -2,6 +2,8 @@ import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
 
+import { Navbar } from '@/features/navigation/navbar'
+import { getSession } from '@/lib/auth/session/get_session'
 import { LayoutProps } from '@/types'
 import { cn } from '@/utils/cn'
 
@@ -23,7 +25,9 @@ export const metadata: Metadata = {
   description: 'The Sydney University Wind Orchestra',
 }
 
-export default function Layout({ children }: LayoutProps) {
+export default async function Layout({ children }: LayoutProps) {
+  const session = await getSession()
+
   return (
     <html lang="en">
       <body
@@ -33,7 +37,10 @@ export default function Layout({ children }: LayoutProps) {
           fontSerif.variable,
         )}
       >
-        {children}
+        <div className="flex min-h-screen flex-col">
+          <Navbar session={session} />
+          <div className="flex-1 px-4 py-8">{children}</div>
+        </div>
 
         <Analytics />
       </body>

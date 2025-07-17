@@ -1,5 +1,8 @@
-import { PageLayout } from '@/components/server/page_layout'
-
 export default function Loading() {
-  return <PageLayout title="Loading" subtitle="Please wait..." />
+  return (
+    <div className="prose mx-auto max-w-screen-sm px-4 py-8">
+      <h1>Loading</h1>
+      <p>Please wait...</p>
+    </div>
+  )
 }

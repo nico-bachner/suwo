@@ -1,11 +1,11 @@
 import { notFound, redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
 
-import { LINKS } from '@/config'
 import { VerificationToken } from '@/generated/prisma'
 import { createSession } from '@/lib/auth/session/create_session'
 import { NextParams } from '@/lib/next/types'
 import prisma from '@/lib/prisma'
+import { routes } from '@/routes'
 
 export const GET = async (
   { nextUrl }: NextRequest,
@@ -45,5 +45,5 @@ export const GET = async (
     id: verificationToken.user_id,
   })
 
-  redirect(LINKS.SETTINGS.href)
+  redirect(routes.SETTINGS)
 }

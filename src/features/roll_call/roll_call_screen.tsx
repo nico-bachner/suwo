@@ -1,6 +1,5 @@
 import Link from 'next/link'
 
-import { PageLayout } from '@/components/server/page_layout'
 import { WEEKS } from '@/lib/usyd/config'
 import { getCurrentSemester, getCurrentYear } from '@/utils/date_manupulation'
 
@@ -9,7 +8,9 @@ export const RollCallScreen = () => {
   const currentSemester = getCurrentSemester()
 
   return (
-    <PageLayout title="Roll Call" className="prose">
+    <div className="prose mx-auto max-w-screen-sm px-4 py-8">
+      <h1>Roll Call</h1>
+
       <p className="text-center text-5xl font-bold">Come back next semester!</p>
 
       <p>
@@ -29,6 +30,6 @@ export const RollCallScreen = () => {
           </Link>
         ))}
       </div>
-    </PageLayout>
+    </div>
   )
 }

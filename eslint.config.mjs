@@ -25,8 +25,10 @@ export default [
         tsconfigRootDir: import.meta.dirname,
       },
       globals: {
-        process: 'readonly',
+        console: 'readonly',
         fetch: 'readonly',
+        process: 'readonly',
+        window: 'readonly',
       },
     },
     settings: {
@@ -79,7 +81,7 @@ export default [
       'no-class-assign': 'error',
       'no-compare-neg-zero': 'error',
       'no-cond-assign': 'error',
-      'no-console': 'error',
+      'no-console': 'warn',
       'no-const-assign': 'error',
       'no-constant-binary-expression': 'error',
       'no-constant-condition': 'error',

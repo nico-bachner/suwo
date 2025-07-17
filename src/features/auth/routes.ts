@@ -4,8 +4,14 @@ import { LoginScreenSearchParams } from './login_screen_search_params_validator'
 
 export const routes = {
   REGISTER: '/register',
-  LOGIN: ({ method }: LoginScreenSearchParams) =>
-    method ? `/login?method=${method}` : '/login',
+  LOGIN: (searchParams?: LoginScreenSearchParams) => {
+    if (!searchParams) {
+      return '/login'
+    }
+
+    const params = new URLSearchParams(searchParams)
+    return `/login?${params.toString()}`
+  },
   API_REGISTER: '/api/auth/register',
   API_LOGIN_WITH_PASSWORD: '/api/auth/login/password',
   API_LOGIN_WITH_MAGIC_LINK: '/api/auth/login/magic-link',

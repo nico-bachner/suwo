@@ -1,12 +1,12 @@
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
-import { LINKS } from '@/config'
 import { WeeklyAttendance } from '@/features/roll_call/weekly_attendance'
 import { $Enums, Attendance } from '@/generated/prisma'
 import { NextParams } from '@/lib/next/types'
 import prisma from '@/lib/prisma'
 import { isValidWeek } from '@/lib/usyd/is_valid_week'
+import { routes } from '@/routes'
 
 type PageProps = {
   params: NextParams<Pick<Attendance, 'year' | 'semester' | 'week'>>
@@ -20,17 +20,17 @@ export default async function Page({ params }: PageProps) {
   } = await params
 
   if (!yearParam || !semesterParam || !weekParam) {
-    redirect(LINKS.ROLL_CALL.href)
+    redirect(routes.ROLL_CALL)
   }
 
   const year = parseInt(decodeURIComponent(yearParam), 10)
   const { data: semester, success } = z
     .nativeEnum($Enums.Semester)
-    .safeParse(parseInt(decodeURIComponent(semesterParam), 10))
+    .safeParse(semesterParam)
   const week = parseInt(decodeURIComponent(weekParam), 10)
 
   if (!success || !isValidWeek(week)) {
-    redirect(LINKS.ROLL_CALL.href)
+    redirect(routes.ROLL_CALL)
   }
 
   const profiles = await prisma.profile.findMany()
