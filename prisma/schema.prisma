@@ -127,7 +127,7 @@ model Attendance {
 
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
-  @@unique([user_id, year, semester, week])
+  @@id([user_id, year, semester, week])
 }
 
 model Instrument {

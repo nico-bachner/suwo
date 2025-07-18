@@ -1,6 +1,7 @@
 import { $Enums } from '@/generated/prisma'
 
 export const routes = {
+  API_ATTENDANCE: '/api/attendance',
   ROLL_CALL: '/roll-call',
   CURRENT_WEEK_ROLL_CALL: (
     year: number,
