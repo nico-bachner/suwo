@@ -2,17 +2,17 @@ import { StatusCode } from './status_code'
 
 export type JSONResponse =
   | {
-      status?: StatusCode.OK | StatusCode.Created
-      body: {
-        data: unknown
-      }
+      status: StatusCode.OK | StatusCode.Created
+      data: unknown
     }
   | {
-      status?:
+      status: StatusCode.NoContent
+    }
+  | {
+      status:
         | StatusCode.BadRequest
         | StatusCode.Unauthorized
         | StatusCode.NotFound
-      body: {
-        error: string
-      }
+        | StatusCode.InternalServerError
+      error: string
     }

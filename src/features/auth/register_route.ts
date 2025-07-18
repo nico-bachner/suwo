@@ -1,10 +1,11 @@
-import { z } from 'zod'
+import { prettifyError } from 'zod'
 
-import { createSession } from '@/lib/auth/session/create_session'
 import prisma from '@/lib/prisma'
 import { createResponse } from '@/utils/http/create_response'
+import { StatusCode } from '@/utils/http/status_code'
 
 import { RegisterValidator } from './register_validator'
+import { createSession } from './session/server/create_session'
 
 export const POST = async (request: Request) => {
   const { data, error, success } = RegisterValidator.safeParse(
@@ -13,8 +14,8 @@ export const POST = async (request: Request) => {
 
   if (!success) {
     return createResponse({
-      status: 400,
-      body: { error: z.prettifyError(error) },
+      status: StatusCode.BadRequest,
+      error: prettifyError(error),
     })
   }
 
@@ -27,9 +28,7 @@ export const POST = async (request: Request) => {
   if (existingUser) {
     return createResponse({
       status: 400,
-      body: {
-        error: `Email ${existingUser.email} already in use. Please try again with another email address.\n\nIf you are sure this email belongs to you, try logging in instead.`,
-      },
+      error: `Email ${existingUser.email} already in use. Please try again with another email address.\n\nIf you are sure this email belongs to you, try logging in instead.`,
     })
   }
 
@@ -61,11 +60,11 @@ export const POST = async (request: Request) => {
   }
 
   await createSession({
-    id: user.id,
+    user_id: user.id,
   })
 
   return createResponse({
-    status: 200,
-    body: { data },
+    status: StatusCode.OK,
+    data,
   })
 }

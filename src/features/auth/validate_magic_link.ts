@@ -2,10 +2,11 @@ import { notFound, redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
 
 import { VerificationToken } from '@/generated/prisma'
-import { createSession } from '@/lib/auth/session/create_session'
 import { NextParams } from '@/lib/next/types'
 import prisma from '@/lib/prisma'
 import { routes } from '@/routes'
+
+import { createSession } from './session/server/create_session'
 
 export const GET = async (
   { nextUrl }: NextRequest,
@@ -42,7 +43,7 @@ export const GET = async (
   }
 
   await createSession({
-    id: verificationToken.user_id,
+    user_id: verificationToken.user_id,
   })
 
   redirect(routes.SETTINGS)

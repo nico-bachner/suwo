@@ -1,10 +1,11 @@
 import { randomBytes } from 'crypto'
-import { z } from 'zod'
+import { prettifyError } from 'zod'
 
 import { BASE_URL, RESEND_DOMAIN, SHORT_NAME } from '@/config'
 import prisma from '@/lib/prisma'
 import { emails } from '@/lib/resend'
 import { createResponse } from '@/utils/http/create_response'
+import { StatusCode } from '@/utils/http/status_code'
 
 import { LoginWithMagicLinkValidator } from './login_with_magic_link_validator'
 import { MagicLinkEmailTemplate } from './magic_link_email_template'
@@ -17,8 +18,8 @@ export const POST = async (request: Request) => {
 
   if (!success) {
     return createResponse({
-      status: 400,
-      body: { error: z.prettifyError(error) },
+      status: StatusCode.BadRequest,
+      error: prettifyError(error),
     })
   }
 
@@ -30,8 +31,8 @@ export const POST = async (request: Request) => {
 
   if (!user) {
     return createResponse({
-      status: 400,
-      body: { error: `Email ${data.email} not in use` },
+      status: StatusCode.BadRequest,
+      error: `Email ${data.email} not in use`,
     })
   }
 
@@ -60,7 +61,7 @@ export const POST = async (request: Request) => {
   })
 
   return createResponse({
-    status: 200,
-    body: { data },
+    status: StatusCode.OK,
+    data,
   })
 }

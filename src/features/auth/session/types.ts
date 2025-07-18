@@ -1,5 +1,5 @@
 import { User } from '@/generated/prisma'
 
 export type Session = {
-  id: User['id'] | null
+  user_id: User['id']
 }

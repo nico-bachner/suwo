@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
 
 import { Navbar } from '@/features/navigation/navbar'
-import { getSession } from '@/lib/auth/session/get_session'
+import { QueryProvider } from '@/lib/tanstack-query/provider'
 import { LayoutFileProps } from '@/types'
 import { cn } from '@/utils/cn'
 
@@ -25,9 +25,7 @@ export const metadata: Metadata = {
   description: 'The Sydney University Wind Orchestra',
 }
 
-export default async function Layout({ children }: LayoutFileProps) {
-  const session = await getSession()
-
+export default function Layout({ children }: LayoutFileProps) {
   return (
     <html lang="en">
       <body
@@ -37,11 +35,12 @@ export default async function Layout({ children }: LayoutFileProps) {
           fontSerif.variable,
         )}
       >
-        <div className="flex min-h-screen flex-col">
-          <Navbar session={session} />
-          <div className="flex-1 px-4 py-8">{children}</div>
-        </div>
-
+        <QueryProvider>
+          <div className="flex min-h-screen flex-col">
+            <Navbar />
+            <div className="flex-1 px-4 py-8">{children}</div>
+          </div>
+        </QueryProvider>
         <Analytics />
       </body>
     </html>

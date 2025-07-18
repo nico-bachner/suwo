@@ -1,32 +1,33 @@
 import { hash } from 'argon2'
-import { z } from 'zod'
+import { prettifyError } from 'zod'
 
-import { getSession } from '@/lib/auth/session/get_session'
 import prisma from '@/lib/prisma'
 import { createResponse } from '@/utils/http/create_response'
+import { StatusCode } from '@/utils/http/status_code'
 
+import { getSession } from './session/server/get_session'
 import { UpdatePasswordValidator } from './update_password_validator'
 
 export const POST = async (request: Request) => {
-  const { id } = await getSession()
+  const session = await getSession()
 
-  if (!id) {
+  if (!session) {
     return createResponse({
-      status: 401,
-      body: { error: 'Unauthorized' },
+      status: StatusCode.Unauthorized,
+      error: 'Unauthorized',
     })
   }
 
   const user = await prisma.user.findUnique({
     where: {
-      id,
+      id: session.user_id,
     },
   })
 
   if (!user) {
     return createResponse({
-      status: 400,
-      body: { error: `Invalid cookie` },
+      status: StatusCode.BadRequest,
+      error: 'Invalid cookie',
     })
   }
 
@@ -36,8 +37,8 @@ export const POST = async (request: Request) => {
 
   if (!success) {
     return createResponse({
-      status: 400,
-      body: { error: z.prettifyError(error) },
+      status: StatusCode.BadRequest,
+      error: prettifyError(error),
     })
   }
 
@@ -51,7 +52,7 @@ export const POST = async (request: Request) => {
   })
 
   return createResponse({
-    status: 200,
-    body: { data: updatedUser },
+    status: StatusCode.OK,
+    data: updatedUser,
   })
 }

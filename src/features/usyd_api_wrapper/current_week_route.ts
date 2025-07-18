@@ -7,8 +7,6 @@ export const GET = async () => {
 
   return createResponse({
     status: StatusCode.OK,
-    body: {
-      data: currentWeek,
-    },
+    data: currentWeek,
   })
 }

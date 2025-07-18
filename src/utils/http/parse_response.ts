@@ -9,33 +9,40 @@ export const parseResponse = async (
     case 200:
       return {
         status: StatusCode.OK,
-        body: await response.json(),
+        data: await response.json(),
       }
     case 201:
       return {
         status: StatusCode.Created,
-        body: await response.json(),
+        data: await response.json(),
+      }
+    case 204:
+      return {
+        status: StatusCode.NoContent,
       }
     case 400:
       return {
         status: StatusCode.BadRequest,
-        body: await response.json(),
+        error: await response.json(),
       }
     case 401:
       return {
         status: StatusCode.Unauthorized,
-        body: await response.json(),
+        error: await response.json(),
       }
     case 404:
       return {
         status: StatusCode.NotFound,
-        body: await response.json(),
+        error: await response.json(),
+      }
+    case 500:
+      return {
+        status: StatusCode.InternalServerError,
+        error: await response.json(),
       }
     default:
-      return {
-        body: {
-          error: 'Could not parse response',
-        },
-      }
+      throw new Error(
+        `Unexpected response status: ${response.status} - ${response.statusText}`,
+      )
   }
 }

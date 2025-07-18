@@ -5,8 +5,6 @@ import { Divider } from '@/design_system/divider'
 import { fetchHistoryPageMetadata } from '@/lib/notion/fetch_history_page_metadata'
 import { fetchHistoryYears } from '@/lib/notion/fetch_history_years'
 
-export const dynamic = 'force-static'
-
 export const generateMetadata = async (): Promise<Metadata> =>
   await fetchHistoryPageMetadata()
 

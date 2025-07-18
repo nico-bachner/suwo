@@ -1,6 +1,7 @@
 'use client'
 
 import { useForm } from '@tanstack/react-form'
+import { useQueryClient } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
@@ -14,6 +15,7 @@ import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
 import { LoginWithPasswordValidator } from './login_with_password_validator'
+import { SESSION_QUERY_KEY } from './session/client/use_session_query'
 
 const defaultValues: z.infer<typeof LoginWithPasswordValidator> = {
   email: '',
@@ -21,25 +23,31 @@ const defaultValues: z.infer<typeof LoginWithPasswordValidator> = {
 }
 
 export const LoginWithPasswordForm = () => {
+  const queryClient = useQueryClient()
+
   const form = useForm({
     defaultValues,
     onSubmit: async ({ value }) => {
-      const response = await fetch(routes.API_LOGIN_WITH_PASSWORD, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(value),
-      })
+      const response = await parseResponse(
+        await fetch(routes.API_LOGIN_WITH_PASSWORD, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(value),
+        }),
+      )
 
-      const jsonResponse = await parseResponse(response)
-
-      switch (jsonResponse.status) {
+      switch (response.status) {
         case StatusCode.BadRequest:
           // eslint-disable-next-line no-alert, no-undef
-          alert(`${jsonResponse.body.error}\n\nPlease try again`)
+          alert(`${response.error}\n\nPlease try again`)
           break
         case StatusCode.OK:
+          await queryClient.invalidateQueries({
+            queryKey: SESSION_QUERY_KEY,
+          })
+
           redirect(routes.SETTINGS)
       }
     },

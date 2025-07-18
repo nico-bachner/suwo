@@ -1,5 +1,6 @@
 import { Profile } from '@/generated/prisma'
-import { Session } from '@/lib/auth/session/types'
+
+import { Session } from '../auth/session/types'
 
 export type ProfilesScreenProps = {
   profiles: Profile[]
@@ -7,5 +8,5 @@ export type ProfilesScreenProps = {
 
 export type ProfileScreenProps = {
   profile: Profile
-  session: Session
+  session: Session | null
 }

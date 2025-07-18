@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
 
+import { getSession } from '@/features/auth/session/server/get_session'
 import { ProfileScreen } from '@/features/profile/profile_screen'
 import { Profile } from '@/generated/prisma'
-import { getSession } from '@/lib/auth/session/get_session'
 import { NextParams } from '@/lib/next/types'
 import prisma from '@/lib/prisma'
 

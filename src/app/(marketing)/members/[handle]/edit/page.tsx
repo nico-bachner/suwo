@@ -1,8 +1,8 @@
 import { forbidden, notFound, redirect } from 'next/navigation'
 
+import { getSession } from '@/features/auth/session/server/get_session'
 import { EditProfileScreen } from '@/features/profile/edit_profile_screen'
 import { Profile } from '@/generated/prisma'
-import { getSession } from '@/lib/auth/session/get_session'
 import { NextParams } from '@/lib/next/types'
 import prisma from '@/lib/prisma'
 import { routes } from '@/routes'
@@ -30,11 +30,11 @@ export default async function Page({ params }: PageFileProps) {
   /** Auth check */
   const session = await getSession()
 
-  if (!session.id) {
+  if (!session) {
     redirect(routes.LOGIN({}))
   }
 
-  if (session.id !== profile.user_id) {
+  if (session.user_id !== profile.user_id) {
     forbidden()
   }
 

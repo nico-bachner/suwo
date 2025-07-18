@@ -6,15 +6,15 @@ import { useEffect, useState } from 'react'
 
 import { SOCIAL_LINKS } from '@/config'
 import { Icon } from '@/design_system/icon'
-import { Session } from '@/lib/auth/session/types'
 import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
 
 import { Dialog } from '../../design_system/dialog'
+import { Session } from '../auth/session/types'
 import { NavbarMenuLink } from './navbar_menu_link'
 
 type NavbarMenuProps = {
-  session: Session
+  session: Session | null
   className?: string
 }
 
@@ -56,12 +56,12 @@ export const NavbarMenu = ({ session, className }: NavbarMenuProps) => {
         <NavbarMenuLink href={routes.HOME}>Home</NavbarMenuLink>
         <NavbarMenuLink href={routes.HISTORY}>History</NavbarMenuLink>
         <NavbarMenuLink href={routes.MEMBERS}>Members</NavbarMenuLink>
-        {session.id && (
+        {session && (
           <NavbarMenuLink href={routes.ROLL_CALL}>Roll Call</NavbarMenuLink>
         )}
       </div>
 
-      {session.id ? (
+      {session ? (
         <NavbarMenuLink href={routes.SETTINGS}>Settings</NavbarMenuLink>
       ) : (
         <div className="flex flex-col items-center gap-6">

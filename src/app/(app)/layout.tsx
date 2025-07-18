@@ -1,20 +1,20 @@
 import { redirect } from 'next/navigation'
 
-import { getSession } from '@/lib/auth/session/get_session'
+import { getSession } from '@/features/auth/session/server/get_session'
 import prisma from '@/lib/prisma'
 import { routes } from '@/routes'
 import { LayoutFileProps } from '@/types'
 
 export default async function Layout({ children }: LayoutFileProps) {
-  const { id } = await getSession()
+  const session = await getSession()
 
-  if (!id) {
+  if (!session) {
     return redirect(routes.LOGIN())
   }
 
   const profile = await prisma.profile.findUnique({
     where: {
-      user_id: id,
+      user_id: session.user_id,
     },
     select: {
       handle: true,

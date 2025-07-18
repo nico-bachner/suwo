@@ -21,20 +21,20 @@ export const UpdateMailingListPreferenceForm = ({
       mailing_list_preference: mailingListPreference,
     },
     onSubmit: async ({ value }) => {
-      const response = await fetch(routes.API_UPDATE_MAILING_LIST_PREFERENCE, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(value),
-      })
+      const response = await parseResponse(
+        await fetch(routes.API_UPDATE_MAILING_LIST_PREFERENCE, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(value),
+        }),
+      )
 
-      const jsonResponse = await parseResponse(response)
-
-      switch (jsonResponse.status) {
+      switch (response.status) {
         case StatusCode.BadRequest:
           // eslint-disable-next-line no-alert, no-undef
-          alert(`${jsonResponse.body.error}\n\nPlease try again`)
+          alert(`${response.error}\n\nPlease try again`)
           break
         case StatusCode.OK:
           // eslint-disable-next-line no-alert, no-undef

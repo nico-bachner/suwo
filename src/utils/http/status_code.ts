@@ -15,6 +15,14 @@ export enum StatusCode {
    */
   Created = 201,
   /**
+   * Indicates that a request has succeeded, but the client doesn't need to
+   * navigate away from its current page. A 204 response is cacheable by
+   * default, and an ETag header is included in such cases.
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/204
+   */
+  NoContent = 204,
+  /**
    * Indicates that the server would not process the request due to something
    * the server considered to be a client error. The reason for a 400 response
    * is typically due to malformed request syntax, invalid request message

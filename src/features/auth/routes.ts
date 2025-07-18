@@ -12,6 +12,7 @@ export const routes = {
     const params = new URLSearchParams(searchParams)
     return `/login?${params.toString()}`
   },
+  API_SESSION: '/api/auth/session',
   API_REGISTER: '/api/auth/register',
   API_LOGIN_WITH_PASSWORD: '/api/auth/login/password',
   API_LOGIN_WITH_MAGIC_LINK: '/api/auth/login/magic-link',
