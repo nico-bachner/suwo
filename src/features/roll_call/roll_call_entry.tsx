@@ -3,6 +3,8 @@ import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { Attendance, Profile } from '@/generated/prisma'
 import prisma from '@/lib/prisma'
 
+import { getProfileScreenName } from '../profile/utils/get_profile_screen_name'
+
 type RollCallEntryProps = {
   year: Attendance['year']
   semester: Attendance['semester']
@@ -38,7 +40,7 @@ export const RollCallEntry = ({
     className="odd:bg-neutral-6 flex flex-row items-center"
   >
     <p className="flex flex-1 flex-row gap-2 px-4 font-bold">
-      <span className="text-neutral-2">{profile.display_name}</span>
+      <span className="text-neutral-2">{getProfileScreenName(profile)}</span>
       <span className="text-neutral-3">{profile.instrument_name}</span>
     </p>
 
