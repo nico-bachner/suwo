@@ -40,7 +40,7 @@ export const parseResponse = async (
     case StatusCode.InternalServerError:
       return {
         status,
-        error: (await response.json()) as string,
+        error: await response.text(),
       }
   }
 }

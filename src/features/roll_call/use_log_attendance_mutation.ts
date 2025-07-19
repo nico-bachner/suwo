@@ -10,7 +10,7 @@ export const useLogAttendanceMutation = () => {
 
   const { mutateAsync } = useMutation({
     mutationFn: async (data: Attendance) => {
-      await fetch(routes.API_ATTENDANCE, {
+      await fetch(routes.API_ATTENDANCE(data), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
