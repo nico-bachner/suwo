@@ -1,4 +1,9 @@
 /* eslint-disable no-magic-numbers */
+
+/**
+ * Enum representing various HTTP status codes and their meanings. Use for
+ * increased type safety and readability.
+ */
 export enum StatusCode {
   /**
    * Indicates that a request has succeeded. A 200 OK response is cacheable by

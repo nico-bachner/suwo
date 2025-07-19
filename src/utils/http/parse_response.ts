@@ -1,48 +1,46 @@
-/* eslint-disable typescript/no-unsafe-assignment */
+import { z } from 'zod'
+
 import { StatusCode } from './status_code'
 import { JSONResponse } from './types'
 
+/**
+ * Parses the response from a fetch request and returns a structured
+ * JSONResponse. Handles different status codes and extracts data or error
+ * messages accordingly.
+ *
+ * @param response - The Response object from a fetch request.
+ */
 export const parseResponse = async (
   response: Response,
 ): Promise<JSONResponse> => {
-  switch (response.status) {
-    case 200:
+  const { data: status, success } = z
+    .enum(StatusCode)
+    .safeParse(response.status)
+
+  if (!success) {
+    throw new Error(
+      `Unexpected response status: ${response.status} - ${response.statusText}`,
+    )
+  }
+
+  switch (status) {
+    case StatusCode.OK:
+    case StatusCode.Created:
       return {
-        status: StatusCode.OK,
+        status,
         data: await response.json(),
       }
-    case 201:
+    case StatusCode.NoContent:
       return {
-        status: StatusCode.Created,
-        data: await response.json(),
+        status,
       }
-    case 204:
+    case StatusCode.BadRequest:
+    case StatusCode.Unauthorized:
+    case StatusCode.NotFound:
+    case StatusCode.InternalServerError:
       return {
-        status: StatusCode.NoContent,
+        status,
+        error: (await response.json()) as string,
       }
-    case 400:
-      return {
-        status: StatusCode.BadRequest,
-        error: await response.json(),
-      }
-    case 401:
-      return {
-        status: StatusCode.Unauthorized,
-        error: await response.json(),
-      }
-    case 404:
-      return {
-        status: StatusCode.NotFound,
-        error: await response.json(),
-      }
-    case 500:
-      return {
-        status: StatusCode.InternalServerError,
-        error: await response.json(),
-      }
-    default:
-      throw new Error(
-        `Unexpected response status: ${response.status} - ${response.statusText}`,
-      )
   }
 }
