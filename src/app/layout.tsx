@@ -28,13 +28,7 @@ export const metadata: Metadata = {
 export default function Layout({ children }: LayoutFileProps) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          'bg-neutral-7 text-neutral-2 font-sans antialiased scheme-dark',
-          fontSans.variable,
-          fontSerif.variable,
-        )}
-      >
+      <body className={cn(fontSans.variable, fontSerif.variable)}>
         <QueryProvider>
           <div className="flex min-h-screen flex-col">
             <Navbar />

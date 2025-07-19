@@ -1,2 +1,7 @@
 @import './tailwind.css';
 @import './prose.css';
+
+body,
+.body {
+  @apply bg-neutral-7 text-neutral-2 font-sans antialiased scheme-dark;
+}
