@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 import { routes } from '@/routes'
 import { LayoutFileProps } from '@/types'
 

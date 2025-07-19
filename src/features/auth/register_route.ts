@@ -1,6 +1,6 @@
 import { prettifyError } from 'zod'
 
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 

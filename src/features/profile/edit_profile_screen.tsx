@@ -1,5 +1,5 @@
 import { SettingsSection } from '@/design_system/settings_section'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 import { ProfileScreenProps } from './types'
 import { UpdateInstrumentForm } from './update_instrument_form'

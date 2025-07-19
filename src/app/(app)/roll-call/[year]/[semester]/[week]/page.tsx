@@ -5,7 +5,7 @@ import { FOUNDING_YEAR } from '@/config'
 import { WeeklyAttendance } from '@/features/roll_call/weekly_attendance'
 import { $Enums, Attendance } from '@/generated/prisma'
 import { NextParams } from '@/lib/next/types'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 import { MAX_WEEK, MIN_WEEK } from '@/lib/usyd/config'
 import { routes } from '@/routes'
 

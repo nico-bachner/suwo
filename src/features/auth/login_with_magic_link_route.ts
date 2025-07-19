@@ -2,7 +2,7 @@ import { randomBytes } from 'crypto'
 import { prettifyError } from 'zod'
 
 import { BASE_URL, RESEND_DOMAIN, SHORT_NAME } from '@/config'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 import { emails } from '@/lib/resend'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'

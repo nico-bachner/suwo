@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { RegisterForm } from '@/features/auth/register_form'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 import { routes } from '@/routes'
 
 export default async function Page() {

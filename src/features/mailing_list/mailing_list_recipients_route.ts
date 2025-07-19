@@ -1,5 +1,5 @@
 import { API_INDENT_SIZE } from '@/config'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 export const GET = async () => {
   const mailingListRecipients = await prisma.mailingListRecipient.findMany()

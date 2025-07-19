@@ -1,5 +1,5 @@
 import { ProfilesScreen } from '@/features/profile/profiles_screen'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 export default async function Page() {
   const profiles = await prisma.profile.findMany()
