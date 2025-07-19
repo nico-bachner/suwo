@@ -29,7 +29,6 @@
     "@tanstack/react-query": "^5.83.0",
     "@vercel/analytics": "^1.5.0",
     "argon2": "^0.43.1",
-    "dotenv": "^17.2.0",
     "jose": "^6.0.12",
     "next": "15.4.2-canary.7",
     "react": "^19.1.0",
@@ -40,12 +39,12 @@
     "zod": "^4.0.5"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^15.4.1",
+    "@next/eslint-plugin-next": "^15.4.2",
     "@storybook/addon-docs": "^9.0.17",
     "@storybook/nextjs": "^9.0.17",
     "@tailwindcss/postcss": "^4.1.11",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-    "@types/node": "^22.16.4",
+    "@types/node": "^22.16.5",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@typescript-eslint/eslint-plugin": "^8.37.0",
