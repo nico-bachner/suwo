@@ -97,8 +97,8 @@ suwo/
 
 ### Prerequisites
 
-- Node.js 22+
-- pnpm
+- [Node.js 22+](https://nodejs.org/)
+- [pnpm](https://pnpm.io/)
 
 ### Installation
 
@@ -112,10 +112,6 @@ suwo/
 2. **Install dependencies**
 
    ```bash
-   # Install pnpm
-   npm install -g pnpm
-
-   # Install project dependencies
    pnpm install
    ```
 
