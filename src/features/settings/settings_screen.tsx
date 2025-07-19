@@ -1,6 +1,6 @@
 import { SettingsSection } from '@/design_system/settings_section'
 import { UpdatePasswordForm } from '@/features/auth/update_password_form'
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/utils/prisma'
 
 import { LogOutButton } from '../auth/log_out_button'
 import { getSession } from '../auth/session/server/get_session'

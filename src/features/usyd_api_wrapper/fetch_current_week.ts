@@ -2,7 +2,7 @@ import { cache } from 'react'
 
 import { getCurrentYear } from '@/utils/date_manupulation'
 
-import { MAX_WEEK } from './config'
+import { MAX_WEEK } from '../../features/usyd_api_wrapper/config'
 import { getMidsemAdjustedWeek } from './get_midsem_adjusted_week'
 import { getMidsemBreak } from './get_midsem_break'
 import { getTeachingDates } from './get_teaching_dates'

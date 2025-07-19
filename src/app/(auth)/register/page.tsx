@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 import { RegisterForm } from '@/features/auth/register_form'
-import { prisma } from '@/lib/prisma'
 import { routes } from '@/routes'
+import { prisma } from '@/utils/prisma'
 
 export default async function Page() {
   const instruments = await prisma.instrument.findMany()

@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { NextParams } from '@/lib/next/types'
-import { fetchHistoryYearPage } from '@/lib/notion/fetch_history_year_page'
-import { fetchHistoryYears } from '@/lib/notion/fetch_history_years'
-import { fetchNotionPageContent } from '@/lib/notion/fetch_page_content'
-import { getPageTitle } from '@/lib/notion/get_page_title'
+import { fetchHistoryYearPage } from '@/features/marketing/fetch_history_year_page'
+import { fetchHistoryYears } from '@/features/marketing/fetch_history_years'
+import { fetchNotionPageContent } from '@/utils/notion/fetch_page_content'
+import { getPageTitle } from '@/utils/notion/get_page_title'
+import { NextParams } from '@/utils/types'
 
 type Params = {
   year: string

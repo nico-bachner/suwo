@@ -2,8 +2,8 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 
 import { Divider } from '@/design_system/divider'
-import { fetchHistoryPageMetadata } from '@/lib/notion/fetch_history_page_metadata'
-import { fetchHistoryYears } from '@/lib/notion/fetch_history_years'
+import { fetchHistoryPageMetadata } from '@/features/marketing/fetch_history_page_metadata'
+import { fetchHistoryYears } from '@/features/marketing/fetch_history_years'
 
 export const generateMetadata = async (): Promise<Metadata> =>
   await fetchHistoryPageMetadata()

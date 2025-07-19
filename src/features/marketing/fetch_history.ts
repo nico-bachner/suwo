@@ -1,8 +1,7 @@
 import { isFullPage } from '@notionhq/client'
 
 import { NOTION_HISTORY_DB_ID } from '@/config'
-
-import { getNotionClient } from './get_notion_client'
+import { getNotionClient } from '@/utils/notion/get_notion_client'
 
 export const fetchHistory = async () => {
   const { databases } = getNotionClient()

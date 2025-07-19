@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation'
 
-import { prisma } from '@/lib/prisma'
 import { routes } from '@/routes'
 import { LayoutFileProps } from '@/types'
+import { prisma } from '@/utils/prisma'
 
 import { getSession } from './session/server/get_session'
 

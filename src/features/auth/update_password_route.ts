@@ -1,9 +1,9 @@
 import { hash } from 'argon2'
 import { prettifyError } from 'zod'
 
-import { prisma } from '@/lib/prisma'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
+import { prisma } from '@/utils/prisma'
 
 import { getSession } from './session/server/get_session'
 import { UpdatePasswordValidator } from './update_password_validator'

@@ -3,9 +3,9 @@ import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
 
 import { Navbar } from '@/features/navigation/navbar'
-import { QueryProvider } from '@/lib/tanstack-query/provider'
 import { LayoutFileProps } from '@/types'
 import { cn } from '@/utils/cn'
+import { QueryProvider } from '@/utils/query_provider'
 
 import '../styles/globals.css'
 

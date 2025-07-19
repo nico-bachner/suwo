@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation'
 import { getSession } from '@/features/auth/session/server/get_session'
 import { ProfileScreen } from '@/features/profile/profile_screen'
 import { Profile } from '@/generated/prisma'
-import { NextParams } from '@/lib/next/types'
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/utils/prisma'
+import { NextParams } from '@/utils/types'
 
 type PageFileProps = {
   params: NextParams<Pick<Profile, 'handle'>>

@@ -2,9 +2,9 @@ import { notFound, redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
 
 import { VerificationToken } from '@/generated/prisma'
-import { NextParams } from '@/lib/next/types'
-import { prisma } from '@/lib/prisma'
 import { routes } from '@/routes'
+import { prisma } from '@/utils/prisma'
+import { NextParams } from '@/utils/types'
 
 import { createSession } from './session/server/create_session'
 

@@ -1,9 +1,9 @@
 import { redirect } from 'next/navigation'
 
 import { getSession } from '@/features/auth/session/server/get_session'
-import { prisma } from '@/lib/prisma'
 import { routes } from '@/routes'
 import { LayoutFileProps } from '@/types'
+import { prisma } from '@/utils/prisma'
 
 export default async function Layout({ children }: LayoutFileProps) {
   const session = await getSession()

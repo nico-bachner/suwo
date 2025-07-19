@@ -3,11 +3,11 @@ import z from 'zod'
 
 import { FOUNDING_YEAR } from '@/config'
 import { WeeklyAttendance } from '@/features/roll_call/weekly_attendance'
+import { MAX_WEEK, MIN_WEEK } from '@/features/usyd_api_wrapper/config'
 import { $Enums, Attendance } from '@/generated/prisma'
-import { NextParams } from '@/lib/next/types'
-import { prisma } from '@/lib/prisma'
-import { MAX_WEEK, MIN_WEEK } from '@/lib/usyd/config'
 import { routes } from '@/routes'
+import { prisma } from '@/utils/prisma'
+import { NextParams } from '@/utils/types'
 
 type PageFileProps = {
   params: NextParams<Pick<Attendance, 'year' | 'semester' | 'week'>>

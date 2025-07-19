@@ -1,6 +1,5 @@
 import { NOTION_HISTORY_DB_ID } from '@/config'
-
-import { fetchNotionDatabase } from './fetch_notion_database'
+import { fetchNotionDatabase } from '@/utils/notion/fetch_notion_database'
 
 export const fetchHistoryPageMetadata = async () => {
   const { title, description } = await fetchNotionDatabase(NOTION_HISTORY_DB_ID)

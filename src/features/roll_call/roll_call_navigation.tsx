@@ -2,8 +2,8 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 
 import { Button } from '@/design_system/button'
+import { MAX_WEEK, MIN_WEEK } from '@/features/usyd_api_wrapper/config'
 import { Attendance } from '@/generated/prisma'
-import { MAX_WEEK, MIN_WEEK } from '@/lib/usyd/config'
 
 export const RollCallNavigation = ({
   year,

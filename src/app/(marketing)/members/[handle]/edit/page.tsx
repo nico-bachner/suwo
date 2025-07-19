@@ -3,9 +3,9 @@ import { forbidden, notFound, redirect } from 'next/navigation'
 import { getSession } from '@/features/auth/session/server/get_session'
 import { EditProfileScreen } from '@/features/profile/edit_profile_screen'
 import { Profile } from '@/generated/prisma'
-import { NextParams } from '@/lib/next/types'
-import { prisma } from '@/lib/prisma'
 import { routes } from '@/routes'
+import { prisma } from '@/utils/prisma'
+import { NextParams } from '@/utils/types'
 
 type PageFileProps = {
   params: NextParams<Pick<Profile, 'handle'>>

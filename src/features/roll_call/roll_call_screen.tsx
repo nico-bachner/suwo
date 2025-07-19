@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { WEEKS } from '@/lib/usyd/config'
+import { WEEKS } from '@/features/usyd_api_wrapper/config'
 import { getCurrentSemester, getCurrentYear } from '@/utils/date_manupulation'
 
 export const RollCallScreen = () => {

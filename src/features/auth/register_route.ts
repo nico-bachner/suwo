@@ -1,8 +1,8 @@
 import { prettifyError } from 'zod'
 
-import { prisma } from '@/lib/prisma'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
+import { prisma } from '@/utils/prisma'
 
 import { RegisterValidator } from './register_validator'
 import { createSession } from './session/server/create_session'
