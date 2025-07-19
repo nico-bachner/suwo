@@ -5,28 +5,23 @@ import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { Attendance, Profile } from '@/generated/prisma'
 
 import { getProfileScreenName } from '../profile/utils/get_profile_screen_name'
-import { useAttendanceEntryQuery } from './use_attendance_query'
-import { useLogAttendanceMutation } from './use_log_attendance_mutation'
+import { useLogAttendanceMutation } from './mutation_log_attendance'
 
-type AttendanceEntryProps = {
+type WeeklyAttendanceEntryProps = {
   year: Attendance['year']
   semester: Attendance['semester']
   week: Attendance['week']
   profile: Profile
+  present: boolean
 }
 
-export const AttendanceEntry = ({
+export const WeeklyAttendanceEntry = ({
   year,
   semester,
   week,
   profile,
-}: AttendanceEntryProps) => {
-  const { present } = useAttendanceEntryQuery({
-    year,
-    semester,
-    week,
-    user_id: profile.user_id,
-  })
+  present,
+}: WeeklyAttendanceEntryProps) => {
   const { logAttendance } = useLogAttendanceMutation()
 
   return (

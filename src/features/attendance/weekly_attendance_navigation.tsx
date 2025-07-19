@@ -3,13 +3,14 @@ import Link from 'next/link'
 
 import { Button } from '@/design_system/button'
 import { MAX_WEEK, MIN_WEEK } from '@/features/usyd_api_wrapper/config'
-import { Attendance } from '@/generated/prisma'
 
-export const RollCallNavigation = ({
+import { WeeklyAttendances } from './types'
+
+export const WeeklyAttendanceNavigation = ({
   year,
   semester,
   week,
-}: Pick<Attendance, 'year' | 'semester' | 'week'>) => (
+}: WeeklyAttendances) => (
   <nav className="bg-neutral-7/50 sticky bottom-0 mx-auto grid w-full max-w-screen-sm grid-cols-2 gap-4 p-4 backdrop-blur-lg">
     {week > MIN_WEEK && (
       <Button

@@ -1,19 +1,18 @@
 import { QrCodeIcon } from '@heroicons/react/24/outline'
 import ReactQRCode from 'react-qr-code'
 
+import { Dialog } from '@/design_system/dialog'
 import { cn } from '@/utils/cn'
 
-import { Dialog } from '../../design_system/dialog'
-
-type RollCallQRCodeProps = {
+type WeeklyAttendanceQRCodeProps = {
   value: string
   className?: string
 }
 
-export const RollCallQRCodeDialog = ({
+export const WeeklyAttendanceQRCodeDialog = ({
   value,
   className,
-}: RollCallQRCodeProps) => (
+}: WeeklyAttendanceQRCodeProps) => (
   <Dialog
     title="QR Code"
     trigger={

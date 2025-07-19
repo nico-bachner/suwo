@@ -26,7 +26,7 @@ export const Navbar = () => {
           <NavbarLink href={routes.HISTORY}>History</NavbarLink>
           <NavbarLink href={routes.MEMBERS}>Members</NavbarLink>
           {session && (
-            <NavbarLink href={routes.ROLL_CALL}>Roll Call</NavbarLink>
+            <NavbarLink href={routes.ATTENDANCES()}>Attendance</NavbarLink>
           )}
         </div>
 

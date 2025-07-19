@@ -14,12 +14,15 @@ export const createResponse = (response: JSONResponse): Response => {
   switch (response.status) {
     case StatusCode.OK:
     case StatusCode.Created:
-      return new Response(JSON.stringify(response, null, API_INDENT_SIZE), {
-        status: response.status,
-        headers: {
-          'Content-Type': 'application/json',
+      return new Response(
+        JSON.stringify(response.data, null, API_INDENT_SIZE),
+        {
+          status: response.status,
+          headers: {
+            'Content-Type': 'application/json',
+          },
         },
-      })
+      )
     case StatusCode.NoContent:
       return new Response(null, {
         status: response.status,

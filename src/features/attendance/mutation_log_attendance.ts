@@ -1,16 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { Attendance } from '@/generated/prisma'
-import { routes } from '@/routes'
-
-import { getWeeklyAttendancesQueryKey } from './use_attendance_query'
+import { apiRoutes, queryKeys } from '@/routes'
 
 export const useLogAttendanceMutation = () => {
   const queryClient = useQueryClient()
 
   const { mutateAsync } = useMutation({
     mutationFn: async (data: Attendance) => {
-      await fetch(routes.API_ATTENDANCE(data), {
+      await fetch(apiRoutes.LOG_WEEKLY_ATTENDANCE(data), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -20,7 +18,7 @@ export const useLogAttendanceMutation = () => {
     },
     onSettled: async (_, __, vars) => {
       await queryClient.invalidateQueries({
-        queryKey: getWeeklyAttendancesQueryKey(vars),
+        queryKey: queryKeys.WEEKLY_ATTENDANCES(vars),
       })
     },
   })

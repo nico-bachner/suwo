@@ -57,7 +57,9 @@ export const NavbarMenu = ({ session, className }: NavbarMenuProps) => {
         <NavbarMenuLink href={routes.HISTORY}>History</NavbarMenuLink>
         <NavbarMenuLink href={routes.MEMBERS}>Members</NavbarMenuLink>
         {session && (
-          <NavbarMenuLink href={routes.ROLL_CALL}>Roll Call</NavbarMenuLink>
+          <NavbarMenuLink href={routes.ATTENDANCES()}>
+            Attendance
+          </NavbarMenuLink>
         )}
       </div>
 
