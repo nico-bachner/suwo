@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import z from 'zod'
 
 import { Semester } from '@/generated/prisma'
 import { WeekValidator } from '@/lib/validators/week'

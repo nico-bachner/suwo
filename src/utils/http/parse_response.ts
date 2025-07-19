@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import z from 'zod'
 
 import { StatusCode } from './status_code'
 import { JSONResponse } from './types'

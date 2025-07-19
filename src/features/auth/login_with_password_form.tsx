@@ -3,7 +3,7 @@
 import { useForm } from '@tanstack/react-form'
 import { useQueryClient } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
-import { z } from 'zod'
+import z from 'zod'
 
 import { Button } from '@/design_system/button'
 import { Spinner } from '@/design_system/spinner'

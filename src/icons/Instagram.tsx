@@ -1,8 +1,10 @@
 import { SVGAttributes } from 'react'
 
+import { STROKE_WIDTH } from './config'
+
 export const InstagramIcon = ({
   fill = 'none',
-  strokeWidth = 2,
+  strokeWidth = STROKE_WIDTH,
   strokeLinecap = 'round',
   strokeLinejoin = 'round',
   ...props

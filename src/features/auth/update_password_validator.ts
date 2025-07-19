@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import z from 'zod'
 
 import { PasswordValidator } from '@/lib/validators/password'
 

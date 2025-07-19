@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import { z } from 'zod'
+import z from 'zod'
 
 import { FOUNDING_YEAR } from '@/config'
 import { WeeklyAttendance } from '@/features/roll_call/weekly_attendance'

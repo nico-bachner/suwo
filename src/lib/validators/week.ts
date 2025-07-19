@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import z from 'zod'
 
 import { MAX_WEEK, MIN_WEEK } from '../usyd/config'
 

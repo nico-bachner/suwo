@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import z from 'zod'
 
 import { MailingListPreferenceValidator } from '@/lib/validators/mailing_list_preference'
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { useForm } from '@tanstack/react-form'
-import { z } from 'zod'
+import z from 'zod'
 
 import { Button } from '@/design_system/button'
 import { Spinner } from '@/design_system/spinner'

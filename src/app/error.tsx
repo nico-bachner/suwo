@@ -7,6 +7,7 @@ import { ErrorFileProps } from '@/types'
 
 export default function Error({ error, reset }: ErrorFileProps) {
   useEffect(() => {
+    // eslint-disable-next-line no-console
     console.error(error)
   }, [error])
 

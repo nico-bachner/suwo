@@ -58,12 +58,6 @@ export default [
       'grouped-accessor-pairs': 'error',
       'guard-for-in': 'error',
       'id-denylist': 'error',
-      'id-length': [
-        'warn',
-        {
-          exceptions: ['_'],
-        },
-      ],
       'id-match': 'error',
       'init-declarations': 'error',
       'logical-assignment-operators': 'error',
@@ -166,12 +160,6 @@ export default [
       'no-self-compare': 'error',
       'no-sequences': 'error',
       'no-setter-return': 'error',
-      'no-shadow': [
-        'warn',
-        {
-          ignoreFunctionTypeParameterNameValueShadow: true,
-        },
-      ],
       'no-shadow-restricted-names': 'error',
       'no-sparse-arrays': 'error',
       'no-template-curly-in-string': 'error',
