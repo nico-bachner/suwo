@@ -43,12 +43,7 @@ export const GET = async (request: Request) => {
 
   const attendanceEntry = await prisma.attendance.findUnique({
     where: {
-      user_id_year_semester_week: {
-        user_id: data.user_id,
-        year: data.year,
-        semester: data.semester,
-        week: data.week,
-      },
+      user_id_year_semester_week: data,
     },
   })
 
@@ -92,12 +87,25 @@ export const POST = async (request: Request) => {
     })
   }
 
-  const attendanceEntry = await prisma.attendance.create({
+  const attendanceEntry = await prisma.attendance.findUnique({
+    where: {
+      user_id_year_semester_week: data,
+    },
+  })
+
+  if (attendanceEntry) {
+    return createResponse({
+      status: StatusCode.BadRequest,
+      error: 'Attendance entry already exists for this week',
+    })
+  }
+
+  const attendanceEntryCreated = await prisma.attendance.create({
     data,
   })
 
   return createResponse({
     status: StatusCode.OK,
-    data: attendanceEntry,
+    data: attendanceEntryCreated,
   })
 }
