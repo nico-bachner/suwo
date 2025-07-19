@@ -1,25 +1,26 @@
 import { notFound } from 'next/navigation'
+import z from 'zod'
 
 import { getSession } from '@/features/auth/session/server/get_session'
 import { ProfileScreen } from '@/features/profile/profile_screen'
-import { Profile } from '@/generated/prisma'
+import { PageFileProps } from '@/utils/next_types'
 import { prisma } from '@/utils/prisma'
-import { NextParams } from '@/utils/types'
-
-type PageFileProps = {
-  params: NextParams<Pick<Profile, 'handle'>>
-}
 
 export default async function Page({ params }: PageFileProps) {
-  const { handle: handleParam } = await params
+  const { data, success } = z
+    .object({
+      handle: z.string(),
+    })
+    .safeParse(await params)
 
-  if (!handleParam) {
+  /** If the profile doesn't exist, redirect to a 404 page. */
+  if (!success) {
     notFound()
   }
 
   const session = await getSession()
   const profile = await prisma.profile.findUnique({
-    where: { handle: decodeURIComponent(handleParam) },
+    where: { handle: data.handle },
   })
 
   if (!profile) {

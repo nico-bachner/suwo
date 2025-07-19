@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 
 import { Button } from '@/design_system/button'
-import { ErrorFileProps } from '@/types'
+import { ErrorFileProps } from '@/utils/next_types'
 
 export default function Error({ error, reset }: ErrorFileProps) {
   useEffect(() => {

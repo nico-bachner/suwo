@@ -1,45 +1,192 @@
 # SUWO
 
-The University of Sydney Wind Orchestra's Website
+The University of Sydney Wind Orchestra's Website - A modern web application for
+managing orchestra members, attendance, and public information.
 
-## Contributing
+## 🎼 About SUWO
 
-- Clone [this repository](https://github.com/nico-bachner/suwo)
+SUWO (Sydney University Wind Orchestra) is a multi-award-winning concert band
+based at the University of Sydney. Founded in 2003, SUWO brings together
+students and alumni to perform a diverse repertoire of wind band music, ranging
+from classical works to contemporary pieces. The orchestra is known for its
+vibrant community, occasional performances throughout the year, and a welcoming
+atmosphere for new members—no auditions required. SUWO has received numerous
+accolades, including "BEST SMALL CLUB" at Sydney University (2006–2010) and
+"Champion Open B Grade Concert Band" in NSW (2011). Members enjoy opportunities
+for musical growth, social events, and contributing to the university's cultural
+life.
 
-  ```bash
-  gh repo clone nico-bachner/suwo
-  ```
+## 🚀 Tech Stack
 
-- Install [`pnpm`](https://pnpm.io) if you don't already have it installed
+### Frontend
 
-  ```bash
-  brew install pnpm
-  ```
+- **Framework**: [Next.js](https://nextjs.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) with custom design
+  system
+- **UI Components**: Custom design system built on
+  [Radix UI](https://www.radix-ui.com/) and [Heroicons](https://heroicons.com/)
+- **State Management**:
+  [TanStack Query (React Query)](https://tanstack.com/query)
+- **Forms**: [TanStack Form](https://tanstack.com/form) with
+  [Zod](https://zod.dev/) validation
 
-- Install [`@antfu/ni`](https://github.com/antfu-collective/ni) (optional)
+### Backend
 
-  ```bash
-  pnpm i -g @antfu/ni
-  ```
+- **Database**: [Neon](https://neon.tech/) PostgreSQL with
+  [Prisma ORM](https://www.prisma.io/)
+- **Authentication**: [`jose`](https://github.com/panva/jose) for JWT session
+  management with [Argon2](https://github.com/ranisalt/node-argon2) password
+  hashing
+- **Email**: [Resend](https://resend.com/) for transactional emails
+- **CMS**: [Notion](https://www.notion.so/) for content management
 
-- Install dependencies
+### Development & Deployment
 
-  ```bash
-  # using @antfu/ni
-  ni
+- **Package Manager**: [pnpm](https://pnpm.io/)
+- **Type Safety**: [TypeScript](https://www.typescriptlang.org/) with strict
+  configuration
+- **Code Quality**: [ESLint](https://eslint.org/),
+  [Prettier](https://prettier.io/)
+- **Documentation**: [Storybook](https://storybook.js.org/) for component
+  documentation
+- **Deployment**: [Vercel](https://vercel.com/)
+- **Monitoring**: [Vercel Analytics](https://vercel.com/analytics)
 
-  # using pnpm directly
-  pnpm i
-  ```
+## ✨ Features
 
-- Run the dev server
+- 🏠 **Marketing Pages**: Orchestra information, history, and joining details
+- 📚 **Dynamic History**: Content managed through Notion CMS
+- 🔐 **Authentication**: Secure login/logout with session management
+- 👤 **Profile Management**: Update personal information and instrument
+- 📧 **Mailing List**: Opt-in/out of weekly communications
+- 🔒 **Password Management**: Secure password updates
+- 📋 **Roll Call**: Digital attendance tracking with QR codes
+- 📊 **Attendance Management**: View and manage weekly attendance
+- 👥 **Member Directory**: Access to all orchestra member profiles
 
-  ```bash
-  # using @antfu/ni
-  nr dev
+## 📁 Project Structure
 
-  # using pnpm directly
-  pnpm run dev
-  ```
+```
+suwo/
+├── prisma/
+│   ├── migrations/               # Database migration files
+│   └── schema.prisma             # Prisma schema definition
+├── src/
+│   ├── app/                      # Next.js App Router pages
+│   │   ├── (app)/                # Authenticated app pages
+│   │   ├── (auth)/               # Authentication (login, register, etc.)
+│   │   ├── (marketing)/          # Public marketing pages
+│   │   └── api/                  # API routes
+│   ├── design_system/            # Reusable UI components
+│   ├── features/                 # Feature-specific modules
+│   ├── styles/                   # Global styles and design tokens
+│   ├── utils/                    # Utility functions and helpers
+│   ├── validators/               # Zod schema validators
+│   ├── config.ts                 # Application configuration
+│   └── routes.ts                 # Application route definitions
+├── .env.local                    # Environment variables (local)
+├── .gitignore                    # Git ignore rules
+├── eslint.config.mjs             # ESLint configuration
+├── next.config.ts                # Next.js configuration
+├── package.json                  # Project dependencies and scripts
+├── prettier.config.mjs           # Prettier configuration
+└── tsconfig.json                 # TypeScript configuration
+```
 
-- If using VSCode (recommended), install the recommended workspace extensions
+## 🛠️ Development Setup
+
+### Prerequisites
+
+- Node.js 22+
+- pnpm
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   gh repo clone nico-bachner/suwo
+   cd suwo
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   # Install pnpm
+   npm install -g pnpm
+
+   # Install project dependencies
+   pnpm install
+   ```
+
+3. **Set up environment variables**
+
+   ```bash
+   vercel env pull
+   ```
+
+4. **Start development server**
+   ```bash
+   pnpm dev
+   ```
+
+### Available Scripts
+
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm lint` - Run ESLint
+- `pnpm format` - Format code with Prisma and Prettier
+- `pnpm sb:dev` - Start Storybook for component development
+- `pnpm sb:build` - Build Storybook for production
+
+## 🤝 Contributing
+
+### Code Style
+
+- Use TypeScript for all new code
+- Follow the existing file naming conventions (snake_case for files, PascalCase
+  for components)
+- Add JSDoc comments for complex functions
+- Ensure all components are properly typed
+- Use absolute imports (`@/` prefix)
+
+### Component Development
+
+- Create components in the appropriate feature folder or design system
+- Include Storybook stories for reusable components
+- Follow the established design patterns and color system
+- Ensure components are accessible and responsive
+
+### Database Changes
+
+1. Create Prisma migration: `pnpm db:migrate --name your_migration_name`
+2. Fix potentially broken TypeScript types
+
+### Git Workflow
+
+1. Create a feature branch from `main`
+2. Make your changes with descriptive commit messages
+3. Ensure all tests pass and code is properly formatted
+4. Create a pull request with a clear description
+
+### Adding New Features
+
+1. **API Routes**: Add to `/src/app/api/` following the existing patterns
+2. **Pages**: Use the appropriate route group (`(marketing)` for public, `(app)`
+   for authenticated)
+3. **Components**: Place in the relevant feature folder or design system
+4. **Utilities**: Add to `/src/utils/` if framework-independent
+
+### Testing
+
+- Test authentication flows thoroughly
+- Verify responsive design on multiple screen sizes
+- Check accessibility with screen readers
+- Test with real data scenarios
+
+## 📄 License
+
+This project is private and proprietary to the University of Sydney Wind
+Orchestra. This project is private and proprietary to the University of Sydney
+Wind Orchestra. Orchestra.

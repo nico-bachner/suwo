@@ -1,24 +1,20 @@
 import { notFound, redirect } from 'next/navigation'
-import { NextRequest } from 'next/server'
+import z from 'zod'
 
-import { VerificationToken } from '@/generated/prisma'
 import { routes } from '@/routes'
+import { APIRoute } from '@/utils/next_types'
 import { prisma } from '@/utils/prisma'
-import { NextParams } from '@/utils/types'
 
 import { createSession } from './session/server/create_session'
 
-export const GET = async (
-  { nextUrl }: NextRequest,
-  {
-    params,
-  }: {
-    params: NextParams<Pick<VerificationToken, 'user_id'>>
-  },
-) => {
-  const { user_id } = await params
+export const GET: APIRoute = async ({ nextUrl }, { params }) => {
+  const { data, success } = z
+    .object({
+      user_id: z.uuidv4(),
+    })
+    .safeParse(await params)
 
-  if (!user_id) {
+  if (!success) {
     return notFound()
   }
 
@@ -30,7 +26,7 @@ export const GET = async (
 
   const verificationToken = await prisma.verificationToken.findUnique({
     where: {
-      user_id,
+      user_id: data.user_id,
       token,
       created_at: {
         gte: new Date(Date.now() - 24 * 60 * 60 * 1000),

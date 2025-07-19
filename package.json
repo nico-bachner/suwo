@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "prisma generate",
     "dev": "next dev",
-    "dev:sb": "storybook dev -p 6006 --no-open",
     "build": "next build",
-    "build:sb": "storybook build",
     "start": "next start",
-    "lint": "eslint ./",
-    "format": "prisma format && prettier --write ./"
+    "lint": "next lint",
+    "format": "prisma format && prettier --write ./",
+    "sb:dev": "storybook dev -p 6006 --no-open",
+    "sb:build": "storybook build",
+    "db:migrate": "prisma migrate dev",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
