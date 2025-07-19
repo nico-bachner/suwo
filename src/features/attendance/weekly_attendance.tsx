@@ -19,25 +19,21 @@ export const WeeklyAttendance = ({
   week,
   profiles,
 }: WeeklyAttendanceProps) => {
-  const { attendances, error, isPending } = useWeeklyAttendancesQuery({
+  const { attendances } = useWeeklyAttendancesQuery({
     year,
     semester,
     week,
   })
 
-  if (isPending) {
-    return <p>Loading...</p>
-  }
-
-  if (error) {
-    return <p>Error: {error.message}</p>
-  }
-
   return (
     <div>
       <div className="prose mx-auto max-w-screen-sm px-4 py-8">
         <h1 className="text-center">Roll Call</h1>
-        <p>{`Week ${week} (${attendances.length} present)`}</p>
+        <p>
+          {attendances
+            ? `Week ${week} (${attendances.length} present)`
+            : `Week ${week}`}
+        </p>
 
         <div className="flex w-full max-w-screen-sm flex-col">
           {profiles.map((profile) => (
@@ -47,9 +43,13 @@ export const WeeklyAttendance = ({
               semester={semester}
               week={week}
               profile={profile}
-              present={attendances.some(
-                (attendance) => attendance.user_id === profile.user_id,
-              )}
+              present={
+                attendances
+                  ? attendances.some(
+                      (attendance) => attendance.user_id === profile.user_id,
+                    )
+                  : null
+              }
             />
           ))}
         </div>
