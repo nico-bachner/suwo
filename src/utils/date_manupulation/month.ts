@@ -1,4 +1,4 @@
-/* eslint-disable no-magic-numbers */
+ 
 export enum Month {
   January = 1,
   February = 2,

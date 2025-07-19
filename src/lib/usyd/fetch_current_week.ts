@@ -8,7 +8,6 @@ import { getMidsemBreak } from './get_midsem_break'
 import { getTeachingDates } from './get_teaching_dates'
 import { KeyDate } from './types'
 
-// eslint-disable-next-line no-magic-numbers
 const MILLISECONDS_IN_A_WEEK = 7 * 24 * 60 * 60 * 1000
 
 export const fetchCurrentWeek = cache(async () => {

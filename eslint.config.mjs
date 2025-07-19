@@ -122,12 +122,7 @@ export default [
       'no-lonely-if': 'error',
       'no-loop-func': 'error',
       'no-loss-of-precision': 'error',
-      'no-magic-numbers': [
-        'warn',
-        {
-          ignoreArrayIndexes: true,
-        },
-      ],
+      // 'no-magic-numbers': 'warn',
       'no-misleading-character-class': 'error',
       'no-multi-assign': 'error',
       'no-multi-str': 'error',
@@ -167,7 +162,7 @@ export default [
       'no-unassigned-vars': 'error',
       'no-undef': 'error',
       'no-undef-init': 'error',
-      'no-undefined': 'warn',
+      // 'no-undefined': 'warn',
       'no-underscore-dangle': 'error',
       'no-unexpected-multiline': 'error',
       'no-unmodified-loop-condition': 'error',
