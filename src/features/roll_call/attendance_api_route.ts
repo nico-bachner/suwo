@@ -1,13 +1,17 @@
-import { prettifyError } from 'zod'
+import z, { prettifyError } from 'zod'
 
+import { FOUNDING_YEAR } from '@/config'
+import { Semester } from '@/generated/prisma'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
+import { APIRoute } from '@/utils/next_types'
 import { prisma } from '@/utils/prisma'
 
 import { getSession } from '../auth/session/server/get_session'
+import { MAX_WEEK, MIN_WEEK } from '../usyd_api_wrapper/config'
 import { AttendanceValidator } from './attendance_validator'
 
-export const GET = async (request: Request) => {
+export const GET: APIRoute = async (_, { params }) => {
   const session = await getSession()
 
   if (!session) {
@@ -30,9 +34,18 @@ export const GET = async (request: Request) => {
     })
   }
 
-  const { data, error, success } = AttendanceValidator.safeParse(
-    await request.json(),
-  )
+  const { data, error, success } = z
+    .object({
+      user_id: z.uuidv4(),
+      year: z.coerce
+        .number()
+        .int()
+        .min(FOUNDING_YEAR)
+        .max(new Date().getFullYear()),
+      semester: z.enum(Semester),
+      week: z.coerce.number().int().min(MIN_WEEK).max(MAX_WEEK),
+    })
+    .safeParse(await params)
 
   if (!success) {
     return createResponse({
@@ -53,7 +66,7 @@ export const GET = async (request: Request) => {
   })
 }
 
-export const POST = async (request: Request) => {
+export const POST: APIRoute = async (_, { params }) => {
   const session = await getSession()
 
   if (!session) {
@@ -76,9 +89,7 @@ export const POST = async (request: Request) => {
     })
   }
 
-  const { data, error, success } = AttendanceValidator.safeParse(
-    await request.json(),
-  )
+  const { data, error, success } = AttendanceValidator.safeParse(await params)
 
   if (!success) {
     return createResponse({

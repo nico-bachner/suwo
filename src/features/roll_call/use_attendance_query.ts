@@ -24,13 +24,7 @@ export const useAttendanceEntryQuery = (args: Attendance) => {
     queryKey: getWeeklyAttendancesQueryKey(args),
     queryFn: async () => {
       const response = await parseResponse(
-        await fetch(routes.API_ATTENDANCE, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(args),
-        }),
+        await fetch(routes.API_ATTENDANCE(args)),
       )
 
       switch (response.status) {
