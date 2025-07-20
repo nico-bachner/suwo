@@ -26,5 +26,5 @@ export const AuthLayout = async ({ children }: LayoutFileProps) => {
     throw new Error('Invalid session: profile not found')
   }
 
-  redirect(routes.PROFILE(profile.handle))
+  redirect(routes.PROFILE(profile))
 }

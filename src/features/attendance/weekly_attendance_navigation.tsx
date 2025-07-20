@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { Button } from '@/design_system/button'
 import { MAX_WEEK, MIN_WEEK } from '@/features/usyd_api_wrapper/config'
+import { routes } from '@/routes'
 
 import { WeeklyAttendances } from './types'
 
@@ -18,7 +19,9 @@ export const WeeklyAttendanceNavigation = ({
         asChild
         className="col-start-1 justify-self-start"
       >
-        <Link href={`/roll-call/${year}/${semester}/${week - 1}`}>
+        <Link
+          href={routes.WEEKLY_ATTENDANCES({ year, semester, week: week - 1 })}
+        >
           <ChevronLeftIcon className="box-content h-5 w-5" />
           <span className="pr-2">Week {week - 1}</span>
         </Link>
@@ -31,7 +34,9 @@ export const WeeklyAttendanceNavigation = ({
         asChild
         className="col-start-2 justify-self-end"
       >
-        <Link href={`/roll-call/${year}/${semester}/${week + 1}`}>
+        <Link
+          href={routes.WEEKLY_ATTENDANCES({ year, semester, week: week + 1 })}
+        >
           <span className="pl-2">Week {week + 1}</span>
           <ChevronRightIcon className="box-content h-5 w-5" />
         </Link>

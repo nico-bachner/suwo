@@ -6,7 +6,7 @@ import { Button } from '@/design_system/button'
 import { Select, SelectItem } from '@/design_system/select'
 import { Spinner } from '@/design_system/spinner'
 import { Instrument } from '@/generated/prisma'
-import { routes } from '@/routes'
+import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
@@ -21,7 +21,7 @@ export const UpdateInstrumentForm = ({ instruments }: RegisterFormProps) => {
     },
     onSubmit: async ({ value }) => {
       const response = await parseResponse(
-        await fetch(routes.API_UPDATE_INSTRUMENT, {
+        await fetch(apiRoutes.UPDATE_INSTRUMENT(), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
