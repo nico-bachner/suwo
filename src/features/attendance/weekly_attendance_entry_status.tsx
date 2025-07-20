@@ -2,29 +2,23 @@
 
 import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
 
-import { Spinner } from '@/design_system/spinner'
+import { Skeleton } from '@/design_system/skeleton'
 
 import { useLogAttendanceMutation } from './mutation_log_attendance'
-import { Attendance } from './types'
+import { WeeklyAttendanceEntryProps } from './types'
 
-type WeeklyAttendanceEntryStatusProps = Attendance & {
-  present: boolean | null
+type WeeklyAttendanceEntryStatusProps = WeeklyAttendanceEntryProps & {
+  isPresent: boolean
 }
 
 export const WeeklyAttendanceEntryStatus = ({
-  year,
-  semester,
-  week,
-  user_id,
-  present,
+  attendanceData,
+  profile,
+  isPresent,
 }: WeeklyAttendanceEntryStatusProps) => {
   const { logAttendance } = useLogAttendanceMutation()
 
-  switch (present) {
-    case null:
-      return (
-        <Spinner className="stroke-neutral-2 box-content h-6 w-6 px-4 py-3" />
-      )
+  switch (isPresent) {
     case true:
       return (
         <CheckIcon className="stroke-positive box-content h-6 w-6 px-4 py-3" />
@@ -35,10 +29,8 @@ export const WeeklyAttendanceEntryStatus = ({
           className="focus:ring-neutral-4 cursor-pointer px-4 py-3"
           onClick={async () => {
             await logAttendance({
-              year,
-              semester,
-              week,
-              user_id,
+              ...attendanceData,
+              user_id: profile.user_id,
             })
           }}
         >
@@ -47,3 +39,9 @@ export const WeeklyAttendanceEntryStatus = ({
       )
   }
 }
+
+export const WeeklyAttendanceEntryStatusSkeleton = () => (
+  <div className="px-4 py-3">
+    <Skeleton className="h-6 w-6" />
+  </div>
+)

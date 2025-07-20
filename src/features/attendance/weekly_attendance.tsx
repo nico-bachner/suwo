@@ -32,8 +32,8 @@ export const WeeklyAttendance = ({
 
   return (
     <div className="prose mx-auto max-w-screen-sm px-4 py-8">
-      <h1 className="text-center">Roll Call</h1>
-      <p>
+      <h1 className="text-center">Attendance Sheet</h1>
+      <p className="text-neutral-3 text-center">
         {attendances
           ? `Week ${week} (${attendances.length} present)`
           : `Week ${week}`}
@@ -41,23 +41,14 @@ export const WeeklyAttendance = ({
 
       <div className="flex w-full max-w-screen-sm flex-col">
         {isPending
-          ? Array.from({ length: 10 }).map((_, index) => (
+          ? Array.from({ length: 20 }).map((_, index) => (
               <WeeklyAttendanceEntrySkeleton key={index} />
             ))
           : profiles.map((profile) => (
               <WeeklyAttendanceEntry
                 key={profile.user_id}
-                year={year}
-                semester={semester}
-                week={week}
+                attendanceData={{ year, semester, week }}
                 profile={profile}
-                present={
-                  attendances
-                    ? attendances.some(
-                        (attendance) => attendance.user_id === profile.user_id,
-                      )
-                    : null
-                }
               />
             ))}
       </div>
