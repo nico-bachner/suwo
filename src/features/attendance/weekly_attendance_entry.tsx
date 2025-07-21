@@ -1,9 +1,11 @@
 'use client'
 
+import { useQuery } from '@tanstack/react-query'
+
 import { Skeleton, SkeletonText } from '@/design_system/skeleton'
+import { queries } from '@/routes'
 
 import { getProfileScreenName } from '../profile/utils/get_profile_screen_name'
-import { useWeeklyAttendancesQuery } from './query_weekly_attendances'
 import { WeeklyAttendanceEntryProps } from './types'
 import {
   WeeklyAttendanceEntryStatus,
@@ -14,8 +16,11 @@ export const WeeklyAttendanceEntry = ({
   attendanceData,
   profile,
 }: WeeklyAttendanceEntryProps) => {
-  const { attendances, error, isPending } =
-    useWeeklyAttendancesQuery(attendanceData)
+  const {
+    data: attendances,
+    error,
+    isPending,
+  } = useQuery(queries.WEEKLY_ATTENDANCES(attendanceData))
 
   if (error) {
     throw new Error(`Failed to fetch attendances: ${error.message}`)

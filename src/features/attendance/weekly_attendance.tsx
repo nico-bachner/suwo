@@ -3,9 +3,9 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { BASE_URL } from '@/config'
+import { Prose } from '@/design_system/prose'
 import { queries } from '@/routes'
 
-import { useWeeklyAttendancesQuery } from './query_weekly_attendances'
 import { WeeklyAttendances } from './types'
 import {
   WeeklyAttendanceEntry,
@@ -19,19 +19,21 @@ export const WeeklyAttendance = ({
   semester,
   week,
 }: WeeklyAttendances) => {
-  const { data: profiles, error, isPending } = useQuery(queries.profilesQuery())
-  const { attendances } = useWeeklyAttendancesQuery({
-    year,
-    semester,
-    week,
-  })
+  const {
+    data: profiles,
+    error: profilesError,
+    isPending: isProfilesPending,
+  } = useQuery(queries.profilesQuery())
+  const { data: attendances } = useQuery(
+    queries.WEEKLY_ATTENDANCES({ year, semester, week }),
+  )
 
-  if (error) {
-    throw new Error(`Failed to fetch profiles: ${error.message}`)
+  if (profilesError) {
+    throw new Error(`Failed to fetch data: ${profilesError.message}`)
   }
 
   return (
-    <div className="prose mx-auto max-w-screen-sm px-4 py-8">
+    <Prose>
       <h1 className="text-center">Attendance Sheet</h1>
       <p className="text-neutral-3 text-center">
         {attendances
@@ -39,8 +41,8 @@ export const WeeklyAttendance = ({
           : `Week ${week}`}
       </p>
 
-      <div className="flex w-full max-w-screen-sm flex-col">
-        {isPending
+      <div className="flex flex-col">
+        {isProfilesPending
           ? Array.from({ length: 20 }).map((_, index) => (
               <WeeklyAttendanceEntrySkeleton key={index} />
             ))
@@ -59,6 +61,6 @@ export const WeeklyAttendance = ({
         value={`${BASE_URL}/roll-call/${year}/${semester}/${week}`}
         className="sticky right-4 self-end max-lg:bottom-20 lg:fixed lg:top-12 lg:right-12"
       />
-    </div>
+    </Prose>
   )
 }

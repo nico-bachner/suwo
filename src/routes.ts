@@ -1,5 +1,6 @@
 import {
   apiRoutes as attendanceApiRoutes,
+  queries as attendanceQueries,
   queryKeys as attendanceQueryKeys,
   routes as attendanceRoutes,
 } from './features/attendance/routes'
@@ -15,6 +16,7 @@ import {
 import { routes as settingsRoutes } from './features/settings/routes'
 
 export const queries = {
+  ...attendanceQueries,
   ...profileQueries,
 }
 

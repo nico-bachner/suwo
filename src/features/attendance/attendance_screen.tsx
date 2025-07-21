@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { Prose } from '@/design_system/prose'
 import { WEEKS } from '@/features/usyd_api_wrapper/config'
 import { routes } from '@/routes'
 import { getCurrentSemester, getCurrentYear } from '@/utils/date_manupulation'
@@ -9,7 +10,7 @@ export const AttendanceScreen = () => {
   const currentSemester = getCurrentSemester()
 
   return (
-    <div className="prose mx-auto max-w-screen-sm px-4 py-8">
+    <Prose>
       <h1>Attendance</h1>
 
       <p className="text-center text-5xl font-bold">Come back next semester!</p>
@@ -20,7 +21,7 @@ export const AttendanceScreen = () => {
         attendance sheets linked below.
       </p>
 
-      <div className="mx-auto flex w-full max-w-screen-sm flex-row flex-wrap gap-1">
+      <div className="flex flex-row flex-wrap gap-1">
         {Array.from({ length: WEEKS }, (_, index) => index + 1).map((week) => (
           <Link
             key={week}
@@ -35,6 +36,6 @@ export const AttendanceScreen = () => {
           </Link>
         ))}
       </div>
-    </div>
+    </Prose>
   )
 }
