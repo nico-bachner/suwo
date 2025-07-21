@@ -17,8 +17,8 @@ export default async function Page({ searchParams }: PageFileProps) {
       <LoginScreen method={data?.method} />
 
       <p>
-        Don&apos;t have an account? <Link href={routes.REGISTER}>Register</Link>{' '}
-        instead
+        Don&apos;t have an account?{' '}
+        <Link href={routes.REGISTER()}>Register</Link> instead
       </p>
     </div>
   )

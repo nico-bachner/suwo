@@ -8,14 +8,13 @@ import z from 'zod'
 import { Button } from '@/design_system/button'
 import { Spinner } from '@/design_system/spinner'
 import { TextInput } from '@/design_system/text_input'
-import { routes } from '@/routes'
+import { apiRoutes, queryKeys, routes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { EmailValidator } from '@/validators/email'
 import { PasswordValidator } from '@/validators/password'
 
 import { LoginWithPasswordValidator } from './login_with_password_validator'
-import { SESSION_QUERY_KEY } from './session/client/use_session_query'
 
 const defaultValues: z.infer<typeof LoginWithPasswordValidator> = {
   email: '',
@@ -29,7 +28,7 @@ export const LoginWithPasswordForm = () => {
     defaultValues,
     onSubmit: async ({ value }) => {
       const response = await parseResponse(
-        await fetch(routes.API_LOGIN_WITH_PASSWORD, {
+        await fetch(apiRoutes.LOGIN_WITH_PASSWORD(), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -45,10 +44,10 @@ export const LoginWithPasswordForm = () => {
           break
         case StatusCode.OK:
           await queryClient.invalidateQueries({
-            queryKey: SESSION_QUERY_KEY,
+            queryKey: queryKeys.SESSION(),
           })
 
-          redirect(routes.SETTINGS)
+          redirect(routes.SETTINGS())
       }
     },
   })

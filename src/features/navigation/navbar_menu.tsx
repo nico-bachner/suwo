@@ -2,36 +2,30 @@
 
 import { Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Close } from '@radix-ui/react-dialog'
+import { useQuery } from '@tanstack/react-query'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { SOCIAL_LINKS } from '@/config'
+import { Dialog } from '@/design_system/dialog'
 import { Icon } from '@/design_system/icon'
-import { routes } from '@/routes'
+import { queries, routes } from '@/routes'
 import { cn } from '@/utils/cn'
 
-import { Dialog } from '../../design_system/dialog'
-import { Session } from '../auth/session/types'
 import { NavbarMenuLink } from './navbar_menu_link'
 
 type NavbarMenuProps = {
-  session: Session | null
   className?: string
 }
 
-export const NavbarMenu = ({ session, className }: NavbarMenuProps) => {
+export const NavbarMenu = ({ className }: NavbarMenuProps) => {
+  const { data: session } = useQuery(queries.SESSION())
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
-    const handleRouteChange = () => {
-      setOpen(false)
-    }
-
-    window.addEventListener('popstate', handleRouteChange)
-
-    return () => {
-      window.removeEventListener('popstate', handleRouteChange)
-    }
-  }, [])
+    setOpen(false)
+  }, [pathname])
 
   return (
     <Dialog
@@ -53,9 +47,9 @@ export const NavbarMenu = ({ session, className }: NavbarMenuProps) => {
       </Close>
 
       <div className="flex flex-col items-center gap-6">
-        <NavbarMenuLink href={routes.HOME}>Home</NavbarMenuLink>
-        <NavbarMenuLink href={routes.HISTORY}>History</NavbarMenuLink>
-        <NavbarMenuLink href={routes.MEMBERS}>Members</NavbarMenuLink>
+        <NavbarMenuLink href={routes.HOME()}>Home</NavbarMenuLink>
+        <NavbarMenuLink href={routes.HISTORY()}>History</NavbarMenuLink>
+        <NavbarMenuLink href={routes.MEMBERS()}>Members</NavbarMenuLink>
         {session && (
           <NavbarMenuLink href={routes.ATTENDANCES()}>
             Attendance
@@ -63,14 +57,26 @@ export const NavbarMenu = ({ session, className }: NavbarMenuProps) => {
         )}
       </div>
 
-      {session ? (
-        <NavbarMenuLink href={routes.SETTINGS}>Settings</NavbarMenuLink>
-      ) : (
-        <div className="flex flex-col items-center gap-6">
-          <NavbarMenuLink href={routes.LOGIN()}>Login</NavbarMenuLink>
-          <NavbarMenuLink href={routes.REGISTER}>Join SUWO</NavbarMenuLink>
-        </div>
-      )}
+      <div className="flex flex-col items-center gap-6">
+        {session ? (
+          <>
+            <NavbarMenuLink
+              href={routes.PROFILE({
+                // This will need to consume a proper profile object once the user is able to update their handle
+                handle: session.user_id,
+              })}
+            >
+              Profile
+            </NavbarMenuLink>
+            <NavbarMenuLink href={routes.SETTINGS()}>Settings</NavbarMenuLink>
+          </>
+        ) : (
+          <>
+            <NavbarMenuLink href={routes.LOGIN()}>Login</NavbarMenuLink>
+            <NavbarMenuLink href={routes.REGISTER()}>Join SUWO</NavbarMenuLink>
+          </>
+        )}
+      </div>
 
       <div className="flex flex-row items-center gap-4 self-center">
         {SOCIAL_LINKS.map(({ href, icon }) => (

@@ -11,7 +11,7 @@ import { Select, SelectItem } from '@/design_system/select'
 import { Spinner } from '@/design_system/spinner'
 import { TextInput } from '@/design_system/text_input'
 import { Instrument } from '@/generated/prisma'
-import { routes } from '@/routes'
+import { apiRoutes, queryKeys, routes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { EmailValidator } from '@/validators/email'
@@ -19,7 +19,6 @@ import { FamilyNameValidator } from '@/validators/family_name'
 import { GivenNameValidator } from '@/validators/given_name'
 
 import { RegisterValidator } from './register_validator'
-import { SESSION_QUERY_KEY } from './session/client/use_session_query'
 
 type RegisterFormProps = {
   instruments: Instrument[]
@@ -41,7 +40,7 @@ export const RegisterForm = ({ instruments }: RegisterFormProps) => {
     defaultValues,
     onSubmit: async ({ value }) => {
       const response = await parseResponse(
-        await fetch(routes.API_REGISTER, {
+        await fetch(apiRoutes.REGISTER(), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -57,10 +56,10 @@ export const RegisterForm = ({ instruments }: RegisterFormProps) => {
           break
         case StatusCode.OK:
           await queryClient.invalidateQueries({
-            queryKey: SESSION_QUERY_KEY,
+            queryKey: queryKeys.SESSION(),
           })
 
-          redirect(routes.SETTINGS)
+          redirect(routes.SETTINGS())
       }
     },
   })

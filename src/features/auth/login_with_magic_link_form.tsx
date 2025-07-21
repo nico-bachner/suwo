@@ -6,12 +6,12 @@ import z from 'zod'
 import { Button } from '@/design_system/button'
 import { Spinner } from '@/design_system/spinner'
 import { TextInput } from '@/design_system/text_input'
+import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { EmailValidator } from '@/validators/email'
 
 import { LoginWithMagicLinkValidator } from './login_with_magic_link_validator'
-import { routes } from './routes'
 
 const defaultValues: z.infer<typeof LoginWithMagicLinkValidator> = {
   email: '',
@@ -22,7 +22,7 @@ export const LoginWithMagicLinkForm = () => {
     defaultValues,
     onSubmit: async ({ value }) => {
       const response = await parseResponse(
-        await fetch(routes.API_LOGIN_WITH_MAGIC_LINK, {
+        await fetch(apiRoutes.LOGIN_WITH_MAGIC_LINK(), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

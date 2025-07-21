@@ -12,7 +12,7 @@ export const LogOutButton = () => {
 
   const handleLogOut = async () => {
     await deleteSession()
-    redirect(routes.HOME)
+    redirect(routes.HOME())
   }
 
   return (

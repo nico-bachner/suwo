@@ -4,7 +4,12 @@ import {
   queryKeys as attendanceQueryKeys,
   routes as attendanceRoutes,
 } from './features/attendance/routes'
-import { routes as authRoutes } from './features/auth/routes'
+import {
+  apiRoutes as authApiRoutes,
+  queries as authQueries,
+  queryKeys as authQueryKeys,
+  routes as authRoutes,
+} from './features/auth/routes'
 import { routes as mailingListRoutes } from './features/mailing_list/routes'
 import { routes as marketingRoutes } from './features/marketing/routes'
 import {
@@ -17,16 +22,19 @@ import { routes as settingsRoutes } from './features/settings/routes'
 
 export const queries = {
   ...attendanceQueries,
+  ...authQueries,
   ...profileQueries,
 }
 
 export const queryKeys = {
   ...attendanceQueryKeys,
+  ...authQueryKeys,
   ...profileQueryKeys,
 }
 
 export const apiRoutes = {
   ...attendanceApiRoutes,
+  ...authApiRoutes,
   ...profileApiRoutes,
 }
 

@@ -1,4 +1,5 @@
 import { Profile } from '@/generated/prisma'
+import { createURL } from '@/utils/http/create_url'
 
 import { profilesQuery } from './profiles_query'
 
@@ -11,13 +12,13 @@ export const queryKeys = {
 }
 
 export const apiRoutes = {
-  PROFILES: () => `/api/members`,
+  PROFILES: () => createURL({ path: ['api', 'members'] }),
   UPDATE_INSTRUMENT: () =>
-    [apiRoutes.PROFILES(), 'update-instrument'].join('/'),
+    createURL({ path: ['api', 'members', 'update-instrument'] }),
 }
 
 export const routes = {
-  PROFILES: () => '/members',
+  PROFILES: () => createURL({ path: ['members'] }),
   PROFILE: ({ handle }: Pick<Profile, 'handle'>) =>
-    [routes.PROFILES(), handle].join('/'),
+    createURL({ path: ['members', handle] }),
 }

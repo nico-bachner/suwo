@@ -2,9 +2,8 @@
 
 import { useQuery } from '@tanstack/react-query'
 
-import { BASE_URL } from '@/config'
 import { Prose } from '@/design_system/prose'
-import { queries } from '@/routes'
+import { queries, routes } from '@/routes'
 
 import { WeeklyAttendances } from './types'
 import {
@@ -58,7 +57,7 @@ export const WeeklyAttendance = ({
       <WeeklyAttendanceNavigation year={year} semester={semester} week={week} />
 
       <WeeklyAttendanceQRCodeDialog
-        value={`${BASE_URL}/roll-call/${year}/${semester}/${week}`}
+        value={routes.WEEKLY_ATTENDANCES({ year, semester, week })}
         className="sticky right-4 self-end max-lg:bottom-20 lg:fixed lg:top-12 lg:right-12"
       />
     </Prose>

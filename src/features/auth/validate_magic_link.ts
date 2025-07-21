@@ -42,5 +42,5 @@ export const GET: APIRoute = async ({ nextUrl }, { params }) => {
     user_id: verificationToken.user_id,
   })
 
-  redirect(routes.SETTINGS)
+  redirect(routes.SETTINGS())
 }

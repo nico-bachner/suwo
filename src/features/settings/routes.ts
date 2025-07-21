@@ -1,3 +1,5 @@
+import { createURL } from '@/utils/http/create_url'
+
 export const routes = {
-  SETTINGS: '/settings',
+  SETTINGS: () => createURL({ path: ['settings'] }),
 }

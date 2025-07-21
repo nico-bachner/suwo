@@ -1,6 +1,7 @@
 import { UseQueryOptions } from '@tanstack/react-query'
 import z, { prettifyError } from 'zod'
 
+import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
@@ -11,18 +12,27 @@ import {
 } from './validators'
 
 export const routes = {
-  ATTENDANCES: () => '/attendance',
+  ATTENDANCES: () => createURL({ path: ['attendance'] }),
   WEEKLY_ATTENDANCES: (args: z.infer<typeof WeeklyAttendancesValidator>) =>
-    ['/attendance', args.year, args.semester, args.week].join('/'),
+    createURL({ path: ['attendance', args.year, args.semester, args.week] }),
 }
 
 export const apiRoutes = {
   WEEKLY_ATTENDANCES: (args: z.infer<typeof WeeklyAttendancesValidator>) =>
-    ['/api/attendance', args.year, args.semester, args.week].join('/'),
+    createURL({
+      path: ['api', 'attendance', args.year, args.semester, args.week],
+    }),
   LOG_WEEKLY_ATTENDANCE: (args: z.infer<typeof LogWeeklyAttendanceValidator>) =>
-    ['/api/attendance', args.year, args.semester, args.week, args.user_id].join(
-      '/',
-    ),
+    createURL({
+      path: [
+        'api',
+        'attendance',
+        args.year,
+        args.semester,
+        args.week,
+        args.user_id,
+      ],
+    }),
 }
 
 export const queryKeys = {

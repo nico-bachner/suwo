@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 
 import { Button } from '@/design_system/button'
+import { Prose } from '@/design_system/prose'
 import { ErrorFileProps } from '@/utils/next_types'
 
 export default function Error({ error, reset }: ErrorFileProps) {
@@ -12,12 +13,12 @@ export default function Error({ error, reset }: ErrorFileProps) {
   }, [error])
 
   return (
-    <div className="mx-auto flex max-w-screen-sm flex-col gap-4 p-4">
-      <h2 className="font-serif text-3xl font-bold">Something went wrong!</h2>
+    <Prose>
+      <h1 className="font-serif text-3xl font-bold">Something went wrong!</h1>
 
       <Button variant="primary" onClick={reset} className="self-center">
         Try again
       </Button>
-    </div>
+    </Prose>
   )
 }

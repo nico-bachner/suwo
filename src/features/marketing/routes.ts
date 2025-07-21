@@ -1,7 +1,9 @@
+import { createURL } from '@/utils/http/create_url'
+
 export const routes = {
-  MEMBERS: '/members',
-  MEMBER: (handle: string) => `${routes.MEMBERS}/${handle}`,
-  HOME: '/',
-  HISTORY: '/history',
-  HISTORY_YEAR: (year: string) => `${routes.HISTORY}/${year}`,
+  HISTORY: () => createURL({ path: ['history'] }),
+  HISTORY_YEAR: (year: string) => createURL({ path: ['history', year] }),
+  HOME: () => createURL({ path: [] }),
+  MEMBERS: () => createURL({ path: ['members'] }),
+  MEMBER: (handle: string) => createURL({ path: ['members', handle] }),
 }
