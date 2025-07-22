@@ -1,4 +1,5 @@
 import { randomBytes } from 'crypto'
+import { headers } from 'next/headers'
 import { prettifyError } from 'zod'
 
 import { RESEND_DOMAIN, SHORT_NAME } from '@/config'
@@ -44,10 +45,16 @@ export const POST = async (request: Request) => {
     },
   })
 
-  const verificationLink = apiRoutes.VALIDATE_MAGIC_LINK({
-    user_id: user.id,
-    token,
-  })
+  const headersList = await headers()
+  const host = headersList.get('x-forwarded-host') || headersList.get('host')
+  const protocol = headersList.get('x-forwarded-proto') || 'https'
+  // eslint-disable-next-line typescript/restrict-template-expressions
+  const verificationLink = `${protocol}://${host}${apiRoutes.VALIDATE_MAGIC_LINK(
+    {
+      user_id: user.id,
+      token,
+    },
+  )}`
 
   await emails.send({
     from: `${SHORT_NAME} <magic-link@${RESEND_DOMAIN}>`,

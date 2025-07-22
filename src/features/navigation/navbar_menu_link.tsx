@@ -14,7 +14,7 @@ type NavbarMenuLinkProps = {
 export const NavbarMenuLink = ({ children, href }: NavbarMenuLinkProps) => {
   const pathname = usePathname()
 
-  const isActive = pathname === new URL(href).pathname
+  const isActive = pathname === href
 
   return (
     <Link href={href} className={cn('text-xl', isActive && 'text-primary-2')}>

@@ -1,18 +1,20 @@
-import { getBaseURL } from './get_base_url'
-
 type CreateURLParams = {
   path: (string | number)[]
   query?: Record<string, string | number | boolean>
 }
 
 export const createURL = ({ path, query }: CreateURLParams) => {
-  const url = new URL(`/${path.join('/')}`, getBaseURL())
+  const url = `/${path.join('/')}`
 
-  if (query) {
-    Object.entries(query).forEach(([key, value]) => {
-      url.searchParams.append(key, encodeURIComponent(value))
-    })
+  if (!query) {
+    return url
   }
 
-  return url.toString()
+  const searchParams = new URLSearchParams()
+
+  Object.entries(query).forEach(([key, value]) => {
+    searchParams.set(key, String(value))
+  })
+
+  return [url, searchParams.toString()].join('?')
 }

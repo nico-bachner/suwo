@@ -14,7 +14,7 @@ type NavbarLinkProps = {
 export const NavbarLink = ({ children, href }: NavbarLinkProps) => {
   const pathname = usePathname()
 
-  const isActive = pathname.split('/')[1] === href.split('/')[1]
+  const isActive = pathname === href
 
   return (
     <Link
