@@ -23,6 +23,7 @@ export const queryKeys = {
   ...authQueryKeys,
   ...profileQueryKeys,
   CURRENT_WEEK: () => ['current-week'],
+  INSTRUMENTS: () => ['instruments'],
 }
 
 export const apiRoutes = {
@@ -30,14 +31,15 @@ export const apiRoutes = {
   ...authApiRoutes,
   ...profileApiRoutes,
   CURRENT_WEEK: () => createURL({ path: ['api', 'usyd', 'current-week'] }),
+  INSTRUMENTS: () => createURL({ path: ['api', 'instruments'] }),
 }
 
 export const routes = {
-  CALENDAR: () => createURL({ path: ['calendar'] }),
   ...attendanceRoutes,
   ...authRoutes,
   ...mailingListRoutes,
   ...marketingRoutes,
   ...profileRoutes,
   ...settingsRoutes,
+  CALENDAR: () => createURL({ path: ['calendar'] }),
 }

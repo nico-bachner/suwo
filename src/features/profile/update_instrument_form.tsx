@@ -1,20 +1,18 @@
 'use client'
 
 import { useForm } from '@tanstack/react-form'
+import { useQuery } from '@tanstack/react-query'
 
 import { Button } from '@/design_system/button'
 import { Select, SelectItem } from '@/design_system/select'
 import { Spinner } from '@/design_system/spinner'
-import { Instrument } from '@/generated/prisma'
+import { queries } from '@/queries'
 import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-type RegisterFormProps = {
-  instruments: Instrument[]
-}
-
-export const UpdateInstrumentForm = ({ instruments }: RegisterFormProps) => {
+export const UpdateInstrumentForm = () => {
+  const { data: instruments } = useQuery(queries.INSTRUMENTS())
   const form = useForm({
     defaultValues: {
       instrument_name: '',
@@ -61,7 +59,7 @@ export const UpdateInstrumentForm = ({ instruments }: RegisterFormProps) => {
             onValueChange={handleChange}
             placeholder="Select Instrument..."
           >
-            {instruments.map(({ name }) => (
+            {instruments?.map(({ name }) => (
               <SelectItem key={name} value={name}>
                 {name}
               </SelectItem>

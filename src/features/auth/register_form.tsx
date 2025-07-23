@@ -1,7 +1,7 @@
 'use client'
 
 import { useForm } from '@tanstack/react-form'
-import { useQueryClient } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
 import z from 'zod'
 
@@ -10,7 +10,7 @@ import { Checkbox } from '@/design_system/checkbox'
 import { Select, SelectItem } from '@/design_system/select'
 import { Spinner } from '@/design_system/spinner'
 import { TextInput } from '@/design_system/text_input'
-import { Instrument } from '@/generated/prisma'
+import { queries } from '@/queries'
 import { apiRoutes, queryKeys, routes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
@@ -19,10 +19,6 @@ import { FamilyNameValidator } from '@/validators/family_name'
 import { GivenNameValidator } from '@/validators/given_name'
 
 import { RegisterValidator } from './register_validator'
-
-type RegisterFormProps = {
-  instruments: Instrument[]
-}
 
 const defaultValues: z.infer<typeof RegisterValidator> = {
   given_name: '',
@@ -33,8 +29,9 @@ const defaultValues: z.infer<typeof RegisterValidator> = {
   mailing_list_preference: true,
 }
 
-export const RegisterForm = ({ instruments }: RegisterFormProps) => {
+export const RegisterForm = () => {
   const queryClient = useQueryClient()
+  const { data: instruments } = useQuery(queries.INSTRUMENTS())
 
   const form = useForm({
     defaultValues,
@@ -222,7 +219,7 @@ export const RegisterForm = ({ instruments }: RegisterFormProps) => {
               onValueChange={handleChange}
               placeholder="Select Instrument..."
             >
-              {instruments.map(({ name }) => (
+              {instruments?.map(({ name }) => (
                 <SelectItem key={name} value={name}>
                   {name}
                 </SelectItem>

@@ -5,7 +5,6 @@ import { getSession } from '@/features/auth/session/get_session'
 import { EditProfileScreen } from '@/features/profile/edit_profile_screen'
 import { routes } from '@/routes'
 import { PageFileProps } from '@/utils/next_types'
-import { prisma } from '@/utils/prisma'
 
 export default async function Page({ params }: PageFileProps) {
   const { data, success } = z
@@ -29,8 +28,5 @@ export default async function Page({ params }: PageFileProps) {
     forbidden()
   }
 
-  /** Fetch instruments for the form */
-  const instruments = await prisma.instrument.findMany()
-
-  return <EditProfileScreen {...data} instruments={instruments} />
+  return <EditProfileScreen {...data} />
 }
