@@ -25,9 +25,7 @@ export const Navbar = () => {
           <NavbarLink href={routes.HOME()}>Home</NavbarLink>
           <NavbarLink href={routes.HISTORY()}>History</NavbarLink>
           <NavbarLink href={routes.MEMBERS()}>Members</NavbarLink>
-          {session && (
-            <NavbarLink href={routes.ATTENDANCES()}>Attendance</NavbarLink>
-          )}
+          <NavbarLink href={routes.ATTENDANCES()}>Attendance</NavbarLink>
         </div>
 
         <div className="hidden items-center gap-2 sm:flex">

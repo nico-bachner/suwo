@@ -50,11 +50,7 @@ export const NavbarMenu = ({ className }: NavbarMenuProps) => {
         <NavbarMenuLink href={routes.HOME()}>Home</NavbarMenuLink>
         <NavbarMenuLink href={routes.HISTORY()}>History</NavbarMenuLink>
         <NavbarMenuLink href={routes.MEMBERS()}>Members</NavbarMenuLink>
-        {session && (
-          <NavbarMenuLink href={routes.ATTENDANCES()}>
-            Attendance
-          </NavbarMenuLink>
-        )}
+        <NavbarMenuLink href={routes.ATTENDANCES()}>Attendance</NavbarMenuLink>
       </div>
 
       <div className="flex flex-col items-center gap-6">
