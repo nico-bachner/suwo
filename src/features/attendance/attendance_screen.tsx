@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 
 import { Container } from '@/design_system/container'
@@ -13,15 +15,12 @@ export const AttendanceScreen = () => {
     <Container size="sm" className="prose">
       <h1>Attendance</h1>
 
-      <p className="text-center text-5xl font-bold">Come back next semester!</p>
-
       <p>
-        We are currently on break after our semester {currentSemester} concert.
-        Come back next semester, or review the semester {currentSemester}{' '}
-        attendance sheets linked below.
+        Review the current semester&apos;s attendance sheets by following their
+        corresponding links below.
       </p>
 
-      <div className="flex flex-row flex-wrap gap-1">
+      <div className="mt-12 flex flex-row flex-wrap gap-1">
         {Array.from({ length: WEEKS }, (_, index) => index + 1).map((week) => (
           <Link
             key={week}

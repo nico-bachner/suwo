@@ -8,3 +8,5 @@ export const WeekCoerceValidator = z.coerce
   .int()
   .min(MIN_WEEK)
   .max(MAX_WEEK)
+
+export type Week = z.infer<typeof WeekValidator>

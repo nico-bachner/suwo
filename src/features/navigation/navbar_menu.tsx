@@ -12,6 +12,7 @@ import { Icon } from '@/design_system/icon'
 import { queries } from '@/queries'
 import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
+import { getCurrentSemester, getCurrentYear } from '@/utils/date_manupulation'
 
 import { NavbarMenuLink } from './navbar_menu_link'
 
@@ -21,6 +22,7 @@ type NavbarMenuProps = {
 
 export const NavbarMenu = ({ className }: NavbarMenuProps) => {
   const { data: session } = useQuery(queries.SESSION())
+  const { data: currentWeek } = useQuery(queries.CURRENT_WEEK())
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
 
@@ -52,7 +54,19 @@ export const NavbarMenu = ({ className }: NavbarMenuProps) => {
         <NavbarMenuLink href={routes.HISTORY()}>History</NavbarMenuLink>
         <NavbarMenuLink href={routes.MEMBERS()}>Members</NavbarMenuLink>
         <NavbarMenuLink href={routes.CALENDAR()}>Calendar</NavbarMenuLink>
-        <NavbarMenuLink href={routes.ATTENDANCES()}>Attendance</NavbarMenuLink>
+        <NavbarMenuLink
+          href={
+            currentWeek
+              ? routes.WEEKLY_ATTENDANCES({
+                  year: getCurrentYear(),
+                  semester: getCurrentSemester(),
+                  week: currentWeek,
+                })
+              : routes.ATTENDANCES()
+          }
+        >
+          Attendance
+        </NavbarMenuLink>
       </div>
 
       <div className="flex flex-col items-center gap-6">

@@ -22,12 +22,14 @@ export const queryKeys = {
   ...attendanceQueryKeys,
   ...authQueryKeys,
   ...profileQueryKeys,
+  CURRENT_WEEK: () => ['current-week'],
 }
 
 export const apiRoutes = {
   ...attendanceApiRoutes,
   ...authApiRoutes,
   ...profileApiRoutes,
+  CURRENT_WEEK: () => createURL({ path: ['api', 'usyd', 'current-week'] }),
 }
 
 export const routes = {
