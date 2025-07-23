@@ -94,6 +94,8 @@ model Profile {
 
   user       User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
   instrument Instrument? @relation(fields: [instrument_name], references: [name])
+
+  @@index([given_name(sort: Asc), family_name(sort: Asc)])
 }
 
 model VerificationToken {
@@ -115,14 +117,15 @@ model MailingListRecipient {
 }
 
 model Attendance {
-  user_id  String
   year     Int
   semester Int    @db.SmallInt
   week     Int    @db.SmallInt
+  user_id  String
 
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@id([user_id, year, semester, week])
+  @@index([year(sort: Desc), semester(sort: Desc), week(sort: Desc)])
 }
 
 model Instrument {
@@ -132,6 +135,8 @@ model Instrument {
 
   Profiles      Profile[]
   PracticeParts PracticePart[]
+
+  @@index([name(sort: Asc)])
 }
 
 model Equipment {

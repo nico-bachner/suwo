@@ -1,5 +1,3 @@
- 
-
 /**
  * Enum representing various HTTP status codes and their meanings. Use for
  * increased type safety and readability.
