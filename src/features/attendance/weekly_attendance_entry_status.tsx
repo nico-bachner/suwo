@@ -1,10 +1,11 @@
 'use client'
 
 import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { Skeleton } from '@/design_system/skeleton'
+import { mutations } from '@/routes'
 
-import { useLogAttendanceMutation } from './mutation_log_attendance'
 import { WeeklyAttendanceEntryProps } from './types'
 
 type WeeklyAttendanceEntryStatusProps = WeeklyAttendanceEntryProps & {
@@ -16,7 +17,8 @@ export const WeeklyAttendanceEntryStatus = ({
   profile,
   isPresent,
 }: WeeklyAttendanceEntryStatusProps) => {
-  const { logAttendance } = useLogAttendanceMutation()
+  const queryClient = useQueryClient()
+  const { mutate } = useMutation(mutations.LOG_WEEKLY_ATTENDANCE(queryClient))
 
   switch (isPresent) {
     case true:
@@ -27,8 +29,8 @@ export const WeeklyAttendanceEntryStatus = ({
       return (
         <button
           className="focus:ring-neutral-4 cursor-pointer px-4 py-3"
-          onClick={async () => {
-            await logAttendance({
+          onClick={() => {
+            mutate({
               ...attendanceData,
               user_id: profile.user_id,
             })

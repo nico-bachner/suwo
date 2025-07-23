@@ -1,5 +1,6 @@
 import {
   apiRoutes as attendanceApiRoutes,
+  mutations as attendanceMutations,
   queries as attendanceQueries,
   queryKeys as attendanceQueryKeys,
   routes as attendanceRoutes,
@@ -34,6 +35,7 @@ export const queries = {
 }
 
 export const mutations = {
+  ...attendanceMutations,
   ...authMutations,
 }
 
