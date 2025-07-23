@@ -13,8 +13,8 @@ export const GET = async () => {
 
   if (!sessionCookie) {
     return createResponse({
-      status: StatusCode.BadRequest,
-      error: 'No session cookie provided',
+      status: StatusCode.OK,
+      data: null,
     })
   }
 

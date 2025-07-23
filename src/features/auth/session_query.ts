@@ -8,13 +8,17 @@ import { StatusCode } from '@/utils/http/status_code'
 import { Session } from './session/types'
 import { SessionValidator } from './session/validator'
 
-export const sessionQuery = (): UseQueryOptions<Session> => ({
+export const sessionQuery = (): UseQueryOptions<Session | null> => ({
   queryKey: queryKeys.SESSION(),
   queryFn: async () => {
     const response = await parseResponse(await fetch(apiRoutes.SESSION()))
 
     switch (response.status) {
       case StatusCode.OK: {
+        if (response.data === null) {
+          return null
+        }
+
         const { data, error, success } = SessionValidator.safeParse(
           response.data,
         )
