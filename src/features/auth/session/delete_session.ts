@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers'
 
-import { SESSION_COOKIE_NAME } from '../config'
+import { SESSION_COOKIE_NAME } from './config'
 
 export const deleteSession = async () => {
   const cookieStore = await cookies()

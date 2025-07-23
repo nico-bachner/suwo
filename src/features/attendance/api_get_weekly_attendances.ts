@@ -5,7 +5,7 @@ import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'
 import { prisma } from '@/utils/prisma'
 
-import { getSession } from '../auth/session/server/get_session'
+import { getSession } from '../auth/session/get_session'
 import { WeeklyAttendancesCoerceValidator } from './validators'
 
 export const getWeeklyAttendances: APIRoute = async (_, { params }) => {

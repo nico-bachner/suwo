@@ -6,7 +6,7 @@ import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
 
 import { LoginWithPasswordValidator } from './login_with_password_validator'
-import { createSession } from './session/server/create_session'
+import { createSession } from './session/create_session'
 
 export const POST = async (request: Request) => {
   const { data, error, success } = LoginWithPasswordValidator.safeParse(

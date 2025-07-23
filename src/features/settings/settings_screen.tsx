@@ -3,7 +3,7 @@ import { UpdatePasswordForm } from '@/features/auth/update_password_form'
 import { prisma } from '@/utils/prisma'
 
 import { LogOutButton } from '../auth/log_out_button'
-import { getSession } from '../auth/session/server/get_session'
+import { getSession } from '../auth/session/get_session'
 import { UpdateMailingListPreferenceForm } from '../mailing_list/update_mailing_list_preference_form'
 
 export const SettingsScreen = async () => {

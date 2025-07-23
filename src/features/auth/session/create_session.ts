@@ -1,8 +1,8 @@
 import { cookies } from 'next/headers'
 
-import { SESSION_COOKIE_NAME } from '../config'
-import { createJWT } from '../lib/jwt'
-import { Session } from '../types'
+import { SESSION_COOKIE_NAME } from './config'
+import { createJWT } from './jwt'
+import { Session } from './types'
 
 export const createSession = async ({ user_id }: Session) => {
   const cookieStore = await cookies()

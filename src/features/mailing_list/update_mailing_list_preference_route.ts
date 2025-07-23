@@ -4,7 +4,7 @@ import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
 
-import { getSession } from '../auth/session/server/get_session'
+import { getSession } from '../auth/session/get_session'
 import { UpdateMailingListPreferenceValidator } from './update_mailing_list_preference_validator'
 
 export const POST = async (request: Request) => {

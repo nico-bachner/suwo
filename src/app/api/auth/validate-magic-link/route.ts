@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import z from 'zod'
 
-import { createSession } from '@/features/auth/session/server/create_session'
+import { createSession } from '@/features/auth/session/create_session'
 import { routes } from '@/routes'
 import { createResponse } from '@/utils/http/create_response'
 import { APIRoute } from '@/utils/next_types'

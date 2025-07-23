@@ -5,7 +5,7 @@ import { routes } from '@/routes'
 import { APIRoute } from '@/utils/next_types'
 import { prisma } from '@/utils/prisma'
 
-import { createSession } from './session/server/create_session'
+import { createSession } from './session/create_session'
 
 export const GET: APIRoute = async ({ nextUrl }, { params }) => {
   const { data, success } = z

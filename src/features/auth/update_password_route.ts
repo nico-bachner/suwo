@@ -5,7 +5,7 @@ import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
 
-import { getSession } from './session/server/get_session'
+import { getSession } from './session/get_session'
 import { UpdatePasswordValidator } from './update_password_validator'
 
 export const POST = async (request: Request) => {

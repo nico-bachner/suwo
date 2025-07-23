@@ -6,6 +6,7 @@ import {
 } from './features/attendance/routes'
 import {
   apiRoutes as authApiRoutes,
+  mutations as authMutations,
   queries as authQueries,
   queryKeys as authQueryKeys,
   routes as authRoutes,
@@ -20,16 +21,20 @@ import {
 } from './features/profile/routes'
 import { routes as settingsRoutes } from './features/settings/routes'
 
+export const queryKeys = {
+  ...attendanceQueryKeys,
+  ...authQueryKeys,
+  ...profileQueryKeys,
+}
+
 export const queries = {
   ...attendanceQueries,
   ...authQueries,
   ...profileQueries,
 }
 
-export const queryKeys = {
-  ...attendanceQueryKeys,
-  ...authQueryKeys,
-  ...profileQueryKeys,
+export const mutations = {
+  ...authMutations,
 }
 
 export const apiRoutes = {

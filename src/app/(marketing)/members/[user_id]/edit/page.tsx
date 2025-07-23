@@ -1,7 +1,7 @@
 import { forbidden, notFound, redirect } from 'next/navigation'
 import z from 'zod'
 
-import { getSession } from '@/features/auth/session/server/get_session'
+import { getSession } from '@/features/auth/session/get_session'
 import { EditProfileScreen } from '@/features/profile/edit_profile_screen'
 import { routes } from '@/routes'
 import { PageFileProps } from '@/utils/next_types'

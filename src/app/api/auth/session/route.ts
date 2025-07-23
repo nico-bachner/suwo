@@ -2,7 +2,7 @@ import { cookies } from 'next/headers'
 import { prettifyError } from 'zod'
 
 import { SESSION_COOKIE_NAME } from '@/features/auth/session/config'
-import { verifyJWT } from '@/features/auth/session/lib/jwt'
+import { verifyJWT } from '@/features/auth/session/jwt'
 import { SessionValidator } from '@/features/auth/session/validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'

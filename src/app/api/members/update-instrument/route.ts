@@ -1,6 +1,6 @@
 import { prettifyError } from 'zod'
 
-import { getSession } from '@/features/auth/session/server/get_session'
+import { getSession } from '@/features/auth/session/get_session'
 import { UpdateInstrumentValidator } from '@/features/profile/update_instrument_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'

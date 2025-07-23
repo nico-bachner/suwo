@@ -1,17 +1,17 @@
 'use client'
 
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
 
 import { Button } from '@/design_system/button'
-import { routes } from '@/routes'
-
-import { useDeleteSessionMutation } from './session/client/use_delete_session_mutation'
+import { mutations, routes } from '@/routes'
 
 export const LogOutButton = () => {
-  const { deleteSession } = useDeleteSessionMutation()
+  const queryClient = useQueryClient()
+  const { mutate } = useMutation(mutations.DELETE_SESSION(queryClient))
 
-  const handleLogOut = async () => {
-    await deleteSession()
+  const handleLogOut = () => {
+    mutate()
     redirect(routes.HOME())
   }
 
