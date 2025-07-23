@@ -35,7 +35,7 @@ export default function Layout({ children }: LayoutFileProps) {
           <div className="flex min-h-screen flex-col">
             <Navbar />
 
-            {children}
+            <div className="flex-1">{children}</div>
 
             <Container size="md">
               <Divider />

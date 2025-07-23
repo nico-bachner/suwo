@@ -26,6 +26,7 @@ export const Navbar = () => {
           <NavbarLink href={routes.HOME()}>Home</NavbarLink>
           <NavbarLink href={routes.HISTORY()}>History</NavbarLink>
           <NavbarLink href={routes.MEMBERS()}>Members</NavbarLink>
+          <NavbarLink href={routes.CALENDAR()}>Calendar</NavbarLink>
           <NavbarLink href={routes.ATTENDANCES()}>Attendance</NavbarLink>
         </div>
 

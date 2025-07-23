@@ -16,6 +16,7 @@ import {
   routes as profileRoutes,
 } from './features/profile/routes'
 import { routes as settingsRoutes } from './features/settings/routes'
+import { createURL } from './utils/http/create_url'
 
 export const queryKeys = {
   ...attendanceQueryKeys,
@@ -30,6 +31,7 @@ export const apiRoutes = {
 }
 
 export const routes = {
+  CALENDAR: () => createURL({ path: ['calendar'] }),
   ...attendanceRoutes,
   ...authRoutes,
   ...mailingListRoutes,

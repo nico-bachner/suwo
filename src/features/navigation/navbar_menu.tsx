@@ -51,6 +51,7 @@ export const NavbarMenu = ({ className }: NavbarMenuProps) => {
         <NavbarMenuLink href={routes.HOME()}>Home</NavbarMenuLink>
         <NavbarMenuLink href={routes.HISTORY()}>History</NavbarMenuLink>
         <NavbarMenuLink href={routes.MEMBERS()}>Members</NavbarMenuLink>
+        <NavbarMenuLink href={routes.CALENDAR()}>Calendar</NavbarMenuLink>
         <NavbarMenuLink href={routes.ATTENDANCES()}>Attendance</NavbarMenuLink>
       </div>
 

@@ -5,15 +5,21 @@ import { FooterLink } from './footer_link'
 
 export const Footer = () => (
   <footer className="flex flex-col gap-12 py-12 sm:flex-row">
-    <div className="flex flex-1 flex-row gap-8">
-      <div className="flex flex-col gap-2">
+    <div className="flex flex-2 flex-row gap-8">
+      <div className="flex flex-1 flex-col gap-2">
         <p className="text-neutral-1 font-bold">The Club</p>
         <FooterLink href={routes.HOME()}>About Us</FooterLink>
         <FooterLink href={routes.HISTORY()}>Our History</FooterLink>
         <FooterLink href={routes.MEMBERS()}>Our Members</FooterLink>
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-1 flex-col gap-2">
+        <p className="text-neutral-1 font-bold">Members</p>
+        <FooterLink href={routes.CALENDAR()}>Events Calendar</FooterLink>
+        <FooterLink href={routes.ATTENDANCES()}>Attendance Sheet</FooterLink>
+      </div>
+
+      <div className="flex flex-1 flex-col gap-2">
         <p className="text-neutral-1 font-bold">Our Socials</p>
         {SOCIAL_LINKS.map(({ href, title }) => (
           <FooterLink key={href} href={href} external>
