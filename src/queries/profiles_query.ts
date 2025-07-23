@@ -1,26 +1,21 @@
 import { UseQueryOptions } from '@tanstack/react-query'
 import z, { prettifyError } from 'zod'
 
+import { ProfileValidator } from '@/features/profile/validators'
+import { Profile } from '@/generated/prisma'
 import { apiRoutes, queryKeys } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-import { Attendance, WeeklyAttendances } from './types'
-import { LogWeeklyAttendanceValidator } from './validators'
-
-export const weeklyAttendancesQuery = (
-  args: WeeklyAttendances,
-): UseQueryOptions<Attendance[]> => ({
-  queryKey: queryKeys.WEEKLY_ATTENDANCES(args),
+export const profilesQuery = (): UseQueryOptions<Profile[]> => ({
+  queryKey: queryKeys.PROFILES(),
   queryFn: async () => {
-    const response = await parseResponse(
-      await fetch(apiRoutes.WEEKLY_ATTENDANCES(args)),
-    )
+    const response = await parseResponse(await fetch(apiRoutes.PROFILES()))
 
     switch (response.status) {
       case StatusCode.OK: {
         const { data, error, success } = z
-          .array(LogWeeklyAttendanceValidator)
+          .array(ProfileValidator)
           .safeParse(response.data)
 
         if (!success) {
@@ -30,7 +25,7 @@ export const weeklyAttendancesQuery = (
         return data
       }
       default:
-        throw new Error('Failed to fetch attendance data')
+        throw new Error('Failed to fetch data')
     }
   },
 })

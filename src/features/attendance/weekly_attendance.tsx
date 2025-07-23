@@ -3,7 +3,8 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { Prose } from '@/design_system/prose'
-import { queries, routes } from '@/routes'
+import { queries } from '@/queries'
+import { routes } from '@/routes'
 
 import { WeeklyAttendances } from './types'
 import {

@@ -1,12 +1,11 @@
 import { UseQueryOptions } from '@tanstack/react-query'
 import { prettifyError } from 'zod'
 
+import { Session } from '@/features/auth/session/types'
+import { SessionValidator } from '@/features/auth/session/validator'
 import { apiRoutes, queryKeys } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
-
-import { Session } from './session/types'
-import { SessionValidator } from './session/validator'
 
 export const sessionQuery = (): UseQueryOptions<Session | null> => ({
   queryKey: queryKeys.SESSION(),

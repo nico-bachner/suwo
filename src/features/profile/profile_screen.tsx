@@ -5,7 +5,8 @@ import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 
 import { Profile } from '@/generated/prisma'
-import { queries, routes } from '@/routes'
+import { queries } from '@/queries'
+import { routes } from '@/routes'
 
 import { getProfileScreenName } from './utils/get_profile_screen_name'
 

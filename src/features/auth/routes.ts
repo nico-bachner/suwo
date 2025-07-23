@@ -3,14 +3,9 @@ import { createURL } from '@/utils/http/create_url'
 
 import { LoginScreenSearchParams } from './login_screen_search_params_validator'
 import { deleteSessionMutation } from './session_mutation'
-import { sessionQuery } from './session_query'
 
 export const queryKeys = {
   SESSION: () => ['session'],
-}
-
-export const queries = {
-  SESSION: sessionQuery,
 }
 
 export const mutations = {

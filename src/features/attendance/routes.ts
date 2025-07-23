@@ -7,7 +7,6 @@ import {
   LogWeeklyAttendanceValidator,
   WeeklyAttendancesValidator,
 } from './validators'
-import { weeklyAttendancesQuery } from './weekly_attendances_query'
 
 export const queryKeys = {
   WEEKLY_ATTENDANCES: (args: z.infer<typeof WeeklyAttendancesValidator>) => [
@@ -16,10 +15,6 @@ export const queryKeys = {
     args.semester,
     args.week,
   ],
-}
-
-export const queries = {
-  WEEKLY_ATTENDANCES: weeklyAttendancesQuery,
 }
 
 export const mutations = {

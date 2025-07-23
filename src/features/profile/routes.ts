@@ -1,14 +1,6 @@
 import { Profile } from '@/generated/prisma'
 import { createURL } from '@/utils/http/create_url'
 
-import { profileQuery } from './profile_query'
-import { profilesQuery } from './profiles_query'
-
-export const queries = {
-  PROFILES: profilesQuery,
-  PROFILE: profileQuery,
-}
-
 export const queryKeys = {
   PROFILES: () => ['members'],
   PROFILE: ({ user_id }: Pick<Profile, 'user_id'>) => ['members', user_id],

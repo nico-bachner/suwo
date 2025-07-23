@@ -6,7 +6,8 @@ import Link from 'next/link'
 
 import { IMAGES } from '@/config'
 import { Button } from '@/design_system/button'
-import { queries, routes } from '@/routes'
+import { queries } from '@/queries'
+import { routes } from '@/routes'
 
 import { NavbarLink } from './navbar_link'
 import { NavbarMenu } from './navbar_menu'

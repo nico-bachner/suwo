@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import { SettingsSection } from '@/design_system/settings_section'
 import { Instrument, Profile } from '@/generated/prisma'
-import { queries } from '@/routes'
+import { queries } from '@/queries'
 
 import { UpdateInstrumentForm } from './update_instrument_form'
 import { getProfileScreenName } from './utils/get_profile_screen_name'
