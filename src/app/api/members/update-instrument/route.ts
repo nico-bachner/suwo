@@ -7,15 +7,6 @@ import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
 
 export const POST = async (request: Request) => {
-  const session = await getSession()
-
-  if (!session) {
-    return createResponse({
-      status: StatusCode.Unauthorized,
-      error: 'Unauthorized',
-    })
-  }
-
   const { data, error, success } = UpdateInstrumentValidator.safeParse(
     await request.json(),
   )
@@ -27,17 +18,24 @@ export const POST = async (request: Request) => {
     })
   }
 
-  const updatedUser = await prisma.profile.update({
-    where: {
-      user_id: session.user_id,
-    },
-    data: {
-      instrument_name: data.instrument_name,
-    },
-  })
+  const session = await getSession()
+
+  if (!session) {
+    return createResponse({
+      status: StatusCode.Unauthorized,
+      error: 'Unauthorized',
+    })
+  }
 
   return createResponse({
     status: StatusCode.OK,
-    data: updatedUser,
+    data: await prisma.profile.update({
+      where: {
+        user_id: session.user_id,
+      },
+      data: {
+        instrument_name: data.instrument_name,
+      },
+    }),
   })
 }
