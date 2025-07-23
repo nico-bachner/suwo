@@ -32,6 +32,6 @@ export const TextInput = ({
       {...props}
     />
 
-    {errors && <p className="px-2 text-sm text-red-500">{errors[0]}</p>}
+    {errors && <p className="text-negative px-2 text-sm">{errors[0]}</p>}
   </div>
 )
