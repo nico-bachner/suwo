@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query'
 
-import { Prose } from '@/design_system/prose'
+import { Container } from '@/design_system/container'
 import { queries } from '@/queries'
 import { routes } from '@/routes'
 
@@ -33,7 +33,7 @@ export const WeeklyAttendance = ({
   }
 
   return (
-    <Prose>
+    <Container size="sm" className="prose">
       <h1 className="text-center">Attendance Sheet</h1>
       <p className="text-neutral-3 text-center">
         {attendances
@@ -61,6 +61,6 @@ export const WeeklyAttendance = ({
         value={routes.WEEKLY_ATTENDANCES({ year, semester, week })}
         className="sticky right-4 self-end max-lg:bottom-20 lg:fixed lg:top-12 lg:right-12"
       />
-    </Prose>
+    </Container>
   )
 }

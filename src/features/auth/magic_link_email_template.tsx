@@ -22,7 +22,7 @@ export const MagicLinkEmailTemplate = ({ link }: MagicLinkTemplateProps) => (
       <Body className="px-2 font-sans">
         <Preview>Log in to your SUWO account</Preview>
 
-        <Container>
+        <Container size="sm">
           <Section>
             <Text>
               Someone recently attempted to login to your SUWO account. If this

@@ -1,10 +1,10 @@
-import { Prose } from '@/design_system/prose'
+import { Container } from '@/design_system/container'
 
 export default function Loading() {
   return (
-    <Prose>
+    <Container size="sm" className="prose">
       <h1>Loading</h1>
       <p>Please wait...</p>
-    </Prose>
+    </Container>
   )
 }

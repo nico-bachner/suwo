@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { Prose } from '@/design_system/prose'
+import { Container } from '@/design_system/container'
 import { WEEKS } from '@/features/usyd_api_wrapper/config'
 import { routes } from '@/routes'
 import { getCurrentSemester, getCurrentYear } from '@/utils/date_manupulation'
@@ -10,7 +10,7 @@ export const AttendanceScreen = () => {
   const currentSemester = getCurrentSemester()
 
   return (
-    <Prose>
+    <Container size="sm" className="prose">
       <h1>Attendance</h1>
 
       <p className="text-center text-5xl font-bold">Come back next semester!</p>
@@ -36,6 +36,6 @@ export const AttendanceScreen = () => {
           </Link>
         ))}
       </div>
-    </Prose>
+    </Container>
   )
 }

@@ -1,10 +1,10 @@
 import Link from 'next/link'
 
-import { Prose } from '@/design_system/prose'
+import { Container } from '@/design_system/container'
 import { routes } from '@/routes'
 
 export const HomeScreen = () => (
-  <Prose>
+  <Container size="sm" className="prose">
     <h1>Sydney University Wind Orchestra</h1>
     <p>
       Sydney University Wind Orchestra (SUWO) is a multi-award-winning concert
@@ -50,5 +50,5 @@ export const HomeScreen = () => (
       </a>{' '}
       Clubs and Societies program.
     </p>
-  </Prose>
+  </Container>
 )
