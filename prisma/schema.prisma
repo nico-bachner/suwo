@@ -114,16 +114,11 @@ model MailingListRecipient {
   user User? @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
-enum Semester {
-  SEMESTER_1
-  SEMESTER_2
-}
-
 model Attendance {
   user_id  String
   year     Int
-  semester Semester
-  week     Int      @db.SmallInt
+  semester Int    @db.SmallInt
+  week     Int    @db.SmallInt
 
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 

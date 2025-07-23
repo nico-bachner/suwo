@@ -1,6 +1,6 @@
 import z from 'zod'
 
-import { Semester } from '@/generated/prisma'
+import { Semester } from '@/utils/date_manupulation/semester'
 import { WeekCoerceValidator, WeekValidator } from '@/validators/week'
 import { YearCoerceValidator, YearValidator } from '@/validators/year'
 
