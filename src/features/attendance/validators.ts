@@ -11,7 +11,7 @@ export const WeeklyAttendancesValidator = z.object({
 })
 export const WeeklyAttendancesCoerceValidator = z.object({
   year: YearCoerceValidator,
-  semester: z.enum(Semester),
+  semester: z.coerce.number(),
   week: WeekCoerceValidator,
 })
 
