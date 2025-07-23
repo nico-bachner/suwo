@@ -1,11 +1,14 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
 
 import { Container } from '@/design_system/container'
+import { TextInput } from '@/design_system/text_input'
 import { queries } from '@/queries'
 import { routes } from '@/routes'
 
+import { getProfileScreenName } from '../profile/utils/get_profile_screen_name'
 import { WeeklyAttendances } from './types'
 import {
   WeeklyAttendanceEntry,
@@ -27,6 +30,7 @@ export const WeeklyAttendance = ({
   const { data: attendances } = useQuery(
     queries.WEEKLY_ATTENDANCES({ year, semester, week }),
   )
+  const [query, setQuery] = useState('')
 
   if (profilesError) {
     throw new Error(`Failed to fetch data: ${profilesError.message}`)
@@ -41,18 +45,39 @@ export const WeeklyAttendance = ({
           : `Week ${week}`}
       </p>
 
+      <TextInput
+        name="search"
+        label="Search"
+        type="search"
+        onChange={({ target }) => {
+          setQuery(target.value)
+        }}
+        placeholder="Search by name or instrument"
+        className="mb-6"
+      />
+
       <div className="flex flex-col">
         {isProfilesPending
           ? Array.from({ length: 20 }).map((_, index) => (
               <WeeklyAttendanceEntrySkeleton key={index} />
             ))
-          : profiles.map((profile) => (
-              <WeeklyAttendanceEntry
-                key={profile.user_id}
-                attendanceData={{ year, semester, week }}
-                profile={profile}
-              />
-            ))}
+          : profiles
+              .filter(
+                (profile) =>
+                  getProfileScreenName(profile)
+                    .toLowerCase()
+                    .includes(query.toLowerCase()) ||
+                  profile.instrument_name
+                    ?.toLowerCase()
+                    .includes(query.toLowerCase()),
+              )
+              .map((profile) => (
+                <WeeklyAttendanceEntry
+                  key={profile.user_id}
+                  attendanceData={{ year, semester, week }}
+                  profile={profile}
+                />
+              ))}
       </div>
 
       <WeeklyAttendanceNavigation year={year} semester={semester} week={week} />
