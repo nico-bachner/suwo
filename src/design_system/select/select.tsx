@@ -36,25 +36,25 @@ export const Select = ({
     <Root name={name} {...props}>
       <Trigger
         id={name}
-        className="flex items-center justify-between gap-2 rounded-md border border-gray-500 px-4 py-2 focus:border-gray-300 focus:outline-none data-placeholder:text-gray-500"
+        className="border-neutral-3 data-placeholder:text-neutral-3 focus:border-neutral-2 flex items-center justify-between gap-2 rounded-md border px-4 py-2 focus:outline-none"
       >
-        <Value placeholder={placeholder} className="text-gray-500" />
+        <Value placeholder={placeholder} className="text-neutral-3" />
 
         <Icon>
-          <ChevronUpDownIcon className="h-6 w-6 stroke-gray-500" />
+          <ChevronUpDownIcon className="stroke-neutral-3 h-6 w-6" />
         </Icon>
       </Trigger>
 
       <Portal>
-        <Content className="relative overflow-hidden rounded-md border border-gray-500 bg-gray-950">
-          <ScrollUpButton className="absolute top-0 z-10 flex w-full flex-row items-center justify-center bg-gray-950/80 py-1 backdrop-blur">
-            <ChevronUpIcon className="h-5 w-5 stroke-gray-300" />
+        <Content className="border-neutral-3 bg-neutral-7 relative overflow-hidden rounded-md border">
+          <ScrollUpButton className="bg-neutral-7/80 absolute top-0 z-10 flex w-full flex-row items-center justify-center py-1 backdrop-blur">
+            <ChevronUpIcon className="stroke-neutral-2 h-5 w-5" />
           </ScrollUpButton>
 
           <Viewport className="p-1">{children}</Viewport>
 
-          <ScrollDownButton className="absolute bottom-0 z-10 flex w-full flex-row items-center justify-center bg-gray-950/80 py-1 backdrop-blur">
-            <ChevronDownIcon className="h-5 w-5 stroke-gray-300" />
+          <ScrollDownButton className="bg-neutral-7/80 absolute bottom-0 z-10 flex w-full flex-row items-center justify-center py-1 backdrop-blur">
+            <ChevronDownIcon className="stroke-neutral-2 h-5 w-5" />
           </ScrollDownButton>
         </Content>
       </Portal>

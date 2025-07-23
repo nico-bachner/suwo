@@ -15,15 +15,15 @@ export const Checkbox = ({
     <Root
       id={name}
       name={name}
-      className="flex h-5 w-5 cursor-pointer items-center justify-center rounded border border-gray-500 bg-gray-950 focus:border-gray-300 focus:outline-none"
+      className="border-neutral-3 bg-neutral-7 focus:border-neutral-2 flex h-5 w-5 cursor-pointer items-center justify-center rounded border focus:outline-none"
       {...props}
     >
       <Indicator>
-        <CheckIcon className="h-5 w-5 stroke-gray-300" />
+        <CheckIcon className="stroke-neutral-2 h-5 w-5" />
       </Indicator>
     </Root>
 
-    <label htmlFor={name} className="text-sm text-gray-300 select-none">
+    <label htmlFor={name} className="text-neutral-2 text-sm select-none">
       {label}
     </label>
   </div>

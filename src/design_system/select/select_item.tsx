@@ -15,7 +15,7 @@ export const SelectItem = ({ children, ...props }: SelectItemProps) => (
     <ItemText className="pl-4">{children}</ItemText>
 
     <ItemIndicator>
-      <CheckIcon className="h-5 w-5 stroke-gray-300" />
+      <CheckIcon className="stroke-neutral-2 h-5 w-5" />
     </ItemIndicator>
   </Item>
 )

@@ -15,7 +15,7 @@ export const Switch = ({ name, label, className, ...props }: SwitchProps) => (
       <Thumb className="bg-neutral-1 h-5 w-5 rounded-full transition-transform data-[state=checked]:translate-x-full" />
     </Root>
 
-    <label htmlFor={name} className="text-sm text-gray-300 select-none">
+    <label htmlFor={name} className="text-neutral-2 text-sm select-none">
       {label}
     </label>
   </div>
