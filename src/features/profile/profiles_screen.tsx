@@ -9,7 +9,7 @@ import { queries, routes } from '@/routes'
 import { getProfileScreenName } from './utils/get_profile_screen_name'
 
 export const ProfilesScreen = () => {
-  const { data: profiles, error, isPending } = useQuery(queries.profilesQuery())
+  const { data: profiles, error, isPending } = useQuery(queries.PROFILES())
 
   if (error) {
     throw new Error(`Failed to fetch profiles: ${error.message}`)

@@ -17,7 +17,7 @@ export const Navbar = () => {
   return (
     <nav className="bg-neutral-7/50 sticky top-0 p-4 backdrop-blur">
       <div className="mx-auto flex max-w-screen-lg items-center justify-between">
-        <Link href="/">
+        <Link href={routes.HOME()}>
           <Image {...IMAGES.ICON} className="h-12 w-12" />
         </Link>
 
@@ -34,14 +34,7 @@ export const Navbar = () => {
           {session ? (
             <>
               <Button asChild variant="secondary">
-                <Link
-                  href={routes.PROFILE({
-                    // This will need to consume a proper profile object once the user is able to update their handle
-                    handle: session.user_id,
-                  })}
-                >
-                  Profile
-                </Link>
+                <Link href={routes.PROFILE(session)}>Profile</Link>
               </Button>
               <Button asChild variant="primary">
                 <Link href={routes.SETTINGS()}>Settings</Link>

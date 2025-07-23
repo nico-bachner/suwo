@@ -1,12 +1,39 @@
-import { SettingsSection } from '@/design_system/settings_section'
-import { prisma } from '@/utils/prisma'
+'use client'
 
-import { ProfileScreenProps } from './types'
+import { useQuery } from '@tanstack/react-query'
+
+import { SettingsSection } from '@/design_system/settings_section'
+import { Instrument, Profile } from '@/generated/prisma'
+import { queries } from '@/routes'
+
 import { UpdateInstrumentForm } from './update_instrument_form'
 import { getProfileScreenName } from './utils/get_profile_screen_name'
 
-export const EditProfileScreen = async ({ profile }: ProfileScreenProps) => {
-  const instruments = await prisma.instrument.findMany()
+export const EditProfileScreen = ({
+  user_id,
+  instruments,
+}: Pick<Profile, 'user_id'> & {
+  instruments: Instrument[]
+}) => {
+  const {
+    data: profile,
+    error,
+    isPending,
+  } = useQuery(queries.PROFILE({ user_id }))
+
+  if (isPending) {
+    return (
+      <div className="prose mx-auto max-w-screen-sm px-4 py-8">Loading...</div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="prose mx-auto max-w-screen-sm px-4 py-8">
+        {error.message}
+      </div>
+    )
+  }
 
   return (
     <div className="prose mx-auto max-w-screen-sm px-4 py-8">

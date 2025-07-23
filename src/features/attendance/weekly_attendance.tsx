@@ -22,7 +22,7 @@ export const WeeklyAttendance = ({
     data: profiles,
     error: profilesError,
     isPending: isProfilesPending,
-  } = useQuery(queries.profilesQuery())
+  } = useQuery(queries.PROFILES())
   const { data: attendances } = useQuery(
     queries.WEEKLY_ATTENDANCES({ year, semester, week }),
   )

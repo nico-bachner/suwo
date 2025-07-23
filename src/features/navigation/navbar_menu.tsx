@@ -60,12 +60,7 @@ export const NavbarMenu = ({ className }: NavbarMenuProps) => {
       <div className="flex flex-col items-center gap-6">
         {session ? (
           <>
-            <NavbarMenuLink
-              href={routes.PROFILE({
-                // This will need to consume a proper profile object once the user is able to update their handle
-                handle: session.user_id,
-              })}
-            >
+            <NavbarMenuLink href={routes.PROFILE(session)}>
               Profile
             </NavbarMenuLink>
             <NavbarMenuLink href={routes.SETTINGS()}>Settings</NavbarMenuLink>

@@ -10,20 +10,11 @@ import { prisma } from '@/utils/prisma'
 export default async function Page({ params }: PageFileProps) {
   const { data, success } = z
     .object({
-      handle: z.string(),
+      user_id: z.uuid(),
     })
     .safeParse(await params)
 
-  /** If the profile doesn't exist, redirect to a 404 page. */
   if (!success) {
-    notFound()
-  }
-
-  const profile = await prisma.profile.findUnique({
-    where: { handle: data.handle },
-  })
-
-  if (!profile) {
     notFound()
   }
 
@@ -31,12 +22,15 @@ export default async function Page({ params }: PageFileProps) {
   const session = await getSession()
 
   if (!session) {
-    redirect(routes.LOGIN({}))
+    redirect(routes.LOGIN())
   }
 
-  if (session.user_id !== profile.user_id) {
+  if (data.user_id !== session.user_id) {
     forbidden()
   }
 
-  return <EditProfileScreen profile={profile} session={session} />
+  /** Fetch instruments for the form */
+  const instruments = await prisma.instrument.findMany()
+
+  return <EditProfileScreen {...data} instruments={instruments} />
 }
