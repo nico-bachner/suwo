@@ -15,10 +15,12 @@ export const sessionQuery = (): UseQueryOptions<Session | null> => ({
 
     switch (response.status) {
       case StatusCode.OK: {
+        // If the user is not authenticated, the response data will be null. This should not be handled as an error.
         if (response.data === null) {
           return null
         }
 
+        // Validate the session data if it exists
         const { data, error, success } = SessionValidator.safeParse(
           response.data,
         )
