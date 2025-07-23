@@ -1,5 +1,59 @@
-import { AttendanceScreen } from '@/features/attendance/attendance_screen'
+import Link from 'next/link'
+import { Fragment } from 'react'
+import z from 'zod'
+
+import { FOUNDING_YEAR } from '@/config'
+import { Container } from '@/design_system/container'
+import { WEEKS } from '@/features/usyd_api_wrapper/config'
+import { routes } from '@/routes'
+import { Semester } from '@/utils/date_manupulation/semester'
 
 export default function Page() {
-  return <AttendanceScreen />
+  const currentYear = new Date().getFullYear()
+
+  return (
+    <Container size="sm" className="prose">
+      <h1>Attendance</h1>
+
+      <p>
+        Review past attendance sheets by following their corresponding links
+        below.
+      </p>
+
+      {Array.from(
+        { length: currentYear - FOUNDING_YEAR + 1 },
+        (_, index) => currentYear - index,
+      ).map((year) => (
+        <Fragment key={year}>
+          <h2>{year}</h2>
+
+          {Array.from({ length: 2 }, (_, index) => index + 1).map(
+            (semester) => (
+              <Fragment key={semester}>
+                <h3>Semester {semester}</h3>
+
+                <div className="flex flex-row flex-wrap gap-1">
+                  {Array.from({ length: WEEKS }, (_, index) => index + 1).map(
+                    (week) => (
+                      <Link
+                        key={week}
+                        href={routes.WEEKLY_ATTENDANCES({
+                          year: currentYear,
+                          semester: z.enum(Semester).parse(semester),
+                          week,
+                        })}
+                        className="bg-neutral-4 hover:bg-neutral-3 flex h-16 w-16 items-center justify-center rounded-md text-3xl transition-colors"
+                      >
+                        {week}
+                      </Link>
+                    ),
+                  )}
+                </div>
+              </Fragment>
+            ),
+          )}
+        </Fragment>
+      ))}
+    </Container>
+  )
 }
