@@ -2,14 +2,9 @@ import { VerificationToken } from '@/generated/prisma'
 import { createURL } from '@/utils/http/create_url'
 
 import { LoginScreenSearchParams } from './login_screen_search_params_validator'
-import { deleteSessionMutation } from './session_mutation'
 
 export const queryKeys = {
   SESSION: () => ['session'],
-}
-
-export const mutations = {
-  DELETE_SESSION: deleteSessionMutation,
 }
 
 export const apiRoutes = {

@@ -2,7 +2,6 @@ import z from 'zod'
 
 import { createURL } from '@/utils/http/create_url'
 
-import { logWeeklyAttendanceMutation } from './log_attendance_mutation'
 import {
   LogWeeklyAttendanceValidator,
   WeeklyAttendancesValidator,
@@ -15,10 +14,6 @@ export const queryKeys = {
     args.semester,
     args.week,
   ],
-}
-
-export const mutations = {
-  LOG_WEEKLY_ATTENDANCE: logWeeklyAttendanceMutation,
 }
 
 export const apiRoutes = {

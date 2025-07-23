@@ -1,12 +1,10 @@
 import {
   apiRoutes as attendanceApiRoutes,
-  mutations as attendanceMutations,
   queryKeys as attendanceQueryKeys,
   routes as attendanceRoutes,
 } from './features/attendance/routes'
 import {
   apiRoutes as authApiRoutes,
-  mutations as authMutations,
   queryKeys as authQueryKeys,
   routes as authRoutes,
 } from './features/auth/routes'
@@ -23,11 +21,6 @@ export const queryKeys = {
   ...attendanceQueryKeys,
   ...authQueryKeys,
   ...profileQueryKeys,
-}
-
-export const mutations = {
-  ...attendanceMutations,
-  ...authMutations,
 }
 
 export const apiRoutes = {

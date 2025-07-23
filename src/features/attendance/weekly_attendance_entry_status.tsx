@@ -4,7 +4,7 @@ import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { Skeleton } from '@/design_system/skeleton'
-import { mutations } from '@/routes'
+import { mutations } from '@/mutations'
 
 import { WeeklyAttendanceEntryProps } from './types'
 
