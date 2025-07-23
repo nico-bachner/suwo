@@ -8,7 +8,7 @@ import { TextInput } from '@/design_system/text_input'
 import { queries } from '@/queries'
 import { routes } from '@/routes'
 
-import { getProfileScreenName } from '../profile/utils/get_profile_screen_name'
+import { search } from './search'
 import { WeeklyAttendances } from './types'
 import {
   WeeklyAttendanceEntry,
@@ -61,23 +61,17 @@ export const WeeklyAttendance = ({
           ? Array.from({ length: 20 }).map((_, index) => (
               <WeeklyAttendanceEntrySkeleton key={index} />
             ))
-          : profiles
-              .filter(
-                (profile) =>
-                  getProfileScreenName(profile)
-                    .toLowerCase()
-                    .includes(query.toLowerCase()) ||
-                  profile.instrument_name
-                    ?.toLowerCase()
-                    .includes(query.toLowerCase()),
-              )
-              .map((profile) => (
-                <WeeklyAttendanceEntry
-                  key={profile.user_id}
-                  attendanceData={{ year, semester, week }}
-                  profile={profile}
-                />
-              ))}
+          : search({
+              data: profiles,
+              keys: ['given_name', 'family_name', 'instrument_name'],
+              query,
+            }).map((profile) => (
+              <WeeklyAttendanceEntry
+                key={profile.user_id}
+                attendanceData={{ year, semester, week }}
+                profile={profile}
+              />
+            ))}
       </div>
 
       <WeeklyAttendanceNavigation year={year} semester={semester} week={week} />
