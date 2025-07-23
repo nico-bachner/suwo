@@ -9,6 +9,9 @@ export const GET: APIRoute = async () => {
       {
         given_name: 'asc',
       },
+      {
+        family_name: 'asc',
+      },
     ],
   })
 
