@@ -3,6 +3,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 
+import { PageContainer } from '@/design_system/container'
 import { TextInput } from '@/design_system/text_input'
 import { queries } from '@/queries'
 import { queryKeys } from '@/routes'
@@ -26,7 +27,7 @@ export const ProfilesScreen = () => {
   }
 
   return (
-    <div className="prose mx-auto max-w-screen-sm px-4 py-8">
+    <PageContainer size="sm" className="prose">
       <h1>Members</h1>
 
       <TextInput
@@ -53,6 +54,6 @@ export const ProfilesScreen = () => {
               <ProfilePreview key={profile.user_id} {...profile} />
             ))}
       </div>
-    </div>
+    </PageContainer>
   )
 }

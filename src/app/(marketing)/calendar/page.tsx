@@ -1,9 +1,9 @@
 import { Button } from '@/design_system/button'
-import { Container } from '@/design_system/container'
+import { PageContainer } from '@/design_system/container'
 
 export default function Page() {
   return (
-    <Container size="sm" className="prose">
+    <PageContainer size="sm" className="prose">
       <h1>Calendar</h1>
 
       <iframe
@@ -20,6 +20,6 @@ export default function Page() {
           Subscribe to the SUWO calendar
         </a>
       </Button>
-    </Container>
+    </PageContainer>
   )
 }

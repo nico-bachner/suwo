@@ -4,6 +4,7 @@ import { PencilIcon } from '@heroicons/react/24/outline'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 
+import { PageContainer } from '@/design_system/container'
 import { Profile } from '@/generated/prisma'
 import { queries } from '@/queries'
 import { routes } from '@/routes'
@@ -20,20 +21,23 @@ export const ProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
 
   if (isPending) {
     return (
-      <div className="prose mx-auto max-w-screen-sm px-4 py-8">Loading...</div>
+      <PageContainer size="sm" className="prose">
+        <h1>Loading...</h1>
+      </PageContainer>
     )
   }
 
   if (error) {
     return (
-      <div className="prose mx-auto max-w-screen-sm px-4 py-8">
-        {error.message}
-      </div>
+      <PageContainer size="sm" className="prose">
+        <h1>Error</h1>
+        <p>Failed to load profile: {error.message}</p>
+      </PageContainer>
     )
   }
 
   return (
-    <div className="prose mx-auto max-w-screen-sm px-4 py-8">
+    <PageContainer size="sm" className="prose">
       <h1>{getProfileScreenName(profile)}</h1>
 
       {profile.instrument_name && <p>{profile.instrument_name}</p>}
@@ -48,6 +52,6 @@ export const ProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
           <span className="text-neutral-2 px-2 font-medium">Edit</span>
         </Link>
       )}
-    </div>
+    </PageContainer>
   )
 }

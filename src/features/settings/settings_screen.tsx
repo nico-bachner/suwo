@@ -1,3 +1,4 @@
+import { PageContainer } from '@/design_system/container'
 import { SettingsSection } from '@/design_system/settings_section'
 import { UpdatePasswordForm } from '@/features/auth/update_password_form'
 import { prisma } from '@/utils/prisma'
@@ -20,7 +21,7 @@ export const SettingsScreen = async () => {
   })
 
   return (
-    <div className="prose mx-auto max-w-screen-sm px-4 py-8">
+    <PageContainer size="sm" className="prose">
       <h1>Settings</h1>
 
       <div className="flex flex-col gap-8">
@@ -42,6 +43,6 @@ export const SettingsScreen = async () => {
 
         <LogOutButton />
       </div>
-    </div>
+    </PageContainer>
   )
 }

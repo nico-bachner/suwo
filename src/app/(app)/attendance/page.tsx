@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 import z from 'zod'
 
 import { FOUNDING_YEAR } from '@/config'
-import { Container } from '@/design_system/container'
+import { PageContainer } from '@/design_system/container'
 import { WEEKS } from '@/features/usyd_api_wrapper/config'
 import { routes } from '@/routes'
 import { Semester } from '@/utils/date_manupulation/semester'
@@ -12,7 +12,7 @@ export default function Page() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <Container size="sm" className="prose">
+    <PageContainer size="sm" className="prose">
       <h1>Attendance</h1>
 
       <p>
@@ -54,6 +54,6 @@ export default function Page() {
           )}
         </Fragment>
       ))}
-    </Container>
+    </PageContainer>
   )
 }

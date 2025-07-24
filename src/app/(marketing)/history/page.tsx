@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 
+import { PageContainer } from '@/design_system/container'
 import { Divider } from '@/design_system/divider'
 import { fetchHistoryPageMetadata } from '@/features/marketing/fetch_history_page_metadata'
 import { fetchHistoryYears } from '@/features/marketing/fetch_history_years'
@@ -13,7 +14,7 @@ export default async function Page() {
   const years = await fetchHistoryYears()
 
   return (
-    <div className="prose mx-auto max-w-screen-sm px-4 py-8">
+    <PageContainer size="sm" className="prose">
       <h1 className="text-center">{title}</h1>
 
       <div className="flex flex-col items-center">
@@ -38,6 +39,6 @@ export default async function Page() {
             ),
           )}
       </div>
-    </div>
+    </PageContainer>
   )
 }

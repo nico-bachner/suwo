@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import z from 'zod'
 
 import { FOUNDING_YEAR } from '@/config'
+import { PageContainer } from '@/design_system/container'
 import { fetchHistoryYearPage } from '@/features/marketing/fetch_history_year_page'
 import { fetchHistoryYears } from '@/features/marketing/fetch_history_years'
 import {
@@ -70,8 +71,8 @@ export default async function Page({ params }: PageFileProps) {
   const content = await fetchNotionPageContent(page.id)
 
   return (
-    <div className="prose mx-auto max-w-screen-sm px-4 py-8">
-      <h1 className="text-center">{getPageTitle(page) ?? data.year}</h1>
+    <PageContainer size="sm" className="prose">
+      <h1>{getPageTitle(page) ?? data.year}</h1>
 
       {content.map((block) => {
         switch (block.type) {
@@ -92,6 +93,6 @@ export default async function Page({ params }: PageFileProps) {
             return null
         }
       })}
-    </div>
+    </PageContainer>
   )
 }
