@@ -1,4 +1,4 @@
-import z, { prettifyError } from 'zod'
+import z from 'zod'
 
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
@@ -15,7 +15,7 @@ export const GET: APIRoute = async (_, { params }) => {
   if (!success) {
     return createResponse({
       status: StatusCode.BadRequest,
-      error: prettifyError(error),
+      error: z.prettifyError(error),
     })
   }
 

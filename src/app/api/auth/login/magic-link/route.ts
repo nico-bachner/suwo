@@ -1,6 +1,6 @@
 import { randomBytes } from 'crypto'
 import { headers } from 'next/headers'
-import { prettifyError } from 'zod'
+import z from 'zod'
 
 import { RESEND_DOMAIN, SHORT_NAME } from '@/config'
 import { LoginWithMagicLinkValidator } from '@/features/auth/login_with_magic_link_validator'
@@ -19,7 +19,7 @@ export const POST = async (request: Request) => {
   if (!success) {
     return createResponse({
       status: StatusCode.BadRequest,
-      error: prettifyError(error),
+      error: z.prettifyError(error),
     })
   }
 

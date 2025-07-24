@@ -1,4 +1,4 @@
-import { prettifyError } from 'zod'
+import z from 'zod'
 
 import { LogWeeklyAttendanceCoerceValidator } from '@/features/attendance/validators'
 import { createResponse } from '@/utils/http/create_response'
@@ -14,7 +14,7 @@ export const POST: APIRoute = async (_, { params }) => {
   if (!success) {
     return createResponse({
       status: StatusCode.BadRequest,
-      error: prettifyError(error),
+      error: z.prettifyError(error),
     })
   }
 

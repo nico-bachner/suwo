@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers'
-import { prettifyError } from 'zod'
+import z from 'zod'
 
 import { SESSION_COOKIE_NAME } from '@/features/auth/session/config'
 import { verifyJWT } from '@/features/auth/session/jwt'
@@ -25,8 +25,8 @@ export const GET = async () => {
 
   if (!success) {
     return createResponse({
-      status: StatusCode.InternalServerError,
-      error: `Invalid session cookie:\n${prettifyError(error)}`,
+      status: StatusCode.BadRequest,
+      error: z.prettifyError(error),
     })
   }
 

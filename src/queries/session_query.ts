@@ -1,5 +1,5 @@
 import { UseQueryOptions } from '@tanstack/react-query'
-import { prettifyError } from 'zod'
+import z from 'zod'
 
 import { Session } from '@/features/auth/session/types'
 import { SessionValidator } from '@/features/auth/session/validator'
@@ -25,7 +25,7 @@ export const sessionQuery = (): UseQueryOptions<Session | null> => ({
         )
 
         if (!success) {
-          throw new Error(prettifyError(error))
+          throw new Error(z.prettifyError(error))
         }
 
         return data

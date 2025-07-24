@@ -1,4 +1,4 @@
-import { prettifyError } from 'zod'
+import z from 'zod'
 
 import { getSession } from '@/features/auth/session/get_session'
 import { UpdateInstrumentValidator } from '@/features/profile/update_instrument_validator'
@@ -14,7 +14,7 @@ export const POST = async (request: Request) => {
   if (!success) {
     return createResponse({
       status: StatusCode.BadRequest,
-      error: prettifyError(error),
+      error: z.prettifyError(error),
     })
   }
 

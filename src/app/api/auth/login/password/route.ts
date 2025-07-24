@@ -1,5 +1,5 @@
 import { verify } from 'argon2'
-import { prettifyError } from 'zod'
+import z from 'zod'
 
 import { LoginWithPasswordValidator } from '@/features/auth/login_with_password_validator'
 import { createSession } from '@/features/auth/session/create_session'
@@ -15,7 +15,7 @@ export const POST = async (request: Request) => {
   if (!success) {
     return createResponse({
       status: StatusCode.BadRequest,
-      error: prettifyError(error),
+      error: z.prettifyError(error),
     })
   }
 

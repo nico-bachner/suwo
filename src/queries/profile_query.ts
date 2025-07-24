@@ -1,5 +1,5 @@
 import { UseQueryOptions } from '@tanstack/react-query'
-import { prettifyError } from 'zod'
+import z from 'zod'
 
 import { ProfileValidator } from '@/features/profile/validators'
 import { Profile } from '@/generated/prisma'
@@ -23,7 +23,7 @@ export const profileQuery = ({
         )
 
         if (!success) {
-          throw new Error(prettifyError(error))
+          throw new Error(z.prettifyError(error))
         }
 
         return data

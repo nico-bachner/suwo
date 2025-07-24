@@ -1,5 +1,5 @@
 import { UseQueryOptions } from '@tanstack/react-query'
-import z, { prettifyError } from 'zod'
+import z from 'zod'
 
 import { WeeklyAttendances } from '@/features/attendance/types'
 import { LogWeeklyAttendanceValidator } from '@/features/attendance/validators'
@@ -24,7 +24,7 @@ export const weeklyAttendancesQuery = (
           .safeParse(response.data)
 
         if (!success) {
-          throw new Error(prettifyError(error))
+          throw new Error(z.prettifyError(error))
         }
 
         return data
