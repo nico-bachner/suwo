@@ -6,7 +6,6 @@ import { useState } from 'react'
 import { Container } from '@/design_system/container'
 import { TextInput } from '@/design_system/text_input'
 import { queries } from '@/queries'
-import { routes } from '@/routes'
 import { search } from '@/utils/search'
 
 import { WeeklyAttendances } from './types'
@@ -15,7 +14,6 @@ import {
   WeeklyAttendanceEntrySkeleton,
 } from './weekly_attendance_entry'
 import { WeeklyAttendanceNavigation } from './weekly_attendance_navigation'
-import { WeeklyAttendanceQRCodeDialog } from './weekly_attendance_qr_code_dialog'
 
 export const WeeklyAttendance = ({
   year,
@@ -37,49 +35,52 @@ export const WeeklyAttendance = ({
   }
 
   return (
-    <Container size="sm" className="prose">
-      <h1 className="text-center">Attendance Sheet</h1>
-      <p className="text-neutral-3 text-center">
-        {attendances
-          ? `Week ${week} (${attendances.length} present)`
-          : `Week ${week}`}
-      </p>
+    <>
+      <Container size="md" className="prose">
+        <h1 className="text-center">
+          Attendance Sheet
+          <br />
+          {year} Semester {semester}
+          <br />
+          Week {week}
+        </h1>
+        <p className="text-center text-xl">
+          {attendances &&
+            profiles &&
+            `Present: ${attendances.length}/${profiles.length}`}
+        </p>
 
-      <TextInput
-        name="search"
-        label="Search"
-        type="search"
-        onChange={({ target }) => {
-          setQuery(target.value)
-        }}
-        placeholder="Search by name or instrument"
-        className="mb-6"
-      />
+        <TextInput
+          name="search"
+          label="Search"
+          type="search"
+          onChange={({ target }) => {
+            setQuery(target.value)
+          }}
+          placeholder="Search by name or instrument"
+          className="mb-6"
+        />
 
-      <div className="flex flex-col">
-        {isProfilesPending
-          ? Array.from({ length: 20 }).map((_, index) => (
-              <WeeklyAttendanceEntrySkeleton key={index} />
-            ))
-          : search({
-              data: profiles,
-              keys: ['given_name', 'family_name', 'instrument_name'],
-              query,
-            }).map((profile) => (
-              <WeeklyAttendanceEntry
-                key={profile.user_id}
-                attendanceData={{ year, semester, week }}
-                profile={profile}
-              />
-            ))}
-      </div>
+        <div className="flex flex-col">
+          {isProfilesPending
+            ? Array.from({ length: 20 }).map((_, index) => (
+                <WeeklyAttendanceEntrySkeleton key={index} />
+              ))
+            : search({
+                data: profiles,
+                keys: ['given_name', 'family_name', 'instrument_name'],
+                query,
+              }).map((profile) => (
+                <WeeklyAttendanceEntry
+                  key={profile.user_id}
+                  attendanceData={{ year, semester, week }}
+                  profile={profile}
+                />
+              ))}
+        </div>
+      </Container>
 
       <WeeklyAttendanceNavigation year={year} semester={semester} week={week} />
-
-      <WeeklyAttendanceQRCodeDialog
-        value={routes.WEEKLY_ATTENDANCES({ year, semester, week })}
-        className="sticky right-4 self-end max-lg:bottom-20 lg:fixed lg:top-12 lg:right-12"
-      />
-    </Container>
+    </>
   )
 }

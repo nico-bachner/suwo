@@ -16,14 +16,9 @@ export const WeeklyAttendanceQRCodeDialog = ({
   <Dialog
     title="QR Code"
     trigger={
-      <button
-        className={cn(
-          'bg-neutral-7/80 hover:bg-neutral-6/80 cursor-pointer rounded backdrop-blur transition-colors focus:outline-none',
-          className,
-        )}
-      >
-        <QrCodeIcon className="stroke-neutral-4 box-content h-10 w-10 p-1 lg:h-14 lg:w-14" />
-      </button>
+      <QrCodeIcon
+        className={cn('stroke-neutral-3 box-content h-12 w-12', className)}
+      />
     }
     className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded focus:outline-none"
   >
