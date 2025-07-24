@@ -1,28 +1,28 @@
 'use client'
 
 import { useForm } from '@tanstack/react-form'
+import { useQuery } from '@tanstack/react-query'
 
 import { Button } from '@/design_system/button'
 import { Spinner } from '@/design_system/spinner'
 import { Switch } from '@/design_system/switch'
-import { routes } from '@/routes'
+import { queries } from '@/queries'
+import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-type UpdateMailingListPreferenceFormProps = {
-  mailingListPreference: boolean
-}
+export const UpdateMailingListPreferenceForm = () => {
+  const { data: mailingListPreference } = useQuery(
+    queries.MAILING_LIST_PREFERENCE(),
+  )
 
-export const UpdateMailingListPreferenceForm = ({
-  mailingListPreference,
-}: UpdateMailingListPreferenceFormProps) => {
   const form = useForm({
     defaultValues: {
       mailing_list_preference: mailingListPreference,
     },
     onSubmit: async ({ value }) => {
       const response = await parseResponse(
-        await fetch(routes.API_UPDATE_MAILING_LIST_PREFERENCE, {
+        await fetch(apiRoutes.MAILING_LIST_PREFERENCE(), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

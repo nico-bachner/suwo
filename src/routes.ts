@@ -8,14 +8,12 @@ import {
   queryKeys as authQueryKeys,
   routes as authRoutes,
 } from './features/auth/routes'
-import { routes as mailingListRoutes } from './features/mailing_list/routes'
 import { routes as marketingRoutes } from './features/marketing/routes'
 import {
   apiRoutes as profileApiRoutes,
   queryKeys as profileQueryKeys,
   routes as profileRoutes,
 } from './features/profile/routes'
-import { routes as settingsRoutes } from './features/settings/routes'
 import { createURL } from './utils/http/create_url'
 
 export const queryKeys = {
@@ -24,6 +22,8 @@ export const queryKeys = {
   ...profileQueryKeys,
   CURRENT_WEEK: () => ['current-week'],
   INSTRUMENTS: () => ['instruments'],
+  MAILING_LIST_RECIPIENTS: () => ['mailing-list', 'recipients'],
+  MAILING_LIST_PREFERENCE: () => ['mailing-list', 'preference'],
 }
 
 export const apiRoutes = {
@@ -32,14 +32,17 @@ export const apiRoutes = {
   ...profileApiRoutes,
   CURRENT_WEEK: () => createURL({ path: ['api', 'usyd', 'current-week'] }),
   INSTRUMENTS: () => createURL({ path: ['api', 'instruments'] }),
+  MAILING_LIST_RECIPIENTS: () =>
+    createURL({ path: ['api', 'mailing-list', 'recipients'] }),
+  MAILING_LIST_PREFERENCE: () =>
+    createURL({ path: ['api', 'mailing-list', 'preference'] }),
 }
 
 export const routes = {
   ...attendanceRoutes,
   ...authRoutes,
-  ...mailingListRoutes,
   ...marketingRoutes,
   ...profileRoutes,
-  ...settingsRoutes,
   CALENDAR: () => createURL({ path: ['calendar'] }),
+  SETTINGS: () => createURL({ path: ['settings'] }),
 }

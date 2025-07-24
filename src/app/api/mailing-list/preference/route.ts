@@ -6,6 +6,28 @@ import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
 
+export const GET = async () => {
+  const session = await getSession()
+
+  if (!session) {
+    return createResponse({
+      status: StatusCode.Unauthorized,
+      error: 'Unauthorized',
+    })
+  }
+
+  return createResponse({
+    status: StatusCode.OK,
+    data: Boolean(
+      await prisma.mailingListRecipient.findUnique({
+        where: {
+          user_id: session.user_id,
+        },
+      }),
+    ),
+  })
+}
+
 export const POST = async (request: Request) => {
   const { data, error, success } =
     UpdateMailingListPreferenceValidator.safeParse(await request.json())
