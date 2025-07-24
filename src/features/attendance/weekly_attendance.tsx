@@ -7,8 +7,8 @@ import { Container } from '@/design_system/container'
 import { TextInput } from '@/design_system/text_input'
 import { queries } from '@/queries'
 import { routes } from '@/routes'
+import { search } from '@/utils/search'
 
-import { search } from './search'
 import { WeeklyAttendances } from './types'
 import {
   WeeklyAttendanceEntry,
