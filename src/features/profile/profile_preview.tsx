@@ -10,17 +10,17 @@ export const ProfilePreview = (profile: Profile) => (
   <Link
     key={profile.handle}
     href={routes.PROFILE(profile)}
-    className="bg-neutral-6 flex flex-col gap-2 rounded-lg px-4 py-2 font-bold"
+    className="bg-neutral-6 flex flex-col rounded-lg px-6 py-4 font-bold"
   >
-    <span className="text-neutral-2 text-lg">
-      {getProfileScreenName(profile)}
+    <span className="text-neutral-2">{getProfileScreenName(profile)}</span>
+    <span className="text-neutral-3">
+      {profile.instrument_name ?? 'No Instrument'}
     </span>
-    <span className="text-neutral-3">{profile.instrument_name}</span>
   </Link>
 )
 
 export const ProfilePreviewSkeleton = () => (
-  <div className="bg-neutral-6 flex flex-col gap-2 rounded-lg px-4 py-2">
+  <div className="bg-neutral-6 flex flex-col rounded-lg px-6 py-4">
     <SkeletonText className="h-7" />
     <SkeletonText className="h-5" />
   </div>
