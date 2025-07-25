@@ -1,8 +1,8 @@
 import z from 'zod'
 
+import { WeekCoerceValidator, WeekValidator } from '@/lib/validators/week'
+import { YearCoerceValidator, YearValidator } from '@/lib/validators/year'
 import { Semester } from '@/utils/date_manupulation/semester'
-import { WeekCoerceValidator, WeekValidator } from '@/validators/week'
-import { YearCoerceValidator, YearValidator } from '@/validators/year'
 
 export const WeeklyAttendancesValidator = z.object({
   year: YearValidator,

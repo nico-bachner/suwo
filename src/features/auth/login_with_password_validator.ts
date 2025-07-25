@@ -1,7 +1,7 @@
 import z from 'zod'
 
-import { EmailValidator } from '@/validators/email'
-import { PasswordValidator } from '@/validators/password'
+import { EmailValidator } from '@/lib/validators/email'
+import { PasswordValidator } from '@/lib/validators/password'
 
 export const LoginWithPasswordValidator = z.object({
   email: EmailValidator,

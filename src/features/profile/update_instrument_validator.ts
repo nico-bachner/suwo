@@ -1,6 +1,6 @@
 import z from 'zod'
 
-import { InstrumentNameValidator } from '@/validators/instrument_name'
+import { InstrumentNameValidator } from '@/lib/validators/instrument_name'
 
 export const UpdateInstrumentValidator = z.object({
   instrument_name: InstrumentNameValidator,

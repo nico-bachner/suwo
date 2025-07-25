@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
 
 import { Button } from '@/design_system/button'
-import { mutations } from '@/mutations'
+import { mutations } from '@/lib/mutations'
 import { routes } from '@/routes'
 
 export const LogOutButton = () => {

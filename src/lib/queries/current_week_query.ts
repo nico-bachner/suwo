@@ -1,9 +1,9 @@
 import { UseQueryOptions } from '@tanstack/react-query'
 
+import { Week, WeekValidator } from '@/lib/validators/week'
 import { apiRoutes, queryKeys } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
-import { Week, WeekValidator } from '@/validators/week'
 
 export const currentWeekQuery = (): UseQueryOptions<Week | null> => ({
   queryKey: queryKeys.CURRENT_WEEK(),

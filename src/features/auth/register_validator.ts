@@ -1,11 +1,11 @@
 import z from 'zod'
 
-import { EmailValidator } from '@/validators/email'
-import { FamilyNameValidator } from '@/validators/family_name'
-import { GivenNameValidator } from '@/validators/given_name'
-import { InstrumentNameValidator } from '@/validators/instrument_name'
-import { MailingListPreferenceValidator } from '@/validators/mailing_list_preference'
-import { UsuNumberValidator } from '@/validators/usu_number'
+import { EmailValidator } from '@/lib/validators/email'
+import { FamilyNameValidator } from '@/lib/validators/family_name'
+import { GivenNameValidator } from '@/lib/validators/given_name'
+import { InstrumentNameValidator } from '@/lib/validators/instrument_name'
+import { MailingListPreferenceValidator } from '@/lib/validators/mailing_list_preference'
+import { UsuNumberValidator } from '@/lib/validators/usu_number'
 
 export const RegisterValidator = z.object({
   given_name: GivenNameValidator,

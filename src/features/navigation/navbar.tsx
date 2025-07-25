@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 import { IMAGES } from '@/config'
 import { Button } from '@/design_system/button'
-import { queries } from '@/queries'
+import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 import { getCurrentSemester, getCurrentYear } from '@/utils/date_manupulation'
 

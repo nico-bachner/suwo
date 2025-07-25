@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 import { PageContainer } from '@/design_system/container'
 import { Profile } from '@/generated/prisma'
-import { queries } from '@/queries'
+import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 
 import { getProfileScreenName } from './utils/get_profile_screen_name'

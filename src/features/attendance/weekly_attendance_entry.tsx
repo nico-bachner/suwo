@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { Skeleton, SkeletonText } from '@/design_system/skeleton'
-import { queries } from '@/queries'
+import { queries } from '@/lib/queries'
 
 import { getProfileScreenName } from '../profile/utils/get_profile_screen_name'
 import { WeeklyAttendanceEntryProps } from './types'

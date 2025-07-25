@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 import { PageContainer } from '@/design_system/container'
 import { TextInput } from '@/design_system/text_input'
-import { queries } from '@/queries'
+import { queries } from '@/lib/queries'
 import { queryKeys } from '@/routes'
 import { search } from '@/utils/search'
 

@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { SOCIAL_LINKS } from '@/config'
-import { queries } from '@/queries'
+import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 import { getCurrentSemester, getCurrentYear } from '@/utils/date_manupulation'
 
