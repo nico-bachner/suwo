@@ -4,11 +4,12 @@ import z from 'zod'
 import { createSession } from '@/features/auth/session/create_session'
 import { routes } from '@/routes'
 import { createResponse } from '@/utils/http/create_response'
+import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'
 import { prisma } from '@/utils/prisma'
 
 export const GET: APIRoute = async ({ nextUrl }) => {
-  const { data, success } = z
+  const { data, error, success } = z
     .object({
       user_id: z.uuid(),
       token: z.string(),
@@ -17,8 +18,8 @@ export const GET: APIRoute = async ({ nextUrl }) => {
 
   if (!success) {
     return createResponse({
-      status: 400,
-      error: 'Invalid request parameters',
+      status: StatusCode.BadRequest,
+      error: z.prettifyError(error),
     })
   }
 
@@ -33,13 +34,17 @@ export const GET: APIRoute = async ({ nextUrl }) => {
 
   if (!verificationToken) {
     return createResponse({
-      status: 400,
+      status: StatusCode.Unauthorized,
       error: 'Invalid token',
     })
   }
 
   await createSession({
     user_id: verificationToken.user_id,
+  })
+
+  await prisma.verificationToken.delete({
+    where: verificationToken,
   })
 
   redirect(routes.SETTINGS())

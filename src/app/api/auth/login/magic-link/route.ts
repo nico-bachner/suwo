@@ -36,7 +36,14 @@ export const POST = async (request: Request) => {
     })
   }
 
-  const { token } = await prisma.verificationToken.create({
+  // Invalidate any existing tokens for the user
+  await prisma.verificationToken.deleteMany({
+    where: {
+      user_id: user.id,
+    },
+  })
+
+  const token = await prisma.verificationToken.create({
     data: {
       user_id: user.id,
       token: randomBytes(32).toString('hex'),
@@ -49,10 +56,7 @@ export const POST = async (request: Request) => {
   const protocol = headersList.get('x-forwarded-proto') || 'https'
   // eslint-disable-next-line typescript/restrict-template-expressions
   const verificationLink = `${protocol}://${host}${apiRoutes.VALIDATE_MAGIC_LINK(
-    {
-      user_id: user.id,
-      token,
-    },
+    token,
   )}`
 
   await emails.send({
