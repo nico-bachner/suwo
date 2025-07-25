@@ -1,6 +1,8 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { Container, PageContainer } from '@/design_system/container'
+import no_auditions from '@/features/marketing/no_auditions.png'
 import { routes } from '@/routes'
 
 export default function Page() {
@@ -17,6 +19,12 @@ export default function Page() {
         </p>
 
         <h2>Rehearsals</h2>
+
+        <Image
+          src={no_auditions}
+          alt="No Auditions"
+          className="fixed bottom-2 left-2 w-1/2 sm:w-1/4"
+        />
 
         <p>
           We rehearse every{' '}
