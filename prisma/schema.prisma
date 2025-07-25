@@ -102,7 +102,6 @@ model VerificationToken {
   user_id    String
   token      String   @unique
   created_at DateTime @default(now())
-  expires_at DateTime
 
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }

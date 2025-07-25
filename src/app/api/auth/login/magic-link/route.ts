@@ -47,7 +47,6 @@ export const POST = async (request: Request) => {
     data: {
       user_id: user.id,
       token: randomBytes(32).toString('hex'),
-      expires_at: new Date(Date.now() + 24 * 60 * 60 * 1000),
     },
   })
 
