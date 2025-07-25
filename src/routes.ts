@@ -21,6 +21,7 @@ export const queryKeys = {
   ...authQueryKeys,
   ...profileQueryKeys,
   CURRENT_WEEK: () => ['current-week'],
+  EQUIPMENT: () => ['equipment'],
   INSTRUMENTS: () => ['instruments'],
   MAILING_LIST_RECIPIENTS: () => ['mailing-list', 'recipients'],
   MAILING_LIST_PREFERENCE: () => ['mailing-list', 'preference'],
@@ -31,6 +32,7 @@ export const apiRoutes = {
   ...authApiRoutes,
   ...profileApiRoutes,
   CURRENT_WEEK: () => createURL({ path: ['api', 'usyd', 'current-week'] }),
+  EQUIPMENT: () => createURL({ path: ['api', 'equipment'] }),
   INSTRUMENTS: () => createURL({ path: ['api', 'instruments'] }),
   MAILING_LIST_RECIPIENTS: () =>
     createURL({ path: ['api', 'mailing-list', 'recipients'] }),
@@ -44,5 +46,6 @@ export const routes = {
   ...marketingRoutes,
   ...profileRoutes,
   CALENDAR: () => createURL({ path: ['calendar'] }),
+  EQUIPMENT: () => createURL({ path: ['equipment'] }),
   SETTINGS: () => createURL({ path: ['settings'] }),
 }
