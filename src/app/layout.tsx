@@ -1,7 +1,9 @@
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
+import Image from 'next/image'
 
+import ensemble from '@/features/marketing/ensemble.jpg'
 import { Footer } from '@/features/navigation/footer'
 import { Navbar } from '@/features/navigation/navbar'
 import '@/styles/styles.css'
@@ -30,6 +32,12 @@ export default function Layout({ children }: LayoutFileProps) {
     <html lang="en">
       <body className={cn(fontSans.variable, fontSerif.variable)}>
         <QueryProvider>
+          <Image
+            src={ensemble}
+            alt="Sydney University Wind Orchestra"
+            className="fixed inset-0 -z-10 w-full brightness-[0.15]"
+          />
+
           <div className="flex min-h-screen flex-col">
             <Navbar />
 
