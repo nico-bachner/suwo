@@ -2,8 +2,6 @@ import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
 
-import { Container } from '@/design_system/container'
-import { Divider } from '@/design_system/divider'
 import { Footer } from '@/features/navigation/footer'
 import { Navbar } from '@/features/navigation/navbar'
 import '@/styles/styles.css'
@@ -35,13 +33,9 @@ export default function Layout({ children }: LayoutFileProps) {
           <div className="flex min-h-screen flex-col">
             <Navbar />
 
-            <div className="flex-1">{children}</div>
+            {children}
 
-            <Container size="md">
-              <Divider />
-
-              <Footer />
-            </Container>
+            <Footer />
           </div>
         </QueryProvider>
 
