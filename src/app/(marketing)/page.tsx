@@ -23,7 +23,7 @@ export default function Page() {
         <Image
           src={no_auditions}
           alt="No Auditions"
-          className="fixed bottom-2 left-2 w-1/2 sm:w-1/4"
+          className="fixed bottom-0 left-2 w-1/2 sm:w-1/4"
         />
 
         <p>
