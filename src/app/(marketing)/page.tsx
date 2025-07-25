@@ -1,56 +1,51 @@
 import Link from 'next/link'
 
-import { PageContainer } from '@/design_system/container'
+import { Container, PageContainer } from '@/design_system/container'
 import { routes } from '@/routes'
 
 export default function Page() {
   return (
-    <PageContainer size="sm" className="prose">
-      <h1>Sydney University Wind Orchestra</h1>
-      <p>
-        Sydney University Wind Orchestra (SUWO) is a multi-award-winning concert
-        band, performing a variety of repertoire throughout the year in
-        concerts, competitions and tours. Rehearsals are held weekly during
-        semester at 5:30pm on Thursdays at Old Darlington School. New players
-        are warmly welcomed, and no auditions are required!
-      </p>
-      <p>
-        <Link href={routes.REGISTER()}>Join us</Link> to become part of Sydney
-        University’s “BEST SMALL CLUB” 2006, 2007, 2008, 2009 and 2010 – and
-        NSW’s “Champion Open B Grade Concert Band” 2011!
-      </p>
-      <h2>Musical Opportunities</h2>
-      <p>
-        Musical Opportunities SUWO offers various performance opportunities and
-        social events for its members throughout the year. We have a major
-        concert at the end of each semester, as well as smaller concerts held
-        throughout the year including our Showcase concert and our annual
-        ‘Concert for Kids!’ programme.
-      </p>
-      <p>
-        SUWO also performs in various competitions, notably the NSW State
-        Championships, and holds an annual band camp and regional tour during
-        the semester holidays (July and November). So far SUWO has seen the
-        sights and performed for local primary schools in Nowra (2009 & 2011)
-        the Hunter Valley (2010), and Canberra (2012).
-      </p>
-      <h2>Social Opportunities</h2>
-      <p>
-        SUWO has regular social events and activities open to everyone,
-        including regular post-rehearsal dinners in Newtown/Glebe, trivia night,
-        SUWO’s Amazing Race, and our annual Christmas party. There are always
-        more activities planned outside of the “official” SUWO events; weekend
-        drinks, Carols/Symphony/Opera in the Domain, and many more! Sign up to
-        our Newsletter or subscribe to our RSS feed to stay up-to-date with all
-        our events.
-      </p>
-      <p>
-        SUWO is supported by the{' '}
-        <a href="https://usu.edu.au" target="_blank" rel="noopener noreferrer">
-          University of Sydney Union
-        </a>{' '}
-        Clubs and Societies program.
-      </p>
+    <PageContainer size="lg">
+      <Container size="sm" className="prose">
+        <h1>Sydney University Wind Orchestra</h1>
+
+        <p>
+          The Sydney University Wind Orchestra (SUWO) is a student-run ensemble
+          affiliated with the University of Sydney. We have{' '}
+          <strong>no auditions</strong> and welcome anyone who is interested in
+          playing wind, brass, or percussion instruments.
+        </p>
+
+        <h2>Rehearsals</h2>
+
+        <p>
+          We rehearse every{' '}
+          <strong>Thursday evening at 17:00 at Gillespie Hall</strong> (see{' '}
+          <Link
+            href={routes.CALENDAR()}
+            className="text-primary-2 hover:underline focus:underline focus:outline-none"
+          >
+            our calendar
+          </Link>
+          ) during the university semester, and perform once at the end of each
+          semester.
+        </p>
+
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.9913322359207!2d151.18291567655325!3d-33.88987707321865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12b1af5537cc19%3A0x2dcf6e63ca183361!2sGillespie%20Hall%20-%20St%20Andrew&#39;s%20College%20CG5G!5e0!3m2!1sen!2sdk!4v1753477585951!5m2!1sen!2sdk"
+          className="aspect-video w-full"
+        ></iframe>
+
+        <h2>
+          An excerpt from <em>Myths and Legends</em>, SUWO&apos;s 2025 Semester
+          1 concert
+        </h2>
+      </Container>
+
+      <iframe
+        src="https://www.youtube.com/embed/AerrE5gpIQo"
+        className="aspect-video w-full"
+      ></iframe>
     </PageContainer>
   )
 }

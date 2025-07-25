@@ -17,7 +17,13 @@ export const NavbarMenuLink = ({ children, href }: NavbarMenuLinkProps) => {
   const isActive = pathname === href
 
   return (
-    <Link href={href} className={cn('text-xl', isActive && 'text-primary-2')}>
+    <Link
+      href={href}
+      className={cn(
+        'text-xl hover:underline focus:underline focus:outline-none',
+        isActive && 'text-primary-2',
+      )}
+    >
       {children}
     </Link>
   )

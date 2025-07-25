@@ -18,52 +18,62 @@ export const Footer = () => {
     <Container size="md" className="flex flex-col gap-16 px-4 pb-24">
       <Divider />
 
-      <footer className="flex flex-col gap-12 sm:flex-row">
-        <div className="flex flex-2 flex-row gap-8">
-          <div className="flex flex-1 flex-col gap-2">
-            <p className="text-neutral-1 font-bold">The Club</p>
-            <FooterLink href={routes.HOME()}>About Us</FooterLink>
-            <FooterLink href={routes.HISTORY()}>Our History</FooterLink>
-            <FooterLink href={routes.MEMBERS()}>Our Members</FooterLink>
-          </div>
+      <footer className="grid grid-cols-3 gap-x-8 gap-y-8 sm:grid-cols-5 sm:gap-y-16">
+        <div className="flex flex-1 flex-col gap-2">
+          <p className="text-neutral-1 text-lg font-bold">The Club</p>
+          <FooterLink href={routes.HOME()}>About Us</FooterLink>
+          <FooterLink href={routes.HISTORY()}>Our History</FooterLink>
+          <FooterLink href={routes.MEMBERS()}>Our Members</FooterLink>
+        </div>
 
-          <div className="flex flex-1 flex-col gap-2">
-            <p className="text-neutral-1 font-bold">Members</p>
-            <FooterLink href={routes.CALENDAR()}>Events Calendar</FooterLink>
-            <FooterLink
-              href={
-                currentWeek
-                  ? routes.WEEKLY_ATTENDANCES({
-                      year: getCurrentYear(),
-                      semester: getCurrentSemester(),
-                      week: currentWeek,
-                    })
-                  : routes.ATTENDANCES()
-              }
-            >
-              Attendance Sheet
+        <div className="flex flex-1 flex-col gap-2 text-lg">
+          <p className="text-neutral-1 font-bold">Members</p>
+          <FooterLink href={routes.CALENDAR()}>Events Calendar</FooterLink>
+          <FooterLink
+            href={
+              currentWeek
+                ? routes.WEEKLY_ATTENDANCES({
+                    year: getCurrentYear(),
+                    semester: getCurrentSemester(),
+                    week: currentWeek,
+                  })
+                : routes.ATTENDANCES()
+            }
+          >
+            Attendance Sheet
+          </FooterLink>
+        </div>
+
+        <div className="flex flex-1 flex-col gap-2 text-lg">
+          <p className="text-neutral-1 font-bold">Our Socials</p>
+          {SOCIAL_LINKS.map(({ href, title }) => (
+            <FooterLink key={href} href={href} external>
+              {title}
             </FooterLink>
-          </div>
-
-          <div className="flex flex-1 flex-col gap-2">
-            <p className="text-neutral-1 font-bold">Our Socials</p>
-            {SOCIAL_LINKS.map(({ href, title }) => (
-              <FooterLink key={href} href={href} external>
-                {title}
-              </FooterLink>
-            ))}
-          </div>
+          ))}
         </div>
 
-        <div className="flex flex-1 flex-col gap-6 sm:text-right">
-          <p>
-            © {new Date().getFullYear()} The University of Sydney Wind
-            Orchestra (SUWO). All rights reserved.
-          </p>
-          <address>
-            Holme Building (A09), Science Rd, The University of Sydney, NSW 2006
-          </address>
-        </div>
+        <address className="col-span-3 text-right sm:col-span-2">
+          Holme Building (A09), Science Rd, The University of Sydney, NSW 2006
+        </address>
+
+        <p className="col-span-3 sm:col-span-2">
+          SUWO is supported by the{' '}
+          <a
+            href="https://usu.edu.au"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary-2 hover:underline focus:underline focus:outline-none"
+          >
+            University of Sydney Union
+          </a>{' '}
+          Clubs and Societies program
+        </p>
+
+        <p className="col-span-3 text-right sm:col-span-2 sm:col-start-4">
+          © {new Date().getFullYear()} The University of Sydney Wind Orchestra
+          (SUWO). All rights reserved.
+        </p>
       </footer>
     </Container>
   )

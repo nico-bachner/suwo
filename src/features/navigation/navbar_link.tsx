@@ -20,7 +20,7 @@ export const NavbarLink = ({ children, href }: NavbarLinkProps) => {
     <Link
       href={href}
       className={cn(
-        'text-lg font-bold transition-transform hover:scale-110 focus:scale-110 focus:outline-none',
+        'text-lg font-bold transition-transform hover:underline focus:underline focus:outline-none',
         isActive && 'text-primary-2',
       )}
     >
