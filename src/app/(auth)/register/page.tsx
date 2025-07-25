@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { PageContainer } from '@/design_system/container'
-import { RegisterForm } from '@/features/auth/register_form'
+import { RegisterForm } from '@/lib/forms/register_form'
 import { routes } from '@/routes'
 
 export default function Page() {

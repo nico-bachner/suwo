@@ -5,9 +5,9 @@ import { useQuery } from '@tanstack/react-query'
 import { PageContainer } from '@/design_system/container'
 import { SettingsSection } from '@/design_system/settings_section'
 import { Profile } from '@/generated/prisma'
+import { UpdateInstrumentForm } from '@/lib/forms/update_instrument_form'
 import { queries } from '@/lib/queries'
 
-import { UpdateInstrumentForm } from './update_instrument_form'
 import { getProfileScreenName } from './utils/get_profile_screen_name'
 
 export const EditProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {

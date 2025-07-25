@@ -6,12 +6,11 @@ import z from 'zod'
 import { Button } from '@/design_system/button'
 import { Spinner } from '@/design_system/spinner'
 import { TextInput } from '@/design_system/text_input'
+import { UpdatePasswordValidator } from '@/features/auth/update_password_validator'
 import { PasswordValidator } from '@/lib/validators/password'
 import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
-
-import { UpdatePasswordValidator } from './update_password_validator'
 
 const defaultValues: z.infer<typeof UpdatePasswordValidator> = {
   password: '',

@@ -10,6 +10,7 @@ import { Checkbox } from '@/design_system/checkbox'
 import { Select, SelectItem } from '@/design_system/select'
 import { Spinner } from '@/design_system/spinner'
 import { TextInput } from '@/design_system/text_input'
+import { RegisterValidator } from '@/features/auth/register_validator'
 import { queries } from '@/lib/queries'
 import { EmailValidator } from '@/lib/validators/email'
 import { FamilyNameValidator } from '@/lib/validators/family_name'
@@ -17,8 +18,6 @@ import { GivenNameValidator } from '@/lib/validators/given_name'
 import { apiRoutes, queryKeys, routes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
-
-import { RegisterValidator } from './register_validator'
 
 const defaultValues: z.infer<typeof RegisterValidator> = {
   given_name: '',

@@ -6,12 +6,11 @@ import z from 'zod'
 import { Button } from '@/design_system/button'
 import { Spinner } from '@/design_system/spinner'
 import { TextInput } from '@/design_system/text_input'
+import { LoginWithMagicLinkValidator } from '@/features/auth/login_with_magic_link_validator'
 import { EmailValidator } from '@/lib/validators/email'
 import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
-
-import { LoginWithMagicLinkValidator } from './login_with_magic_link_validator'
 
 const defaultValues: z.infer<typeof LoginWithMagicLinkValidator> = {
   email: '',
