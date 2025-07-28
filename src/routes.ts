@@ -25,6 +25,7 @@ export const queryKeys = {
   INSTRUMENTS: () => ['instruments'],
   MAILING_LIST_RECIPIENTS: () => ['mailing-list', 'recipients'],
   MAILING_LIST_PREFERENCE: () => ['mailing-list', 'preference'],
+  USER_ROLES: () => ['user-roles'],
 }
 
 export const apiRoutes = {
@@ -38,6 +39,7 @@ export const apiRoutes = {
     createURL({ path: ['api', 'mailing-list', 'recipients'] }),
   MAILING_LIST_PREFERENCE: () =>
     createURL({ path: ['api', 'mailing-list', 'preference'] }),
+  USER_ROLES: () => createURL({ path: ['api', 'auth', 'user-roles'] }),
 }
 
 export const routes = {

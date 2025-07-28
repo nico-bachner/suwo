@@ -9,112 +9,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id         String   @id @default(uuid())
-  email      String   @unique
-  password   String?
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now()) @updatedAt
-
-  Profile              Profile?
-  VerificationTokens   VerificationToken[]
-  Attendances          Attendance[]
-  UsuMembership        UsuMembership?
-  MailingListRecipient MailingListRecipient?
-  Payments             Payment[]
-  UserRole             UserRole[]
-}
-
-model UserRole {
-  user_id   String
-  role_name String
-
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  role Role @relation(fields: [role_name], references: [name], onUpdate: Cascade, onDelete: Cascade)
-
-  @@id([user_id, role_name])
-}
-
-model Payment {
-  user_id    String
-  amount     Float
-  created_at DateTime @default(now())
-
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
-
-  @@id([user_id, created_at])
-}
-
-model Privilege {
-  name       String   @id
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now()) @updatedAt
-
-  RolePrivilege RolePrivilege[]
-}
-
-model Role {
-  name        String   @id
-  email       String?  @unique
-  description String?
-  created_at  DateTime @default(now())
-  updated_at  DateTime @default(now()) @updatedAt
-
-  RolePrivilege RolePrivilege[]
-  UserRole      UserRole[]
-}
-
-model RolePrivilege {
-  role_name      String
-  privilege_name String
-
-  role      Role      @relation(fields: [role_name], references: [name], onUpdate: Cascade, onDelete: Cascade)
-  privilege Privilege @relation(fields: [privilege_name], references: [name], onUpdate: Cascade, onDelete: Cascade)
-
-  @@id([role_name, privilege_name])
-}
-
-model UsuMembership {
-  user_id    String   @id
-  number     String   @unique @db.Char(7)
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now()) @updatedAt
-
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
-}
-
-model Profile {
-  user_id         String  @id
-  handle          String  @unique @default(uuid())
-  given_name      String
-  family_name     String?
-  display_name    String?
-  instrument_name String?
-  bio             String?
-
-  user       User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  instrument Instrument? @relation(fields: [instrument_name], references: [name])
-
-  @@index([given_name(sort: Asc), family_name(sort: Asc)])
-}
-
-model VerificationToken {
-  user_id    String
-  token      String   @unique
-  created_at DateTime @default(now())
-
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
-}
-
-model MailingListRecipient {
-  user_id    String   @id
-  email      String   @unique
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now()) @updatedAt
-
-  user User? @relation(fields: [user_id], references: [id], onDelete: Cascade)
-}
-
 model Attendance {
   year     Int
   semester Int    @db.SmallInt
@@ -127,17 +21,6 @@ model Attendance {
   @@index([year(sort: Desc), semester(sort: Desc), week(sort: Desc)])
 }
 
-model Instrument {
-  name        String  @unique
-  slug        String  @unique
-  description String?
-
-  Profiles      Profile[]
-  PracticeParts PracticePart[]
-
-  @@index([name(sort: Asc)])
-}
-
 model Equipment {
   id                String   @id @default(uuid())
   name              String
@@ -148,6 +31,17 @@ model Equipment {
   description       String?
   created_at        DateTime @default(now())
   updated_at        DateTime @default(now()) @updatedAt
+}
+
+model Instrument {
+  name        String  @unique
+  slug        String  @unique
+  description String?
+
+  Profiles      Profile[]
+  PracticeParts PracticePart[]
+
+  @@index([name(sort: Asc)])
 }
 
 model Library {
@@ -165,6 +59,25 @@ model Library {
   PracticeParts PracticePart[]
 }
 
+model MailingListRecipient {
+  user_id    String   @id
+  email      String   @unique
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  user User? @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model Payment {
+  user_id    String
+  amount     Float
+  created_at DateTime @default(now())
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@id([user_id, created_at])
+}
+
 model PracticePart {
   id              String   @id @default(uuid())
   instrument_name String
@@ -178,4 +91,93 @@ model PracticePart {
   library    Library    @relation(fields: [library_id], references: [id], onDelete: Cascade)
 
   @@unique([instrument_name, library_id, variant])
+}
+
+model Privilege {
+  id         String   @id @default(uuid())
+  name       String   @unique
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  RolePrivilege RolePrivilege[]
+}
+
+model Profile {
+  user_id         String  @id
+  handle          String  @unique @default(uuid())
+  given_name      String
+  family_name     String?
+  display_name    String?
+  instrument_name String?
+  bio             String?
+
+  user       User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  instrument Instrument? @relation(fields: [instrument_name], references: [name])
+
+  @@index([given_name(sort: Asc), family_name(sort: Asc)])
+}
+
+model Role {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  email       String?  @unique
+  description String?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
+
+  RolePrivilege RolePrivilege[]
+  UserRole      UserRole[]
+}
+
+model RolePrivilege {
+  role_id      String
+  privilege_id String
+
+  role      Role      @relation(fields: [role_id], references: [id], onDelete: Cascade)
+  privilege Privilege @relation(fields: [privilege_id], references: [id], onDelete: Cascade)
+
+  @@id([role_id, privilege_id])
+}
+
+model User {
+  id         String   @id @default(uuid())
+  email      String   @unique
+  password   String?
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  Profile              Profile?
+  VerificationTokens   VerificationToken[]
+  Attendances          Attendance[]
+  UsuMembership        UsuMembership?
+  MailingListRecipient MailingListRecipient?
+  Payments             Payment[]
+  UserRole             UserRole[]
+}
+
+model UserRole {
+  user_id String
+  role_id String
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  role Role @relation(fields: [role_id], references: [id], onDelete: Cascade)
+
+  @@id([user_id, role_id])
+}
+
+model UsuMembership {
+  user_id    String   @id
+  number     String   @unique @db.Char(7)
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  user_id    String
+  token      String   @unique
+  created_at DateTime @default(now())
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }

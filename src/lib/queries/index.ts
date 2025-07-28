@@ -5,6 +5,7 @@ import { mailingListPreferenceQuery } from './mailing_list_preference_query'
 import { profileQuery } from './profile_query'
 import { profilesQuery } from './profiles_query'
 import { sessionQuery } from './session_query'
+import { userRolesQuery } from './user_roles_query'
 import { weeklyAttendancesQuery } from './weekly_attendances_query'
 
 export const queries = {
@@ -15,5 +16,6 @@ export const queries = {
   PROFILES: profilesQuery,
   PROFILE: profileQuery,
   SESSION: sessionQuery,
+  USER_ROLES: userRolesQuery,
   WEEKLY_ATTENDANCES: weeklyAttendancesQuery,
 }
