@@ -7,9 +7,9 @@ import { StatusCode } from '@/utils/http/status_code'
 
 export const mailingListPreferenceQuery = (): UseQueryOptions<boolean> => ({
   queryKey: queryKeys.MAILING_LIST_PREFERENCE(),
-  queryFn: async () => {
+  queryFn: async ({ signal }) => {
     const response = await parseResponse(
-      await fetch(apiRoutes.MAILING_LIST_PREFERENCE()),
+      await fetch(apiRoutes.MAILING_LIST_PREFERENCE(), { signal }),
     )
 
     switch (response.status) {

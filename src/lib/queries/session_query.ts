@@ -9,8 +9,10 @@ import { StatusCode } from '@/utils/http/status_code'
 
 export const sessionQuery = (): UseQueryOptions<Session | null> => ({
   queryKey: queryKeys.SESSION(),
-  queryFn: async () => {
-    const response = await parseResponse(await fetch(apiRoutes.SESSION()))
+  queryFn: async ({ signal }) => {
+    const response = await parseResponse(
+      await fetch(apiRoutes.SESSION(), { signal }),
+    )
 
     switch (response.status) {
       case StatusCode.OK: {

@@ -7,8 +7,10 @@ import { StatusCode } from '@/utils/http/status_code'
 
 export const currentWeekQuery = (): UseQueryOptions<Week | null> => ({
   queryKey: queryKeys.CURRENT_WEEK(),
-  queryFn: async () => {
-    const response = await parseResponse(await fetch(apiRoutes.CURRENT_WEEK()))
+  queryFn: async ({ signal }) => {
+    const response = await parseResponse(
+      await fetch(apiRoutes.CURRENT_WEEK(), { signal }),
+    )
 
     switch (response.status) {
       case StatusCode.OK: {

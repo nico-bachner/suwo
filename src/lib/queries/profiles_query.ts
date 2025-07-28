@@ -9,8 +9,10 @@ import { StatusCode } from '@/utils/http/status_code'
 
 export const profilesQuery = (): UseQueryOptions<Profile[]> => ({
   queryKey: queryKeys.PROFILES(),
-  queryFn: async () => {
-    const response = await parseResponse(await fetch(apiRoutes.PROFILES()))
+  queryFn: async ({ signal }) => {
+    const response = await parseResponse(
+      await fetch(apiRoutes.PROFILES(), { signal }),
+    )
 
     switch (response.status) {
       case StatusCode.OK: {

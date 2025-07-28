@@ -12,9 +12,9 @@ export const weeklyAttendancesQuery = (
   args: WeeklyAttendances,
 ): UseQueryOptions<Attendance[]> => ({
   queryKey: queryKeys.WEEKLY_ATTENDANCES(args),
-  queryFn: async () => {
+  queryFn: async ({ signal }) => {
     const response = await parseResponse(
-      await fetch(apiRoutes.WEEKLY_ATTENDANCES(args)),
+      await fetch(apiRoutes.WEEKLY_ATTENDANCES(args), { signal }),
     )
 
     switch (response.status) {

@@ -11,9 +11,9 @@ export const profileQuery = ({
   user_id,
 }: Pick<Profile, 'user_id'>): UseQueryOptions<Profile> => ({
   queryKey: queryKeys.PROFILE({ user_id }),
-  queryFn: async () => {
+  queryFn: async ({ signal }) => {
     const response = await parseResponse(
-      await fetch(apiRoutes.PROFILE({ user_id })),
+      await fetch(apiRoutes.PROFILE({ user_id }), { signal }),
     )
 
     switch (response.status) {

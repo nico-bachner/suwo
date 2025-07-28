@@ -8,8 +8,10 @@ import { StatusCode } from '@/utils/http/status_code'
 
 export const equipmentQuery = (): UseQueryOptions<Equipment[]> => ({
   queryKey: queryKeys.EQUIPMENT(),
-  queryFn: async () => {
-    const response = await parseResponse(await fetch(apiRoutes.EQUIPMENT()))
+  queryFn: async ({ signal }) => {
+    const response = await parseResponse(
+      await fetch(apiRoutes.EQUIPMENT(), { signal }),
+    )
 
     switch (response.status) {
       case StatusCode.OK: {
