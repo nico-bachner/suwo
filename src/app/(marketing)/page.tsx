@@ -44,7 +44,9 @@ export default function Page() {
 
         <p>
           In advance of the first rehearsal, please join our club through the{' '}
-          <em>University of Sydney Union (USU)</em>{' '}
+          <em>University of Sydney Union (USU)</em>. Not sure if we match your
+          vibe? Come anyway, the first few weeks of each semester are free to
+          attend.
         </p>
 
         <Button asChild variant="primary">
