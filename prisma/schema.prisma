@@ -118,13 +118,21 @@ model Profile {
 }
 
 model Role {
-  id          String   @id @default(uuid())
-  name        String   @unique
-  email       String?  @unique
-  description String?
-  created_at  DateTime @default(now())
-  updated_at  DateTime @default(now()) @updatedAt
+  // ID
+  id String @id @default(uuid())
 
+  // Required Attributes
+  name String @unique
+
+  // Optional Attributes
+  description String?
+  email       String? @unique
+
+  // Metadata
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  // Relations
   RolePrivilege RolePrivilege[]
   UserRole      UserRole[]
 }
