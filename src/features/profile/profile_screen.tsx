@@ -40,6 +40,12 @@ export const ProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
     <PageContainer size="sm" className="prose">
       <h1>{getProfileScreenName(profile)}</h1>
 
+      {profile.role_names.length > 0 && (
+        <p className="text-sm text-neutral-500">
+          {profile.role_names.join(', ')}
+        </p>
+      )}
+
       {profile.instrument_name && <p>{profile.instrument_name}</p>}
 
       {session && session.user_id === profile.user_id && (

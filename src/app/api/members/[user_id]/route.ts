@@ -30,8 +30,19 @@ export const GET: APIRoute = async (_, { params }) => {
     })
   }
 
+  const roles = await prisma.role.findMany({
+    where: {
+      UserRole: {
+        some: data,
+      },
+    },
+  })
+
   return createResponse({
     status: StatusCode.OK,
-    data: profile,
+    data: {
+      ...profile,
+      role_names: roles.map(({ name }) => name),
+    },
   })
 }

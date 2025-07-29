@@ -1,6 +1,8 @@
 import { Profile } from '@/generated/prisma'
 
-export const getProfileScreenName = (profile: Profile) => {
+export const getProfileScreenName = (
+  profile: Pick<Profile, 'given_name' | 'family_name' | 'display_name'>,
+) => {
   if (profile.display_name) {
     return profile.display_name
   }
