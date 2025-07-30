@@ -24,7 +24,7 @@ export const Navbar = () => {
           <Image {...IMAGES.ICON} className="h-12 w-12" />
         </Link>
 
-        <div className="hidden items-center gap-4 sm:flex">
+        <div className="hidden items-center gap-4 md:flex">
           <NavbarLink href={routes.HOME()}>Home</NavbarLink>
           <NavbarLink href={routes.HISTORY()}>History</NavbarLink>
           <NavbarLink href={routes.MEMBERS()}>Members</NavbarLink>
@@ -44,7 +44,7 @@ export const Navbar = () => {
           </NavbarLink>
         </div>
 
-        <div className="hidden items-center gap-2 sm:flex">
+        <div className="hidden items-center gap-2 md:flex">
           {session ? (
             <>
               <Button asChild variant="secondary">
@@ -66,7 +66,7 @@ export const Navbar = () => {
           )}
         </div>
 
-        <NavbarMenu className="sm:hidden" />
+        <NavbarMenu className="md:hidden" />
       </div>
     </nav>
   )

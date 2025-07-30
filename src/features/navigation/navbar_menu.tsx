@@ -36,7 +36,7 @@ export const NavbarMenu = ({ className }: NavbarMenuProps) => {
       trigger={
         <Bars3BottomRightIcon
           className={cn(
-            'stroke-neutral-1 box-content h-8 w-8 cursor-pointer stroke-1 p-4',
+            'stroke-neutral-1 h-12 w-12 cursor-pointer stroke-1 p-2',
             className,
           )}
         />
