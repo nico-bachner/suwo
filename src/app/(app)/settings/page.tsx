@@ -1,4 +1,3 @@
-import { PageContainer } from '@/design_system/container'
 import { SettingsSection } from '@/design_system/settings_section'
 import { LogOutButton } from '@/features/auth/log_out_button'
 import { UpdateMailingListPreferenceForm } from '@/lib/forms/update_mailing_list_preference_form'
@@ -6,7 +5,7 @@ import { UpdatePasswordForm } from '@/lib/forms/update_password_form'
 
 export default function Page() {
   return (
-    <PageContainer size="sm" className="prose">
+    <main className="prose">
       <h1>Settings</h1>
 
       <div className="flex flex-col gap-8">
@@ -26,6 +25,6 @@ export default function Page() {
 
         <LogOutButton />
       </div>
-    </PageContainer>
+    </main>
   )
 }

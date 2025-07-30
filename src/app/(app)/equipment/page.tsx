@@ -2,7 +2,6 @@
 
 import { useQuery } from '@tanstack/react-query'
 
-import { PageContainer } from '@/design_system/container'
 import { queries } from '@/lib/queries'
 
 export default function Page() {
@@ -19,50 +18,50 @@ export default function Page() {
 
   if (isSessionPending || isEquipmentPending) {
     return (
-      <PageContainer size="sm" className="prose">
+      <main className="prose">
         <h1>Loading...</h1>
-      </PageContainer>
+      </main>
     )
   }
 
   if (sessionError) {
     return (
-      <PageContainer size="sm" className="prose">
+      <main className="prose">
         <h1>Error</h1>
         <p>{sessionError.message}</p>
-      </PageContainer>
+      </main>
     )
   }
 
   if (equipmentError) {
     return (
-      <PageContainer size="sm" className="prose">
+      <main className="prose">
         <h1>Error</h1>
         <p>{equipmentError.message}</p>
-      </PageContainer>
+      </main>
     )
   }
 
   if (!session) {
     return (
-      <PageContainer size="sm" className="prose">
+      <main className="prose">
         <h1>Not logged in</h1>
         <p>Please log in to view this page.</p>
-      </PageContainer>
+      </main>
     )
   }
 
   if (equipment.length === 0) {
     return (
-      <PageContainer size="sm" className="prose">
+      <main className="prose">
         <h1>Equipment</h1>
         <p>There are currently no equipment items available.</p>
-      </PageContainer>
+      </main>
     )
   }
 
   return (
-    <PageContainer size="sm" className="prose">
+    <main className="prose">
       <h1>Equipment</h1>
       <ul>
         {equipment.map((item) => (
@@ -72,6 +71,6 @@ export default function Page() {
           </li>
         ))}
       </ul>
-    </PageContainer>
+    </main>
   )
 }

@@ -43,11 +43,11 @@ export default function Layout({ children }: LayoutFileProps) {
           </div>
 
           <div className="flex min-h-screen flex-col">
-            <Navbar />
+            <Navbar className="px-4 py-4" />
 
-            {children}
+            <div className="flex-1 px-4 py-20">{children}</div>
 
-            <Footer />
+            <Footer className="px-4" />
           </div>
         </QueryProvider>
 

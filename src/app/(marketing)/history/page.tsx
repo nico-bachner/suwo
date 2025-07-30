@@ -1,8 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 
-import { PageContainer } from '@/design_system/container'
-import { Heading } from '@/design_system/typography'
 import { fetchHistoryPageMetadata } from '@/features/marketing/fetch_history_page_metadata'
 import { fetchHistoryYears } from '@/features/marketing/fetch_history_years'
 import { routes } from '@/routes'
@@ -33,10 +31,8 @@ export default async function Page() {
   const years = await fetchHistoryYears()
 
   return (
-    <PageContainer size="md" className="flex flex-col items-center gap-8">
-      <Heading as="h1" variant="primary">
-        {title}
-      </Heading>
+    <main className="prose">
+      <h1 className="text-center">{title}</h1>
 
       <div className="grid w-full grid-flow-dense grid-cols-3 gap-2">
         {years.map((value, index, array) => (
@@ -48,14 +44,14 @@ export default async function Page() {
               getYearAlignment(index),
             )}
             style={{
-              color: `oklch(0.8 0.1 ${(array.length - index) * 10 + 30} / 0.8)`,
-              backgroundColor: `oklch(0.4 0.1 ${(array.length - index) * 10 + 30} / 0.8)`,
+              color: `oklch(0.8 0.1 ${(array.length - index) * 10 + 30} / 0.9)`,
+              backgroundColor: `oklch(0.4 0.1 ${(array.length - index) * 10 + 30} / 0.9)`,
             }}
           >
             {value}
           </Link>
         ))}
       </div>
-    </PageContainer>
+    </main>
   )
 }

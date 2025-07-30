@@ -2,7 +2,6 @@
 
 import { useQuery } from '@tanstack/react-query'
 
-import { PageContainer } from '@/design_system/container'
 import { SettingsSection } from '@/design_system/settings_section'
 import { Profile } from '@/generated/prisma'
 import { CreateInstrumentForm } from '@/lib/forms/create_instrument_form'
@@ -20,23 +19,23 @@ export const EditProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
 
   if (isPending) {
     return (
-      <PageContainer size="sm" className="prose">
+      <main className="prose">
         <h1>Loading...</h1>
-      </PageContainer>
+      </main>
     )
   }
 
   if (error) {
     return (
-      <PageContainer size="sm" className="prose">
+      <main className="prose">
         <h1>Error</h1>
         <p>{error.message}</p>
-      </PageContainer>
+      </main>
     )
   }
 
   return (
-    <PageContainer size="sm" className="prose flex flex-col gap-8">
+    <main className="prose">
       <h1>{getProfileScreenName(profile)}</h1>
 
       {profile.roles.length > 0 && <p>{profile.roles.join(', ')}</p>}
@@ -54,6 +53,6 @@ export const EditProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
       >
         <CreateInstrumentForm />
       </SettingsSection>
-    </PageContainer>
+    </main>
   )
 }

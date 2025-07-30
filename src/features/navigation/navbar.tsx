@@ -8,18 +8,28 @@ import { IMAGES } from '@/config'
 import { Button } from '@/design_system/button'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
+import { cn } from '@/utils/cn'
 import { getCurrentSemester, getCurrentYear } from '@/utils/date_manupulation'
 
 import { NavbarLink } from './navbar_link'
 import { NavbarMenu } from './navbar_menu'
 
-export const Navbar = () => {
+type NavbarProps = {
+  className?: string
+}
+
+export const Navbar = ({ className }: NavbarProps) => {
   const { data: session } = useQuery(queries.SESSION())
   const { data: currentWeek } = useQuery(queries.CURRENT_WEEK())
 
   return (
-    <nav className="bg-neutral-7/80 border-neutral-4/50 sticky top-0 z-30 border-b p-4 backdrop-blur-lg">
-      <div className="mx-auto flex max-w-screen-lg items-center justify-between">
+    <div
+      className={cn(
+        'bg-neutral-7/80 border-neutral-4/50 sticky top-0 z-30 border-b backdrop-blur-lg',
+        className,
+      )}
+    >
+      <nav className="mx-auto flex w-full max-w-screen-lg items-center justify-between">
         <Link href={routes.HOME()}>
           <Image {...IMAGES.ICON} className="h-12 w-12" />
         </Link>
@@ -67,7 +77,7 @@ export const Navbar = () => {
         </div>
 
         <NavbarMenu className="md:hidden" />
-      </div>
-    </nav>
+      </nav>
+    </div>
   )
 }

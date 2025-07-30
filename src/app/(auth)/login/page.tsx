@@ -1,6 +1,5 @@
 import Link from 'next/link'
 
-import { PageContainer } from '@/design_system/container'
 import { LoginScreen } from '@/features/auth/login_screen'
 import { LoginScreenSearchParamsValidator } from '@/features/auth/login_screen_search_params_validator'
 import { routes } from '@/routes'
@@ -12,7 +11,7 @@ export default async function Page({ searchParams }: PageFileProps) {
   )
 
   return (
-    <PageContainer size="sm" className="prose">
+    <main className="prose">
       <h1>Log In</h1>
 
       <LoginScreen method={data?.method} />
@@ -21,6 +20,6 @@ export default async function Page({ searchParams }: PageFileProps) {
         Don&apos;t have an account?{' '}
         <Link href={routes.REGISTER()}>Register</Link> instead
       </p>
-    </PageContainer>
+    </main>
   )
 }

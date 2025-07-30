@@ -3,7 +3,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 
-import { PageContainer } from '@/design_system/container'
 import { TextInput } from '@/design_system/text_input'
 import { queries } from '@/lib/queries'
 import { search } from '@/utils/search'
@@ -36,7 +35,7 @@ export const WeeklyAttendance = ({
 
   return (
     <>
-      <PageContainer size="sm" className="prose">
+      <main className="prose">
         <h1 className="text-center">
           Attendance Sheet
           <br />
@@ -76,7 +75,7 @@ export const WeeklyAttendance = ({
                 />
               ))}
         </div>
-      </PageContainer>
+      </main>
 
       <WeeklyAttendanceNavigation year={year} semester={semester} week={week} />
     </>

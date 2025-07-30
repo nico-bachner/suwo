@@ -3,7 +3,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 
-import { PageContainer } from '@/design_system/container'
 import { TextInput } from '@/design_system/text_input'
 import { queries } from '@/lib/queries'
 import { queryKeys } from '@/routes'
@@ -27,7 +26,7 @@ export const ProfilesScreen = () => {
   }
 
   return (
-    <PageContainer size="sm" className="prose">
+    <main className="prose">
       <h1>Members</h1>
 
       <TextInput
@@ -38,10 +37,10 @@ export const ProfilesScreen = () => {
           setQuery(target.value)
         }}
         placeholder="Search by name or instrument"
-        className="mb-6"
+        className="mx-auto max-w-screen-sm"
       />
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {isPending
           ? Array.from({ length: 20 }).map((_, index) => (
               <ProfilePreviewSkeleton key={index} />
@@ -54,6 +53,6 @@ export const ProfilesScreen = () => {
               <ProfilePreview key={profile.user_id} {...profile} />
             ))}
       </div>
-    </PageContainer>
+    </main>
   )
 }

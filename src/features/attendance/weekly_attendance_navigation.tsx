@@ -2,7 +2,6 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 
 import { Button } from '@/design_system/button'
-import { Container } from '@/design_system/container'
 import { MAX_WEEK, MIN_WEEK } from '@/features/usyd_api_wrapper/config'
 import { routes } from '@/routes'
 
@@ -14,8 +13,8 @@ export const WeeklyAttendanceNavigation = ({
   semester,
   week,
 }: WeeklyAttendances) => (
-  <nav className="bg-neutral-7/80 border-neutral-4/50 fixed bottom-0 w-full border-t backdrop-blur-lg">
-    <Container size="sm" className="grid grid-cols-3 items-center gap-2 p-4">
+  <div className="bg-neutral-7/80 border-neutral-4/50 fixed bottom-0 w-full border-t backdrop-blur-lg">
+    <nav className="mx-auto grid max-w-screen-lg grid-cols-3 items-center gap-2 p-4">
       {week > MIN_WEEK && (
         <Button
           variant="secondary"
@@ -50,6 +49,6 @@ export const WeeklyAttendanceNavigation = ({
           </Link>
         </Button>
       )}
-    </Container>
-  </nav>
+    </nav>
+  </div>
 )

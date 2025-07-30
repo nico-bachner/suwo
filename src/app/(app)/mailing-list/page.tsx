@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 
 import { Button } from '@/design_system/button'
-import { PageContainer } from '@/design_system/container'
 import { TextInput } from '@/design_system/text_input'
 import { queries } from '@/lib/queries'
 import { search } from '@/utils/search'
@@ -24,45 +23,45 @@ export default function Page() {
 
   if (isSessionPending || isMailingListRecipientsPending) {
     return (
-      <PageContainer size="sm" className="prose">
+      <main className="prose">
         <h1>Loading...</h1>
-      </PageContainer>
+      </main>
     )
   }
 
   if (sessionError) {
     return (
-      <PageContainer size="sm" className="prose">
+      <main className="prose">
         <h1>Error</h1>
         <p>{sessionError.message}</p>
-      </PageContainer>
+      </main>
     )
   }
 
   if (mailingListRecipientsError) {
     return (
-      <PageContainer size="sm" className="prose">
+      <main className="prose">
         <h1>Error</h1>
         <p>{mailingListRecipientsError.message}</p>
-      </PageContainer>
+      </main>
     )
   }
 
   if (!session) {
     return (
-      <PageContainer size="sm" className="prose">
+      <main className="prose">
         <h1>Not logged in</h1>
         <p>Please log in to view this page.</p>
-      </PageContainer>
+      </main>
     )
   }
 
   if (mailingListRecipients.length === 0) {
     return (
-      <PageContainer size="sm" className="prose">
+      <main className="prose">
         <h1>Equipment</h1>
         <p>There are currently no equipment items available.</p>
-      </PageContainer>
+      </main>
     )
   }
 
@@ -76,10 +75,10 @@ export default function Page() {
   ].join('\n')
 
   return (
-    <PageContainer size="sm" className="prose">
+    <main className="prose">
       <h1>Mailing List Recipients</h1>
 
-      <Button variant="secondary" asChild className="mb-6">
+      <Button variant="secondary" asChild>
         <a
           href={URL.createObjectURL(
             new Blob([csv], {
@@ -100,20 +99,17 @@ export default function Page() {
           setSearchQuery(target.value)
         }}
         placeholder="Search by name or instrument"
-        className="mb-6"
       />
 
-      <ul className="flex flex-col">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {search({
           data: mailingListRecipients,
           keys: ['email'],
           query: searchQuery,
         }).map((mailingListRecipient) => (
-          <li key={mailingListRecipient.user_id}>
-            {mailingListRecipient.email}
-          </li>
+          <p key={mailingListRecipient.user_id}>{mailingListRecipient.email}</p>
         ))}
-      </ul>
-    </PageContainer>
+      </div>
+    </main>
   )
 }

@@ -3,14 +3,18 @@
 }
 
 .prose > * {
-  margin-block: 2rem;
+  margin-block: 3rem;
+  @apply mx-auto w-full max-w-screen-lg;
 }
 
 /* Text */
 .prose > h1,
 .prose > h2,
 .prose > h3,
-.prose > p {
+.prose > p,
+.prose > ul,
+.prose > ol,
+.prose > a {
   @apply mx-auto w-full max-w-screen-sm;
 }
 

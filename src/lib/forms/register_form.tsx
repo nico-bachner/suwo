@@ -213,7 +213,7 @@ export const RegisterForm = () => {
 
       <form.Field name="instrument_ids">
         {({ state, handleChange }) => (
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
             {instruments?.map((instrument) => (
               <Button
                 key={instrument.id}

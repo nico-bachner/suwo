@@ -3,7 +3,6 @@ import { Fragment } from 'react'
 import z from 'zod'
 
 import { FOUNDING_YEAR } from '@/config'
-import { PageContainer } from '@/design_system/container'
 import { WEEKS } from '@/features/usyd_api_wrapper/config'
 import { routes } from '@/routes'
 import { Semester } from '@/utils/date_manupulation/semester'
@@ -12,7 +11,7 @@ export default function Page() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <PageContainer size="sm" className="prose">
+    <main className="prose">
       <h1>Attendance</h1>
 
       <p>
@@ -25,35 +24,37 @@ export default function Page() {
         (_, index) => currentYear - index,
       ).map((year) => (
         <Fragment key={year}>
-          <h2>{year}</h2>
+          <h2 className="text-center">{year}</h2>
 
-          {Array.from({ length: 2 }, (_, index) => index + 1).map(
-            (semester) => (
-              <Fragment key={semester}>
-                <h3>Semester {semester}</h3>
+          <div className="flex flex-col gap-6 sm:flex-row">
+            {Array.from({ length: 2 }, (_, index) => index + 1).map(
+              (semester) => (
+                <div className="prose" key={semester}>
+                  <h3 className="text-center">Semester {semester}</h3>
 
-                <div className="flex flex-row flex-wrap gap-1">
-                  {Array.from({ length: WEEKS }, (_, index) => index + 1).map(
-                    (week) => (
-                      <Link
-                        key={week}
-                        href={routes.WEEKLY_ATTENDANCES({
-                          year: currentYear,
-                          semester: z.enum(Semester).parse(semester),
-                          week,
-                        })}
-                        className="bg-neutral-4 hover:bg-neutral-3 flex h-16 w-16 items-center justify-center rounded-md text-3xl transition-colors"
-                      >
-                        {week}
-                      </Link>
-                    ),
-                  )}
+                  <div className="flex flex-row flex-wrap gap-1">
+                    {Array.from({ length: WEEKS }, (_, index) => index + 1).map(
+                      (week) => (
+                        <Link
+                          key={week}
+                          href={routes.WEEKLY_ATTENDANCES({
+                            year: currentYear,
+                            semester: z.enum(Semester).parse(semester),
+                            week,
+                          })}
+                          className="bg-neutral-4 hover:bg-neutral-3 flex h-16 w-16 items-center justify-center rounded-md text-3xl transition-colors"
+                        >
+                          {week}
+                        </Link>
+                      ),
+                    )}
+                  </div>
                 </div>
-              </Fragment>
-            ),
-          )}
+              ),
+            )}
+          </div>
         </Fragment>
       ))}
-    </PageContainer>
+    </main>
   )
 }
