@@ -207,25 +207,33 @@ export const RegisterForm = () => {
             />
           )}
         </form.Field>
+      </div>
 
-        <form.Field name="instrument_ids">
-          {({ state, handleChange }) =>
-            instruments?.map((instrument) => (
+      <h2>Instruments</h2>
+
+      <form.Field name="instrument_ids">
+        {({ state, handleChange }) => (
+          <div className="grid grid-cols-2 gap-2">
+            {instruments?.map((instrument) => (
               <Button
                 key={instrument.id}
                 variant={
                   state.value.includes(instrument.id) ? 'primary' : 'secondary'
                 }
                 onClick={() => {
-                  handleChange((prev) => [...prev, instrument.id])
+                  handleChange((prev) =>
+                    prev.includes(instrument.id)
+                      ? prev.filter((id) => id !== instrument.id)
+                      : [...prev, instrument.id],
+                  )
                 }}
               >
                 {instrument.name}
               </Button>
-            ))
-          }
-        </form.Field>
-      </div>
+            ))}
+          </div>
+        )}
+      </form.Field>
 
       <form.Field name="mailing_list_preference">
         {({ state, name, handleChange }) => (

@@ -1,17 +1,20 @@
 'use client'
 
 import { useForm } from '@tanstack/react-form'
+import { useQueryClient } from '@tanstack/react-query'
 import z from 'zod'
 
 import { SubmitButton } from '@/design_system/submit_button'
 import { TextInput } from '@/design_system/text_input'
-import { apiRoutes } from '@/routes'
+import { apiRoutes, queryKeys } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
 import { CreateInstrumentFormValidator } from '../validators/create_instrument_form_validator'
 
 export const CreateInstrumentForm = () => {
+  const queryClient = useQueryClient()
+
   const defaultValues: z.infer<typeof CreateInstrumentFormValidator> = {
     instrument_name: '',
   }
@@ -39,8 +42,9 @@ export const CreateInstrumentForm = () => {
           break
         case StatusCode.OK:
         case StatusCode.Created:
-          // eslint-disable-next-line no-alert, no-undef
-          alert('Instrument updated successfully!')
+          await queryClient.invalidateQueries({
+            queryKey: queryKeys.INSTRUMENTS(),
+          })
           break
       }
     },

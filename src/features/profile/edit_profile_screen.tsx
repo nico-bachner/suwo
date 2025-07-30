@@ -41,13 +41,9 @@ export const EditProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
 
       {profile.roles.length > 0 && <p>{profile.roles.join(', ')}</p>}
 
-      {profile.instruments.length > 0 && (
-        <p>{profile.instruments.join(', ')}</p>
-      )}
-
       <SettingsSection
-        title="Instrument"
-        description="This is the instrument you usually play during SUWO rehearsals. If you play multiple instruments, choose the one you play most often."
+        title="Instruments"
+        description="Tell us what instruments you play"
       >
         <UpdateInstrumentForm />
         <CreateInstrumentForm />
