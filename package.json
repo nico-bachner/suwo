@@ -10,7 +10,6 @@
     "format": "prisma format && prettier --write ./",
     "sb:dev": "storybook dev -p 6006 --no-open",
     "sb:build": "storybook build",
-    "db:migrate": "prisma migrate dev",
     "postinstall": "prisma generate"
   },
   "prisma": {

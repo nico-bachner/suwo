@@ -70,7 +70,8 @@ life.
 suwo/
 ├── prisma/
 │   ├── migrations/               # Database migration files
-│   └── schema.prisma             # Prisma schema definition
+│   ├── models/                   # Prisma schema files
+│   └── schema.prisma             # Prisma config schema
 ├── src/
 │   ├── app/                      # Next.js App Router pages
 │   │   ├── (app)/                # Authenticated app pages
@@ -79,9 +80,14 @@ suwo/
 │   │   └── api/                  # API routes
 │   ├── design_system/            # Reusable UI components
 │   ├── features/                 # Feature-specific modules
+│   ├── generated/                # Prisma output – ignore this
+│   ├── lib/                      # Next.js App Router pages
+│   │   ├── forms/                # Tanstack Form forms
+│   │   ├── mutations/            # Tanstack Query mutations
+│   │   ├── queries/              # Tanstack Query queries
+│   │   └── validators/           # Zod schema validators
 │   ├── styles/                   # Global styles and design tokens
 │   ├── utils/                    # Utility functions and helpers
-│   ├── validators/               # Zod schema validators
 │   ├── config.ts                 # Application configuration
 │   └── routes.ts                 # Application route definitions
 ├── .env.local                    # Environment variables (local)
@@ -128,13 +134,13 @@ suwo/
 
 ### Available Scripts
 
-- `pnpm dev` - Start development server
-- `pnpm build` - Build for production
-- `pnpm start` - Start production server
-- `pnpm lint` - Run ESLint
-- `pnpm format` - Format code with Prisma and Prettier
-- `pnpm sb:dev` - Start Storybook for component development
-- `pnpm sb:build` - Build Storybook for production
+- `dev` - Start development server
+- `build` - Build for production
+- `start` - Start production server
+- `lint` - Run ESLint
+- `format` - Format code with Prisma and Prettier
+- `sb:dev` - Start Storybook for component development
+- `sb:build` - Build Storybook for production
 
 ## 🤝 Contributing
 
@@ -145,7 +151,7 @@ suwo/
   for components)
 - Add JSDoc comments for complex functions
 - Ensure all components are properly typed
-- Use absolute imports (`@/` prefix)
+- Prefer absolute imports (`@/` prefix)
 
 ### Component Development
 
@@ -156,7 +162,8 @@ suwo/
 
 ### Database Changes
 
-1. Create Prisma migration: `pnpm db:migrate --name your_migration_name`
+1. Create Prisma migration: `pnpm prisma migrate dev --name [MIGRATION_NAME]`
+   (use snake case for migration names)
 2. Fix potentially broken TypeScript types
 
 ### Git Workflow
@@ -176,13 +183,12 @@ suwo/
 
 ### Testing
 
-- Test authentication flows thoroughly
+- Our dev database is a replica of the production database. Use that to your
+  advantage to test against real data.
 - Verify responsive design on multiple screen sizes
 - Check accessibility with screen readers
-- Test with real data scenarios
 
 ## 📄 License
 
 This project is private and proprietary to the University of Sydney Wind
-Orchestra. This project is private and proprietary to the University of Sydney
-Wind Orchestra. Orchestra.
+Orchestra.
