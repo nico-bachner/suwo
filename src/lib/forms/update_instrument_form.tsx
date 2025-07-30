@@ -16,17 +16,11 @@ import { UpdateInstrumentFormValidator } from '../validators/update_instrument_f
 
 export const UpdateInstrumentForm = () => {
   const { data: instruments } = useQuery(queries.INSTRUMENTS())
-  const { data: myInstruments, error } = useQuery(queries.MY_INSTRUMENTS())
-
-  if (error) {
-    throw new Error('Failed to fetch instruments')
-  }
+  const { data: myInstruments } = useQuery(queries.MY_INSTRUMENTS())
 
   const defaultValues: z.infer<typeof UpdateInstrumentFormValidator> = {
     instrument_ids: myInstruments?.map(({ id }) => id) || [],
   }
-
-  console.log('Default Values:', defaultValues)
 
   const form = useForm({
     defaultValues,
@@ -47,6 +41,7 @@ export const UpdateInstrumentForm = () => {
           alert(`${response.error}\n\nPlease try again`)
           break
         case StatusCode.OK:
+          form.reset()
           // eslint-disable-next-line no-alert, no-undef
           alert('Instrument updated successfully!')
           break
