@@ -12,12 +12,12 @@ export default function Page() {
 
       <RegisterForm />
 
-      <p>
+      <p className="text-right">
         Already have an account? <Link href={routes.LOGIN()}>Log in</Link>{' '}
         instead
       </p>
 
-      <p>Don&apos;t see your instrument in the list? Add it below.</p>
+      <h2>Don&apos;t see your instrument in the list? Add it below.</h2>
 
       <CreateInstrumentForm />
     </PageContainer>

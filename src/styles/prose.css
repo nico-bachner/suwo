@@ -2,6 +2,10 @@
   @apply w-full;
 }
 
+.prose > * {
+  margin-block: 2rem;
+}
+
 /* Text */
 .prose > h1,
 .prose > h2,
