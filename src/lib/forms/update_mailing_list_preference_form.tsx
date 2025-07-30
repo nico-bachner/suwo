@@ -3,8 +3,7 @@
 import { useForm } from '@tanstack/react-form'
 import { useQuery } from '@tanstack/react-query'
 
-import { Button } from '@/design_system/button'
-import { Spinner } from '@/design_system/spinner'
+import { SubmitButton } from '@/design_system/submit_button'
 import { Switch } from '@/design_system/switch'
 import { queries } from '@/lib/queries'
 import { apiRoutes } from '@/routes'
@@ -66,13 +65,7 @@ export const UpdateMailingListPreferenceForm = () => {
 
       <form.Subscribe>
         {({ canSubmit, isSubmitting }) => (
-          <Button variant="primary" disabled={!canSubmit} className="mt-4">
-            {isSubmitting ? (
-              <Spinner className="stroke-neutral-3 h-6 w-6" />
-            ) : (
-              'Submit'
-            )}
-          </Button>
+          <SubmitButton canSubmit={canSubmit} isSubmitting={isSubmitting} />
         )}
       </form.Subscribe>
     </form>

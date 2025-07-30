@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import z from 'zod'
 
 import { Button } from '@/design_system/button'
-import { Spinner } from '@/design_system/spinner'
+import { SubmitButton } from '@/design_system/submit_button'
 import { queries } from '@/lib/queries'
 import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
@@ -88,18 +88,7 @@ export const UpdateInstrumentForm = () => {
 
       <form.Subscribe>
         {({ canSubmit, isSubmitting }) => (
-          <Button
-            type="submit"
-            variant="primary"
-            disabled={!canSubmit}
-            className="mt-4"
-          >
-            {isSubmitting ? (
-              <Spinner className="stroke-neutral-3 h-6 w-6" />
-            ) : (
-              'Submit'
-            )}
-          </Button>
+          <SubmitButton canSubmit={canSubmit} isSubmitting={isSubmitting} />
         )}
       </form.Subscribe>
     </form>
