@@ -1,5 +1,3 @@
-import { cn } from '@/utils/cn'
-
 import { Container } from './container'
 import { ContainerProps } from './types'
 
@@ -8,7 +6,9 @@ export const PageContainer = ({
   className,
   ...props
 }: ContainerProps) => (
-  <Container {...props} className={cn('flex-1 px-4 pt-12 pb-20', className)}>
-    {children}
-  </Container>
+  <div className="flex-1 px-4 pt-12 pb-20">
+    <Container {...props} className={className}>
+      {children}
+    </Container>
+  </div>
 )

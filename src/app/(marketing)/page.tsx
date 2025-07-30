@@ -7,8 +7,8 @@ import { routes } from '@/routes'
 
 export default function Page() {
   return (
-    <PageContainer size="lg">
-      <Container size="sm" className="prose">
+    <PageContainer size="lg" className="flex flex-col gap-8">
+      <Container size="md" className="prose">
         <h1>Sydney University Wind Orchestra</h1>
 
         <p>
@@ -34,12 +34,14 @@ export default function Page() {
           ) during the university semester, and perform once at the end of each
           semester.
         </p>
+      </Container>
 
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.9913322359207!2d151.18291567655325!3d-33.88987707321865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12b1af5537cc19%3A0x2dcf6e63ca183361!2sGillespie%20Hall%20-%20St%20Andrew&#39;s%20College%20CG5G!5e0!3m2!1sen!2sdk!4v1753477585951!5m2!1sen!2sdk"
-          className="aspect-video w-full focus:outline-none"
-        />
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.9913322359207!2d151.18291567655325!3d-33.88987707321865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12b1af5537cc19%3A0x2dcf6e63ca183361!2sGillespie%20Hall%20-%20St%20Andrew&#39;s%20College%20CG5G!5e0!3m2!1sen!2sdk!4v1753477585951!5m2!1sen!2sdk"
+        className="aspect-video w-full focus:outline-none"
+      />
 
+      <Container size="md" className="prose">
         <h2>Become a member</h2>
 
         <p>
