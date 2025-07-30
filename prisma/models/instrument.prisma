@@ -1,4 +1,7 @@
 model Instrument {
+    // ID
+    id String @id @default(uuid())
+
     // Required Attributes
     name String @unique
     slug String @unique
@@ -9,6 +12,4 @@ model Instrument {
     // Metadata
     Profiles      Profile[]
     PracticeParts PracticePart[]
-
-    @@index([name(sort: Asc)])
 }
