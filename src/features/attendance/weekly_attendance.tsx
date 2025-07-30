@@ -35,6 +35,13 @@ export const WeeklyAttendance = ({
 
   return (
     <>
+      <WeeklyAttendanceNavigation
+        year={year}
+        semester={semester}
+        week={week}
+        className="fixed right-0 bottom-0 left-0 z-10"
+      />
+
       <main className="prose">
         <h1 className="text-center">
           Attendance Sheet
@@ -76,8 +83,6 @@ export const WeeklyAttendance = ({
               ))}
         </div>
       </main>
-
-      <WeeklyAttendanceNavigation year={year} semester={semester} week={week} />
     </>
   )
 }

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Button } from '@/design_system/button'
 import { MAX_WEEK, MIN_WEEK } from '@/features/usyd_api_wrapper/config'
 import { routes } from '@/routes'
+import { cn } from '@/utils/cn'
 
 import { WeeklyAttendances } from './types'
 import { WeeklyAttendanceQRCodeDialog } from './weekly_attendance_qr_code_dialog'
@@ -12,9 +13,17 @@ export const WeeklyAttendanceNavigation = ({
   year,
   semester,
   week,
-}: WeeklyAttendances) => (
-  <div className="bg-neutral-7/80 border-neutral-4/50 fixed bottom-0 w-full border-t backdrop-blur-lg">
-    <nav className="mx-auto grid max-w-screen-lg grid-cols-3 items-center gap-2 p-4">
+  className,
+}: WeeklyAttendances & {
+  className?: string
+}) => (
+  <div
+    className={cn(
+      'bg-neutral-7/80 border-neutral-4/50 border-t px-4 backdrop-blur-lg',
+      className,
+    )}
+  >
+    <nav className="mx-auto grid w-full max-w-screen-lg grid-cols-3 items-center gap-2 py-4">
       {week > MIN_WEEK && (
         <Button
           variant="secondary"
