@@ -1,7 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 
-import { Button } from '@/design_system/button'
 import { MAX_WEEK, MIN_WEEK } from '@/features/usyd_api_wrapper/config'
 import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
@@ -25,18 +24,13 @@ export const WeeklyAttendanceNavigation = ({
   >
     <nav className="mx-auto grid w-full max-w-screen-lg grid-cols-3 items-center gap-2 py-4">
       {week > MIN_WEEK && (
-        <Button
-          variant="secondary"
-          asChild
-          className="col-start-1 justify-self-start"
+        <Link
+          href={routes.WEEKLY_ATTENDANCES({ year, semester, week: week - 1 })}
+          className="col-start-1 flex items-center gap-1 justify-self-start"
         >
-          <Link
-            href={routes.WEEKLY_ATTENDANCES({ year, semester, week: week - 1 })}
-          >
-            <ChevronLeftIcon className="box-content h-5 w-5" />
-            <span className="pr-2">Week {week - 1}</span>
-          </Link>
-        </Button>
+          <ChevronLeftIcon className="box-content size-4" />
+          <span className="pr-1">Week {week - 1}</span>
+        </Link>
       )}
 
       <WeeklyAttendanceQRCodeDialog
@@ -45,18 +39,13 @@ export const WeeklyAttendanceNavigation = ({
       />
 
       {week < MAX_WEEK && (
-        <Button
-          variant="secondary"
-          asChild
-          className="col-start-3 justify-self-end"
+        <Link
+          href={routes.WEEKLY_ATTENDANCES({ year, semester, week: week + 1 })}
+          className="col-start-3 flex items-center gap-1 justify-self-end"
         >
-          <Link
-            href={routes.WEEKLY_ATTENDANCES({ year, semester, week: week + 1 })}
-          >
-            <span className="pl-2">Week {week + 1}</span>
-            <ChevronRightIcon className="box-content h-5 w-5" />
-          </Link>
-        </Button>
+          <span className="pl-1">Week {week + 1}</span>
+          <ChevronRightIcon className="box-content size-4" />
+        </Link>
       )}
     </nav>
   </div>
