@@ -13,11 +13,12 @@ model User {
     updated_at DateTime @default(now()) @updatedAt
 
     // Relations
-    Profile              Profile?
-    VerificationTokens   VerificationToken[]
     Attendances          Attendance[]
-    UsuMembership        UsuMembership?
     MailingListRecipient MailingListRecipient?
     Payments             Payment[]
+    Profile              Profile?
+    UserInstrument       UserInstrument[]
     UserRole             UserRole[]
+    UsuMembership        UsuMembership?
+    VerificationTokens   VerificationToken[]
 }

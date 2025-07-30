@@ -4,12 +4,11 @@ model Instrument {
 
     // Required Attributes
     name String @unique
-    slug String @unique
 
     // Optional Attributes
     description String?
 
     // Metadata
-    Profiles      Profile[]
-    PracticeParts PracticePart[]
+    PracticeParts  PracticePart[]
+    UserInstrument UserInstrument[]
 }

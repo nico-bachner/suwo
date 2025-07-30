@@ -1,13 +1,13 @@
 import z from 'zod'
 
 import { getSession } from '@/features/auth/session/get_session'
-import { UpdateInstrumentValidator } from '@/features/profile/update_instrument_validator'
+import { UpdateInstrumentFormValidator } from '@/lib/validators/update_instrument_form_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
 
 export const POST = async (request: Request) => {
-  const { data, error, success } = UpdateInstrumentValidator.safeParse(
+  const { data, error, success } = UpdateInstrumentFormValidator.safeParse(
     await request.json(),
   )
 
@@ -27,15 +27,21 @@ export const POST = async (request: Request) => {
     })
   }
 
+  await prisma.userInstrument.deleteMany({
+    where: {
+      user_id: session.user_id,
+    },
+  })
+
+  const userInstruments = await prisma.userInstrument.createManyAndReturn({
+    data: data.instrument_ids.map((id) => ({
+      user_id: session.user_id,
+      instrument_id: id,
+    })),
+  })
+
   return createResponse({
     status: StatusCode.OK,
-    data: await prisma.profile.update({
-      where: {
-        user_id: session.user_id,
-      },
-      data: {
-        instrument_name: data.instrument_name,
-      },
-    }),
+    data: userInstruments,
   })
 }

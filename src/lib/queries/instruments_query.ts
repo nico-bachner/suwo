@@ -1,12 +1,20 @@
 import { UseQueryOptions } from '@tanstack/react-query'
 import z from 'zod'
 
-import { Instrument } from '@/generated/prisma'
 import { apiRoutes, queryKeys } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-export const instrumentsQuery = (): UseQueryOptions<Instrument[]> => ({
+const schema = z.array(
+  z.object({
+    id: z.uuid(),
+    name: z.string(),
+  }),
+)
+
+type Instruments = z.infer<typeof schema>
+
+export const instrumentsQuery = (): UseQueryOptions<Instruments> => ({
   queryKey: queryKeys.INSTRUMENTS(),
   queryFn: async ({ signal }) => {
     const response = await parseResponse(
@@ -15,15 +23,7 @@ export const instrumentsQuery = (): UseQueryOptions<Instrument[]> => ({
 
     switch (response.status) {
       case StatusCode.OK: {
-        const { data, success } = z
-          .array(
-            z.object({
-              name: z.string(),
-              slug: z.string(),
-              description: z.string().nullable(),
-            }),
-          )
-          .safeParse(response.data)
+        const { data, success } = schema.safeParse(response.data)
 
         if (!success) {
           throw new Error('Invalid instrument data format')

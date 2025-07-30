@@ -2,21 +2,26 @@
 
 import { useForm } from '@tanstack/react-form'
 import { useQuery } from '@tanstack/react-query'
+import z from 'zod'
 
 import { Button } from '@/design_system/button'
-import { Select, SelectItem } from '@/design_system/select'
 import { Spinner } from '@/design_system/spinner'
 import { queries } from '@/lib/queries'
 import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
+import { UpdateInstrumentFormValidator } from '../validators/update_instrument_form_validator'
+
 export const UpdateInstrumentForm = () => {
   const { data: instruments } = useQuery(queries.INSTRUMENTS())
+
+  const defaultValues: z.infer<typeof UpdateInstrumentFormValidator> = {
+    instrument_ids: [],
+  }
+
   const form = useForm({
-    defaultValues: {
-      instrument_name: '',
-    },
+    defaultValues,
     onSubmit: async ({ value }) => {
       const response = await parseResponse(
         await fetch(apiRoutes.UPDATE_INSTRUMENT(), {
@@ -50,22 +55,22 @@ export const UpdateInstrumentForm = () => {
       }}
       className="flex flex-col gap-4"
     >
-      <form.Field name="instrument_name">
-        {({ state, name, handleChange }) => (
-          <Select
-            name={name}
-            value={state.value}
-            label="Instrument"
-            onValueChange={handleChange}
-            placeholder="Select Instrument..."
-          >
-            {instruments?.map(({ name }) => (
-              <SelectItem key={name} value={name}>
-                {name}
-              </SelectItem>
-            ))}
-          </Select>
-        )}
+      <form.Field name="instrument_ids">
+        {({ state, handleChange }) =>
+          instruments?.map((instrument) => (
+            <Button
+              key={instrument.id}
+              variant={
+                state.value.includes(instrument.id) ? 'primary' : 'secondary'
+              }
+              onClick={() => {
+                handleChange((prev) => [...prev, instrument.id])
+              }}
+            >
+              {instrument.name}
+            </Button>
+          ))
+        }
       </form.Field>
 
       <form.Subscribe>

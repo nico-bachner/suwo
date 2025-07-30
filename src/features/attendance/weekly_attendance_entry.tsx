@@ -30,7 +30,11 @@ export const WeeklyAttendanceEntry = ({
     <div className="odd:bg-neutral-6 flex flex-row items-center">
       <p className="flex flex-1 flex-row gap-2 px-4 font-bold">
         <span className="text-neutral-2">{getProfileScreenName(profile)}</span>
-        <span className="text-neutral-3">{profile.instrument_name}</span>
+        {profile.instruments.length > 0 && (
+          <span className="text-neutral-3">
+            {profile.instruments.join(', ')}
+          </span>
+        )}
       </p>
 
       {isPending ? (

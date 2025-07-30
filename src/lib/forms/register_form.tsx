@@ -6,31 +6,30 @@ import { redirect } from 'next/navigation'
 import z from 'zod'
 
 import { Button } from '@/design_system/button'
-import { Select, SelectItem } from '@/design_system/select'
 import { Spinner } from '@/design_system/spinner'
 import { Switch } from '@/design_system/switch'
 import { TextInput } from '@/design_system/text_input'
-import { RegisterValidator } from '@/features/auth/register_validator'
 import { queries } from '@/lib/queries'
 import { EmailValidator } from '@/lib/validators/email'
 import { FamilyNameValidator } from '@/lib/validators/family_name'
 import { GivenNameValidator } from '@/lib/validators/given_name'
+import { RegisterFormValidator } from '@/lib/validators/register_form_validator'
 import { apiRoutes, queryKeys, routes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-const defaultValues: z.infer<typeof RegisterValidator> = {
-  given_name: '',
-  family_name: undefined,
-  email: '',
-  usu_number: undefined,
-  instrument_name: undefined,
-  mailing_list_preference: true,
-}
-
 export const RegisterForm = () => {
   const queryClient = useQueryClient()
   const { data: instruments } = useQuery(queries.INSTRUMENTS())
+
+  const defaultValues: z.infer<typeof RegisterFormValidator> = {
+    given_name: '',
+    family_name: undefined,
+    email: '',
+    usu_number: undefined,
+    instrument_ids: [],
+    mailing_list_preference: true,
+  }
 
   const form = useForm({
     defaultValues,
@@ -209,22 +208,22 @@ export const RegisterForm = () => {
           )}
         </form.Field>
 
-        <form.Field name="instrument_name">
-          {({ state, name, handleChange }) => (
-            <Select
-              name={name}
-              value={state.value}
-              label="Instrument"
-              onValueChange={handleChange}
-              placeholder="Select Instrument..."
-            >
-              {instruments?.map(({ name }) => (
-                <SelectItem key={name} value={name}>
-                  {name}
-                </SelectItem>
-              ))}
-            </Select>
-          )}
+        <form.Field name="instrument_ids">
+          {({ state, handleChange }) =>
+            instruments?.map((instrument) => (
+              <Button
+                key={instrument.id}
+                variant={
+                  state.value.includes(instrument.id) ? 'primary' : 'secondary'
+                }
+                onClick={() => {
+                  handleChange((prev) => [...prev, instrument.id])
+                }}
+              >
+                {instrument.name}
+              </Button>
+            ))
+          }
         </form.Field>
       </div>
 

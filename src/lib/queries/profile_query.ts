@@ -6,21 +6,20 @@ import { apiRoutes, queryKeys } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-const ProfileValidator = z.object({
+export const ProfileQueryValidator = z.object({
   user_id: z.uuid(),
   given_name: z.string(),
   family_name: z.string().nullable(),
   display_name: z.string().nullable(),
-  instrument_name: z.string().nullable(),
-  bio: z.string().nullable(),
-  role_names: z.array(z.string()),
+  instruments: z.array(z.string()),
+  roles: z.array(z.string()),
 })
+
+export type ProfileQueryResult = z.infer<typeof ProfileQueryValidator>
 
 export const profileQuery = ({
   user_id,
-}: Pick<Profile, 'user_id'>): UseQueryOptions<
-  z.infer<typeof ProfileValidator>
-> => ({
+}: Pick<Profile, 'user_id'>): UseQueryOptions<ProfileQueryResult> => ({
   queryKey: queryKeys.PROFILE({ user_id }),
   queryFn: async ({ signal }) => {
     const response = await parseResponse(
@@ -29,7 +28,7 @@ export const profileQuery = ({
 
     switch (response.status) {
       case StatusCode.OK: {
-        const { data, error, success } = ProfileValidator.safeParse(
+        const { data, error, success } = ProfileQueryValidator.safeParse(
           response.data,
         )
 

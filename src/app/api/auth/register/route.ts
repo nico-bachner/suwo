@@ -1,13 +1,13 @@
 import z from 'zod'
 
-import { RegisterValidator } from '@/features/auth/register_validator'
 import { createSession } from '@/features/auth/session/create_session'
+import { RegisterFormValidator } from '@/lib/validators/register_form_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
 
 export const POST = async (request: Request) => {
-  const { data, error, success } = RegisterValidator.safeParse(
+  const { data, error, success } = RegisterFormValidator.safeParse(
     await request.json(),
   )
 
@@ -35,32 +35,33 @@ export const POST = async (request: Request) => {
     data: {
       email: data.email,
       Profile: {
-        create: {
-          given_name: data.given_name,
-          family_name: data.family_name,
-          instrument_name: data.instrument_name,
-        },
+        create: data,
       },
       MailingListRecipient: {
-        create: {
-          email: data.email,
-        },
+        create: data,
       },
     },
   })
 
-  if (data.usu_number) {
-    await prisma.usuMembership.create({
-      data: {
-        user_id: user.id,
-        number: data.usu_number,
-      },
-    })
-  }
-
-  await createSession({
-    user_id: user.id,
-  })
+  await Promise.all([
+    data.usu_number &&
+      prisma.usuMembership.create({
+        data: {
+          user_id: user.id,
+          number: data.usu_number,
+        },
+      }),
+    data.instrument_ids.length > 0 &&
+      prisma.userInstrument.createMany({
+        data: data.instrument_ids.map((instrument_id) => ({
+          user_id: user.id,
+          instrument_id,
+        })),
+      }),
+    createSession({
+      user_id: user.id,
+    }),
+  ])
 
   return createResponse({
     status: StatusCode.OK,

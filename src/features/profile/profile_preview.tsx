@@ -1,21 +1,21 @@
 import Link from 'next/link'
 
 import { SkeletonText } from '@/design_system/skeleton'
-import { Profile } from '@/generated/prisma'
+import { ProfileQueryResult } from '@/lib/queries/profile_query'
 import { routes } from '@/routes'
 
 import { getProfileScreenName } from './utils/get_profile_screen_name'
 
-export const ProfilePreview = (profile: Profile) => (
+export const ProfilePreview = (profile: ProfileQueryResult) => (
   <Link
-    key={profile.handle}
+    key={profile.user_id}
     href={routes.PROFILE(profile)}
     className="bg-neutral-6 flex flex-col rounded-lg px-6 py-4 font-bold"
   >
     <span className="text-neutral-2">{getProfileScreenName(profile)}</span>
-    <span className="text-neutral-3">
-      {profile.instrument_name ?? 'No Instrument'}
-    </span>
+    {profile.instruments.length > 0
+      ? profile.instruments.join(', ')
+      : 'Non-playing member'}
   </Link>
 )
 

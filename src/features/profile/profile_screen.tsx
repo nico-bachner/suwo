@@ -31,7 +31,7 @@ export const ProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
     return (
       <PageContainer size="sm" className="prose">
         <h1>Error</h1>
-        <p>Failed to load profile: {error.message}</p>
+        <p>{error.message}</p>
       </PageContainer>
     )
   }
@@ -40,13 +40,11 @@ export const ProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
     <PageContainer size="sm" className="prose">
       <h1>{getProfileScreenName(profile)}</h1>
 
-      {profile.role_names.length > 0 && (
-        <p className="text-sm text-neutral-500">
-          {profile.role_names.join(', ')}
-        </p>
-      )}
+      {profile.roles.length > 0 && <p>{profile.roles.join(', ')}</p>}
 
-      {profile.instrument_name && <p>{profile.instrument_name}</p>}
+      {profile.instruments.length > 0 && (
+        <p>{profile.instruments.join(', ')}</p>
+      )}
 
       {session && session.user_id === profile.user_id && (
         <Link

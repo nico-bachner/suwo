@@ -29,7 +29,7 @@ export const EditProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
     return (
       <PageContainer size="sm" className="prose">
         <h1>Error</h1>
-        <p>Failed to load profile: {error.message}</p>
+        <p>{error.message}</p>
       </PageContainer>
     )
   }
@@ -38,7 +38,11 @@ export const EditProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
     <PageContainer size="sm" className="prose">
       <h1>{getProfileScreenName(profile)}</h1>
 
-      {profile.instrument_name && <p>{profile.instrument_name}</p>}
+      {profile.roles.length > 0 && <p>{profile.roles.join(', ')}</p>}
+
+      {profile.instruments.length > 0 && (
+        <p>{profile.instruments.join(', ')}</p>
+      )}
 
       <SettingsSection
         title="Instrument"
