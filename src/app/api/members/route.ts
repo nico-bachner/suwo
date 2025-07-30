@@ -43,13 +43,10 @@ export const GET: APIRoute = async () => {
   })
 
   const data: ProfilesQueryResult = profiles.map((profile) => ({
-    user_id: profile.user_id,
-    given_name: profile.given_name,
-    family_name: profile.family_name,
-    display_name: profile.display_name,
+    ...profile,
     instruments: profile.user.UserInstrument.map(
       ({ instrument }) => instrument.name,
-    ),
+    ).toSorted((a, b) => a.localeCompare(b)),
     roles: profile.user.UserRole.map(({ role }) => role.name),
   }))
 

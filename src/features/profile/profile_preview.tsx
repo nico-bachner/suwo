@@ -13,9 +13,11 @@ export const ProfilePreview = (profile: ProfileQueryResult) => (
     className="bg-neutral-6 flex flex-col rounded-lg px-6 py-4 font-bold"
   >
     <span className="text-neutral-2">{getProfileScreenName(profile)}</span>
-    {profile.instruments.length > 0
-      ? profile.instruments.join(', ')
-      : 'Non-playing member'}
+    <span className="text-neutral-3 line-clamp-1">
+      {profile.instruments.length > 0
+        ? profile.instruments.join(', ')
+        : 'Non-playing member'}
+    </span>
   </Link>
 )
 

@@ -24,22 +24,37 @@ export const GET: APIRoute = async (_, { params }) => {
     })
   }
 
-  const [profile, roles] = await Promise.all([
-    prisma.profile.findUnique({
-      where: {
-        user_id: paramsData.user_id,
-      },
-    }),
-    prisma.role.findMany({
-      where: {
-        UserRole: {
-          some: {
-            user_id: paramsData.user_id,
+  const profile = await prisma.profile.findUnique({
+    where: {
+      user_id: paramsData.user_id,
+    },
+    include: {
+      user: {
+        select: {
+          UserInstrument: {
+            select: {
+              instrument: {
+                select: {
+                  id: true,
+                  name: true,
+                },
+              },
+            },
+          },
+          UserRole: {
+            select: {
+              role: {
+                select: {
+                  id: true,
+                  name: true,
+                },
+              },
+            },
           },
         },
       },
-    }),
-  ])
+    },
+  })
 
   if (!profile) {
     return createResponse({
@@ -50,24 +65,10 @@ export const GET: APIRoute = async (_, { params }) => {
 
   const data: ProfileQueryResult = {
     ...profile,
-    instruments: await prisma.userInstrument
-      .findMany({
-        where: {
-          user_id: paramsData.user_id,
-        },
-        select: {
-          instrument: {
-            select: {
-              id: true,
-              name: true,
-            },
-          },
-        },
-      })
-      .then((userInstruments) =>
-        userInstruments.map(({ instrument }) => instrument.name),
-      ),
-    roles: roles.map(({ name }) => name),
+    instruments: profile.user.UserInstrument.map(
+      ({ instrument }) => instrument.name,
+    ).toSorted((a, b) => a.localeCompare(b)),
+    roles: profile.user.UserRole.map(({ role }) => role.name),
   }
 
   return createResponse({
