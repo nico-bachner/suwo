@@ -8,7 +8,7 @@ export const PageContainer = ({
   className,
   ...props
 }: ContainerProps) => (
-  <Container {...props} className={cn('flex-1 px-4 pt-8 pb-16', className)}>
+  <Container {...props} className={cn('flex-1 px-4 pt-12 pb-20', className)}>
     {children}
   </Container>
 )

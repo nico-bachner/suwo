@@ -32,11 +32,15 @@ export default function Layout({ children }: LayoutFileProps) {
     <html lang="en">
       <body className={cn(fontSans.variable, fontSerif.variable)}>
         <QueryProvider>
-          <Image
-            src={ensemble}
-            alt="Sydney University Wind Orchestra"
-            className="fixed inset-0 -z-10 w-full brightness-[0.15]"
-          />
+          <div className="fixed inset-0 -z-10">
+            <Image
+              src={ensemble}
+              alt="Sydney University Wind Orchestra"
+              layout="fill"
+              objectFit="cover"
+              className="brightness-[0.2]"
+            />
+          </div>
 
           <div className="flex min-h-screen flex-col">
             <Navbar />

@@ -18,7 +18,7 @@ export const Navbar = () => {
   const { data: currentWeek } = useQuery(queries.CURRENT_WEEK())
 
   return (
-    <nav className="bg-neutral-7/50 sticky top-0 p-4 backdrop-blur">
+    <nav className="bg-neutral-7/80 border-neutral-4/50 sticky top-0 border-b p-4 backdrop-blur-lg">
       <div className="mx-auto flex max-w-screen-lg items-center justify-between">
         <Link href={routes.HOME()}>
           <Image {...IMAGES.ICON} className="h-12 w-12" />
