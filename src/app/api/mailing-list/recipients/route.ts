@@ -17,6 +17,6 @@ export const GET = async () => {
 
   return createResponse({
     status: StatusCode.OK,
-    data: mailingListRecipients.map(({ email }) => email),
+    data: mailingListRecipients,
   })
 }
