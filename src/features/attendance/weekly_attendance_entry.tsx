@@ -23,11 +23,11 @@ export const WeeklyAttendanceEntry = ({
   } = useQuery(queries.WEEKLY_ATTENDANCES(attendanceData))
 
   if (error) {
-    throw new Error(`Failed to fetch attendances: ${error.message}`)
+    throw new Error(error.message)
   }
 
   return (
-    <div className="odd:bg-neutral-6 flex flex-row items-center">
+    <div className="odd:bg-neutral-5 even:bg-neutral-7 flex flex-row items-center">
       <p className="flex flex-1 flex-row gap-2 px-4 font-bold">
         <span className="text-neutral-2">{getProfileScreenName(profile)}</span>
         {profile.instruments.length > 0 && (
@@ -53,7 +53,7 @@ export const WeeklyAttendanceEntry = ({
 }
 
 export const WeeklyAttendanceEntrySkeleton = () => (
-  <div className="odd:bg-neutral-6 flex flex-row items-center">
+  <div className="odd:bg-neutral-5 even:bg-neutral-7 flex flex-row items-center">
     <div className="flex flex-1 flex-row gap-2 px-4">
       <SkeletonText className="h-5 w-50" />
       <SkeletonText className="h-5 w-30" />

@@ -45,9 +45,7 @@ export const WeeklyAttendance = ({
           Week {week}
         </h1>
         <p className="text-center text-xl">
-          {attendances &&
-            profiles &&
-            `Present: ${attendances.length}/${profiles.length}`}
+          Present: {`${attendances?.length ?? 0}/${profiles?.length ?? 0}`}
         </p>
 
         <TextInput

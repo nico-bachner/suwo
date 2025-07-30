@@ -14,7 +14,7 @@ export const WeeklyAttendanceNavigation = ({
   semester,
   week,
 }: WeeklyAttendances) => (
-  <nav className="bg-neutral-7/50 sticky bottom-0 backdrop-blur">
+  <nav className="bg-neutral-7/80 border-neutral-4/50 fixed bottom-0 w-full border-t backdrop-blur-lg">
     <Container size="sm" className="grid grid-cols-3 items-center gap-2 p-4">
       {week > MIN_WEEK && (
         <Button

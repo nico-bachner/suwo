@@ -28,7 +28,7 @@ export const TextInput = ({
       type={type}
       name={name}
       id={name}
-      className="focus:border-neutral-2 border-neutral-3 placeholder:text-neutral-3 bg-neutral-7 rounded-md border px-3 py-2 focus:outline-none"
+      className="focus:border-neutral-2 border-neutral-3 placeholder:text-neutral-3 rounded-md border px-3 py-2 focus:outline-none"
       {...props}
     />
 
