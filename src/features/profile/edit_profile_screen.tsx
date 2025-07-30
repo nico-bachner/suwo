@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import { PageContainer } from '@/design_system/container'
 import { SettingsSection } from '@/design_system/settings_section'
 import { Profile } from '@/generated/prisma'
+import { CreateInstrumentForm } from '@/lib/forms/create_instrument_form'
 import { UpdateInstrumentForm } from '@/lib/forms/update_instrument_form'
 import { queries } from '@/lib/queries'
 
@@ -49,6 +50,7 @@ export const EditProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
         description="This is the instrument you usually play during SUWO rehearsals. If you play multiple instruments, choose the one you play most often."
       >
         <UpdateInstrumentForm />
+        <CreateInstrumentForm />
       </SettingsSection>
     </PageContainer>
   )

@@ -32,6 +32,7 @@ export const apiRoutes = {
   ...attendanceApiRoutes,
   ...authApiRoutes,
   ...profileApiRoutes,
+  CREATE_INSTRUMENT: () => createURL({ path: ['api', 'instruments'] }),
   CURRENT_WEEK: () => createURL({ path: ['api', 'usyd', 'current-week'] }),
   EQUIPMENT: () => createURL({ path: ['api', 'equipment'] }),
   INSTRUMENTS: () => createURL({ path: ['api', 'instruments'] }),

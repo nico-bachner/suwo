@@ -5,34 +5,37 @@ import { apiRoutes, queryKeys } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-const schema = z.array(
+export const InstrumentsQueryValidator = z.array(
   z.object({
     id: z.uuid(),
     name: z.string(),
   }),
 )
 
-type Instruments = z.infer<typeof schema>
+export type InstrumentsQueryResult = z.infer<typeof InstrumentsQueryValidator>
 
-export const instrumentsQuery = (): UseQueryOptions<Instruments> => ({
-  queryKey: queryKeys.INSTRUMENTS(),
-  queryFn: async ({ signal }) => {
-    const response = await parseResponse(
-      await fetch(apiRoutes.INSTRUMENTS(), { signal }),
-    )
+export const instrumentsQuery =
+  (): UseQueryOptions<InstrumentsQueryResult> => ({
+    queryKey: queryKeys.INSTRUMENTS(),
+    queryFn: async ({ signal }) => {
+      const response = await parseResponse(
+        await fetch(apiRoutes.INSTRUMENTS(), { signal }),
+      )
 
-    switch (response.status) {
-      case StatusCode.OK: {
-        const { data, success } = schema.safeParse(response.data)
+      switch (response.status) {
+        case StatusCode.OK: {
+          const { data, success } = InstrumentsQueryValidator.safeParse(
+            response.data,
+          )
 
-        if (!success) {
-          throw new Error('Invalid instrument data format')
+          if (!success) {
+            throw new Error('Invalid instrument data format')
+          }
+
+          return data
         }
-
-        return data
+        default:
+          throw new Error('Failed to fetch data')
       }
-      default:
-        throw new Error('Failed to fetch data')
-    }
-  },
-})
+    },
+  })
