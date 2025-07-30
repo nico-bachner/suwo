@@ -6,9 +6,9 @@ import { redirect } from 'next/navigation'
 import z from 'zod'
 
 import { Button } from '@/design_system/button'
-import { Checkbox } from '@/design_system/checkbox'
 import { Select, SelectItem } from '@/design_system/select'
 import { Spinner } from '@/design_system/spinner'
+import { Switch } from '@/design_system/switch'
 import { TextInput } from '@/design_system/text_input'
 import { RegisterValidator } from '@/features/auth/register_validator'
 import { queries } from '@/lib/queries'
@@ -230,21 +230,11 @@ export const RegisterForm = () => {
 
       <form.Field name="mailing_list_preference">
         {({ state, name, handleChange }) => (
-          <Checkbox
+          <Switch
             name={name}
             label="Sign up for weekly rehearsal updates"
             checked={state.value}
-            onCheckedChange={(value) => {
-              switch (value) {
-                case true:
-                case false:
-                  handleChange(value)
-                  break
-                default:
-                  handleChange(true)
-                  break
-              }
-            }}
+            onCheckedChange={handleChange}
             className="mt-4 self-center"
           />
         )}

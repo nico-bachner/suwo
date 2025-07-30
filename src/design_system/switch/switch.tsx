@@ -5,7 +5,7 @@ import { cn } from '@/utils/cn'
 import { SwitchProps } from './types'
 
 export const Switch = ({ name, label, className, ...props }: SwitchProps) => (
-  <div className={cn('flex flex-row items-center gap-2', className)}>
+  <div className={cn('flex flex-row items-center gap-4', className)}>
     <Root
       id={name}
       name={name}
@@ -15,7 +15,7 @@ export const Switch = ({ name, label, className, ...props }: SwitchProps) => (
       <Thumb className="bg-neutral-1 h-5 w-5 rounded-full transition-transform data-[state=checked]:translate-x-full" />
     </Root>
 
-    <label htmlFor={name} className="text-neutral-2 text-sm select-none">
+    <label htmlFor={name} className="text-neutral-2 select-none">
       {label}
     </label>
   </div>
