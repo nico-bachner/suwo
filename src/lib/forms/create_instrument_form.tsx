@@ -6,10 +6,11 @@ import z from 'zod'
 
 import { SubmitButton } from '@/design_system/submit_button'
 import { TextInput } from '@/design_system/text_input'
-import { apiRoutes, queryKeys } from '@/routes'
+import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
+import { queries } from '../queries'
 import { CreateInstrumentFormValidator } from '../validators/create_instrument_form_validator'
 
 export const CreateInstrumentForm = () => {
@@ -42,9 +43,8 @@ export const CreateInstrumentForm = () => {
           break
         case StatusCode.OK:
         case StatusCode.Created:
-          await queryClient.invalidateQueries({
-            queryKey: queryKeys.INSTRUMENTS(),
-          })
+          await queryClient.invalidateQueries(queries.INSTRUMENTS())
+          form.reset()
           break
       }
     },

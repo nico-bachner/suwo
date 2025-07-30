@@ -72,7 +72,7 @@ export const POST = async (request: Request) => {
   })
 
   return createResponse({
-    status: StatusCode.OK,
+    status: StatusCode.Created,
     data: userInstruments,
   })
 }

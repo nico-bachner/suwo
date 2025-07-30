@@ -1,7 +1,7 @@
 'use client'
 
 import { useForm } from '@tanstack/react-form'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import z from 'zod'
 
 import { Button } from '@/design_system/button'
@@ -15,6 +15,8 @@ import { StatusCode } from '@/utils/http/status_code'
 import { UpdateInstrumentFormValidator } from '../validators/update_instrument_form_validator'
 
 export const UpdateInstrumentForm = () => {
+  const queryClient = useQueryClient()
+
   const { data: instruments } = useQuery(queries.INSTRUMENTS())
   const { data: myInstruments } = useQuery(queries.MY_INSTRUMENTS())
 
@@ -41,7 +43,8 @@ export const UpdateInstrumentForm = () => {
           alert(`${response.error}\n\nPlease try again`)
           break
         case StatusCode.OK:
-          form.reset()
+        case StatusCode.Created:
+          await queryClient.invalidateQueries(queries.MY_INSTRUMENTS())
           // eslint-disable-next-line no-alert, no-undef
           alert('Instrument updated successfully!')
           break
