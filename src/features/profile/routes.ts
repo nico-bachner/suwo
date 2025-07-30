@@ -10,8 +10,6 @@ export const apiRoutes = {
   PROFILES: () => createURL({ path: ['api', 'members'] }),
   PROFILE: ({ user_id }: Pick<Profile, 'user_id'>) =>
     createURL({ path: ['api', 'members', user_id] }),
-  UPDATE_INSTRUMENT: () =>
-    createURL({ path: ['api', 'members', 'update-instrument'] }),
 }
 
 export const routes = {

@@ -15,16 +15,23 @@ import { UpdateInstrumentFormValidator } from '../validators/update_instrument_f
 
 export const UpdateInstrumentForm = () => {
   const { data: instruments } = useQuery(queries.INSTRUMENTS())
+  const { data: myInstruments, error } = useQuery(queries.MY_INSTRUMENTS())
+
+  if (error) {
+    throw new Error('Failed to fetch instruments')
+  }
 
   const defaultValues: z.infer<typeof UpdateInstrumentFormValidator> = {
-    instrument_ids: instruments?.map((instrument) => instrument.id) || [],
+    instrument_ids: myInstruments?.map(({ id }) => id) || [],
   }
+
+  console.log('Default Values:', defaultValues)
 
   const form = useForm({
     defaultValues,
     onSubmit: async ({ value }) => {
       const response = await parseResponse(
-        await fetch(apiRoutes.UPDATE_INSTRUMENT(), {
+        await fetch(apiRoutes.MY_INSTRUMENTS(), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -56,26 +63,37 @@ export const UpdateInstrumentForm = () => {
       className="flex flex-col gap-4"
     >
       <form.Field name="instrument_ids">
-        {({ state, handleChange }) =>
-          instruments?.map((instrument) => (
-            <Button
-              key={instrument.id}
-              variant={
-                state.value.includes(instrument.id) ? 'primary' : 'secondary'
-              }
-              onClick={() => {
-                handleChange((prev) => [...prev, instrument.id])
-              }}
-            >
-              {instrument.name}
-            </Button>
-          ))
-        }
+        {({ state, handleChange }) => (
+          <div className="grid grid-cols-2 gap-4">
+            {instruments?.map((instrument) => (
+              <Button
+                key={instrument.id}
+                variant={
+                  state.value.includes(instrument.id) ? 'primary' : 'secondary'
+                }
+                onClick={() => {
+                  handleChange((prev) =>
+                    prev.includes(instrument.id)
+                      ? prev.filter((id) => id !== instrument.id)
+                      : [...prev, instrument.id],
+                  )
+                }}
+              >
+                {instrument.name}
+              </Button>
+            ))}
+          </div>
+        )}
       </form.Field>
 
       <form.Subscribe>
         {({ canSubmit, isSubmitting }) => (
-          <Button variant="primary" disabled={!canSubmit} className="mt-4">
+          <Button
+            type="submit"
+            variant="primary"
+            disabled={!canSubmit}
+            className="mt-4"
+          >
             {isSubmitting ? (
               <Spinner className="stroke-neutral-3 h-6 w-6" />
             ) : (

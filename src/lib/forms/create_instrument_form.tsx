@@ -39,6 +39,7 @@ export const CreateInstrumentForm = () => {
           alert(`${response.error}\n\nPlease try again`)
           break
         case StatusCode.OK:
+        case StatusCode.Created:
           // eslint-disable-next-line no-alert, no-undef
           alert('Instrument updated successfully!')
           break

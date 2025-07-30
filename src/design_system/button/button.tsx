@@ -7,6 +7,7 @@ import { getVariant } from './utils/get_variant'
 
 export const Button = ({
   children,
+  type = 'button',
   variant,
   asChild,
   className,
@@ -16,6 +17,7 @@ export const Button = ({
 
   return (
     <Component
+      type={type}
       className={cn(
         'flex transform cursor-pointer flex-row items-center justify-center gap-2 rounded-md px-4 py-2.5 font-semibold transition-transform select-none hover:scale-105 focus:scale-105 focus:outline-none',
         getVariant(variant),
