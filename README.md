@@ -81,7 +81,7 @@ suwo/
 │   ├── design_system/            # Reusable UI components
 │   ├── features/                 # Feature-specific modules
 │   ├── generated/                # Prisma output – ignore this
-│   ├── lib/                      # Next.js App Router pages
+│   ├── lib/
 │   │   ├── forms/                # Tanstack Form forms
 │   │   ├── mutations/            # Tanstack Query mutations
 │   │   ├── queries/              # Tanstack Query queries
