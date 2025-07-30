@@ -10,6 +10,7 @@ import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 
 import { getProfileScreenName } from './utils/get_profile_screen_name'
+import { useProfileAttendanceRate } from './utils/use_profile_attendance_rate'
 
 export const ProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
   const { data: session } = useQuery(queries.SESSION())
@@ -18,6 +19,7 @@ export const ProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
     error,
     isPending,
   } = useQuery(queries.PROFILE({ user_id }))
+  const attendanceRate = useProfileAttendanceRate(profile?.attendances)
 
   if (isPending) {
     return (
@@ -45,6 +47,8 @@ export const ProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
       {profile.instruments.length > 0 && (
         <p>{profile.instruments.join(', ')}</p>
       )}
+
+      <p>{attendanceRate}% attendance</p>
 
       {session && session.user_id === profile.user_id && (
         <Button variant="primary" asChild>

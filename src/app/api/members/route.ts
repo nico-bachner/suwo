@@ -37,6 +37,13 @@ export const GET: APIRoute = async () => {
               },
             },
           },
+          Attendances: {
+            select: {
+              year: true,
+              semester: true,
+              week: true,
+            },
+          },
         },
       },
     },
@@ -48,6 +55,7 @@ export const GET: APIRoute = async () => {
       ({ instrument }) => instrument.name,
     ).toSorted((a, b) => a.localeCompare(b)),
     roles: profile.user.UserRole.map(({ role }) => role.name),
+    attendances: profile.user.Attendances,
   }))
 
   return createResponse({

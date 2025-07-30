@@ -13,6 +13,13 @@ export const ProfileQueryValidator = z.object({
   display_name: z.string().nullable(),
   instruments: z.array(z.string()),
   roles: z.array(z.string()),
+  attendances: z.array(
+    z.object({
+      year: z.number(),
+      semester: z.number(),
+      week: z.number(),
+    }),
+  ),
 })
 
 export type ProfileQueryResult = z.infer<typeof ProfileQueryValidator>
