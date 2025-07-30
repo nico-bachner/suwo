@@ -3,6 +3,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 
+import { Button } from '@/design_system/button'
 import { PageContainer } from '@/design_system/container'
 import { TextInput } from '@/design_system/text_input'
 import { queries } from '@/lib/queries'
@@ -65,9 +66,31 @@ export default function Page() {
     )
   }
 
+  const rows = mailingListRecipients.map((recipient) => ({
+    email: recipient.email,
+  }))
+
+  const csv = [
+    Object.keys(rows[0]).join(','),
+    ...rows.map((row) => Object.values(row).join(',')),
+  ].join('\n')
+
   return (
     <PageContainer size="sm" className="prose">
       <h1>Mailing List Recipients</h1>
+
+      <Button variant="secondary" asChild className="mb-6">
+        <a
+          href={URL.createObjectURL(
+            new Blob([csv], {
+              type: 'text/csv;charset=utf-8;',
+            }),
+          )}
+          download="suwo_mailing_list.csv"
+        >
+          Download as CSV
+        </a>
+      </Button>
 
       <TextInput
         name="search"
