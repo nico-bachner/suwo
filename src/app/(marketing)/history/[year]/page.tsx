@@ -13,6 +13,8 @@ import {
 import { fetchNotionPageContent } from '@/utils/notion/fetch_page_content'
 import { getPageTitle } from '@/utils/notion/get_page_title'
 
+export const dynamic = 'error'
+
 export const generateStaticParams: GenerateStaticParams = async () => {
   const years = await fetchHistoryYears()
 
