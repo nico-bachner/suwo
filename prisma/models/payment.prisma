@@ -1,0 +1,11 @@
+model Payment {
+    // Required Attributes
+    user_id    String
+    amount     Float
+    created_at DateTime @default(now())
+
+    // Relations
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@id([user_id, created_at])
+}

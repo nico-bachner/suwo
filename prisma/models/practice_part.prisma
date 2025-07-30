@@ -1,0 +1,22 @@
+model PracticePart {
+    // ID
+    id String @id @default(uuid())
+
+    // Required Attributes
+    instrument_name String
+    library_id      String
+    url             String
+
+    // Optional Attributes
+    variant String?
+
+    // Metadata
+    created_at DateTime @default(now())
+    updated_at DateTime @default(now()) @updatedAt
+
+    // Relations
+    instrument Instrument @relation(fields: [instrument_name], references: [name], onDelete: Cascade)
+    library    Library    @relation(fields: [library_id], references: [id], onDelete: Cascade)
+
+    @@unique([instrument_name, library_id, variant])
+}

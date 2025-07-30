@@ -1,0 +1,14 @@
+model Privilege {
+    // ID
+    id String @id @default(uuid())
+
+    // Required Attributes
+    name String @unique
+
+    // Metadata
+    created_at DateTime @default(now())
+    updated_at DateTime @default(now()) @updatedAt
+
+    // Relations
+    RolePrivilege RolePrivilege[]
+}

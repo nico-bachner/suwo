@@ -1,0 +1,11 @@
+model RolePrivilege {
+    // Required Attributes
+    role_id      String
+    privilege_id String
+
+    // Relations
+    role      Role      @relation(fields: [role_id], references: [id], onDelete: Cascade)
+    privilege Privilege @relation(fields: [privilege_id], references: [id], onDelete: Cascade)
+
+    @@id([role_id, privilege_id])
+}

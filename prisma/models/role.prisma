@@ -1,0 +1,19 @@
+model Role {
+    // ID
+    id String @id @default(uuid())
+
+    // Required Attributes
+    name String @unique
+
+    // Optional Attributes
+    description String?
+    email       String? @unique
+
+    // Metadata
+    created_at DateTime @default(now())
+    updated_at DateTime @default(now()) @updatedAt
+
+    // Relations
+    RolePrivilege RolePrivilege[]
+    UserRole      UserRole[]
+}

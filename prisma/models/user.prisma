@@ -1,0 +1,23 @@
+model User {
+    // ID
+    id String @id @default(uuid())
+
+    // Required Attributes
+    email String @unique
+
+    // Optional Attributes
+    password String?
+
+    // Metadata
+    created_at DateTime @default(now())
+    updated_at DateTime @default(now()) @updatedAt
+
+    // Relations
+    Profile              Profile?
+    VerificationTokens   VerificationToken[]
+    Attendances          Attendance[]
+    UsuMembership        UsuMembership?
+    MailingListRecipient MailingListRecipient?
+    Payments             Payment[]
+    UserRole             UserRole[]
+}

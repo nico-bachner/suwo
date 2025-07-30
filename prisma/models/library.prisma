@@ -1,0 +1,22 @@
+model Library {
+    // ID
+    id String @id @default(uuid())
+
+    // Required Attributes
+    title            String
+    acquisition_date DateTime
+
+    // Optional Attributes
+    acquisition_price Float?
+    composer          String?
+    arranger          String?
+    notes             String?
+    lease_expiry      DateTime?
+
+    // Metadata
+    created_at DateTime @default(now())
+    updated_at DateTime @default(now()) @updatedAt
+
+    // Relations
+    PracticeParts PracticePart[]
+}

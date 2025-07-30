@@ -1,0 +1,11 @@
+model VerificationToken {
+    // Required Attributes
+    user_id String
+    token   String @unique
+
+    // Metadata
+    created_at DateTime @default(now())
+
+    // Relations
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}

@@ -1,0 +1,14 @@
+model UsuMembership {
+    // ID
+    user_id String @id
+
+    // Required Attributes
+    number String @unique
+
+    // Metadata
+    created_at DateTime @default(now())
+    updated_at DateTime @default(now()) @updatedAt
+
+    // Relations
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
