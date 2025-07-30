@@ -8,6 +8,7 @@ import { Button } from '@/design_system/button'
 import { SubmitButton } from '@/design_system/submit_button'
 import { queries } from '@/lib/queries'
 import { apiRoutes } from '@/routes'
+import { cn } from '@/utils/cn'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
@@ -78,6 +79,12 @@ export const UpdateInstrumentForm = () => {
                       : [...prev, instrument.id],
                   )
                 }}
+                className={cn(
+                  'grayscale-50',
+                  state.value.includes(instrument.id)
+                    ? 'bg-positive'
+                    : 'bg-negative',
+                )}
               >
                 {instrument.name}
               </Button>

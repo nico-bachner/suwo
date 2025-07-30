@@ -36,7 +36,7 @@ export const EditProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
   }
 
   return (
-    <PageContainer size="sm" className="prose">
+    <PageContainer size="sm" className="prose flex flex-col gap-8">
       <h1>{getProfileScreenName(profile)}</h1>
 
       {profile.roles.length > 0 && <p>{profile.roles.join(', ')}</p>}
@@ -46,6 +46,12 @@ export const EditProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
         description="Tell us what instruments you play"
       >
         <UpdateInstrumentForm />
+      </SettingsSection>
+
+      <SettingsSection
+        title="Can't find your instrument?"
+        description="Add it below to help us improve our instrument list"
+      >
         <CreateInstrumentForm />
       </SettingsSection>
     </PageContainer>

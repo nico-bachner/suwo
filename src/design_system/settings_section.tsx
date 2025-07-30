@@ -11,7 +11,7 @@ export const SettingsSection = ({
   title,
   description,
 }: SettingsSectionProps) => (
-  <section className="flex flex-col gap-8 rounded-xl border border-gray-700 p-6">
+  <section className="border-neutral-4 flex flex-col gap-8 rounded-xl border p-6">
     <div className="prose">
       <h2>{title}</h2>
       <p>{description}</p>
