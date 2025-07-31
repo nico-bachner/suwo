@@ -40,19 +40,23 @@ export const EditProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
 
       {profile.roles.length > 0 && <p>{profile.roles.join(', ')}</p>}
 
-      <SettingsSection
-        title="Instruments"
-        description="Tell us what instruments you play"
-      >
-        <UpdateInstrumentForm />
-      </SettingsSection>
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <SettingsSection
+          title="Instruments"
+          description="Tell us what instruments you play"
+          className="mx-auto w-full max-w-screen-sm lg:max-w-screen-lg"
+        >
+          <UpdateInstrumentForm />
+        </SettingsSection>
 
-      <SettingsSection
-        title="Can't find your instrument?"
-        description="Add it below to help us improve our instrument list"
-      >
-        <CreateInstrumentForm />
-      </SettingsSection>
+        <SettingsSection
+          title="Can't find your instrument?"
+          description="Add it below to help us improve our instrument list"
+          className="mx-auto w-full max-w-screen-sm lg:max-w-screen-lg"
+        >
+          <CreateInstrumentForm />
+        </SettingsSection>
+      </div>
     </main>
   )
 }

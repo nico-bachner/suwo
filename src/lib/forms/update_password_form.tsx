@@ -49,7 +49,7 @@ export const UpdatePasswordForm = () => {
         event.stopPropagation()
         await form.handleSubmit()
       }}
-      className="flex flex-col gap-1"
+      className="flex flex-col gap-4"
     >
       <form.Field
         name="password"

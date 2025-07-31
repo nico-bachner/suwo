@@ -10,7 +10,12 @@ export const SubmitButton = ({
   canSubmit,
   isSubmitting,
 }: SubmitButtonProps) => (
-  <Button type="submit" variant="primary" disabled={!canSubmit}>
+  <Button
+    type="submit"
+    variant="primary"
+    disabled={!canSubmit}
+    className="self-stretch"
+  >
     {isSubmitting ? <Spinner className="stroke-neutral-3 h-6 w-6" /> : 'Submit'}
   </Button>
 )

@@ -7,6 +7,13 @@
   @apply mx-auto w-full max-w-screen-lg;
 }
 
+.prose > *:first-child {
+  margin-block-start: 0;
+}
+.prose > *:last-child {
+  margin-block-end: 0;
+}
+
 /* Text */
 .prose > h1,
 .prose > h2,

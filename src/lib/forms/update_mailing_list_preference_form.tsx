@@ -50,7 +50,7 @@ export const UpdateMailingListPreferenceForm = () => {
         event.stopPropagation()
         await form.handleSubmit()
       }}
-      className="flex flex-col gap-1"
+      className="flex flex-col items-center gap-4"
     >
       <form.Field name="mailing_list_preference">
         {({ state, name, handleChange }) => (
