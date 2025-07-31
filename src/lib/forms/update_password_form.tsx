@@ -3,10 +3,9 @@
 import { useForm } from '@tanstack/react-form'
 import z from 'zod'
 
+import { PasswordInput } from '@/design_system/password_input'
 import { SubmitButton } from '@/design_system/submit_button'
-import { TextInput } from '@/design_system/text_input'
 import { UpdatePasswordValidator } from '@/features/auth/update_password_validator'
-import { PasswordValidator } from '@/lib/validators/password'
 import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
@@ -51,33 +50,11 @@ export const UpdatePasswordForm = () => {
       }}
       className="flex flex-col gap-4"
     >
-      <form.Field
-        name="password"
-        validators={{
-          onBlur: PasswordValidator,
-        }}
-      >
-        {({ state, name, handleBlur, handleChange }) => (
-          <TextInput
-            name={name}
-            value={state.value}
-            type="password"
-            label="Password"
-            placeholder='e.g. "I<3SUWO25!"'
+      <form.Field name="password">
+        {({ state, handleChange }) => (
+          <PasswordInput
             autoComplete="new-password"
-            errors={state.meta.errors
-              .map((error) => {
-                switch (typeof error) {
-                  case 'string':
-                    return error
-                  case 'object':
-                    return error.message
-                  default:
-                    return null
-                }
-              })
-              .filter((error) => error !== null)}
-            onBlur={handleBlur}
+            value={state.value}
             onChange={({ target }) => {
               handleChange(target.value)
             }}
