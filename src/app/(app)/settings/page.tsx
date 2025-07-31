@@ -29,7 +29,7 @@ export default function Page() {
 
         <SettingsSection
           title="Password"
-          description="If you need to reset your password, you can do so here. We recommend using a password manager to generate a secure password and keep track of it."
+          description="If you want to log in using a password, you can set one here. You can also reset your password here. We recommend using a password manager to generate a secure password and keep track of it."
           className="mx-auto w-full max-w-screen-sm lg:max-w-screen-lg"
         >
           <UpdatePasswordForm />
