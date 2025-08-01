@@ -1,8 +1,8 @@
 import z from 'zod'
 
 import { getSession } from '@/features/auth/session/get_session'
-import { UpdateInstrumentFormInputValidator } from '@/lib/form_input_validators/update_instrument_form_input_validator'
 import { InstrumentsQueryResult } from '@/lib/queries/instruments_query'
+import { UpdateInstrumentFormInputValidator } from '@/lib/validators/form_input_validators/update_instrument_form_input_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'

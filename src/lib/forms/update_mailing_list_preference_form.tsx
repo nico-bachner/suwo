@@ -13,7 +13,7 @@ import { StatusCode } from '@/utils/http/status_code'
 import {
   UpdateMailingListPreferenceFormInput,
   UpdateMailingListPreferenceFormInputValidator,
-} from '../form_input_validators/update_mailing_list_preference_form_input_validator'
+} from '../validators/form_input_validators/update_mailing_list_preference_form_input_validator'
 
 export const UpdateMailingListPreferenceForm = () => {
   const { data: mailingListPreference } = useQuery(

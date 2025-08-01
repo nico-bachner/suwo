@@ -10,7 +10,7 @@ import { TextInput } from '@/design_system/text_input'
 import {
   LoginWithPasswordFormInput,
   LoginWithPasswordFormInputValidator,
-} from '@/lib/form_input_validators/login_with_password_form_input_validator'
+} from '@/lib/validators/form_input_validators/login_with_password_form_input_validator'
 import { apiRoutes, queryKeys, routes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'

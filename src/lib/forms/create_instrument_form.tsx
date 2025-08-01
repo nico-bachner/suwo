@@ -9,11 +9,11 @@ import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
+import { queries } from '../queries'
 import {
   CreateInstrumentFormInput,
   CreateInstrumentFormInputValidator,
-} from '../form_input_validators/create_instrument_form_input_validator'
-import { queries } from '../queries'
+} from '../validators/form_input_validators/create_instrument_form_input_validator'
 
 export const CreateInstrumentForm = () => {
   const queryClient = useQueryClient()

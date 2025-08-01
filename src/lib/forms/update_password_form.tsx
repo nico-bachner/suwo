@@ -11,7 +11,7 @@ import { StatusCode } from '@/utils/http/status_code'
 import {
   UpdatePasswordFormInput,
   UpdatePasswordFormInputValidator,
-} from '../form_input_validators/update_password_form_input_validator'
+} from '../validators/form_input_validators/update_password_form_input_validator'
 
 export const UpdatePasswordForm = () => {
   const defaultValues: UpdatePasswordFormInput = {

@@ -2,7 +2,7 @@ import { verify } from 'argon2'
 import z from 'zod'
 
 import { createSession } from '@/features/auth/session/create_session'
-import { LoginWithPasswordFormInputValidator } from '@/lib/form_input_validators/login_with_password_form_input_validator'
+import { LoginWithPasswordFormInputValidator } from '@/lib/validators/form_input_validators/login_with_password_form_input_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'

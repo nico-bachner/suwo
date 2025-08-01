@@ -1,7 +1,7 @@
 import z from 'zod'
 
-import { CreateInstrumentFormInputValidator } from '@/lib/form_input_validators/create_instrument_form_input_validator'
 import { InstrumentsQueryResult } from '@/lib/queries/instruments_query'
+import { CreateInstrumentFormInputValidator } from '@/lib/validators/form_input_validators/create_instrument_form_input_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'

@@ -16,7 +16,7 @@ import { StatusCode } from '@/utils/http/status_code'
 import {
   RegisterFormInput,
   RegisterFormInputValidator,
-} from '../form_input_validators/register_form_input_validator'
+} from '../validators/form_input_validators/register_form_input_validator'
 
 export const RegisterForm = () => {
   const queryClient = useQueryClient()

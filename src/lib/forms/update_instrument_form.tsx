@@ -14,7 +14,7 @@ import { StatusCode } from '@/utils/http/status_code'
 import {
   UpdateInstrumentFormInput,
   UpdateInstrumentFormInputValidator,
-} from '../form_input_validators/update_instrument_form_input_validator'
+} from '../validators/form_input_validators/update_instrument_form_input_validator'
 
 export const UpdateInstrumentForm = () => {
   const queryClient = useQueryClient()

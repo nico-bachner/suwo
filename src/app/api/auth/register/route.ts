@@ -1,7 +1,7 @@
 import z from 'zod'
 
 import { createSession } from '@/features/auth/session/create_session'
-import { RegisterFormInputValidator } from '@/lib/form_input_validators/register_form_input_validator'
+import { RegisterFormInputValidator } from '@/lib/validators/form_input_validators/register_form_input_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'

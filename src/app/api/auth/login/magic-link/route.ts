@@ -4,7 +4,7 @@ import z from 'zod'
 
 import { RESEND_DOMAIN, SHORT_NAME } from '@/config'
 import { MagicLinkEmailTemplate } from '@/features/auth/magic_link_email_template'
-import { LoginWithMagicLinkFormInputValidator } from '@/lib/form_input_validators/login_with_magic_link_form_input_validator'
+import { LoginWithMagicLinkFormInputValidator } from '@/lib/validators/form_input_validators/login_with_magic_link_form_input_validator'
 import { apiRoutes } from '@/routes'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'

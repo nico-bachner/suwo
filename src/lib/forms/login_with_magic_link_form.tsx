@@ -8,7 +8,7 @@ import { TextInput } from '@/design_system/text_input'
 import {
   LoginWithMagicLinkFormInput,
   LoginWithMagicLinkFormInputValidator,
-} from '@/lib/form_input_validators/login_with_magic_link_form_input_validator'
+} from '@/lib/validators/form_input_validators/login_with_magic_link_form_input_validator'
 import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
