@@ -1,11 +1,9 @@
 'use client'
 
-import { useForm } from '@tanstack/react-form'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
 
 import { Button } from '@/design_system/button'
-import { SubmitButton } from '@/design_system/submit_button'
 import { Switch } from '@/design_system/switch'
 import { TextInput } from '@/design_system/text_input'
 import { queries } from '@/lib/queries'
@@ -17,6 +15,7 @@ import {
   RegisterFormInput,
   RegisterFormInputValidator,
 } from '../validators/form_input_validators/register_form_input_validator'
+import { useAppForm } from './context'
 
 export const RegisterForm = () => {
   const queryClient = useQueryClient()
@@ -31,7 +30,7 @@ export const RegisterForm = () => {
     mailing_list_preference: true,
   }
 
-  const form = useForm({
+  const form = useAppForm({
     defaultValues,
     validators: {
       onBlur: RegisterFormInputValidator,
@@ -206,11 +205,9 @@ export const RegisterForm = () => {
         )}
       </form.Field>
 
-      <form.Subscribe>
-        {({ canSubmit, isSubmitting }) => (
-          <SubmitButton canSubmit={canSubmit} isSubmitting={isSubmitting} />
-        )}
-      </form.Subscribe>
+      <form.AppForm>
+        <form.SubmitButton />
+      </form.AppForm>
     </form>
   )
 }

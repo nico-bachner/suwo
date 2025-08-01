@@ -1,11 +1,9 @@
 'use client'
 
-import { useForm } from '@tanstack/react-form'
 import { useQueryClient } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
 import z from 'zod'
 
-import { SubmitButton } from '@/design_system/submit_button'
 import { TextInput } from '@/design_system/text_input'
 import {
   LoginWithPasswordFormInput,
@@ -15,6 +13,8 @@ import { apiRoutes, queryKeys, routes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
+import { useAppForm } from './context'
+
 export const LoginWithPasswordForm = () => {
   const queryClient = useQueryClient()
 
@@ -23,7 +23,7 @@ export const LoginWithPasswordForm = () => {
     password: '',
   }
 
-  const form = useForm({
+  const form = useAppForm({
     defaultValues,
     validators: {
       onBlur: LoginWithPasswordFormInputValidator,
@@ -112,11 +112,9 @@ export const LoginWithPasswordForm = () => {
         )}
       </form.Field>
 
-      <form.Subscribe>
-        {({ canSubmit, isSubmitting }) => (
-          <SubmitButton canSubmit={canSubmit} isSubmitting={isSubmitting} />
-        )}
-      </form.Subscribe>
+      <form.AppForm>
+        <form.SubmitButton />
+      </form.AppForm>
     </form>
   )
 }

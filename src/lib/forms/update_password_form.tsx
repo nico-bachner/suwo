@@ -1,9 +1,6 @@
 'use client'
 
-import { useForm } from '@tanstack/react-form'
-
 import { PasswordInput } from '@/design_system/password_input'
-import { SubmitButton } from '@/design_system/submit_button'
 import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
@@ -12,13 +9,14 @@ import {
   UpdatePasswordFormInput,
   UpdatePasswordFormInputValidator,
 } from '../validators/form_input_validators/update_password_form_input_validator'
+import { useAppForm } from './context'
 
 export const UpdatePasswordForm = () => {
   const defaultValues: UpdatePasswordFormInput = {
     password: '',
   }
 
-  const form = useForm({
+  const form = useAppForm({
     defaultValues,
     validators: {
       onBlur: UpdatePasswordFormInputValidator,
@@ -68,11 +66,9 @@ export const UpdatePasswordForm = () => {
         )}
       </form.Field>
 
-      <form.Subscribe>
-        {({ canSubmit, isSubmitting }) => (
-          <SubmitButton canSubmit={canSubmit} isSubmitting={isSubmitting} />
-        )}
-      </form.Subscribe>
+      <form.AppForm>
+        <form.SubmitButton />
+      </form.AppForm>
     </form>
   )
 }

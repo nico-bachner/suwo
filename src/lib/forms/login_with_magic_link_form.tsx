@@ -1,9 +1,7 @@
 'use client'
 
-import { useForm } from '@tanstack/react-form'
 import z from 'zod'
 
-import { SubmitButton } from '@/design_system/submit_button'
 import { TextInput } from '@/design_system/text_input'
 import {
   LoginWithMagicLinkFormInput,
@@ -13,12 +11,14 @@ import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
+import { useAppForm } from './context'
+
 export const LoginWithMagicLinkForm = () => {
   const defaultValues: LoginWithMagicLinkFormInput = {
     email: '',
   }
 
-  const form = useForm({
+  const form = useAppForm({
     defaultValues,
     validators: {
       onBlur: LoginWithMagicLinkFormInputValidator,
@@ -88,11 +88,9 @@ export const LoginWithMagicLinkForm = () => {
         )}
       </form.Field>
 
-      <form.Subscribe>
-        {({ canSubmit, isSubmitting }) => (
-          <SubmitButton canSubmit={canSubmit} isSubmitting={isSubmitting} />
-        )}
-      </form.Subscribe>
+      <form.AppForm>
+        <form.SubmitButton />
+      </form.AppForm>
     </form>
   )
 }

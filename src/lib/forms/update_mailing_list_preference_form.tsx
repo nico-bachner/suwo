@@ -1,9 +1,7 @@
 'use client'
 
-import { useForm } from '@tanstack/react-form'
 import { useQuery } from '@tanstack/react-query'
 
-import { SubmitButton } from '@/design_system/submit_button'
 import { Switch } from '@/design_system/switch'
 import { queries } from '@/lib/queries'
 import { apiRoutes } from '@/routes'
@@ -14,6 +12,7 @@ import {
   UpdateMailingListPreferenceFormInput,
   UpdateMailingListPreferenceFormInputValidator,
 } from '../validators/form_input_validators/update_mailing_list_preference_form_input_validator'
+import { useAppForm } from './context'
 
 export const UpdateMailingListPreferenceForm = () => {
   const { data: mailingListPreference } = useQuery(
@@ -24,7 +23,7 @@ export const UpdateMailingListPreferenceForm = () => {
     mailing_list_preference: mailingListPreference ?? false,
   }
 
-  const form = useForm({
+  const form = useAppForm({
     defaultValues,
     validators: {
       onBlur: UpdateMailingListPreferenceFormInputValidator,
@@ -73,11 +72,9 @@ export const UpdateMailingListPreferenceForm = () => {
         )}
       </form.Field>
 
-      <form.Subscribe>
-        {({ canSubmit, isSubmitting }) => (
-          <SubmitButton canSubmit={canSubmit} isSubmitting={isSubmitting} />
-        )}
-      </form.Subscribe>
+      <form.AppForm>
+        <form.SubmitButton />
+      </form.AppForm>
     </form>
   )
 }

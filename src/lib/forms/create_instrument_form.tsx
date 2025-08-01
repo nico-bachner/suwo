@@ -1,9 +1,7 @@
 'use client'
 
-import { useForm } from '@tanstack/react-form'
 import { useQueryClient } from '@tanstack/react-query'
 
-import { SubmitButton } from '@/design_system/submit_button'
 import { TextInput } from '@/design_system/text_input'
 import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
@@ -14,6 +12,7 @@ import {
   CreateInstrumentFormInput,
   CreateInstrumentFormInputValidator,
 } from '../validators/form_input_validators/create_instrument_form_input_validator'
+import { useAppForm } from './context'
 
 export const CreateInstrumentForm = () => {
   const queryClient = useQueryClient()
@@ -22,7 +21,7 @@ export const CreateInstrumentForm = () => {
     instrument_name: '',
   }
 
-  const form = useForm({
+  const form = useAppForm({
     defaultValues,
     validators: {
       onBlur: CreateInstrumentFormInputValidator,
@@ -89,11 +88,9 @@ export const CreateInstrumentForm = () => {
         )}
       </form.Field>
 
-      <form.Subscribe>
-        {({ canSubmit, isSubmitting }) => (
-          <SubmitButton canSubmit={canSubmit} isSubmitting={isSubmitting} />
-        )}
-      </form.Subscribe>
+      <form.AppForm>
+        <form.SubmitButton />
+      </form.AppForm>
     </form>
   )
 }
