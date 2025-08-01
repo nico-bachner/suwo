@@ -45,25 +45,20 @@ export const POST = async (request: Request) => {
           email: data.email.toLowerCase(),
         },
       },
-    },
-  })
-
-  await Promise.all([
-    data.usu_number &&
-      prisma.usuMembership.create({
-        data: {
-          user_id: user.id,
-          number: data.usu_number,
-        },
-      }),
-    data.instrument_ids.length > 0 &&
-      prisma.userInstrument.createMany({
-        data: data.instrument_ids.map((instrument_id) => ({
-          user_id: user.id,
+      UsuMembership: {
+        create: data.usu_number
+          ? {
+              number: data.usu_number,
+            }
+          : undefined,
+      },
+      UserInstrument: {
+        create: data.instrument_ids.map((instrument_id) => ({
           instrument_id,
         })),
-      }),
-  ])
+      },
+    },
+  })
 
   await createSession({
     user_id: user.id,
