@@ -3,26 +3,26 @@
 import { useForm } from '@tanstack/react-form'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
-import z from 'zod'
 
 import { Button } from '@/design_system/button'
 import { SubmitButton } from '@/design_system/submit_button'
 import { Switch } from '@/design_system/switch'
 import { TextInput } from '@/design_system/text_input'
 import { queries } from '@/lib/queries'
-import { EmailValidator } from '@/lib/validators/email'
-import { FamilyNameValidator } from '@/lib/validators/family_name'
-import { GivenNameValidator } from '@/lib/validators/given_name'
-import { RegisterFormValidator } from '@/lib/validators/register_form_validator'
 import { apiRoutes, queryKeys, routes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
+
+import {
+  RegisterFormInput,
+  RegisterFormInputValidator,
+} from '../form_input_validators/register_form_input_validator'
 
 export const RegisterForm = () => {
   const queryClient = useQueryClient()
   const { data: instruments } = useQuery(queries.INSTRUMENTS())
 
-  const defaultValues: z.infer<typeof RegisterFormValidator> = {
+  const defaultValues: RegisterFormInput = {
     given_name: '',
     family_name: undefined,
     email: '',
@@ -33,6 +33,9 @@ export const RegisterForm = () => {
 
   const form = useForm({
     defaultValues,
+    validators: {
+      onBlur: RegisterFormInputValidator,
+    },
     onSubmit: async ({ value }) => {
       const response = await parseResponse(
         await fetch(apiRoutes.REGISTER(), {
@@ -69,12 +72,7 @@ export const RegisterForm = () => {
       className="flex flex-col gap-4"
     >
       <div className="flex flex-col gap-4 sm:flex-row">
-        <form.Field
-          name="given_name"
-          validators={{
-            onBlur: GivenNameValidator,
-          }}
-        >
+        <form.Field name="given_name">
           {({ state, name, handleBlur, handleChange }) => (
             <TextInput
               name={name}
@@ -83,18 +81,6 @@ export const RegisterForm = () => {
               placeholder='e.g. "John"'
               autoComplete="given-name"
               required
-              errors={state.meta.errors
-                .map((error) => {
-                  switch (typeof error) {
-                    case 'string':
-                      return error
-                    case 'object':
-                      return error.message
-                    default:
-                      return null
-                  }
-                })
-                .filter((error) => error !== null)}
               onBlur={handleBlur}
               onChange={({ target }) => {
                 handleChange(target.value)
@@ -104,12 +90,7 @@ export const RegisterForm = () => {
           )}
         </form.Field>
 
-        <form.Field
-          name="family_name"
-          validators={{
-            onBlur: FamilyNameValidator.optional(),
-          }}
-        >
+        <form.Field name="family_name">
           {({ state, name, handleBlur, handleChange }) => (
             <TextInput
               name={name}
@@ -117,18 +98,6 @@ export const RegisterForm = () => {
               label="Family Name"
               placeholder='e.g. "Doe"'
               autoComplete="family-name"
-              errors={state.meta.errors
-                .map((error) => {
-                  switch (typeof error) {
-                    case 'string':
-                      return error
-                    case 'object':
-                      return error.message
-                    default:
-                      return null
-                  }
-                })
-                .filter((error) => error !== null)}
               onBlur={handleBlur}
               onChange={({ target }) => {
                 handleChange(target.value)
@@ -139,12 +108,7 @@ export const RegisterForm = () => {
         </form.Field>
       </div>
 
-      <form.Field
-        name="email"
-        validators={{
-          onBlur: EmailValidator,
-        }}
-      >
+      <form.Field name="email">
         {({ state, name, handleBlur, handleChange }) => (
           <TextInput
             name={name}
@@ -174,12 +138,7 @@ export const RegisterForm = () => {
       </form.Field>
 
       <div className="flex flex-col gap-4 sm:flex-row">
-        <form.Field
-          name="usu_number"
-          validators={{
-            onBlur: FamilyNameValidator.optional(),
-          }}
-        >
+        <form.Field name="usu_number">
           {({ state, name, handleBlur, handleChange }) => (
             <TextInput
               name={name}

@@ -1,13 +1,13 @@
 import z from 'zod'
 
 import { createSession } from '@/features/auth/session/create_session'
-import { RegisterFormValidator } from '@/lib/validators/register_form_validator'
+import { RegisterFormInputValidator } from '@/lib/form_input_validators/register_form_input_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
 
 export const POST = async (request: Request) => {
-  const { data, error, success } = RegisterFormValidator.safeParse(
+  const { data, error, success } = RegisterFormInputValidator.safeParse(
     await request.json(),
   )
 

@@ -7,23 +7,27 @@ import z from 'zod'
 
 import { SubmitButton } from '@/design_system/submit_button'
 import { TextInput } from '@/design_system/text_input'
-import { LoginWithPasswordValidator } from '@/features/auth/login_with_password_validator'
-import { EmailValidator } from '@/lib/validators/email'
-import { PasswordValidator } from '@/lib/validators/password'
+import {
+  LoginWithPasswordFormInput,
+  LoginWithPasswordFormInputValidator,
+} from '@/lib/form_input_validators/login_with_password_form_input_validator'
 import { apiRoutes, queryKeys, routes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-const defaultValues: z.infer<typeof LoginWithPasswordValidator> = {
-  email: '',
-  password: '',
-}
-
 export const LoginWithPasswordForm = () => {
   const queryClient = useQueryClient()
 
+  const defaultValues: LoginWithPasswordFormInput = {
+    email: '',
+    password: '',
+  }
+
   const form = useForm({
     defaultValues,
+    validators: {
+      onBlur: LoginWithPasswordFormInputValidator,
+    },
     onSubmit: async ({ value }) => {
       const response = await parseResponse(
         await fetch(apiRoutes.LOGIN_WITH_PASSWORD(), {
@@ -62,7 +66,7 @@ export const LoginWithPasswordForm = () => {
       <form.Field
         name="email"
         validators={{
-          onBlur: EmailValidator,
+          onBlur: z.email(),
         }}
       >
         {({ state, name, handleBlur, handleChange }) => (
@@ -91,12 +95,7 @@ export const LoginWithPasswordForm = () => {
           />
         )}
       </form.Field>
-      <form.Field
-        name="password"
-        validators={{
-          onBlur: PasswordValidator,
-        }}
-      >
+      <form.Field name="password">
         {({ state, name, handleBlur, handleChange }) => (
           <TextInput
             name={name}
@@ -105,18 +104,6 @@ export const LoginWithPasswordForm = () => {
             label="Password"
             placeholder='e.g. "I<3SUWO25!"'
             autoComplete="current-password"
-            errors={state.meta.errors
-              .map((error) => {
-                switch (typeof error) {
-                  case 'string':
-                    return error
-                  case 'object':
-                    return error.message
-                  default:
-                    return null
-                }
-              })
-              .filter((error) => error !== null)}
             onBlur={handleBlur}
             onChange={({ target }) => {
               handleChange(target.value)

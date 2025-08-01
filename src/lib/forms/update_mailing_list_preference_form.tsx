@@ -10,14 +10,24 @@ import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
+import {
+  UpdateMailingListPreferenceFormInput,
+  UpdateMailingListPreferenceFormInputValidator,
+} from '../form_input_validators/update_mailing_list_preference_form_input_validator'
+
 export const UpdateMailingListPreferenceForm = () => {
   const { data: mailingListPreference } = useQuery(
     queries.MAILING_LIST_PREFERENCE(),
   )
 
+  const defaultValues: UpdateMailingListPreferenceFormInput = {
+    mailing_list_preference: mailingListPreference ?? false,
+  }
+
   const form = useForm({
-    defaultValues: {
-      mailing_list_preference: mailingListPreference,
+    defaultValues,
+    validators: {
+      onBlur: UpdateMailingListPreferenceFormInputValidator,
     },
     onSubmit: async ({ value }) => {
       const response = await parseResponse(

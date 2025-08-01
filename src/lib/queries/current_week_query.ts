@@ -1,6 +1,6 @@
 import { UseQueryOptions } from '@tanstack/react-query'
 
-import { Week, WeekValidator } from '@/lib/validators/week'
+import { Week, WeekValidator } from '@/lib/validators/suwo_week_validator'
 import { apiRoutes, queryKeys } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'

@@ -2,7 +2,6 @@
 
 import { useForm } from '@tanstack/react-form'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import z from 'zod'
 
 import { Button } from '@/design_system/button'
 import { SubmitButton } from '@/design_system/submit_button'
@@ -12,7 +11,10 @@ import { cn } from '@/utils/cn'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-import { UpdateInstrumentFormValidator } from '../validators/update_instrument_form_validator'
+import {
+  UpdateInstrumentFormInput,
+  UpdateInstrumentFormInputValidator,
+} from '../form_input_validators/update_instrument_form_input_validator'
 
 export const UpdateInstrumentForm = () => {
   const queryClient = useQueryClient()
@@ -20,12 +22,15 @@ export const UpdateInstrumentForm = () => {
   const { data: instruments } = useQuery(queries.INSTRUMENTS())
   const { data: myInstruments } = useQuery(queries.MY_INSTRUMENTS())
 
-  const defaultValues: z.infer<typeof UpdateInstrumentFormValidator> = {
+  const defaultValues: UpdateInstrumentFormInput = {
     instrument_ids: myInstruments?.map(({ id }) => id) || [],
   }
 
   const form = useForm({
     defaultValues,
+    validators: {
+      onBlur: UpdateInstrumentFormInputValidator,
+    },
     onSubmit: async ({ value }) => {
       const response = await parseResponse(
         await fetch(apiRoutes.MY_INSTRUMENTS(), {

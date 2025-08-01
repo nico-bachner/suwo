@@ -5,19 +5,24 @@ import z from 'zod'
 
 import { SubmitButton } from '@/design_system/submit_button'
 import { TextInput } from '@/design_system/text_input'
-import { LoginWithMagicLinkValidator } from '@/features/auth/login_with_magic_link_validator'
-import { EmailValidator } from '@/lib/validators/email'
+import {
+  LoginWithMagicLinkFormInput,
+  LoginWithMagicLinkFormInputValidator,
+} from '@/lib/form_input_validators/login_with_magic_link_form_input_validator'
 import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-const defaultValues: z.infer<typeof LoginWithMagicLinkValidator> = {
-  email: '',
-}
-
 export const LoginWithMagicLinkForm = () => {
+  const defaultValues: LoginWithMagicLinkFormInput = {
+    email: '',
+  }
+
   const form = useForm({
     defaultValues,
+    validators: {
+      onBlur: LoginWithMagicLinkFormInputValidator,
+    },
     onSubmit: async ({ value }) => {
       const response = await parseResponse(
         await fetch(apiRoutes.LOGIN_WITH_MAGIC_LINK(), {
@@ -53,7 +58,7 @@ export const LoginWithMagicLinkForm = () => {
       <form.Field
         name="email"
         validators={{
-          onBlur: EmailValidator,
+          onBlur: z.email(),
         }}
       >
         {({ state, name, handleBlur, handleChange }) => (

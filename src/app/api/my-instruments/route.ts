@@ -1,8 +1,8 @@
 import z from 'zod'
 
 import { getSession } from '@/features/auth/session/get_session'
+import { UpdateInstrumentFormInputValidator } from '@/lib/form_input_validators/update_instrument_form_input_validator'
 import { InstrumentsQueryResult } from '@/lib/queries/instruments_query'
-import { UpdateInstrumentFormValidator } from '@/lib/validators/update_instrument_form_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'
@@ -38,7 +38,7 @@ export const GET: APIRoute = async () => {
 }
 
 export const POST = async (request: Request) => {
-  const { data, error, success } = UpdateInstrumentFormValidator.safeParse(
+  const { data, error, success } = UpdateInstrumentFormInputValidator.safeParse(
     await request.json(),
   )
 

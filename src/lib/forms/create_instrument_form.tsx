@@ -2,7 +2,6 @@
 
 import { useForm } from '@tanstack/react-form'
 import { useQueryClient } from '@tanstack/react-query'
-import z from 'zod'
 
 import { SubmitButton } from '@/design_system/submit_button'
 import { TextInput } from '@/design_system/text_input'
@@ -10,20 +9,23 @@ import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
+import {
+  CreateInstrumentFormInput,
+  CreateInstrumentFormInputValidator,
+} from '../form_input_validators/create_instrument_form_input_validator'
 import { queries } from '../queries'
-import { CreateInstrumentFormValidator } from '../validators/create_instrument_form_validator'
 
 export const CreateInstrumentForm = () => {
   const queryClient = useQueryClient()
 
-  const defaultValues: z.infer<typeof CreateInstrumentFormValidator> = {
+  const defaultValues: CreateInstrumentFormInput = {
     instrument_name: '',
   }
 
   const form = useForm({
     defaultValues,
     validators: {
-      onChange: CreateInstrumentFormValidator,
+      onBlur: CreateInstrumentFormInputValidator,
     },
     onSubmit: async ({ value }) => {
       const response = await parseResponse(

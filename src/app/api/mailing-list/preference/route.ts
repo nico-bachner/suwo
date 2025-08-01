@@ -1,7 +1,7 @@
 import z from 'zod'
 
 import { getSession } from '@/features/auth/session/get_session'
-import { UpdateMailingListPreferenceValidator } from '@/lib/validators/update_mailing_list_preference_validator'
+import { UpdateMailingListPreferenceFormInputValidator } from '@/lib/form_input_validators/update_mailing_list_preference_form_input_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
@@ -30,7 +30,9 @@ export const GET = async () => {
 
 export const POST = async (request: Request) => {
   const { data, error, success } =
-    UpdateMailingListPreferenceValidator.safeParse(await request.json())
+    UpdateMailingListPreferenceFormInputValidator.safeParse(
+      await request.json(),
+    )
 
   if (!success) {
     return createResponse({

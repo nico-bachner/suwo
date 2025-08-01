@@ -2,13 +2,13 @@ import { hash } from 'argon2'
 import z from 'zod'
 
 import { getSession } from '@/features/auth/session/get_session'
-import { UpdatePasswordValidator } from '@/features/auth/update_password_validator'
+import { UpdatePasswordFormInputValidator } from '@/lib/form_input_validators/update_password_form_input_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
 
 export const POST = async (request: Request) => {
-  const { data, error, success } = UpdatePasswordValidator.safeParse(
+  const { data, error, success } = UpdatePasswordFormInputValidator.safeParse(
     await request.json(),
   )
 

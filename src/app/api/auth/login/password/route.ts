@@ -1,16 +1,15 @@
 import { verify } from 'argon2'
 import z from 'zod'
 
-import { LoginWithPasswordValidator } from '@/features/auth/login_with_password_validator'
 import { createSession } from '@/features/auth/session/create_session'
+import { LoginWithPasswordFormInputValidator } from '@/lib/form_input_validators/login_with_password_form_input_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
 
 export const POST = async (request: Request) => {
-  const { data, error, success } = LoginWithPasswordValidator.safeParse(
-    await request.json(),
-  )
+  const { data, error, success } =
+    LoginWithPasswordFormInputValidator.safeParse(await request.json())
 
   if (!success) {
     return createResponse({
