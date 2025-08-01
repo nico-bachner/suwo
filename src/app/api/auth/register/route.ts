@@ -35,10 +35,15 @@ export const POST = async (request: Request) => {
     data: {
       email: data.email.toLowerCase(),
       Profile: {
-        create: data,
+        create: {
+          given_name: data.given_name,
+          family_name: data.family_name,
+        },
       },
       MailingListRecipient: {
-        create: data,
+        create: {
+          email: data.email.toLowerCase(),
+        },
       },
     },
   })
@@ -58,10 +63,11 @@ export const POST = async (request: Request) => {
           instrument_id,
         })),
       }),
-    createSession({
-      user_id: user.id,
-    }),
   ])
+
+  await createSession({
+    user_id: user.id,
+  })
 
   return createResponse({
     status: StatusCode.OK,
