@@ -3,11 +3,10 @@
 import { useQueryClient } from '@tanstack/react-query'
 
 import { TextInput } from '@/design_system/text_input'
-import { apiRoutes } from '@/routes'
+import { apiRoutes, queryKeys } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-import { queries } from '../queries'
 import {
   CreateInstrumentFormInput,
   CreateInstrumentFormInputValidator,
@@ -44,7 +43,9 @@ export const CreateInstrumentForm = () => {
           break
         case StatusCode.OK:
         case StatusCode.Created:
-          await queryClient.invalidateQueries(queries.INSTRUMENTS())
+          await queryClient.invalidateQueries({
+            queryKey: queryKeys.INSTRUMENTS(),
+          })
           form.reset()
           break
       }

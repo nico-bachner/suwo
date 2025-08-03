@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { Button } from '@/design_system/button'
 import { queries } from '@/lib/queries'
-import { apiRoutes } from '@/routes'
+import { apiRoutes, queryKeys } from '@/routes'
 import { cn } from '@/utils/cn'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
@@ -48,7 +48,9 @@ export const UpdateInstrumentForm = () => {
           break
         case StatusCode.OK:
         case StatusCode.Created:
-          await queryClient.invalidateQueries(queries.MY_INSTRUMENTS())
+          await queryClient.invalidateQueries({
+            queryKey: queryKeys.MY_INSTRUMENTS(),
+          })
           // eslint-disable-next-line no-alert, no-undef
           alert('Instrument updated successfully!')
           break
