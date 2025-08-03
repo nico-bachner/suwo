@@ -1,4 +1,5 @@
 import pluginNext from '@next/eslint-plugin-next'
+import pluginQuery from '@tanstack/eslint-plugin-query'
 import pluginTypeScript from '@typescript-eslint/eslint-plugin'
 import parserTypeScript from '@typescript-eslint/parser'
 import pluginReact from 'eslint-plugin-react'
@@ -17,6 +18,7 @@ export default [
       react: pluginReact,
       'react-hooks': pluginReactHooks,
       next: pluginNext,
+      query: pluginQuery,
     },
     languageOptions: {
       parser: parserTypeScript,
@@ -372,6 +374,14 @@ export default [
       // Core Web Vitals
       'next/no-html-link-for-pages': 'error',
       'next/no-sync-scripts': 'error',
+
+      /** Query */
+      'query/exhaustive-deps': 'error',
+      'query/stable-query-client': 'error',
+      'query/no-rest-destructuring': 'warn',
+      'query/no-unstable-deps': 'warn',
+      'query/no-void-query-fn': 'error',
+      'query/infinite-query-property-order': 'warn',
     },
   },
 ]
