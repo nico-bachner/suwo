@@ -59,9 +59,17 @@ export const Footer = ({ className }: FooterProps) => {
           ))}
         </div>
 
-        <address className="col-span-3 text-right sm:col-span-2">
-          Holme Building (A09), Science Rd, The University of Sydney, NSW 2006
-        </address>
+        <div className="col-span-3 flex flex-col gap-2 text-right sm:col-span-2">
+          <address>
+            Holme Building (A09), Science Rd, The University of Sydney, NSW 2006
+          </address>
+
+          <p>
+            We acknowledge the Gadigal people of the Eora Nation as the
+            Traditional Custodians of the land on which we hold rehearsals, and
+            pay our respects to Elders past, present and emerging.
+          </p>
+        </div>
 
         <p className="col-span-3 sm:col-span-2">
           SUWO is supported by the{' '}
