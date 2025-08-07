@@ -73,7 +73,17 @@ export const Footer = ({ className }: FooterProps) => {
           >
             University of Sydney Union
           </a>{' '}
-          Clubs and Societies program
+          Clubs and Societies program, as well as the University of
+          Sydney&apos;s{' '}
+          <a
+            href="https://www.standrewscollege.edu.au"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary-2 hover:underline focus:underline focus:outline-none"
+          >
+            St Andrew&apos;s College
+          </a>
+          .
         </p>
 
         <p className="col-span-3 text-right sm:col-span-2 sm:col-start-4">
