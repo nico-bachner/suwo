@@ -1,0 +1,106 @@
+import z from 'zod'
+
+import { getSession } from '@/features/auth/session/get_session'
+import { InstrumentsQueryResult } from '@/lib/queries/instruments_query'
+import { UpdateInstrumentFormInputValidator } from '@/lib/validators/form_input_validators/update_instrument_form_input_validator'
+import { createResponse } from '@/utils/http/create_response'
+import { StatusCode } from '@/utils/http/status_code'
+import { APIRoute } from '@/utils/next_types'
+import { prisma } from '@/utils/prisma'
+
+export const GET: APIRoute = async (_, { params }) => {
+  const { user_id } = z
+    .object({
+      user_id: z.uuid(),
+    })
+    .parse(await params)
+
+  const session = await getSession()
+
+  if (!session) {
+    return createResponse({
+      status: StatusCode.Unauthorized,
+      error: 'Unauthorized',
+    })
+  }
+
+  if (user_id !== session.user_id) {
+    return createResponse({
+      status: StatusCode.Forbidden,
+      error:
+        "Users are only allowed to access their own instruments. Only admins can access other users' instruments.",
+    })
+  }
+
+  const userInstruments = await prisma.userInstrument.findMany({
+    where: {
+      user_id: session.user_id,
+    },
+    include: {
+      instrument: true,
+    },
+  })
+
+  const data: InstrumentsQueryResult = userInstruments.map(
+    ({ instrument }) => instrument,
+  )
+
+  return createResponse({
+    status: StatusCode.OK,
+    data,
+  })
+}
+
+export const POST: APIRoute = async (request, { params }) => {
+  const { user_id } = z
+    .object({
+      user_id: z.uuid(),
+    })
+    .parse(await params)
+
+  const session = await getSession()
+
+  if (!session) {
+    return createResponse({
+      status: StatusCode.Unauthorized,
+      error: 'Unauthorized',
+    })
+  }
+
+  if (user_id !== session.user_id) {
+    return createResponse({
+      status: StatusCode.Forbidden,
+      error:
+        "Users are only allowed to access their own instruments. Only admins can access other users' instruments.",
+    })
+  }
+
+  const { data, error, success } = UpdateInstrumentFormInputValidator.safeParse(
+    await request.json(),
+  )
+
+  if (!success) {
+    return createResponse({
+      status: StatusCode.BadRequest,
+      error: z.prettifyError(error),
+    })
+  }
+
+  await prisma.userInstrument.deleteMany({
+    where: {
+      user_id: session.user_id,
+    },
+  })
+
+  const userInstruments = await prisma.userInstrument.createManyAndReturn({
+    data: data.instrument_ids.map((id) => ({
+      user_id: session.user_id,
+      instrument_id: id,
+    })),
+  })
+
+  return createResponse({
+    status: StatusCode.Created,
+    data: userInstruments,
+  })
+}

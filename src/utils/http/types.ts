@@ -12,6 +12,7 @@ export type JSONResponse =
       status:
         | StatusCode.BadRequest
         | StatusCode.Unauthorized
+        | StatusCode.Forbidden
         | StatusCode.NotFound
         | StatusCode.InternalServerError
       error: string

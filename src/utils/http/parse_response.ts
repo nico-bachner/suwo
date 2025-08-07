@@ -36,11 +36,19 @@ export const parseResponse = async (
       }
     case StatusCode.BadRequest:
     case StatusCode.Unauthorized:
+    case StatusCode.Forbidden:
     case StatusCode.NotFound:
-    case StatusCode.InternalServerError:
+    case StatusCode.InternalServerError: {
+      const { error } = z
+        .object({
+          error: z.string(),
+        })
+        .parse(await response.json())
+
       return {
         status,
-        error: await response.text(),
+        error,
       }
+    }
   }
 }

@@ -29,13 +29,23 @@ export const createResponse = (response: JSONResponse): Response => {
       })
     case StatusCode.BadRequest:
     case StatusCode.Unauthorized:
+    case StatusCode.Forbidden:
     case StatusCode.NotFound:
     case StatusCode.InternalServerError:
-      return new Response(response.error, {
-        status: response.status,
-        headers: {
-          'Content-Type': 'application/json',
+      return new Response(
+        JSON.stringify(
+          {
+            error: response.error,
+          },
+          null,
+          API_INDENT_SIZE,
+        ),
+        {
+          status: response.status,
+          headers: {
+            'Content-Type': 'application/json',
+          },
         },
-      })
+      )
   }
 }

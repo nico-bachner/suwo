@@ -45,6 +45,16 @@ export enum StatusCode {
    */
   Unauthorized = 401,
   /**
+   * Indicates that the server understood the request but refused to process it.
+   * This status is similar to 401, except that for 403 Forbidden responses,
+   * authenticating or re-authenticating makes no difference. The request
+   * failure is tied to application logic, such as insufficient permissions to a
+   * resource or action.
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/403
+   */
+  Forbidden = 403,
+  /**
    * Indicates that the server cannot find the requested resource. Links that
    * lead to a 404 page are often called broken or dead links and can be subject
    * to link rot.
