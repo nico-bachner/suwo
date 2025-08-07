@@ -11,7 +11,6 @@ import { prisma } from '@/utils/prisma'
 export const GET: APIRoute = async ({ nextUrl }) => {
   const { data, error, success } = z
     .object({
-      user_id: z.uuid(),
       token: z.string(),
     })
     .safeParse(Object.fromEntries(nextUrl.searchParams))
@@ -25,17 +24,24 @@ export const GET: APIRoute = async ({ nextUrl }) => {
 
   const verificationToken = await prisma.verificationToken.findUnique({
     where: {
-      ...data,
-      created_at: {
-        gte: new Date(Date.now() - 24 * 60 * 60 * 1000),
-      },
+      token: data.token,
     },
   })
 
   if (!verificationToken) {
     return createResponse({
-      status: StatusCode.Unauthorized,
-      error: 'Invalid token',
+      status: StatusCode.BadRequest,
+      error: 'Token invalid',
+    })
+  }
+
+  /** Check if the token is still valid. We set the expiration to 24 hours. */
+  if (
+    verificationToken.created_at < new Date(Date.now() - 24 * 60 * 60 * 1000)
+  ) {
+    return createResponse({
+      status: StatusCode.BadRequest,
+      error: 'Token expired',
     })
   }
 
@@ -43,8 +49,15 @@ export const GET: APIRoute = async ({ nextUrl }) => {
     user_id: verificationToken.user_id,
   })
 
-  await prisma.verificationToken.delete({
-    where: verificationToken,
+  /**
+   * Delete all previous verification tokens for the user for security. This
+   * approach is mode UX-friendly than deleting previous tokens after minting a
+   * new one, since some users may click the magic link multiple times.
+   */
+  await prisma.verificationToken.deleteMany({
+    where: {
+      user_id: verificationToken.user_id,
+    },
   })
 
   redirect(routes.SETTINGS())

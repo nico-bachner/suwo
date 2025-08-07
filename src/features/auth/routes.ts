@@ -1,4 +1,3 @@
-import { VerificationToken } from '@/generated/prisma'
 import { createURL } from '@/utils/http/create_url'
 
 import { LoginScreenSearchParams } from './login_screen_search_params_validator'
@@ -16,13 +15,10 @@ export const apiRoutes = {
   SESSION: () => createURL({ path: ['api', 'auth', 'session'] }),
   UPDATE_PASSWORD: () =>
     createURL({ path: ['api', 'auth', 'update-password'] }),
-  VALIDATE_MAGIC_LINK: ({
-    user_id,
-    token,
-  }: Pick<VerificationToken, 'user_id' | 'token'>) =>
+  VALIDATE_MAGIC_LINK: (token: string) =>
     createURL({
       path: ['api', 'auth', 'validate-magic-link'],
-      query: { user_id, token },
+      query: { token },
     }),
 }
 

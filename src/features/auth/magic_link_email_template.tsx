@@ -38,7 +38,7 @@ export const MagicLinkEmailTemplate = ({ link }: MagicLinkTemplateProps) => (
 
             <Text>
               This link will expire in 24 hours. If you need a new link, please
-              fill in the form again.
+              click the login with magic link button again to request a new one.
             </Text>
           </Section>
         </Container>
