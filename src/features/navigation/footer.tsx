@@ -86,10 +86,24 @@ export const Footer = ({ className }: FooterProps) => {
           .
         </p>
 
-        <p className="col-span-3 text-right sm:col-span-2 sm:col-start-4">
-          © {new Date().getFullYear()} The University of Sydney Wind Orchestra
-          (SUWO). All rights reserved.
-        </p>
+        <div className="col-span-3 flex flex-col gap-2 text-right sm:col-span-2 sm:col-start-4">
+          <p>
+            © {new Date().getFullYear()} The University of Sydney Wind
+            Orchestra (SUWO). All rights reserved.
+          </p>
+          <p>
+            Developed by{' '}
+            <a
+              href="https://nicobachner.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-2 hover:underline focus:underline focus:outline-none"
+            >
+              Nico Bachner
+            </a>
+            .
+          </p>
+        </div>
       </footer>
     </div>
   )
