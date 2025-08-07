@@ -18,11 +18,16 @@ import { useAppForm } from './context'
 export const UpdateInstrumentForm = () => {
   const queryClient = useQueryClient()
 
+  const { data: session } = useQuery(queries.SESSION())
   const { data: instruments } = useQuery(queries.INSTRUMENTS())
-  const { data: myInstruments } = useQuery(queries.MY_INSTRUMENTS())
+  const { data: userInstruments } = useQuery({
+    // eslint-disable-next-line typescript/no-non-null-assertion
+    ...queries.USER_INSTRUMENTS(session!.user_id),
+    enabled: Boolean(session),
+  })
 
   const defaultValues: UpdateInstrumentFormInput = {
-    instrument_ids: myInstruments?.map(({ id }) => id) || [],
+    instrument_ids: userInstruments?.map(({ id }) => id) || [],
   }
 
   const form = useAppForm({
@@ -32,7 +37,8 @@ export const UpdateInstrumentForm = () => {
     },
     onSubmit: async ({ value }) => {
       const response = await parseResponse(
-        await fetch(apiRoutes.MY_INSTRUMENTS(), {
+        // eslint-disable-next-line typescript/no-non-null-assertion
+        await fetch(apiRoutes.USER_INSTRUMENTS(session!.user_id), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -49,10 +55,11 @@ export const UpdateInstrumentForm = () => {
         case StatusCode.OK:
         case StatusCode.Created:
           await queryClient.invalidateQueries({
-            queryKey: queryKeys.MY_INSTRUMENTS(),
+            // eslint-disable-next-line typescript/no-non-null-assertion
+            queryKey: queryKeys.USER_INSTRUMENTS(session!.user_id),
           })
           // eslint-disable-next-line no-alert, no-undef
-          alert('Instrument updated successfully!')
+          alert('Instrument(s) updated successfully!')
           break
       }
     },
