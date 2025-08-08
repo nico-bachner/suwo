@@ -16,13 +16,13 @@ export const LoginScreen = ({ method }: LoginScreenSearchParams) => {
       return <LoginWithPasswordForm />
     default:
       return (
-        <div className="flex max-w-screen-sm flex-col gap-4 sm:flex-row">
-          <Button asChild variant="primary" className="flex-1">
+        <div className="flex flex-col gap-4">
+          <Button asChild variant="primary">
             <Link href={routes.LOGIN({ method: LoginMethod.MAGIC_LINK })}>
               Log in with Magic Link
             </Link>
           </Button>
-          <Button variant="secondary" className="flex-1">
+          <Button variant="secondary">
             <Link href={routes.LOGIN({ method: LoginMethod.PASSWORD })}>
               Log in with Password
             </Link>

@@ -61,13 +61,17 @@ export const LoginWithPasswordForm = () => {
       }}
       className="flex flex-col gap-4"
     >
-      <form.AppField name="email">
-        {(field) => <field.Email label="Email Address" autoComplete="email" />}
-      </form.AppField>
+      <div className="flex flex-col gap-2">
+        <form.AppField name="email">
+          {(field) => (
+            <field.Email label="Email Address" autoComplete="email" />
+          )}
+        </form.AppField>
 
-      <form.AppField name="password">
-        {(field) => <field.Password autoComplete="current-password" />}
-      </form.AppField>
+        <form.AppField name="password">
+          {(field) => <field.Password autoComplete="current-password" />}
+        </form.AppField>
+      </div>
 
       <form.AppForm>
         <form.SubmitButton />
