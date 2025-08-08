@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
 
 import { Button } from '@/design_system/button'
-import { EmailInput, TextInput } from '@/design_system/input'
+import { TextInput } from '@/design_system/input'
 import { Switch } from '@/design_system/switch'
 import { queries } from '@/lib/queries'
 import { apiRoutes, queryKeys, routes } from '@/routes'
@@ -108,21 +108,9 @@ export const RegisterForm = () => {
         </form.Field>
       </div>
 
-      <form.Field name="email">
-        {({ name, state, handleBlur, handleChange }) => (
-          <EmailInput
-            label="Email Address"
-            autoComplete="email"
-            name={name}
-            value={state.value}
-            issues={state.meta.errors}
-            onBlur={handleBlur}
-            onChange={({ target }) => {
-              handleChange(target.value)
-            }}
-          />
-        )}
-      </form.Field>
+      <form.AppField name="email">
+        {(field) => <field.Email label="Email Address" autoComplete="email" />}
+      </form.AppField>
 
       <div className="flex flex-col gap-4 sm:flex-row">
         <form.Field name="usu_number">

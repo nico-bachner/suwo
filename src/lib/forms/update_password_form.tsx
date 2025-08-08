@@ -54,8 +54,8 @@ export const UpdatePasswordForm = () => {
       className="flex flex-col gap-4"
     >
       <form.AppField name="password">
-        {({ Password }) => (
-          <Password label="New Password" autoComplete="new-password" />
+        {(field) => (
+          <field.Password label="New Password" autoComplete="new-password" />
         )}
       </form.AppField>
 

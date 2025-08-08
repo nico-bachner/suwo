@@ -3,7 +3,6 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
 
-import { EmailInput } from '@/design_system/input'
 import {
   LoginWithPasswordFormInput,
   LoginWithPasswordFormInputValidator,
@@ -62,23 +61,12 @@ export const LoginWithPasswordForm = () => {
       }}
       className="flex flex-col gap-4"
     >
-      <form.Field name="email">
-        {({ name, state, handleBlur, handleChange }) => (
-          <EmailInput
-            label="Email Address"
-            autoComplete="email"
-            name={name}
-            value={state.value}
-            issues={state.meta.errors}
-            onBlur={handleBlur}
-            onChange={({ target }) => {
-              handleChange(target.value)
-            }}
-          />
-        )}
-      </form.Field>
+      <form.AppField name="email">
+        {(field) => <field.Email label="Email Address" autoComplete="email" />}
+      </form.AppField>
+
       <form.AppField name="password">
-        {({ Password }) => <Password autoComplete="current-password" />}
+        {(field) => <field.Password autoComplete="current-password" />}
       </form.AppField>
 
       <form.AppForm>
