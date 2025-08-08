@@ -112,7 +112,6 @@ export default [
       'no-implicit-coercion': 'error',
       'no-implicit-globals': 'error',
       'no-import-assign': 'error',
-      'no-inline-comments': 'warn',
       'no-inner-declarations': 'error',
       'no-invalid-regexp': 'error',
       'no-invalid-this': 'error',

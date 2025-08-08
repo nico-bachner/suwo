@@ -7,15 +7,13 @@ import { Session } from './types'
 export const createSession = async ({ user_id }: Session) => {
   const cookieStore = await cookies()
 
-  const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-  const session = await createJWT({
+  const sessionJWT = await createJWT({
     user_id,
-    expiresAt,
   })
 
-  cookieStore.set(SESSION_COOKIE_NAME, session, {
-    expires: expiresAt,
+  cookieStore.set(SESSION_COOKIE_NAME, sessionJWT, {
     httpOnly: true,
+    maxAge: 365 * 24 * 60 * 60, // 1 year
     path: '/',
     sameSite: 'lax',
     secure: true,
