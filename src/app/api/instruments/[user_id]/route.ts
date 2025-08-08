@@ -15,26 +15,26 @@ export const GET: APIRoute = async (_, { params }) => {
     })
     .parse(await params)
 
-  const session = await getSession()
+  // Const session = await getSession()
 
-  if (!session) {
-    return createResponse({
-      status: StatusCode.Unauthorized,
-      error: 'Unauthorized',
-    })
-  }
+  // If (!session) {
+  //   Return createResponse({
+  //     Status: StatusCode.Unauthorized,
+  //     Error: 'Unauthorized',
+  //   })
+  // }
 
-  if (user_id !== session.user_id) {
-    return createResponse({
-      status: StatusCode.Forbidden,
-      error:
-        "Users are only allowed to access their own instruments. Only admins can access other users' instruments.",
-    })
-  }
+  // If (user_id !== session.user_id) {
+  //   Return createResponse({
+  //     Status: StatusCode.Forbidden,
+  //     Error:
+  //       "Users are only allowed to access their own instruments. Only admins can access other users' instruments.",
+  //   })
+  // }
 
   const userInstruments = await prisma.userInstrument.findMany({
     where: {
-      user_id: session.user_id,
+      user_id,
     },
     include: {
       instrument: true,
