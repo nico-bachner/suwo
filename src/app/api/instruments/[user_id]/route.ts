@@ -1,5 +1,6 @@
 import z from 'zod'
 
+import { getSession } from '@/features/auth/session/get_session'
 import { InstrumentsQueryResult } from '@/lib/queries/instruments_query'
 import { UpdateInstrumentFormInputValidator } from '@/lib/validators/form_input_validators/update_instrument_form_input_validator'
 import { createResponse } from '@/utils/http/create_response'
@@ -40,22 +41,22 @@ export const POST: APIRoute = async (request, { params }) => {
     })
     .parse(await params)
 
-  // Const session = await getSession()
+  const session = await getSession()
 
-  // If (!session) {
-  //   Return createResponse({
-  //     Status: StatusCode.Unauthorized,
-  //     Error: 'Unauthorized',
-  //   })
-  // }
+  if (!session) {
+    return createResponse({
+      status: StatusCode.Unauthorized,
+      error: 'Unauthorized',
+    })
+  }
 
-  // If (user_id !== session.user_id) {
-  //   Return createResponse({
-  //     Status: StatusCode.Forbidden,
-  //     Error:
-  //       "Users are only allowed to access their own instruments. Only admins can access other users' instruments.",
-  //   })
-  // }
+  if (user_id !== session.user_id) {
+    return createResponse({
+      status: StatusCode.Forbidden,
+      error:
+        "Users are only allowed to access their own instruments. Only admins can access other users' instruments.",
+    })
+  }
 
   const { data, error, success } = UpdateInstrumentFormInputValidator.safeParse(
     await request.json(),
