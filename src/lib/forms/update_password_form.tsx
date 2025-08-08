@@ -1,6 +1,5 @@
 'use client'
 
-import { PasswordInput } from '@/design_system/input'
 import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
@@ -54,21 +53,11 @@ export const UpdatePasswordForm = () => {
       }}
       className="flex flex-col gap-4"
     >
-      <form.Field name="password">
-        {({ name, state, handleBlur, handleChange }) => (
-          <PasswordInput
-            label="New Password"
-            autoComplete="new-password"
-            name={name}
-            value={state.value}
-            issues={state.meta.errors}
-            onBlur={handleBlur}
-            onChange={({ target }) => {
-              handleChange(target.value)
-            }}
-          />
+      <form.AppField name="password">
+        {({ Password }) => (
+          <Password label="New Password" autoComplete="new-password" />
         )}
-      </form.Field>
+      </form.AppField>
 
       <form.AppForm>
         <form.SubmitButton />

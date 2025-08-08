@@ -5,16 +5,10 @@ import {
   Root,
   Toggle,
 } from '@radix-ui/react-password-toggle-field'
-import { StandardSchemaV1Issue } from '@tanstack/react-form'
-import { ComponentProps } from 'react'
 
 import { cn } from '@/utils/cn'
 
-type PasswordInputProps = ComponentProps<typeof Input> & {
-  name: string
-  label: string
-  issues?: (StandardSchemaV1Issue | undefined)[]
-}
+import { PasswordInputProps } from './types'
 
 export const PasswordInput = ({
   issues,

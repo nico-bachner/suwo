@@ -1,13 +1,6 @@
-import { StandardSchemaV1Issue } from '@tanstack/react-form'
-import { ComponentProps } from 'react'
-
 import { cn } from '@/utils/cn'
 
-type TextInputProps = ComponentProps<'input'> & {
-  name: string
-  label: string
-  issues?: (StandardSchemaV1Issue | undefined)[]
-}
+import { TextInputProps } from './types'
 
 export const TextInput = ({
   issues,

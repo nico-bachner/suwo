@@ -1,14 +1,8 @@
 import { AtSymbolIcon } from '@heroicons/react/24/outline'
-import { StandardSchemaV1Issue } from '@tanstack/react-form'
-import { ComponentProps } from 'react'
 
 import { cn } from '@/utils/cn'
 
-type EmailInputProps = ComponentProps<'input'> & {
-  name: string
-  label: string
-  issues?: (StandardSchemaV1Issue | undefined)[]
-}
+import { EmailInputProps } from './types'
 
 export const EmailInput = ({
   issues,
