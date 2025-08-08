@@ -5,7 +5,7 @@ import z from 'zod'
 import { FOUNDING_YEAR } from '@/config'
 import { WEEKS } from '@/features/usyd_api_wrapper/config'
 import { routes } from '@/routes'
-import { Semester } from '@/utils/date_manupulation/semester'
+import { Semester } from '@/utils/date_manipulation/semester'
 
 export default function Page() {
   const currentYear = new Date().getFullYear()

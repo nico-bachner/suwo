@@ -12,7 +12,7 @@ import { Icon } from '@/design_system/icon'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
-import { getCurrentSemester, getCurrentYear } from '@/utils/date_manupulation'
+import { getCurrentSemester, getCurrentYear } from '@/utils/date_manipulation'
 
 import { NavbarMenuLink } from './navbar_menu_link'
 

@@ -1,6 +1,6 @@
 import { cache } from 'react'
 
-import { getCurrentYear } from '@/utils/date_manupulation'
+import { getCurrentYear } from '@/utils/date_manipulation'
 
 import { MAX_WEEK } from '../../features/usyd_api_wrapper/config'
 import { getMidsemAdjustedWeek } from './get_midsem_adjusted_week'

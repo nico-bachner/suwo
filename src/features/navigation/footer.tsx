@@ -6,7 +6,7 @@ import { SOCIAL_LINKS } from '@/config'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
-import { getCurrentSemester, getCurrentYear } from '@/utils/date_manupulation'
+import { getCurrentSemester, getCurrentYear } from '@/utils/date_manipulation'
 
 import { FooterLink } from './footer_link'
 

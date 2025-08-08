@@ -1,4 +1,4 @@
-import { getCurrentYear } from '@/utils/date_manupulation'
+import { getCurrentYear } from '@/utils/date_manipulation'
 
 import { getCurrentSemesterSessionCode } from './get_current_semester_session_code'
 import { KeyDate } from './types'

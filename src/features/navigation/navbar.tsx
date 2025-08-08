@@ -9,7 +9,7 @@ import { Button } from '@/design_system/button'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
-import { getCurrentSemester, getCurrentYear } from '@/utils/date_manupulation'
+import { getCurrentSemester, getCurrentYear } from '@/utils/date_manipulation'
 
 import { NavbarLink } from './navbar_link'
 import { NavbarMenu } from './navbar_menu'

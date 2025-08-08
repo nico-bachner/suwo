@@ -1,5 +1,5 @@
-import { getCurrentSemester } from '@/utils/date_manupulation/get_current_semester'
-import { Semester } from '@/utils/date_manupulation/semester'
+import { getCurrentSemester } from '@/utils/date_manipulation/get_current_semester'
+import { Semester } from '@/utils/date_manipulation/semester'
 
 import { SessionCode } from './session_code'
 

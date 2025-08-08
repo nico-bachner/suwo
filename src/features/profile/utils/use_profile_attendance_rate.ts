@@ -4,8 +4,8 @@ import z from 'zod'
 import { WEEKS } from '@/features/usyd_api_wrapper/config'
 import { queries } from '@/lib/queries'
 import { ProfileQueryResult } from '@/lib/queries/profile_query'
-import { getCurrentSemester } from '@/utils/date_manupulation'
-import { Semester } from '@/utils/date_manupulation/semester'
+import { getCurrentSemester } from '@/utils/date_manipulation'
+import { Semester } from '@/utils/date_manipulation/semester'
 
 export const useProfileAttendanceRate = (
   attendances: ProfileQueryResult['attendances'] | undefined,

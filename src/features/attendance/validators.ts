@@ -8,7 +8,7 @@ import {
   YearCoerceValidator,
   YearValidator,
 } from '@/lib/validators/suwo_year_validator'
-import { Semester } from '@/utils/date_manupulation/semester'
+import { Semester } from '@/utils/date_manipulation/semester'
 
 export const WeeklyAttendancesValidator = z.object({
   year: YearValidator,
