@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 
-import { TextInput } from '@/design_system/text_input'
+import { SearchInput } from '@/design_system/input'
 import { queries } from '@/lib/queries'
 import { search } from '@/utils/search'
 
@@ -43,26 +43,24 @@ export const WeeklyAttendance = ({
       />
 
       <main className="prose">
-        <h1 className="text-center">
+        <h1>
           Attendance Sheet
           <br />
           {year} Semester {semester}
           <br />
           Week {week}
         </h1>
-        <p className="text-center text-xl">
+
+        <p className="text-xl">
           Present: {`${attendances?.length ?? 0}/${profiles?.length ?? 0}`}
         </p>
 
-        <TextInput
-          name="search"
-          label="Search"
-          type="search"
+        <SearchInput
+          value={query}
           onChange={({ target }) => {
             setQuery(target.value)
           }}
           placeholder="Search by name or instrument"
-          className="mb-6"
         />
 
         <div className="flex flex-col">

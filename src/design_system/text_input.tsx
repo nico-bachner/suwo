@@ -6,7 +6,7 @@ import { InputLabel } from './input_label'
 
 type TextInputProps = ComponentProps<'input'> & {
   errors?: string[]
-  type?: 'text' | 'email' | 'password' | 'search'
+  type?: 'text' | 'email'
   name: string
   label: string
   className?: string

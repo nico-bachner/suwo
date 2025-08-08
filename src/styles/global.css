@@ -1,4 +1,4 @@
 body,
 .body {
-  @apply bg-neutral-7 text-neutral-2 font-sans antialiased scheme-dark;
+  @apply bg-neutral-7 text-neutral-2 selection:bg-primary-4 selection:text-neutral-1 font-sans antialiased scheme-dark selection:p-1;
 }
