@@ -1,6 +1,6 @@
 'use client'
 
-import { PasswordInput } from '@/design_system/password_input'
+import { PasswordInput } from '@/design_system/input'
 import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'

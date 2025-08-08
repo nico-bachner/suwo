@@ -25,7 +25,7 @@ export const PasswordInput = ({
         placeholder='e.g. "I<3SUWO25!"'
         className="selection:bg-neutral-4 selection:text-neutral-1 flex-1 pl-3 outline-none"
       />
-      <Toggle className="focus-visible:ring-primary-4 flex items-center justify-center outline-none focus-visible:ring">
+      <Toggle className="focus-visible:ring-primary-3 flex items-center justify-center rounded-md outline-none focus-visible:ring-2">
         <Icon
           visible={<EyeIcon />}
           hidden={<EyeSlashIcon />}
