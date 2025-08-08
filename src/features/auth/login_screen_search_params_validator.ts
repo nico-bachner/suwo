@@ -1,7 +1,9 @@
 import z from 'zod'
 
+import { LoginMethod } from './login_method'
+
 export const LoginScreenSearchParamsValidator = z.object({
-  method: z.enum(['MAGIC_LINK', 'PASSWORD']).optional(),
+  method: z.enum(LoginMethod).optional(),
 })
 
 export type LoginScreenSearchParams = z.infer<
