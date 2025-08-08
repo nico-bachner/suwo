@@ -15,7 +15,7 @@ export const EmailInput = ({
   const issue = issues?.filter((issue) => issue !== undefined)[0]
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className={cn('flex h-18 flex-col gap-1', className)}>
       <label
         htmlFor={name}
         className="flex items-center justify-between px-2 text-sm"
@@ -26,11 +26,11 @@ export const EmailInput = ({
 
       <div
         className={cn(
-          'text-neutral-2 focus-within:text-neutral-1 group focus-within:border-neutral-3 border-neutral-4 flex items-center rounded-lg border pr-3 pl-0.5',
-          className,
+          'flex flex-1 items-center gap-3 px-3',
+          'text-neutral-2 focus-within:text-neutral-1 group focus-within:border-neutral-3 border-neutral-4 rounded-lg border',
         )}
       >
-        <AtSymbolIcon className="stroke-neutral-3 group-focus-within:stroke-neutral-2 box-content size-5 p-2.5" />
+        <AtSymbolIcon className="stroke-neutral-3 group-focus-within:stroke-neutral-2 size-5" />
         <input
           type="email"
           id={name}

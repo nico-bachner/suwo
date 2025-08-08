@@ -67,16 +67,15 @@ export const RegisterForm = () => {
         event.stopPropagation()
         await form.handleSubmit()
       }}
-      className="flex flex-col gap-4"
+      className="flex flex-col gap-8"
     >
-      <div className="flex flex-col gap-4 sm:flex-row">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <form.AppField name="given_name">
           {(field) => (
             <field.Text
               label="Given Name"
-              placeholder='e.g. "John"'
+              placeholder='e.g. "Ambrose"'
               autoComplete="given-name"
-              className="flex-1"
             />
           )}
         </form.AppField>
@@ -85,54 +84,63 @@ export const RegisterForm = () => {
           {(field) => (
             <field.Text
               label="Family Name"
-              placeholder='e.g. "Doe"'
+              placeholder='e.g. "Phelps"'
               autoComplete="family-name"
-              className="flex-1"
+            />
+          )}
+        </form.AppField>
+
+        <form.AppField name="email">
+          {(field) => (
+            <field.Email
+              label="Email Address"
+              autoComplete="email"
+              className="sm:col-span-2"
+            />
+          )}
+        </form.AppField>
+
+        <form.AppField name="usu_number">
+          {(field) => (
+            <field.Text
+              label="USU Number"
+              placeholder='e.g. "1234567"'
+              inputMode="numeric"
+              className="sm:col-span-2"
             />
           )}
         </form.AppField>
       </div>
 
-      <form.AppField name="email">
-        {(field) => <field.Email label="Email Address" autoComplete="email" />}
-      </form.AppField>
+      <div className="prose">
+        <h2 className="p-2">Instruments</h2>
 
-      <form.AppField name="usu_number">
-        {(field) => (
-          <field.Text
-            label="USU Number"
-            placeholder='e.g. "1234567"'
-            inputMode="numeric"
-            className="flex-1"
-          />
-        )}
-      </form.AppField>
-
-      <h2>Instruments</h2>
-
-      <form.Field name="instrument_ids">
-        {({ state, handleChange }) => (
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-            {instruments?.map((instrument) => (
-              <Button
-                key={instrument.id}
-                variant={
-                  state.value.includes(instrument.id) ? 'primary' : 'secondary'
-                }
-                onClick={() => {
-                  handleChange((prev) =>
-                    prev.includes(instrument.id)
-                      ? prev.filter((id) => id !== instrument.id)
-                      : [...prev, instrument.id],
-                  )
-                }}
-              >
-                {instrument.name}
-              </Button>
-            ))}
-          </div>
-        )}
-      </form.Field>
+        <form.Field name="instrument_ids">
+          {({ state, handleChange }) => (
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+              {instruments?.map((instrument) => (
+                <Button
+                  key={instrument.id}
+                  variant={
+                    state.value.includes(instrument.id)
+                      ? 'primary'
+                      : 'secondary'
+                  }
+                  onClick={() => {
+                    handleChange((prev) =>
+                      prev.includes(instrument.id)
+                        ? prev.filter((id) => id !== instrument.id)
+                        : [...prev, instrument.id],
+                    )
+                  }}
+                >
+                  {instrument.name}
+                </Button>
+              ))}
+            </div>
+          )}
+        </form.Field>
+      </div>
 
       <form.Field name="mailing_list_preference">
         {({ state, name, handleChange }) => (
@@ -141,7 +149,7 @@ export const RegisterForm = () => {
             label="Sign up for weekly rehearsal updates"
             checked={state.value}
             onCheckedChange={handleChange}
-            className="mt-4 self-center"
+            className="self-center"
           />
         )}
       </form.Field>
