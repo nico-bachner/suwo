@@ -4,6 +4,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
 import z from 'zod'
 
+import { PasswordInput } from '@/design_system/input'
 import { TextInput } from '@/design_system/text_input'
 import {
   LoginWithPasswordFormInput,
@@ -96,15 +97,10 @@ export const LoginWithPasswordForm = () => {
         )}
       </form.Field>
       <form.Field name="password">
-        {({ state, name, handleBlur, handleChange }) => (
-          <TextInput
-            name={name}
-            value={state.value}
-            type="password"
-            label="Password"
-            placeholder='e.g. "I<3SUWO25!"'
+        {({ state, handleChange }) => (
+          <PasswordInput
             autoComplete="current-password"
-            onBlur={handleBlur}
+            value={state.value}
             onChange={({ target }) => {
               handleChange(target.value)
             }}

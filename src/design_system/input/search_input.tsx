@@ -10,7 +10,7 @@ export const SearchInput = ({
 }: ComponentProps<'input'>) => (
   <div
     className={cn(
-      'text-neutral-2 focus-within:text-neutral-1 group focus-within:border-neutral-3 border-neutral-4 flex items-center rounded-lg border',
+      'text-neutral-2 focus-within:text-neutral-1 group focus-within:border-neutral-3 border-neutral-4 flex items-center rounded-lg border pr-3 pl-0.5',
       className,
     )}
   >
@@ -18,7 +18,7 @@ export const SearchInput = ({
     <input
       type="search"
       placeholder={placeholder}
-      className="flex-1 pr-3 outline-none"
+      className="flex-1 outline-none"
       {...props}
     />
   </div>

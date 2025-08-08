@@ -16,14 +16,14 @@ export const PasswordInput = ({
   <Root>
     <div
       className={cn(
-        'bg-neutral-7 text-neutral-2 focus-within:text-neutral-1 group focus-within:border-neutral-3 border-neutral-4 flex items-center rounded-lg border',
+        'text-neutral-2 focus-within:text-neutral-1 group focus-within:border-neutral-3 border-neutral-4 flex items-center rounded-lg border pr-0.5 pl-3',
         className,
       )}
     >
       <Input
         suppressHydrationWarning
         placeholder='e.g. "I<3SUWO25!"'
-        className="flex-1 pl-3 outline-none"
+        className="flex-1 outline-none"
         {...props}
       />
       <Toggle className="focus-visible:ring-primary-3 flex items-center justify-center rounded-md outline-none focus-visible:ring-2">

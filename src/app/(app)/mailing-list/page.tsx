@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 
 import { Button } from '@/design_system/button'
-import { TextInput } from '@/design_system/text_input'
+import { SearchInput } from '@/design_system/input'
 import { queries } from '@/lib/queries'
 import { search } from '@/utils/search'
 
@@ -19,7 +19,7 @@ export default function Page() {
     error: mailingListRecipientsError,
     isPending: isMailingListRecipientsPending,
   } = useQuery(queries.MAILING_LIST_RECIPIENTS())
-  const [searchQuery, setSearchQuery] = useState('')
+  const [query, setQuery] = useState('')
 
   if (isSessionPending || isMailingListRecipientsPending) {
     return (
@@ -78,34 +78,34 @@ export default function Page() {
     <main className="prose">
       <h1>Mailing List Recipients</h1>
 
-      <Button variant="secondary" asChild>
-        <a
-          href={URL.createObjectURL(
-            new Blob([csv], {
-              type: 'text/csv;charset=utf-8;',
-            }),
-          )}
-          download="suwo_mailing_list.csv"
-        >
-          Download as CSV
-        </a>
-      </Button>
+      <div className="flex flex-col-reverse gap-2 sm:flex-row">
+        <SearchInput
+          value={query}
+          onChange={({ target }) => {
+            setQuery(target.value)
+          }}
+          className="flex-grow"
+        />
 
-      <TextInput
-        name="search"
-        label="Search"
-        type="search"
-        onChange={({ target }) => {
-          setSearchQuery(target.value)
-        }}
-        placeholder="Search by name or instrument"
-      />
+        <Button variant="secondary" asChild>
+          <a
+            href={URL.createObjectURL(
+              new Blob([csv], {
+                type: 'text/csv;charset=utf-8;',
+              }),
+            )}
+            download="suwo_mailing_list.csv"
+          >
+            Download as CSV
+          </a>
+        </Button>
+      </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {search({
           data: mailingListRecipients,
           keys: ['email'],
-          query: searchQuery,
+          query,
         }).map((mailingListRecipient) => (
           <p key={mailingListRecipient.user_id}>{mailingListRecipient.email}</p>
         ))}
