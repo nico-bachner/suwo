@@ -55,11 +55,12 @@ export const UpdatePasswordForm = () => {
       className="flex flex-col gap-4"
     >
       <form.Field name="password">
-        {({ state, handleChange }) => (
+        {({ state, handleBlur, handleChange }) => (
           <PasswordInput
             autoComplete="new-password"
             value={state.value}
             issues={state.meta.errors}
+            onBlur={handleBlur}
             onChange={({ target }) => {
               handleChange(target.value)
             }}

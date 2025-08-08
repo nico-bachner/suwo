@@ -4,8 +4,8 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
 
 import { Button } from '@/design_system/button'
+import { TextInput } from '@/design_system/input/text_input'
 import { Switch } from '@/design_system/switch'
-import { TextInput } from '@/design_system/text_input'
 import { queries } from '@/lib/queries'
 import { apiRoutes, queryKeys, routes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
@@ -75,16 +75,16 @@ export const RegisterForm = () => {
           {({ state, name, handleBlur, handleChange }) => (
             <TextInput
               name={name}
-              value={state.value}
               label="Given Name"
               placeholder='e.g. "John"'
               autoComplete="given-name"
-              required
+              className="flex-1"
+              value={state.value}
+              issues={state.meta.errors}
               onBlur={handleBlur}
               onChange={({ target }) => {
                 handleChange(target.value)
               }}
-              className="flex-1"
             />
           )}
         </form.Field>
@@ -93,15 +93,16 @@ export const RegisterForm = () => {
           {({ state, name, handleBlur, handleChange }) => (
             <TextInput
               name={name}
-              value={state.value}
               label="Family Name"
               placeholder='e.g. "Doe"'
               autoComplete="family-name"
+              className="flex-1"
+              value={state.value}
+              issues={state.meta.errors}
               onBlur={handleBlur}
               onChange={({ target }) => {
                 handleChange(target.value)
               }}
-              className="flex-1"
             />
           )}
         </form.Field>
@@ -111,23 +112,11 @@ export const RegisterForm = () => {
         {({ state, name, handleBlur, handleChange }) => (
           <TextInput
             name={name}
-            value={state.value}
             label="Email Address"
             placeholder='e.g. "name@example.com"'
             autoComplete="email"
-            required
-            errors={state.meta.errors
-              .map((error) => {
-                switch (typeof error) {
-                  case 'string':
-                    return error
-                  case 'object':
-                    return error.message
-                  default:
-                    return null
-                }
-              })
-              .filter((error) => error !== null)}
+            value={state.value}
+            issues={state.meta.errors}
             onBlur={handleBlur}
             onChange={({ target }) => {
               handleChange(target.value)
@@ -141,27 +130,16 @@ export const RegisterForm = () => {
           {({ state, name, handleBlur, handleChange }) => (
             <TextInput
               name={name}
-              value={state.value}
               label="USU Number"
               placeholder='e.g. "1234567"'
               inputMode="numeric"
-              errors={state.meta.errors
-                .map((error) => {
-                  switch (typeof error) {
-                    case 'string':
-                      return error
-                    case 'object':
-                      return error.message
-                    default:
-                      return null
-                  }
-                })
-                .filter((error) => error !== null)}
+              className="flex-1"
+              value={state.value}
+              issues={state.meta.errors}
               onBlur={handleBlur}
               onChange={({ target }) => {
                 handleChange(target.value)
               }}
-              className="flex-1"
             />
           )}
         </form.Field>

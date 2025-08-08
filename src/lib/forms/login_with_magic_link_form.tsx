@@ -1,8 +1,6 @@
 'use client'
 
-import z from 'zod'
-
-import { TextInput } from '@/design_system/text_input'
+import { TextInput } from '@/design_system/input/text_input'
 import {
   LoginWithMagicLinkFormInput,
   LoginWithMagicLinkFormInputValidator,
@@ -55,31 +53,15 @@ export const LoginWithMagicLinkForm = () => {
       }}
       className="flex flex-col gap-1"
     >
-      <form.Field
-        name="email"
-        validators={{
-          onBlur: z.email(),
-        }}
-      >
+      <form.Field name="email">
         {({ state, name, handleBlur, handleChange }) => (
           <TextInput
             name={name}
-            value={state.value}
             label="Email Address"
             placeholder='e.g. "name@example.com"'
             autoComplete="email"
-            errors={state.meta.errors
-              .map((error) => {
-                switch (typeof error) {
-                  case 'string':
-                    return error
-                  case 'object':
-                    return error.message
-                  default:
-                    return null
-                }
-              })
-              .filter((error) => error !== null)}
+            value={state.value}
+            issues={state.meta.errors}
             onBlur={handleBlur}
             onChange={({ target }) => {
               handleChange(target.value)

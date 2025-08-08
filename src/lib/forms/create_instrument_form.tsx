@@ -2,7 +2,7 @@
 
 import { useQueryClient } from '@tanstack/react-query'
 
-import { TextInput } from '@/design_system/text_input'
+import { TextInput } from '@/design_system/input/text_input'
 import { apiRoutes, queryKeys } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
@@ -67,20 +67,9 @@ export const CreateInstrumentForm = () => {
             type="text"
             name={name}
             label="Instrument Name"
-            value={state.value}
             placeholder="e.g. Trombone"
-            errors={state.meta.errors
-              .map((error) => {
-                switch (typeof error) {
-                  case 'string':
-                    return error
-                  case 'object':
-                    return error.message
-                  default:
-                    return null
-                }
-              })
-              .filter((error) => error !== null)}
+            value={state.value}
+            issues={state.meta.errors}
             onBlur={handleBlur}
             onChange={({ target }) => {
               handleChange(target.value)

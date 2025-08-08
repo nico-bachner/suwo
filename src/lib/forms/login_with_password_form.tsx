@@ -4,7 +4,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
 
 import { PasswordInput } from '@/design_system/input'
-import { TextInput } from '@/design_system/text_input'
+import { TextInput } from '@/design_system/input/text_input'
 import {
   LoginWithPasswordFormInput,
   LoginWithPasswordFormInputValidator,
@@ -67,22 +67,11 @@ export const LoginWithPasswordForm = () => {
         {({ state, name, handleBlur, handleChange }) => (
           <TextInput
             name={name}
-            value={state.value}
             label="Email Address"
             placeholder='e.g. "name@example.com"'
             autoComplete="email"
-            errors={state.meta.errors
-              .map((error) => {
-                switch (typeof error) {
-                  case 'string':
-                    return error
-                  case 'object':
-                    return error.message
-                  default:
-                    return null
-                }
-              })
-              .filter((error) => error !== null)}
+            value={state.value}
+            issues={state.meta.errors}
             onBlur={handleBlur}
             onChange={({ target }) => {
               handleChange(target.value)
@@ -91,11 +80,12 @@ export const LoginWithPasswordForm = () => {
         )}
       </form.Field>
       <form.Field name="password">
-        {({ state, handleChange }) => (
+        {({ state, handleBlur, handleChange }) => (
           <PasswordInput
             autoComplete="current-password"
             value={state.value}
             issues={state.meta.errors}
+            onBlur={handleBlur}
             onChange={({ target }) => {
               handleChange(target.value)
             }}
