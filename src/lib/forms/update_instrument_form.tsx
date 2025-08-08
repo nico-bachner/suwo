@@ -54,19 +54,18 @@ export const UpdateInstrumentForm = () => {
           break
         case StatusCode.OK:
         case StatusCode.Created:
-          await Promise.all([
-            queryClient.invalidateQueries({
-              // eslint-disable-next-line typescript/no-non-null-assertion
-              queryKey: queryKeys.USER_INSTRUMENTS(session!.user_id),
-            }),
-            queryClient.invalidateQueries({
-              queryKey: queryKeys.PROFILES(),
-            }),
-            queryClient.invalidateQueries({
-              // eslint-disable-next-line typescript/no-non-null-assertion
-              queryKey: queryKeys.PROFILE(session!),
-            }),
-          ])
+          await queryClient.invalidateQueries({
+            // eslint-disable-next-line typescript/no-non-null-assertion
+            queryKey: queryKeys.USER_INSTRUMENTS(session!.user_id),
+          })
+          await queryClient.invalidateQueries({
+            // eslint-disable-next-line typescript/no-non-null-assertion
+            queryKey: queryKeys.USER_INSTRUMENTS(session!.user_id),
+          })
+          await queryClient.invalidateQueries({
+            // eslint-disable-next-line typescript/no-non-null-assertion
+            queryKey: queryKeys.PROFILE(session!),
+          })
 
           // eslint-disable-next-line no-alert, no-undef
           alert('Instrument(s) updated successfully!')
