@@ -2,7 +2,6 @@
 
 import { useQueryClient } from '@tanstack/react-query'
 
-import { TextInput } from '@/design_system/input'
 import { apiRoutes, queryKeys } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
@@ -61,21 +60,11 @@ export const CreateInstrumentForm = () => {
       }}
       className="flex flex-col gap-4"
     >
-      <form.Field name="instrument_name">
-        {({ name, state, handleBlur, handleChange }) => (
-          <TextInput
-            label="Instrument Name"
-            placeholder="e.g. Trombone"
-            name={name}
-            value={state.value}
-            issues={state.meta.errors}
-            onBlur={handleBlur}
-            onChange={({ target }) => {
-              handleChange(target.value)
-            }}
-          />
+      <form.AppField name="instrument_name">
+        {(field) => (
+          <field.Text label="Instrument Name" placeholder="e.g. Trombone" />
         )}
-      </form.Field>
+      </form.AppField>
 
       <form.AppForm>
         <form.SubmitButton />

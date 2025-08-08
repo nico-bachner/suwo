@@ -4,7 +4,6 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
 
 import { Button } from '@/design_system/button'
-import { TextInput } from '@/design_system/input'
 import { Switch } from '@/design_system/switch'
 import { queries } from '@/lib/queries'
 import { apiRoutes, queryKeys, routes } from '@/routes'
@@ -71,66 +70,43 @@ export const RegisterForm = () => {
       className="flex flex-col gap-4"
     >
       <div className="flex flex-col gap-4 sm:flex-row">
-        <form.Field name="given_name">
-          {({ name, state, handleBlur, handleChange }) => (
-            <TextInput
+        <form.AppField name="given_name">
+          {(field) => (
+            <field.Text
               label="Given Name"
               placeholder='e.g. "John"'
               autoComplete="given-name"
               className="flex-1"
-              name={name}
-              value={state.value}
-              issues={state.meta.errors}
-              onBlur={handleBlur}
-              onChange={({ target }) => {
-                handleChange(target.value)
-              }}
             />
           )}
-        </form.Field>
+        </form.AppField>
 
-        <form.Field name="family_name">
-          {({ name, state, handleBlur, handleChange }) => (
-            <TextInput
+        <form.AppField name="family_name">
+          {(field) => (
+            <field.Text
               label="Family Name"
               placeholder='e.g. "Doe"'
               autoComplete="family-name"
               className="flex-1"
-              name={name}
-              value={state.value}
-              issues={state.meta.errors}
-              onBlur={handleBlur}
-              onChange={({ target }) => {
-                handleChange(target.value)
-              }}
             />
           )}
-        </form.Field>
+        </form.AppField>
       </div>
 
       <form.AppField name="email">
         {(field) => <field.Email label="Email Address" autoComplete="email" />}
       </form.AppField>
 
-      <div className="flex flex-col gap-4 sm:flex-row">
-        <form.Field name="usu_number">
-          {({ name, state, handleBlur, handleChange }) => (
-            <TextInput
-              label="USU Number"
-              placeholder='e.g. "1234567"'
-              inputMode="numeric"
-              className="flex-1"
-              name={name}
-              value={state.value}
-              issues={state.meta.errors}
-              onBlur={handleBlur}
-              onChange={({ target }) => {
-                handleChange(target.value)
-              }}
-            />
-          )}
-        </form.Field>
-      </div>
+      <form.AppField name="usu_number">
+        {(field) => (
+          <field.Text
+            label="USU Number"
+            placeholder='e.g. "1234567"'
+            inputMode="numeric"
+            className="flex-1"
+          />
+        )}
+      </form.AppField>
 
       <h2>Instruments</h2>
 
