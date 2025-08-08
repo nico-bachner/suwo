@@ -2,7 +2,6 @@
 
 import { useQueryClient } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
-import z from 'zod'
 
 import { PasswordInput } from '@/design_system/input'
 import { TextInput } from '@/design_system/text_input'
@@ -62,14 +61,9 @@ export const LoginWithPasswordForm = () => {
         event.stopPropagation()
         await form.handleSubmit()
       }}
-      className="flex flex-col gap-1"
+      className="flex flex-col gap-4"
     >
-      <form.Field
-        name="email"
-        validators={{
-          onBlur: z.email(),
-        }}
-      >
+      <form.Field name="email">
         {({ state, name, handleBlur, handleChange }) => (
           <TextInput
             name={name}
@@ -101,6 +95,7 @@ export const LoginWithPasswordForm = () => {
           <PasswordInput
             autoComplete="current-password"
             value={state.value}
+            issues={state.meta.errors}
             onChange={({ target }) => {
               handleChange(target.value)
             }}

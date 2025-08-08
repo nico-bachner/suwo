@@ -59,6 +59,7 @@ export const UpdatePasswordForm = () => {
           <PasswordInput
             autoComplete="new-password"
             value={state.value}
+            issues={state.meta.errors}
             onChange={({ target }) => {
               handleChange(target.value)
             }}
