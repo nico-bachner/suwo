@@ -5,7 +5,7 @@ import { Month } from './month'
 export const getCurrentMonth = () => {
   const { data: month, success } = z
     .enum(Month)
-    .safeParse(new Date().getMonth())
+    .safeParse(new Date().getMonth() + 1)
 
   if (!success) {
     throw new Error('Invalid month')
