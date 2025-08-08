@@ -1,9 +1,8 @@
 'use client'
 
+import { Button } from '@/design_system/button'
+import { Spinner } from '@/design_system/spinner'
 import { useFormContext } from '@/lib/forms/context'
-
-import { Button } from './button/button'
-import { Spinner } from './spinner'
 
 export const SubmitButton = () => {
   const form = useFormContext()
