@@ -3,6 +3,16 @@
 The University of Sydney Wind Orchestra's Website - A modern web application for
 managing orchestra members, attendance, and public information.
 
+```
+     _________   ____    ____  ___   __   ____  ___________
+    /        /  /   /   /   / |   | /  | /   / /          /
+   /    ____/  /   /   /   /  |   |/   |/   / /   ___    /
+  |        |  /   /   /   /   |            / /   /  /   /
+  |____    | /   /___/   /    |           / /   /__/   /
+ /        / /           /     |    /|    / /          /
+/________/ /___________/      |___/ |___/ /__________/
+```
+
 ## 🎼 About SUWO
 
 SUWO (Sydney University Wind Orchestra) is a multi-award-winning concert band
