@@ -54,7 +54,8 @@ life.
 
 ## ✨ Features
 
-- 🏠 **Marketing Pages**: Orchestra information, history, and joining details
+- 🏠 **Marketing Pages**: Orchestra information, calendar, history, and joining
+  details
 - 📚 **Dynamic History**: Content managed through Notion CMS
 - 🔐 **Authentication**: Secure login/logout with session management
 - 👤 **Profile Management**: Update personal information and instrument
@@ -63,6 +64,7 @@ life.
 - 📋 **Roll Call**: Digital attendance tracking with QR codes
 - 📊 **Attendance Management**: View and manage weekly attendance
 - 👥 **Member Directory**: Access to all orchestra member profiles
+- 🎺 **Equipment Inventory**: Track and view available equipment
 
 ## 📁 Project Structure
 
@@ -75,11 +77,23 @@ suwo/
 ├── src/
 │   ├── app/                      # Next.js App Router pages
 │   │   ├── (app)/                # Authenticated app pages
+│   │   │   ├── attendance/       # Roll call and attendance management
+│   │   │   ├── equipment/        # Equipment inventory
+│   │   │   ├── mailing-list/     # Mailing list admin
+│   │   │   ├── members/          # Member directory
+│   │   │   └── settings/         # Account settings
 │   │   ├── (auth)/               # Authentication (login, register, etc.)
 │   │   ├── (marketing)/          # Public marketing pages
 │   │   └── api/                  # API routes
 │   ├── design_system/            # Reusable UI components
 │   ├── features/                 # Feature-specific modules
+│   │   ├── attendance/
+│   │   ├── auth/
+│   │   ├── marketing/
+│   │   ├── navigation/
+│   │   ├── profile/
+│   │   └── usyd_api_wrapper/     # USYD calendar helpers
+│   ├── icons/                    # SUWO-specific SVG icons
 │   ├── generated/                # Prisma output – ignore this
 │   ├── lib/
 │   │   ├── forms/                # Tanstack Form forms
