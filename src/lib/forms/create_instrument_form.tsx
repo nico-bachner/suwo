@@ -2,7 +2,7 @@
 
 import { useQueryClient } from '@tanstack/react-query'
 
-import { TextInput } from '@/design_system/input/text_input'
+import { TextInput } from '@/design_system/input'
 import { apiRoutes, queryKeys } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
@@ -64,10 +64,9 @@ export const CreateInstrumentForm = () => {
       <form.Field name="instrument_name">
         {({ name, state, handleBlur, handleChange }) => (
           <TextInput
-            type="text"
-            name={name}
             label="Instrument Name"
             placeholder="e.g. Trombone"
+            name={name}
             value={state.value}
             issues={state.meta.errors}
             onBlur={handleBlur}

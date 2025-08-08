@@ -11,11 +11,16 @@ import { ComponentProps } from 'react'
 import { cn } from '@/utils/cn'
 
 type PasswordInputProps = ComponentProps<typeof Input> & {
+  name: string
+  label: string
   issues?: (StandardSchemaV1Issue | undefined)[]
 }
 
 export const PasswordInput = ({
   issues,
+  name,
+  label = 'Password',
+  placeholder = 'e.g. "I<3SUWO25!"',
   className,
   ...props
 }: PasswordInputProps) => {
@@ -23,6 +28,14 @@ export const PasswordInput = ({
 
   return (
     <div className="flex flex-col gap-1">
+      <label
+        htmlFor={name}
+        className="flex items-center justify-between px-2 text-sm"
+      >
+        <p>{label}</p>
+        {issue && <p className="text-negative">{issue.message}</p>}
+      </label>
+
       <Root>
         <div
           className={cn(
@@ -32,7 +45,9 @@ export const PasswordInput = ({
         >
           <Input
             suppressHydrationWarning
-            placeholder='e.g. "I<3SUWO25!"'
+            id={name}
+            name={name}
+            placeholder={placeholder}
             className="flex-1 outline-none"
             {...props}
           />
@@ -45,8 +60,6 @@ export const PasswordInput = ({
           </Toggle>
         </div>
       </Root>
-
-      {issue && <p className="text-negative px-2 text-sm">{issue.message}</p>}
     </div>
   )
 }

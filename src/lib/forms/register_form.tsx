@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
 
 import { Button } from '@/design_system/button'
-import { TextInput } from '@/design_system/input/text_input'
+import { EmailInput, TextInput } from '@/design_system/input'
 import { Switch } from '@/design_system/switch'
 import { queries } from '@/lib/queries'
 import { apiRoutes, queryKeys, routes } from '@/routes'
@@ -72,13 +72,13 @@ export const RegisterForm = () => {
     >
       <div className="flex flex-col gap-4 sm:flex-row">
         <form.Field name="given_name">
-          {({ state, name, handleBlur, handleChange }) => (
+          {({ name, state, handleBlur, handleChange }) => (
             <TextInput
-              name={name}
               label="Given Name"
               placeholder='e.g. "John"'
               autoComplete="given-name"
               className="flex-1"
+              name={name}
               value={state.value}
               issues={state.meta.errors}
               onBlur={handleBlur}
@@ -90,13 +90,13 @@ export const RegisterForm = () => {
         </form.Field>
 
         <form.Field name="family_name">
-          {({ state, name, handleBlur, handleChange }) => (
+          {({ name, state, handleBlur, handleChange }) => (
             <TextInput
-              name={name}
               label="Family Name"
               placeholder='e.g. "Doe"'
               autoComplete="family-name"
               className="flex-1"
+              name={name}
               value={state.value}
               issues={state.meta.errors}
               onBlur={handleBlur}
@@ -109,12 +109,11 @@ export const RegisterForm = () => {
       </div>
 
       <form.Field name="email">
-        {({ state, name, handleBlur, handleChange }) => (
-          <TextInput
-            name={name}
+        {({ name, state, handleBlur, handleChange }) => (
+          <EmailInput
             label="Email Address"
-            placeholder='e.g. "name@example.com"'
             autoComplete="email"
+            name={name}
             value={state.value}
             issues={state.meta.errors}
             onBlur={handleBlur}
@@ -127,13 +126,13 @@ export const RegisterForm = () => {
 
       <div className="flex flex-col gap-4 sm:flex-row">
         <form.Field name="usu_number">
-          {({ state, name, handleBlur, handleChange }) => (
+          {({ name, state, handleBlur, handleChange }) => (
             <TextInput
-              name={name}
               label="USU Number"
               placeholder='e.g. "1234567"'
               inputMode="numeric"
               className="flex-1"
+              name={name}
               value={state.value}
               issues={state.meta.errors}
               onBlur={handleBlur}

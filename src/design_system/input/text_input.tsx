@@ -3,22 +3,16 @@ import { ComponentProps } from 'react'
 
 import { cn } from '@/utils/cn'
 
-import { InputLabel } from '../input_label'
-
 type TextInputProps = ComponentProps<'input'> & {
-  issues?: (StandardSchemaV1Issue | undefined)[]
-  type?: 'text' | 'email'
   name: string
   label: string
-  className?: string
+  issues?: (StandardSchemaV1Issue | undefined)[]
 }
 
 export const TextInput = ({
   issues,
-  type = 'text',
   name,
-  label,
-  required,
+  label = 'Password',
   className,
   ...props
 }: TextInputProps) => {
@@ -26,13 +20,19 @@ export const TextInput = ({
 
   return (
     <div className={cn('flex flex-col gap-1', className)}>
-      <InputLabel label={label} htmlFor={name} required={required} />
+      <label
+        htmlFor={name}
+        className="flex items-center justify-between px-2 text-sm"
+      >
+        <p>{label}</p>
+        {issue && <p className="text-negative">{issue.message}</p>}
+      </label>
 
       <input
-        type={type}
-        name={name}
+        type="text"
         id={name}
-        className="focus:border-neutral-2 border-neutral-3 placeholder:text-neutral-3 rounded-md border px-3 py-2 focus:outline-none"
+        name={name}
+        className="focus:border-neutral-3 border-neutral-4 placeholder:text-neutral-3 rounded-lg border px-3 py-2.5 focus:outline-none"
         {...props}
       />
 

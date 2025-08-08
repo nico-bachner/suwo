@@ -1,6 +1,6 @@
 'use client'
 
-import { TextInput } from '@/design_system/input/text_input'
+import { EmailInput } from '@/design_system/input'
 import {
   LoginWithMagicLinkFormInput,
   LoginWithMagicLinkFormInputValidator,
@@ -54,12 +54,11 @@ export const LoginWithMagicLinkForm = () => {
       className="flex flex-col gap-1"
     >
       <form.Field name="email">
-        {({ state, name, handleBlur, handleChange }) => (
-          <TextInput
-            name={name}
+        {({ name, state, handleBlur, handleChange }) => (
+          <EmailInput
             label="Email Address"
-            placeholder='e.g. "name@example.com"'
             autoComplete="email"
+            name={name}
             value={state.value}
             issues={state.meta.errors}
             onBlur={handleBlur}

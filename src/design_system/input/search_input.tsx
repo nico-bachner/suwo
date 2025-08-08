@@ -4,8 +4,8 @@ import { ComponentProps } from 'react'
 import { cn } from '@/utils/cn'
 
 export const SearchInput = ({
-  className,
   placeholder = 'Search...',
+  className,
   ...props
 }: ComponentProps<'input'>) => (
   <div
