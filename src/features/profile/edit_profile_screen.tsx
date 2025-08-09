@@ -71,7 +71,7 @@ export const EditProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
   }
 
   return (
-    <main className="mx-auto flex w-full max-w-screen-lg flex-col gap-8">
+    <main className="mx-auto flex w-full max-w-screen-sm flex-col gap-8 lg:max-w-screen-xl">
       <Heading
         as="h1"
         variant="primary"

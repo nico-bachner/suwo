@@ -2,6 +2,8 @@ import { ReactNode } from 'react'
 
 import { cn } from '@/utils/cn'
 
+import { Heading } from './typography'
+
 type SettingsSectionProps = {
   children: ReactNode
   title: string
@@ -21,9 +23,11 @@ export const SettingsSection = ({
       className,
     )}
   >
-    <div className="prose flex-1">
-      <h2>{title}</h2>
-      <p>{description}</p>
+    <div className="flex flex-1 flex-col gap-4">
+      <Heading as="h2" variant="secondary">
+        {title}
+      </Heading>
+      <p className="text-lg">{description}</p>
     </div>
 
     {children}
