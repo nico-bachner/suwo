@@ -22,9 +22,9 @@ export const RegisterForm = () => {
 
   const defaultValues: RegisterFormInput = {
     given_name: '',
-    family_name: undefined,
+    family_name: '',
     email: '',
-    usu_number: undefined,
+    usu_number: '',
     instrument_ids: [],
     mailing_list_preference: true,
   }
