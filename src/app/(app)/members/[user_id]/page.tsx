@@ -1,19 +1,14 @@
-import { notFound } from 'next/navigation'
 import z from 'zod'
 
 import { ProfileScreen } from '@/features/profile/profile_screen'
 import { PageFileProps } from '@/utils/next_types'
 
 export default async function Page({ params }: PageFileProps) {
-  const { data, success } = z
+  const { user_id } = z
     .object({
       user_id: z.uuid(),
     })
-    .safeParse(await params)
+    .parse(await params)
 
-  if (!success) {
-    notFound()
-  }
-
-  return <ProfileScreen {...data} />
+  return <ProfileScreen user_id={user_id} />
 }

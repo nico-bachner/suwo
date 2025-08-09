@@ -26,7 +26,7 @@ export type ProfileQueryResult = z.infer<typeof ProfileQueryValidator>
 
 export const profileQuery = ({
   user_id,
-}: Pick<Profile, 'user_id'>): UseQueryOptions<ProfileQueryResult> => ({
+}: Pick<Profile, 'user_id'>): UseQueryOptions<ProfileQueryResult | null> => ({
   queryKey: queryKeys.PROFILE({ user_id }),
   queryFn: async ({ signal }) => {
     const response = await parseResponse(
@@ -44,6 +44,9 @@ export const profileQuery = ({
         }
 
         return data
+      }
+      case StatusCode.NotFound: {
+        return null
       }
       default:
         throw new Error('Failed to fetch data')

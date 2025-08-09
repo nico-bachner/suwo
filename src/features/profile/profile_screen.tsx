@@ -13,15 +13,15 @@ import { getProfileScreenName } from './utils/get_profile_screen_name'
 import { useProfileAttendanceRate } from './utils/use_profile_attendance_rate'
 
 export const ProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
-  const { data: session } = useQuery(queries.SESSION())
   const {
     data: profile,
-    error,
-    isPending,
+    error: profileError,
+    isPending: isProfilePending,
   } = useQuery(queries.PROFILE({ user_id }))
+  const { data: session } = useQuery(queries.SESSION())
   const attendanceRate = useProfileAttendanceRate(profile?.attendances)
 
-  if (isPending) {
+  if (isProfilePending) {
     return (
       <main className="prose">
         <h1>Loading...</h1>
@@ -29,11 +29,20 @@ export const ProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
     )
   }
 
-  if (error) {
+  if (profileError) {
     return (
       <main className="prose">
         <h1>Error</h1>
-        <p>{error.message}</p>
+        <p>{profileError.message}</p>
+      </main>
+    )
+  }
+
+  if (!profile) {
+    return (
+      <main className="prose">
+        <h1>Profile Not Found</h1>
+        <p>The profile you are looking for does not exist.</p>
       </main>
     )
   }
