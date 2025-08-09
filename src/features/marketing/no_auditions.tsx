@@ -11,7 +11,7 @@ export const NoAuditions = () => {
   const [flipped, setFlipped] = useState(false)
 
   return (
-    <div className="pointer-events-none fixed inset-0 flex w-full flex-row items-end">
+    <div className="pointer-events-none fixed inset-0 z-50 flex w-full flex-row items-end">
       <Image
         src={no_auditions}
         alt="No Auditions"
