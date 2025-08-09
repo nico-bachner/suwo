@@ -21,7 +21,7 @@ export const PasswordInput = ({
   const issue = issues?.filter((issue) => issue !== undefined)[0]
 
   return (
-    <div className={cn('flex h-18 flex-col gap-1', className)}>
+    <div className={cn('flex flex-col gap-1', className)}>
       <label
         htmlFor={name}
         className="flex items-center justify-between px-2 text-sm"
@@ -31,25 +31,20 @@ export const PasswordInput = ({
       </label>
 
       <Root>
-        <div
-          className={cn(
-            'flex flex-1 items-center gap-3 px-3',
-            'text-neutral-2 focus-within:text-neutral-1 group focus-within:border-neutral-3 border-neutral-4 rounded-lg border',
-          )}
-        >
+        <div className="text-neutral-2 focus-within:text-neutral-1 group focus-within:border-neutral-3 border-neutral-4 flex rounded-lg border">
           <Input
             suppressHydrationWarning
             id={name}
             name={name}
             placeholder={placeholder}
-            className="flex-1 outline-none"
+            className="flex-1 px-4 py-3 outline-none"
             {...props}
           />
-          <Toggle className="focus-visible:ring-primary-3 flex items-center justify-center rounded-md outline-none focus-visible:ring-2">
+          <Toggle className="focus-visible:ring-primary-3 flex items-center justify-center rounded-lg outline-none focus-visible:ring-2">
             <Icon
               visible={<EyeIcon />}
               hidden={<EyeSlashIcon />}
-              className="stroke-neutral-3 group-focus-within:stroke-neutral-2 size-5"
+              className="stroke-neutral-3 group-focus-within:stroke-neutral-2 box-content size-6 px-4"
             />
           </Toggle>
         </div>
