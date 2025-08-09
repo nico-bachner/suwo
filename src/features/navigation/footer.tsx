@@ -77,7 +77,7 @@ export const Footer = ({ className }: FooterProps) => {
             href="https://usu.edu.au"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary-2 hover:underline focus:underline focus:outline-none"
+            className="text-primary-2 outline-none hover:underline focus:underline"
           >
             University of Sydney Union
           </a>{' '}
@@ -87,7 +87,7 @@ export const Footer = ({ className }: FooterProps) => {
             href="https://www.standrewscollege.edu.au"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary-2 hover:underline focus:underline focus:outline-none"
+            className="text-primary-2 outline-none hover:underline focus:underline"
           >
             St Andrew&apos;s College
           </a>
@@ -105,7 +105,7 @@ export const Footer = ({ className }: FooterProps) => {
               href="https://nicobachner.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary-2 hover:underline focus:underline focus:outline-none"
+              className="text-primary-2 outline-none hover:underline focus:underline"
             >
               Nico Bachner
             </a>

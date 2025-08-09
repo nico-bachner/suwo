@@ -32,7 +32,7 @@ export default function Page() {
           <strong>Thursday evening at 17:00 at Gillespie Hall</strong> (see{' '}
           <Link
             href={routes.CALENDAR()}
-            className="text-primary-2 hover:underline focus:underline focus:outline-none"
+            className="text-primary-2 outline-none hover:underline focus:underline"
           >
             our calendar
           </Link>
@@ -42,7 +42,7 @@ export default function Page() {
 
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.9913322359207!2d151.18291567655325!3d-33.88987707321865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12b1af5537cc19%3A0x2dcf6e63ca183361!2sGillespie%20Hall%20-%20St%20Andrew&#39;s%20College%20CG5G!5e0!3m2!1sen!2sdk!4v1753477585951!5m2!1sen!2sdk"
-          className="aspect-video w-full focus:outline-none"
+          className="aspect-video w-full outline-none"
         />
 
         <h2>Become a member</h2>
@@ -71,7 +71,7 @@ export default function Page() {
 
         <iframe
           src="https://www.youtube.com/embed/AerrE5gpIQo"
-          className="aspect-video w-full focus:outline-none"
+          className="aspect-video w-full outline-none"
         />
 
         <h2>FAQs</h2>
@@ -86,7 +86,7 @@ export default function Page() {
                 href="https://www.google.com/maps/place/Gillespie+Hall/@-33.8898771,151.1829157,17z/data=!3m1!4b1!4m6!3m5!1s0x6b12b1af5537cc19:0x2dcf6e63ca183361!8m2!3d-33.8898771!4d151.1829157!16s%2Fg%2F11c5_9j9qv"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary-2 hover:underline focus:underline focus:outline-none"
+                className="text-primary-2 outline-none hover:underline focus:underline"
               >
                 Google Maps
               </Link>
@@ -177,7 +177,7 @@ export default function Page() {
               Please recommend me a new breakfast cereal at{' '}
               <a
                 href="mailto:president@suwo.org.au"
-                className="text-primary-2 hover:underline focus:underline focus:outline-none"
+                className="text-primary-2 outline-none hover:underline focus:underline"
               >
                 president@suwo.org.au
               </a>

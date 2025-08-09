@@ -22,7 +22,7 @@ export const FooterLink = ({ children, href, external }: FooterLinkProps) => {
       <a
         href={href}
         className={cn(
-          'text-lg hover:underline focus:underline focus:outline-none',
+          'text-lg outline-none hover:underline focus:underline',
           isActive && 'text-primary-2',
         )}
         target="_blank"
@@ -37,7 +37,7 @@ export const FooterLink = ({ children, href, external }: FooterLinkProps) => {
     <Link
       href={href}
       className={cn(
-        'text-lg hover:underline focus:underline focus:outline-none',
+        'text-lg outline-none hover:underline focus:underline',
         isActive && 'text-primary-2',
       )}
     >

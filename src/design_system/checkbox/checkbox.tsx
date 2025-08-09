@@ -15,7 +15,7 @@ export const Checkbox = ({
     <Root
       id={name}
       name={name}
-      className="border-neutral-3 bg-neutral-7 focus:border-neutral-2 flex h-5 w-5 cursor-pointer items-center justify-center rounded border focus:outline-none"
+      className="border-neutral-3 bg-neutral-7 focus:border-neutral-2 flex h-5 w-5 cursor-pointer items-center justify-center rounded border outline-none"
       {...props}
     >
       <Indicator>

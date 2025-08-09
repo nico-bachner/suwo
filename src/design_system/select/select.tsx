@@ -36,7 +36,7 @@ export const Select = ({
     <Root name={name} {...props}>
       <Trigger
         id={name}
-        className="border-neutral-3 data-placeholder:text-neutral-3 focus:border-neutral-2 flex items-center justify-between gap-2 rounded-md border px-4 py-2 focus:outline-none"
+        className="border-neutral-3 data-placeholder:text-neutral-3 focus:border-neutral-2 flex items-center justify-between gap-2 rounded-md border px-4 py-2 outline-none"
       >
         <Value placeholder={placeholder} className="text-neutral-3" />
 

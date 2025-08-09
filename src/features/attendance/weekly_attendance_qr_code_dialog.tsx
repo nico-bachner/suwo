@@ -20,7 +20,7 @@ export const WeeklyAttendanceQRCodeDialog = ({
         className={cn('stroke-neutral-3 box-content h-12 w-12', className)}
       />
     }
-    className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded focus:outline-none"
+    className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded outline-none"
   >
     <ReactQRCode value={value} className="h-auto w-[80vw] max-w-96" />
   </Dialog>
