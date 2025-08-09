@@ -15,10 +15,10 @@ export default async function Page({ searchParams }: PageFileProps) {
     <main
       className={cn(
         'mx-auto w-full max-w-screen-lg',
-        'grid grid-cols-1 items-center gap-8 sm:grid-cols-2',
+        'grid grid-flow-dense grid-cols-1 gap-8 sm:grid-cols-2',
       )}
     >
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-8 self-start">
         {method && (
           <Button asChild variant="secondary" className="self-start">
             <Link href={routes.LOGIN()}>← Back to Login Options</Link>
@@ -28,20 +28,20 @@ export default async function Page({ searchParams }: PageFileProps) {
         <Heading as="h1" variant="primary">
           Log In
         </Heading>
-
-        <p>
-          Don&apos;t have an account?{' '}
-          <Link
-            href={routes.REGISTER()}
-            className="text-primary-2 outline-none hover:underline focus:underline"
-          >
-            Register
-          </Link>{' '}
-          instead
-        </p>
       </div>
 
-      <LoginScreen method={method} />
+      <LoginScreen method={method} className="row-span-2 self-center" />
+
+      <p className="self-end">
+        Don&apos;t have an account?{' '}
+        <Link
+          href={routes.REGISTER()}
+          className="text-primary-2 outline-none hover:underline focus:underline"
+        >
+          Register
+        </Link>{' '}
+        instead
+      </p>
     </main>
   )
 }
