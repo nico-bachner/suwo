@@ -11,14 +11,14 @@
   --color-neutral-2: oklch(0.7 0.01 80);
   --color-neutral-1: oklch(0.9 0.01 80);
 
-  --color-primary-7: oklch(0.1 0.5 80);
-  --color-primary-6: oklch(0.2 0.75 80);
+  --color-primary-7: oklch(0.1 0.05 80);
+  --color-primary-6: oklch(0.2 0.075 80);
   --color-primary-5: oklch(0.3 0.1 80);
   --color-primary-4: oklch(0.4 0.15 80);
   --color-primary-3: oklch(0.5 0.2 80);
   --color-primary-2: oklch(0.7 0.2 80);
   --color-primary-1: oklch(0.9 0.1 80);
 
-  --color-negative: oklch(0.5 0.2 30);
-  --color-positive: oklch(0.5 0.2 145);
+  --color-negative: oklch(0.5 0.15 30);
+  --color-positive: oklch(0.5 0.15 145);
 }

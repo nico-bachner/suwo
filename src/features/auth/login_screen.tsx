@@ -36,7 +36,7 @@ export const LoginScreen = ({
               Log in with Magic Link
             </Link>
           </Button>
-          <Button variant="secondary">
+          <Button asChild variant="secondary">
             <Link href={routes.LOGIN({ method: LoginMethod.PASSWORD })}>
               Log in with Password
             </Link>

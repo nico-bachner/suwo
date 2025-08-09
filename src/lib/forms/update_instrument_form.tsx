@@ -19,7 +19,9 @@ export const UpdateInstrumentForm = () => {
   const queryClient = useQueryClient()
 
   const { data: session } = useQuery(queries.SESSION())
-  const { data: instruments } = useQuery(queries.INSTRUMENTS())
+  const { data: instruments, isPending: isInstrumentsPending } = useQuery(
+    queries.INSTRUMENTS(),
+  )
   const { data: userInstruments } = useQuery({
     // eslint-disable-next-line typescript/no-non-null-assertion
     ...queries.USER_INSTRUMENTS(session!.user_id),
@@ -81,34 +83,46 @@ export const UpdateInstrumentForm = () => {
         event.stopPropagation()
         await form.handleSubmit()
       }}
-      className="flex flex-col gap-4"
+      className="@container flex flex-col gap-4"
     >
       <form.Field name="instrument_ids">
         {({ state, handleChange }) => (
-          <div className="grid grid-cols-2 gap-4">
-            {instruments?.map((instrument) => (
-              <Button
-                key={instrument.id}
-                variant={
-                  state.value.includes(instrument.id) ? 'primary' : 'secondary'
-                }
-                onClick={() => {
-                  handleChange((prev) =>
-                    prev.includes(instrument.id)
-                      ? prev.filter((id) => id !== instrument.id)
-                      : [...prev, instrument.id],
-                  )
-                }}
-                className={cn(
-                  'grayscale-50',
-                  state.value.includes(instrument.id)
-                    ? 'bg-positive'
-                    : 'bg-negative',
-                )}
-              >
-                {instrument.name}
-              </Button>
-            ))}
+          <div className="grid grid-cols-2 gap-4 @xl:grid-cols-3">
+            {isInstrumentsPending
+              ? Array.from({ length: 30 }, (_, index) => (
+                  <Button
+                    key={index}
+                    variant="secondary"
+                    className="bg-neutral-6"
+                  >
+                    Loading...
+                  </Button>
+                ))
+              : instruments?.map((instrument) => (
+                  <Button
+                    key={instrument.id}
+                    variant={
+                      state.value.includes(instrument.id)
+                        ? 'primary'
+                        : 'secondary'
+                    }
+                    onClick={() => {
+                      handleChange((prev) =>
+                        prev.includes(instrument.id)
+                          ? prev.filter((id) => id !== instrument.id)
+                          : [...prev, instrument.id],
+                      )
+                    }}
+                    className={cn(
+                      'grayscale-50',
+                      state.value.includes(instrument.id)
+                        ? 'bg-positive'
+                        : 'bg-neutral-6',
+                    )}
+                  >
+                    {instrument.name}
+                  </Button>
+                ))}
           </div>
         )}
       </form.Field>

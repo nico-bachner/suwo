@@ -61,13 +61,9 @@ export const ProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
 
       {session && session.user_id === profile.user_id && (
         <Button variant="primary" asChild>
-          <Link
-            href={routes.EDIT_PROFILE(profile)}
-            className="flex cursor-pointer flex-row items-center rounded-full bg-amber-700 px-4 py-2 transition-colors select-none hover:bg-amber-800 focus:bg-amber-900 focus:outline-none"
-          >
-            <PencilIcon className="stroke-neutral-2 h-5 w-5" />
-
-            <span className="text-neutral-2 px-2 font-medium">Edit</span>
+          <Link href={routes.EDIT_PROFILE(profile)}>
+            <PencilIcon className="h-5 w-5" />
+            Edit
           </Link>
         </Button>
       )}
