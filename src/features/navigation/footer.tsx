@@ -18,10 +18,15 @@ export const Footer = ({ className }: FooterProps) => {
   const { data: currentWeek } = useQuery(queries.CURRENT_WEEK())
 
   return (
-    <div className={className}>
+    <div
+      className={cn(
+        'border-neutral-4/50 bg-neutral-7/50 border-t py-24 backdrop-blur-lg',
+        className,
+      )}
+    >
       <footer
         className={cn(
-          'border-neutral-4 grid grid-cols-3 gap-x-8 gap-y-8 border-t pt-20 pb-24 sm:grid-cols-5 sm:gap-y-16',
+          'grid grid-cols-3 gap-x-8 gap-y-8 sm:grid-cols-5 sm:gap-y-16',
           'mx-auto w-full max-w-screen-lg',
         )}
       >
