@@ -10,7 +10,7 @@ export const ProfilePreview = (profile: ProfileQueryResult) => (
   <Link
     key={profile.user_id}
     href={routes.PROFILE(profile)}
-    className="bg-neutral-5/90 flex flex-col gap-1 rounded-lg px-6 py-4 font-bold transition-transform outline-none hover:scale-105 focus:scale-105"
+    className="bg-neutral-7/80 border-neutral-5/80 flex flex-col gap-1 rounded-3xl border px-6 py-4 font-bold backdrop-blur transition-transform outline-none hover:scale-105 focus:scale-105"
   >
     <span className="text-neutral-2">{getProfileScreenName(profile)}</span>
     <span className="text-neutral-3 line-clamp-1">
@@ -22,7 +22,7 @@ export const ProfilePreview = (profile: ProfileQueryResult) => (
 )
 
 export const ProfilePreviewSkeleton = () => (
-  <div className="bg-neutral-5/90 flex flex-col gap-1 rounded-lg px-6 py-4">
+  <div className="bg-neutral-5/80 flex flex-col gap-1 rounded-3xl px-6 py-4 backdrop-blur">
     <SkeletonText className="h-7" />
     <SkeletonText className="h-5" />
   </div>

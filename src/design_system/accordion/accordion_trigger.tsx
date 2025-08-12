@@ -11,13 +11,13 @@ export const AccordionTrigger = ({
 }: ComponentProps<typeof Trigger>) => (
   <Trigger
     className={cn(
-      'bg-neutral-6 border-neutral-5 hover:border-neutral-4 hover:bg-neutral-5 focus-visible:bg-neutral-5 group flex w-full cursor-pointer flex-row items-center rounded-md border transition-colors outline-none',
+      'bg-neutral-7/80 border-neutral-5/80 group flex h-16 w-full cursor-pointer flex-row items-center rounded-full border px-8 transition-transform outline-none hover:scale-105 focus-visible:scale-105',
       className,
     )}
     {...props}
   >
-    <p className="flex-1 pl-5 text-left text-lg font-medium">{children}</p>
+    <p className="flex-1 text-left text-lg font-medium">{children}</p>
 
-    <ChevronDownIcon className="box-content size-5 p-5 transition-transform duration-300 group-data-[state=open]:rotate-180" />
+    <ChevronDownIcon className="box-content size-5 transition-transform duration-300 group-data-[state=open]:rotate-180" />
   </Trigger>
 )

@@ -31,7 +31,7 @@ export const MagicLinkEmailTemplate = ({ link }: MagicLinkTemplateProps) => (
 
             <Button
               href={link}
-              className="rounded-lg bg-amber-500 px-4 py-2 text-white"
+              className="rounded-full bg-amber-500 px-4 py-2 text-white"
             >
               Log in to your account
             </Button>

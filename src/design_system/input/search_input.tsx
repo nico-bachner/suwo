@@ -8,14 +8,18 @@ export const SearchInput = ({
   className,
   ...props
 }: ComponentProps<'input'>) => (
-  <div className={cn('group flex', className)}>
-    <div className="bg-neutral-5 group-focus-within:bg-neutral-4 flex items-center justify-center rounded-l-lg px-4 py-3">
-      <MagnifyingGlassIcon className="stroke-neutral-3 group-focus-within:stroke-neutral-2 box-content size-6" />
-    </div>
+  <div
+    className={cn(
+      'group bg-neutral-7/80 border-neutral-5/80 focus-within:border-neutral-4/80 flex h-12 gap-4 rounded-full border backdrop-blur',
+      className,
+    )}
+  >
+    <MagnifyingGlassIcon className="stroke-neutral-3/80 group-focus-within:stroke-neutral-2/80 -m-1 box-content size-6 self-center pl-6" />
+
     <input
       type="search"
       placeholder={placeholder}
-      className="focus:text-neutral-1 text-neutral-2 border-neutral-5 focus:border-neutral-4 flex-1 rounded-r-lg border px-4 py-3 outline-none"
+      className="focus:text-neutral-1/80 text-neutral-3/80 placeholder:text-neutral-4/80 focus:placeholder:text-neutral-3/80 flex-grow pr-6 outline-none"
       {...props}
     />
   </div>

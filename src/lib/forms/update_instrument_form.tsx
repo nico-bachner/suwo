@@ -87,7 +87,7 @@ export const UpdateInstrumentForm = () => {
     >
       <form.Field name="instrument_ids">
         {({ state, handleChange }) => (
-          <div className="grid grid-cols-2 gap-4 @xl:grid-cols-3">
+          <div className="grid grid-cols-2 gap-2 @lg:grid-cols-3">
             {isInstrumentsPending
               ? Array.from({ length: 30 }, (_, index) => (
                   <Button

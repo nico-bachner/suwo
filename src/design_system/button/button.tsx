@@ -20,8 +20,8 @@ export const Button = ({
       type={type}
       className={cn(
         'cursor-pointer font-semibold outline-none select-none',
-        'rounded-lg px-4 py-2.5',
-        'transform transition-transform hover:scale-105',
+        'h-10 rounded-full px-5',
+        'transition-transform hover:scale-105',
         'focus-visible:ring-primary-3 focus-visible:ring-4',
         'flex items-center justify-center gap-2',
         getVariant(variant),

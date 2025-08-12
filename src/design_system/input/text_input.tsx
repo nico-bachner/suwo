@@ -15,7 +15,7 @@ export const TextInput = ({
     <div className={cn('flex flex-col gap-1', className)}>
       <label
         htmlFor={name}
-        className="flex items-center justify-between px-2 text-sm"
+        className="flex items-center justify-between px-6 text-sm"
       >
         <p>{label}</p>
         {issue && <p className="text-negative">{issue.message}</p>}
@@ -25,7 +25,7 @@ export const TextInput = ({
         type="text"
         id={name}
         name={name}
-        className="text-neutral-2 focus:text-neutral-1 focus:border-neutral-3 border-neutral-4 rounded-lg border px-4 py-3 outline-none"
+        className="text-neutral-3/80 bg-neutral-7/80 focus:text-neutral-1/80 placeholder:text-neutral-4/80 focus:placeholder:text-neutral-3/80 focus:border-neutral-4/80 border-neutral-5/80 h-12 rounded-full border px-6 backdrop-blur outline-none"
         {...props}
       />
     </div>

@@ -45,7 +45,7 @@ export const NavbarMenu = ({ className }: NavbarMenuProps) => {
       onOpenChange={setOpen}
       className="inset-0 flex flex-col justify-evenly p-6"
     >
-      <Close className="absolute top-6 right-6 cursor-pointer rounded-lg p-1 outline-none">
+      <Close className="absolute top-6 right-6 cursor-pointer rounded-full p-1 outline-none">
         <XMarkIcon className="h-8 w-8 stroke-gray-100 stroke-1" />
       </Close>
 

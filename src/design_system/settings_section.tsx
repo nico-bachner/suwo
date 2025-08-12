@@ -19,7 +19,7 @@ export const SettingsSection = ({
 }: SettingsSectionProps) => (
   <section
     className={cn(
-      'border-neutral-4 bg-neutral-7/50 flex flex-col gap-6 rounded-xl border p-6',
+      'border-neutral-5/80 bg-neutral-7/80 flex flex-col gap-6 rounded-3xl border p-6 backdrop-blur',
       className,
     )}
   >

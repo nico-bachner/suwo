@@ -43,7 +43,7 @@ export default function Layout({ children }: LayoutFileProps) {
           <div className="flex min-h-screen flex-col">
             <Navbar className="px-4 py-4" />
 
-            <div className="flex-1 px-4 py-20">{children}</div>
+            <div className="flex-1 px-4 pt-12 pb-24">{children}</div>
 
             <Footer className="px-4" />
           </div>

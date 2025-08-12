@@ -23,13 +23,8 @@ export const Navbar = ({ className }: NavbarProps) => {
   const { data: currentWeek } = useQuery(queries.CURRENT_WEEK())
 
   return (
-    <div
-      className={cn(
-        'bg-neutral-7/80 border-neutral-4/50 sticky top-0 z-30 border-b backdrop-blur-lg',
-        className,
-      )}
-    >
-      <nav className="mx-auto flex w-full max-w-screen-lg items-center justify-between">
+    <div className={cn('sticky top-0 z-30', className)}>
+      <nav className="bg-neutral-7/80 border-neutral-5/80 mx-auto flex h-20 w-full max-w-screen-lg items-center justify-between rounded-full border px-5 backdrop-blur">
         <Link href={routes.HOME()}>
           <Image {...IMAGES.ICON} className="h-12 w-12" />
         </Link>
