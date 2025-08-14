@@ -28,8 +28,9 @@ export const WeeklyAttendanceEntry = ({
 
   return (
     <div className="bg-neutral-7/50 border-neutral-5/80 flex h-16 flex-row items-center rounded-full border pr-4 pl-8 backdrop-blur">
-      <p className="flex flex-1 flex-row gap-4 font-bold">
+      <p className="flex flex-1 flex-row items-center gap-4 font-bold">
         <span className="text-neutral-2">{getProfileScreenName(profile)}</span>
+
         {profile.instruments.length > 0 && (
           <span className="text-neutral-3">
             {profile.instruments.slice(0, 3).join(', ')}
