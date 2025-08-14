@@ -63,7 +63,7 @@ export const WeeklyAttendance = ({
           placeholder="Search by name or instrument"
         />
 
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-2">
           {isProfilesPending
             ? Array.from({ length: 20 }).map((_, index) => (
                 <WeeklyAttendanceEntrySkeleton key={index} />

@@ -3,6 +3,7 @@
 import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { Button } from '@/design_system/button'
 import { Skeleton } from '@/design_system/skeleton'
 import { mutations } from '@/lib/mutations'
 
@@ -23,12 +24,14 @@ export const WeeklyAttendanceEntryStatus = ({
   switch (isPresent) {
     case true:
       return (
-        <CheckIcon className="stroke-positive box-content h-6 w-6 px-4 py-3" />
+        <div className="px-6">
+          <CheckIcon className="stroke-positive -m-1 size-6" />
+        </div>
       )
     case false:
       return (
-        <button
-          className="focus:ring-neutral-4 cursor-pointer px-4 py-3"
+        <Button
+          variant="secondary"
           onClick={() => {
             mutate({
               ...attendanceData,
@@ -36,14 +39,14 @@ export const WeeklyAttendanceEntryStatus = ({
             })
           }}
         >
-          <PlusIcon className="h-6 w-6" />
-        </button>
+          <PlusIcon className="-m-1 size-6" />
+        </Button>
       )
   }
 }
 
 export const WeeklyAttendanceEntryStatusSkeleton = () => (
-  <div className="px-4 py-3">
-    <Skeleton className="h-6 w-6" />
+  <div className="px-6">
+    <Skeleton className="size-6" />
   </div>
 )

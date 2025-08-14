@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query'
 
-import { Skeleton, SkeletonText } from '@/design_system/skeleton'
+import { SkeletonText } from '@/design_system/skeleton'
 import { queries } from '@/lib/queries'
 
 import { getProfileScreenName } from '../profile/utils/get_profile_screen_name'
@@ -27,12 +27,12 @@ export const WeeklyAttendanceEntry = ({
   }
 
   return (
-    <div className="odd:bg-neutral-5 even:bg-neutral-7 flex flex-row items-center">
-      <p className="flex flex-1 flex-row gap-2 px-4 font-bold">
+    <div className="bg-neutral-7/50 border-neutral-5/80 flex h-16 flex-row items-center rounded-full border pr-4 pl-8 backdrop-blur">
+      <p className="flex flex-1 flex-row gap-4 font-bold">
         <span className="text-neutral-2">{getProfileScreenName(profile)}</span>
         {profile.instruments.length > 0 && (
           <span className="text-neutral-3">
-            {profile.instruments.join(', ')}
+            {profile.instruments.slice(0, 3).join(', ')}
           </span>
         )}
       </p>
@@ -53,14 +53,12 @@ export const WeeklyAttendanceEntry = ({
 }
 
 export const WeeklyAttendanceEntrySkeleton = () => (
-  <div className="odd:bg-neutral-5 even:bg-neutral-7 flex flex-row items-center">
+  <div className="bg-neutral-7/50 border-neutral-5/80 flex h-16 flex-row items-center rounded-full border pr-4 pl-8 backdrop-blur">
     <div className="flex flex-1 flex-row gap-2 px-4">
       <SkeletonText className="h-5 w-50" />
       <SkeletonText className="h-5 w-30" />
     </div>
 
-    <div className="px-4 py-3">
-      <Skeleton className="stroke-neutral-2 box-content h-6 w-6" />
-    </div>
+    <WeeklyAttendanceEntryStatusSkeleton />
   </div>
 )
