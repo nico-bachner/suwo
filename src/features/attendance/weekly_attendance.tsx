@@ -39,7 +39,7 @@ export const WeeklyAttendance = ({
         year={year}
         semester={semester}
         week={week}
-        className="fixed right-0 bottom-0 left-0 z-10"
+        className="fixed right-0 bottom-4 left-0 z-10"
       />
 
       <main className="prose">
@@ -63,7 +63,7 @@ export const WeeklyAttendance = ({
           placeholder="Search by name or instrument"
         />
 
-        <div className="flex flex-col gap-2">
+        <div className="mx-auto flex w-full max-w-screen-md flex-col gap-2">
           {isProfilesPending
             ? Array.from({ length: 20 }).map((_, index) => (
                 <WeeklyAttendanceEntrySkeleton key={index} />
