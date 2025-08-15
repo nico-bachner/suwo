@@ -25,7 +25,7 @@ export const WeeklyAttendanceEntryStatus = ({
     case true:
       return (
         <div className="px-6">
-          <CheckIcon className="stroke-positive -m-1 size-6" />
+          <CheckIcon className="stroke-positive-3 -m-1 size-6 stroke-2" />
         </div>
       )
     case false:

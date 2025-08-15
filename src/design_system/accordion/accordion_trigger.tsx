@@ -11,7 +11,7 @@ export const AccordionTrigger = ({
 }: ComponentProps<typeof Trigger>) => (
   <Trigger
     className={cn(
-      'bg-neutral-7/80 border-neutral-5/80 group flex h-16 w-full cursor-pointer flex-row items-center rounded-full border px-8 transition-transform outline-none hover:scale-105 focus-visible:scale-105',
+      'bg-neutral-5/80 border-neutral-4/80 group flex h-16 w-full cursor-pointer flex-row items-center rounded-full border px-8 backdrop-blur transition-transform outline-none hover:scale-105 focus-visible:scale-105',
       className,
     )}
     {...props}

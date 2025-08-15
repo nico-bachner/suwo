@@ -34,18 +34,18 @@ export default async function Page() {
     <main className="prose">
       <h1 className="text-center">{title}</h1>
 
-      <div className="grid w-full grid-flow-dense grid-cols-3 gap-2">
+      <div className="grid w-full grid-flow-dense grid-cols-3 gap-4">
         {years.map((value, index, array) => (
           <Link
             key={value}
             href={routes.HISTORY_YEAR(value)}
             className={cn(
-              'hover:text-neutral-1 bg-neutral-5/80 flex aspect-square items-center justify-center text-4xl font-bold transition-colors',
+              'hover:text-neutral-1 flex aspect-square items-center justify-center rounded-full text-4xl font-bold backdrop-blur transition-colors',
               getYearAlignment(index),
             )}
             style={{
-              color: `oklch(0.8 0.1 ${(array.length - index) * 10 + 30} / 0.9)`,
-              backgroundColor: `oklch(0.4 0.1 ${(array.length - index) * 10 + 30} / 0.9)`,
+              color: `oklch(0.8 0.1 ${(array.length - index) * 10 + 30})`,
+              backgroundColor: `oklch(0.4 0.1 ${(array.length - index) * 10 + 30} / 0.8)`,
             }}
           >
             {value}

@@ -5,10 +5,12 @@ export default function Page() {
     <main className="prose">
       <h1>Calendar</h1>
 
-      <iframe
-        src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Australia%2FSydney&hl=en_GB&mode=AGENDA&src=ZDM0ODM2MmRmMGQ4MWIxOTAxYjQxYTMxMWRlMmJiZWFmZmM4ZmJhOGFhMjdiN2MxMDEzMjgxZGIyNzZkY2NkNEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23D81B60"
-        className="aspect-video w-full rounded-3xl hue-rotate-180 invert-100 saturate-50 outline-none"
-      />
+      <div className="border-neutral-4/80 bg-neutral-5/80 aspect-video w-full rounded-3xl border">
+        <iframe
+          src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Australia%2FSydney&hl=en_GB&mode=AGENDA&src=ZDM0ODM2MmRmMGQ4MWIxOTAxYjQxYTMxMWRlMmJiZWFmZmM4ZmJhOGFhMjdiN2MxMDEzMjgxZGIyNzZkY2NkNEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23D81B60"
+          className="h-full w-full rounded-3xl brightness-110 hue-rotate-180 invert-100 saturate-50"
+        />
+      </div>
 
       <Button asChild variant="primary">
         <a

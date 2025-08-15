@@ -24,9 +24,12 @@ export const Navbar = ({ className }: NavbarProps) => {
 
   return (
     <div className={cn('sticky top-0 z-30', className)}>
-      <nav className="bg-neutral-7/80 border-neutral-5/80 mx-auto flex h-20 w-full max-w-screen-lg items-center justify-between rounded-full border px-5 backdrop-blur">
-        <Link href={routes.HOME()}>
-          <Image {...IMAGES.ICON} className="h-12 w-12" />
+      <nav className="bg-neutral-5/20 border-neutral-4/80 mx-auto flex h-20 w-full max-w-screen-lg items-center justify-between rounded-full border pr-5 pl-4 backdrop-blur">
+        <Link
+          href={routes.HOME()}
+          className="outline-primary-1 rounded-full outline-offset-4 focus-visible:outline-4"
+        >
+          <Image {...IMAGES.ICON} className="size-12" />
         </Link>
 
         <div className="hidden items-center gap-4 md:flex">

@@ -23,10 +23,10 @@ export const Dialog = ({
     {trigger && <Trigger asChild>{trigger}</Trigger>}
 
     <Portal>
-      <Overlay className="bg-neutral-7/50 fixed inset-0 backdrop-blur" />
+      <Overlay className="bg-neutral-5/80 fixed inset-0 z-40 backdrop-blur" />
 
       <Content
-        className={cn('bg-neutral-7/50 fixed z-50 backdrop-blur-lg', className)}
+        className={cn('bg-neutral-5/80 fixed z-50 backdrop-blur', className)}
       >
         <VisuallyHidden>
           <Title>{title}</Title>

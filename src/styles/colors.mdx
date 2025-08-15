@@ -1,29 +1,45 @@
 {/* see https://storybook.js.org/docs/api/doc-blocks/doc-block-colorpalette */}
-import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs/blocks'
+import { ColorItem, ColorPalette, Meta } from '@storybook/addon-docs/blocks'
 
 <Meta title="Tokens/Colors" />
 
 <ColorPalette>
   <ColorItem
-    title="Neutral"
-    subtitle="Neutral colors for backgrounds, text, and borders"
-    colors={{
-      5: 'oklch(0.1 0.01 70)',
-      4: 'oklch(0.3 0.01 70)',
-      3: 'oklch(0.5 0.01 70)',
-      2: 'oklch(0.7 0.01 70)',
-      1: 'oklch(0.9 0.01 70)',
-    }}
-  />
-  <ColorItem
     title="Primary"
     subtitle="SUWO's brand color"
     colors={{
-      5: 'oklch(0.1 0.01 70)',
-      4: 'oklch(0.3 0.05 70)',
-      3: 'oklch(0.5 0.1 70)',
-      2: 'oklch(0.7 0.2 70)',
-      1: 'oklch(0.9 0.1 70)',
+      1: 'oklch(0.9 0.15 90)',
+      2: 'oklch(0.7 0.15 90)',
+      3: 'oklch(0.5 0.15 90)',
+    }}
+  />
+  <ColorItem
+    title="Neutral"
+    subtitle="Neutral colors for backgrounds, text, and borders"
+    colors={{
+      1: 'oklch(0.9 0.01 90)',
+      2: 'oklch(0.7 0.01 90)',
+      3: 'oklch(0.5 0.01 90)',
+      4: 'oklch(0.3 0.01 90)',
+      5: 'oklch(0.1 0.01 90)',
+    }}
+  />
+  <ColorItem
+    title="Negative"
+    subtitle="Used for errors and warnings"
+    colors={{
+      1: 'oklch(0.9 0.15 30)',
+      2: 'oklch(0.7 0.15 30)',
+      3: 'oklch(0.5 0.15 30)',
+    }}
+  />
+  <ColorItem
+    title="Positive"
+    subtitle="Used for success messages"
+    colors={{
+      1: 'oklch(0.9 0.15 150)',
+      2: 'oklch(0.7 0.15 150)',
+      3: 'oklch(0.5 0.15 150)',
     }}
   />
 </ColorPalette>

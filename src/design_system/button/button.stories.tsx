@@ -31,6 +31,13 @@ export const Secondary: StoryObj<typeof Button> = {
   },
 }
 
+export const Tertiary: StoryObj<typeof Button> = {
+  args: {
+    variant: 'tertiary',
+    children: 'Tertiary Button',
+  },
+}
+
 export const Danger: StoryObj<typeof Button> = {
   args: {
     variant: 'danger',

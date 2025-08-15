@@ -20,7 +20,7 @@ export const Footer = ({ className }: FooterProps) => {
   return (
     <div
       className={cn(
-        'border-neutral-5/80 bg-neutral-7/80 border-t py-24 backdrop-blur',
+        'border-neutral-4/80 bg-neutral-5/80 border-t py-24 backdrop-blur',
         className,
       )}
     >

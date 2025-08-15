@@ -25,7 +25,7 @@ export const WeeklyAttendanceNavigation = ({
     <div className={cn('px-4', className)}>
       <nav
         className={cn(
-          'bg-neutral-7/50 border-neutral-5/50 h-20 rounded-full border px-5 backdrop-blur',
+          'bg-neutral-5/20 border-neutral-4/80 h-20 rounded-full border px-5 backdrop-blur',
           'mx-auto grid w-full max-w-screen-sm grid-cols-3 items-center gap-2',
         )}
       >

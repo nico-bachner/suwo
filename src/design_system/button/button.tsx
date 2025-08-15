@@ -19,10 +19,10 @@ export const Button = ({
     <Component
       type={type}
       className={cn(
-        'cursor-pointer font-semibold outline-none select-none',
+        'cursor-pointer font-semibold select-none',
         'h-10 rounded-full px-5',
         'transition-transform hover:scale-105',
-        'focus-visible:ring-primary-3 focus-visible:ring-4',
+        'outline-offset-2 focus-visible:outline-4',
         'flex items-center justify-center gap-2',
         getVariant(variant),
         className,

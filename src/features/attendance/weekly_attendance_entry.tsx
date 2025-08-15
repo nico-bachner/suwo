@@ -27,7 +27,7 @@ export const WeeklyAttendanceEntry = ({
   }
 
   return (
-    <div className="bg-neutral-7/50 border-neutral-5/80 flex h-16 flex-row items-center rounded-full border pr-4 pl-8 backdrop-blur">
+    <div className="bg-neutral-5/80 border-neutral-4/80 flex h-16 flex-row items-center rounded-full border pr-4 pl-8 backdrop-blur">
       <p className="flex flex-1 flex-row items-center gap-4 font-bold">
         <span className="text-neutral-2">{getProfileScreenName(profile)}</span>
 
@@ -54,10 +54,10 @@ export const WeeklyAttendanceEntry = ({
 }
 
 export const WeeklyAttendanceEntrySkeleton = () => (
-  <div className="bg-neutral-7/50 border-neutral-5/80 flex h-16 flex-row items-center rounded-full border pr-4 pl-8 backdrop-blur">
+  <div className="bg-neutral-5/80 border-neutral-4/80 flex h-16 flex-row items-center rounded-full border pr-4 pl-8 backdrop-blur">
     <div className="flex flex-1 flex-row gap-2 px-4">
-      <SkeletonText className="h-5 w-50" />
-      <SkeletonText className="h-5 w-30" />
+      <SkeletonText className="h-5 w-20" />
+      <SkeletonText className="h-5 w-10" />
     </div>
 
     <WeeklyAttendanceEntryStatusSkeleton />
