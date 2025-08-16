@@ -5,7 +5,6 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { Button } from '@/design_system/button'
 import { queries } from '@/lib/queries'
 import { apiRoutes, queryKeys } from '@/routes'
-import { cn } from '@/utils/cn'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
@@ -90,11 +89,7 @@ export const UpdateInstrumentForm = () => {
           <div className="grid grid-cols-2 gap-2 @lg:grid-cols-3">
             {isInstrumentsPending
               ? Array.from({ length: 30 }, (_, index) => (
-                  <Button
-                    key={index}
-                    variant="secondary"
-                    className="bg-neutral-6"
-                  >
+                  <Button key={index} variant="secondary">
                     Loading...
                   </Button>
                 ))
@@ -103,7 +98,7 @@ export const UpdateInstrumentForm = () => {
                     key={instrument.id}
                     variant={
                       state.value.includes(instrument.id)
-                        ? 'primary'
+                        ? 'success'
                         : 'secondary'
                     }
                     onClick={() => {
@@ -113,12 +108,6 @@ export const UpdateInstrumentForm = () => {
                           : [...prev, instrument.id],
                       )
                     }}
-                    className={cn(
-                      'grayscale-50',
-                      state.value.includes(instrument.id)
-                        ? 'bg-positive'
-                        : 'bg-neutral-6',
-                    )}
                   >
                     {instrument.name}
                   </Button>

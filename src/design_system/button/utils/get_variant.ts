@@ -10,6 +10,8 @@ export const getVariant = (variant: ButtonVariant) => {
       return 'bg-transparent border border-neutral-4/80 text-neutral-2 backdrop-blur'
     case 'danger':
       return 'bg-negative-3/80 text-negative-1 backdrop-blur inset-shadow-xs inset-shadow-negative-1'
+    case 'success':
+      return 'bg-positive-3/80 text-positive-1 backdrop-blur inset-shadow-xs inset-shadow-positive-1'
     default:
       variant satisfies never
   }

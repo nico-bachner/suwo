@@ -18,7 +18,9 @@ import { useAppForm } from './context'
 
 export const RegisterForm = () => {
   const queryClient = useQueryClient()
-  const { data: instruments } = useQuery(queries.INSTRUMENTS())
+  const { data: instruments, isPending: isInstrumentsPending } = useQuery(
+    queries.INSTRUMENTS(),
+  )
 
   const defaultValues: RegisterFormInput = {
     given_name: '',
@@ -67,7 +69,7 @@ export const RegisterForm = () => {
         event.stopPropagation()
         await form.handleSubmit()
       }}
-      className="flex flex-col gap-8"
+      className="@container flex flex-col gap-8"
     >
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <form.AppField name="given_name">
@@ -117,26 +119,32 @@ export const RegisterForm = () => {
 
         <form.Field name="instrument_ids">
           {({ state, handleChange }) => (
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-              {instruments?.map((instrument) => (
-                <Button
-                  key={instrument.id}
-                  variant={
-                    state.value.includes(instrument.id)
-                      ? 'primary'
-                      : 'secondary'
-                  }
-                  onClick={() => {
-                    handleChange((prev) =>
-                      prev.includes(instrument.id)
-                        ? prev.filter((id) => id !== instrument.id)
-                        : [...prev, instrument.id],
-                    )
-                  }}
-                >
-                  {instrument.name}
-                </Button>
-              ))}
+            <div className="grid grid-cols-2 gap-2 @lg:grid-cols-3">
+              {isInstrumentsPending
+                ? Array.from({ length: 30 }, (_, index) => (
+                    <Button key={index} variant="secondary">
+                      Loading...
+                    </Button>
+                  ))
+                : instruments?.map((instrument) => (
+                    <Button
+                      key={instrument.id}
+                      variant={
+                        state.value.includes(instrument.id)
+                          ? 'success'
+                          : 'secondary'
+                      }
+                      onClick={() => {
+                        handleChange((prev) =>
+                          prev.includes(instrument.id)
+                            ? prev.filter((id) => id !== instrument.id)
+                            : [...prev, instrument.id],
+                        )
+                      }}
+                    >
+                      {instrument.name}
+                    </Button>
+                  ))}
             </div>
           )}
         </form.Field>
