@@ -36,7 +36,7 @@ export default function Layout({ children }: LayoutFileProps) {
             <Image
               src={ensemble}
               alt="Sydney University Wind Orchestra"
-              className="h-full w-full object-cover brightness-50"
+              className="h-full w-full object-cover brightness-[0.25]"
             />
           </div>
 
