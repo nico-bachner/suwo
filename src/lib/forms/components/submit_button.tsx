@@ -3,8 +3,13 @@
 import { Button } from '@/design_system/button'
 import { Spinner } from '@/design_system/spinner'
 import { useFormContext } from '@/lib/forms/context'
+import { cn } from '@/utils/cn'
 
-export const SubmitButton = () => {
+type SubmitButtonProps = {
+  className?: string
+}
+
+export const SubmitButton = ({ className }: SubmitButtonProps) => {
   const form = useFormContext()
 
   return (
@@ -14,7 +19,7 @@ export const SubmitButton = () => {
           type="submit"
           variant="primary"
           disabled={!canSubmit}
-          className="self-stretch"
+          className={cn('w-full max-w-screen-sm self-center', className)}
         >
           {isSubmitting ? (
             <Spinner className="stroke-neutral-3 h-6 w-6" />

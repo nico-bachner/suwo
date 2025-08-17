@@ -71,7 +71,7 @@ export const RegisterForm = () => {
       }}
       className="@container flex flex-col gap-8"
     >
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="mx-auto grid w-full max-w-screen-sm grid-cols-1 gap-4 sm:grid-cols-2">
         <form.AppField name="given_name">
           {(field) => (
             <field.Text
@@ -114,41 +114,37 @@ export const RegisterForm = () => {
         </form.AppField>
       </div>
 
-      <div className="prose">
-        <h2 className="p-2">Instruments</h2>
-
-        <form.Field name="instrument_ids">
-          {({ state, handleChange }) => (
-            <div className="grid grid-cols-2 gap-2 @lg:grid-cols-3">
-              {isInstrumentsPending
-                ? Array.from({ length: 30 }, (_, index) => (
-                    <Button key={index} variant="secondary">
-                      Loading...
-                    </Button>
-                  ))
-                : instruments?.map((instrument) => (
-                    <Button
-                      key={instrument.id}
-                      variant={
-                        state.value.includes(instrument.id)
-                          ? 'success'
-                          : 'secondary'
-                      }
-                      onClick={() => {
-                        handleChange((prev) =>
-                          prev.includes(instrument.id)
-                            ? prev.filter((id) => id !== instrument.id)
-                            : [...prev, instrument.id],
-                        )
-                      }}
-                    >
-                      {instrument.name}
-                    </Button>
-                  ))}
-            </div>
-          )}
-        </form.Field>
-      </div>
+      <form.Field name="instrument_ids">
+        {({ state, handleChange }) => (
+          <div className="grid grid-cols-2 gap-2 @lg:grid-cols-3 @2xl:grid-cols-4 @4xl:grid-cols-5">
+            {isInstrumentsPending
+              ? Array.from({ length: 30 }, (_, index) => (
+                  <Button key={index} variant="secondary">
+                    Loading...
+                  </Button>
+                ))
+              : instruments?.map((instrument) => (
+                  <Button
+                    key={instrument.id}
+                    variant={
+                      state.value.includes(instrument.id)
+                        ? 'success'
+                        : 'secondary'
+                    }
+                    onClick={() => {
+                      handleChange((prev) =>
+                        prev.includes(instrument.id)
+                          ? prev.filter((id) => id !== instrument.id)
+                          : [...prev, instrument.id],
+                      )
+                    }}
+                  >
+                    {instrument.name}
+                  </Button>
+                ))}
+          </div>
+        )}
+      </form.Field>
 
       <form.Field name="mailing_list_preference">
         {({ state, name, handleChange }) => (

@@ -1,24 +1,49 @@
 import Link from 'next/link'
 
+import { Heading } from '@/design_system/typography'
 import { CreateInstrumentForm } from '@/lib/forms/create_instrument_form'
 import { RegisterForm } from '@/lib/forms/register_form'
 import { routes } from '@/routes'
 
 export default function Page() {
   return (
-    <main className="prose">
-      <h1>Register</h1>
+    <main className="flex flex-col gap-48">
+      <section className="mx-auto flex w-full max-w-screen-lg flex-col gap-12">
+        <Heading
+          variant="primary"
+          as="h1"
+          className="mx-auto w-full max-w-screen-sm"
+        >
+          Register
+        </Heading>
 
-      <RegisterForm />
+        <RegisterForm />
 
-      <p>
-        Already have an account? <Link href={routes.LOGIN()}>Log in</Link>{' '}
-        instead
-      </p>
+        <div className="mx-auto flex w-full max-w-screen-sm flex-col gap-4">
+          <p className="text-left">
+            Already have an account?{' '}
+            <Link
+              href={routes.LOGIN()}
+              className="text-primary-2 hover:underline;"
+            >
+              Log in
+            </Link>{' '}
+            instead
+          </p>
 
-      <h2>Don&apos;t see your instrument in the list? Add it below.</h2>
+          <p className="text-right">
+            Don&apos;t see your instrument in the list? Add it below.
+          </p>
+        </div>
+      </section>
 
-      <CreateInstrumentForm />
+      <section className="mx-auto flex w-full max-w-screen-sm flex-col gap-12">
+        <Heading variant="secondary" as="h2" className="text-center">
+          Add Instrument
+        </Heading>
+
+        <CreateInstrumentForm />
+      </section>
     </main>
   )
 }
