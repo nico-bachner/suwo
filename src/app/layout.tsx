@@ -44,7 +44,7 @@ export default function Layout({ children }: LayoutFileProps) {
           <div className="flex min-h-screen flex-col">
             <TabBar className="fixed right-2 bottom-2 left-2 z-30 md:hidden" />
 
-            <Navbar className="px-4 py-4" />
+            <Navbar className="sticky top-2 right-2 left-2 z-30" />
 
             <div className="flex-1 px-4 pt-12 pb-24">{children}</div>
 
