@@ -1,13 +1,17 @@
 'use client'
 
+import { ChevronLeftIcon } from '@heroicons/react/24/outline'
 import { useQuery } from '@tanstack/react-query'
+import Link from 'next/link'
 
+import { Button } from '@/design_system/button'
 import { SettingsSection } from '@/design_system/settings_section'
 import { Heading } from '@/design_system/typography'
 import { Profile } from '@/generated/prisma'
 import { CreateInstrumentForm } from '@/lib/forms/create_instrument_form'
 import { UpdateInstrumentForm } from '@/lib/forms/update_instrument_form'
 import { queries } from '@/lib/queries'
+import { routes } from '@/routes'
 
 import { getProfileScreenName } from './utils/get_profile_screen_name'
 
@@ -72,13 +76,18 @@ export const EditProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
 
   return (
     <main className="mx-auto flex w-full max-w-screen-sm flex-col gap-8 lg:max-w-screen-xl">
-      <Heading
-        as="h1"
-        variant="primary"
-        className="mx-auto w-full max-w-screen-sm"
-      >
-        {getProfileScreenName(profile)}
-      </Heading>
+      <div className="flex flex-col gap-x-16 gap-y-8 lg:flex-row lg:items-center">
+        <Button variant="secondary" className="self-start" asChild>
+          <Link href={routes.PROFILE(session)}>
+            <ChevronLeftIcon className="-mx-1 size-5" />
+            Back to Profile
+          </Link>
+        </Button>
+
+        <Heading as="h1" variant="primary">
+          Edit Profile: {getProfileScreenName(profile)}
+        </Heading>
+      </div>
 
       {profile.roles.length > 0 && <p>{profile.roles.join(', ')}</p>}
 
