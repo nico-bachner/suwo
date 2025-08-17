@@ -36,19 +36,19 @@ export const TabBar = ({ className }: TabBarProps) => {
         History
       </TabBarLink>
 
-      <Divider orientation="vertical" className="h-2/3" />
+      <Divider orientation="vertical" className="h-1/2" />
 
       <TabBarLink href={routes.MEMBERS()} icon={UsersIcon}>
         Members
       </TabBarLink>
 
-      <Divider orientation="vertical" className="h-2/3" />
+      <Divider orientation="vertical" className="h-1/2" />
 
       <TabBarLink href={routes.CALENDAR()} icon={CalendarDaysIcon}>
         Calendar
       </TabBarLink>
 
-      <Divider orientation="vertical" className="h-2/3" />
+      <Divider orientation="vertical" className="h-1/2" />
 
       <TabBarLink
         href={
