@@ -18,14 +18,16 @@ export const POST: APIRoute = async (_, { params }) => {
     })
   }
 
+  const responseData = await prisma.attendance.upsert({
+    where: {
+      user_id_year_semester_week: data,
+    },
+    create: data,
+    update: data,
+  })
+
   return createResponse({
-    status: StatusCode.OK,
-    data: await prisma.attendance.upsert({
-      where: {
-        user_id_year_semester_week: data,
-      },
-      create: data,
-      update: data,
-    }),
+    status: StatusCode.Created,
+    data: responseData,
   })
 }
