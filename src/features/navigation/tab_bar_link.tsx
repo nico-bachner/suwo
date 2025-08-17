@@ -20,7 +20,9 @@ export const TabBarLink = ({ children, href, icon: Icon }: TabBarLinkProps) => {
   return (
     <Link
       href={href}
-      className="flex flex-col items-center justify-center gap-1"
+      className={cn(
+        'flex flex-1 flex-col items-center justify-center gap-1 p-2',
+      )}
     >
       <Icon
         className={cn(
