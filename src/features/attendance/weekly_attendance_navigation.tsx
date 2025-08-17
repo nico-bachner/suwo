@@ -22,59 +22,59 @@ export const WeeklyAttendanceNavigation = ({
   )
 
   return (
-    <div className={cn('px-4', className)}>
-      <nav
-        className={cn(
-          'bg-neutral-5/20 border-neutral-4/80 h-20 rounded-full border px-5 backdrop-blur',
-          'mx-auto grid w-full max-w-screen-sm grid-cols-3 items-center gap-2',
-        )}
-      >
-        {week > MIN_WEEK && (
-          <Button
-            variant="secondary"
-            className="col-start-1 justify-self-start"
-            asChild
+    <nav
+      className={cn(
+        'bg-neutral-5/20 border-neutral-2/20 rounded-full border backdrop-blur',
+        'mx-auto h-16 w-fit px-3',
+        'grid grid-cols-3 items-center',
+        className,
+      )}
+    >
+      {week > MIN_WEEK && (
+        <Button
+          variant="secondary"
+          className="col-start-1 justify-self-start"
+          asChild
+        >
+          <Link
+            href={routes.WEEKLY_ATTENDANCES({
+              year,
+              semester,
+              week: week - 1,
+            })}
           >
-            <Link
-              href={routes.WEEKLY_ATTENDANCES({
-                year,
-                semester,
-                week: week - 1,
-              })}
-            >
-              Week {week - 1}
-            </Link>
-          </Button>
-        )}
+            Week {week - 1}
+          </Link>
+        </Button>
+      )}
 
-        {currentWeekShareableURL && (
-          <Button
-            variant="secondary"
-            className="col-start-2 justify-self-center"
-            asChild
-          >
-            <WeeklyAttendanceQRCodeDialog value={currentWeekShareableURL} />
-          </Button>
-        )}
+      {currentWeekShareableURL && (
+        <Button
+          variant="secondary"
+          className="col-start-2 justify-self-center"
+          asChild
+        >
+          <WeeklyAttendanceQRCodeDialog value={currentWeekShareableURL} />
+        </Button>
+      )}
 
-        {week < MAX_WEEK && (
-          <Button
-            variant="secondary"
-            className="col-start-3 justify-self-end"
-            asChild
+      {week < MAX_WEEK && (
+        <Button
+          variant="secondary"
+          className="col-start-3 justify-self-end"
+          asChild
+        >
+          <Link
+            href={routes.WEEKLY_ATTENDANCES({
+              year,
+              semester,
+              week: week + 1,
+            })}
           >
-            <Link
-              href={routes.WEEKLY_ATTENDANCES({
-                year,
-                semester,
-                week: week + 1,
-              })}
-            >
-              Week {week + 1}
-            </Link>
-          </Button>
-        )}
-      </nav>
-    </div>
+            Week {week + 1}
+          </Link>
+        </Button>
+      )}
+    </nav>
   )
 }

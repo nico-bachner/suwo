@@ -39,7 +39,7 @@ export const WeeklyAttendance = ({
         year={year}
         semester={semester}
         week={week}
-        className="fixed right-0 bottom-4 left-0 z-10"
+        className="fixed right-2 bottom-20 left-2 z-30 md:bottom-4"
       />
 
       <main className="prose">

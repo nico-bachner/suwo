@@ -27,7 +27,8 @@ export const TabBar = ({ className }: TabBarProps) => {
     <nav
       className={cn(
         'bg-neutral-5/20 border-neutral-2/20 rounded-full border backdrop-blur',
-        'flex h-16 flex-row items-center px-2',
+        'h-16 px-2',
+        'flex flex-row items-center',
         className,
       )}
     >
