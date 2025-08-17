@@ -4,6 +4,8 @@ import {
   BookOpenIcon,
   CalendarDaysIcon,
   ClipboardDocumentCheckIcon,
+  CogIcon,
+  UserIcon,
   UsersIcon,
 } from '@heroicons/react/24/outline'
 import { useQuery } from '@tanstack/react-query'
@@ -21,29 +23,18 @@ type TabBarProps = {
 }
 
 export const TabBar = ({ className }: TabBarProps) => {
+  const { data: session } = useQuery(queries.SESSION())
   const { data: currentWeek } = useQuery(queries.CURRENT_WEEK())
 
   return (
     <nav
       className={cn(
         'bg-neutral-5/20 border-neutral-2/20 rounded-full border backdrop-blur',
-        'h-16 px-2',
+        'h-16',
         'flex flex-row items-center',
         className,
       )}
     >
-      <TabBarLink href={routes.HISTORY()} icon={BookOpenIcon}>
-        History
-      </TabBarLink>
-
-      <Divider orientation="vertical" className="h-1/2" />
-
-      <TabBarLink href={routes.MEMBERS()} icon={UsersIcon}>
-        Members
-      </TabBarLink>
-
-      <Divider orientation="vertical" className="h-1/2" />
-
       <TabBarLink href={routes.CALENDAR()} icon={CalendarDaysIcon}>
         Calendar
       </TabBarLink>
@@ -64,6 +55,30 @@ export const TabBar = ({ className }: TabBarProps) => {
       >
         Attendance
       </TabBarLink>
+
+      <Divider orientation="vertical" className="h-1/2" />
+
+      {session ? (
+        <TabBarLink href={routes.HISTORY()} icon={UserIcon}>
+          Profile
+        </TabBarLink>
+      ) : (
+        <TabBarLink href={routes.MEMBERS()} icon={UsersIcon}>
+          Members
+        </TabBarLink>
+      )}
+
+      <Divider orientation="vertical" className="h-1/2" />
+
+      {session ? (
+        <TabBarLink href={routes.SETTINGS()} icon={CogIcon}>
+          Settings
+        </TabBarLink>
+      ) : (
+        <TabBarLink href={routes.HISTORY()} icon={BookOpenIcon}>
+          History
+        </TabBarLink>
+      )}
     </nav>
   )
 }
