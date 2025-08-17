@@ -31,7 +31,7 @@ export const NoAuditions = () => {
   const [position, setPosition] = useState<Position>(Position.BOTTOM_LEFT)
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-50 flex h-full w-full flex-row items-end">
+    <div className="pointer-events-none fixed inset-0 z-20 flex h-full w-full flex-row items-end">
       <Image
         src={no_auditions}
         alt="No Auditions"

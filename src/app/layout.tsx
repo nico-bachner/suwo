@@ -6,6 +6,7 @@ import Image from 'next/image'
 import ensemble from '@/features/marketing/ensemble.jpg'
 import { Footer } from '@/features/navigation/footer'
 import { Navbar } from '@/features/navigation/navbar'
+import { TabBar } from '@/features/navigation/tab_bar'
 import '@/styles/styles.css'
 import { cn } from '@/utils/cn'
 import { LayoutFileProps } from '@/utils/next_types'
@@ -41,6 +42,8 @@ export default function Layout({ children }: LayoutFileProps) {
           </div>
 
           <div className="flex min-h-screen flex-col">
+            <TabBar className="fixed right-2 bottom-2 left-2 z-30 md:hidden" />
+
             <Navbar className="px-4 py-4" />
 
             <div className="flex-1 px-4 pt-12 pb-24">{children}</div>
