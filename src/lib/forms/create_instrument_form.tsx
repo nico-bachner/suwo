@@ -2,10 +2,11 @@
 
 import { useQueryClient } from '@tanstack/react-query'
 
-import { apiRoutes, queryKeys } from '@/routes'
+import { apiRoutes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
+import { queryKeys } from '../queries'
 import {
   CreateInstrumentFormInput,
   CreateInstrumentFormInputValidator,

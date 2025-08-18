@@ -1,7 +1,6 @@
 import z from 'zod'
 
 import { getSession } from '@/features/auth/session/get_session'
-import { InstrumentsQueryResult } from '@/lib/queries/instruments_query'
 import { UpdateInstrumentFormInputValidator } from '@/lib/validators/form_input_validators/update_instrument_form_input_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
@@ -24,9 +23,7 @@ export const GET: APIRoute = async (_, { params }) => {
     },
   })
 
-  const data: InstrumentsQueryResult = userInstruments.map(
-    ({ instrument }) => instrument,
-  )
+  const data = userInstruments.map(({ instrument }) => instrument)
 
   return createResponse({
     status: StatusCode.OK,

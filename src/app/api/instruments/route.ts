@@ -1,28 +1,30 @@
 import z from 'zod'
 
-import { InstrumentsQueryResult } from '@/lib/queries/instruments_query'
-import { CreateInstrumentFormInputValidator } from '@/lib/validators/form_input_validators/create_instrument_form_input_validator'
+import { InstrumentValidator } from '@/lib/validators/instrument_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'
 import { prisma } from '@/utils/prisma'
 
 export const GET: APIRoute = async () => {
-  const instruments = await prisma.instrument.findMany()
-  const data: InstrumentsQueryResult = instruments.toSorted((a, b) =>
-    a.name.localeCompare(b.name),
-  )
+  const instruments = await prisma.instrument.findMany({
+    orderBy: {
+      name: 'asc',
+    },
+  })
 
   return createResponse({
     status: StatusCode.OK,
-    data,
+    data: z.array(InstrumentValidator).parse(instruments),
   })
 }
 
-export const POST: APIRoute = async (req) => {
-  const { data, error, success } = CreateInstrumentFormInputValidator.safeParse(
-    await req.json(),
-  )
+export const POST: APIRoute = async (request) => {
+  const { data, error, success } = InstrumentValidator.omit({
+    id: true,
+    created_at: true,
+    updated_at: true,
+  }).safeParse(await request.json())
 
   if (!success) {
     return createResponse({
@@ -32,13 +34,11 @@ export const POST: APIRoute = async (req) => {
   }
 
   const instrument = await prisma.instrument.create({
-    data: {
-      name: data.instrument_name,
-    },
+    data,
   })
 
   return createResponse({
     status: StatusCode.Created,
-    data: instrument,
+    data: InstrumentValidator.parse(instrument),
   })
 }

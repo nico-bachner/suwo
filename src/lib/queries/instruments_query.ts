@@ -1,41 +1,32 @@
 import { UseQueryOptions } from '@tanstack/react-query'
 import z from 'zod'
 
-import { apiRoutes, queryKeys } from '@/routes'
+import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-export const InstrumentsQueryValidator = z.array(
-  z.object({
-    id: z.uuid(),
-    name: z.string(),
-  }),
-)
+import {
+  Instrument,
+  InstrumentValidator,
+} from '../validators/instrument_validator'
 
-export type InstrumentsQueryResult = z.infer<typeof InstrumentsQueryValidator>
+export const instrumentsQueryKey = () => ['instruments']
 
-export const instrumentsQuery =
-  (): UseQueryOptions<InstrumentsQueryResult> => ({
-    queryKey: queryKeys.INSTRUMENTS(),
-    queryFn: async ({ signal }) => {
-      const response = await parseResponse(
-        await fetch(apiRoutes.INSTRUMENTS(), { signal }),
-      )
+export const instrumentsQuery = (): UseQueryOptions<Instrument[]> => ({
+  queryKey: instrumentsQueryKey(),
+  queryFn: async ({ signal }) => {
+    const response = await parseResponse(
+      await fetch(createURL({ path: ['api', ...instrumentsQueryKey()] }), {
+        signal,
+      }),
+    )
 
-      switch (response.status) {
-        case StatusCode.OK: {
-          const { data, success } = InstrumentsQueryValidator.safeParse(
-            response.data,
-          )
-
-          if (!success) {
-            throw new Error('Invalid instrument data format')
-          }
-
-          return data
-        }
-        default:
-          throw new Error('Failed to fetch data')
+    switch (response.status) {
+      case StatusCode.OK: {
+        return z.array(InstrumentValidator).parse(response.data)
       }
-    },
-  })
+      default:
+        throw new Error('Failed to fetch data')
+    }
+  },
+})

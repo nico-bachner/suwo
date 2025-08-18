@@ -44,16 +44,6 @@ export const POST: APIRoute = async (request) => {
 
   return createResponse({
     status: StatusCode.Created,
-    data: EventValidator.parse({
-      id: event.id,
-      name: event.name,
-      starts_at: event.starts_at.toISOString(),
-      ends_at: event.ends_at?.toISOString() ?? null,
-      location: event.location,
-      notes: event.notes,
-      type: event.type,
-      created_at: event.created_at.toISOString(),
-      updated_at: event.updated_at.toISOString(),
-    }),
+    data: EventValidator.parse(event),
   })
 }

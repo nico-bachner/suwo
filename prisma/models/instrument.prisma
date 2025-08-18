@@ -9,6 +9,10 @@ model Instrument {
     description String?
 
     // Metadata
+    created_at DateTime @default(now())
+    updated_at DateTime @default(now()) @updatedAt
+
+    // Relations
     PracticeParts  PracticePart[]
     UserInstrument UserInstrument[]
 }
