@@ -22,7 +22,7 @@ export const ProfilePreview = (profile: ProfileQueryResult) => (
 )
 
 export const ProfilePreviewSkeleton = () => (
-  <div className="bg-neutral-5/80 flex flex-col gap-1 rounded-3xl px-6 py-4 backdrop-blur">
+  <div className="bg-neutral-5/80 border-neutral-4/80 flex flex-col gap-1 rounded-3xl border px-6 py-4 font-bold backdrop-blur transition-transform outline-none hover:scale-105 focus:scale-105">
     <SkeletonText className="h-7" />
     <SkeletonText className="h-5" />
   </div>

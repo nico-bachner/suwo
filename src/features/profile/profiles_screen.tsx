@@ -41,7 +41,7 @@ export const ProfilesScreen = () => {
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {isPending
-            ? Array.from({ length: 20 }).map((_, index) => (
+            ? Array.from({ length: 30 }).map((_, index) => (
                 <ProfilePreviewSkeleton key={index} />
               ))
             : search({
