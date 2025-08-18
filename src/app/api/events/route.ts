@@ -1,10 +1,28 @@
 import z from 'zod'
 
-import { Event, EventValidator } from '@/lib/validators/event_validator'
+import { EventValidator } from '@/lib/validators/event_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'
 import { prisma } from '@/utils/prisma'
+
+export const GET: APIRoute = async () => {
+  const events = await prisma.event.findMany({
+    where: {
+      starts_at: {
+        gte: new Date(),
+      },
+    },
+    orderBy: {
+      starts_at: 'asc',
+    },
+  })
+
+  return createResponse({
+    status: StatusCode.OK,
+    data: z.array(EventValidator).parse(events),
+  })
+}
 
 export const POST: APIRoute = async (request) => {
   const { data, error, success } = EventValidator.omit({
@@ -24,20 +42,18 @@ export const POST: APIRoute = async (request) => {
     data,
   })
 
-  const response: Event = EventValidator.parse({
-    id: event.id,
-    name: event.name,
-    starts_at: event.starts_at.toISOString(),
-    ends_at: event.ends_at?.toISOString() ?? null,
-    location: event.location,
-    notes: event.notes,
-    type: event.type,
-    created_at: event.created_at.toISOString(),
-    updated_at: event.updated_at.toISOString(),
-  })
-
   return createResponse({
     status: StatusCode.Created,
-    data: response,
+    data: EventValidator.parse({
+      id: event.id,
+      name: event.name,
+      starts_at: event.starts_at.toISOString(),
+      ends_at: event.ends_at?.toISOString() ?? null,
+      location: event.location,
+      notes: event.notes,
+      type: event.type,
+      created_at: event.created_at.toISOString(),
+      updated_at: event.updated_at.toISOString(),
+    }),
   })
 }
