@@ -4,13 +4,13 @@ model Event {
 
     // Required Attributes
     name      String
-    category  String
     starts_at DateTime
 
     // Optional Attributes
     ends_at  DateTime?
     location String?
     notes    String?
+    type     String?
 
     // Metadata
     created_at DateTime @default(now())
