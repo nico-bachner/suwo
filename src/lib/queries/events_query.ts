@@ -1,6 +1,7 @@
 import { UseQueryOptions } from '@tanstack/react-query'
 import z from 'zod'
 
+import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
@@ -12,7 +13,9 @@ export const eventsQuery = (): UseQueryOptions<Event[]> => ({
   queryKey: eventsQueryKey(),
   queryFn: async ({ signal }) => {
     const response = await parseResponse(
-      await fetch(`/api/${eventsQueryKey().join('/')}`, { signal }),
+      await fetch(createURL({ path: ['api', ...eventsQueryKey()] }), {
+        signal,
+      }),
     )
 
     switch (response.status) {
