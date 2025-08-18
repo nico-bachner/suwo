@@ -1,0 +1,18 @@
+model Event {
+    // ID
+    id String @id @default(uuid())
+
+    // Required Attributes
+    name      String
+    category  String
+    starts_at DateTime
+
+    // Optional Attributes
+    ends_at  DateTime?
+    location String?
+    notes    String?
+
+    // Metadata
+    created_at DateTime @default(now())
+    updated_at DateTime @default(now()) @updatedAt
+}
