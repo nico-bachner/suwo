@@ -14,20 +14,17 @@ export const GET: APIRoute = async (_, { params }) => {
     })
     .parse(await params)
 
-  const userInstruments = await prisma.userInstrument.findMany({
+  const instruments = await prisma.instrument.findMany({
     where: {
-      user_id,
-    },
-    include: {
-      instrument: true,
+      UserInstrument: {
+        some: { user_id },
+      },
     },
   })
 
-  const data = userInstruments.map(({ instrument }) => instrument)
-
   return createResponse({
     status: StatusCode.OK,
-    data,
+    data: instruments,
   })
 }
 
