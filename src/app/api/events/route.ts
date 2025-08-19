@@ -41,14 +41,17 @@ export const POST: APIRoute = async (request) => {
   const existingEvents = await prisma.event.findMany({
     where: {
       name: data.name,
-      starts_at: z.coerce.date().parse(data.starts_at),
+      starts_at: {
+        gte: z.coerce.date().parse(data.starts_at),
+        lte: z.coerce.date().optional().parse(data.ends_at),
+      },
     },
   })
 
   if (existingEvents.length > 0) {
     return createResponse({
       status: StatusCode.Conflict,
-      error: `Event with name "${data.name}" at the specified start time already exists.`,
+      error: `Existing event with name "${data.name}" already exists at the same time.`,
     })
   }
 
