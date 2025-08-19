@@ -3,27 +3,29 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { Button } from '@/design_system/button'
+import { Session } from '@/features/auth/session/types'
 import { queries } from '@/lib/queries'
 import { apiRoutes, queryKeys } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-import {
-  UpdateInstrumentFormInput,
-  UpdateInstrumentFormInputValidator,
-} from '../validators/form_input_validators/update_instrument_form_input_validator'
+import { UpdateInstrumentFormInput } from '../validators/form_input_validators/update_instrument_form_input_validator'
 import { useAppForm } from './context'
 
-export const UpdateInstrumentForm = () => {
+type UpdateInstrumentFormProps = {
+  session: Session
+}
+
+export const UpdateInstrumentForm = ({
+  session,
+}: UpdateInstrumentFormProps) => {
   const queryClient = useQueryClient()
 
-  const { data: session } = useQuery(queries.SESSION())
   const { data: instruments, isPending: isInstrumentsPending } = useQuery(
     queries.INSTRUMENTS(),
   )
   const { data: userInstruments } = useQuery({
-    // eslint-disable-next-line typescript/no-non-null-assertion
-    ...queries.USER_INSTRUMENTS(session!.user_id),
+    ...queries.USER_INSTRUMENTS(session.user_id),
     enabled: Boolean(session),
   })
 
@@ -33,13 +35,9 @@ export const UpdateInstrumentForm = () => {
 
   const form = useAppForm({
     defaultValues,
-    validators: {
-      onBlur: UpdateInstrumentFormInputValidator,
-    },
     onSubmit: async ({ value }) => {
       const response = await parseResponse(
-        // eslint-disable-next-line typescript/no-non-null-assertion
-        await fetch(apiRoutes.USER_INSTRUMENTS(session!.user_id), {
+        await fetch(apiRoutes.USER_INSTRUMENTS(session.user_id), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -56,16 +54,13 @@ export const UpdateInstrumentForm = () => {
         case StatusCode.OK:
         case StatusCode.Created:
           await queryClient.invalidateQueries({
-            // eslint-disable-next-line typescript/no-non-null-assertion
-            queryKey: queryKeys.USER_INSTRUMENTS(session!.user_id),
+            queryKey: queryKeys.USER_INSTRUMENTS(session.user_id),
           })
           await queryClient.invalidateQueries({
-            // eslint-disable-next-line typescript/no-non-null-assertion
-            queryKey: queryKeys.USER_INSTRUMENTS(session!.user_id),
+            queryKey: queryKeys.USER_INSTRUMENTS(session.user_id),
           })
           await queryClient.invalidateQueries({
-            // eslint-disable-next-line typescript/no-non-null-assertion
-            queryKey: queryKeys.PROFILE(session!),
+            queryKey: queryKeys.PROFILE(session),
           })
 
           // eslint-disable-next-line no-alert, no-undef

@@ -96,7 +96,7 @@ export const EditProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
           title="Instruments"
           description="Tell us what instruments you play"
         >
-          <UpdateInstrumentForm />
+          <UpdateInstrumentForm session={session} />
         </SettingsSection>
 
         <SettingsSection

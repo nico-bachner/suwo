@@ -40,7 +40,7 @@ export const POST: APIRoute = async (request, { params }) => {
   if (!session) {
     return createResponse({
       status: StatusCode.Unauthorized,
-      error: 'Unauthorized',
+      error: 'Users must be logged in to access their instruments.',
     })
   }
 
@@ -69,15 +69,23 @@ export const POST: APIRoute = async (request, { params }) => {
     },
   })
 
-  const userInstruments = await prisma.userInstrument.createManyAndReturn({
+  await prisma.userInstrument.createManyAndReturn({
     data: data.instrument_ids.map((id) => ({
       user_id,
       instrument_id: id,
     })),
   })
 
+  const instruments = await prisma.instrument.findMany({
+    where: {
+      UserInstrument: {
+        some: { user_id },
+      },
+    },
+  })
+
   return createResponse({
     status: StatusCode.Created,
-    data: userInstruments,
+    data: instruments,
   })
 }
