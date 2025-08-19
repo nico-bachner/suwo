@@ -9,11 +9,6 @@ import { prisma } from '@/utils/prisma'
 
 export const GET: APIRoute = async () => {
   const events = await prisma.event.findMany({
-    where: {
-      starts_at: {
-        gte: new Date(),
-      },
-    },
     orderBy: {
       starts_at: 'asc',
     },

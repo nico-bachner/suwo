@@ -20,7 +20,7 @@ export const Button = ({
     <Component
       type={type}
       className={cn(
-        'font-semibold select-none',
+        'leading-tight font-semibold select-none',
         'h-10 rounded-full px-5',
         'outline-offset-2 focus-visible:outline-4',
         'flex items-center justify-center gap-2',
