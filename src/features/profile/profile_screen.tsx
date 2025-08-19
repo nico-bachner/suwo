@@ -61,7 +61,7 @@ export const ProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
 
       {session && session.user_id === profile.user_id && (
         <Button variant="primary" asChild>
-          <Link href={routes.EDIT_PROFILE(profile)}>
+          <Link href={routes.EDIT_PROFILE(profile.user_id)}>
             <PencilIcon className="h-5 w-5" />
             Edit
           </Link>

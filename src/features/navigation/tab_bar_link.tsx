@@ -15,7 +15,7 @@ type TabBarLinkProps = {
 export const TabBarLink = ({ children, href, icon: Icon }: TabBarLinkProps) => {
   const pathname = usePathname()
 
-  const isActive = pathname === href
+  const isActive = pathname.split('/')[1] === href.split('/')[1]
 
   return (
     <Link

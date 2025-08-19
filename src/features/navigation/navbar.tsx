@@ -62,7 +62,7 @@ export const Navbar = ({ className }: NavbarProps) => {
         {session ? (
           <>
             <Button asChild variant="secondary">
-              <Link href={routes.PROFILE(session)}>Profile</Link>
+              <Link href={routes.PROFILE(session.user_id)}>Profile</Link>
             </Button>
             <Button asChild variant="primary">
               <Link href={routes.SETTINGS()}>Settings</Link>

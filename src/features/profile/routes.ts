@@ -14,8 +14,8 @@ export const apiRoutes = {
 
 export const routes = {
   PROFILES: () => createURL({ path: ['members'] }),
-  PROFILE: ({ user_id }: Pick<Profile, 'user_id'>) =>
+  PROFILE: (user_id: Profile['user_id']) =>
     createURL({ path: ['members', user_id] }),
-  EDIT_PROFILE: ({ user_id }: Pick<Profile, 'user_id'>) =>
+  EDIT_PROFILE: (user_id: Profile['user_id']) =>
     createURL({ path: ['members', user_id, 'edit'] }),
 }

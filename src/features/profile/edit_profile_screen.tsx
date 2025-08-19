@@ -78,7 +78,7 @@ export const EditProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
     <main className="mx-auto flex w-full max-w-screen-sm flex-col gap-8 lg:max-w-screen-xl">
       <div className="flex flex-col gap-x-16 gap-y-8 lg:flex-row lg:items-center">
         <Button variant="secondary" className="self-start" asChild>
-          <Link href={routes.PROFILE(session)}>
+          <Link href={routes.PROFILE(session.user_id)}>
             <ChevronLeftIcon className="-mx-1 size-5" />
             Back to Profile
           </Link>

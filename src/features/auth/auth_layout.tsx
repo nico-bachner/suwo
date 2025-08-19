@@ -12,5 +12,5 @@ export const AuthLayout = async ({ children }: LayoutFileProps) => {
     return children
   }
 
-  redirect(routes.PROFILE(session))
+  redirect(routes.PROFILE(session.user_id))
 }

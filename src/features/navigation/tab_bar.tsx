@@ -59,7 +59,7 @@ export const TabBar = ({ className }: TabBarProps) => {
       <Divider orientation="vertical" className="h-1/2" />
 
       {session ? (
-        <TabBarLink href={routes.HISTORY()} icon={UserIcon}>
+        <TabBarLink href={routes.PROFILE(session.user_id)} icon={UserIcon}>
           Profile
         </TabBarLink>
       ) : (

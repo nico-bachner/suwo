@@ -9,7 +9,7 @@ import { getProfileScreenName } from './utils/get_profile_screen_name'
 export const ProfilePreview = (profile: ProfileQueryResult) => (
   <Link
     key={profile.user_id}
-    href={routes.PROFILE(profile)}
+    href={routes.PROFILE(profile.user_id)}
     className="bg-neutral-5/80 border-neutral-4/80 flex flex-col gap-1 rounded-3xl border px-6 py-4 font-bold backdrop-blur transition-transform outline-none hover:scale-105 focus:scale-105"
   >
     <span className="text-neutral-2">{getProfileScreenName(profile)}</span>
