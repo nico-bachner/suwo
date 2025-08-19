@@ -44,7 +44,13 @@ export default function Page() {
         {events.map((item) => (
           <div key={item.id}>
             <p>{item.name}</p>
-            <p>{new Date(item.starts_at).toDateString()}</p>
+            <p>
+              {new Intl.DateTimeFormat('en-AU', {
+                timeZone: 'Australia/Sydney',
+                dateStyle: 'full',
+                timeStyle: 'long',
+              }).format(new Date(item.starts_at))}
+            </p>
           </div>
         ))}
       </div>

@@ -1,3 +1,4 @@
+import { Temporal } from '@js-temporal/polyfill'
 import z from 'zod'
 
 import { EventValidator } from '@/lib/validators/event_validator'
@@ -38,12 +39,25 @@ export const POST: APIRoute = async (request) => {
     })
   }
 
+  const startsAt = new Date(
+    Temporal.PlainDateTime.from(data.starts_at).toZonedDateTime(
+      'Australia/Sydney',
+    ).epochMilliseconds,
+  )
+  const endsAt = data.ends_at
+    ? new Date(
+        Temporal.PlainDateTime.from(data.ends_at).toZonedDateTime(
+          'Australia/Sydney',
+        ).epochMilliseconds,
+      )
+    : undefined
+
   const existingEvents = await prisma.event.findMany({
     where: {
       name: data.name,
       starts_at: {
-        gte: z.coerce.date().parse(data.starts_at),
-        lte: z.coerce.date().optional().parse(data.ends_at),
+        gte: startsAt,
+        lte: endsAt,
       },
     },
   })
@@ -58,8 +72,8 @@ export const POST: APIRoute = async (request) => {
   const event = await prisma.event.create({
     data: {
       ...data,
-      starts_at: z.coerce.date().parse(data.starts_at),
-      ends_at: z.coerce.date().optional().parse(data.ends_at),
+      starts_at: startsAt,
+      ends_at: endsAt,
     },
   })
 
