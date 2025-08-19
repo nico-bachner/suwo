@@ -14,6 +14,7 @@ import {
   queryKeys as profileQueryKeys,
   routes as profileRoutes,
 } from './features/profile/routes'
+import { Event } from './lib/validators/event_validator'
 import { createURL } from './utils/http/create_url'
 
 export const queryKeys = {
@@ -50,6 +51,8 @@ export const routes = {
   ...marketingRoutes,
   ...profileRoutes,
   CALENDAR: () => createURL({ path: ['calendar'] }),
+  EVENTS: () => createURL({ path: ['events'] }),
+  EVENT: (id: Event['id']) => createURL({ path: ['events', id] }),
   EQUIPMENT: () => createURL({ path: ['equipment'] }),
   SETTINGS: () => createURL({ path: ['settings'] }),
 }

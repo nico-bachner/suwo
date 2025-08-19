@@ -1,5 +1,6 @@
 import { currentWeekQuery } from './current_week_query'
 import { equipmentQuery } from './equipment_query'
+import { eventQuery, eventQueryKey } from './event_query'
 import { eventsQuery, eventsQueryKey } from './events_query'
 import { instrumentsQuery, instrumentsQueryKey } from './instruments_query'
 import { mailingListPreferenceQuery } from './mailing_list_preference_query'
@@ -13,6 +14,7 @@ import { weeklyAttendancesQuery } from './weekly_attendances_query'
 
 export const queryKeys = {
   EVENTS: eventsQueryKey,
+  EVENT: eventQueryKey,
   INSTRUMENTS: instrumentsQueryKey,
 }
 
@@ -20,6 +22,7 @@ export const queries = {
   CURRENT_WEEK: currentWeekQuery,
   EQUIPMENT: equipmentQuery,
   EVENTS: eventsQuery,
+  EVENT: eventQuery,
   INSTRUMENTS: instrumentsQuery,
   MAILING_LIST_PREFERENCE: mailingListPreferenceQuery,
   MAILING_LIST_RECIPIENTS: mailingListRecipientsQuery,
