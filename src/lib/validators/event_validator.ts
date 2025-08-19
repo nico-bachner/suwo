@@ -1,13 +1,21 @@
 import z from 'zod'
 
+export enum EventType {
+  Rehearsal = 'rehearsal',
+  Performance = 'performance',
+  Social = 'social',
+}
+
 export const EventValidator = z.object({
   id: z.uuid(),
-  name: z.string(),
+  name: z.string().trim().min(1, {
+    message: 'Instrument name is required',
+  }),
   starts_at: z.iso.datetime(),
-  ends_at: z.iso.datetime().nullable(),
-  location: z.string().nullable(),
-  notes: z.string().nullable(),
-  type: z.enum(['rehearsal', 'performance', 'social']).nullable(),
+  ends_at: z.iso.datetime().optional(),
+  location: z.string().optional(),
+  notes: z.string().optional(),
+  type: z.enum(EventType).optional(),
   created_at: z.iso.datetime(),
   updated_at: z.iso.datetime(),
 })

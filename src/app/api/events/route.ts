@@ -20,7 +20,7 @@ export const GET: APIRoute = async () => {
 
   return createResponse({
     status: StatusCode.OK,
-    data: z.array(EventValidator).parse(events),
+    data: events,
   })
 }
 
@@ -44,6 +44,6 @@ export const POST: APIRoute = async (request) => {
 
   return createResponse({
     status: StatusCode.Created,
-    data: EventValidator.parse(event),
+    data: event,
   })
 }
