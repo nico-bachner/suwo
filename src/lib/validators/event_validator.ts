@@ -9,7 +9,7 @@ export enum EventType {
 export const EventValidator = z.object({
   id: z.uuid(),
   name: z.string().trim().min(1, {
-    message: 'Instrument name is required',
+    message: 'Event name is required',
   }),
   starts_at: z.iso.datetime({ local: true }),
   ends_at: z.iso.datetime({ local: true }).optional(),
