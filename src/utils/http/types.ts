@@ -14,6 +14,7 @@ export type JSONResponse =
         | StatusCode.Unauthorized
         | StatusCode.Forbidden
         | StatusCode.NotFound
+        | StatusCode.Conflict
         | StatusCode.InternalServerError
       error: string
     }

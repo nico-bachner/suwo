@@ -5,9 +5,6 @@ model Instrument {
     // Required Attributes
     name String @unique
 
-    // Optional Attributes
-    description String?
-
     // Metadata
     created_at DateTime @default(now())
     updated_at DateTime @default(now()) @updatedAt

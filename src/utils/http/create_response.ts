@@ -31,6 +31,7 @@ export const createResponse = (response: JSONResponse): Response => {
     case StatusCode.Unauthorized:
     case StatusCode.Forbidden:
     case StatusCode.NotFound:
+    case StatusCode.Conflict:
     case StatusCode.InternalServerError:
       return new Response(
         JSON.stringify(

@@ -8,22 +8,26 @@ import { StatusCode } from '@/utils/http/status_code'
 
 import { queryKeys } from '../queries'
 import {
-  CreateInstrumentFormInput,
-  CreateInstrumentFormInputValidator,
-} from '../validators/form_input_validators/create_instrument_form_input_validator'
+  Instrument,
+  InstrumentValidator,
+} from '../validators/instrument_validator'
 import { useAppForm } from './context'
 
 export const CreateInstrumentForm = () => {
   const queryClient = useQueryClient()
 
-  const defaultValues: CreateInstrumentFormInput = {
-    instrument_name: '',
+  const defaultValues: Omit<Instrument, 'id' | 'created_at' | 'updated_at'> = {
+    name: '',
   }
 
   const form = useAppForm({
     defaultValues,
     validators: {
-      onBlur: CreateInstrumentFormInputValidator,
+      onBlur: InstrumentValidator.omit({
+        id: true,
+        created_at: true,
+        updated_at: true,
+      }),
     },
     onSubmit: async ({ value }) => {
       const response = await parseResponse(
@@ -37,16 +41,18 @@ export const CreateInstrumentForm = () => {
       )
 
       switch (response.status) {
-        case StatusCode.BadRequest:
-          // eslint-disable-next-line no-alert, no-undef
-          alert(`${response.error}\n\nPlease try again`)
-          break
         case StatusCode.OK:
         case StatusCode.Created:
           await queryClient.invalidateQueries({
             queryKey: queryKeys.INSTRUMENTS(),
           })
           form.reset()
+          break
+        case StatusCode.NoContent:
+          break
+        default:
+          // eslint-disable-next-line no-alert, no-undef
+          alert(response.error)
           break
       }
     },
@@ -61,7 +67,7 @@ export const CreateInstrumentForm = () => {
       }}
       className="flex flex-col gap-4"
     >
-      <form.AppField name="instrument_name">
+      <form.AppField name="name">
         {(field) => (
           <field.Text label="Instrument Name" placeholder="e.g. Trombone" />
         )}

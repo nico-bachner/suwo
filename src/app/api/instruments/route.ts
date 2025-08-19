@@ -15,7 +15,7 @@ export const GET: APIRoute = async () => {
 
   return createResponse({
     status: StatusCode.OK,
-    data: z.array(InstrumentValidator).parse(instruments),
+    data: instruments,
   })
 }
 
@@ -33,12 +33,25 @@ export const POST: APIRoute = async (request) => {
     })
   }
 
+  const existingInstrument = await prisma.instrument.findUnique({
+    where: {
+      name: data.name,
+    },
+  })
+
+  if (existingInstrument) {
+    return createResponse({
+      status: StatusCode.Conflict,
+      error: `Instrument with name "${data.name}" already exists.`,
+    })
+  }
+
   const instrument = await prisma.instrument.create({
     data,
   })
 
   return createResponse({
     status: StatusCode.Created,
-    data: InstrumentValidator.parse(instrument),
+    data: instrument,
   })
 }

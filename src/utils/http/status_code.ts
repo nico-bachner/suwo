@@ -63,6 +63,12 @@ export enum StatusCode {
    */
   NotFound = 404,
   /**
+   * Indicates a request conflict with the current state of the target resource.
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/409
+   */
+  Conflict = 409,
+  /**
    * Indicates that the server encountered an unexpected condition that
    * prevented it from fulfilling the request. This error is a generic
    * "catch-all" response to server issues, indicating that the server cannot

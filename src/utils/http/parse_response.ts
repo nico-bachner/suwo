@@ -38,6 +38,7 @@ export const parseResponse = async (
     case StatusCode.Unauthorized:
     case StatusCode.Forbidden:
     case StatusCode.NotFound:
+    case StatusCode.Conflict:
     case StatusCode.InternalServerError: {
       const { error } = z
         .object({
