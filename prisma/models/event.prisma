@@ -15,4 +15,6 @@ model Event {
     // Metadata
     created_at DateTime @default(now())
     updated_at DateTime @default(now()) @updatedAt
+
+    @@unique([name, starts_at])
 }
