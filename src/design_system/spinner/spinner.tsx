@@ -1,4 +1,4 @@
-import { SpinnerIcon } from '@/icons/Spinner'
+import { SpinnerIcon } from '@/design_system/icons/spinner_icon'
 import { cn } from '@/utils/cn'
 
 type SpinnerProps = {

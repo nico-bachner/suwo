@@ -1,4 +1,4 @@
-import { FacebookIcon, InstagramIcon, YouTubeIcon } from '@/icons'
+import { FacebookIcon, InstagramIcon, YouTubeIcon } from '@/design_system/icons'
 
 export const API_INDENT_SIZE = 2
 

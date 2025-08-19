@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react'
 
 import { SOCIAL_LINKS } from '@/config'
 import { Dialog } from '@/design_system/dialog'
-import { Icon } from '@/design_system/icon'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
@@ -86,9 +85,9 @@ export const NavbarMenu = ({ className }: NavbarMenuProps) => {
       </div>
 
       <div className="flex flex-row items-center gap-4 self-center">
-        {SOCIAL_LINKS.map(({ href, icon }) => (
+        {SOCIAL_LINKS.map(({ href, icon: Icon }) => (
           <a key={href} href={href} target="_blank" rel="noopener noreferrer">
-            <Icon icon={icon} size="lg" className="stroke-neutral-2 stroke-1" />
+            <Icon className="stroke-neutral-2 size-8 stroke-1" />
           </a>
         ))}
       </div>
