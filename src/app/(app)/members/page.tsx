@@ -1,5 +1,5 @@
-import { ProfilesScreen } from '@/features/profile/profiles_screen'
+import { ProfilesPage } from '@/lib/pages/profiles_page'
 
 export default function Page() {
-  return <ProfilesScreen />
+  return <ProfilesPage />
 }

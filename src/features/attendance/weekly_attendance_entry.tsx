@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import { SkeletonText } from '@/design_system/skeleton'
 import { queries } from '@/lib/queries'
 
-import { getProfileScreenName } from '../profile/utils/get_profile_screen_name'
+import { getProfileScreenName } from '../profile/get_profile_screen_name'
 import { WeeklyAttendanceEntryProps } from './types'
 import {
   WeeklyAttendanceEntryStatus,

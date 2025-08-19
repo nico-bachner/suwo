@@ -4,8 +4,8 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { Button } from '@/design_system/button'
 import { Session } from '@/features/auth/session/types'
-import { queries } from '@/lib/queries'
-import { apiRoutes, queryKeys } from '@/routes'
+import { queries, queryKeys } from '@/lib/queries'
+import { apiRoutes, queryKeys as legacy_queryKeys } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
@@ -54,13 +54,13 @@ export const UpdateInstrumentForm = ({
         case StatusCode.OK:
         case StatusCode.Created:
           await queryClient.invalidateQueries({
-            queryKey: queryKeys.USER_INSTRUMENTS(session.user_id),
+            queryKey: legacy_queryKeys.USER_INSTRUMENTS(session.user_id),
           })
           await queryClient.invalidateQueries({
-            queryKey: queryKeys.USER_INSTRUMENTS(session.user_id),
+            queryKey: legacy_queryKeys.USER_INSTRUMENTS(session.user_id),
           })
           await queryClient.invalidateQueries({
-            queryKey: queryKeys.PROFILE(session),
+            queryKey: queryKeys.PROFILE(session.user_id),
           })
 
           // eslint-disable-next-line no-alert, no-undef

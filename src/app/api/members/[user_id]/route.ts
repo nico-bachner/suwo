@@ -1,32 +1,17 @@
-import z from 'zod'
-
-import { ProfileQueryResult } from '@/lib/queries/profile_query'
+import { Profile, ProfileValidator } from '@/lib/validators/profile_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'
 import { prisma } from '@/utils/prisma'
 
 export const GET: APIRoute = async (_, { params }) => {
-  const {
-    data: paramsData,
-    error,
-    success,
-  } = z
-    .object({
-      user_id: z.uuid(),
-    })
-    .safeParse(await params)
-
-  if (!success) {
-    return createResponse({
-      status: StatusCode.BadRequest,
-      error: z.prettifyError(error),
-    })
-  }
+  const { user_id } = ProfileValidator.pick({ user_id: true }).parse(
+    await params,
+  )
 
   const profile = await prisma.profile.findUnique({
     where: {
-      user_id: paramsData.user_id,
+      user_id,
     },
     include: {
       user: {
@@ -70,7 +55,7 @@ export const GET: APIRoute = async (_, { params }) => {
     })
   }
 
-  const data: ProfileQueryResult = {
+  const data: Profile = {
     ...profile,
     instruments: profile.user.UserInstrument.map(
       ({ instrument }) => instrument.name,

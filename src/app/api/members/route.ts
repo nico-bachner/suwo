@@ -1,4 +1,4 @@
-import { ProfilesQueryResult } from '@/lib/queries/profiles_query'
+import { Profile } from '@/lib/validators/profile_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'
@@ -49,7 +49,7 @@ export const GET: APIRoute = async () => {
     },
   })
 
-  const data: ProfilesQueryResult = profiles.map((profile) => ({
+  const data: Profile[] = profiles.map((profile) => ({
     ...profile,
     instruments: profile.user.UserInstrument.map(
       ({ instrument }) => instrument.name,

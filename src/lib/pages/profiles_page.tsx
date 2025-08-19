@@ -4,13 +4,14 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 
 import { SearchInput } from '@/design_system/input'
-import { queries } from '@/lib/queries'
-import { queryKeys } from '@/routes'
+import {
+  ProfilePreview,
+  ProfilePreviewSkeleton,
+} from '@/features/profile/profile_preview'
+import { queries, queryKeys } from '@/lib/queries'
 import { search } from '@/utils/search'
 
-import { ProfilePreview, ProfilePreviewSkeleton } from './profile_preview'
-
-export const ProfilesScreen = () => {
+export const ProfilesPage = () => {
   const queryClient = useQueryClient()
   const { data: profiles, error, isPending } = useQuery(queries.PROFILES())
   const [query, setQuery] = useState('')
@@ -21,7 +22,7 @@ export const ProfilesScreen = () => {
 
   if (profiles) {
     profiles.forEach((profile) => {
-      queryClient.setQueryData(queryKeys.PROFILE(profile), profile)
+      queryClient.setQueryData(queryKeys.PROFILE(profile.user_id), profile)
     })
   }
 

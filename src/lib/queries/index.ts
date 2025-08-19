@@ -5,8 +5,8 @@ import { eventsQuery, eventsQueryKey } from './events_query'
 import { instrumentsQuery, instrumentsQueryKey } from './instruments_query'
 import { mailingListPreferenceQuery } from './mailing_list_preference_query'
 import { mailingListRecipientsQuery } from './mailing_list_recipients_query'
-import { profileQuery } from './profile_query'
-import { profilesQuery } from './profiles_query'
+import { profileQuery, profileQueryKey } from './profile_query'
+import { profilesQuery, profilesQueryKey } from './profiles_query'
 import { sessionQuery } from './session_query'
 import { userInstrumentsQuery } from './user_instruments_query'
 import { userRolesQuery } from './user_roles_query'
@@ -16,6 +16,8 @@ export const queryKeys = {
   EVENTS: eventsQueryKey,
   EVENT: eventQueryKey,
   INSTRUMENTS: instrumentsQueryKey,
+  PROFILES: profilesQueryKey,
+  PROFILE: profileQueryKey,
 }
 
 export const queries = {

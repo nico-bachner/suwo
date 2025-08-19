@@ -1,14 +1,11 @@
-import z from 'zod'
-
-import { EditProfileScreen } from '@/features/profile/edit_profile_screen'
+import { ProfileEditPage } from '@/lib/pages/profile_edit_page'
+import { ProfileValidator } from '@/lib/validators/profile_validator'
 import { PageFileProps } from '@/utils/next_types'
 
 export default async function Page({ params }: PageFileProps) {
-  const { user_id } = z
-    .object({
-      user_id: z.uuid(),
-    })
-    .parse(await params)
+  const { user_id } = ProfileValidator.pick({ user_id: true }).parse(
+    await params,
+  )
 
-  return <EditProfileScreen user_id={user_id} />
+  return <ProfileEditPage user_id={user_id} />
 }

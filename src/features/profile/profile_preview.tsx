@@ -1,12 +1,12 @@
 import Link from 'next/link'
 
 import { SkeletonText } from '@/design_system/skeleton'
-import { ProfileQueryResult } from '@/lib/queries/profile_query'
+import { Profile } from '@/lib/validators/profile_validator'
 import { routes } from '@/routes'
 
-import { getProfileScreenName } from './utils/get_profile_screen_name'
+import { getProfileScreenName } from './get_profile_screen_name'
 
-export const ProfilePreview = (profile: ProfileQueryResult) => (
+export const ProfilePreview = (profile: Profile) => (
   <Link
     key={profile.user_id}
     href={routes.PROFILE(profile.user_id)}

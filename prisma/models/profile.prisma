@@ -3,13 +3,10 @@ model Profile {
     user_id String @id
 
     // Required Attributes
-    handle     String @unique @default(uuid())
     given_name String
 
     // Optional Attributes
-    family_name  String?
-    display_name String?
-    bio          String?
+    family_name String?
 
     // Relations
     user User @relation(fields: [user_id], references: [id], onDelete: Cascade)

@@ -9,15 +9,15 @@ import { Profile } from '@/generated/prisma'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 
-import { getProfileScreenName } from './utils/get_profile_screen_name'
-import { useProfileAttendanceRate } from './utils/use_profile_attendance_rate'
+import { getProfileScreenName } from '../../features/profile/get_profile_screen_name'
+import { useProfileAttendanceRate } from '../../features/profile/use_profile_attendance_rate'
 
-export const ProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
+export const ProfilePage = ({ user_id }: Pick<Profile, 'user_id'>) => {
   const {
     data: profile,
     error: profileError,
     isPending: isProfilePending,
-  } = useQuery(queries.PROFILE({ user_id }))
+  } = useQuery(queries.PROFILE(user_id))
   const { data: session } = useQuery(queries.SESSION())
   const attendanceRate = useProfileAttendanceRate(profile?.attendances)
 
@@ -61,7 +61,7 @@ export const ProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
 
       {session && session.user_id === profile.user_id && (
         <Button variant="primary" asChild>
-          <Link href={routes.EDIT_PROFILE(profile.user_id)}>
+          <Link href={routes.PROFILE_EDIT(profile.user_id)}>
             <PencilIcon className="h-5 w-5" />
             Edit
           </Link>

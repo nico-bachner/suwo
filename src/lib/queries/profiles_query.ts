@@ -1,34 +1,26 @@
 import { UseQueryOptions } from '@tanstack/react-query'
 import z from 'zod'
 
-import { apiRoutes, queryKeys } from '@/routes'
+import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-import { ProfileQueryValidator } from './profile_query'
+import { Profile, ProfileValidator } from '../validators/profile_validator'
 
-export const ProfilesQueryValidator = z.array(ProfileQueryValidator)
+export const profilesQueryKey = () => ['members']
 
-export type ProfilesQueryResult = z.infer<typeof ProfilesQueryValidator>
-
-export const profilesQuery = (): UseQueryOptions<ProfilesQueryResult> => ({
-  queryKey: queryKeys.PROFILES(),
+export const profilesQuery = (): UseQueryOptions<Profile[]> => ({
+  queryKey: profilesQueryKey(),
   queryFn: async ({ signal }) => {
     const response = await parseResponse(
-      await fetch(apiRoutes.PROFILES(), { signal }),
+      await fetch(createURL({ path: ['api', ...profilesQueryKey()] }), {
+        signal,
+      }),
     )
 
     switch (response.status) {
       case StatusCode.OK: {
-        const { data, error, success } = ProfilesQueryValidator.safeParse(
-          response.data,
-        )
-
-        if (!success) {
-          throw new Error(z.prettifyError(error))
-        }
-
-        return data
+        return z.array(ProfileValidator).parse(response.data)
       }
       default:
         throw new Error('Failed to fetch data')

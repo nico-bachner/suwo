@@ -9,18 +9,13 @@ import {
   routes as authRoutes,
 } from './features/auth/routes'
 import { routes as marketingRoutes } from './features/marketing/routes'
-import {
-  apiRoutes as profileApiRoutes,
-  queryKeys as profileQueryKeys,
-  routes as profileRoutes,
-} from './features/profile/routes'
 import { Event } from './lib/validators/event_validator'
+import { Profile } from './lib/validators/profile_validator'
 import { createURL } from './utils/http/create_url'
 
 export const queryKeys = {
   ...attendanceQueryKeys,
   ...authQueryKeys,
-  ...profileQueryKeys,
   CURRENT_WEEK: () => ['current-week'],
   EQUIPMENT: () => ['equipment'],
   MAILING_LIST_RECIPIENTS: () => ['mailing-list', 'recipients'],
@@ -32,7 +27,6 @@ export const queryKeys = {
 export const apiRoutes = {
   ...attendanceApiRoutes,
   ...authApiRoutes,
-  ...profileApiRoutes,
   CREATE_INSTRUMENT: () => createURL({ path: ['api', 'instruments'] }),
   CURRENT_WEEK: () => createURL({ path: ['api', 'usyd', 'current-week'] }),
   EQUIPMENT: () => createURL({ path: ['api', 'equipment'] }),
@@ -49,10 +43,14 @@ export const routes = {
   ...attendanceRoutes,
   ...authRoutes,
   ...marketingRoutes,
-  ...profileRoutes,
   CALENDAR: () => createURL({ path: ['calendar'] }),
   EVENTS: () => createURL({ path: ['events'] }),
   EVENT: (id: Event['id']) => createURL({ path: ['events', id] }),
   EQUIPMENT: () => createURL({ path: ['equipment'] }),
+  PROFILES: () => createURL({ path: ['members'] }),
+  PROFILE: (user_id: Profile['user_id']) =>
+    createURL({ path: ['members', user_id] }),
+  PROFILE_EDIT: (user_id: Profile['user_id']) =>
+    createURL({ path: ['members', user_id, 'edit'] }),
   SETTINGS: () => createURL({ path: ['settings'] }),
 }

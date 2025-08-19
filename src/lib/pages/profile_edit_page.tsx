@@ -7,20 +7,20 @@ import Link from 'next/link'
 import { Button } from '@/design_system/button'
 import { SettingsSection } from '@/design_system/settings_section'
 import { Heading } from '@/design_system/typography'
-import { Profile } from '@/generated/prisma'
+import { getProfileScreenName } from '@/features/profile/get_profile_screen_name'
 import { CreateInstrumentForm } from '@/lib/forms/create_instrument_form'
 import { UpdateInstrumentForm } from '@/lib/forms/update_instrument_form'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 
-import { getProfileScreenName } from './utils/get_profile_screen_name'
+import { Profile } from '../validators/profile_validator'
 
-export const EditProfileScreen = ({ user_id }: Pick<Profile, 'user_id'>) => {
+export const ProfileEditPage = ({ user_id }: Pick<Profile, 'user_id'>) => {
   const {
     data: profile,
     error: profileError,
     isPending: isProfilePending,
-  } = useQuery(queries.PROFILE({ user_id }))
+  } = useQuery(queries.PROFILE(user_id))
   const {
     data: session,
     error: sessionError,
