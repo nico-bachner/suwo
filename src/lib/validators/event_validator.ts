@@ -11,8 +11,8 @@ export const EventValidator = z.object({
   name: z.string().trim().min(1, {
     message: 'Instrument name is required',
   }),
-  starts_at: z.iso.datetime(),
-  ends_at: z.iso.datetime().optional(),
+  starts_at: z.iso.datetime({ local: true }),
+  ends_at: z.iso.datetime({ local: true }).optional(),
   location: z.string().optional(),
   notes: z.string().optional(),
   type: z.enum(EventType).optional(),

@@ -39,7 +39,11 @@ export const POST: APIRoute = async (request) => {
   }
 
   const event = await prisma.event.create({
-    data,
+    data: {
+      ...data,
+      starts_at: z.coerce.date().parse(data.starts_at),
+      ends_at: z.coerce.date().optional().parse(data.starts_at),
+    },
   })
 
   return createResponse({

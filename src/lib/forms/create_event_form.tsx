@@ -27,7 +27,7 @@ export const CreateEventForm = () => {
   const form = useAppForm({
     defaultValues,
     validators: {
-      onBlur: EventValidator.omit({
+      onSubmit: EventValidator.omit({
         id: true,
         created_at: true,
         updated_at: true,

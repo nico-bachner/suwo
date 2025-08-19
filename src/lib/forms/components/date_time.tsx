@@ -15,6 +15,7 @@ export const DateTime = ({ ...props }: DateTimeInputProps) => {
       onBlur={handleBlur}
       onChange={({ target }) => {
         handleChange(target.value)
+        console.log('DateTime input changed:', target.value)
       }}
       {...props}
     />
