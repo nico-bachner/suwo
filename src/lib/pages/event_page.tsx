@@ -3,6 +3,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { queries } from '@/lib/queries'
+import { formatDateRange } from '@/utils/format_date_range'
 
 import { Event } from '../validators/event_validator'
 
@@ -42,7 +43,13 @@ export const EventPage = ({ id }: Pick<Event, 'id'>) => {
   return (
     <main className="prose">
       <h1>{event.name}</h1>
-      <div>{}</div>
+
+      <p>
+        {formatDateRange(
+          new Date(event.starts_at),
+          event.ends_at ? new Date(event.ends_at) : undefined,
+        )}
+      </p>
     </main>
   )
 }
