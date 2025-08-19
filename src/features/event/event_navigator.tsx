@@ -31,7 +31,7 @@ export const EventNavigator = ({ id, className }: EventNavigatorProps) => {
     <nav
       className={cn(
         'bg-neutral-5/20 border-neutral-2/20 rounded-full border backdrop-blur',
-        'mx-auto h-12 px-3',
+        'mx-auto h-10 w-[calc(100%-16px)] px-2.5 md:max-w-screen-lg',
         'flex',
         className,
       )}
@@ -39,9 +39,9 @@ export const EventNavigator = ({ id, className }: EventNavigatorProps) => {
       {prev ? (
         <Link
           href={routes.EVENT(prev.id)}
-          className="flex flex-1 items-center gap-2 p-2"
+          className="flex flex-1 items-center gap-3 px-2"
         >
-          <ChevronDoubleLeftIcon className="size-4" />
+          <ChevronDoubleLeftIcon className="-m-1 size-4" />
 
           <span className="flex-1 text-left text-sm">{prev.name}</span>
         </Link>
@@ -54,11 +54,11 @@ export const EventNavigator = ({ id, className }: EventNavigatorProps) => {
       {next ? (
         <Link
           href={routes.EVENT(next.id)}
-          className="flex flex-1 items-center gap-2 p-2"
+          className="flex flex-1 items-center gap-3 px-2"
         >
           <span className="flex-1 text-right text-sm">{next.name}</span>
 
-          <ChevronDoubleRightIcon className="size-4" />
+          <ChevronDoubleRightIcon className="-m-1 size-4" />
         </Link>
       ) : (
         <div />

@@ -45,7 +45,7 @@ export const EventPage = ({ id }: Pick<Event, 'id'>) => {
     <main>
       <EventNavigator
         id={event.id}
-        className="fixed right-2 bottom-20 left-2 z-30 md:bottom-4"
+        className="fixed right-2 bottom-20 left-2 z-30 md:top-24"
       />
 
       <h1>{event.name}</h1>
