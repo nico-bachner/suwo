@@ -49,25 +49,54 @@ export const EventsPage = () => {
     <main className="prose">
       <h1>Events</h1>
 
+      <h2>Upcoming Events</h2>
+
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {events.map((event) => (
-          <Link
-            key={event.id}
-            href={routes.EVENT(event.id)}
-            className="bg-neutral-5/80 border-neutral-4/80 flex flex-col gap-1 rounded-3xl border px-6 py-4 backdrop-blur transition-transform outline-none hover:scale-105 focus:scale-105"
-          >
-            <h2 className="text-neutral-1 font-bold">{event.name}</h2>
-            <p className="font-light">
-              {formatDateRange(
-                new Date(event.starts_at),
-                event.ends_at ? new Date(event.ends_at) : undefined,
-              )}
-            </p>
-            <p className="text-neutral-3 font-bold">
-              {event.location || 'No location specified'}
-            </p>
-          </Link>
-        ))}
+        {events
+          .filter((event) => new Date(event.starts_at).getTime() > Date.now())
+          .map((event) => (
+            <Link
+              key={event.id}
+              href={routes.EVENT(event.id)}
+              className="bg-neutral-5/80 border-neutral-4/80 flex flex-col gap-1 rounded-3xl border px-6 py-4 backdrop-blur transition-transform outline-none hover:scale-105 focus:scale-105"
+            >
+              <h2 className="text-neutral-1 font-bold">{event.name}</h2>
+              <p className="font-light">
+                {formatDateRange(
+                  new Date(event.starts_at),
+                  event.ends_at ? new Date(event.ends_at) : undefined,
+                )}
+              </p>
+              <p className="text-neutral-3 font-bold">
+                {event.location || 'No location specified'}
+              </p>
+            </Link>
+          ))}
+      </div>
+
+      <h2>Past Events</h2>
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {events
+          .filter((event) => new Date(event.starts_at).getTime() < Date.now())
+          .map((event) => (
+            <Link
+              key={event.id}
+              href={routes.EVENT(event.id)}
+              className="bg-neutral-5/80 border-neutral-4/80 flex flex-col gap-1 rounded-3xl border px-6 py-4 backdrop-blur transition-transform outline-none hover:scale-105 focus:scale-105"
+            >
+              <h2 className="text-neutral-1 font-bold">{event.name}</h2>
+              <p className="font-light">
+                {formatDateRange(
+                  new Date(event.starts_at),
+                  event.ends_at ? new Date(event.ends_at) : undefined,
+                )}
+              </p>
+              <p className="text-neutral-3 font-bold">
+                {event.location || 'No location specified'}
+              </p>
+            </Link>
+          ))}
       </div>
     </main>
   )
