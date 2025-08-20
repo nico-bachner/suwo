@@ -39,7 +39,8 @@ export const Footer = ({ className }: FooterProps) => {
 
         <div className="flex flex-1 flex-col gap-2 text-lg">
           <p className="text-neutral-1 font-bold">Members</p>
-          <FooterLink href={routes.CALENDAR()}>Events Calendar</FooterLink>
+          <FooterLink href={routes.EVENTS()}>Events</FooterLink>
+          <FooterLink href={routes.CALENDAR()}>Calendar</FooterLink>
           <FooterLink
             href={
               currentWeek

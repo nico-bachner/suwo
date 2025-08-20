@@ -42,6 +42,7 @@ export const Navbar = ({ className }: NavbarProps) => {
       <div className="hidden items-center gap-4 md:flex">
         <NavbarLink href={routes.HISTORY()}>History</NavbarLink>
         <NavbarLink href={routes.PROFILES()}>Members</NavbarLink>
+        <NavbarLink href={routes.EVENTS()}>Events</NavbarLink>
         <NavbarLink href={routes.CALENDAR()}>Calendar</NavbarLink>
         <NavbarLink
           href={

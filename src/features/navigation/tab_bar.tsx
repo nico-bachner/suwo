@@ -35,8 +35,8 @@ export const TabBar = ({ className }: TabBarProps) => {
         className,
       )}
     >
-      <TabBarLink href={routes.CALENDAR()} icon={CalendarDaysIcon}>
-        Calendar
+      <TabBarLink href={routes.EVENTS()} icon={CalendarDaysIcon}>
+        Events
       </TabBarLink>
 
       <Divider orientation="vertical" className="h-1/2" />
