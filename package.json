@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint ./",
     "format": "prisma format && prettier --write ./",
     "sb:dev": "storybook dev -p 6006 --no-open",
     "sb:build": "storybook build",
@@ -37,7 +37,7 @@
     "argon2": "^0.43.1",
     "fuse.js": "^7.1.0",
     "jose": "^6.0.12",
-    "next": "^15.4.7",
+    "next": "^15.5.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-qr-code": "^2.0.18",
@@ -46,7 +46,7 @@
     "zod": "^4.0.17"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^15.4.7",
+    "@next/eslint-plugin-next": "^15.5.0",
     "@storybook/addon-docs": "^9.1.2",
     "@storybook/nextjs": "^9.1.2",
     "@tailwindcss/postcss": "^4.1.12",
