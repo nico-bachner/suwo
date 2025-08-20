@@ -6,6 +6,7 @@ import { useState } from 'react'
 
 import { Button } from '@/design_system/button'
 import { SearchInput } from '@/design_system/input'
+import { Heading } from '@/design_system/typography'
 import { getProfileScreenName } from '@/features/profile/get_profile_screen_name'
 import { queries } from '@/lib/queries'
 import { search } from '@/utils/search'
@@ -13,6 +14,11 @@ import { search } from '@/utils/search'
 import { Event } from '../validators/event_validator'
 
 export const EventAttendeesPage = ({ id }: Pick<Event, 'id'>) => {
+  const {
+    data: session,
+    error: sessionError,
+    isPending: isSessionPending,
+  } = useQuery(queries.SESSION())
   const {
     data: event,
     error: eventError,
@@ -30,16 +36,26 @@ export const EventAttendeesPage = ({ id }: Pick<Event, 'id'>) => {
   } = useQuery(queries.EVENT_ATTENDEES(id))
   const [query, setQuery] = useState('')
 
-  if (eventError || profilesError || eventAttendeesError) {
+  if (sessionError || eventError || profilesError || eventAttendeesError) {
     return (
       <main className="prose">
         <h1>Error</h1>
-        <p>{(eventError || profilesError || eventAttendeesError)?.message}</p>
+        <p>
+          {
+            (sessionError || eventError || profilesError || eventAttendeesError)
+              ?.message
+          }
+        </p>
       </main>
     )
   }
 
-  if (isEventPending || isProfilesPending || isEventAttendeesPending) {
+  if (
+    isSessionPending ||
+    isEventPending ||
+    isProfilesPending ||
+    isEventAttendeesPending
+  ) {
     return (
       <main className="prose">
         <h1>Loading...</h1>
@@ -57,20 +73,35 @@ export const EventAttendeesPage = ({ id }: Pick<Event, 'id'>) => {
   }
 
   return (
-    <main className="prose">
-      <h1>{event.name} Attendees</h1>
+    <main className="mx-auto flex w-full max-w-screen-md flex-col gap-8">
+      <Heading
+        as="h1"
+        variant="primary"
+        className="mx-auto w-full max-w-screen-sm"
+      >
+        {event.name} Attendees
+      </Heading>
 
-      <p className="text-xl">
+      <p className="mx-auto w-full max-w-screen-sm text-xl">
         Present: {`${eventAttendees.length}/${profiles.length}`}
       </p>
 
-      <SearchInput
-        value={query}
-        onChange={({ target }) => {
-          setQuery(target.value)
-        }}
-        placeholder="Search by name or instrument"
-      />
+      {session && (
+        <Button variant="primary" className="mx-auto w-full max-w-screen-sm">
+          Mark self as present
+        </Button>
+      )}
+
+      <div className="flex flex-col gap-2 md:flex-row md:items-center">
+        <SearchInput
+          value={query}
+          onChange={({ target }) => {
+            setQuery(target.value)
+          }}
+          placeholder="Search by name or instrument"
+          className="flex-grow"
+        />
+      </div>
 
       <div className="mx-auto flex w-full max-w-screen-md flex-col gap-2">
         {search({
