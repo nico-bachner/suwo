@@ -9,10 +9,10 @@ import { SettingsSection } from '@/design_system/settings_section'
 import { Heading } from '@/design_system/typography'
 import { getProfileScreenName } from '@/features/profile/get_profile_screen_name'
 import { CreateInstrumentForm } from '@/lib/forms/create_instrument_form'
-import { UpdateInstrumentForm } from '@/lib/forms/update_instrument_form'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 
+import { UpdateUserInstrumentsForm } from '../forms/update_user_instruments_form'
 import { Profile } from '../validators/profile_validator'
 
 export const ProfileEditPage = ({ user_id }: Pick<Profile, 'user_id'>) => {
@@ -96,7 +96,7 @@ export const ProfileEditPage = ({ user_id }: Pick<Profile, 'user_id'>) => {
           title="Instruments"
           description="Tell us what instruments you play"
         >
-          <UpdateInstrumentForm user_id={session.user_id} />
+          <UpdateUserInstrumentsForm user_id={session.user_id} />
         </SettingsSection>
 
         <SettingsSection

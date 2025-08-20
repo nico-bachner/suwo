@@ -1,20 +1,18 @@
 import z from 'zod'
 
 import { getSession } from '@/features/auth/session/get_session'
-import { UpdateInstrumentFormInputValidator } from '@/lib/validators/form_input_validators/update_instrument_form_input_validator'
+import { UserInstrumentValidator } from '@/lib/validators/user_instrument_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'
 import { prisma } from '@/utils/prisma'
 
 export const GET: APIRoute = async (_, { params }) => {
-  const { user_id } = z
-    .object({
-      user_id: z.uuid(),
-    })
-    .parse(await params)
+  const { user_id } = UserInstrumentValidator.pick({ user_id: true }).parse(
+    await params,
+  )
 
-  const instruments = await prisma.instrument.findMany({
+  const userInstruments = await prisma.instrument.findMany({
     where: {
       UserInstrument: {
         some: { user_id },
@@ -24,16 +22,14 @@ export const GET: APIRoute = async (_, { params }) => {
 
   return createResponse({
     status: StatusCode.OK,
-    data: instruments,
+    data: userInstruments,
   })
 }
 
 export const POST: APIRoute = async (request, { params }) => {
-  const { user_id } = z
-    .object({
-      user_id: z.uuid(),
-    })
-    .parse(await params)
+  const { user_id } = UserInstrumentValidator.pick({ user_id: true }).parse(
+    await params,
+  )
 
   const session = await getSession()
 
@@ -52,9 +48,9 @@ export const POST: APIRoute = async (request, { params }) => {
     })
   }
 
-  const { data, error, success } = UpdateInstrumentFormInputValidator.safeParse(
-    await request.json(),
-  )
+  const { data, error, success } = z
+    .array(z.uuid())
+    .safeParse(await request.json())
 
   if (!success) {
     return createResponse({
@@ -69,8 +65,8 @@ export const POST: APIRoute = async (request, { params }) => {
     },
   })
 
-  await prisma.userInstrument.createManyAndReturn({
-    data: data.instrument_ids.map((id) => ({
+  await prisma.userInstrument.createMany({
+    data: data.map((id) => ({
       user_id,
       instrument_id: id,
     })),

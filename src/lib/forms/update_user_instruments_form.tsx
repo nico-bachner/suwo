@@ -1,18 +1,15 @@
 'use client'
 
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { Button } from '@/design_system/button'
-import { queries, queryKeys } from '@/lib/queries'
-import { apiRoutes, queryKeys as legacy_queryKeys } from '@/routes'
-import { parseResponse } from '@/utils/http/parse_response'
-import { StatusCode } from '@/utils/http/status_code'
+import { queries } from '@/lib/queries'
 
-import { UpdateInstrumentFormInput } from '../validators/form_input_validators/update_instrument_form_input_validator'
+import { mutations } from '../mutations'
 import { UserInstrument } from '../validators/user_instrument_validator'
 import { useAppForm } from './context'
 
-export const UpdateInstrumentForm = ({
+export const UpdateUserInstrumentsForm = ({
   user_id,
 }: Pick<UserInstrument, 'user_id'>) => {
   const queryClient = useQueryClient()
@@ -22,45 +19,16 @@ export const UpdateInstrumentForm = ({
   const { data: userInstruments } = useQuery({
     ...queries.USER_INSTRUMENTS(user_id),
   })
-
-  const defaultValues: UpdateInstrumentFormInput = {
-    instrument_ids: userInstruments?.map(({ id }) => id) || [],
-  }
+  const { mutate: updateUserInstruments } = useMutation(
+    mutations.USER_INSTRUMENTS(queryClient, user_id),
+  )
 
   const form = useAppForm({
-    defaultValues,
-    onSubmit: async ({ value }) => {
-      const response = await parseResponse(
-        await fetch(apiRoutes.USER_INSTRUMENTS(user_id), {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(value),
-        }),
-      )
-
-      switch (response.status) {
-        case StatusCode.BadRequest:
-          // eslint-disable-next-line no-alert, no-undef
-          alert(`${response.error}\n\nPlease try again`)
-          break
-        case StatusCode.OK:
-        case StatusCode.Created:
-          await queryClient.invalidateQueries({
-            queryKey: legacy_queryKeys.USER_INSTRUMENTS(user_id),
-          })
-          await queryClient.invalidateQueries({
-            queryKey: legacy_queryKeys.USER_INSTRUMENTS(user_id),
-          })
-          await queryClient.invalidateQueries({
-            queryKey: queryKeys.PROFILE(user_id),
-          })
-
-          // eslint-disable-next-line no-alert, no-undef
-          alert('Instrument(s) updated successfully!')
-          break
-      }
+    defaultValues: {
+      instrument_ids: userInstruments?.map(({ id }) => id) || [],
+    },
+    onSubmit: ({ value }) => {
+      updateUserInstruments(value.instrument_ids)
     },
   })
 

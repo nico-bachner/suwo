@@ -1,42 +1,44 @@
 import { UseQueryOptions } from '@tanstack/react-query'
 import z from 'zod'
 
-import { apiRoutes, queryKeys } from '@/routes'
+import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-export const UserInstrumentsQueryValidator = z.array(
-  z.object({
-    id: z.uuid(),
-    name: z.string(),
-  }),
-)
+import {
+  Instrument,
+  InstrumentValidator,
+} from '../validators/instrument_validator'
+import { UserInstrument } from '../validators/user_instrument_validator'
 
-export type UserInstrumentsQueryResult = z.infer<
-  typeof UserInstrumentsQueryValidator
->
+export const userInstrumentsQueryKey = (user_id: UserInstrument['user_id']) => [
+  'instruments',
+  user_id,
+]
 
+/**
+ * Fetches the instruments associated with a specific user.
+ *
+ * @param user_id - The ID of the user whose instruments are being queried.
+ * @returns A list of instruments associated with the user.
+ */
 export const userInstrumentsQuery = (
-  userId: string,
-): UseQueryOptions<UserInstrumentsQueryResult> => ({
-  queryKey: queryKeys.USER_INSTRUMENTS(userId),
+  user_id: UserInstrument['user_id'],
+): UseQueryOptions<Instrument[]> => ({
+  queryKey: userInstrumentsQueryKey(user_id),
   queryFn: async ({ signal }) => {
     const response = await parseResponse(
-      await fetch(apiRoutes.USER_INSTRUMENTS(userId), { signal }),
+      await fetch(
+        createURL({ path: ['api', ...userInstrumentsQueryKey(user_id)] }),
+        {
+          signal,
+        },
+      ),
     )
 
     switch (response.status) {
-      case StatusCode.OK: {
-        const { data, success } = UserInstrumentsQueryValidator.safeParse(
-          response.data,
-        )
-
-        if (!success) {
-          throw new Error('Invalid instrument data format')
-        }
-
-        return data
-      }
+      case StatusCode.OK:
+        return z.array(InstrumentValidator).parse(response.data)
       default:
         throw new Error('Failed to fetch data')
     }

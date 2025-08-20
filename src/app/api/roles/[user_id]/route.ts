@@ -7,16 +7,16 @@ import { prisma } from '@/utils/prisma'
 export const GET: APIRoute = async (_, { params }) => {
   const { user_id } = UserRoleValidator.pick({ user_id: true }).parse(params)
 
+  const userRoles = await prisma.role.findMany({
+    where: {
+      UserRole: {
+        some: { user_id },
+      },
+    },
+  })
+
   return createResponse({
     status: StatusCode.OK,
-    data: await prisma.role.findMany({
-      where: {
-        UserRole: {
-          some: {
-            user_id,
-          },
-        },
-      },
-    }),
+    data: userRoles,
   })
 }

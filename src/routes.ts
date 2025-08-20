@@ -15,7 +15,6 @@ export const queryKeys = {
   ...attendanceQueryKeys,
   CURRENT_WEEK: () => ['current-week'],
   EQUIPMENT: () => ['equipment'],
-  USER_INSTRUMENTS: (userId: string) => ['user-instruments', userId],
 }
 
 export const apiRoutes = {
@@ -23,9 +22,6 @@ export const apiRoutes = {
   ...authApiRoutes,
   CURRENT_WEEK: () => createURL({ path: ['api', 'usyd', 'current-week'] }),
   EQUIPMENT: () => createURL({ path: ['api', 'equipment'] }),
-  USER_INSTRUMENTS: (userId: string) =>
-    createURL({ path: ['api', 'instruments', userId] }),
-  USER_ROLES: () => createURL({ path: ['api', 'auth', 'user-roles'] }),
 }
 
 export const routes = {
