@@ -2,11 +2,11 @@ import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
 } from '@heroicons/react/24/outline'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 
 import { Divider } from '@/design_system/divider'
-import { queries } from '@/lib/queries'
+import { queries, queryKeys } from '@/lib/queries'
 import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
 
@@ -16,6 +16,7 @@ type EventNavigatorProps = {
 }
 
 export const EventNavigator = ({ id, className }: EventNavigatorProps) => {
+  const queryClient = useQueryClient()
   const { data, error, isPending } = useQuery(queries.EVENTS())
 
   if (error || isPending) {
@@ -26,6 +27,13 @@ export const EventNavigator = ({ id, className }: EventNavigatorProps) => {
 
   const prev = data.at(index - 1)
   const next = data.at(index + 1)
+
+  if (prev) {
+    queryClient.setQueryData(queryKeys.EVENT(prev.id), prev)
+  }
+  if (next) {
+    queryClient.setQueryData(queryKeys.EVENT(next.id), next)
+  }
 
   return (
     <nav
