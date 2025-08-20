@@ -46,7 +46,9 @@ export default function Layout({ children }: LayoutFileProps) {
 
             <Navbar className="sticky top-2 right-2 left-2 z-30" />
 
-            <div className="flex-1 px-4 pt-20 pb-40">{children}</div>
+            <div className="flex-1 px-4 pt-12 pb-24 md:pt-20 md:pb-40">
+              {children}
+            </div>
 
             <Footer className="px-4" />
           </div>
