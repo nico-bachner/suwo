@@ -1,12 +1,14 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 
-import { queries } from '@/lib/queries'
+import { queries, queryKeys } from '@/lib/queries'
 import { routes } from '@/routes'
+import { formatDateRange } from '@/utils/format_date_range'
 
 export const EventsPage = () => {
+  const queryClient = useQueryClient()
   const {
     data: events,
     error: eventsError,
@@ -39,19 +41,30 @@ export const EventsPage = () => {
     )
   }
 
+  events.forEach((event) => {
+    queryClient.setQueryData(queryKeys.EVENT(event.id), event)
+  })
+
   return (
     <main className="prose">
       <h1>Events</h1>
-      <div>
-        {events.map((item) => (
-          <Link key={item.id} href={routes.EVENT(item.id)}>
-            <p>{item.name}</p>
-            <p>
-              {new Intl.DateTimeFormat('en-AU', {
-                timeZone: 'Australia/Sydney',
-                dateStyle: 'full',
-                timeStyle: 'long',
-              }).format(new Date(item.starts_at))}
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {events.map((event) => (
+          <Link
+            key={event.id}
+            href={routes.EVENT(event.id)}
+            className="bg-neutral-5/80 border-neutral-4/80 flex flex-col gap-1 rounded-3xl border px-6 py-4 backdrop-blur transition-transform outline-none hover:scale-105 focus:scale-105"
+          >
+            <h2 className="text-neutral-1 font-bold">{event.name}</h2>
+            <p className="font-light">
+              {formatDateRange(
+                new Date(event.starts_at),
+                event.ends_at ? new Date(event.ends_at) : undefined,
+              )}
+            </p>
+            <p className="text-neutral-3 font-bold">
+              {event.location || 'No location specified'}
             </p>
           </Link>
         ))}
