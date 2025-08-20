@@ -25,7 +25,7 @@ export const UpdateUserInstrumentsForm = ({
 
   const form = useAppForm({
     defaultValues: {
-      instrument_ids: userInstruments?.map(({ id }) => id) || [],
+      instrument_ids: userInstruments || [],
     },
     onSubmit: ({ value }) => {
       updateUserInstruments(value.instrument_ids)

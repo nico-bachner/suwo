@@ -6,10 +6,9 @@ import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
 import {
-  Instrument,
-  InstrumentValidator,
-} from '../validators/instrument_validator'
-import { UserInstrument } from '../validators/user_instrument_validator'
+  UserInstrument,
+  UserInstrumentValidator,
+} from '../validators/user_instrument_validator'
 
 export const userInstrumentsQueryKey = (user_id: UserInstrument['user_id']) => [
   'instruments',
@@ -24,7 +23,7 @@ export const userInstrumentsQueryKey = (user_id: UserInstrument['user_id']) => [
  */
 export const userInstrumentsQuery = (
   user_id: UserInstrument['user_id'],
-): UseQueryOptions<Instrument[]> => ({
+): UseQueryOptions<UserInstrument['instrument_id'][]> => ({
   queryKey: userInstrumentsQueryKey(user_id),
   queryFn: async ({ signal }) => {
     const response = await parseResponse(
@@ -38,7 +37,9 @@ export const userInstrumentsQuery = (
 
     switch (response.status) {
       case StatusCode.OK:
-        return z.array(InstrumentValidator).parse(response.data)
+        return z
+          .array(UserInstrumentValidator.shape.instrument_id)
+          .parse(response.data)
       default:
         throw new Error('Failed to fetch data')
     }

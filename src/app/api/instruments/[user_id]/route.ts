@@ -12,21 +12,19 @@ export const GET: APIRoute = async (_, { params }) => {
     await params,
   )
 
-  const userInstruments = await prisma.instrument.findMany({
+  const userInstruments = await prisma.userInstrument.findMany({
     where: {
-      UserInstrument: {
-        some: { user_id },
-      },
+      user_id,
     },
   })
 
   return createResponse({
     status: StatusCode.OK,
-    data: userInstruments,
+    data: userInstruments.map(({ instrument_id }) => instrument_id),
   })
 }
 
-export const POST: APIRoute = async (request, { params }) => {
+export const PUT: APIRoute = async (request, { params }) => {
   const { user_id } = UserInstrumentValidator.pick({ user_id: true }).parse(
     await params,
   )
@@ -49,7 +47,7 @@ export const POST: APIRoute = async (request, { params }) => {
   }
 
   const { data, error, success } = z
-    .array(z.uuid())
+    .array(UserInstrumentValidator.shape.instrument_id)
     .safeParse(await request.json())
 
   if (!success) {
@@ -65,23 +63,15 @@ export const POST: APIRoute = async (request, { params }) => {
     },
   })
 
-  await prisma.userInstrument.createMany({
+  const userInstruments = await prisma.userInstrument.createManyAndReturn({
     data: data.map((id) => ({
       user_id,
       instrument_id: id,
     })),
   })
 
-  const instruments = await prisma.instrument.findMany({
-    where: {
-      UserInstrument: {
-        some: { user_id },
-      },
-    },
-  })
-
   return createResponse({
-    status: StatusCode.Created,
-    data: instruments,
+    status: StatusCode.OK,
+    data: userInstruments.map(({ instrument_id }) => instrument_id),
   })
 }

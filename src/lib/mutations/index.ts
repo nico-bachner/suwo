@@ -4,8 +4,14 @@ import { mailingListRecipientMutation } from './mailing_list_recipient_mutation'
 import { userInstrumentsMutation } from './user_instruments_mutation'
 
 export const mutations = {
-  DELETE_SESSION: deleteSessionMutation,
-  LOG_WEEKLY_ATTENDANCE: logWeeklyAttendanceMutation,
+  // Mailing List
   MAILING_LIST_RECIPIENT: mailingListRecipientMutation,
+
+  // Session
+  DELETE_SESSION: deleteSessionMutation,
+
+  // User
   USER_INSTRUMENTS: userInstrumentsMutation,
+
+  LOG_WEEKLY_ATTENDANCE: logWeeklyAttendanceMutation,
 }

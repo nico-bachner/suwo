@@ -77,8 +77,6 @@ export const queries = {
   USER_INSTRUMENTS: userInstrumentsQuery,
   USER_ROLES: userRolesQuery,
 
-  /** @deprecated */
   WEEKLY_ATTENDANCES: weeklyAttendancesQuery,
-  /** @deprecated */
   CURRENT_WEEK: currentWeekQuery,
 }
