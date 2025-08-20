@@ -34,6 +34,8 @@ export const routes = {
   // Events
   EVENTS: () => createURL({ path: ['events'] }),
   EVENT: (id: Event['id']) => createURL({ path: ['events', id] }),
+  EVENT_ATTENDEES: (id: Event['id']) =>
+    createURL({ path: ['events', id, 'attendees'] }),
 
   // Equipment
   EQUIPMENT: () => createURL({ path: ['equipment'] }),

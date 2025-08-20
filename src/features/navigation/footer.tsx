@@ -26,7 +26,7 @@ export const Footer = ({ className }: FooterProps) => {
     >
       <footer
         className={cn(
-          'grid grid-cols-3 gap-x-8 gap-y-8 sm:grid-cols-5 sm:gap-y-16',
+          'grid grid-cols-3 gap-x-8 gap-y-8 md:grid-cols-5 md:gap-y-16',
           'mx-auto w-full max-w-screen-lg',
         )}
       >
@@ -65,7 +65,7 @@ export const Footer = ({ className }: FooterProps) => {
           ))}
         </div>
 
-        <div className="col-span-3 flex flex-col gap-2 text-right sm:col-span-2">
+        <div className="col-span-3 flex flex-col gap-2 text-right md:col-span-2">
           <address>
             Holme Building (A09), Science Rd, The University of Sydney, NSW 2006
           </address>
@@ -77,7 +77,7 @@ export const Footer = ({ className }: FooterProps) => {
           </p>
         </div>
 
-        <p className="col-span-3 sm:col-span-2">
+        <p className="col-span-3 md:col-span-2">
           SUWO is supported by the{' '}
           <a
             href="https://usu.edu.au"
@@ -100,7 +100,7 @@ export const Footer = ({ className }: FooterProps) => {
           .
         </p>
 
-        <div className="col-span-3 flex flex-col gap-2 text-right sm:col-span-2 sm:col-start-4">
+        <div className="col-span-3 flex flex-col gap-2 text-right md:col-span-2 md:col-start-4">
           <p>
             © {new Date().getFullYear()} The University of Sydney Wind
             Orchestra (SUWO). All rights reserved.

@@ -1,8 +1,11 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
+import Link from 'next/link'
 
+import { Button } from '@/design_system/button'
 import { queries } from '@/lib/queries'
+import { routes } from '@/routes'
 import { formatDateRange } from '@/utils/format_date_range'
 
 import { Event } from '../validators/event_validator'
@@ -41,7 +44,7 @@ export const EventPage = ({ id }: Pick<Event, 'id'>) => {
   }
 
   return (
-    <main className="prose">
+    <main className="prose mx-auto max-w-screen-sm">
       <h1>{event.name}</h1>
 
       <p>
@@ -51,6 +54,16 @@ export const EventPage = ({ id }: Pick<Event, 'id'>) => {
         )}
         {event.location && ` at ${event.location}`}
       </p>
+
+      <div className="flex items-center gap-2">
+        <Button variant="primary" asChild className="flex-1">
+          <Link href={routes.EVENTS()}>Back to Events</Link>
+        </Button>
+
+        <Button variant="primary" asChild className="flex-1">
+          <Link href={routes.EVENT_ATTENDEES(id)}>Attendance Sheet</Link>
+        </Button>
+      </div>
     </main>
   )
 }
