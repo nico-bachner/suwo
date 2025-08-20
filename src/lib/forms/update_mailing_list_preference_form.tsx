@@ -1,63 +1,31 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { Switch } from '@/design_system/switch'
 import { queries } from '@/lib/queries'
-import { createURL } from '@/utils/http/create_url'
-import { parseResponse } from '@/utils/http/parse_response'
-import { StatusCode } from '@/utils/http/status_code'
 
-import { mailingListRecipientQueryKey } from '../queries/mailing_list_recipient_query'
-import {
-  UpdateMailingListPreferenceFormInput,
-  UpdateMailingListPreferenceFormInputValidator,
-} from '../validators/form_input_validators/update_mailing_list_preference_form_input_validator'
+import { mutations } from '../mutations'
 import { MailingListRecipient } from '../validators/mailing_list_recipient'
 import { useAppForm } from './context'
 
 export const UpdateMailingListPreferenceForm = ({
   user_id,
 }: Pick<MailingListRecipient, 'user_id'>) => {
+  const queryClient = useQueryClient()
   const { data: mailingListRecipient } = useQuery(
     queries.MAILING_LIST_RECIPIENT(user_id),
   )
-
-  const defaultValues: UpdateMailingListPreferenceFormInput = {
-    mailing_list_preference: Boolean(mailingListRecipient),
-  }
+  const { mutate: updateMailingListPreference } = useMutation(
+    mutations.MAILING_LIST_RECIPIENT(queryClient, user_id),
+  )
 
   const form = useAppForm({
-    defaultValues,
-    validators: {
-      onBlur: UpdateMailingListPreferenceFormInputValidator,
+    defaultValues: {
+      mailing_list_preference: Boolean(mailingListRecipient),
     },
-    onSubmit: async ({ value }) => {
-      const response = await parseResponse(
-        await fetch(
-          createURL({
-            path: ['api', ...mailingListRecipientQueryKey(user_id)],
-          }),
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(value),
-          },
-        ),
-      )
-
-      switch (response.status) {
-        case StatusCode.BadRequest:
-          // eslint-disable-next-line no-alert, no-undef
-          alert(`${response.error}\n\nPlease try again`)
-          break
-        case StatusCode.OK:
-          // eslint-disable-next-line no-alert, no-undef
-          alert('Successfully updated mailing list preference')
-          break
-      }
+    onSubmit: ({ value }) => {
+      updateMailingListPreference(value.mailing_list_preference)
     },
   })
 

@@ -1,7 +1,4 @@
-import z from 'zod'
-
 import { getSession } from '@/features/auth/session/get_session'
-import { UpdateMailingListPreferenceFormInputValidator } from '@/lib/validators/form_input_validators/update_mailing_list_preference_form_input_validator'
 import { MailingListRecipientValidator } from '@/lib/validators/mailing_list_recipient'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
@@ -23,22 +20,10 @@ export const GET: APIRoute = async (_, { params }) => {
   })
 }
 
-export const POST: APIRoute = async (request: Request, { params }) => {
+export const POST: APIRoute = async (_, { params }) => {
   const { user_id } = MailingListRecipientValidator.pick({
     user_id: true,
   }).parse(await params)
-
-  const { data, error, success } =
-    UpdateMailingListPreferenceFormInputValidator.safeParse(
-      await request.json(),
-    )
-
-  if (!success) {
-    return createResponse({
-      status: StatusCode.BadRequest,
-      error: z.prettifyError(error),
-    })
-  }
 
   const session = await getSession()
 
@@ -62,28 +47,40 @@ export const POST: APIRoute = async (request: Request, { params }) => {
     })
   }
 
-  if (data.mailing_list_preference) {
-    const mailingListRecipient = await prisma.mailingListRecipient.create({
-      data: {
-        user_id: user.id,
-        email: user.email,
-      },
-    })
+  const mailingListRecipient = await prisma.mailingListRecipient.create({
+    data: {
+      user_id: user.id,
+      email: user.email,
+    },
+  })
 
+  return createResponse({
+    status: StatusCode.Created,
+    data: mailingListRecipient,
+  })
+}
+
+export const DELETE: APIRoute = async (_, { params }) => {
+  const { user_id } = MailingListRecipientValidator.pick({
+    user_id: true,
+  }).parse(await params)
+
+  const session = await getSession()
+
+  if (!session) {
     return createResponse({
-      status: StatusCode.OK,
-      data: mailingListRecipient,
+      status: StatusCode.Unauthorized,
+      error: 'Unauthorized',
     })
   }
 
   await prisma.mailingListRecipient.delete({
     where: {
-      user_id: user.id,
+      user_id,
     },
   })
 
   return createResponse({
-    status: StatusCode.OK,
-    data: 'Successfully removed from Mailing list',
+    status: StatusCode.NoContent,
   })
 }
