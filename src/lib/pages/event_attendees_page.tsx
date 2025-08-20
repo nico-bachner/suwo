@@ -1,10 +1,12 @@
 'use client'
 
+import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 
+import { Button } from '@/design_system/button'
 import { SearchInput } from '@/design_system/input'
-import { EventAttendee } from '@/features/event/event_attendee'
+import { getProfileScreenName } from '@/features/profile/get_profile_screen_name'
 import { queries } from '@/lib/queries'
 import { search } from '@/utils/search'
 
@@ -28,29 +30,11 @@ export const EventAttendeesPage = ({ id }: Pick<Event, 'id'>) => {
   } = useQuery(queries.EVENT_ATTENDEES(id))
   const [query, setQuery] = useState('')
 
-  if (eventError) {
+  if (eventError || profilesError || eventAttendeesError) {
     return (
       <main className="prose">
         <h1>Error</h1>
-        <p>{eventError.message}</p>
-      </main>
-    )
-  }
-
-  if (profilesError) {
-    return (
-      <main className="prose">
-        <h1>Error</h1>
-        <p>{profilesError.message}</p>
-      </main>
-    )
-  }
-
-  if (eventAttendeesError) {
-    return (
-      <main className="prose">
-        <h1>Error</h1>
-        <p>{eventAttendeesError.message}</p>
+        <p>{(eventError || profilesError || eventAttendeesError)?.message}</p>
       </main>
     )
   }
@@ -94,13 +78,34 @@ export const EventAttendeesPage = ({ id }: Pick<Event, 'id'>) => {
           keys: ['given_name', 'family_name', 'instrument_name'],
           query,
         }).map((profile) => (
-          <EventAttendee
+          <div
             key={profile.user_id}
-            profile={profile}
-            status={eventAttendees.some(
+            className="bg-neutral-5/80 border-neutral-4/80 flex h-16 flex-row items-center rounded-full border pr-4 pl-8 backdrop-blur"
+          >
+            <p className="flex flex-1 flex-row items-center gap-4 font-bold">
+              <span className="text-neutral-2">
+                {getProfileScreenName(profile)}
+              </span>
+
+              {profile.instruments.length > 0 && (
+                <span className="text-neutral-3">
+                  {profile.instruments.slice(0, 3).join(', ')}
+                </span>
+              )}
+            </p>
+
+            {eventAttendees.some(
               (attendee) => attendee.user_id === profile.user_id,
+            ) ? (
+              <div className="px-6">
+                <CheckIcon className="stroke-positive-3 -m-1 size-6 stroke-2" />
+              </div>
+            ) : (
+              <Button variant="secondary">
+                <PlusIcon className="-m-1 size-6" />
+              </Button>
             )}
-          />
+          </div>
         ))}
       </div>
     </main>
