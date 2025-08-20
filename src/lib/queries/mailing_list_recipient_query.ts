@@ -1,5 +1,4 @@
 import { UseQueryOptions } from '@tanstack/react-query'
-import z from 'zod'
 
 import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
@@ -10,16 +9,18 @@ import {
   MailingListRecipientValidator,
 } from '../validators/mailing_list_recipient'
 
-export const mailingListRecipientsQueryKey = () => ['mailing-list-recipients']
+export const mailingListRecipientQueryKey = (
+  user_id: MailingListRecipient['user_id'],
+) => ['mailing-list-recipients', user_id]
 
-export const mailingListRecipientsQuery = (): UseQueryOptions<
-  MailingListRecipient[]
-> => ({
-  queryKey: mailingListRecipientsQueryKey(),
+export const mailingListRecipientQuery = (
+  user_id: MailingListRecipient['user_id'],
+): UseQueryOptions<MailingListRecipient | null> => ({
+  queryKey: mailingListRecipientQueryKey(user_id),
   queryFn: async ({ signal }) => {
     const response = await parseResponse(
       await fetch(
-        createURL({ path: ['api', ...mailingListRecipientsQueryKey()] }),
+        createURL({ path: ['api', ...mailingListRecipientQueryKey(user_id)] }),
         {
           signal,
         },
@@ -28,7 +29,9 @@ export const mailingListRecipientsQuery = (): UseQueryOptions<
 
     switch (response.status) {
       case StatusCode.OK:
-        return z.array(MailingListRecipientValidator).parse(response.data)
+        return MailingListRecipientValidator.parse(response.data)
+      case StatusCode.NotFound:
+        return null
       default:
         throw new Error('Failed to fetch data')
     }

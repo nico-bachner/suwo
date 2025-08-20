@@ -4,23 +4,27 @@ import { useQuery } from '@tanstack/react-query'
 
 import { Switch } from '@/design_system/switch'
 import { queries } from '@/lib/queries'
-import { apiRoutes } from '@/routes'
+import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
+import { mailingListRecipientQueryKey } from '../queries/mailing_list_recipient_query'
 import {
   UpdateMailingListPreferenceFormInput,
   UpdateMailingListPreferenceFormInputValidator,
 } from '../validators/form_input_validators/update_mailing_list_preference_form_input_validator'
+import { MailingListRecipient } from '../validators/mailing_list_recipient'
 import { useAppForm } from './context'
 
-export const UpdateMailingListPreferenceForm = () => {
-  const { data: mailingListPreference } = useQuery(
-    queries.MAILING_LIST_PREFERENCE(),
+export const UpdateMailingListPreferenceForm = ({
+  user_id,
+}: Pick<MailingListRecipient, 'user_id'>) => {
+  const { data: mailingListRecipient } = useQuery(
+    queries.MAILING_LIST_RECIPIENT(user_id),
   )
 
   const defaultValues: UpdateMailingListPreferenceFormInput = {
-    mailing_list_preference: mailingListPreference ?? false,
+    mailing_list_preference: Boolean(mailingListRecipient),
   }
 
   const form = useAppForm({
@@ -30,13 +34,18 @@ export const UpdateMailingListPreferenceForm = () => {
     },
     onSubmit: async ({ value }) => {
       const response = await parseResponse(
-        await fetch(apiRoutes.MAILING_LIST_PREFERENCE(), {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+        await fetch(
+          createURL({
+            path: ['api', ...mailingListRecipientQueryKey(user_id)],
+          }),
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(value),
           },
-          body: JSON.stringify(value),
-        }),
+        ),
       )
 
       switch (response.status) {

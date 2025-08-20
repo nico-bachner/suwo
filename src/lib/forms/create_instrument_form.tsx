@@ -2,7 +2,7 @@
 
 import { useQueryClient } from '@tanstack/react-query'
 
-import { apiRoutes } from '@/routes'
+import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
@@ -31,13 +31,18 @@ export const CreateInstrumentForm = () => {
     },
     onSubmit: async ({ value }) => {
       const response = await parseResponse(
-        await fetch(apiRoutes.CREATE_INSTRUMENT(), {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+        await fetch(
+          createURL({
+            path: ['api', ...queryKeys.INSTRUMENTS()],
+          }),
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(value),
           },
-          body: JSON.stringify(value),
-        }),
+        ),
       )
 
       switch (response.status) {

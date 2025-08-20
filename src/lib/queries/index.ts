@@ -3,8 +3,14 @@ import { equipmentQuery } from './equipment_query'
 import { eventQuery, eventQueryKey } from './event_query'
 import { eventsQuery, eventsQueryKey } from './events_query'
 import { instrumentsQuery, instrumentsQueryKey } from './instruments_query'
-import { mailingListPreferenceQuery } from './mailing_list_preference_query'
-import { mailingListRecipientsQuery } from './mailing_list_recipients_query'
+import {
+  mailingListRecipientQuery,
+  mailingListRecipientQueryKey,
+} from './mailing_list_recipient_query'
+import {
+  mailingListRecipientsQuery,
+  mailingListRecipientsQueryKey,
+} from './mailing_list_recipients_query'
 import { profileQuery, profileQueryKey } from './profile_query'
 import { profilesQuery, profilesQueryKey } from './profiles_query'
 import { sessionQuery } from './session_query'
@@ -16,6 +22,8 @@ export const queryKeys = {
   EVENTS: eventsQueryKey,
   EVENT: eventQueryKey,
   INSTRUMENTS: instrumentsQueryKey,
+  MAILING_LIST_RECIPIENTS: mailingListRecipientsQueryKey,
+  MAILING_LIST_RECIPIENT: mailingListRecipientQueryKey,
   PROFILES: profilesQueryKey,
   PROFILE: profileQueryKey,
 }
@@ -26,8 +34,8 @@ export const queries = {
   EVENTS: eventsQuery,
   EVENT: eventQuery,
   INSTRUMENTS: instrumentsQuery,
-  MAILING_LIST_PREFERENCE: mailingListPreferenceQuery,
   MAILING_LIST_RECIPIENTS: mailingListRecipientsQuery,
+  MAILING_LIST_RECIPIENT: mailingListRecipientQuery,
   PROFILES: profilesQuery,
   PROFILE: profileQuery,
   SESSION: sessionQuery,

@@ -22,9 +22,8 @@ export const instrumentsQuery = (): UseQueryOptions<Instrument[]> => ({
     )
 
     switch (response.status) {
-      case StatusCode.OK: {
+      case StatusCode.OK:
         return z.array(InstrumentValidator).parse(response.data)
-      }
       default:
         throw new Error('Failed to fetch data')
     }

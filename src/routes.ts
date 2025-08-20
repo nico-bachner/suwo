@@ -18,8 +18,6 @@ export const queryKeys = {
   ...authQueryKeys,
   CURRENT_WEEK: () => ['current-week'],
   EQUIPMENT: () => ['equipment'],
-  MAILING_LIST_RECIPIENTS: () => ['mailing-list', 'recipients'],
-  MAILING_LIST_PREFERENCE: () => ['mailing-list', 'preference'],
   USER_INSTRUMENTS: (userId: string) => ['user-instruments', userId],
   USER_ROLES: () => ['user-roles'],
 }
@@ -27,13 +25,8 @@ export const queryKeys = {
 export const apiRoutes = {
   ...attendanceApiRoutes,
   ...authApiRoutes,
-  CREATE_INSTRUMENT: () => createURL({ path: ['api', 'instruments'] }),
   CURRENT_WEEK: () => createURL({ path: ['api', 'usyd', 'current-week'] }),
   EQUIPMENT: () => createURL({ path: ['api', 'equipment'] }),
-  MAILING_LIST_RECIPIENTS: () =>
-    createURL({ path: ['api', 'mailing-list', 'recipients'] }),
-  MAILING_LIST_PREFERENCE: () =>
-    createURL({ path: ['api', 'mailing-list', 'preference'] }),
   USER_INSTRUMENTS: (userId: string) =>
     createURL({ path: ['api', 'instruments', userId] }),
   USER_ROLES: () => createURL({ path: ['api', 'auth', 'user-roles'] }),

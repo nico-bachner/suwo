@@ -19,9 +19,8 @@ export const profilesQuery = (): UseQueryOptions<Profile[]> => ({
     )
 
     switch (response.status) {
-      case StatusCode.OK: {
+      case StatusCode.OK:
         return z.array(ProfileValidator).parse(response.data)
-      }
       default:
         throw new Error('Failed to fetch data')
     }
