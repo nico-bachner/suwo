@@ -14,6 +14,7 @@ model User {
 
     // Relations
     Attendances          Attendance[]
+    EventAttendee        EventAttendee[]
     MailingListRecipient MailingListRecipient?
     Payments             Payment[]
     Profile              Profile?
