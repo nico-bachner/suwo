@@ -5,8 +5,8 @@ import { redirect } from 'next/navigation'
 
 import { Button } from '@/design_system/button'
 import { Switch } from '@/design_system/switch'
-import { queries } from '@/lib/queries'
-import { apiRoutes, queryKeys, routes } from '@/routes'
+import { queries, queryKeys } from '@/lib/queries'
+import { apiRoutes, routes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 

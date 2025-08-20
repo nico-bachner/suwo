@@ -1,12 +1,14 @@
 import { QueryClient, UseMutationOptions } from '@tanstack/react-query'
 
-import { apiRoutes, queryKeys } from '@/routes'
+import { createURL } from '@/utils/http/create_url'
+
+import { queryKeys } from '../queries'
 
 export const deleteSessionMutation = (
   queryClient: QueryClient,
 ): UseMutationOptions => ({
   mutationFn: async () => {
-    await fetch(apiRoutes.SESSION(), {
+    await fetch(createURL({ path: ['api', ...queryKeys.SESSION()] }), {
       method: 'DELETE',
     })
   },

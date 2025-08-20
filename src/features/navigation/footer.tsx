@@ -34,7 +34,7 @@ export const Footer = ({ className }: FooterProps) => {
           <p className="text-neutral-1 text-lg font-bold">The Club</p>
           <FooterLink href={routes.HOME()}>About Us</FooterLink>
           <FooterLink href={routes.HISTORY()}>Our History</FooterLink>
-          <FooterLink href={routes.MEMBERS()}>Our Members</FooterLink>
+          <FooterLink href={routes.PROFILES()}>Our Members</FooterLink>
         </div>
 
         <div className="flex flex-1 flex-col gap-2 text-lg">

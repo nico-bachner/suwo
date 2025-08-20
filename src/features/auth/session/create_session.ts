@@ -1,15 +1,14 @@
 import { cookies } from 'next/headers'
 
+import { Session } from '@/lib/validators/session_validator'
+
 import { SESSION_COOKIE_NAME } from './config'
 import { createJWT } from './jwt'
-import { Session } from './types'
 
-export const createSession = async ({ user_id }: Session) => {
+export const createSession = async (session: Session) => {
   const cookieStore = await cookies()
 
-  const sessionJWT = await createJWT({
-    user_id,
-  })
+  const sessionJWT = await createJWT(session)
 
   cookieStore.set(SESSION_COOKIE_NAME, sessionJWT, {
     httpOnly: true,

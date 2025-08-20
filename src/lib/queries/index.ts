@@ -13,9 +13,9 @@ import {
 } from './mailing_list_recipients_query'
 import { profileQuery, profileQueryKey } from './profile_query'
 import { profilesQuery, profilesQueryKey } from './profiles_query'
-import { sessionQuery } from './session_query'
+import { sessionQuery, sessionQueryKey } from './session_query'
 import { userInstrumentsQuery } from './user_instruments_query'
-import { userRolesQuery } from './user_roles_query'
+import { userRolesQuery, userRolesQueryKey } from './user_roles_query'
 import { weeklyAttendancesQuery } from './weekly_attendances_query'
 
 export const queryKeys = {
@@ -26,6 +26,8 @@ export const queryKeys = {
   MAILING_LIST_RECIPIENT: mailingListRecipientQueryKey,
   PROFILES: profilesQueryKey,
   PROFILE: profileQueryKey,
+  SESSION: sessionQueryKey,
+  USER_ROLES: userRolesQueryKey,
 }
 
 export const queries = {

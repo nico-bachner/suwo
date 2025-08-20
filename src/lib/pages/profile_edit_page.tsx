@@ -96,7 +96,7 @@ export const ProfileEditPage = ({ user_id }: Pick<Profile, 'user_id'>) => {
           title="Instruments"
           description="Tell us what instruments you play"
         >
-          <UpdateInstrumentForm session={session} />
+          <UpdateInstrumentForm user_id={session.user_id} />
         </SettingsSection>
 
         <SettingsSection

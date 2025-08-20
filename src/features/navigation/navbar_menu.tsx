@@ -51,7 +51,7 @@ export const NavbarMenu = ({ className }: NavbarMenuProps) => {
       <div className="flex flex-col items-center gap-6">
         <NavbarMenuLink href={routes.HOME()}>Home</NavbarMenuLink>
         <NavbarMenuLink href={routes.HISTORY()}>History</NavbarMenuLink>
-        <NavbarMenuLink href={routes.MEMBERS()}>Members</NavbarMenuLink>
+        <NavbarMenuLink href={routes.PROFILES()}>Members</NavbarMenuLink>
         <NavbarMenuLink href={routes.CALENDAR()}>Calendar</NavbarMenuLink>
         <NavbarMenuLink
           href={

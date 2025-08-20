@@ -63,7 +63,7 @@ export const TabBar = ({ className }: TabBarProps) => {
           Profile
         </TabBarLink>
       ) : (
-        <TabBarLink href={routes.MEMBERS()} icon={UsersIcon}>
+        <TabBarLink href={routes.PROFILES()} icon={UsersIcon}>
           Members
         </TabBarLink>
       )}

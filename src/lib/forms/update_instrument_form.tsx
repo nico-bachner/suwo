@@ -3,30 +3,24 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { Button } from '@/design_system/button'
-import { Session } from '@/features/auth/session/types'
 import { queries, queryKeys } from '@/lib/queries'
 import { apiRoutes, queryKeys as legacy_queryKeys } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
 import { UpdateInstrumentFormInput } from '../validators/form_input_validators/update_instrument_form_input_validator'
+import { UserInstrument } from '../validators/user_instrument_validator'
 import { useAppForm } from './context'
 
-type UpdateInstrumentFormProps = {
-  session: Session
-}
-
 export const UpdateInstrumentForm = ({
-  session,
-}: UpdateInstrumentFormProps) => {
+  user_id,
+}: Pick<UserInstrument, 'user_id'>) => {
   const queryClient = useQueryClient()
-
   const { data: instruments, isPending: isInstrumentsPending } = useQuery(
     queries.INSTRUMENTS(),
   )
   const { data: userInstruments } = useQuery({
-    ...queries.USER_INSTRUMENTS(session.user_id),
-    enabled: Boolean(session),
+    ...queries.USER_INSTRUMENTS(user_id),
   })
 
   const defaultValues: UpdateInstrumentFormInput = {
@@ -37,7 +31,7 @@ export const UpdateInstrumentForm = ({
     defaultValues,
     onSubmit: async ({ value }) => {
       const response = await parseResponse(
-        await fetch(apiRoutes.USER_INSTRUMENTS(session.user_id), {
+        await fetch(apiRoutes.USER_INSTRUMENTS(user_id), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -54,13 +48,13 @@ export const UpdateInstrumentForm = ({
         case StatusCode.OK:
         case StatusCode.Created:
           await queryClient.invalidateQueries({
-            queryKey: legacy_queryKeys.USER_INSTRUMENTS(session.user_id),
+            queryKey: legacy_queryKeys.USER_INSTRUMENTS(user_id),
           })
           await queryClient.invalidateQueries({
-            queryKey: legacy_queryKeys.USER_INSTRUMENTS(session.user_id),
+            queryKey: legacy_queryKeys.USER_INSTRUMENTS(user_id),
           })
           await queryClient.invalidateQueries({
-            queryKey: queryKeys.PROFILE(session.user_id),
+            queryKey: queryKeys.PROFILE(user_id),
           })
 
           // eslint-disable-next-line no-alert, no-undef

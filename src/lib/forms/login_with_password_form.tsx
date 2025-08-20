@@ -7,10 +7,11 @@ import {
   LoginWithPasswordFormInput,
   LoginWithPasswordFormInputValidator,
 } from '@/lib/validators/form_input_validators/login_with_password_form_input_validator'
-import { apiRoutes, queryKeys, routes } from '@/routes'
+import { apiRoutes, routes } from '@/routes'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
+import { queryKeys } from '../queries'
 import { useAppForm } from './context'
 
 export const LoginWithPasswordForm = () => {

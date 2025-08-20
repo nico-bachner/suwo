@@ -1,44 +1,26 @@
-import { cookies } from 'next/headers'
-import z from 'zod'
-
-import { SESSION_COOKIE_NAME } from '@/features/auth/session/config'
-import { verifyJWT } from '@/features/auth/session/jwt'
-import { SessionValidator } from '@/features/auth/session/validator'
+import { deleteSession } from '@/features/auth/session/delete_session'
+import { getSession } from '@/features/auth/session/get_session'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 
 export const GET = async () => {
-  const cookieStore = await cookies()
-  const sessionCookie = cookieStore.get(SESSION_COOKIE_NAME)
+  const session = await getSession()
 
-  if (!sessionCookie) {
+  if (!session) {
     return createResponse({
-      status: StatusCode.OK,
-      data: null,
-    })
-  }
-
-  const decryptedSessionCookie = await verifyJWT(sessionCookie.value)
-  const { data, error, success } = SessionValidator.safeParse(
-    decryptedSessionCookie,
-  )
-
-  if (!success) {
-    return createResponse({
-      status: StatusCode.BadRequest,
-      error: z.prettifyError(error),
+      status: StatusCode.NotFound,
+      error: 'Session cookie not found',
     })
   }
 
   return createResponse({
     status: StatusCode.OK,
-    data,
+    data: session,
   })
 }
 
 export const DELETE = async () => {
-  const cookieStore = await cookies()
-  cookieStore.delete(SESSION_COOKIE_NAME)
+  await deleteSession()
 
   return createResponse({
     status: StatusCode.NoContent,
