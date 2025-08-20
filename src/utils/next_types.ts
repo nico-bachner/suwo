@@ -12,6 +12,7 @@ export type NextParams<T extends Record<string, string>> = T
  */
 export type LayoutFileProps = Readonly<{
   children: ReactNode
+  params: Promise<Record<string, string>>
 }>
 
 /**

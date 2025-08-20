@@ -2,7 +2,6 @@
 
 import { useQuery } from '@tanstack/react-query'
 
-import { EventNavigator } from '@/features/event/event_navigator'
 import { queries } from '@/lib/queries'
 import { formatDateRange } from '@/utils/format_date_range'
 
@@ -42,12 +41,7 @@ export const EventPage = ({ id }: Pick<Event, 'id'>) => {
   }
 
   return (
-    <main>
-      <EventNavigator
-        id={event.id}
-        className="fixed right-2 bottom-20 left-2 z-30 md:top-24"
-      />
-
+    <main className="prose">
       <h1>{event.name}</h1>
 
       <p>
@@ -55,6 +49,7 @@ export const EventPage = ({ id }: Pick<Event, 'id'>) => {
           new Date(event.starts_at),
           event.ends_at ? new Date(event.ends_at) : undefined,
         )}
+        {event.location && ` at ${event.location}`}
       </p>
     </main>
   )
