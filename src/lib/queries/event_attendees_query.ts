@@ -10,7 +10,7 @@ import { Profile, ProfileValidator } from '../validators/profile_validator'
 
 export const eventAttendeesQueryKey = (
   event_id: EventAttendees['event_id'],
-) => ['event', event_id, 'attendees']
+) => ['events', event_id, 'attendees']
 
 export const eventAttendeesQuery = (
   event_id: EventAttendees['event_id'],
