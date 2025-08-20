@@ -1,4 +1,4 @@
-import { Profile, ProfileValidator } from '@/lib/validators/profile_validator'
+import { ProfileValidator } from '@/lib/validators/profile_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'
@@ -55,17 +55,15 @@ export const GET: APIRoute = async (_, { params }) => {
     })
   }
 
-  const data: Profile = {
-    ...profile,
-    instruments: profile.user.UserInstrument.map(
-      ({ instrument }) => instrument.name,
-    ).toSorted((a, b) => a.localeCompare(b)),
-    roles: profile.user.UserRole.map(({ role }) => role.name),
-    attendances: profile.user.Attendances,
-  }
-
   return createResponse({
     status: StatusCode.OK,
-    data,
+    data: {
+      ...profile,
+      instruments: profile.user.UserInstrument.map(
+        ({ instrument }) => instrument.name,
+      ).toSorted((a, b) => a.localeCompare(b)),
+      roles: profile.user.UserRole.map(({ role }) => role.name),
+      attendances: profile.user.Attendances,
+    },
   })
 }
