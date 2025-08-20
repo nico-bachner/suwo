@@ -21,11 +21,7 @@ export const SubmitButton = ({ className }: SubmitButtonProps) => {
           disabled={!canSubmit}
           className={cn('w-full max-w-screen-sm self-center', className)}
         >
-          {isSubmitting ? (
-            <Spinner className="stroke-neutral-3 h-6 w-6" />
-          ) : (
-            'Submit'
-          )}
+          {isSubmitting ? <Spinner /> : 'Submit'}
         </Button>
       )}
     </form.Subscribe>

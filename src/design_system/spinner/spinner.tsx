@@ -6,5 +6,7 @@ type SpinnerProps = {
 }
 
 export const Spinner = ({ className }: SpinnerProps) => (
-  <SpinnerIcon className={cn('animate-spin', className)} />
+  <SpinnerIcon
+    className={cn('stroke-neutral-2 size-6 animate-spin', className)}
+  />
 )

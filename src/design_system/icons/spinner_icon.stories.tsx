@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import { SpinnerIcon } from './spinner_icon'
 
@@ -10,5 +10,7 @@ const meta: Meta<typeof SpinnerIcon> = {
 export default meta
 
 export const Default: StoryObj<typeof SpinnerIcon> = {
-  args: {},
+  args: {
+    className: 'size-60 stroke-neutral-1',
+  },
 }

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import { InstagramIcon } from './instagram_icon'
 
@@ -10,5 +10,7 @@ const meta: Meta<typeof InstagramIcon> = {
 export default meta
 
 export const Default: StoryObj<typeof InstagramIcon> = {
-  args: {},
+  args: {
+    className: 'size-60 stroke-neutral-1',
+  },
 }

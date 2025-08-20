@@ -48,7 +48,7 @@
   "devDependencies": {
     "@next/eslint-plugin-next": "^15.5.0",
     "@storybook/addon-docs": "^9.1.2",
-    "@storybook/nextjs": "^9.1.2",
+    "@storybook/nextjs-vite": "^9.1.2",
     "@tailwindcss/postcss": "^4.1.12",
     "@tanstack/eslint-plugin-query": "^5.83.1",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
