@@ -1,6 +1,7 @@
 import z from 'zod'
 
 import { EventAttendeeValidator } from './event_attendee_validator'
+import { UserInstrumentValidator } from './user_instrument_validator'
 
 export const ProfileValidator = z.object({
   user_id: z.uuid(),
@@ -8,18 +9,10 @@ export const ProfileValidator = z.object({
     message: 'Given name is required',
   }),
   family_name: z.string().nullable(),
+  events: z.array(EventAttendeeValidator.shape.event_id),
+  instruments: z.array(UserInstrumentValidator.shape.instrument_id),
   created_at: z.iso.datetime(),
   updated_at: z.iso.datetime(),
-  instruments: z.array(z.string()),
-  roles: z.array(z.string()),
-  attendances: z.array(
-    z.object({
-      year: z.number().int(),
-      semester: z.number().int(),
-      week: z.number().int(),
-    }),
-  ),
-  events: z.array(EventAttendeeValidator.shape.event_id),
 })
 
 export type Profile = z.infer<typeof ProfileValidator>

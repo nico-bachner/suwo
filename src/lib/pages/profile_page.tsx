@@ -51,8 +51,6 @@ export const ProfilePage = ({ user_id }: Pick<Profile, 'user_id'>) => {
     <main className="prose">
       <h1>{getProfileScreenName(profile)}</h1>
 
-      {profile.roles.length > 0 && <p>{profile.roles.join(', ')}</p>}
-
       {profile.instruments.length > 0 && (
         <p>{profile.instruments.join(', ')}</p>
       )}

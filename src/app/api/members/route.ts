@@ -1,3 +1,6 @@
+import z from 'zod'
+
+import { ProfileValidator } from '@/lib/validators/profile_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'
@@ -18,29 +21,7 @@ export const GET: APIRoute = async () => {
         select: {
           UserInstrument: {
             select: {
-              instrument: {
-                select: {
-                  id: true,
-                  name: true,
-                },
-              },
-            },
-          },
-          UserRole: {
-            select: {
-              role: {
-                select: {
-                  id: true,
-                  name: true,
-                },
-              },
-            },
-          },
-          Attendances: {
-            select: {
-              year: true,
-              semester: true,
-              week: true,
+              instrument_id: true,
             },
           },
           EventAttendee: {
@@ -53,16 +34,20 @@ export const GET: APIRoute = async () => {
     },
   })
 
+  const data = z.array(ProfileValidator).parse(
+    profiles.map((profile) => ({
+      ...profile,
+      events: profile.user.EventAttendee.map(({ event_id }) => event_id),
+      instruments: profile.user.UserInstrument.map(
+        ({ instrument_id }) => instrument_id,
+      ),
+      created_at: profile.created_at.toISOString(),
+      updated_at: profile.updated_at.toISOString(),
+    })),
+  )
+
   return createResponse({
     status: StatusCode.OK,
-    data: profiles.map((profile) => ({
-      ...profile,
-      instruments: profile.user.UserInstrument.map(
-        ({ instrument }) => instrument.name,
-      ).toSorted((a, b) => a.localeCompare(b)),
-      roles: profile.user.UserRole.map(({ role }) => role.name),
-      attendances: profile.user.Attendances,
-      events: profile.user.EventAttendee.map(({ event_id }) => event_id),
-    })),
+    data,
   })
 }
