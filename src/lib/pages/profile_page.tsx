@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 import { Button } from '@/design_system/button'
 import { EventsAttended } from '@/features/profile/events_attended'
+import { ProfileInstruments } from '@/features/profile/profile_instruments'
 import { Profile } from '@/generated/prisma'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
@@ -51,9 +52,7 @@ export const ProfilePage = ({ user_id }: Pick<Profile, 'user_id'>) => {
     <main className="prose">
       <h1>{getProfileScreenName(profile)}</h1>
 
-      {profile.instruments.length > 0 && (
-        <p>{profile.instruments.join(', ')}</p>
-      )}
+      <ProfileInstruments profile={profile} />
 
       <EventsAttended user_id={profile.user_id} />
 
