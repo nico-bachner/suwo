@@ -33,6 +33,7 @@ export const Navbar = ({ className }: NavbarProps) => {
     >
       <Link
         href={routes.HOME()}
+        title="Home"
         className="outline-primary-1 rounded-full outline-offset-4 focus-visible:outline-4"
       >
         <SUWOIcon className="size-12" />
