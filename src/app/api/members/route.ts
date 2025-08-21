@@ -43,6 +43,11 @@ export const GET: APIRoute = async () => {
               week: true,
             },
           },
+          EventAttendee: {
+            select: {
+              event_id: true,
+            },
+          },
         },
       },
     },
@@ -57,6 +62,7 @@ export const GET: APIRoute = async () => {
       ).toSorted((a, b) => a.localeCompare(b)),
       roles: profile.user.UserRole.map(({ role }) => role.name),
       attendances: profile.user.Attendances,
+      events: profile.user.EventAttendee.map(({ event_id }) => event_id),
     })),
   })
 }

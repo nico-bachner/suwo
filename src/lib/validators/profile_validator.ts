@@ -1,5 +1,7 @@
 import z from 'zod'
 
+import { EventAttendeeValidator } from './event_attendee_validator'
+
 export const ProfileValidator = z.object({
   user_id: z.uuid(),
   given_name: z.string().trim().min(1, {
@@ -17,6 +19,7 @@ export const ProfileValidator = z.object({
       week: z.number().int(),
     }),
   ),
+  events: z.array(EventAttendeeValidator.shape.event_id),
 })
 
 export type Profile = z.infer<typeof ProfileValidator>

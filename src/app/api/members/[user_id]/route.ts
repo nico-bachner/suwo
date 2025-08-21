@@ -43,6 +43,11 @@ export const GET: APIRoute = async (_, { params }) => {
               week: true,
             },
           },
+          EventAttendee: {
+            select: {
+              event_id: true,
+            },
+          },
         },
       },
     },
