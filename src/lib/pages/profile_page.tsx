@@ -20,6 +20,7 @@ export const ProfilePage = ({ user_id }: Pick<Profile, 'user_id'>) => {
     isPending: isProfilePending,
   } = useQuery(queries.PROFILE(user_id))
   const { data: session } = useQuery(queries.SESSION())
+  useQuery(queries.INSTRUMENTS())
   useQuery(queries.EVENTS())
 
   if (isProfilePending) {

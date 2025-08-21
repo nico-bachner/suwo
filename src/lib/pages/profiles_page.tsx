@@ -14,6 +14,7 @@ import { search } from '@/utils/search'
 export const ProfilesPage = () => {
   const queryClient = useQueryClient()
   const { data: profiles, error, isPending } = useQuery(queries.PROFILES())
+  useQuery(queries.INSTRUMENTS())
   const [query, setQuery] = useState('')
 
   if (error) {
