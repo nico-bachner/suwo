@@ -7,20 +7,14 @@ import { prisma } from '@/utils/prisma'
 export const GET: APIRoute = async (_, { params }) => {
   const { id } = EventValidator.pick({ id: true }).parse(await params)
 
-  const profiles = await prisma.profile.findMany({
+  const eventAttendees = await prisma.eventAttendee.findMany({
     where: {
-      user: {
-        EventAttendee: {
-          some: {
-            event_id: id,
-          },
-        },
-      },
+      event_id: id,
     },
   })
 
   return createResponse({
     status: StatusCode.OK,
-    data: profiles,
+    data: eventAttendees.map(({ user_id }) => user_id),
   })
 }

@@ -125,9 +125,7 @@ export const EventAttendeesPage = ({ id }: Pick<Event, 'id'>) => {
               )}
             </p>
 
-            {eventAttendees.some(
-              (attendee) => attendee.user_id === profile.user_id,
-            ) ? (
+            {eventAttendees.some((attendee) => attendee === profile.user_id) ? (
               <div className="px-6">
                 <CheckIcon className="stroke-positive-3 -m-1 size-6 stroke-2" />
               </div>
