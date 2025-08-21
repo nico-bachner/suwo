@@ -17,9 +17,9 @@ export const eventAttendeesMutation = (
 ): UseMutationOptions<
   EventAttendee['user_id'][],
   Error,
-  EventAttendee['user_id'][]
+  EventAttendee['user_id']
 > => ({
-  mutationFn: async (value) => {
+  mutationFn: async (variables) => {
     const response = await parseResponse(
       await fetch(
         createURL({ path: ['api', ...queryKeys.EVENT_ATTENDEES(event_id)] }),
@@ -28,7 +28,7 @@ export const eventAttendeesMutation = (
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(value),
+          body: JSON.stringify(variables),
         },
       ),
     )

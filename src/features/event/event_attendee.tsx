@@ -1,7 +1,8 @@
 import { CheckIcon, PlusIcon } from '@heroicons/react/24/outline'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { Button } from '@/design_system/button'
+import { mutations } from '@/lib/mutations'
 import { queries } from '@/lib/queries'
 import { Profile } from '@/lib/validators/profile_validator'
 
@@ -13,11 +14,15 @@ type EventAttendeeProps = {
 }
 
 export const EventAttendee = ({ eventId, profile }: EventAttendeeProps) => {
+  const queryClient = useQueryClient()
   const {
     data: eventAttendees,
     error,
     isPending,
   } = useQuery(queries.EVENT_ATTENDEES(eventId))
+  const { mutate: updateAttendance } = useMutation(
+    mutations.EVENT_ATTENDEES(queryClient, eventId),
+  )
 
   if (error || isPending) {
     return null
@@ -43,7 +48,12 @@ export const EventAttendee = ({ eventId, profile }: EventAttendeeProps) => {
           <CheckIcon className="stroke-positive-3 -m-1 size-6 stroke-2" />
         </div>
       ) : (
-        <Button variant="secondary">
+        <Button
+          variant="secondary"
+          onClick={() => {
+            updateAttendance(profile.user_id)
+          }}
+        >
           <PlusIcon className="-m-1 size-6" />
         </Button>
       )}
