@@ -31,29 +31,27 @@ export const NoAuditions = () => {
   const [position, setPosition] = useState<Position>(Position.BOTTOM_LEFT)
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-20 flex h-full w-full flex-row items-end">
-      <Image
-        src={no_auditions}
-        alt="No Auditions"
-        className={cn(
-          'pointer-events-auto w-[min(70vw,70vh)] transition-transform duration-1000',
-          getPosition(position),
-        )}
-        onClick={() => {
-          setPosition((prev) => {
-            switch (prev) {
-              case Position.BOTTOM_LEFT:
-                return Position.BOTTOM_RIGHT
-              case Position.BOTTOM_RIGHT:
-                return Position.TOP_LEFT
-              case Position.TOP_LEFT:
-                return Position.TOP_RIGHT
-              case Position.TOP_RIGHT:
-                return Position.BOTTOM_LEFT
-            }
-          })
-        }}
-      />
-    </div>
+    <Image
+      src={no_auditions}
+      alt="No Auditions"
+      className={cn(
+        'fixed bottom-0 left-0 z-20 w-[min(70vw,70vh)] transition-transform duration-1000',
+        getPosition(position),
+      )}
+      onClick={() => {
+        setPosition((prev) => {
+          switch (prev) {
+            case Position.BOTTOM_LEFT:
+              return Position.BOTTOM_RIGHT
+            case Position.BOTTOM_RIGHT:
+              return Position.TOP_LEFT
+            case Position.TOP_LEFT:
+              return Position.TOP_RIGHT
+            case Position.TOP_RIGHT:
+              return Position.BOTTOM_LEFT
+          }
+        })
+      }}
+    />
   )
 }
