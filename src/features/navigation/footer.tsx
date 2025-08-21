@@ -9,6 +9,8 @@ import { cn } from '@/utils/cn'
 import { getCurrentSemester, getCurrentYear } from '@/utils/date_manipulation'
 
 import { FooterLink } from './footer_link'
+import { SUWOLogo } from './suwo_logo'
+import { USYDLogo } from './usyd_logo'
 
 type FooterProps = {
   className?: string
@@ -117,6 +119,11 @@ export const Footer = ({ className }: FooterProps) => {
             </a>
             .
           </p>
+        </div>
+
+        <div className="col-span-3 flex flex-col items-center justify-center gap-x-12 gap-y-6 md:col-span-5 md:flex-row">
+          <SUWOLogo className="h-14" />
+          <USYDLogo className="h-14" />
         </div>
       </footer>
     </div>

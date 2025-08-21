@@ -60,12 +60,13 @@
   margin-block-end: 1.2em;
 }
 
-.prose > h1 a,
-.prose > h2 a,
-.prose > h3 a,
+.prose > p strong,
+.prose > li strong {
+  @apply text-neutral-1 font-bold;
+}
 .prose > p a,
 .prose > li a {
-  @apply text-primary-2 hover:underline;
+  @apply text-primary-2 font-bold hover:underline;
 }
 
 /* Lists */

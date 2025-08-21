@@ -17,22 +17,6 @@ export const SHORT_NAME = 'Sydney University Wind Orchestra'
 export const ACRONYM = 'SUWO'
 export const FOUNDING_YEAR = 2003
 
-// Static Assets
-export const IMAGES = {
-  ICON: {
-    src: '/images/icon.png',
-    alt: 'The SUWO icon',
-    width: 250,
-    height: 250,
-  },
-  LOGO: {
-    src: '/images/logo.png',
-    alt: 'The SUWO logo',
-    width: 800,
-    height: 190,
-  },
-}
-
 export const SOCIAL_LINKS = [
   {
     title: 'YouTube',

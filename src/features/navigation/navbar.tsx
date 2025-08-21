@@ -1,10 +1,8 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import Image from 'next/image'
 import Link from 'next/link'
 
-import { IMAGES } from '@/config'
 import { Button } from '@/design_system/button'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
@@ -13,6 +11,7 @@ import { getCurrentSemester, getCurrentYear } from '@/utils/date_manipulation'
 
 import { NavbarLink } from './navbar_link'
 import { NavbarMenu } from './navbar_menu'
+import { SUWOIcon } from './suwo_icon'
 
 type NavbarProps = {
   className?: string
@@ -36,7 +35,7 @@ export const Navbar = ({ className }: NavbarProps) => {
         href={routes.HOME()}
         className="outline-primary-1 rounded-full outline-offset-4 focus-visible:outline-4"
       >
-        <Image {...IMAGES.ICON} className="size-12" />
+        <SUWOIcon className="size-12" />
       </Link>
 
       <div className="hidden items-center gap-4 md:flex">

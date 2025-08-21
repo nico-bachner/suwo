@@ -65,7 +65,6 @@ export default [
       'logical-assignment-operators': 'error',
       'max-classes-per-file': 'error',
       'max-depth': 'error',
-      'max-lines': 'error',
       'max-nested-callbacks': 'error',
       'max-params': 'error',
       'no-alert': 'error',
