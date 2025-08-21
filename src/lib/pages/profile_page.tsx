@@ -5,12 +5,12 @@ import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 
 import { Button } from '@/design_system/button'
+import { EventsAttended } from '@/features/profile/events_attended'
 import { Profile } from '@/generated/prisma'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 
 import { getProfileScreenName } from '../../features/profile/get_profile_screen_name'
-import { useProfileAttendanceRate } from '../../features/profile/use_profile_attendance_rate'
 
 export const ProfilePage = ({ user_id }: Pick<Profile, 'user_id'>) => {
   const {
@@ -19,7 +19,7 @@ export const ProfilePage = ({ user_id }: Pick<Profile, 'user_id'>) => {
     isPending: isProfilePending,
   } = useQuery(queries.PROFILE(user_id))
   const { data: session } = useQuery(queries.SESSION())
-  const attendanceRate = useProfileAttendanceRate(profile?.attendances)
+  useQuery(queries.EVENTS())
 
   if (isProfilePending) {
     return (
@@ -57,7 +57,7 @@ export const ProfilePage = ({ user_id }: Pick<Profile, 'user_id'>) => {
         <p>{profile.instruments.join(', ')}</p>
       )}
 
-      <p>{attendanceRate}% attendance</p>
+      <EventsAttended user_id={profile.user_id} />
 
       {session && session.user_id === profile.user_id && (
         <Button variant="primary" asChild>
