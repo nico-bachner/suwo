@@ -19,7 +19,7 @@ export const eventAttendeesMutation = (
   EventAttendee['user_id'],
   EventAttendee['user_id'][]
 > => ({
-  mutationFn: async (attendeeId) => {
+  mutationFn: async (variables) => {
     const response = await parseResponse(
       await fetch(
         createURL({ path: ['api', ...queryKeys.EVENT_ATTENDEES(event_id)] }),
@@ -28,7 +28,7 @@ export const eventAttendeesMutation = (
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(attendeeId),
+          body: JSON.stringify(variables),
         },
       ),
     )
@@ -40,7 +40,7 @@ export const eventAttendeesMutation = (
         throw new Error('Failed to fetch data')
     }
   },
-  onMutate: async (attendeeId) => {
+  onMutate: async (variables) => {
     await queryClient.cancelQueries({
       queryKey: queryKeys.EVENT_ATTENDEES(event_id),
     })
@@ -49,12 +49,10 @@ export const eventAttendeesMutation = (
       queryKeys.EVENT_ATTENDEES(event_id),
     )
 
-    if (snapshot) {
-      queryClient.setQueryData<EventAttendee['user_id'][]>(
-        queryKeys.EVENT_ATTENDEES(event_id),
-        [...snapshot, attendeeId],
-      )
-    }
+    queryClient.setQueryData<EventAttendee['user_id'][]>(
+      queryKeys.EVENT_ATTENDEES(event_id),
+      (snapshot) => (snapshot ? [...snapshot, variables] : [variables]),
+    )
 
     return snapshot
   },
@@ -67,9 +65,15 @@ export const eventAttendeesMutation = (
     // eslint-disable-next-line no-alert, no-undef
     alert(`${error.message}\n\nPlease try again`)
   },
-  onSettled: async () => {
+  onSettled: async (data) => {
     await queryClient.invalidateQueries({
       queryKey: queryKeys.EVENT_ATTENDEES(event_id),
     })
+
+    if (data) {
+      await queryClient.invalidateQueries({
+        queryKey: queryKeys.PROFILE(data),
+      })
+    }
   },
 })
