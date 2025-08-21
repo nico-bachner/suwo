@@ -1,5 +1,4 @@
 import { QueryClient, UseMutationOptions } from '@tanstack/react-query'
-import z from 'zod'
 
 import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
@@ -15,7 +14,7 @@ export const eventAttendeesMutation = (
   queryClient: QueryClient,
   event_id: EventAttendee['event_id'],
 ): UseMutationOptions<
-  EventAttendee['user_id'][],
+  EventAttendee['user_id'],
   Error,
   EventAttendee['user_id']
 > => ({
@@ -34,10 +33,8 @@ export const eventAttendeesMutation = (
     )
 
     switch (response.status) {
-      case StatusCode.OK:
-        return z
-          .array(EventAttendeeValidator.shape.user_id)
-          .parse(response.data)
+      case StatusCode.Created:
+        return EventAttendeeValidator.shape.user_id.parse(response.data)
       default:
         throw new Error('Failed to fetch data')
     }
