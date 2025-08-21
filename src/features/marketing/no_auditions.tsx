@@ -17,13 +17,13 @@ enum Position {
 const getPosition = (position: Position) => {
   switch (position) {
     case Position.BOTTOM_LEFT:
-      return 'translate-x-0 translate-y-0 rotate-y-0'
+      return 'rotate-x-0 rotate-y-0 translate-x-0 translate-y-0 '
     case Position.BOTTOM_RIGHT:
-      return 'translate-x-[calc(100vw-100%)] translate-y-0 rotate-y-180'
+      return 'rotate-x-0 rotate-y-180 translate-x-[calc(100vw-100%)] translate-y-0'
     case Position.TOP_LEFT:
-      return 'translate-x-0 translate-y-[calc(100%+100px-100vh)] rotate-y-0'
+      return 'rotate-x-180 rotate-y-0 translate-x-0 translate-y-[calc(100%-100vh)]'
     case Position.TOP_RIGHT:
-      return 'translate-x-[calc(100vw-100%)] translate-y-[calc(100%+100px-100vh)] rotate-y-180'
+      return 'rotate-x-180 rotate-y-180 translate-x-[calc(100vw-100%)] translate-y-[calc(100%-100vh)]'
   }
 }
 
@@ -36,12 +36,9 @@ export const NoAuditions = () => {
         src={no_auditions}
         alt="No Auditions"
         className={cn(
-          'pointer-events-auto transition-transform duration-1000',
+          'pointer-events-auto w-[min(70vw,70vh)] transition-transform duration-1000',
           getPosition(position),
         )}
-        style={{
-          width: 'min(50vw, 50vh)',
-        }}
         onClick={() => {
           setPosition((prev) => {
             switch (prev) {
