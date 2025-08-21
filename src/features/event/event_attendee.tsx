@@ -29,10 +29,7 @@ export const EventAttendee = ({ eventId, profile }: EventAttendeeProps) => {
   }
 
   return (
-    <div
-      key={profile.user_id}
-      className="bg-neutral-5/80 border-neutral-4/80 flex h-16 flex-row items-center rounded-full border pr-4 pl-8 backdrop-blur"
-    >
+    <div className="bg-neutral-5/80 border-neutral-4/80 flex h-16 flex-row items-center rounded-full border pr-4 pl-8 backdrop-blur">
       <p className="flex flex-1 flex-row items-center gap-4 font-bold">
         <span className="text-neutral-2">{getProfileScreenName(profile)}</span>
 

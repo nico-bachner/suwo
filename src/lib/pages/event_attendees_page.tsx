@@ -1,13 +1,16 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
+import Link from 'next/link'
 import { useState } from 'react'
 
 import { Button } from '@/design_system/button'
 import { SearchInput } from '@/design_system/input'
 import { Heading } from '@/design_system/typography'
 import { EventAttendee } from '@/features/event/event_attendee'
+import { MarkSelfAsPresent } from '@/features/event/mark_self_as_present'
 import { queries } from '@/lib/queries'
+import { routes } from '@/routes'
 import { search } from '@/utils/search'
 
 import { Event } from '../validators/event_validator'
@@ -85,9 +88,18 @@ export const EventAttendeesPage = ({ id }: Pick<Event, 'id'>) => {
         Present: {`${eventAttendees.length}/${profiles.length}`}
       </p>
 
-      {session && (
-        <Button variant="primary" className="mx-auto w-full max-w-screen-sm">
-          Mark self as present
+      {session ? (
+        <MarkSelfAsPresent
+          eventId={event.id}
+          className="mx-auto w-full max-w-screen-sm"
+        />
+      ) : (
+        <Button
+          variant="primary"
+          className="mx-auto w-full max-w-screen-sm"
+          asChild
+        >
+          <Link href={routes.LOGIN()}>Login to auto-mark attendance</Link>
         </Button>
       )}
 
