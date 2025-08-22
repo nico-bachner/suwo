@@ -19,6 +19,7 @@ export const GET: APIRoute = async () => {
     include: {
       user: {
         select: {
+          created_at: true,
           UserInstrument: {
             select: {
               instrument_id: true,
@@ -41,7 +42,7 @@ export const GET: APIRoute = async () => {
       instruments: profile.user.UserInstrument.map(
         ({ instrument_id }) => instrument_id,
       ),
-      created_at: profile.created_at.toISOString(),
+      created_at: profile.user.created_at.toISOString(),
       updated_at: profile.updated_at.toISOString(),
     })),
   )
