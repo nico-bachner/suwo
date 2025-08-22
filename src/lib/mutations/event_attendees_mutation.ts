@@ -9,6 +9,12 @@ import {
   EventAttendee,
   EventAttendeeValidator,
 } from '../validators/event_attendee_validator'
+import { Profile } from '../validators/profile_validator'
+
+type Context = {
+  eventAttendees: EventAttendee['user_id'][] | undefined
+  profile: Profile | undefined
+}
 
 export const eventAttendeesMutation = (
   queryClient: QueryClient,
@@ -17,7 +23,7 @@ export const eventAttendeesMutation = (
   EventAttendee['user_id'],
   Error,
   EventAttendee['user_id'],
-  EventAttendee['user_id'][]
+  Context
 > => ({
   mutationFn: async (variables) => {
     const response = await parseResponse(
@@ -44,23 +50,55 @@ export const eventAttendeesMutation = (
     await queryClient.cancelQueries({
       queryKey: queryKeys.EVENT_ATTENDEES(event_id),
     })
+    await queryClient.cancelQueries({
+      queryKey: queryKeys.PROFILE(variables),
+    })
 
-    const snapshot = queryClient.getQueryData<EventAttendee['user_id'][]>(
-      queryKeys.EVENT_ATTENDEES(event_id),
-    )
+    const context: Context = {
+      eventAttendees: queryClient.getQueryData<EventAttendee['user_id'][]>(
+        queryKeys.EVENT_ATTENDEES(event_id),
+      ),
+      profile: queryClient.getQueryData<Profile>(queryKeys.PROFILE(variables)),
+    }
 
     queryClient.setQueryData<EventAttendee['user_id'][]>(
       queryKeys.EVENT_ATTENDEES(event_id),
-      (snapshot) => (snapshot ? [...snapshot, variables] : [variables]),
+      (snapshot) => {
+        if (!snapshot) {
+          return [variables]
+        }
+
+        return [...snapshot, variables]
+      },
     )
 
-    return snapshot
+    queryClient.setQueryData<Profile>(
+      queryKeys.PROFILE(variables),
+      (snapshot) => {
+        if (!snapshot) {
+          return undefined
+        }
+
+        return {
+          ...snapshot,
+          events: [...snapshot.events, event_id],
+        }
+      },
+    )
+
+    return context
   },
-  onError: (error, _, context) => {
-    queryClient.setQueryData<EventAttendee['user_id'][]>(
-      queryKeys.EVENT_ATTENDEES(event_id),
-      context,
-    )
+  onError: (error, variables, context) => {
+    if (context) {
+      queryClient.setQueryData<EventAttendee['user_id'][]>(
+        queryKeys.EVENT_ATTENDEES(event_id),
+        context.eventAttendees,
+      )
+      queryClient.setQueryData<Profile>(
+        queryKeys.PROFILE(variables),
+        context.profile,
+      )
+    }
 
     // eslint-disable-next-line no-alert, no-undef
     alert(`${error.message}\n\nPlease try again`)
