@@ -39,6 +39,17 @@ export const EventAttendee = ({ eventId, profile }: EventAttendeeProps) => {
       }}
     >
       {getProfileScreenName(profile)}
+
+      <div
+        className="absolute -top-1 -right-1 z-10 rounded-full px-1.5 py-0.5 tabular-nums"
+        style={{
+          color: `oklch(0.9 0.15 ${profile.attendance_rate * 1.2 + 30})`,
+          backgroundColor: `oklch(0.6 0.15 ${profile.attendance_rate * 1.2 + 30})`,
+          border: `1px solid oklch(0.8 0.15 ${profile.attendance_rate * 1.2 + 30})`,
+        }}
+      >
+        {profile.attendance_rate}%
+      </div>
     </Button>
   )
 }
