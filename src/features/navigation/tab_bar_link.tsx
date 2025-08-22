@@ -1,10 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { ComponentType, SVGProps } from 'react'
 
 import { cn } from '@/utils/cn'
+import { useIsActive } from '@/utils/use_is_active'
 
 type TabBarLinkProps = {
   children: string
@@ -13,9 +13,7 @@ type TabBarLinkProps = {
 }
 
 export const TabBarLink = ({ children, href, icon: Icon }: TabBarLinkProps) => {
-  const pathname = usePathname()
-
-  const isActive = pathname.split('/')[1] === href.split('/')[1]
+  const isActive = useIsActive(href)
 
   return (
     <Link

@@ -1,10 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { ReactNode } from 'react'
 
 import { cn } from '@/utils/cn'
+import { useIsActive } from '@/utils/use_is_active'
 
 type NavbarMenuLinkProps = {
   children: ReactNode
@@ -12,9 +12,7 @@ type NavbarMenuLinkProps = {
 }
 
 export const NavbarMenuLink = ({ children, href }: NavbarMenuLinkProps) => {
-  const pathname = usePathname()
-
-  const isActive = pathname === href
+  const isActive = useIsActive(href)
 
   return (
     <Link

@@ -3,6 +3,7 @@
 import {
   BookOpenIcon,
   CalendarDaysIcon,
+  ClipboardDocumentCheckIcon,
   CogIcon,
   HomeModernIcon,
   UserIcon,
@@ -15,6 +16,7 @@ import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
 
+import { useUpcomingEventId } from '../event/use_upcoming_event_id'
 import { TabBarLink } from './tab_bar_link'
 
 type TabBarProps = {
@@ -23,6 +25,7 @@ type TabBarProps = {
 
 export const TabBar = ({ className }: TabBarProps) => {
   const { data: session } = useQuery(queries.SESSION())
+  const upcomingEventId = useUpcomingEventId()
 
   return (
     <nav
@@ -33,9 +36,18 @@ export const TabBar = ({ className }: TabBarProps) => {
         className,
       )}
     >
-      <TabBarLink href={routes.HOME()} icon={HomeModernIcon}>
-        Home
-      </TabBarLink>
+      {session ? (
+        <TabBarLink
+          href={routes.EVENT_ATTENDEES(upcomingEventId)}
+          icon={ClipboardDocumentCheckIcon}
+        >
+          Attendance
+        </TabBarLink>
+      ) : (
+        <TabBarLink href={routes.HOME()} icon={HomeModernIcon}>
+          Home
+        </TabBarLink>
+      )}
 
       <Divider orientation="vertical" className="h-1/2" />
 

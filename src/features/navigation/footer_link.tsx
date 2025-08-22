@@ -1,10 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { ReactNode } from 'react'
 
 import { cn } from '@/utils/cn'
+import { useIsActive } from '@/utils/use_is_active'
 
 type FooterLinkProps = {
   children: ReactNode
@@ -13,9 +13,7 @@ type FooterLinkProps = {
 }
 
 export const FooterLink = ({ children, href, external }: FooterLinkProps) => {
-  const pathname = usePathname()
-
-  const isActive = pathname === href
+  const isActive = useIsActive(href)
 
   if (external) {
     return (

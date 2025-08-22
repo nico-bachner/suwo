@@ -28,16 +28,17 @@ export const Footer = ({ className }: FooterProps) => (
         <FooterLink href={routes.HOME()}>About Us</FooterLink>
         <FooterLink href={routes.HISTORY()}>Our History</FooterLink>
         <FooterLink href={routes.PROFILES()}>Our Members</FooterLink>
+        <FooterLink href={routes.REGISTER()}>Join Us</FooterLink>
       </div>
 
-      <div className="flex flex-1 flex-col gap-2 text-lg">
-        <p className="text-neutral-1 font-bold">Members</p>
+      <div className="flex flex-1 flex-col gap-2">
+        <p className="text-neutral-1 text-lg font-bold">Members</p>
         <FooterLink href={routes.EVENTS()}>Events</FooterLink>
         <FooterLink href={routes.CALENDAR()}>Calendar</FooterLink>
       </div>
 
-      <div className="flex flex-1 flex-col gap-2 text-lg">
-        <p className="text-neutral-1 font-bold">Our Socials</p>
+      <div className="flex flex-1 flex-col gap-2">
+        <p className="text-neutral-1 text-lg font-bold">Our Socials</p>
         {SOCIAL_LINKS.map(({ href, title }) => (
           <FooterLink key={href} href={href} external>
             {title}

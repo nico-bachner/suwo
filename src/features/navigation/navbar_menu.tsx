@@ -12,6 +12,7 @@ import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
 
+import { useUpcomingEventId } from '../event/use_upcoming_event_id'
 import { NavbarMenuLink } from './navbar_menu_link'
 
 type NavbarMenuProps = {
@@ -20,6 +21,7 @@ type NavbarMenuProps = {
 
 export const NavbarMenu = ({ className }: NavbarMenuProps) => {
   const { data: session } = useQuery(queries.SESSION())
+  const upcomingEventId = useUpcomingEventId()
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
 
@@ -68,6 +70,9 @@ export const NavbarMenu = ({ className }: NavbarMenuProps) => {
         <NavbarMenuLink href={routes.PROFILES()}>Members</NavbarMenuLink>
         <NavbarMenuLink href={routes.HISTORY()}>History</NavbarMenuLink>
         <NavbarMenuLink href={routes.CALENDAR()}>Calendar</NavbarMenuLink>
+        <NavbarMenuLink href={routes.EVENT_ATTENDEES(upcomingEventId)}>
+          Attendance
+        </NavbarMenuLink>
       </div>
 
       <div className="flex flex-row items-center gap-4 self-center">
