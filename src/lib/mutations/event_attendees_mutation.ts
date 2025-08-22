@@ -113,6 +113,10 @@ export const eventAttendeesMutation = (
       queryKey: queryKeys.EVENT_ATTENDEES(event_id),
     })
 
+    await queryClient.invalidateQueries({
+      queryKey: queryKeys.PROFILES(),
+    })
+
     if (data) {
       await queryClient.invalidateQueries({
         queryKey: queryKeys.PROFILE(data),
