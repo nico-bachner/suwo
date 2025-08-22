@@ -1,0 +1,19 @@
+li[data-sonner-toast][data-styled='true'] {
+  @apply flex h-14 flex-row items-center gap-4 rounded-full border px-5 backdrop-blur;
+}
+li[data-sonner-toast][data-styled='true'] [data-icon] {
+  @apply -m-1 size-6;
+}
+li[data-sonner-toast][data-styled='true'] [data-title] {
+  @apply pr-3.5 text-sm font-medium;
+}
+
+li[data-sonner-toast][data-styled='true'][data-type='default'] {
+  @apply bg-neutral-5/20 text-neutral-2 border-neutral-2/20;
+}
+li[data-sonner-toast][data-styled='true'][data-type='success'] {
+  @apply bg-positive-3/80 text-positive-1 border-positive-2/80;
+}
+li[data-sonner-toast][data-styled='true'][data-type='error'] {
+  @apply bg-negative-3/80 text-negative-1 border-negative-2/80;
+}
