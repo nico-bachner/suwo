@@ -28,23 +28,15 @@ export const MarkSelfAsPresent = ({
     (attendee) => attendee === session.user_id,
   )
 
-  if (isPresent) {
-    return (
-      <Button variant="primary" disabled className={className}>
-        Marked as present
-      </Button>
-    )
-  }
-
   return (
     <Button
-      variant="primary"
+      variant={isPresent ? 'success' : 'primary'}
       className={className}
       onClick={() => {
         updateAttendance(session.user_id)
       }}
     >
-      Mark self as present
+      {isPresent ? 'Marked as present' : 'Mark self as present'}
     </Button>
   )
 }
