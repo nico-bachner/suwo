@@ -1,0 +1,31 @@
+import { Event } from '@/lib/validators/event_validator'
+import { Profile } from '@/lib/validators/profile_validator'
+
+export const getAttendanceRate = (
+  events: Pick<Event, 'id' | 'starts_at'>[],
+  profileEvents: Profile['events'],
+  profileCreatedAt: Profile['created_at'],
+) => {
+  const pastEventsSinceAccountCreation = events.filter((event) => {
+    const eventDate = new Date(event.starts_at).getTime()
+    const accountCreationDate = new Date(profileCreatedAt).getTime()
+    const now = Date.now()
+
+    return eventDate > accountCreationDate && eventDate < now
+  })
+
+  if (pastEventsSinceAccountCreation.length === 0) {
+    return 0
+  }
+
+  const eventsAttendedSinceAccountCreation =
+    pastEventsSinceAccountCreation.filter((event) =>
+      profileEvents.includes(event.id),
+    )
+
+  const ratio =
+    eventsAttendedSinceAccountCreation.length /
+    pastEventsSinceAccountCreation.length
+
+  return Math.round(ratio * 100)
+}

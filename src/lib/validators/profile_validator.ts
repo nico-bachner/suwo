@@ -9,6 +9,7 @@ export const ProfileValidator = z.object({
     message: 'Given name is required',
   }),
   family_name: z.string().nullable(),
+  attendance_rate: z.int().min(0).max(100),
   events: z.array(EventAttendeeValidator.shape.event_id),
   instruments: z.array(UserInstrumentValidator.shape.instrument_id),
   created_at: z.iso.datetime(),

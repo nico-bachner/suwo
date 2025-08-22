@@ -4,14 +4,12 @@ import { queries } from '@/lib/queries'
 import { EventAttendee } from '@/lib/validators/event_attendee_validator'
 
 import { ProfileEventAttended } from './profile_event_attended'
-import { useAttendanceRate } from './use_attendance_rate'
 
 export const ProfileEventsAttended = ({
   user_id,
 }: Pick<EventAttendee, 'user_id'>) => {
   const { data: events } = useQuery(queries.EVENTS())
   const { data: profile } = useQuery(queries.PROFILE(user_id))
-  const attendanceRate = useAttendanceRate(user_id)
 
   if (!profile || !events) {
     return null
@@ -21,7 +19,7 @@ export const ProfileEventsAttended = ({
     <div className="prose">
       <h2>Events Attended</h2>
 
-      <p>{attendanceRate}% attendance rate</p>
+      <p>{profile.attendance_rate}% attendance rate</p>
 
       <div className="flex flex-wrap gap-2">
         {events
