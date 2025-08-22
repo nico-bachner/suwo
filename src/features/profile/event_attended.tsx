@@ -4,7 +4,6 @@ import { Button } from '@/design_system/button'
 import { mutations } from '@/lib/mutations'
 import { Event } from '@/lib/validators/event_validator'
 import { Profile } from '@/lib/validators/profile_validator'
-import { cn } from '@/utils/cn'
 
 type EventAttendedProps = {
   event: Event
@@ -19,8 +18,7 @@ export const EventAttended = ({ event, profile }: EventAttendedProps) => {
 
   return (
     <Button
-      variant="secondary"
-      className={cn(profile.events.includes(event.id) && 'bg-positive-3')}
+      variant={profile.events.includes(event.id) ? 'success' : 'secondary'}
       onClick={() => {
         updateAttendance(profile.user_id)
       }}

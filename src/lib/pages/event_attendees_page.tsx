@@ -75,7 +75,7 @@ export const EventAttendeesPage = ({ id }: Pick<Event, 'id'>) => {
   }
 
   return (
-    <main className="mx-auto flex w-full max-w-screen-md flex-col gap-8">
+    <main className="mx-auto flex w-full max-w-screen-lg flex-col gap-8">
       <Heading
         as="h1"
         variant="primary"
@@ -103,18 +103,16 @@ export const EventAttendeesPage = ({ id }: Pick<Event, 'id'>) => {
         </Button>
       )}
 
-      <div className="flex flex-col gap-2 md:flex-row md:items-center">
-        <SearchInput
-          value={query}
-          onChange={({ target }) => {
-            setQuery(target.value)
-          }}
-          placeholder="Search by name or instrument"
-          className="flex-grow"
-        />
-      </div>
+      <SearchInput
+        value={query}
+        onChange={({ target }) => {
+          setQuery(target.value)
+        }}
+        placeholder="Search by name or instrument"
+        className="mx-auto w-full max-w-screen-sm"
+      />
 
-      <div className="mx-auto flex w-full max-w-screen-md flex-col gap-2">
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
         {search({
           data: profiles,
           keys: ['given_name', 'family_name', 'instrument_name'],
