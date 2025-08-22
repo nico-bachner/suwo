@@ -114,7 +114,7 @@ export const EventAttendeesPage = ({ id }: Pick<Event, 'id'>) => {
 
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
         {search({
-          data: profiles,
+          data: profiles.sort((a, b) => b.attendance_rate - a.attendance_rate),
           keys: ['given_name', 'family_name'],
           query,
         }).map((profile) => (
