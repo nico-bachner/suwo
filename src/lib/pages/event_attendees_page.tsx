@@ -108,14 +108,14 @@ export const EventAttendeesPage = ({ id }: Pick<Event, 'id'>) => {
         onChange={({ target }) => {
           setQuery(target.value)
         }}
-        placeholder="Search by name or instrument"
+        placeholder="Search by first or last name"
         className="mx-auto w-full max-w-screen-sm"
       />
 
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
         {search({
           data: profiles,
-          keys: ['given_name', 'family_name', 'instrument_name'],
+          keys: ['given_name', 'family_name'],
           query,
         }).map((profile) => (
           <EventAttendee
