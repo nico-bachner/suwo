@@ -1,9 +1,4 @@
 import {
-  apiRoutes as attendanceApiRoutes,
-  queryKeys as attendanceQueryKeys,
-  routes as attendanceRoutes,
-} from './features/attendance/routes'
-import {
   apiRoutes as authApiRoutes,
   routes as authRoutes,
 } from './features/auth/routes'
@@ -12,20 +7,15 @@ import { Profile } from './lib/validators/profile_validator'
 import { createURL } from './utils/http/create_url'
 
 export const queryKeys = {
-  ...attendanceQueryKeys,
-  CURRENT_WEEK: () => ['current-week'],
   EQUIPMENT: () => ['equipment'],
 }
 
 export const apiRoutes = {
-  ...attendanceApiRoutes,
   ...authApiRoutes,
-  CURRENT_WEEK: () => createURL({ path: ['api', 'usyd', 'current-week'] }),
   EQUIPMENT: () => createURL({ path: ['api', 'equipment'] }),
 }
 
 export const routes = {
-  ...attendanceRoutes,
   ...authRoutes,
 
   // Calendar

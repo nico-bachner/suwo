@@ -13,7 +13,6 @@ model User {
     updated_at DateTime @default(now()) @updatedAt
 
     // Relations
-    Attendances          Attendance[]
     EventAttendee        EventAttendee[]
     MailingListRecipient MailingListRecipient?
     Payments             Payment[]

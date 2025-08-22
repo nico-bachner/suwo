@@ -1,4 +1,3 @@
-import { currentWeekQuery } from './current_week_query'
 import { equipmentQuery } from './equipment_query'
 import {
   eventAttendeesQuery,
@@ -23,7 +22,6 @@ import {
   userInstrumentsQueryKey,
 } from './user_instruments_query'
 import { userRolesQuery, userRolesQueryKey } from './user_roles_query'
-import { weeklyAttendancesQuery } from './weekly_attendances_query'
 
 export const queryKeys = {
   // Event
@@ -76,7 +74,4 @@ export const queries = {
   // User
   USER_INSTRUMENTS: userInstrumentsQuery,
   USER_ROLES: userRolesQuery,
-
-  WEEKLY_ATTENDANCES: weeklyAttendancesQuery,
-  CURRENT_WEEK: currentWeekQuery,
 }

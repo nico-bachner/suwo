@@ -1,12 +1,6 @@
-'use client'
-
-import { useQuery } from '@tanstack/react-query'
-
 import { SOCIAL_LINKS } from '@/config'
-import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
-import { getCurrentSemester, getCurrentYear } from '@/utils/date_manipulation'
 
 import { FooterLink } from './footer_link'
 import { SUWOLogo } from './suwo_logo'
@@ -16,116 +10,98 @@ type FooterProps = {
   className?: string
 }
 
-export const Footer = ({ className }: FooterProps) => {
-  const { data: currentWeek } = useQuery(queries.CURRENT_WEEK())
-
-  return (
-    <div
+export const Footer = ({ className }: FooterProps) => (
+  <div
+    className={cn(
+      'border-neutral-4/80 bg-neutral-5/80 border-t py-24 backdrop-blur',
+      className,
+    )}
+  >
+    <footer
       className={cn(
-        'border-neutral-4/80 bg-neutral-5/80 border-t py-24 backdrop-blur',
-        className,
+        'grid grid-cols-3 gap-x-8 gap-y-8 md:grid-cols-5 md:gap-y-16',
+        'mx-auto w-full max-w-screen-lg',
       )}
     >
-      <footer
-        className={cn(
-          'grid grid-cols-3 gap-x-8 gap-y-8 md:grid-cols-5 md:gap-y-16',
-          'mx-auto w-full max-w-screen-lg',
-        )}
-      >
-        <div className="flex flex-1 flex-col gap-2">
-          <p className="text-neutral-1 text-lg font-bold">The Club</p>
-          <FooterLink href={routes.HOME()}>About Us</FooterLink>
-          <FooterLink href={routes.HISTORY()}>Our History</FooterLink>
-          <FooterLink href={routes.PROFILES()}>Our Members</FooterLink>
-        </div>
+      <div className="flex flex-1 flex-col gap-2">
+        <p className="text-neutral-1 text-lg font-bold">The Club</p>
+        <FooterLink href={routes.HOME()}>About Us</FooterLink>
+        <FooterLink href={routes.HISTORY()}>Our History</FooterLink>
+        <FooterLink href={routes.PROFILES()}>Our Members</FooterLink>
+      </div>
 
-        <div className="flex flex-1 flex-col gap-2 text-lg">
-          <p className="text-neutral-1 font-bold">Members</p>
-          <FooterLink href={routes.EVENTS()}>Events</FooterLink>
-          <FooterLink href={routes.CALENDAR()}>Calendar</FooterLink>
-          <FooterLink
-            href={
-              currentWeek
-                ? routes.WEEKLY_ATTENDANCES({
-                    year: getCurrentYear(),
-                    semester: getCurrentSemester(),
-                    week: currentWeek,
-                  })
-                : routes.ATTENDANCES()
-            }
-          >
-            Attendance Sheet
+      <div className="flex flex-1 flex-col gap-2 text-lg">
+        <p className="text-neutral-1 font-bold">Members</p>
+        <FooterLink href={routes.EVENTS()}>Events</FooterLink>
+        <FooterLink href={routes.CALENDAR()}>Calendar</FooterLink>
+      </div>
+
+      <div className="flex flex-1 flex-col gap-2 text-lg">
+        <p className="text-neutral-1 font-bold">Our Socials</p>
+        {SOCIAL_LINKS.map(({ href, title }) => (
+          <FooterLink key={href} href={href} external>
+            {title}
           </FooterLink>
-        </div>
+        ))}
+      </div>
 
-        <div className="flex flex-1 flex-col gap-2 text-lg">
-          <p className="text-neutral-1 font-bold">Our Socials</p>
-          {SOCIAL_LINKS.map(({ href, title }) => (
-            <FooterLink key={href} href={href} external>
-              {title}
-            </FooterLink>
-          ))}
-        </div>
+      <div className="col-span-3 flex flex-col gap-2 text-right md:col-span-2">
+        <address>
+          Holme Building (A09), Science Rd, The University of Sydney, NSW 2006
+        </address>
 
-        <div className="col-span-3 flex flex-col gap-2 text-right md:col-span-2">
-          <address>
-            Holme Building (A09), Science Rd, The University of Sydney, NSW 2006
-          </address>
+        <p>
+          We acknowledge the Gadigal people of the Eora Nation as the
+          Traditional Custodians of the land on which we hold rehearsals, and
+          pay our respects to Elders past, present and emerging.
+        </p>
+      </div>
 
-          <p>
-            We acknowledge the Gadigal people of the Eora Nation as the
-            Traditional Custodians of the land on which we hold rehearsals, and
-            pay our respects to Elders past, present and emerging.
-          </p>
-        </div>
+      <p className="col-span-3 md:col-span-2">
+        SUWO is supported by the{' '}
+        <a
+          href="https://usu.edu.au"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary-2 outline-none hover:underline focus:underline"
+        >
+          University of Sydney Union
+        </a>{' '}
+        Clubs and Societies program, as well as the University of Sydney&apos;s{' '}
+        <a
+          href="https://www.standrewscollege.edu.au"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary-2 outline-none hover:underline focus:underline"
+        >
+          St Andrew&apos;s College
+        </a>
+        .
+      </p>
 
-        <p className="col-span-3 md:col-span-2">
-          SUWO is supported by the{' '}
+      <div className="col-span-3 flex flex-col gap-2 text-right md:col-span-2 md:col-start-4">
+        <p>
+          © {new Date().getFullYear()} The University of Sydney Wind Orchestra
+          (SUWO). All rights reserved.
+        </p>
+        <p>
+          Developed by{' '}
           <a
-            href="https://usu.edu.au"
+            href="https://nicobachner.com"
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary-2 outline-none hover:underline focus:underline"
           >
-            University of Sydney Union
-          </a>{' '}
-          Clubs and Societies program, as well as the University of
-          Sydney&apos;s{' '}
-          <a
-            href="https://www.standrewscollege.edu.au"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary-2 outline-none hover:underline focus:underline"
-          >
-            St Andrew&apos;s College
+            Nico Bachner
           </a>
           .
         </p>
+      </div>
 
-        <div className="col-span-3 flex flex-col gap-2 text-right md:col-span-2 md:col-start-4">
-          <p>
-            © {new Date().getFullYear()} The University of Sydney Wind
-            Orchestra (SUWO). All rights reserved.
-          </p>
-          <p>
-            Developed by{' '}
-            <a
-              href="https://nicobachner.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary-2 outline-none hover:underline focus:underline"
-            >
-              Nico Bachner
-            </a>
-            .
-          </p>
-        </div>
-
-        <div className="col-span-3 flex flex-col items-center justify-center gap-x-12 gap-y-6 md:col-span-5 md:flex-row">
-          <SUWOLogo className="h-14" />
-          <USYDLogo className="h-14" />
-        </div>
-      </footer>
-    </div>
-  )
-}
+      <div className="col-span-3 flex flex-col items-center justify-center gap-x-12 gap-y-6 md:col-span-5 md:flex-row">
+        <SUWOLogo className="h-14" />
+        <USYDLogo className="h-14" />
+      </div>
+    </footer>
+  </div>
+)

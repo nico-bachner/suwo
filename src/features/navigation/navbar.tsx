@@ -7,7 +7,6 @@ import { Button } from '@/design_system/button'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
-import { getCurrentSemester, getCurrentYear } from '@/utils/date_manipulation'
 
 import { NavbarLink } from './navbar_link'
 import { NavbarMenu } from './navbar_menu'
@@ -19,7 +18,6 @@ type NavbarProps = {
 
 export const Navbar = ({ className }: NavbarProps) => {
   const { data: session } = useQuery(queries.SESSION())
-  const { data: currentWeek } = useQuery(queries.CURRENT_WEEK())
 
   return (
     <nav
@@ -40,23 +38,11 @@ export const Navbar = ({ className }: NavbarProps) => {
       </Link>
 
       <div className="hidden items-center gap-4 md:flex">
+        <NavbarLink href={routes.HOME()}>Home</NavbarLink>
         <NavbarLink href={routes.HISTORY()}>History</NavbarLink>
         <NavbarLink href={routes.PROFILES()}>Members</NavbarLink>
         <NavbarLink href={routes.EVENTS()}>Events</NavbarLink>
         <NavbarLink href={routes.CALENDAR()}>Calendar</NavbarLink>
-        <NavbarLink
-          href={
-            currentWeek
-              ? routes.WEEKLY_ATTENDANCES({
-                  year: getCurrentYear(),
-                  semester: getCurrentSemester(),
-                  week: currentWeek,
-                })
-              : routes.ATTENDANCES()
-          }
-        >
-          Attendance
-        </NavbarLink>
       </div>
 
       <div className="hidden items-center gap-2 md:flex">

@@ -3,8 +3,8 @@
 import {
   BookOpenIcon,
   CalendarDaysIcon,
-  ClipboardDocumentCheckIcon,
   CogIcon,
+  HomeModernIcon,
   UserIcon,
   UsersIcon,
 } from '@heroicons/react/24/outline'
@@ -14,7 +14,6 @@ import { Divider } from '@/design_system/divider'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
-import { getCurrentSemester, getCurrentYear } from '@/utils/date_manipulation'
 
 import { TabBarLink } from './tab_bar_link'
 
@@ -24,7 +23,6 @@ type TabBarProps = {
 
 export const TabBar = ({ className }: TabBarProps) => {
   const { data: session } = useQuery(queries.SESSION())
-  const { data: currentWeek } = useQuery(queries.CURRENT_WEEK())
 
   return (
     <nav
@@ -35,25 +33,14 @@ export const TabBar = ({ className }: TabBarProps) => {
         className,
       )}
     >
-      <TabBarLink href={routes.EVENTS()} icon={CalendarDaysIcon}>
-        Events
+      <TabBarLink href={routes.HOME()} icon={HomeModernIcon}>
+        Home
       </TabBarLink>
 
       <Divider orientation="vertical" className="h-1/2" />
 
-      <TabBarLink
-        href={
-          currentWeek
-            ? routes.WEEKLY_ATTENDANCES({
-                year: getCurrentYear(),
-                semester: getCurrentSemester(),
-                week: currentWeek,
-              })
-            : routes.ATTENDANCES()
-        }
-        icon={ClipboardDocumentCheckIcon}
-      >
-        Attendance
+      <TabBarLink href={routes.EVENTS()} icon={CalendarDaysIcon}>
+        Events
       </TabBarLink>
 
       <Divider orientation="vertical" className="h-1/2" />
