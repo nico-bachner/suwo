@@ -1,4 +1,5 @@
 import { QueryClient, UseMutationOptions } from '@tanstack/react-query'
+import { toast } from 'sonner'
 
 import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
@@ -102,8 +103,10 @@ export const eventAttendeesMutation = (
       )
     }
 
-    // eslint-disable-next-line no-alert, no-undef
-    alert(`${error.message}\n\nPlease try again`)
+    toast.error(error.message)
+  },
+  onSuccess: () => {
+    toast.success('Successfully updated attendance status')
   },
   onSettled: async (data) => {
     await queryClient.invalidateQueries({

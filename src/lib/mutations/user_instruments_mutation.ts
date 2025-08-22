@@ -1,4 +1,5 @@
 import { QueryClient, UseMutationOptions } from '@tanstack/react-query'
+import { toast } from 'sonner'
 import z from 'zod'
 
 import { createURL } from '@/utils/http/create_url'
@@ -43,8 +44,10 @@ export const userInstrumentsMutation = (
     }
   },
   onError: (error) => {
-    // eslint-disable-next-line no-alert, no-undef
-    alert(`${error.message}\n\nPlease try again`)
+    toast.error(error.message)
+  },
+  onSuccess: () => {
+    toast.success('Successfully updated instruments')
   },
   onSettled: async () => {
     await queryClient.invalidateQueries({

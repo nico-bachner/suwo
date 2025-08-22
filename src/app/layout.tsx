@@ -2,6 +2,7 @@ import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
 import Image from 'next/image'
+import { Toaster } from 'sonner'
 
 import ensemble from '@/features/marketing/ensemble.jpg'
 import { Footer } from '@/features/navigation/footer'
@@ -50,6 +51,8 @@ export default function Layout({ children }: LayoutFileProps) {
 
             <Footer className="px-4" />
           </div>
+
+          <Toaster />
         </QueryProvider>
 
         <Analytics />

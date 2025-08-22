@@ -1,4 +1,5 @@
 import { QueryClient, UseMutationOptions } from '@tanstack/react-query'
+import { toast } from 'sonner'
 
 import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
@@ -36,12 +37,10 @@ export const mailingListRecipientMutation = (
     }
   },
   onError: (error) => {
-    // eslint-disable-next-line no-alert, no-undef
-    alert(`${error.message}\n\nPlease try again`)
+    toast.error(error.message)
   },
   onSuccess: () => {
-    // eslint-disable-next-line no-alert, no-undef
-    alert('Successfully updated mailing list preference')
+    toast.success('Successfully updated mailing list preference')
   },
   onSettled: async () => {
     await queryClient.invalidateQueries({
