@@ -3,6 +3,8 @@ import { cookies } from 'next/headers'
 import { Session, SessionValidator } from '@/lib/validators/session_validator'
 
 import { SESSION_COOKIE_NAME } from './config'
+import { createSession } from './create_session'
+import { deleteSession } from './delete_session'
 import { verifyJWT } from './jwt'
 
 /**
@@ -20,5 +22,19 @@ export const getSession = async (): Promise<Session | null> => {
     return null
   }
 
-  return SessionValidator.parse(await verifyJWT(sessionCookie.value))
+  const session = SessionValidator.nullable().parse(
+    await verifyJWT(sessionCookie.value),
+  )
+
+  if (!session) {
+    // If the session is invalid, delete it
+    await deleteSession()
+
+    return null
+  }
+
+  // If the session is valid, create a new session cookie to refresh it
+  await createSession(session)
+
+  return session
 }

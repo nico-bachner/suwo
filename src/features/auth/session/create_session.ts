@@ -2,7 +2,7 @@ import { cookies } from 'next/headers'
 
 import { Session } from '@/lib/validators/session_validator'
 
-import { SESSION_COOKIE_NAME } from './config'
+import { SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_NAME } from './config'
 import { createJWT } from './jwt'
 
 export const createSession = async (session: Session) => {
@@ -12,7 +12,7 @@ export const createSession = async (session: Session) => {
 
   cookieStore.set(SESSION_COOKIE_NAME, sessionJWT, {
     httpOnly: true,
-    maxAge: 365 * 24 * 60 * 60, // 1 year
+    maxAge: SESSION_COOKIE_MAX_AGE,
     path: '/',
     sameSite: 'lax',
     secure: true,

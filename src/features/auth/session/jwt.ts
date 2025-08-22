@@ -1,18 +1,22 @@
 import { JWTPayload, SignJWT, jwtVerify } from 'jose'
 
-const key = new TextEncoder().encode(process.env.SESSION_SECRET)
+import { JWT_ALGORITHM, JWT_EXPIRATION_TIME, JWT_KEY } from './config'
 
 export const createJWT = (payload: JWTPayload) =>
   new SignJWT(payload)
-    .setProtectedHeader({ alg: 'HS256' })
+    .setProtectedHeader({ alg: JWT_ALGORITHM })
     .setIssuedAt()
-    .setExpirationTime('7d')
-    .sign(key)
+    .setExpirationTime(Date.now() + JWT_EXPIRATION_TIME)
+    .sign(JWT_KEY)
 
 export const verifyJWT = async (session: string) => {
-  const { payload } = await jwtVerify(session, key, {
-    algorithms: ['HS256'],
-  })
+  try {
+    const { payload } = await jwtVerify(session, JWT_KEY, {
+      algorithms: [JWT_ALGORITHM],
+    })
 
-  return payload
+    return payload
+  } catch {
+    return null
+  }
 }
