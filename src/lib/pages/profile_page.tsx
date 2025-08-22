@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 
 import { Button } from '@/design_system/button'
-import { EventsAttended } from '@/features/profile/events_attended'
+import { ProfileEventsAttended } from '@/features/profile/profile_events_attended'
 import { ProfileInstruments } from '@/features/profile/profile_instruments'
 import { Profile } from '@/generated/prisma'
 import { queries } from '@/lib/queries'
@@ -55,7 +55,7 @@ export const ProfilePage = ({ user_id }: Pick<Profile, 'user_id'>) => {
 
       <ProfileInstruments profile={profile} />
 
-      <EventsAttended user_id={profile.user_id} />
+      <ProfileEventsAttended user_id={profile.user_id} />
 
       {session && session.user_id === profile.user_id && (
         <Button variant="primary" asChild>

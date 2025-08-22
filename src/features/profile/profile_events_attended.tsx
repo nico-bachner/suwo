@@ -3,10 +3,12 @@ import { useQuery } from '@tanstack/react-query'
 import { queries } from '@/lib/queries'
 import { EventAttendee } from '@/lib/validators/event_attendee_validator'
 
-import { EventAttended } from './event_attended'
+import { ProfileEventAttended } from './profile_event_attended'
 import { useAttendanceRate } from './use_attendance_rate'
 
-export const EventsAttended = ({ user_id }: Pick<EventAttendee, 'user_id'>) => {
+export const ProfileEventsAttended = ({
+  user_id,
+}: Pick<EventAttendee, 'user_id'>) => {
   const { data: events } = useQuery(queries.EVENTS())
   const { data: profile } = useQuery(queries.PROFILE(user_id))
   const attendanceRate = useAttendanceRate(user_id)
@@ -25,7 +27,11 @@ export const EventsAttended = ({ user_id }: Pick<EventAttendee, 'user_id'>) => {
         {events
           .filter((event) => new Date(event.starts_at).getTime() < Date.now())
           .map((event) => (
-            <EventAttended key={event.id} event={event} profile={profile} />
+            <ProfileEventAttended
+              key={event.id}
+              event={event}
+              profile={profile}
+            />
           ))}
       </div>
     </div>
