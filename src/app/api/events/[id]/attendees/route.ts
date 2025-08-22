@@ -35,6 +35,20 @@ export const PATCH: APIRoute = async (req, { params }) => {
     })
   }
 
+  const existingAttendee = await prisma.eventAttendee.findFirst({
+    where: {
+      event_id: id,
+      user_id: data,
+    },
+  })
+
+  if (existingAttendee) {
+    return createResponse({
+      status: StatusCode.Conflict,
+      error: 'User is already an attendee of this event.',
+    })
+  }
+
   const eventAttendee = await prisma.eventAttendee.create({
     data: {
       event_id: id,

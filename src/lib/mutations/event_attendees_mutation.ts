@@ -42,6 +42,8 @@ export const eventAttendeesMutation = (
     switch (response.status) {
       case StatusCode.Created:
         return EventAttendeeValidator.shape.user_id.parse(response.data)
+      case StatusCode.Conflict:
+        throw new Error(response.error)
       default:
         throw new Error('Failed to fetch data')
     }
