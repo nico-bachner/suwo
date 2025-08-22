@@ -21,7 +21,7 @@ export const MailingListRecipientsPage = () => {
   } = useQuery(queries.MAILING_LIST_RECIPIENTS())
   const [query, setQuery] = useState('')
 
-  if (isSessionPending || isMailingListRecipientsPending) {
+  if (isSessionPending) {
     return (
       <main className="prose">
         <h1>Loading...</h1>
@@ -38,20 +38,28 @@ export const MailingListRecipientsPage = () => {
     )
   }
 
-  if (mailingListRecipientsError) {
-    return (
-      <main className="prose">
-        <h1>Error</h1>
-        <p>{mailingListRecipientsError.message}</p>
-      </main>
-    )
-  }
-
   if (!session) {
     return (
       <main className="prose">
         <h1>Not logged in</h1>
         <p>Please log in to view this page.</p>
+      </main>
+    )
+  }
+
+  if (isMailingListRecipientsPending) {
+    return (
+      <main className="prose">
+        <h1>Loading...</h1>
+      </main>
+    )
+  }
+
+  if (mailingListRecipientsError) {
+    return (
+      <main className="prose">
+        <h1>Error</h1>
+        <p>{mailingListRecipientsError.message}</p>
       </main>
     )
   }
@@ -78,7 +86,7 @@ export const MailingListRecipientsPage = () => {
     <main className="prose">
       <h1>Mailing List Recipients</h1>
 
-      <div className="flex flex-col-reverse gap-2 sm:flex-row">
+      <div className="flex flex-col-reverse gap-2 sm:flex-row sm:items-center">
         <SearchInput
           value={query}
           onChange={({ target }) => {
