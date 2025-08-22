@@ -5,7 +5,7 @@ li[data-sonner-toast][data-styled='true'] [data-icon] {
   @apply -m-1 size-6;
 }
 li[data-sonner-toast][data-styled='true'] [data-title] {
-  @apply pr-3.5 text-sm font-medium;
+  @apply text-sm font-medium;
 }
 
 li[data-sonner-toast][data-styled='true'][data-type='default'] {
