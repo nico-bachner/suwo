@@ -89,8 +89,6 @@ export const ProfileEditPage = ({ user_id }: Pick<Profile, 'user_id'>) => {
         </Heading>
       </div>
 
-      {profile.roles.length > 0 && <p>{profile.roles.join(', ')}</p>}
-
       <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
         <SettingsSection
           title="Instruments"
