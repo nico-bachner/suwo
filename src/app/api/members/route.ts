@@ -43,7 +43,7 @@ export const GET: APIRoute = async () => {
     }),
   ])
 
-  const data = z.array(ProfileValidator).parse(
+  const profilesDTO = z.array(ProfileValidator).parse(
     profiles.map((profile) => ({
       ...profile,
       attendance_rate: getAttendanceRate(
@@ -65,6 +65,6 @@ export const GET: APIRoute = async () => {
 
   return createResponse({
     status: StatusCode.OK,
-    data,
+    data: profilesDTO,
   })
 }

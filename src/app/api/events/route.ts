@@ -14,9 +14,19 @@ export const GET: APIRoute = async () => {
     },
   })
 
+  const eventsDTO = z.array(EventValidator).parse(
+    events.map((event) => ({
+      ...event,
+      starts_at: event.starts_at.toISOString(),
+      ends_at: event.ends_at ? event.ends_at.toISOString() : null,
+      created_at: event.created_at.toISOString(),
+      updated_at: event.updated_at.toISOString(),
+    })),
+  )
+
   return createResponse({
     status: StatusCode.OK,
-    data: events,
+    data: eventsDTO,
   })
 }
 
@@ -72,8 +82,16 @@ export const POST: APIRoute = async (request) => {
     },
   })
 
+  const eventDTO = EventValidator.parse({
+    ...event,
+    starts_at: event.starts_at.toISOString(),
+    ends_at: event.ends_at ? event.ends_at.toISOString() : null,
+    created_at: event.created_at.toISOString(),
+    updated_at: event.updated_at.toISOString(),
+  })
+
   return createResponse({
     status: StatusCode.Created,
-    data: event,
+    data: eventDTO,
   })
 }

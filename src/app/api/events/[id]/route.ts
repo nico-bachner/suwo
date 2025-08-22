@@ -20,8 +20,16 @@ export const GET: APIRoute = async (_, { params }) => {
     })
   }
 
+  const eventDTO = EventValidator.parse({
+    ...event,
+    starts_at: event.starts_at.toISOString(),
+    ends_at: event.ends_at ? event.ends_at.toISOString() : null,
+    created_at: event.created_at.toISOString(),
+    updated_at: event.updated_at.toISOString(),
+  })
+
   return createResponse({
     status: StatusCode.OK,
-    data: event,
+    data: eventDTO,
   })
 }

@@ -47,7 +47,7 @@ export const GET: APIRoute = async (_, { params }) => {
     })
   }
 
-  const data = ProfileValidator.parse({
+  const profileDTO = ProfileValidator.parse({
     ...profile,
     attendance_rate: getAttendanceRate(
       events.map((event) => ({
@@ -67,6 +67,6 @@ export const GET: APIRoute = async (_, { params }) => {
 
   return createResponse({
     status: StatusCode.OK,
-    data,
+    data: profileDTO,
   })
 }
