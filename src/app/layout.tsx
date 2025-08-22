@@ -1,7 +1,3 @@
-import {
-  CheckCircleIcon,
-  ExclamationCircleIcon,
-} from '@heroicons/react/24/outline'
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Limelight, Raleway } from 'next/font/google'
@@ -56,12 +52,7 @@ export default function Layout({ children }: LayoutFileProps) {
             <Footer className="px-4" />
           </div>
 
-          <Toaster
-            icons={{
-              success: <CheckCircleIcon />,
-              error: <ExclamationCircleIcon />,
-            }}
-          />
+          <Toaster />
         </QueryProvider>
 
         <Analytics />

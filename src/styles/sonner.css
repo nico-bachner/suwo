@@ -1,10 +1,13 @@
 li[data-sonner-toast][data-styled='true'] {
-  @apply flex h-14 flex-row items-center gap-4 rounded-full border px-5 backdrop-blur;
+  @apply flex flex-row items-center gap-3 rounded-full border p-4 backdrop-blur;
 }
-li[data-sonner-toast][data-styled='true'] [data-icon] {
-  @apply -m-1 size-6;
+li[data-sonner-toast][data-styled='true'] > [data-icon] {
+  @apply m-0 size-fit;
 }
-li[data-sonner-toast][data-styled='true'] [data-title] {
+li[data-sonner-toast][data-styled='true'] > [data-icon] > svg {
+  @apply size-6;
+}
+li[data-sonner-toast][data-styled='true'] > [data-content] > [data-title] {
   @apply text-sm font-medium;
 }
 

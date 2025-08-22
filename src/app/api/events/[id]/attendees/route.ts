@@ -45,7 +45,7 @@ export const PATCH: APIRoute = async (req, { params }) => {
   if (existingAttendee) {
     return createResponse({
       status: StatusCode.Conflict,
-      error: 'User is already an attendee of this event.',
+      error: 'User is already an attendee of this event',
     })
   }
 
