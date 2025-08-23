@@ -1,7 +1,7 @@
 import z from 'zod'
 
 import { getSession } from '@/features/auth/session/get_session'
-import { getUserDTO } from '@/lib/dtos/user_dto'
+import { getUserDTO, updateUser } from '@/lib/dtos/user_dto'
 import { UserDTOValidator } from '@/lib/dtos/user_dto_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
@@ -27,11 +27,7 @@ export const GET: APIRoute = async (_, { params }) => {
       id,
     },
     include: {
-      UserInstrument: {
-        select: {
-          instrument_id: true,
-        },
-      },
+      instruments: true,
     },
   })
 
@@ -77,25 +73,9 @@ export const PATCH: APIRoute = async (request, { params }) => {
     where: {
       id,
     },
-    data: {
-      email: data.email,
-      given_name: data.given_name,
-      mailing_list_preference: data.mailing_list_preference,
-      family_name: data.family_name,
-      usu_number: data.usu_number,
-      UserInstrument: data.instruments && {
-        deleteMany: {},
-        create: data.instruments.map((instrument_id) => ({
-          instrument_id,
-        })),
-      },
-    },
+    data: updateUser(data),
     include: {
-      UserInstrument: {
-        select: {
-          instrument_id: true,
-        },
-      },
+      instruments: true,
     },
   })
 

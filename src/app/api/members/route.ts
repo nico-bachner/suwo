@@ -16,11 +16,7 @@ export const GET: APIRoute = async () => {
         },
       ],
       include: {
-        UserInstrument: {
-          select: {
-            instrument_id: true,
-          },
-        },
+        instruments: true,
         EventAttendee: {
           select: {
             event_id: true,

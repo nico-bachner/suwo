@@ -1,5 +1,5 @@
 import { getAttendanceRate } from '@/features/profile/get_attendance_rate'
-import { Event, EventAttendee, User, UserInstrument } from '@/generated/prisma'
+import { Event, EventAttendee, Instrument, User } from '@/generated/prisma'
 
 import { ProfileDTO } from './profile_dto_validator'
 
@@ -9,7 +9,7 @@ export const getProfileDTO = (
     'id' | 'given_name' | 'family_name' | 'created_at' | 'updated_at'
   > & {
     EventAttendee: Pick<EventAttendee, 'event_id'>[]
-    UserInstrument: Pick<UserInstrument, 'instrument_id'>[]
+    instruments: Pick<Instrument, 'id'>[]
   },
   events: Event[],
 ): ProfileDTO => ({
@@ -25,7 +25,7 @@ export const getProfileDTO = (
     user.created_at.toISOString(),
   ),
   events: user.EventAttendee.map(({ event_id }) => event_id),
-  instruments: user.UserInstrument.map(({ instrument_id }) => instrument_id),
+  instruments: user.instruments.map((instrument) => instrument.id),
 
   created_at: user.created_at.toISOString(),
   updated_at: user.updated_at.toISOString(),

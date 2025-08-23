@@ -2,7 +2,7 @@ import z from 'zod'
 
 import { createSession } from '@/features/auth/session/create_session'
 import { getSession } from '@/features/auth/session/get_session'
-import { getUserDTO } from '@/lib/dtos/user_dto'
+import { createUser, getUserDTO } from '@/lib/dtos/user_dto'
 import { UserDTOValidator } from '@/lib/dtos/user_dto_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
@@ -21,11 +21,7 @@ export const GET: APIRoute = async () => {
 
   const users = await prisma.user.findMany({
     include: {
-      UserInstrument: {
-        select: {
-          instrument_id: true,
-        },
-      },
+      instruments: true,
     },
   })
 
@@ -62,23 +58,10 @@ export const POST: APIRoute = async (request) => {
     })
   }
 
-  const { instruments, ...rest } = data
-
   const user = await prisma.user.create({
-    data: {
-      ...rest,
-      UserInstrument: {
-        create: instruments.map((instrument_id) => ({
-          instrument_id,
-        })),
-      },
-    },
+    data: createUser(data),
     include: {
-      UserInstrument: {
-        select: {
-          instrument_id: true,
-        },
-      },
+      instruments: true,
     },
   })
 

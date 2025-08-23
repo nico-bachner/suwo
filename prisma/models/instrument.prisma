@@ -3,13 +3,13 @@ model Instrument {
     id String @id @default(uuid())
 
     // Required Attributes
-    name String @unique
+    name    String @unique
+    players User[]
 
     // Metadata
     created_at DateTime @default(now())
     updated_at DateTime @default(now()) @updatedAt
 
     // Relations
-    PracticeParts  PracticePart[]
-    UserInstrument UserInstrument[]
+    PracticeParts PracticePart[]
 }

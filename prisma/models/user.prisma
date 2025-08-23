@@ -3,9 +3,10 @@ model User {
     id String @id @default(uuid())
 
     // Required Attributes
-    email                   String  @unique
+    email                   String       @unique
     given_name              String
     mailing_list_preference Boolean
+    instruments             Instrument[]
 
     // Optional Attributes
     family_name String?
@@ -19,7 +20,6 @@ model User {
     // Relations
     EventAttendee      EventAttendee[]
     Payments           Payment[]
-    UserInstrument     UserInstrument[]
     UserRole           UserRole[]
     VerificationTokens VerificationToken[]
 }
