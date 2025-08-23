@@ -10,11 +10,11 @@ import {
   EventAttendee,
   EventAttendeeValidator,
 } from '../validators/event_attendee_validator'
-import { Profile } from '../validators/profile_validator'
+import { ProfileDTO } from '../validators/profile_dto_validator'
 
 type Context = {
   eventAttendees: EventAttendee['user_id'][] | undefined
-  profile: Profile | undefined
+  profile: ProfileDTO | undefined
 }
 
 export const eventAttendeesMutation = (
@@ -61,7 +61,9 @@ export const eventAttendeesMutation = (
       eventAttendees: queryClient.getQueryData<EventAttendee['user_id'][]>(
         queryKeys.EVENT_ATTENDEES(event_id),
       ),
-      profile: queryClient.getQueryData<Profile>(queryKeys.PROFILE(variables)),
+      profile: queryClient.getQueryData<ProfileDTO>(
+        queryKeys.PROFILE(variables),
+      ),
     }
 
     queryClient.setQueryData<EventAttendee['user_id'][]>(
@@ -75,7 +77,7 @@ export const eventAttendeesMutation = (
       },
     )
 
-    queryClient.setQueryData<Profile>(
+    queryClient.setQueryData<ProfileDTO>(
       queryKeys.PROFILE(variables),
       (snapshot) => {
         if (!snapshot) {
@@ -97,7 +99,7 @@ export const eventAttendeesMutation = (
         queryKeys.EVENT_ATTENDEES(event_id),
         context.eventAttendees,
       )
-      queryClient.setQueryData<Profile>(
+      queryClient.setQueryData<ProfileDTO>(
         queryKeys.PROFILE(variables),
         context.profile,
       )

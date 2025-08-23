@@ -3,13 +3,13 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Button } from '@/design_system/button'
 import { mutations } from '@/lib/mutations'
 import { queries } from '@/lib/queries'
-import { Profile } from '@/lib/validators/profile_validator'
+import { ProfileDTO } from '@/lib/validators/profile_dto_validator'
 
 import { getProfileScreenName } from '../profile/get_profile_screen_name'
 
 type EventAttendeeProps = {
   eventId: string
-  profile: Profile
+  profile: ProfileDTO
 }
 
 export const EventAttendee = ({ eventId, profile }: EventAttendeeProps) => {

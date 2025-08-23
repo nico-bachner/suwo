@@ -3,7 +3,7 @@ import {
   routes as authRoutes,
 } from './features/auth/routes'
 import { Event } from './lib/validators/event_validator'
-import { Profile } from './lib/validators/profile_validator'
+import { ProfileDTO } from './lib/validators/profile_dto_validator'
 import { createURL } from './utils/http/create_url'
 
 export const queryKeys = {
@@ -39,9 +39,9 @@ export const routes = {
 
   // Profiles
   PROFILES: () => createURL({ path: ['members'] }),
-  PROFILE: (user_id: Profile['user_id']) =>
+  PROFILE: (user_id: ProfileDTO['user_id']) =>
     createURL({ path: ['members', user_id] }),
-  PROFILE_EDIT: (user_id: Profile['user_id']) =>
+  PROFILE_EDIT: (user_id: ProfileDTO['user_id']) =>
     createURL({ path: ['members', user_id, 'edit'] }),
 
   // Settings

@@ -1,10 +1,10 @@
 import { Event } from '@/lib/validators/event_validator'
-import { Profile } from '@/lib/validators/profile_validator'
+import { ProfileDTO } from '@/lib/validators/profile_dto_validator'
 
 export const getAttendanceRate = (
   events: Pick<Event, 'id' | 'starts_at'>[],
-  profileEvents: Profile['events'],
-  profileCreatedAt: Profile['created_at'],
+  profileEvents: ProfileDTO['events'],
+  profileCreatedAt: ProfileDTO['created_at'],
 ) => {
   const pastEventsSinceAccountCreation = events.filter((event) => {
     const eventDate = new Date(event.starts_at).getTime()

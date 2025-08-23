@@ -5,11 +5,14 @@ import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-import { Profile, ProfileValidator } from '../validators/profile_validator'
+import {
+  ProfileDTO,
+  ProfileDTOValidator,
+} from '../validators/profile_dto_validator'
 
 export const profilesQueryKey = () => ['members']
 
-export const profilesQuery = (): UseQueryOptions<Profile[]> => ({
+export const profilesQuery = (): UseQueryOptions<ProfileDTO[]> => ({
   queryKey: profilesQueryKey(),
   queryFn: async ({ signal }) => {
     const response = await parseResponse(
@@ -20,7 +23,7 @@ export const profilesQuery = (): UseQueryOptions<Profile[]> => ({
 
     switch (response.status) {
       case StatusCode.OK:
-        return z.array(ProfileValidator).parse(response.data)
+        return z.array(ProfileDTOValidator).parse(response.data)
       default:
         throw new Error('Failed to fetch data')
     }

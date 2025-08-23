@@ -13,9 +13,9 @@ import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 
 import { UpdateUserInstrumentsForm } from '../forms/update_user_instruments_form'
-import { Profile } from '../validators/profile_validator'
+import { ProfileDTO } from '../validators/profile_dto_validator'
 
-export const ProfileEditPage = ({ user_id }: Pick<Profile, 'user_id'>) => {
+export const ProfileEditPage = ({ user_id }: Pick<ProfileDTO, 'user_id'>) => {
   const {
     data: profile,
     error: profileError,

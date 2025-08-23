@@ -1,7 +1,4 @@
-import z from 'zod'
-
-import { getAttendanceRate } from '@/features/profile/get_attendance_rate'
-import { ProfileValidator } from '@/lib/validators/profile_validator'
+import { getProfileDTO } from '@/lib/dtos/profile_dto'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'
@@ -43,24 +40,11 @@ export const GET: APIRoute = async () => {
     }),
   ])
 
-  const profilesDTO = z.array(ProfileValidator).parse(
-    profiles.map((profile) => ({
-      ...profile,
-      attendance_rate: getAttendanceRate(
-        events.map((event) => ({
-          id: event.id,
-          starts_at: event.starts_at.toISOString(),
-        })),
-        profile.user.EventAttendee.map(({ event_id }) => event_id),
-        profile.user.created_at.toISOString(),
-      ),
-      events: profile.user.EventAttendee.map(({ event_id }) => event_id),
-      instruments: profile.user.UserInstrument.map(
-        ({ instrument_id }) => instrument_id,
-      ),
-      created_at: profile.user.created_at.toISOString(),
-      updated_at: profile.updated_at.toISOString(),
-    })),
+  const profilesDTO = profiles.map((profile) =>
+    getProfileDTO({
+      profile,
+      events,
+    }),
   )
 
   return createResponse({
