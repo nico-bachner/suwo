@@ -41,7 +41,7 @@ export const EventAttendee = ({ eventId, profile }: EventAttendeeProps) => {
       {getUserDisplayName(profile)}
 
       <div
-        className="absolute -top-1 -right-1 z-10 rounded-full border px-1.5 py-0.5 tabular-nums"
+        className="absolute -top-1 -right-1 z-10 rounded-full border px-1 text-sm leading-tight tabular-nums"
         style={{
           color: `oklch(0.9 0.15 ${profile.attendance_rate * 1.2 + 30})`,
           backgroundColor: `oklch(0.6 0.15 ${profile.attendance_rate * 1.2 + 30})`,
