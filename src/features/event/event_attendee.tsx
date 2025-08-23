@@ -5,7 +5,7 @@ import { ProfileDTO } from '@/lib/dtos/profile_dto_validator'
 import { mutations } from '@/lib/mutations'
 import { queries } from '@/lib/queries'
 
-import { getUserDisplayName } from '../profile/get_user_display_name'
+import { getUserDisplayName } from '../user/get_user_display_name'
 
 type EventAttendeeProps = {
   eventId: string

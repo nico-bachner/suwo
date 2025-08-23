@@ -32,6 +32,7 @@ export default [
         process: 'readonly',
         window: 'readonly',
         LayoutProps: 'readonly',
+        PageProps: 'readonly',
       },
     },
     settings: {

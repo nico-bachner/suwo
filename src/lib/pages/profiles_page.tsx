@@ -1,60 +1,42 @@
 'use client'
 
-import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 
-import { SearchInput } from '@/design_system/input'
 import {
-  ProfilePreview,
-  ProfilePreviewSkeleton,
-} from '@/features/profile/profile_preview'
-import { queries, queryKeys } from '@/lib/queries'
-import { search } from '@/utils/search'
+  ProfilesScreen,
+  ProfilesScreenSkeleton,
+} from '@/features/profile/profiles_screen'
+import { queries } from '@/lib/queries'
 
 export const ProfilesPage = () => {
-  const queryClient = useQueryClient()
-  const { data: profiles, error, isPending } = useQuery(queries.PROFILES())
+  const {
+    data: users,
+    error: usersError,
+    isPending: isUsersPending,
+  } = useQuery(queries.USERS())
   useQuery(queries.INSTRUMENTS())
-  const [query, setQuery] = useState('')
 
-  if (error) {
-    throw new Error(`Failed to fetch profiles: ${error.message}`)
+  if (isUsersPending) {
+    return <ProfilesScreenSkeleton />
   }
 
-  if (profiles) {
-    profiles.forEach((profile) => {
-      queryClient.setQueryData(queryKeys.PROFILE(profile.user_id), profile)
-    })
+  if (usersError) {
+    return (
+      <main className="prose">
+        <h1>Error</h1>
+        <p>An error occurred while fetching members {usersError.message}</p>
+      </main>
+    )
   }
 
-  return (
-    <main className="prose">
-      <h1>Members</h1>
+  if (users.length === 0) {
+    return (
+      <main className="prose">
+        <h1>Members</h1>
+        <p>No members found.</p>
+      </main>
+    )
+  }
 
-      <div className="flex flex-col gap-6">
-        <SearchInput
-          value={query}
-          onChange={({ target }) => {
-            setQuery(target.value)
-          }}
-          placeholder="Search by name or instrument"
-          className="mx-auto w-full max-w-screen-sm"
-        />
-
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {isPending
-            ? Array.from({ length: 30 }).map((_, index) => (
-                <ProfilePreviewSkeleton key={index} />
-              ))
-            : search({
-                data: profiles,
-                keys: ['given_name', 'family_name', 'instrument_name'],
-                query,
-              }).map((profile) => (
-                <ProfilePreview key={profile.user_id} {...profile} />
-              ))}
-        </div>
-      </div>
-    </main>
-  )
+  return <ProfilesScreen users={users} />
 }

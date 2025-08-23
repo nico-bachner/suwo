@@ -5,25 +5,25 @@ import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 
 import { Button } from '@/design_system/button'
-import { ProfileEventsAttended } from '@/features/profile/profile_events_attended'
-import { ProfileInstruments } from '@/features/profile/profile_instruments'
+import { getUserDisplayName } from '@/features/user/get_user_display_name'
+import { UserEventsAttended } from '@/features/user/user_events_attended'
+import { UserInstruments } from '@/features/user/user_instruments'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 
-import { getUserDisplayName } from '../../features/profile/get_user_display_name'
-import { ProfileDTO } from '../dtos/profile_dto_validator'
+import { UserDTO } from '../dtos/user_dto_validator'
 
-export const ProfilePage = ({ user_id }: Pick<ProfileDTO, 'user_id'>) => {
+export const ProfilePage = ({ id }: Pick<UserDTO, 'id'>) => {
   const {
-    data: profile,
-    error: profileError,
-    isPending: isProfilePending,
-  } = useQuery(queries.PROFILE(user_id))
+    data: user,
+    error: userError,
+    isPending: isUserPending,
+  } = useQuery(queries.USER(id))
   const { data: session } = useQuery(queries.SESSION())
   useQuery(queries.INSTRUMENTS())
   useQuery(queries.EVENTS())
 
-  if (isProfilePending) {
+  if (isUserPending) {
     return (
       <main className="prose">
         <h1>Loading...</h1>
@@ -31,35 +31,35 @@ export const ProfilePage = ({ user_id }: Pick<ProfileDTO, 'user_id'>) => {
     )
   }
 
-  if (profileError) {
+  if (userError) {
     return (
       <main className="prose">
         <h1>Error</h1>
-        <p>{profileError.message}</p>
+        <p>{userError.message}</p>
       </main>
     )
   }
 
-  if (!profile) {
+  if (!user) {
     return (
       <main className="prose">
-        <h1>Profile Not Found</h1>
-        <p>The profile you are looking for does not exist.</p>
+        <h1>User Not Found</h1>
+        <p>The user you are looking for does not exist.</p>
       </main>
     )
   }
 
   return (
     <main className="prose">
-      <h1>{getUserDisplayName(profile)}</h1>
+      <h1>{getUserDisplayName(user)}</h1>
 
-      <ProfileInstruments profile={profile} />
+      <UserInstruments user={user} />
 
-      <ProfileEventsAttended user_id={profile.user_id} />
+      <UserEventsAttended id={user.id} />
 
-      {session && session.user_id === profile.user_id && (
+      {session && session.user_id === user.id && (
         <Button variant="primary" asChild>
-          <Link href={routes.PROFILE_EDIT(profile.user_id)}>
+          <Link href={routes.PROFILE_EDIT(user.id)}>
             <PencilIcon className="h-5 w-5" />
             Edit
           </Link>

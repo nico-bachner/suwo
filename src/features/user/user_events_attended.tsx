@@ -1,15 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
 
+import { UserDTO } from '@/lib/dtos/user_dto_validator'
 import { queries } from '@/lib/queries'
-import { EventAttendee } from '@/lib/validators/event_attendee_validator'
 
-import { ProfileEventAttended } from './profile_event_attended'
+import { ProfileEventAttended } from '../profile/profile_event_attended'
 
-export const ProfileEventsAttended = ({
-  user_id,
-}: Pick<EventAttendee, 'user_id'>) => {
+export const UserEventsAttended = ({ id }: Pick<UserDTO, 'id'>) => {
   const { data: events } = useQuery(queries.EVENTS())
-  const { data: profile } = useQuery(queries.PROFILE(user_id))
+  const { data: profile } = useQuery(queries.PROFILE(id))
 
   if (!profile || !events) {
     return null

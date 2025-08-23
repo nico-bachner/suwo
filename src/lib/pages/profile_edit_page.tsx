@@ -7,33 +7,28 @@ import Link from 'next/link'
 import { Button } from '@/design_system/button'
 import { SettingsSection } from '@/design_system/settings_section'
 import { Heading } from '@/design_system/typography'
-import { getUserDisplayName } from '@/features/profile/get_user_display_name'
+import { getUserDisplayName } from '@/features/user/get_user_display_name'
 import { CreateInstrumentForm } from '@/lib/forms/create_instrument_form'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 
-import { ProfileDTO } from '../dtos/profile_dto_validator'
+import { UserDTO } from '../dtos/user_dto_validator'
 import { UpdateUserInstrumentsForm } from '../forms/update_user_instruments_form'
 
-export const ProfileEditPage = ({ user_id }: Pick<ProfileDTO, 'user_id'>) => {
+export const ProfileEditPage = ({ id }: Pick<UserDTO, 'id'>) => {
   const {
     data: user,
     error: userError,
     isPending: isUserPending,
-  } = useQuery(queries.USER(user_id))
-  const {
-    data: profile,
-    error: profileError,
-    isPending: isProfilePending,
-  } = useQuery(queries.PROFILE(user_id))
+  } = useQuery(queries.USER(id))
   const {
     data: session,
     error: sessionError,
     isPending: isSessionPending,
   } = useQuery(queries.SESSION())
 
-  const isPending = isProfilePending || isSessionPending || isUserPending
-  const error = profileError || sessionError || userError
+  const isPending = isSessionPending || isUserPending
+  const error = sessionError || userError
 
   if (isPending) {
     return (
@@ -48,15 +43,6 @@ export const ProfileEditPage = ({ user_id }: Pick<ProfileDTO, 'user_id'>) => {
       <main className="prose">
         <h1>Error</h1>
         <p>{error.message}</p>
-      </main>
-    )
-  }
-
-  if (!profile) {
-    return (
-      <main className="prose">
-        <h1>Profile Not Found</h1>
-        <p>The profile you are looking for does not exist.</p>
       </main>
     )
   }
@@ -79,7 +65,7 @@ export const ProfileEditPage = ({ user_id }: Pick<ProfileDTO, 'user_id'>) => {
     )
   }
 
-  if (session.user_id !== user_id) {
+  if (session.user_id !== id) {
     return (
       <main className="prose">
         <h1>Forbidden</h1>
@@ -99,7 +85,7 @@ export const ProfileEditPage = ({ user_id }: Pick<ProfileDTO, 'user_id'>) => {
         </Button>
 
         <Heading as="h1" variant="primary">
-          Edit Profile: {getUserDisplayName(profile)}
+          Edit Profile: {getUserDisplayName(user)}
         </Heading>
       </div>
 

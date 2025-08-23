@@ -1,31 +1,28 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { ProfileDTO } from '@/lib/dtos/profile_dto_validator'
+import { UserDTO } from '@/lib/dtos/user_dto_validator'
 import { queries } from '@/lib/queries'
 
-type ProfileInstrumentsProps = {
-  profile: ProfileDTO
+type UserInstrumentsProps = {
+  user: UserDTO
   className?: string
 }
 
-export const ProfileInstruments = ({
-  profile,
-  className,
-}: ProfileInstrumentsProps) => {
+export const UserInstruments = ({ user, className }: UserInstrumentsProps) => {
   const { data: instruments } = useQuery(queries.INSTRUMENTS())
 
   if (!instruments) {
     return null
   }
 
-  if (profile.instruments.length === 0) {
+  if (user.instruments.length === 0) {
     return <p className={className}>Non-playing member</p>
   }
 
   return (
     <p className={className}>
       {instruments
-        .filter((instrument) => profile.instruments.includes(instrument.id))
+        .filter((instrument) => user.instruments.includes(instrument.id))
         .map((instrument) => instrument.name)
         .join(', ')}
     </p>
