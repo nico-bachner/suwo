@@ -20,8 +20,8 @@ export const apiRoutes = {
 export const routes = {
   LOGIN: (searchParams?: LoginScreenSearchParams) =>
     createURL({
-      path: ['login'],
+      path: ['auth', 'login'],
       query: searchParams,
     }),
-  REGISTER: () => createURL({ path: ['register'] }),
+  REGISTER: () => createURL({ path: ['auth', 'register'] }),
 }

@@ -7,7 +7,8 @@ model User {
     mailing_list_preference Boolean
 
     // Optional Attributes
-    password String?
+    password   String?
+    usu_number String? @unique
 
     // Metadata
     created_at DateTime @default(now())
@@ -19,6 +20,5 @@ model User {
     Profile            Profile?
     UserInstrument     UserInstrument[]
     UserRole           UserRole[]
-    UsuMembership      UsuMembership?
     VerificationTokens VerificationToken[]
 }

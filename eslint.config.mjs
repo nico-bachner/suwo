@@ -31,6 +31,7 @@ export default [
         fetch: 'readonly',
         process: 'readonly',
         window: 'readonly',
+        LayoutProps: 'readonly',
       },
     },
     settings: {

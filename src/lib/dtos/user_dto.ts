@@ -6,6 +6,7 @@ export const getUserDTO = (user: User): UserDTO => ({
   id: user.id,
 
   email: user.email,
+  usu_number: user.usu_number,
   mailing_list_preference: user.mailing_list_preference,
 
   created_at: user.created_at.toISOString(),

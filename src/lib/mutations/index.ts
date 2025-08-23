@@ -1,3 +1,4 @@
+import { createUserMutation } from './create_user_mutation'
 import { deleteSessionMutation } from './delete_session_mutation'
 import { eventAttendeesMutation } from './event_attendees_mutation'
 import { userInstrumentsMutation } from './user_instruments_mutation'
@@ -12,5 +13,6 @@ export const mutations = {
 
   // User
   USER: userMutation,
+  CREATE_USER: createUserMutation,
   USER_INSTRUMENTS: userInstrumentsMutation,
 }

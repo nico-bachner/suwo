@@ -1,15 +1,12 @@
 'use client'
 
-import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { redirect } from 'next/navigation'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { Button } from '@/design_system/button'
 import { Switch } from '@/design_system/switch'
-import { queries, queryKeys } from '@/lib/queries'
-import { apiRoutes, routes } from '@/routes'
-import { parseResponse } from '@/utils/http/parse_response'
-import { StatusCode } from '@/utils/http/status_code'
+import { queries } from '@/lib/queries'
 
+import { mutations } from '../mutations'
 import {
   RegisterFormInput,
   RegisterFormInputValidator,
@@ -18,6 +15,7 @@ import { useAppForm } from './context'
 
 export const RegisterForm = () => {
   const queryClient = useQueryClient()
+  const { mutate: createUser } = useMutation(mutations.CREATE_USER(queryClient))
   const { data: instruments, isPending: isInstrumentsPending } = useQuery(
     queries.INSTRUMENTS(),
   )
@@ -36,29 +34,8 @@ export const RegisterForm = () => {
     validators: {
       onBlur: RegisterFormInputValidator,
     },
-    onSubmit: async ({ value }) => {
-      const response = await parseResponse(
-        await fetch(apiRoutes.REGISTER(), {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(value),
-        }),
-      )
-
-      switch (response.status) {
-        case StatusCode.BadRequest:
-          // eslint-disable-next-line no-alert, no-undef
-          alert(`${response.error}\n\nPlease try again`)
-          break
-        case StatusCode.OK:
-          await queryClient.invalidateQueries({
-            queryKey: queryKeys.SESSION(),
-          })
-
-          redirect(routes.SETTINGS())
-      }
+    onSubmit: ({ value }) => {
+      createUser(value)
     },
   })
 
