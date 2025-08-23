@@ -24,20 +24,3 @@ export const getUserDTO = (user: UserDB): UserDTO => ({
   created_at: user.created_at.toISOString(),
   updated_at: user.updated_at.toISOString(),
 })
-
-export const parseUserDTO = (data: Partial<UserDTO>): Partial<UserDB> => ({
-  // ID
-  id: data.id,
-
-  // Required Attributes
-  email: data.email,
-  given_name: data.given_name,
-  mailing_list_preference: data.mailing_list_preference,
-  UserInstrument: data.instruments?.map((instrument_id) => ({
-    instrument_id,
-  })),
-
-  // Optional Attributes
-  family_name: data.family_name,
-  usu_number: data.usu_number,
-})
