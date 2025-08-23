@@ -1,6 +1,6 @@
 import { MailingListRecipient } from '@/generated/prisma'
 
-import { MailingListRecipientDTO } from '../validators/dtos/mailing_list_recipient_dto_validator'
+import { MailingListRecipientDTO } from './mailing_list_recipient_dto_validator'
 
 export const getMailingListRecipientDTO = (
   mailingListRecipient: MailingListRecipient,

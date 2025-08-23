@@ -1,7 +1,7 @@
 import z from 'zod'
 
-import { EventAttendeeValidator } from '../event_attendee_validator'
-import { UserInstrumentValidator } from '../user_instrument_validator'
+import { EventAttendeeValidator } from '../validators/event_attendee_validator'
+import { UserInstrumentValidator } from '../validators/user_instrument_validator'
 
 export const ProfileDTOValidator = z.object({
   user_id: z.uuid(),

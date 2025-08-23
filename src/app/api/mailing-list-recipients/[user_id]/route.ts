@@ -1,6 +1,6 @@
 import { getSession } from '@/features/auth/session/get_session'
 import { getMailingListRecipientDTO } from '@/lib/dtos/mailing_list_recipient_dto'
-import { MailingListRecipientDTOValidator } from '@/lib/validators/dtos/mailing_list_recipient_dto_validator'
+import { MailingListRecipientDTOValidator } from '@/lib/dtos/mailing_list_recipient_dto_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'

@@ -1,5 +1,5 @@
 import { getProfileDTO } from '@/lib/dtos/profile_dto'
-import { ProfileDTOValidator } from '@/lib/validators/dtos/profile_dto_validator'
+import { ProfileDTOValidator } from '@/lib/dtos/profile_dto_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'

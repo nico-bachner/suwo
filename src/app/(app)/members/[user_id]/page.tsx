@@ -1,5 +1,5 @@
+import { ProfileDTOValidator } from '@/lib/dtos/profile_dto_validator'
 import { ProfilePage } from '@/lib/pages/profile_page'
-import { ProfileDTOValidator } from '@/lib/validators/dtos/profile_dto_validator'
 import { PageFileProps } from '@/utils/next_types'
 
 export default async function Page({ params }: PageFileProps) {

@@ -5,10 +5,7 @@ import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-import {
-  ProfileDTO,
-  ProfileDTOValidator,
-} from '../validators/dtos/profile_dto_validator'
+import { ProfileDTO, ProfileDTOValidator } from '../dtos/profile_dto_validator'
 
 export const profilesQueryKey = () => ['members']
 

@@ -12,8 +12,8 @@ import { CreateInstrumentForm } from '@/lib/forms/create_instrument_form'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 
+import { ProfileDTO } from '../dtos/profile_dto_validator'
 import { UpdateUserInstrumentsForm } from '../forms/update_user_instruments_form'
-import { ProfileDTO } from '../validators/dtos/profile_dto_validator'
 
 export const ProfileEditPage = ({ user_id }: Pick<ProfileDTO, 'user_id'>) => {
   const {

@@ -5,11 +5,11 @@ import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-import { queryKeys } from '../queries'
 import {
   MailingListRecipientDTO,
   MailingListRecipientDTOValidator,
-} from '../validators/dtos/mailing_list_recipient_dto_validator'
+} from '../dtos/mailing_list_recipient_dto_validator'
+import { queryKeys } from '../queries'
 
 export const mailingListRecipientMutation = (
   queryClient: QueryClient,

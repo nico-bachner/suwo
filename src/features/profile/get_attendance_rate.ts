@@ -1,4 +1,4 @@
-import { ProfileDTO } from '@/lib/validators/dtos/profile_dto_validator'
+import { ProfileDTO } from '@/lib/dtos/profile_dto_validator'
 import { Event } from '@/lib/validators/event_validator'
 
 export const getAttendanceRate = (

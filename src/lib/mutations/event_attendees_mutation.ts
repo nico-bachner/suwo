@@ -5,8 +5,8 @@ import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
+import { ProfileDTO } from '../dtos/profile_dto_validator'
 import { queryKeys } from '../queries'
-import { ProfileDTO } from '../validators/dtos/profile_dto_validator'
 import {
   EventAttendee,
   EventAttendeeValidator,

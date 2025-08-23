@@ -5,8 +5,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Switch } from '@/design_system/switch'
 import { queries } from '@/lib/queries'
 
+import { MailingListRecipientDTO } from '../dtos/mailing_list_recipient_dto_validator'
 import { mutations } from '../mutations'
-import { MailingListRecipientDTO } from '../validators/dtos/mailing_list_recipient_dto_validator'
 import { useAppForm } from './context'
 
 export const UpdateMailingListPreferenceForm = ({

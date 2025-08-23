@@ -7,7 +7,7 @@ import { StatusCode } from '@/utils/http/status_code'
 import {
   MailingListRecipientDTO,
   MailingListRecipientDTOValidator,
-} from '../validators/dtos/mailing_list_recipient_dto_validator'
+} from '../dtos/mailing_list_recipient_dto_validator'
 
 export const mailingListRecipientQueryKey = (
   user_id: MailingListRecipientDTO['user_id'],

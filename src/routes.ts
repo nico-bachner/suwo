@@ -2,7 +2,7 @@ import {
   apiRoutes as authApiRoutes,
   routes as authRoutes,
 } from './features/auth/routes'
-import { ProfileDTO } from './lib/validators/dtos/profile_dto_validator'
+import { ProfileDTO } from './lib/dtos/profile_dto_validator'
 import { Event } from './lib/validators/event_validator'
 import { createURL } from './utils/http/create_url'
 

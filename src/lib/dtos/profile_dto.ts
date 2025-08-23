@@ -7,7 +7,7 @@ import {
   UserInstrument,
 } from '@/generated/prisma'
 
-import { ProfileDTO } from '../validators/dtos/profile_dto_validator'
+import { ProfileDTO } from './profile_dto_validator'
 
 export const getProfileDTO = (
   profile: Profile & {
