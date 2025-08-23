@@ -1,6 +1,6 @@
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
-import { Limelight, Raleway } from 'next/font/google'
+import { Kode_Mono, Limelight, Raleway } from 'next/font/google'
 import Image from 'next/image'
 import { Toaster } from 'sonner'
 
@@ -24,6 +24,11 @@ const fontSerif = Limelight({
   subsets: ['latin'],
 })
 
+const fontMono = Kode_Mono({
+  variable: '--font-mono',
+  subsets: ['latin'],
+})
+
 export const metadata: Metadata = {
   title: 'SUWO',
   description: 'The Sydney University Wind Orchestra',
@@ -32,7 +37,9 @@ export const metadata: Metadata = {
 export default function Layout({ children }: LayoutFileProps) {
   return (
     <html lang="en">
-      <body className={cn(fontSans.variable, fontSerif.variable)}>
+      <body
+        className={cn(fontSans.variable, fontSerif.variable, fontMono.variable)}
+      >
         <QueryProvider>
           <div className="fixed inset-0 -z-10">
             <Image
