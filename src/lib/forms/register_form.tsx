@@ -6,11 +6,8 @@ import { Button } from '@/design_system/button'
 import { Switch } from '@/design_system/switch'
 import { queries } from '@/lib/queries'
 
+import { UserDTO, UserDTOValidator } from '../dtos/user_dto_validator'
 import { mutations } from '../mutations'
-import {
-  RegisterFormInput,
-  RegisterFormInputValidator,
-} from '../validators/form_input_validators/register_form_input_validator'
 import { useAppForm } from './context'
 
 export const RegisterForm = () => {
@@ -20,19 +17,23 @@ export const RegisterForm = () => {
     queries.INSTRUMENTS(),
   )
 
-  const defaultValues: RegisterFormInput = {
+  const defaultValues: Omit<UserDTO, 'id' | 'created_at' | 'updated_at'> = {
     given_name: '',
     family_name: '',
     email: '',
     usu_number: '',
-    instrument_ids: [],
+    instruments: [],
     mailing_list_preference: true,
   }
 
   const form = useAppForm({
     defaultValues,
     validators: {
-      onBlur: RegisterFormInputValidator,
+      onBlur: UserDTOValidator.omit({
+        id: true,
+        created_at: true,
+        updated_at: true,
+      }),
     },
     onSubmit: ({ value }) => {
       createUser(value)
@@ -91,7 +92,7 @@ export const RegisterForm = () => {
         </form.AppField>
       </div>
 
-      <form.Field name="instrument_ids">
+      <form.Field name="instruments">
         {({ state, handleChange }) => (
           <div className="grid grid-cols-2 gap-2 @lg:grid-cols-3 @2xl:grid-cols-4 @4xl:grid-cols-5">
             {isInstrumentsPending

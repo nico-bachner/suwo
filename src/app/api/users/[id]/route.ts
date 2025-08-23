@@ -1,3 +1,5 @@
+import z from 'zod'
+
 import { getSession } from '@/features/auth/session/get_session'
 import { getUserDTO } from '@/lib/dtos/user_dto'
 import { UserDTOValidator } from '@/lib/dtos/user_dto_validator'
@@ -23,6 +25,13 @@ export const GET: APIRoute = async (_, { params }) => {
   const user = await prisma.user.findUnique({
     where: {
       id,
+    },
+    include: {
+      UserInstrument: {
+        select: {
+          instrument_id: true,
+        },
+      },
     },
   })
 
@@ -53,13 +62,41 @@ export const PATCH: APIRoute = async (request, { params }) => {
     id: true,
   }).parse(await params)
 
-  const userData = UserDTOValidator.parse(await request.json())
+  const { data, error, success } = UserDTOValidator.partial().safeParse(
+    await request.json(),
+  )
+
+  if (!success) {
+    return createResponse({
+      status: StatusCode.BadRequest,
+      error: z.prettifyError(error),
+    })
+  }
 
   const user = await prisma.user.update({
     where: {
       id,
     },
-    data: userData,
+    data: {
+      email: data.email,
+      given_name: data.given_name,
+      mailing_list_preference: data.mailing_list_preference,
+      family_name: data.family_name,
+      usu_number: data.usu_number,
+      UserInstrument: data.instruments && {
+        deleteMany: {},
+        create: data.instruments.map((instrument_id) => ({
+          instrument_id,
+        })),
+      },
+    },
+    include: {
+      UserInstrument: {
+        select: {
+          instrument_id: true,
+        },
+      },
+    },
   })
 
   return createResponse({

@@ -10,6 +10,7 @@ export const UserDTOValidator = z.object({
     message: 'Given name is required',
   }),
   mailing_list_preference: z.boolean(),
+  instruments: z.array(z.uuid()),
 
   // Optional Attributes
   family_name: z.string().nullable(),

@@ -1,7 +1,6 @@
 import z from 'zod'
 
 import { EventAttendeeValidator } from '../validators/event_attendee_validator'
-import { UserInstrumentValidator } from '../validators/user_instrument_validator'
 
 export const ProfileDTOValidator = z.object({
   user_id: z.uuid(),
@@ -11,7 +10,7 @@ export const ProfileDTOValidator = z.object({
   family_name: z.string().nullable(),
   attendance_rate: z.int().min(0).max(100),
   events: z.array(EventAttendeeValidator.shape.event_id),
-  instruments: z.array(UserInstrumentValidator.shape.instrument_id),
+  instruments: z.array(z.uuid()),
   created_at: z.iso.datetime(),
   updated_at: z.iso.datetime(),
 })

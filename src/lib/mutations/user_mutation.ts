@@ -11,7 +11,7 @@ import { queryKeys } from '../queries'
 export const userMutation = (
   queryClient: QueryClient,
   id: UserDTO['id'],
-): UseMutationOptions<UserDTO, Error, UserDTO> => ({
+): UseMutationOptions<UserDTO, Error, Partial<UserDTO>> => ({
   mutationFn: async (value) => {
     const response = await parseResponse(
       await fetch(createURL({ path: ['api', ...queryKeys.USER(id)] }), {

@@ -3,7 +3,7 @@ import z from 'zod'
 import { createSession } from '@/features/auth/session/create_session'
 import { getSession } from '@/features/auth/session/get_session'
 import { getUserDTO } from '@/lib/dtos/user_dto'
-import { RegisterFormInputValidator } from '@/lib/validators/form_input_validators/register_form_input_validator'
+import { UserDTOValidator } from '@/lib/dtos/user_dto_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'
@@ -19,7 +19,15 @@ export const GET: APIRoute = async () => {
     })
   }
 
-  const users = await prisma.user.findMany()
+  const users = await prisma.user.findMany({
+    include: {
+      UserInstrument: {
+        select: {
+          instrument_id: true,
+        },
+      },
+    },
+  })
 
   return createResponse({
     status: StatusCode.OK,
@@ -28,16 +36,11 @@ export const GET: APIRoute = async () => {
 }
 
 export const POST: APIRoute = async (request) => {
-  // Const { data, error, success } = UserDTOValidator.omit({
-  //   Id: true,
-  //   Created_at: true,
-  //   Updated_at: true,
-  // }).safeParse(await request.json())
-
-  // To be replaced with the above dto
-  const { data, error, success } = RegisterFormInputValidator.safeParse(
-    await request.json(),
-  )
+  const { data, error, success } = UserDTOValidator.omit({
+    id: true,
+    created_at: true,
+    updated_at: true,
+  }).safeParse(await request.json())
 
   if (!success) {
     return createResponse({
@@ -59,15 +62,22 @@ export const POST: APIRoute = async (request) => {
     })
   }
 
-  const { instrument_ids, ...rest } = data
+  const { instruments, ...rest } = data
 
   const user = await prisma.user.create({
     data: {
       ...rest,
       UserInstrument: {
-        create: instrument_ids.map((instrument_id) => ({
+        create: instruments.map((instrument_id) => ({
           instrument_id,
         })),
+      },
+    },
+    include: {
+      UserInstrument: {
+        select: {
+          instrument_id: true,
+        },
       },
     },
   })

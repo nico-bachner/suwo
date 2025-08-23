@@ -5,30 +5,31 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Button } from '@/design_system/button'
 import { queries } from '@/lib/queries'
 
+import { UserDTO } from '../dtos/user_dto_validator'
 import { mutations } from '../mutations'
-import { UserInstrument } from '../validators/user_instrument_validator'
 import { useAppForm } from './context'
 
+type UpdateUserInstrumentsFormProps = {
+  user: UserDTO
+}
+
 export const UpdateUserInstrumentsForm = ({
-  user_id,
-}: Pick<UserInstrument, 'user_id'>) => {
+  user,
+}: UpdateUserInstrumentsFormProps) => {
   const queryClient = useQueryClient()
+  const { mutate: updateUser } = useMutation(
+    mutations.USER(queryClient, user.id),
+  )
   const { data: instruments, isPending: isInstrumentsPending } = useQuery(
     queries.INSTRUMENTS(),
-  )
-  const { data: userInstruments } = useQuery({
-    ...queries.USER_INSTRUMENTS(user_id),
-  })
-  const { mutate: updateUserInstruments } = useMutation(
-    mutations.USER_INSTRUMENTS(queryClient, user_id),
   )
 
   const form = useAppForm({
     defaultValues: {
-      instrument_ids: userInstruments || [],
+      instruments: user.instruments,
     },
     onSubmit: ({ value }) => {
-      updateUserInstruments(value.instrument_ids)
+      updateUser(value)
     },
   })
 
@@ -41,7 +42,7 @@ export const UpdateUserInstrumentsForm = ({
       }}
       className="@container flex flex-col gap-4"
     >
-      <form.Field name="instrument_ids">
+      <form.Field name="instruments">
         {({ state, handleChange }) => (
           <div className="grid grid-cols-2 gap-2 @lg:grid-cols-3">
             {isInstrumentsPending

@@ -17,6 +17,11 @@ import { UpdateUserInstrumentsForm } from '../forms/update_user_instruments_form
 
 export const ProfileEditPage = ({ user_id }: Pick<ProfileDTO, 'user_id'>) => {
   const {
+    data: user,
+    error: userError,
+    isPending: isUserPending,
+  } = useQuery(queries.USER(user_id))
+  const {
     data: profile,
     error: profileError,
     isPending: isProfilePending,
@@ -27,8 +32,8 @@ export const ProfileEditPage = ({ user_id }: Pick<ProfileDTO, 'user_id'>) => {
     isPending: isSessionPending,
   } = useQuery(queries.SESSION())
 
-  const isPending = isProfilePending || isSessionPending
-  const error = profileError || sessionError
+  const isPending = isProfilePending || isSessionPending || isUserPending
+  const error = profileError || sessionError || userError
 
   if (isPending) {
     return (
@@ -65,6 +70,15 @@ export const ProfileEditPage = ({ user_id }: Pick<ProfileDTO, 'user_id'>) => {
     )
   }
 
+  if (!user) {
+    return (
+      <main className="prose">
+        <h1>User Not Found</h1>
+        <p>The user you are trying to edit does not exist.</p>
+      </main>
+    )
+  }
+
   if (session.user_id !== user_id) {
     return (
       <main className="prose">
@@ -94,7 +108,7 @@ export const ProfileEditPage = ({ user_id }: Pick<ProfileDTO, 'user_id'>) => {
           title="Instruments"
           description="Tell us what instruments you play"
         >
-          <UpdateUserInstrumentsForm user_id={session.user_id} />
+          <UpdateUserInstrumentsForm user={user} />
         </SettingsSection>
 
         <SettingsSection
