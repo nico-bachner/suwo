@@ -1,5 +1,5 @@
+import { ProfileDTO } from '@/lib/validators/dtos/profile_dto_validator'
 import { Event } from '@/lib/validators/event_validator'
-import { ProfileDTO } from '@/lib/validators/profile_dto_validator'
 
 export const getAttendanceRate = (
   events: Pick<Event, 'id' | 'starts_at'>[],

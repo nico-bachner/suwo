@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { queries } from '@/lib/queries'
-import { ProfileDTO } from '@/lib/validators/profile_dto_validator'
+import { ProfileDTO } from '@/lib/validators/dtos/profile_dto_validator'
 
 type ProfileInstrumentsProps = {
   profile: ProfileDTO

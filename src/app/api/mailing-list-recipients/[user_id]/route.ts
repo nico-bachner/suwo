@@ -1,27 +1,37 @@
 import { getSession } from '@/features/auth/session/get_session'
-import { MailingListRecipientValidator } from '@/lib/validators/mailing_list_recipient'
+import { getMailingListRecipientDTO } from '@/lib/dtos/mailing_list_recipient_dto'
+import { MailingListRecipientDTOValidator } from '@/lib/validators/dtos/mailing_list_recipient_dto_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'
 import { prisma } from '@/utils/prisma'
 
 export const GET: APIRoute = async (_, { params }) => {
-  const { user_id } = MailingListRecipientValidator.pick({
+  const { user_id } = MailingListRecipientDTOValidator.pick({
     user_id: true,
   }).parse(await params)
 
+  const mailingListRecipient = await prisma.mailingListRecipient.findUnique({
+    where: {
+      user_id,
+    },
+  })
+
+  if (!mailingListRecipient) {
+    return createResponse({
+      status: StatusCode.NotFound,
+      error: 'Mailing list recipient not found',
+    })
+  }
+
   return createResponse({
     status: StatusCode.OK,
-    data: await prisma.mailingListRecipient.findUnique({
-      where: {
-        user_id,
-      },
-    }),
+    data: getMailingListRecipientDTO(mailingListRecipient),
   })
 }
 
 export const POST: APIRoute = async (_, { params }) => {
-  const { user_id } = MailingListRecipientValidator.pick({
+  const { user_id } = MailingListRecipientDTOValidator.pick({
     user_id: true,
   }).parse(await params)
 
@@ -56,12 +66,12 @@ export const POST: APIRoute = async (_, { params }) => {
 
   return createResponse({
     status: StatusCode.Created,
-    data: mailingListRecipient,
+    data: getMailingListRecipientDTO(mailingListRecipient),
   })
 }
 
 export const DELETE: APIRoute = async (_, { params }) => {
-  const { user_id } = MailingListRecipientValidator.pick({
+  const { user_id } = MailingListRecipientDTOValidator.pick({
     user_id: true,
   }).parse(await params)
 

@@ -7,23 +7,20 @@ import {
   UserInstrument,
 } from '@/generated/prisma'
 
-import { ProfileDTO } from '../validators/profile_dto_validator'
+import { ProfileDTO } from '../validators/dtos/profile_dto_validator'
 
-type ProfileDTOInput = {
+export const getProfileDTO = (
   profile: Profile & {
     user: Pick<User, 'created_at'> & {
       EventAttendee: Pick<EventAttendee, 'event_id'>[]
       UserInstrument: Pick<UserInstrument, 'instrument_id'>[]
     }
-  }
-  events: Event[]
-}
-
-export const getProfileDTO = ({
-  profile,
-  events,
-}: ProfileDTOInput): ProfileDTO => ({
-  ...profile,
+  },
+  events: Event[],
+): ProfileDTO => ({
+  user_id: profile.user_id,
+  given_name: profile.given_name,
+  family_name: profile.family_name,
   attendance_rate: getAttendanceRate(
     events.map((event) => ({
       id: event.id,

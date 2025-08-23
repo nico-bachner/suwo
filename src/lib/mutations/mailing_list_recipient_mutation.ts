@@ -7,14 +7,14 @@ import { StatusCode } from '@/utils/http/status_code'
 
 import { queryKeys } from '../queries'
 import {
-  MailingListRecipient,
-  MailingListRecipientValidator,
-} from '../validators/mailing_list_recipient'
+  MailingListRecipientDTO,
+  MailingListRecipientDTOValidator,
+} from '../validators/dtos/mailing_list_recipient_dto_validator'
 
 export const mailingListRecipientMutation = (
   queryClient: QueryClient,
-  user_id: MailingListRecipient['user_id'],
-): UseMutationOptions<MailingListRecipient | null, Error, boolean> => ({
+  user_id: MailingListRecipientDTO['user_id'],
+): UseMutationOptions<MailingListRecipientDTO | null, Error, boolean> => ({
   mutationFn: async (value) => {
     const response = await parseResponse(
       await fetch(
@@ -29,7 +29,7 @@ export const mailingListRecipientMutation = (
 
     switch (response.status) {
       case StatusCode.Created:
-        return MailingListRecipientValidator.parse(response.data)
+        return MailingListRecipientDTOValidator.parse(response.data)
       case StatusCode.NoContent:
         return null
       default:

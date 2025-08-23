@@ -2,8 +2,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { Button } from '@/design_system/button'
 import { mutations } from '@/lib/mutations'
+import { ProfileDTO } from '@/lib/validators/dtos/profile_dto_validator'
 import { Event } from '@/lib/validators/event_validator'
-import { ProfileDTO } from '@/lib/validators/profile_dto_validator'
 
 type ProfileEventAttendedProps = {
   event: Event

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { SkeletonText } from '@/design_system/skeleton'
-import { ProfileDTO } from '@/lib/validators/profile_dto_validator'
+import { ProfileDTO } from '@/lib/validators/dtos/profile_dto_validator'
 import { routes } from '@/routes'
 
 import { getProfileScreenName } from './get_profile_screen_name'

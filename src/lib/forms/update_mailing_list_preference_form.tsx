@@ -6,12 +6,12 @@ import { Switch } from '@/design_system/switch'
 import { queries } from '@/lib/queries'
 
 import { mutations } from '../mutations'
-import { MailingListRecipient } from '../validators/mailing_list_recipient'
+import { MailingListRecipientDTO } from '../validators/dtos/mailing_list_recipient_dto_validator'
 import { useAppForm } from './context'
 
 export const UpdateMailingListPreferenceForm = ({
   user_id,
-}: Pick<MailingListRecipient, 'user_id'>) => {
+}: Pick<MailingListRecipientDTO, 'user_id'>) => {
   const queryClient = useQueryClient()
   const { data: mailingListRecipient } = useQuery(
     queries.MAILING_LIST_RECIPIENT(user_id),

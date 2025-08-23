@@ -7,7 +7,7 @@ import { StatusCode } from '@/utils/http/status_code'
 import {
   ProfileDTO,
   ProfileDTOValidator,
-} from '../validators/profile_dto_validator'
+} from '../validators/dtos/profile_dto_validator'
 
 export const profileQueryKey = (user_id: ProfileDTO['user_id']) => [
   'members',

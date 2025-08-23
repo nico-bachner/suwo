@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Button } from '@/design_system/button'
 import { mutations } from '@/lib/mutations'
 import { queries } from '@/lib/queries'
-import { ProfileDTO } from '@/lib/validators/profile_dto_validator'
+import { ProfileDTO } from '@/lib/validators/dtos/profile_dto_validator'
 
 import { getProfileScreenName } from '../profile/get_profile_screen_name'
 

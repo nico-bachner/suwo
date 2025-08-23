@@ -1,5 +1,5 @@
 import { getProfileDTO } from '@/lib/dtos/profile_dto'
-import { ProfileDTOValidator } from '@/lib/validators/profile_dto_validator'
+import { ProfileDTOValidator } from '@/lib/validators/dtos/profile_dto_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next_types'
@@ -47,13 +47,8 @@ export const GET: APIRoute = async (_, { params }) => {
     })
   }
 
-  const profileDTO = getProfileDTO({
-    profile,
-    events,
-  })
-
   return createResponse({
     status: StatusCode.OK,
-    data: profileDTO,
+    data: getProfileDTO(profile, events),
   })
 }

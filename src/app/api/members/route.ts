@@ -40,15 +40,8 @@ export const GET: APIRoute = async () => {
     }),
   ])
 
-  const profilesDTO = profiles.map((profile) =>
-    getProfileDTO({
-      profile,
-      events,
-    }),
-  )
-
   return createResponse({
     status: StatusCode.OK,
-    data: profilesDTO,
+    data: profiles.map((profile) => getProfileDTO(profile, events)),
   })
 }

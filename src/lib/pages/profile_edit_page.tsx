@@ -13,7 +13,7 @@ import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 
 import { UpdateUserInstrumentsForm } from '../forms/update_user_instruments_form'
-import { ProfileDTO } from '../validators/profile_dto_validator'
+import { ProfileDTO } from '../validators/dtos/profile_dto_validator'
 
 export const ProfileEditPage = ({ user_id }: Pick<ProfileDTO, 'user_id'>) => {
   const {

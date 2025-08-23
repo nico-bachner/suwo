@@ -5,17 +5,17 @@ import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
 import {
-  MailingListRecipient,
-  MailingListRecipientValidator,
-} from '../validators/mailing_list_recipient'
+  MailingListRecipientDTO,
+  MailingListRecipientDTOValidator,
+} from '../validators/dtos/mailing_list_recipient_dto_validator'
 
 export const mailingListRecipientQueryKey = (
-  user_id: MailingListRecipient['user_id'],
+  user_id: MailingListRecipientDTO['user_id'],
 ) => ['mailing-list-recipients', user_id]
 
 export const mailingListRecipientQuery = (
-  user_id: MailingListRecipient['user_id'],
-): UseQueryOptions<MailingListRecipient | null> => ({
+  user_id: MailingListRecipientDTO['user_id'],
+): UseQueryOptions<MailingListRecipientDTO | null> => ({
   queryKey: mailingListRecipientQueryKey(user_id),
   queryFn: async ({ signal }) => {
     const response = await parseResponse(
@@ -29,7 +29,7 @@ export const mailingListRecipientQuery = (
 
     switch (response.status) {
       case StatusCode.OK:
-        return MailingListRecipientValidator.parse(response.data)
+        return MailingListRecipientDTOValidator.parse(response.data)
       case StatusCode.NotFound:
         return null
       default:

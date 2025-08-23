@@ -6,14 +6,14 @@ import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
 import {
-  MailingListRecipient,
-  MailingListRecipientValidator,
-} from '../validators/mailing_list_recipient'
+  MailingListRecipientDTO,
+  MailingListRecipientDTOValidator,
+} from '../validators/dtos/mailing_list_recipient_dto_validator'
 
 export const mailingListRecipientsQueryKey = () => ['mailing-list-recipients']
 
 export const mailingListRecipientsQuery = (): UseQueryOptions<
-  MailingListRecipient[]
+  MailingListRecipientDTO[]
 > => ({
   queryKey: mailingListRecipientsQueryKey(),
   queryFn: async ({ signal }) => {
@@ -28,7 +28,7 @@ export const mailingListRecipientsQuery = (): UseQueryOptions<
 
     switch (response.status) {
       case StatusCode.OK:
-        return z.array(MailingListRecipientValidator).parse(response.data)
+        return z.array(MailingListRecipientDTOValidator).parse(response.data)
       default:
         throw new Error('Failed to fetch data')
     }

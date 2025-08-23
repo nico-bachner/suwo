@@ -6,11 +6,11 @@ import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
 import { queryKeys } from '../queries'
+import { ProfileDTO } from '../validators/dtos/profile_dto_validator'
 import {
   EventAttendee,
   EventAttendeeValidator,
 } from '../validators/event_attendee_validator'
-import { ProfileDTO } from '../validators/profile_dto_validator'
 
 type Context = {
   eventAttendees: EventAttendee['user_id'][] | undefined
