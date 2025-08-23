@@ -6,14 +6,6 @@ import {
 import { eventQuery, eventQueryKey } from './event_query'
 import { eventsQuery, eventsQueryKey } from './events_query'
 import { instrumentsQuery, instrumentsQueryKey } from './instruments_query'
-import {
-  mailingListRecipientQuery,
-  mailingListRecipientQueryKey,
-} from './mailing_list_recipient_query'
-import {
-  mailingListRecipientsQuery,
-  mailingListRecipientsQueryKey,
-} from './mailing_list_recipients_query'
 import { profileQuery, profileQueryKey } from './profile_query'
 import { profilesQuery, profilesQueryKey } from './profiles_query'
 import { sessionQuery, sessionQueryKey } from './session_query'
@@ -21,7 +13,9 @@ import {
   userInstrumentsQuery,
   userInstrumentsQueryKey,
 } from './user_instruments_query'
+import { userQuery, userQueryKey } from './user_query'
 import { userRolesQuery, userRolesQueryKey } from './user_roles_query'
+import { usersQuery, usersQueryKey } from './users_query'
 
 export const queryKeys = {
   // Event
@@ -32,10 +26,6 @@ export const queryKeys = {
   // Instrument
   INSTRUMENTS: instrumentsQueryKey,
 
-  // Mailing List
-  MAILING_LIST_RECIPIENTS: mailingListRecipientsQueryKey,
-  MAILING_LIST_RECIPIENT: mailingListRecipientQueryKey,
-
   // Profile
   PROFILES: profilesQueryKey,
   PROFILE: profileQueryKey,
@@ -44,6 +34,8 @@ export const queryKeys = {
   SESSION: sessionQueryKey,
 
   // User
+  USERS: usersQueryKey,
+  USER: userQueryKey,
   USER_INSTRUMENTS: userInstrumentsQueryKey,
   USER_ROLES: userRolesQueryKey,
 }
@@ -60,10 +52,6 @@ export const queries = {
   // Instrument
   INSTRUMENTS: instrumentsQuery,
 
-  // Mailing List
-  MAILING_LIST_RECIPIENTS: mailingListRecipientsQuery,
-  MAILING_LIST_RECIPIENT: mailingListRecipientQuery,
-
   // Profile
   PROFILES: profilesQuery,
   PROFILE: profileQuery,
@@ -72,6 +60,8 @@ export const queries = {
   SESSION: sessionQuery,
 
   // User
+  USERS: usersQuery,
+  USER: userQuery,
   USER_INSTRUMENTS: userInstrumentsQuery,
   USER_ROLES: userRolesQuery,
 }

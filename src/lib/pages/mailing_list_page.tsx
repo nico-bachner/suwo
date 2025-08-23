@@ -8,32 +8,32 @@ import { SearchInput } from '@/design_system/input'
 import { queries } from '@/lib/queries'
 import { search } from '@/utils/search'
 
-export const MailingListRecipientsPage = () => {
+export const MailingListPage = () => {
   const {
     data: session,
     error: sessionError,
     isPending: isSessionPending,
   } = useQuery(queries.SESSION())
   const {
-    data: mailingListRecipients,
-    error: mailingListRecipientsError,
-    isPending: isMailingListRecipientsPending,
-  } = useQuery(queries.MAILING_LIST_RECIPIENTS())
+    data: users,
+    error: usersError,
+    isPending: isUsersPending,
+  } = useQuery(queries.USERS())
   const [query, setQuery] = useState('')
-
-  if (isSessionPending) {
-    return (
-      <main className="prose">
-        <h1>Loading...</h1>
-      </main>
-    )
-  }
 
   if (sessionError) {
     return (
       <main className="prose">
         <h1>Error</h1>
         <p>{sessionError.message}</p>
+      </main>
+    )
+  }
+
+  if (isSessionPending) {
+    return (
+      <main className="prose">
+        <h1>Authenticating...</h1>
       </main>
     )
   }
@@ -47,44 +47,47 @@ export const MailingListRecipientsPage = () => {
     )
   }
 
-  if (isMailingListRecipientsPending) {
-    return (
-      <main className="prose">
-        <h1>Loading...</h1>
-      </main>
-    )
-  }
-
-  if (mailingListRecipientsError) {
+  if (usersError) {
     return (
       <main className="prose">
         <h1>Error</h1>
-        <p>{mailingListRecipientsError.message}</p>
+        <p>{usersError.message}</p>
       </main>
     )
   }
 
-  if (mailingListRecipients.length === 0) {
+  if (isUsersPending) {
     return (
       <main className="prose">
-        <h1>Equipment</h1>
-        <p>There are currently no equipment items available.</p>
+        <h1>Loading users...</h1>
       </main>
     )
   }
 
-  const rows = mailingListRecipients.map((recipient) => ({
-    email: recipient.email,
-  }))
+  const mailingListRecipients = users
+    .filter((user) => user.mailing_list_preference)
+    .map((user) => ({
+      user_id: user.id,
+      email: user.email,
+    }))
+
+  if (users.length === 0) {
+    return (
+      <main className="prose">
+        <h1>No users found</h1>
+        <p>There are no users in the mailing list.</p>
+      </main>
+    )
+  }
 
   const csv = [
-    Object.keys(rows[0]).join(','),
-    ...rows.map((row) => Object.values(row).join(',')),
+    Object.keys(mailingListRecipients[0]).join(','),
+    ...mailingListRecipients.map((row) => Object.values(row).join(',')),
   ].join('\n')
 
   return (
     <main className="prose">
-      <h1>Mailing List Recipients</h1>
+      <h1>Mailing List</h1>
 
       <div className="flex flex-col-reverse gap-2 sm:flex-row sm:items-center">
         <SearchInput
@@ -114,8 +117,8 @@ export const MailingListRecipientsPage = () => {
           data: mailingListRecipients,
           keys: ['email'],
           query,
-        }).map((mailingListRecipient) => (
-          <p key={mailingListRecipient.user_id}>{mailingListRecipient.email}</p>
+        }).map(({ user_id, email }) => (
+          <p key={user_id}>{email}</p>
         ))}
       </div>
     </main>

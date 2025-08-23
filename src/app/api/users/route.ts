@@ -1,5 +1,5 @@
 import { getSession } from '@/features/auth/session/get_session'
-import { getMailingListRecipientDTO } from '@/lib/dtos/mailing_list_recipient_dto'
+import { getUserDTO } from '@/lib/dtos/user_dto'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
@@ -14,12 +14,10 @@ export const GET = async () => {
     })
   }
 
-  const mailingListRecipients = await prisma.mailingListRecipient.findMany()
+  const users = await prisma.user.findMany()
 
   return createResponse({
     status: StatusCode.OK,
-    data: mailingListRecipients.map((mailingListRecipient) =>
-      getMailingListRecipientDTO(mailingListRecipient),
-    ),
+    data: users.map(getUserDTO),
   })
 }

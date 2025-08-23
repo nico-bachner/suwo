@@ -11,37 +11,45 @@ import { UpdatePasswordForm } from '@/lib/forms/update_password_form'
 import { mutations } from '@/lib/mutations'
 import { routes } from '@/routes'
 
+import { UserDTO } from '../dtos/user_dto_validator'
 import { queries } from '../queries'
 
-export const SettingsPage = () => {
+export const SettingsPage = ({ id }: Pick<UserDTO, 'id'>) => {
   const queryClient = useQueryClient()
-  const { data: session, error, isPending } = useQuery(queries.SESSION())
   const { mutate: deleteSession } = useMutation(
     mutations.DELETE_SESSION(queryClient),
   )
+  const {
+    data: user,
+    error: userError,
+    isPending: isUserPending,
+  } = useQuery({
+    ...queries.USER(id),
+  })
 
-  if (isPending) {
-    return (
-      <main className="prose">
-        <h1>Loading...</h1>
-      </main>
-    )
-  }
-
-  if (error) {
+  if (userError) {
     return (
       <main className="prose">
         <h1>Error</h1>
-        <p>{error.message}</p>
+        <p>An error occurred while fetching user data.</p>
+        <p>{userError.message}</p>
       </main>
     )
   }
 
-  if (!session) {
+  if (isUserPending) {
     return (
       <main className="prose">
-        <h1>Not logged in</h1>
-        <p>Please log in to view this page.</p>
+        <h1>Loading user data...</h1>
+      </main>
+    )
+  }
+
+  if (!user) {
+    return (
+      <main className="prose">
+        <h1>User not found</h1>
+        <p>Please log in again.</p>
       </main>
     )
   }
@@ -61,7 +69,7 @@ export const SettingsPage = () => {
           title="Communications Preferences"
           description="We send weekly emails to all SUWO members to keep you up to date with event scheduling and administrative issues. You can use the form below to set your communications preferences."
         >
-          <UpdateMailingListPreferenceForm user_id={session.user_id} />
+          <UpdateMailingListPreferenceForm user={user} />
         </SettingsSection>
 
         <SettingsSection

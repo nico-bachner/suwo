@@ -37,6 +37,9 @@ export const routes = {
   // Home
   HOME: () => createURL({ path: [] }),
 
+  // Mailing List
+  MAILING_LIST: () => createURL({ path: ['mailing-list'] }),
+
   // Profiles
   PROFILES: () => createURL({ path: ['members'] }),
   PROFILE: (user_id: ProfileDTO['user_id']) =>

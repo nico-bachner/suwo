@@ -3,7 +3,8 @@ model User {
     id String @id @default(uuid())
 
     // Required Attributes
-    email String @unique
+    email                   String  @unique
+    mailing_list_preference Boolean
 
     // Optional Attributes
     password String?
@@ -13,12 +14,11 @@ model User {
     updated_at DateTime @default(now()) @updatedAt
 
     // Relations
-    EventAttendee        EventAttendee[]
-    MailingListRecipient MailingListRecipient?
-    Payments             Payment[]
-    Profile              Profile?
-    UserInstrument       UserInstrument[]
-    UserRole             UserRole[]
-    UsuMembership        UsuMembership?
-    VerificationTokens   VerificationToken[]
+    EventAttendee      EventAttendee[]
+    Payments           Payment[]
+    Profile            Profile?
+    UserInstrument     UserInstrument[]
+    UserRole           UserRole[]
+    UsuMembership      UsuMembership?
+    VerificationTokens VerificationToken[]
 }

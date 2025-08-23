@@ -26,23 +26,18 @@ export const POST = async (request: Request) => {
 
   if (existingUser) {
     return createResponse({
-      status: 400,
+      status: StatusCode.Conflict,
       error: `Email ${existingUser.email} already in use. Please try again with another email address.\n\nIf you are sure this email belongs to you, try logging in instead.`,
     })
   }
 
   const user = await prisma.user.create({
     data: {
-      email: data.email.toLowerCase(),
+      ...data,
       Profile: {
         create: {
           given_name: data.given_name,
           family_name: data.family_name,
-        },
-      },
-      MailingListRecipient: {
-        create: {
-          email: data.email.toLowerCase(),
         },
       },
       UsuMembership: {

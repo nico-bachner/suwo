@@ -1,31 +1,34 @@
 'use client'
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { Switch } from '@/design_system/switch'
-import { queries } from '@/lib/queries'
 
-import { MailingListRecipientDTO } from '../dtos/mailing_list_recipient_dto_validator'
+import { UserDTO } from '../dtos/user_dto_validator'
 import { mutations } from '../mutations'
 import { useAppForm } from './context'
 
+type UpdateMailingListPreferenceFormProps = {
+  user: UserDTO
+}
+
 export const UpdateMailingListPreferenceForm = ({
-  user_id,
-}: Pick<MailingListRecipientDTO, 'user_id'>) => {
+  user,
+}: UpdateMailingListPreferenceFormProps) => {
   const queryClient = useQueryClient()
-  const { data: mailingListRecipient } = useQuery(
-    queries.MAILING_LIST_RECIPIENT(user_id),
-  )
-  const { mutate: updateMailingListPreference } = useMutation(
-    mutations.MAILING_LIST_RECIPIENT(queryClient, user_id),
+  const { mutate: updateUser } = useMutation(
+    mutations.USER(queryClient, user.id),
   )
 
   const form = useAppForm({
     defaultValues: {
-      mailing_list_preference: Boolean(mailingListRecipient),
+      mailing_list_preference: user.mailing_list_preference,
     },
     onSubmit: ({ value }) => {
-      updateMailingListPreference(value.mailing_list_preference)
+      updateUser({
+        ...user,
+        mailing_list_preference: value.mailing_list_preference,
+      })
     },
   })
 

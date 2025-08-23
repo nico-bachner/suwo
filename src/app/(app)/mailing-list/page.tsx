@@ -1,5 +1,5 @@
-import { MailingListRecipientsPage } from '@/lib/pages/mailing_list_recipients_page'
+import { MailingListPage } from '@/lib/pages/mailing_list_page'
 
 export default function Page() {
-  return <MailingListRecipientsPage />
+  return <MailingListPage />
 }
