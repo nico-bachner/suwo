@@ -16,8 +16,7 @@ export default function Page() {
     return (
       <main className="prose">
         <h1>Error</h1>
-        <p>An error occurred while authenticating.</p>
-        <p>{sessionError.message}</p>
+        <p>An error occurred while authenticating: {sessionError.message}</p>
       </main>
     )
   }

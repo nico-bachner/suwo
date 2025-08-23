@@ -31,8 +31,7 @@ export const SettingsPage = ({ id }: Pick<UserDTO, 'id'>) => {
     return (
       <main className="prose">
         <h1>Error</h1>
-        <p>An error occurred while fetching user data.</p>
-        <p>{userError.message}</p>
+        <p>An error occurred while fetching user data: {userError.message}</p>
       </main>
     )
   }
