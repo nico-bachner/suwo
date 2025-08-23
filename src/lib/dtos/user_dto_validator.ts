@@ -1,9 +1,18 @@
 import z from 'zod'
 
 export const UserDTOValidator = z.object({
+  // ID
   id: z.uuid(),
 
+  // Required Attributes
   email: z.email().trim().toLowerCase().min(1, 'Email is required'),
+  given_name: z.string().trim().min(1, {
+    message: 'Given name is required',
+  }),
+  mailing_list_preference: z.boolean(),
+
+  // Optional Attributes
+  family_name: z.string().nullable(),
   usu_number: z
     .string()
     .trim()
@@ -11,8 +20,7 @@ export const UserDTOValidator = z.object({
     .length(7, `USU number must be exactly 7 characters long`)
     .nullable(),
 
-  mailing_list_preference: z.boolean(),
-
+  // Metadata
   created_at: z.iso.datetime(),
   updated_at: z.iso.datetime(),
 })

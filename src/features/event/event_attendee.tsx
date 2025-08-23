@@ -5,7 +5,7 @@ import { ProfileDTO } from '@/lib/dtos/profile_dto_validator'
 import { mutations } from '@/lib/mutations'
 import { queries } from '@/lib/queries'
 
-import { getProfileScreenName } from '../profile/get_profile_screen_name'
+import { getUserDisplayName } from '../profile/get_user_display_name'
 
 type EventAttendeeProps = {
   eventId: string
@@ -38,7 +38,7 @@ export const EventAttendee = ({ eventId, profile }: EventAttendeeProps) => {
         updateAttendance(profile.user_id)
       }}
     >
-      {getProfileScreenName(profile)}
+      {getUserDisplayName(profile)}
 
       <div
         className="absolute -top-1 -right-1 z-10 rounded-full border px-1.5 py-0.5 tabular-nums"

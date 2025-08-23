@@ -11,24 +11,19 @@ export const GET: APIRoute = async (_, { params }) => {
   )
 
   const [profile, events] = await Promise.all([
-    prisma.profile.findUnique({
+    prisma.user.findUnique({
       where: {
-        user_id,
+        id: user_id,
       },
       include: {
-        user: {
+        UserInstrument: {
           select: {
-            created_at: true,
-            UserInstrument: {
-              select: {
-                instrument_id: true,
-              },
-            },
-            EventAttendee: {
-              select: {
-                event_id: true,
-              },
-            },
+            instrument_id: true,
+          },
+        },
+        EventAttendee: {
+          select: {
+            event_id: true,
           },
         },
       },

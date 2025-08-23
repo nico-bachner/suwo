@@ -6,7 +6,7 @@ import { prisma } from '@/utils/prisma'
 
 export const GET: APIRoute = async () => {
   const [profiles, events] = await Promise.all([
-    prisma.profile.findMany({
+    prisma.user.findMany({
       orderBy: [
         {
           given_name: 'asc',
@@ -16,19 +16,14 @@ export const GET: APIRoute = async () => {
         },
       ],
       include: {
-        user: {
+        UserInstrument: {
           select: {
-            created_at: true,
-            UserInstrument: {
-              select: {
-                instrument_id: true,
-              },
-            },
-            EventAttendee: {
-              select: {
-                event_id: true,
-              },
-            },
+            instrument_id: true,
+          },
+        },
+        EventAttendee: {
+          select: {
+            event_id: true,
           },
         },
       },

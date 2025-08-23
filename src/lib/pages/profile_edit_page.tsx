@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { Button } from '@/design_system/button'
 import { SettingsSection } from '@/design_system/settings_section'
 import { Heading } from '@/design_system/typography'
-import { getProfileScreenName } from '@/features/profile/get_profile_screen_name'
+import { getUserDisplayName } from '@/features/profile/get_user_display_name'
 import { CreateInstrumentForm } from '@/lib/forms/create_instrument_form'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
@@ -85,7 +85,7 @@ export const ProfileEditPage = ({ user_id }: Pick<ProfileDTO, 'user_id'>) => {
         </Button>
 
         <Heading as="h1" variant="primary">
-          Edit Profile: {getProfileScreenName(profile)}
+          Edit Profile: {getUserDisplayName(profile)}
         </Heading>
       </div>
 

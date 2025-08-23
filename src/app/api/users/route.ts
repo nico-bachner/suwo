@@ -59,19 +59,13 @@ export const POST: APIRoute = async (request) => {
     })
   }
 
+  const { instrument_ids, ...rest } = data
+
   const user = await prisma.user.create({
     data: {
-      email: data.email,
-      usu_number: data.usu_number,
-      mailing_list_preference: data.mailing_list_preference,
-      Profile: {
-        create: {
-          given_name: data.given_name,
-          family_name: data.family_name,
-        },
-      },
+      ...rest,
       UserInstrument: {
-        create: data.instrument_ids.map((instrument_id) => ({
+        create: instrument_ids.map((instrument_id) => ({
           instrument_id,
         })),
       },

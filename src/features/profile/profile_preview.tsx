@@ -4,7 +4,7 @@ import { SkeletonText } from '@/design_system/skeleton'
 import { ProfileDTO } from '@/lib/dtos/profile_dto_validator'
 import { routes } from '@/routes'
 
-import { getProfileScreenName } from './get_profile_screen_name'
+import { getUserDisplayName } from './get_user_display_name'
 import { ProfileInstruments } from './profile_instruments'
 
 export const ProfilePreview = (profile: ProfileDTO) => (
@@ -13,7 +13,7 @@ export const ProfilePreview = (profile: ProfileDTO) => (
     href={routes.PROFILE(profile.user_id)}
     className="bg-neutral-5/80 border-neutral-4/80 flex flex-col gap-1 rounded-3xl border px-6 py-4 font-bold backdrop-blur transition-transform outline-none hover:scale-105 focus:scale-105"
   >
-    <p className="text-neutral-2">{getProfileScreenName(profile)}</p>
+    <p className="text-neutral-2">{getUserDisplayName(profile)}</p>
     <ProfileInstruments
       profile={profile}
       className="text-neutral-3 line-clamp-1"

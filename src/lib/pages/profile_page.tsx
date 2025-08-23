@@ -7,13 +7,13 @@ import Link from 'next/link'
 import { Button } from '@/design_system/button'
 import { ProfileEventsAttended } from '@/features/profile/profile_events_attended'
 import { ProfileInstruments } from '@/features/profile/profile_instruments'
-import { Profile } from '@/generated/prisma'
 import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 
-import { getProfileScreenName } from '../../features/profile/get_profile_screen_name'
+import { getUserDisplayName } from '../../features/profile/get_user_display_name'
+import { ProfileDTO } from '../dtos/profile_dto_validator'
 
-export const ProfilePage = ({ user_id }: Pick<Profile, 'user_id'>) => {
+export const ProfilePage = ({ user_id }: Pick<ProfileDTO, 'user_id'>) => {
   const {
     data: profile,
     error: profileError,
@@ -51,7 +51,7 @@ export const ProfilePage = ({ user_id }: Pick<Profile, 'user_id'>) => {
 
   return (
     <main className="prose">
-      <h1>{getProfileScreenName(profile)}</h1>
+      <h1>{getUserDisplayName(profile)}</h1>
 
       <ProfileInstruments profile={profile} />
 

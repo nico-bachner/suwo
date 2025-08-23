@@ -4,11 +4,13 @@ model User {
 
     // Required Attributes
     email                   String  @unique
+    given_name              String
     mailing_list_preference Boolean
 
     // Optional Attributes
-    password   String?
-    usu_number String? @unique
+    family_name String?
+    password    String?
+    usu_number  String? @unique
 
     // Metadata
     created_at DateTime @default(now())
@@ -17,7 +19,6 @@ model User {
     // Relations
     EventAttendee      EventAttendee[]
     Payments           Payment[]
-    Profile            Profile?
     UserInstrument     UserInstrument[]
     UserRole           UserRole[]
     VerificationTokens VerificationToken[]
