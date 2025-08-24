@@ -13,15 +13,13 @@ model User {
     usu_number  String? @unique
 
     // Relations
-    instruments Instrument[]
-    events      Event[]
+    events             Event[]
+    instruments        Instrument[]
+    payments           Payment[]
+    roles              Role[]
+    verificationTokens VerificationToken[]
 
     // Metadata
     created_at DateTime @default(now())
     updated_at DateTime @default(now()) @updatedAt
-
-    // Relations
-    Payments           Payment[]
-    UserRole           UserRole[]
-    VerificationTokens VerificationToken[]
 }

@@ -9,11 +9,11 @@ model Role {
     description String?
     email       String? @unique
 
+    // Relations
+    assignees  User[]
+    privileges Privilege[]
+
     // Metadata
     created_at DateTime @default(now())
     updated_at DateTime @default(now()) @updatedAt
-
-    // Relations
-    RolePrivilege RolePrivilege[]
-    UserRole      UserRole[]
 }

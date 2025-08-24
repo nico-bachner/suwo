@@ -5,10 +5,10 @@ model Privilege {
     // Required Attributes
     name String @unique
 
+    // Relations
+    grantees Role[]
+
     // Metadata
     created_at DateTime @default(now())
     updated_at DateTime @default(now()) @updatedAt
-
-    // Relations
-    RolePrivilege RolePrivilege[]
 }
