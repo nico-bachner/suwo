@@ -14,18 +14,20 @@ type EventAttendeeProps = {
 
 export const EventAttendee = ({ event, user }: EventAttendeeProps) => {
   const queryClient = useQueryClient()
-  const { mutate: updateUser } = useMutation(
-    mutations.USER(queryClient, user.id),
+  const { mutate: updateEvent } = useMutation(
+    mutations.EVENT(queryClient, event.id),
   )
+
+  const attended = event.attendees.includes(user.id)
 
   return (
     <Button
-      variant={user.events.includes(event.id) ? 'success' : 'secondary'}
+      variant={attended ? 'success' : 'secondary'}
       onClick={() => {
-        updateUser({
-          events: user.events.includes(event.id)
-            ? user.events.filter((id) => id !== event.id)
-            : [...user.events, event.id],
+        updateEvent({
+          attendees: attended
+            ? event.attendees.filter((id) => id !== user.id)
+            : [...event.attendees, user.id],
         })
       }}
     >

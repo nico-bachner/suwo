@@ -5,16 +5,16 @@ import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-import { UserDTO, UserDTOValidator } from '../dtos/user_dto_validator'
+import { EventDTO, EventDTOValidator } from '../dtos/event_dto_validator'
 import { queryKeys } from '../queries'
 
-export const userMutation = (
+export const eventMutation = (
   queryClient: QueryClient,
-  id: UserDTO['id'],
-): UseMutationOptions<UserDTO, Error, Partial<UserDTO>> => ({
+  id: EventDTO['id'],
+): UseMutationOptions<EventDTO, Error, Partial<EventDTO>> => ({
   mutationFn: async (value) => {
     const response = await parseResponse(
-      await fetch(createURL({ path: ['api', ...queryKeys.USER(id)] }), {
+      await fetch(createURL({ path: ['api', ...queryKeys.EVENT(id)] }), {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -25,10 +25,8 @@ export const userMutation = (
 
     switch (response.status) {
       case StatusCode.OK:
-        return UserDTOValidator.parse(response.data)
+        return EventDTOValidator.parse(response.data)
       case StatusCode.BadRequest:
-        throw new Error(response.error)
-      case StatusCode.Unauthorized:
         throw new Error(response.error)
       default:
         throw new Error('Failed to fetch data')
@@ -42,14 +40,17 @@ export const userMutation = (
   },
   onSettled: async (data) => {
     await queryClient.invalidateQueries({
-      queryKey: queryKeys.USERS(),
+      queryKey: queryKeys.EVENTS(),
     })
     await queryClient.invalidateQueries({
-      queryKey: queryKeys.USER(id),
+      queryKey: queryKeys.EVENT(id),
     })
-    data?.events.forEach(async (eventId) => {
+    await queryClient.invalidateQueries({
+      queryKey: queryKeys.USERS(),
+    })
+    data?.attendees.forEach(async (id) => {
       await queryClient.invalidateQueries({
-        queryKey: queryKeys.EVENT(eventId),
+        queryKey: queryKeys.USER(id),
       })
     })
   },

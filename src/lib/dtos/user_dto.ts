@@ -37,8 +37,8 @@ export const getUserDTO = (
 })
 
 /**
- * Formats a new User Data Transfer Object (DTO) for insertion into the
- * database. Used in POST requests to create a new user.
+ * Transforms the input User Data Transfer Object (DTO) into a format suitable
+ * for database insertion. Used in POST requests to create a new user.
  */
 export const createUser = (
   user: Omit<UserDTO, 'id' | 'created_at' | 'updated_at'>,
@@ -66,8 +66,9 @@ export const createUser = (
 })
 
 /**
- * Formats an existing User Data Transfer Object (DTO) for insertion into the
- * database. Used in PATCH requests to update user information.
+ * Transforms the input partial User Data Transfer Object (DTO) into a format
+ * suitable for database updates. Used in PATCH requests to update an existing
+ * user.
  */
 export const updateUser = (
   user: Partial<Omit<UserDTO, 'id' | 'created_at' | 'updated_at'>>,

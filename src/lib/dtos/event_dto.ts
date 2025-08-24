@@ -21,7 +21,7 @@ export const getEventDTO = (
   starts_at: event.starts_at.toISOString(),
 
   // Optional Attributes
-  ends_at: event.ends_at ? event.ends_at.toISOString() : null,
+  ends_at: event.ends_at && event.ends_at.toISOString(),
   location: event.location,
   notes: event.notes,
   type: event.type,
@@ -35,8 +35,8 @@ export const getEventDTO = (
 })
 
 /**
- * Formats a new Event Data Transfer Object (DTO) for insertion into the
- * database. Used in POST requests to create a new event.
+ * Transforms the input Event Data Transfer Object (DTO) into a format suitable
+ * for database insertion. Used in POST requests to create a new event.
  */
 export const createEvent = (
   event: Omit<EventDTO, 'id' | 'created_at' | 'updated_at'>,
@@ -53,13 +53,13 @@ export const createEvent = (
   ),
 
   // Optional Attributes
-  ends_at: event.ends_at
-    ? new Date(
-        Temporal.PlainDateTime.from(event.ends_at).toZonedDateTime(
-          'Australia/Sydney',
-        ).epochMilliseconds,
-      )
-    : undefined,
+  ends_at:
+    event.ends_at &&
+    new Date(
+      Temporal.PlainDateTime.from(event.ends_at).toZonedDateTime(
+        'Australia/Sydney',
+      ).epochMilliseconds,
+    ),
   location: event.location,
   notes: event.notes,
   type: event.type,
@@ -67,6 +67,45 @@ export const createEvent = (
   // Relations
   attendees: {
     connect: event.attendees.map((attendee) => ({
+      id: attendee,
+    })),
+  },
+})
+
+/**
+ * Transforms the input partial Event Data Transfer Object (DTO) into a format
+ * suitable for database updates. Used in PATCH requests to update an existing
+ * event.
+ */
+export const updateEvent = (
+  event: Partial<Omit<EventDTO, 'id' | 'created_at' | 'updated_at'>>,
+): Partial<
+  Omit<Prisma.EventUpdateArgs['data'], 'id' | 'created_at' | 'updated_at'>
+> => ({
+  // Required Attributes
+  name: event.name,
+  starts_at:
+    event.starts_at &&
+    new Date(
+      Temporal.PlainDateTime.from(event.starts_at).toZonedDateTime(
+        'Australia/Sydney',
+      ).epochMilliseconds,
+    ),
+  // Optional Attributes
+  ends_at:
+    event.ends_at &&
+    new Date(
+      Temporal.PlainDateTime.from(event.ends_at).toZonedDateTime(
+        'Australia/Sydney',
+      ).epochMilliseconds,
+    ),
+  location: event.location,
+  notes: event.notes,
+  type: event.type,
+
+  // Relations
+  attendees: event.attendees && {
+    set: event.attendees.map((attendee) => ({
       id: attendee,
     })),
   },
