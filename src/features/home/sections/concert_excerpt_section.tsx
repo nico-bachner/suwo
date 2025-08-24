@@ -13,6 +13,7 @@ export const ConcertExcerptSection = () => (
       src={EMBED_URL}
       title="SUWO Myths and Legends Concert – The Lord of the Rings"
       allow="fullscreen"
+      loading="lazy"
       className="aspect-video w-full rounded-3xl brightness-75 outline-none"
     />
   </Section>
