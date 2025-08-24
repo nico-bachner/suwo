@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
 import ensemble from '@/features/marketing/ensemble.jpg'
+import { NoAuditions } from '@/features/marketing/no_auditions'
 
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (
@@ -12,6 +13,8 @@ export default function Layout({ children }: LayoutProps<'/'>) {
       />
 
       {children}
+
+      <NoAuditions />
     </>
   )
 }

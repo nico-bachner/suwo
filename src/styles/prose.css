@@ -1,7 +1,3 @@
-.prose {
-  @apply w-full;
-}
-
 .prose > * {
   margin-block: 3rem;
   @apply mx-auto w-full max-w-screen-lg;
