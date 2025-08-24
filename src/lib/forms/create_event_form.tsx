@@ -6,14 +6,17 @@ import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
+import { EventDTO, EventDTOValidator } from '../dtos/event_dto_validator'
 import { queryKeys } from '../queries'
-import { Event, EventType, EventValidator } from '../validators/event_validator'
 import { useAppForm } from './context'
 
 export const CreateEventForm = () => {
   const queryClient = useQueryClient()
 
-  const defaultValues: Omit<Event, 'id' | 'created_at' | 'updated_at'> = {
+  const defaultValues: Omit<
+    EventDTO,
+    'id' | 'attendees' | 'created_at' | 'updated_at'
+  > = {
     name: '',
     starts_at: new Date().toISOString(),
     ends_at: new Date(
@@ -21,14 +24,15 @@ export const CreateEventForm = () => {
     ).toISOString(),
     location: '',
     notes: '',
-    type: EventType.Rehearsal,
+    type: 'rehearsal',
   }
 
   const form = useAppForm({
     defaultValues,
     validators: {
-      onSubmit: EventValidator.omit({
+      onSubmit: EventDTOValidator.omit({
         id: true,
+        attendees: true,
         created_at: true,
         updated_at: true,
       }),

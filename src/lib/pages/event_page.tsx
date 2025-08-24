@@ -8,9 +8,9 @@ import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 import { formatDateRange } from '@/utils/format_date_range'
 
-import { Event } from '../validators/event_validator'
+import { EventDTO } from '../dtos/event_dto_validator'
 
-export const EventPage = ({ id }: Pick<Event, 'id'>) => {
+export const EventPage = ({ id }: Pick<EventDTO, 'id'>) => {
   const {
     data: event,
     error: eventError,

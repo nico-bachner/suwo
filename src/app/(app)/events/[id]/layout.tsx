@@ -1,9 +1,10 @@
 import { EventNavigator } from '@/features/event/event_navigator'
-import { EventValidator } from '@/lib/validators/event_validator'
-import { LayoutFileProps } from '@/utils/next_types'
 
-export default async function Layout({ children, params }: LayoutFileProps) {
-  const { id } = EventValidator.pick({ id: true }).parse(await params)
+export default async function Layout({
+  children,
+  params,
+}: LayoutProps<'/events/[id]'>) {
+  const { id } = await params
 
   return (
     <div className="md:pt-12">

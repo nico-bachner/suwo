@@ -3,13 +3,12 @@ import { useQuery } from '@tanstack/react-query'
 import { UserDTO } from '@/lib/dtos/user_dto_validator'
 import { queries } from '@/lib/queries'
 
-import { ProfileEventAttended } from '../profile/profile_event_attended'
+import { UserEventAttended } from './user_event_attended'
 
-export const UserEventsAttended = ({ id }: Pick<UserDTO, 'id'>) => {
+export const UserEventsAttended = (user: UserDTO) => {
   const { data: events } = useQuery(queries.EVENTS())
-  const { data: profile } = useQuery(queries.PROFILE(id))
 
-  if (!profile || !events) {
+  if (!events) {
     return null
   }
 
@@ -17,17 +16,13 @@ export const UserEventsAttended = ({ id }: Pick<UserDTO, 'id'>) => {
     <div className="prose">
       <h2>Events Attended</h2>
 
-      <p>{profile.attendance_rate}% attendance rate</p>
+      <p>{user.attendance_rate}% attendance rate</p>
 
       <div className="flex flex-wrap gap-2">
         {events
           .filter((event) => new Date(event.starts_at).getTime() < Date.now())
           .map((event) => (
-            <ProfileEventAttended
-              key={event.id}
-              event={event}
-              profile={profile}
-            />
+            <UserEventAttended key={event.id} event={event} user={user} />
           ))}
       </div>
     </div>

@@ -1,37 +1,30 @@
-import { Temporal } from '@js-temporal/polyfill'
+import { NextRequest } from 'next/server'
 import z from 'zod'
 
-import { EventValidator } from '@/lib/validators/event_validator'
+import { createEvent, getEventDTO } from '@/lib/dtos/event_dto'
+import { EventDTOValidator } from '@/lib/dtos/event_dto_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
-import { APIRoute } from '@/utils/next_types'
 import { prisma } from '@/utils/prisma'
 
-export const GET: APIRoute = async () => {
+export const GET = async () => {
   const events = await prisma.event.findMany({
     orderBy: {
       starts_at: 'asc',
     },
+    include: {
+      attendees: true,
+    },
   })
-
-  const eventsDTO = z.array(EventValidator).parse(
-    events.map((event) => ({
-      ...event,
-      starts_at: event.starts_at.toISOString(),
-      ends_at: event.ends_at ? event.ends_at.toISOString() : null,
-      created_at: event.created_at.toISOString(),
-      updated_at: event.updated_at.toISOString(),
-    })),
-  )
 
   return createResponse({
     status: StatusCode.OK,
-    data: eventsDTO,
+    data: events.map(getEventDTO),
   })
 }
 
-export const POST: APIRoute = async (request) => {
-  const { data, error, success } = EventValidator.omit({
+export const POST = async (request: NextRequest) => {
+  const { data, error, success } = EventDTOValidator.omit({
     id: true,
     created_at: true,
     updated_at: true,
@@ -44,25 +37,14 @@ export const POST: APIRoute = async (request) => {
     })
   }
 
-  const startsAt = new Date(
-    Temporal.PlainDateTime.from(data.starts_at).toZonedDateTime(
-      'Australia/Sydney',
-    ).epochMilliseconds,
-  )
-  const endsAt = data.ends_at
-    ? new Date(
-        Temporal.PlainDateTime.from(data.ends_at).toZonedDateTime(
-          'Australia/Sydney',
-        ).epochMilliseconds,
-      )
-    : undefined
+  const dbEvent = createEvent(data)
 
   const existingEvents = await prisma.event.findMany({
     where: {
-      name: data.name,
+      name: dbEvent.name,
       starts_at: {
-        gte: startsAt,
-        lte: endsAt,
+        gte: dbEvent.starts_at,
+        lte: dbEvent.ends_at ?? undefined,
       },
     },
   })
@@ -75,23 +57,14 @@ export const POST: APIRoute = async (request) => {
   }
 
   const event = await prisma.event.create({
-    data: {
-      ...data,
-      starts_at: startsAt,
-      ends_at: endsAt,
+    data: dbEvent,
+    include: {
+      attendees: true,
     },
-  })
-
-  const eventDTO = EventValidator.parse({
-    ...event,
-    starts_at: event.starts_at.toISOString(),
-    ends_at: event.ends_at ? event.ends_at.toISOString() : null,
-    created_at: event.created_at.toISOString(),
-    updated_at: event.updated_at.toISOString(),
   })
 
   return createResponse({
     status: StatusCode.Created,
-    data: eventDTO,
+    data: getEventDTO(event),
   })
 }

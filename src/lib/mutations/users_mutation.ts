@@ -8,12 +8,12 @@ import { StatusCode } from '@/utils/http/status_code'
 import { UserDTO, UserDTOValidator } from '../dtos/user_dto_validator'
 import { queryKeys } from '../queries'
 
-export const createUserMutation = (
+export const usersMutation = (
   queryClient: QueryClient,
 ): UseMutationOptions<
   UserDTO,
   Error,
-  Omit<UserDTO, 'id' | 'created_at' | 'updated_at'>
+  Omit<UserDTO, 'id' | 'attendance_rate' | 'created_at' | 'updated_at'>
 > => ({
   mutationFn: async (value) => {
     const response = await parseResponse(

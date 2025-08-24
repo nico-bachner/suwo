@@ -10,7 +10,6 @@ export const UserDTOValidator = z.object({
     message: 'Given name is required',
   }),
   mailing_list_preference: z.boolean(),
-  instruments: z.array(z.uuid()),
 
   // Optional Attributes
   family_name: z.string().nullable(),
@@ -21,7 +20,12 @@ export const UserDTOValidator = z.object({
     .length(7, `USU number must be exactly 7 characters long`)
     .nullable(),
 
+  // Relations
+  events: z.array(z.uuid()),
+  instruments: z.array(z.uuid()),
+
   // Metadata
+  attendance_rate: z.int().min(0).max(100),
   created_at: z.iso.datetime(),
   updated_at: z.iso.datetime(),
 })

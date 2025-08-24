@@ -3,22 +3,24 @@ model User {
     id String @id @default(uuid())
 
     // Required Attributes
-    email                   String       @unique
+    email                   String  @unique
     given_name              String
     mailing_list_preference Boolean
-    instruments             Instrument[]
 
     // Optional Attributes
     family_name String?
     password    String?
     usu_number  String? @unique
 
+    // Relations
+    instruments Instrument[]
+    events      Event[]
+
     // Metadata
     created_at DateTime @default(now())
     updated_at DateTime @default(now()) @updatedAt
 
     // Relations
-    EventAttendee      EventAttendee[]
     Payments           Payment[]
     UserRole           UserRole[]
     VerificationTokens VerificationToken[]

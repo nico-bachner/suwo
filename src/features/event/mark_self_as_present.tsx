@@ -1,39 +1,48 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { Button } from '@/design_system/button'
+import { EventDTO } from '@/lib/dtos/event_dto_validator'
 import { mutations } from '@/lib/mutations'
 import { queries } from '@/lib/queries'
+import { Session } from '@/lib/validators/session_validator'
 
 type MarkSelfAsPresentProps = {
-  eventId: string
+  session: Session
+  event: EventDTO
   className?: string
 }
 
 export const MarkSelfAsPresent = ({
-  eventId,
+  session,
+  event,
   className,
 }: MarkSelfAsPresentProps) => {
   const queryClient = useQueryClient()
-  const { data: eventAttendees } = useQuery(queries.EVENT_ATTENDEES(eventId))
-  const { data: session } = useQuery(queries.SESSION())
-  const { mutate: updateAttendance } = useMutation(
-    mutations.EVENT_ATTENDEES(queryClient, eventId),
+  const { data: user } = useQuery(queries.USER(session.user_id))
+  const { mutate: updateUser } = useMutation(
+    mutations.USER(queryClient, session.user_id),
   )
 
-  if (!session || !eventAttendees) {
-    return null
+  if (!user) {
+    return (
+      <Button variant="secondary" className={className} disabled>
+        Loading user...
+      </Button>
+    )
   }
 
-  const isPresent = eventAttendees.some(
-    (attendee) => attendee === session.user_id,
-  )
+  const isPresent = user.events.includes(event.id)
 
   return (
     <Button
       variant={isPresent ? 'success' : 'primary'}
       className={className}
       onClick={() => {
-        updateAttendance(session.user_id)
+        updateUser({
+          events: isPresent
+            ? user.events.filter((id) => id !== event.id)
+            : [...user.events, event.id],
+        })
       }}
     >
       {isPresent ? 'Marked as present' : 'Mark self as present'}

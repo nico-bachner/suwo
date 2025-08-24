@@ -5,11 +5,11 @@ import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-import { Event, EventValidator } from '../validators/event_validator'
+import { EventDTO, EventDTOValidator } from '../dtos/event_dto_validator'
 
 export const eventsQueryKey = () => ['events']
 
-export const eventsQuery = (): UseQueryOptions<Event[]> => ({
+export const eventsQuery = (): UseQueryOptions<EventDTO[]> => ({
   queryKey: eventsQueryKey(),
   queryFn: async ({ signal }) => {
     const response = await parseResponse(
@@ -20,7 +20,7 @@ export const eventsQuery = (): UseQueryOptions<Event[]> => ({
 
     switch (response.status) {
       case StatusCode.OK: {
-        return z.array(EventValidator).parse(response.data)
+        return z.array(EventDTOValidator).parse(response.data)
       }
       default:
         throw new Error('Failed to fetch data')

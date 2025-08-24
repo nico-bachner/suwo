@@ -33,6 +33,7 @@ export default [
         window: 'readonly',
         LayoutProps: 'readonly',
         PageProps: 'readonly',
+        RouteContext: 'readonly',
       },
     },
     settings: {

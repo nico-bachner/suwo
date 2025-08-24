@@ -35,15 +35,20 @@ export const userMutation = (
   onError: (error) => {
     toast.error(error.message)
   },
-  onSuccess: () => {
-    toast.success('Successfully updated instruments')
+  onSuccess: (_, variables) => {
+    toast.success(`Successfully updated ${Object.keys(variables).join(', ')}`)
   },
-  onSettled: async () => {
+  onSettled: async (data) => {
     await queryClient.invalidateQueries({
       queryKey: queryKeys.USERS(),
     })
     await queryClient.invalidateQueries({
       queryKey: queryKeys.USER(id),
+    })
+    data?.events.forEach(async (eventId) => {
+      await queryClient.invalidateQueries({
+        queryKey: queryKeys.EVENT(eventId),
+      })
     })
   },
 })

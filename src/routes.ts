@@ -2,8 +2,8 @@ import {
   apiRoutes as authApiRoutes,
   routes as authRoutes,
 } from './features/auth/routes'
-import { ProfileDTO } from './lib/dtos/profile_dto_validator'
-import { Event } from './lib/validators/event_validator'
+import { EventDTO } from './lib/dtos/event_dto_validator'
+import { UserDTO } from './lib/dtos/user_dto_validator'
 import { createURL } from './utils/http/create_url'
 
 export const queryKeys = {
@@ -23,8 +23,8 @@ export const routes = {
 
   // Events
   EVENTS: () => createURL({ path: ['events'] }),
-  EVENT: (id: Event['id']) => createURL({ path: ['events', id] }),
-  EVENT_ATTENDEES: (id: Event['id']) =>
+  EVENT: (id: EventDTO['id']) => createURL({ path: ['events', id] }),
+  EVENT_ATTENDEES: (id: EventDTO['id']) =>
     createURL({ path: ['events', id, 'attendees'] }),
 
   // Equipment
@@ -42,10 +42,9 @@ export const routes = {
 
   // Profiles
   PROFILES: () => createURL({ path: ['members'] }),
-  PROFILE: (user_id: ProfileDTO['user_id']) =>
-    createURL({ path: ['members', user_id] }),
-  PROFILE_EDIT: (user_id: ProfileDTO['user_id']) =>
-    createURL({ path: ['members', user_id, 'edit'] }),
+  PROFILE: (id: UserDTO['id']) => createURL({ path: ['members', id] }),
+  PROFILE_EDIT: (id: UserDTO['id']) =>
+    createURL({ path: ['members', id, 'edit'] }),
 
   // Settings
   SETTINGS: () => createURL({ path: ['settings'] }),

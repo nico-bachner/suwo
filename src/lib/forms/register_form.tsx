@@ -12,17 +12,21 @@ import { useAppForm } from './context'
 
 export const RegisterForm = () => {
   const queryClient = useQueryClient()
-  const { mutate: createUser } = useMutation(mutations.CREATE_USER(queryClient))
+  const { mutate: createUser } = useMutation(mutations.USERS(queryClient))
   const { data: instruments, isPending: isInstrumentsPending } = useQuery(
     queries.INSTRUMENTS(),
   )
 
-  const defaultValues: Omit<UserDTO, 'id' | 'created_at' | 'updated_at'> = {
+  const defaultValues: Omit<
+    UserDTO,
+    'id' | 'attendance_rate' | 'created_at' | 'updated_at'
+  > = {
     given_name: '',
     family_name: '',
     email: '',
     usu_number: '',
     instruments: [],
+    events: [],
     mailing_list_preference: true,
   }
 

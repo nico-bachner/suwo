@@ -1,53 +1,44 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { Button } from '@/design_system/button'
-import { ProfileDTO } from '@/lib/dtos/profile_dto_validator'
+import { EventDTO } from '@/lib/dtos/event_dto_validator'
+import { UserDTO } from '@/lib/dtos/user_dto_validator'
 import { mutations } from '@/lib/mutations'
-import { queries } from '@/lib/queries'
 
 import { getUserDisplayName } from '../user/get_user_display_name'
 
 type EventAttendeeProps = {
-  eventId: string
-  profile: ProfileDTO
+  event: EventDTO
+  user: UserDTO
 }
 
-export const EventAttendee = ({ eventId, profile }: EventAttendeeProps) => {
+export const EventAttendee = ({ event, user }: EventAttendeeProps) => {
   const queryClient = useQueryClient()
-  const {
-    data: eventAttendees,
-    error,
-    isPending,
-  } = useQuery(queries.EVENT_ATTENDEES(eventId))
-  const { mutate: updateAttendance } = useMutation(
-    mutations.EVENT_ATTENDEES(queryClient, eventId),
+  const { mutate: updateUser } = useMutation(
+    mutations.USER(queryClient, user.id),
   )
-
-  if (error || isPending) {
-    return null
-  }
 
   return (
     <Button
-      variant={
-        eventAttendees.some((attendee) => attendee === profile.user_id)
-          ? 'success'
-          : 'secondary'
-      }
+      variant={user.events.includes(event.id) ? 'success' : 'secondary'}
       onClick={() => {
-        updateAttendance(profile.user_id)
+        updateUser({
+          events: user.events.includes(event.id)
+            ? user.events.filter((id) => id !== event.id)
+            : [...user.events, event.id],
+        })
       }}
     >
-      {getUserDisplayName(profile)}
+      {getUserDisplayName(user)}
 
       <div
         className="absolute -top-1 -right-1 z-10 rounded-full border px-1 font-mono text-xs leading-tight"
         style={{
-          color: `oklch(0.9 0.15 ${profile.attendance_rate * 1.2 + 30})`,
-          backgroundColor: `oklch(0.6 0.15 ${profile.attendance_rate * 1.2 + 30})`,
+          color: `oklch(0.9 0.15 ${user.attendance_rate * 1.2 + 30})`,
+          backgroundColor: `oklch(0.6 0.15 ${user.attendance_rate * 1.2 + 30})`,
         }}
       >
-        {profile.attendance_rate}%
+        {user.attendance_rate}%
       </div>
     </Button>
   )

@@ -12,12 +12,12 @@ model Event {
     notes    String?
     type     String?
 
+    // Relations
+    attendees User[]
+
     // Metadata
     created_at DateTime @default(now())
     updated_at DateTime @default(now()) @updatedAt
-
-    // Relations
-    EventAttendee EventAttendee[]
 
     @@unique([name, starts_at])
 }

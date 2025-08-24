@@ -55,7 +55,7 @@ export const ProfilePage = ({ id }: Pick<UserDTO, 'id'>) => {
 
       <UserInstruments user={user} />
 
-      <UserEventsAttended id={user.id} />
+      <UserEventsAttended {...user} />
 
       {session && session.user_id === user.id && (
         <Button variant="primary" asChild>

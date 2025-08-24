@@ -1,37 +1,37 @@
+import { NextRequest } from 'next/server'
 import z from 'zod'
 
 import { createSession } from '@/features/auth/session/create_session'
-import { getSession } from '@/features/auth/session/get_session'
 import { createUser, getUserDTO } from '@/lib/dtos/user_dto'
 import { UserDTOValidator } from '@/lib/dtos/user_dto_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
-import { APIRoute } from '@/utils/next_types'
 import { prisma } from '@/utils/prisma'
 
-export const GET: APIRoute = async () => {
-  const session = await getSession()
-
-  if (!session) {
-    return createResponse({
-      status: StatusCode.Unauthorized,
-      error: 'Unauthorized',
-    })
-  }
-
-  const users = await prisma.user.findMany({
-    include: {
-      instruments: true,
-    },
-  })
+export const GET = async () => {
+  const [users, events] = await Promise.all([
+    prisma.user.findMany({
+      include: {
+        events: true,
+        instruments: true,
+      },
+    }),
+    prisma.event.findMany({
+      where: {
+        starts_at: {
+          lt: new Date(),
+        },
+      },
+    }),
+  ])
 
   return createResponse({
     status: StatusCode.OK,
-    data: users.map(getUserDTO),
+    data: users.map((user) => getUserDTO(user, events)),
   })
 }
 
-export const POST: APIRoute = async (request) => {
+export const POST = async (request: NextRequest) => {
   const { data, error, success } = UserDTOValidator.omit({
     id: true,
     created_at: true,
@@ -58,12 +58,22 @@ export const POST: APIRoute = async (request) => {
     })
   }
 
-  const user = await prisma.user.create({
-    data: createUser(data),
-    include: {
-      instruments: true,
-    },
-  })
+  const [user, events] = await Promise.all([
+    prisma.user.create({
+      data: createUser(data),
+      include: {
+        events: true,
+        instruments: true,
+      },
+    }),
+    prisma.event.findMany({
+      where: {
+        starts_at: {
+          lt: new Date(),
+        },
+      },
+    }),
+  ])
 
   await createSession({
     user_id: user.id,
@@ -71,6 +81,6 @@ export const POST: APIRoute = async (request) => {
 
   return createResponse({
     status: StatusCode.Created,
-    data: getUserDTO(user),
+    data: getUserDTO(user, events),
   })
 }

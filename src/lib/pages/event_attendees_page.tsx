@@ -13,9 +13,9 @@ import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 import { search } from '@/utils/search'
 
-import { Event } from '../validators/event_validator'
+import { EventDTO } from '../dtos/event_dto_validator'
 
-export const EventAttendeesPage = ({ id }: Pick<Event, 'id'>) => {
+export const EventAttendeesPage = ({ id }: Pick<EventDTO, 'id'>) => {
   const {
     data: session,
     error: sessionError,
@@ -27,37 +27,22 @@ export const EventAttendeesPage = ({ id }: Pick<Event, 'id'>) => {
     isPending: isEventPending,
   } = useQuery(queries.EVENT(id))
   const {
-    data: profiles,
-    error: profilesError,
-    isPending: isProfilesPending,
-  } = useQuery(queries.PROFILES())
-  const {
-    data: eventAttendees,
-    error: eventAttendeesError,
-    isPending: isEventAttendeesPending,
-  } = useQuery(queries.EVENT_ATTENDEES(id))
+    data: users,
+    error: usersError,
+    isPending: isUsersPending,
+  } = useQuery(queries.USERS())
   const [query, setQuery] = useState('')
 
-  if (sessionError || eventError || profilesError || eventAttendeesError) {
+  if (sessionError || eventError || usersError) {
     return (
       <main className="prose">
         <h1>Error</h1>
-        <p>
-          {
-            (sessionError || eventError || profilesError || eventAttendeesError)
-              ?.message
-          }
-        </p>
+        <p>{(sessionError || eventError || usersError)?.message}</p>
       </main>
     )
   }
 
-  if (
-    isSessionPending ||
-    isEventPending ||
-    isProfilesPending ||
-    isEventAttendeesPending
-  ) {
+  if (isSessionPending || isEventPending || isUsersPending) {
     return (
       <main className="prose">
         <h1>Loading...</h1>
@@ -85,12 +70,13 @@ export const EventAttendeesPage = ({ id }: Pick<Event, 'id'>) => {
       </Heading>
 
       <p className="mx-auto w-full max-w-screen-sm text-xl">
-        Present: {`${eventAttendees.length}/${profiles.length}`}
+        Present: {`${event.attendees.length}/${users.length}`}
       </p>
 
       {session ? (
         <MarkSelfAsPresent
-          eventId={event.id}
+          session={session}
+          event={event}
           className="mx-auto w-full max-w-screen-sm"
         />
       ) : (
@@ -114,15 +100,11 @@ export const EventAttendeesPage = ({ id }: Pick<Event, 'id'>) => {
 
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
         {search({
-          data: profiles.sort((a, b) => b.attendance_rate - a.attendance_rate),
+          data: users.sort((a, b) => b.attendance_rate - a.attendance_rate),
           keys: ['given_name', 'family_name'],
           query,
-        }).map((profile) => (
-          <EventAttendee
-            key={profile.user_id}
-            eventId={event.id}
-            profile={profile}
-          />
+        }).map((user) => (
+          <EventAttendee key={user.id} event={event} user={user} />
         ))}
       </div>
     </main>
