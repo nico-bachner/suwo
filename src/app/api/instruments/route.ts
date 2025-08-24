@@ -1,27 +1,32 @@
+import { NextRequest } from 'next/server'
 import z from 'zod'
 
-import { InstrumentValidator } from '@/lib/validators/instrument_validator'
+import { createInstrument, getInstrumentDTO } from '@/lib/dtos/instrument_dto'
+import { InstrumentDTOValidator } from '@/lib/dtos/instrument_dto_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
-import { APIRoute } from '@/utils/next_types'
 import { prisma } from '@/utils/prisma'
 
-export const GET: APIRoute = async () => {
+export const GET = async () => {
   const instruments = await prisma.instrument.findMany({
     orderBy: {
       name: 'asc',
+    },
+    include: {
+      players: true,
     },
   })
 
   return createResponse({
     status: StatusCode.OK,
-    data: instruments,
+    data: instruments.map(getInstrumentDTO),
   })
 }
 
-export const POST: APIRoute = async (request) => {
-  const { data, error, success } = InstrumentValidator.omit({
+export const POST = async (request: NextRequest) => {
+  const { data, error, success } = InstrumentDTOValidator.omit({
     id: true,
+    players: true,
     created_at: true,
     updated_at: true,
   }).safeParse(await request.json())
@@ -47,11 +52,14 @@ export const POST: APIRoute = async (request) => {
   }
 
   const instrument = await prisma.instrument.create({
-    data,
+    data: createInstrument(data),
+    include: {
+      players: true,
+    },
   })
 
   return createResponse({
     status: StatusCode.Created,
-    data: instrument,
+    data: getInstrumentDTO(instrument),
   })
 }

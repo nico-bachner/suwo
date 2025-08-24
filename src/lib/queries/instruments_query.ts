@@ -6,13 +6,13 @@ import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
 import {
-  Instrument,
-  InstrumentValidator,
-} from '../validators/instrument_validator'
+  InstrumentDTO,
+  InstrumentDTOValidator,
+} from '../dtos/instrument_dto_validator'
 
 export const instrumentsQueryKey = () => ['instruments']
 
-export const instrumentsQuery = (): UseQueryOptions<Instrument[]> => ({
+export const instrumentsQuery = (): UseQueryOptions<InstrumentDTO[]> => ({
   queryKey: instrumentsQueryKey(),
   queryFn: async ({ signal }) => {
     const response = await parseResponse(
@@ -23,7 +23,7 @@ export const instrumentsQuery = (): UseQueryOptions<Instrument[]> => ({
 
     switch (response.status) {
       case StatusCode.OK:
-        return z.array(InstrumentValidator).parse(response.data)
+        return z.array(InstrumentDTOValidator).parse(response.data)
       default:
         throw new Error('Failed to fetch data')
     }

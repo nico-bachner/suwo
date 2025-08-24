@@ -1,65 +1,39 @@
 'use client'
 
-import { useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { createURL } from '@/utils/http/create_url'
-import { parseResponse } from '@/utils/http/parse_response'
-import { StatusCode } from '@/utils/http/status_code'
-
-import { queryKeys } from '../queries'
 import {
-  Instrument,
-  InstrumentValidator,
-} from '../validators/instrument_validator'
+  InstrumentDTO,
+  InstrumentDTOValidator,
+} from '../dtos/instrument_dto_validator'
+import { mutations } from '../mutations'
 import { useAppForm } from './context'
 
 export const CreateInstrumentForm = () => {
   const queryClient = useQueryClient()
+  const { mutate: createInstrument } = useMutation(
+    mutations.INSTRUMENTS(queryClient),
+  )
 
-  const defaultValues: Omit<Instrument, 'id' | 'created_at' | 'updated_at'> = {
+  const defaultValues: Omit<
+    InstrumentDTO,
+    'id' | 'players' | 'created_at' | 'updated_at'
+  > = {
     name: '',
   }
 
   const form = useAppForm({
     defaultValues,
     validators: {
-      onBlur: InstrumentValidator.omit({
+      onBlur: InstrumentDTOValidator.omit({
         id: true,
+        players: true,
         created_at: true,
         updated_at: true,
       }),
     },
-    onSubmit: async ({ value }) => {
-      const response = await parseResponse(
-        await fetch(
-          createURL({
-            path: ['api', ...queryKeys.INSTRUMENTS()],
-          }),
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(value),
-          },
-        ),
-      )
-
-      switch (response.status) {
-        case StatusCode.OK:
-        case StatusCode.Created:
-          await queryClient.invalidateQueries({
-            queryKey: queryKeys.INSTRUMENTS(),
-          })
-          form.reset()
-          break
-        case StatusCode.NoContent:
-          break
-        default:
-          // eslint-disable-next-line no-alert, no-undef
-          alert(response.error)
-          break
-      }
+    onSubmit: ({ value }) => {
+      createInstrument(value)
     },
   })
 

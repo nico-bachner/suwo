@@ -63,13 +63,6 @@ export const createEvent = (
   location: event.location,
   notes: event.notes,
   type: event.type,
-
-  // Relations
-  attendees: {
-    connect: event.attendees.map((attendee) => ({
-      id: attendee,
-    })),
-  },
 })
 
 /**
@@ -105,8 +98,6 @@ export const updateEvent = (
 
   // Relations
   attendees: event.attendees && {
-    set: event.attendees.map((attendee) => ({
-      id: attendee,
-    })),
+    set: event.attendees.map((id) => ({ id })),
   },
 })
