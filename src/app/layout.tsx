@@ -1,10 +1,8 @@
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Kode_Mono, Limelight, Raleway } from 'next/font/google'
-import Image from 'next/image'
 import { Toaster } from 'sonner'
 
-import ensemble from '@/features/marketing/ensemble.jpg'
 import { Footer } from '@/features/navigation/footer'
 import { Navbar } from '@/features/navigation/navbar'
 import { TabBar } from '@/features/navigation/tab_bar'
@@ -41,14 +39,6 @@ export default function Layout({ children }: LayoutFileProps) {
         className={cn(fontSans.variable, fontSerif.variable, fontMono.variable)}
       >
         <QueryProvider>
-          <div className="fixed inset-0 -z-10">
-            <Image
-              src={ensemble}
-              alt="Sydney University Wind Orchestra"
-              className="h-full w-full object-cover brightness-[0.25]"
-            />
-          </div>
-
           <div className="flex min-h-screen flex-col">
             <TabBar className="fixed right-2 bottom-2 left-2 z-30 md:hidden" />
 
