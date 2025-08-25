@@ -1,6 +1,6 @@
 import { Instrument, Prisma, User } from '@/generated/prisma'
 
-import { InstrumentDTO } from './instrument_dto_validator'
+import { InstrumentDTO, InstrumentInput } from './instrument_dto_validator'
 
 /**
  * Transforms the database representation of an Instrument (including nested
@@ -31,14 +31,13 @@ export const getInstrumentDTO = (
  * instrument.
  */
 export const createInstrument = (
-  instrument: Omit<
-    InstrumentDTO,
-    'id' | 'players' | 'created_at' | 'updated_at'
-  >,
-): Omit<
-  Prisma.InstrumentCreateArgs['data'],
-  'id' | 'players' | 'created_at' | 'updated_at'
-> => ({
+  instrument: InstrumentInput,
+): Prisma.InstrumentCreateArgs['data'] => ({
   // Required Attributes
   name: instrument.name,
+
+  // Relations
+  players: instrument.players && {
+    connect: instrument.players.map((id) => ({ id })),
+  },
 })

@@ -30,9 +30,7 @@ export const UserDTOValidator = z.object({
 export const UserInputValidator = z.object({
   // Required Attributes
   email: z.email().trim().toLowerCase().min(1, 'Email is required'),
-  given_name: z.string().trim().min(1, {
-    message: 'Given name is required',
-  }),
+  given_name: z.string().trim().min(1, 'Given name is required'),
   mailing_list_preference: z.boolean(),
 
   // Optional Attributes
@@ -50,6 +48,6 @@ export const UserInputValidator = z.object({
     .optional(),
 
   // Relations
-  events: z.array(z.uuid()),
-  instruments: z.array(z.uuid()),
+  events: z.array(z.uuid()).optional(),
+  instruments: z.array(z.uuid()).optional(),
 })

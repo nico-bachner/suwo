@@ -2,11 +2,7 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import {
-  UserDTO,
-  UserInput,
-  UserInputValidator,
-} from '../dtos/user_dto_validator'
+import { UserDTO } from '../dtos/user_dto_validator'
 import { mutations } from '../mutations'
 import { useAppForm } from './context'
 
@@ -16,14 +12,9 @@ export const UpdatePasswordForm = (user: UserDTO) => {
     mutations.USER(queryClient, user.id),
   )
 
-  const defaultValues: Pick<UserInput, 'password'> = {
-    password: '',
-  }
-
   const form = useAppForm({
-    defaultValues,
-    validators: {
-      onBlur: UserInputValidator.pick({ password: true }),
+    defaultValues: {
+      password: '',
     },
     onSubmit: ({ value }) => {
       updateUser(value)

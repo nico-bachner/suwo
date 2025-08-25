@@ -62,15 +62,11 @@ export const createUser = async (
     user.usu_number && user.usu_number !== '' ? user.usu_number : null,
 
   // Relations
-  events: {
-    connect: user.events.map((event) => ({
-      id: event,
-    })),
+  events: user.events && {
+    connect: user.events.map((id) => ({ id })),
   },
-  instruments: {
-    connect: user.instruments.map((instrument) => ({
-      id: instrument,
-    })),
+  instruments: user.instruments && {
+    connect: user.instruments.map((id) => ({ id })),
   },
 })
 
@@ -98,14 +94,10 @@ export const updateUser = async (
     user.usu_number && user.usu_number !== '' ? user.usu_number : null,
 
   // Relations
-  events: {
-    set: user.events?.map((event) => ({
-      id: event,
-    })),
+  events: user.events && {
+    set: user.events.map((id) => ({ id })),
   },
-  instruments: {
-    set: user.instruments?.map((instrument) => ({
-      id: instrument,
-    })),
+  instruments: user.instruments && {
+    set: user.instruments.map((id) => ({ id })),
   },
 })

@@ -8,16 +8,13 @@ import { StatusCode } from '@/utils/http/status_code'
 import {
   InstrumentDTO,
   InstrumentDTOValidator,
+  InstrumentInput,
 } from '../dtos/instrument_dto_validator'
 import { queryKeys } from '../queries'
 
 export const instrumentsMutation = (
   queryClient: QueryClient,
-): UseMutationOptions<
-  InstrumentDTO,
-  Error,
-  Omit<InstrumentDTO, 'id' | 'players' | 'created_at' | 'updated_at'>
-> => ({
+): UseMutationOptions<InstrumentDTO, Error, InstrumentInput> => ({
   mutationFn: async (value) => {
     const response = await parseResponse(
       await fetch(createURL({ path: ['api', ...queryKeys.INSTRUMENTS()] }), {

@@ -1,11 +1,14 @@
 import z from 'zod'
 
+export type InstrumentDTO = z.infer<typeof InstrumentDTOValidator>
+export type InstrumentInput = z.infer<typeof InstrumentInputValidator>
+
 export const InstrumentDTOValidator = z.object({
   // ID
   id: z.uuid(),
 
   // Required Attributes
-  name: z.string().trim().min(1, 'Instrument name is required'),
+  name: z.string(),
 
   // Relations
   players: z.array(z.uuid()),
@@ -15,4 +18,10 @@ export const InstrumentDTOValidator = z.object({
   updated_at: z.iso.datetime(),
 })
 
-export type InstrumentDTO = z.infer<typeof InstrumentDTOValidator>
+export const InstrumentInputValidator = z.object({
+  // Required Attributes
+  name: z.string().trim().min(1, 'Instrument name is required'),
+
+  // Relations
+  players: z.array(z.uuid()).optional(),
+})

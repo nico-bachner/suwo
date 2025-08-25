@@ -6,7 +6,6 @@ import { Button } from '@/design_system/button'
 import { Switch } from '@/design_system/switch'
 import { queries } from '@/lib/queries'
 
-import { UserInput, UserInputValidator } from '../dtos/user_dto_validator'
 import { mutations } from '../mutations'
 import { useAppForm } from './context'
 
@@ -17,21 +16,15 @@ export const RegisterForm = () => {
     queries.INSTRUMENTS(),
   )
 
-  const defaultValues: UserInput = {
-    email: '',
-    given_name: '',
-    mailing_list_preference: true,
-    family_name: '',
-    password: '',
-    usu_number: '',
-    events: [],
-    instruments: [],
-  }
-
   const form = useAppForm({
-    defaultValues,
-    validators: {
-      onBlur: UserInputValidator,
+    defaultValues: {
+      email: '',
+      given_name: '',
+      mailing_list_preference: true,
+      family_name: '',
+      password: '',
+      usu_number: '',
+      instruments: [] as string[],
     },
     onSubmit: ({ value }) => {
       createUser(value)
