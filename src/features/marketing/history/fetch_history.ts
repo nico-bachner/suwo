@@ -14,5 +14,5 @@ export const fetchHistory = async () => {
     ],
   })
 
-  return results.filter((row) => isFullPage(row))
+  return results.filter(isFullPage)
 }

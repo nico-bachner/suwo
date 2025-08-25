@@ -1,17 +1,12 @@
 import { FacebookIcon, InstagramIcon, YouTubeIcon } from '@/design_system/icons'
 
-export const API_INDENT_SIZE = 2
+// Notion
+export const NOTION_HISTORY_DB_ID = '1a68056f6788801d8c00c5c62188d987'
 
 // Resend
 export const RESEND_DOMAIN = 'transactional.suwo.org.au'
 
-// Notion pages
-export const NOTION_HISTORY_DB_ID = '1a68056f6788801d8c00c5c62188d987'
-
-// Google Calendar
-export const GOOGLE_CALENDAR_ID = ''
-
-// For copy
+// Copy
 export const FULL_NAME = 'The University of Sydney Wind Orchestra'
 export const SHORT_NAME = 'Sydney University Wind Orchestra'
 export const ACRONYM = 'SUWO'

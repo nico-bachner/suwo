@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 
-import { fetchHistoryYears } from '@/features/marketing/history/fetch_history_years'
+import { fetchHistory } from '@/features/marketing/history/fetch_history'
+import { getHistoryYears } from '@/features/marketing/history/get_history_years'
 import { HistoryYearsPage } from '@/lib/pages/history_years_page'
 
 export const dynamic = 'error'
@@ -11,7 +12,8 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-  const years = await fetchHistoryYears()
+  const history = await fetchHistory()
+  const years = getHistoryYears(history)
 
   return <HistoryYearsPage years={years} />
 }

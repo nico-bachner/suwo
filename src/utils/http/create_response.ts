@@ -1,5 +1,3 @@
-import { API_INDENT_SIZE } from '@/config'
-
 import { StatusCode } from './status_code'
 import { JSONResponse } from './types'
 
@@ -14,15 +12,12 @@ export const createResponse = (response: JSONResponse): Response => {
   switch (response.status) {
     case StatusCode.OK:
     case StatusCode.Created:
-      return new Response(
-        JSON.stringify(response.data, null, API_INDENT_SIZE),
-        {
-          status: response.status,
-          headers: {
-            'Content-Type': 'application/json',
-          },
+      return new Response(JSON.stringify(response.data, null, 2), {
+        status: response.status,
+        headers: {
+          'Content-Type': 'application/json',
         },
-      )
+      })
     case StatusCode.NoContent:
       return new Response(null, {
         status: response.status,
@@ -39,7 +34,7 @@ export const createResponse = (response: JSONResponse): Response => {
             error: response.error,
           },
           null,
-          API_INDENT_SIZE,
+          2,
         ),
         {
           status: response.status,
