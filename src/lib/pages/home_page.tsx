@@ -1,7 +1,7 @@
-import { ConcertExcerptSection } from '@/features/home/sections/concert_excerpt_section'
-import { FAQsSection } from '@/features/home/sections/faqs_section'
-import { JoinSection } from '@/features/home/sections/join_section'
-import { RehearsalsSection } from '@/features/home/sections/rehearsals_section'
+import { ConcertExcerptSection } from '@/features/marketing/home/sections/concert_excerpt_section'
+import { FAQsSection } from '@/features/marketing/home/sections/faqs_section'
+import { JoinSection } from '@/features/marketing/home/sections/join_section'
+import { RehearsalsSection } from '@/features/marketing/home/sections/rehearsals_section'
 
 export const HomePage = () => (
   <main className="flex flex-col gap-8">

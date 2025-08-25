@@ -2,8 +2,8 @@ import { notFound } from 'next/navigation'
 import z from 'zod'
 
 import { FOUNDING_YEAR } from '@/config'
-import { fetchHistoryYearPage } from '@/features/marketing/fetch_history_year_page'
-import { fetchHistoryYears } from '@/features/marketing/fetch_history_years'
+import { fetchHistoryYearPage } from '@/features/marketing/history/fetch_history_year_page'
+import { fetchHistoryYears } from '@/features/marketing/history/fetch_history_years'
 import {
   GenerateMetadata,
   GenerateStaticParams,

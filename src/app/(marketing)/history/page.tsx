@@ -1,8 +1,9 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 
-import { fetchHistoryPageMetadata } from '@/features/marketing/fetch_history_page_metadata'
-import { fetchHistoryYears } from '@/features/marketing/fetch_history_years'
+import { fetchHistoryPageMetadata } from '@/features/marketing/history/fetch_history_page_metadata'
+import { fetchHistoryYears } from '@/features/marketing/history/fetch_history_years'
+import { getHistoryPageYearAlignment } from '@/features/marketing/history/get_history_page_year_alignment'
 import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
 
@@ -10,21 +11,6 @@ export const dynamic = 'error'
 
 export const generateMetadata = async (): Promise<Metadata> =>
   await fetchHistoryPageMetadata()
-
-const getYearAlignment = (index: number) => {
-  switch (index % 6) {
-    case 0:
-      return 'col-start-1 col-span-2 row-span-2 text-[min(20vw,240px)]'
-    case 1:
-    case 2:
-      return 'col-start-3 text-[min(10vw,120px)]'
-    case 3:
-    case 4:
-      return 'col-start-1 text-[min(10vw,120px)]'
-    case 5:
-      return 'col-start-2 col-span-2 row-span-2 text-[min(20vw,240px)]'
-  }
-}
 
 export default async function Page() {
   const { title } = await fetchHistoryPageMetadata()
@@ -41,7 +27,7 @@ export default async function Page() {
             href={routes.HISTORY_YEAR(value)}
             className={cn(
               'flex aspect-square items-center justify-center rounded-full border font-black backdrop-blur transition-colors',
-              getYearAlignment(index),
+              getHistoryPageYearAlignment(index),
             )}
             style={{
               color: `oklch(0.9 0.15 ${(index % 360) * 10 + 90})`,
