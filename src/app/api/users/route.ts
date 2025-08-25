@@ -3,7 +3,7 @@ import z from 'zod'
 
 import { createSession } from '@/features/auth/session/create_session'
 import { createUser, getUserDTO } from '@/lib/dtos/user_dto'
-import { UserDTOValidator } from '@/lib/dtos/user_dto_validator'
+import { UserInputValidator } from '@/lib/dtos/user_dto_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
@@ -32,11 +32,9 @@ export const GET = async () => {
 }
 
 export const POST = async (request: NextRequest) => {
-  const { data, error, success } = UserDTOValidator.omit({
-    id: true,
-    created_at: true,
-    updated_at: true,
-  }).safeParse(await request.json())
+  const { data, error, success } = UserInputValidator.safeParse(
+    await request.json(),
+  )
 
   if (!success) {
     return createResponse({
@@ -45,9 +43,11 @@ export const POST = async (request: NextRequest) => {
     })
   }
 
+  const dbUser = await createUser(data)
+
   const existingUser = await prisma.user.findUnique({
     where: {
-      email: data.email,
+      email: dbUser.email,
     },
   })
 
@@ -60,7 +60,7 @@ export const POST = async (request: NextRequest) => {
 
   const [user, events] = await Promise.all([
     prisma.user.create({
-      data: createUser(data),
+      data: dbUser,
       include: {
         events: true,
         instruments: true,

@@ -1,7 +1,9 @@
+import { hash } from 'argon2'
+
 import { getUserAttendanceRate } from '@/features/user/get_user_attendance_rate'
 import { Event, Instrument, Prisma, User } from '@/generated/prisma'
 
-import { UserDTO } from './user_dto_validator'
+import { UserDTO, UserInput } from './user_dto_validator'
 
 /**
  * Transforms the database representation of a User (including nested tables via
@@ -24,6 +26,7 @@ export const getUserDTO = (
 
   // Optional Attributes
   family_name: user.family_name,
+  password: null, // No one, not even the user themselves, should be able to see their password
   usu_number: user.usu_number,
 
   // Relations
@@ -40,9 +43,11 @@ export const getUserDTO = (
  * Transforms the input User Data Transfer Object (DTO) into a format suitable
  * for database insertion. Used in POST requests to create a new user.
  */
-export const createUser = (
-  user: Omit<UserDTO, 'id' | 'created_at' | 'updated_at'>,
-): Omit<Prisma.UserCreateArgs['data'], 'id' | 'created_at' | 'updated_at'> => ({
+export const createUser = async (
+  user: UserInput,
+): Promise<
+  Omit<Prisma.UserCreateArgs['data'], 'id' | 'created_at' | 'updated_at'>
+> => ({
   // Required Attributes
   email: user.email,
   given_name: user.given_name,
@@ -50,6 +55,7 @@ export const createUser = (
 
   // Optional Attributes
   family_name: user.family_name,
+  password: user.password ? await hash(user.password) : null,
   usu_number: user.usu_number,
 
   // Relations
@@ -70,10 +76,12 @@ export const createUser = (
  * suitable for database updates. Used in PATCH requests to update an existing
  * user.
  */
-export const updateUser = (
-  user: Partial<Omit<UserDTO, 'id' | 'created_at' | 'updated_at'>>,
-): Partial<
-  Omit<Prisma.UserUpdateArgs['data'], 'id' | 'created_at' | 'updated_at'>
+export const updateUser = async (
+  user: Partial<UserInput>,
+): Promise<
+  Partial<
+    Omit<Prisma.UserUpdateArgs['data'], 'id' | 'created_at' | 'updated_at'>
+  >
 > => ({
   // Required Attributes
   email: user.email,
@@ -82,6 +90,7 @@ export const updateUser = (
 
   // Optional Attributes
   family_name: user.family_name,
+  password: user.password ? await hash(user.password) : null,
   usu_number: user.usu_number,
 
   // Relations

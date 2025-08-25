@@ -3,7 +3,7 @@ import z from 'zod'
 
 import { getSession } from '@/features/auth/session/get_session'
 import { getUserDTO, updateUser } from '@/lib/dtos/user_dto'
-import { UserDTOValidator } from '@/lib/dtos/user_dto_validator'
+import { UserInputValidator } from '@/lib/dtos/user_dto_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
@@ -54,6 +54,7 @@ export const PATCH = async (
 
   const session = await getSession()
 
+  /** The user must be authenticated to update their information. */
   if (!session) {
     return createResponse({
       status: StatusCode.Unauthorized,
@@ -61,7 +62,15 @@ export const PATCH = async (
     })
   }
 
-  const { data, error, success } = UserDTOValidator.partial().safeParse(
+  /** Users can only update their own information. */
+  if (session.user_id !== id) {
+    return createResponse({
+      status: StatusCode.Forbidden,
+      error: 'Forbidden',
+    })
+  }
+
+  const { data, error, success } = UserInputValidator.partial().safeParse(
     await request.json(),
   )
 
@@ -72,12 +81,14 @@ export const PATCH = async (
     })
   }
 
+  const dbUser = await updateUser(data)
+
   const [user, events] = await Promise.all([
     prisma.user.update({
       where: {
         id,
       },
-      data: updateUser(data),
+      data: dbUser,
       include: {
         events: true,
         instruments: true,

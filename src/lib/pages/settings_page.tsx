@@ -75,7 +75,7 @@ export const SettingsPage = ({ id }: Pick<UserDTO, 'id'>) => {
           title="Password"
           description="If you want to log in using a password, you can set one here. You can also reset your password here. We recommend using a password manager to generate a secure password and keep track of it."
         >
-          <UpdatePasswordForm />
+          <UpdatePasswordForm {...user} />
         </SettingsSection>
 
         <Button

@@ -5,16 +5,16 @@ import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-import { UserDTO, UserDTOValidator } from '../dtos/user_dto_validator'
+import {
+  UserDTO,
+  UserDTOValidator,
+  UserInput,
+} from '../dtos/user_dto_validator'
 import { queryKeys } from '../queries'
 
 export const usersMutation = (
   queryClient: QueryClient,
-): UseMutationOptions<
-  UserDTO,
-  Error,
-  Omit<UserDTO, 'id' | 'attendance_rate' | 'created_at' | 'updated_at'>
-> => ({
+): UseMutationOptions<UserDTO, Error, UserInput> => ({
   mutationFn: async (value) => {
     const response = await parseResponse(
       await fetch(createURL({ path: ['api', ...queryKeys.USERS()] }), {

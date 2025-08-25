@@ -1,46 +1,32 @@
 'use client'
 
-import { apiRoutes } from '@/routes'
-import { parseResponse } from '@/utils/http/parse_response'
-import { StatusCode } from '@/utils/http/status_code'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import {
-  UpdatePasswordFormInput,
-  UpdatePasswordFormInputValidator,
-} from '../validators/form_input_validators/update_password_form_input_validator'
+  UserDTO,
+  UserInput,
+  UserInputValidator,
+} from '../dtos/user_dto_validator'
+import { mutations } from '../mutations'
 import { useAppForm } from './context'
 
-export const UpdatePasswordForm = () => {
-  const defaultValues: UpdatePasswordFormInput = {
+export const UpdatePasswordForm = (user: UserDTO) => {
+  const queryClient = useQueryClient()
+  const { mutate: updateUser } = useMutation(
+    mutations.USER(queryClient, user.id),
+  )
+
+  const defaultValues: Pick<UserInput, 'password'> = {
     password: '',
   }
 
   const form = useAppForm({
     defaultValues,
     validators: {
-      onBlur: UpdatePasswordFormInputValidator,
+      onBlur: UserInputValidator.pick({ password: true }),
     },
-    onSubmit: async ({ value }) => {
-      const response = await parseResponse(
-        await fetch(apiRoutes.UPDATE_PASSWORD(), {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(value),
-        }),
-      )
-
-      switch (response.status) {
-        case StatusCode.BadRequest:
-          // eslint-disable-next-line no-alert, no-undef
-          alert(`${response.error}\n\nPlease try again`)
-          break
-        case StatusCode.OK:
-          // eslint-disable-next-line no-alert, no-undef
-          alert('Password updated successfully.')
-          break
-      }
+    onSubmit: ({ value }) => {
+      updateUser(value)
     },
   })
 
