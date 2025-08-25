@@ -205,7 +205,6 @@ export default [
       'prefer-rest-params': 'error',
       'prefer-spread': 'error',
       'prefer-template': 'error',
-      radix: 'error',
       'require-atomic-updates': 'error',
       'require-unicode-regexp': 'error',
       'require-yield': 'error',

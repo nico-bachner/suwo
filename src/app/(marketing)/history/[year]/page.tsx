@@ -1,14 +1,10 @@
+import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import z from 'zod'
 
-import { FOUNDING_YEAR } from '@/config'
 import { fetchHistoryYearPage } from '@/features/marketing/history/fetch_history_year_page'
 import { fetchHistoryYears } from '@/features/marketing/history/fetch_history_years'
-import {
-  GenerateMetadata,
-  GenerateStaticParams,
-  PageFileProps,
-} from '@/utils/next_types'
+import { HistoryPage } from '@/lib/pages/history_page'
+import { GenerateStaticParams } from '@/utils/next_types'
 import { fetchNotionPageContent } from '@/utils/notion/fetch_page_content'
 import { getPageTitle } from '@/utils/notion/get_page_title'
 
@@ -22,22 +18,12 @@ export const generateStaticParams: GenerateStaticParams = async () => {
   }))
 }
 
-export const generateMetadata: GenerateMetadata = async ({ params }) => {
-  const { data, success } = z
-    .object({
-      year: z.coerce
-        .number()
-        .int()
-        .min(FOUNDING_YEAR)
-        .max(new Date().getFullYear()),
-    })
-    .safeParse(await params)
+export const generateMetadata = async ({
+  params,
+}: PageProps<'/history/[year]'>): Promise<Metadata> => {
+  const { year } = await params
 
-  if (!success) {
-    return notFound()
-  }
-
-  const page = await fetchHistoryYearPage(data.year)
+  const page = await fetchHistoryYearPage(parseInt(year))
 
   if (!page) {
     return notFound()
@@ -48,52 +34,16 @@ export const generateMetadata: GenerateMetadata = async ({ params }) => {
   }
 }
 
-export default async function Page({ params }: PageFileProps) {
-  const { data, success } = z
-    .object({
-      year: z.coerce
-        .number()
-        .int()
-        .min(FOUNDING_YEAR)
-        .max(new Date().getFullYear()),
-    })
-    .safeParse(await params)
+export default async function Page({ params }: PageProps<'/history/[year]'>) {
+  const { year } = await params
 
-  if (!success) {
-    return notFound()
-  }
-
-  const page = await fetchHistoryYearPage(data.year)
+  const page = await fetchHistoryYearPage(parseInt(year))
 
   if (!page) {
     return notFound()
   }
 
-  const content = await fetchNotionPageContent(page.id)
+  const blocks = await fetchNotionPageContent(page.id)
 
-  return (
-    <main className="prose">
-      <h1>{getPageTitle(page) ?? data.year}</h1>
-
-      {content.map((block) => {
-        switch (block.type) {
-          case 'heading_1':
-            return (
-              <h2 key={block.id}>{block.heading_1.rich_text[0]?.plain_text}</h2>
-            )
-          case 'heading_2':
-            return (
-              <h3 key={block.id}>{block.heading_2.rich_text[0]?.plain_text}</h3>
-            )
-          case 'paragraph':
-            return (
-              <p key={block.id}>{block.paragraph.rich_text[0]?.plain_text}</p>
-            )
-
-          default:
-            return null
-        }
-      })}
-    </main>
-  )
+  return <HistoryPage page={page} blocks={blocks} />
 }
