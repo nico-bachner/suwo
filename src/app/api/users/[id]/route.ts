@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server'
 import z from 'zod'
 
-import { getCurrentSession } from '@/features/auth/session/get_current_session'
+import { getSession } from '@/features/auth/session/get_current_session'
 import { getUserDTO, updateUser } from '@/lib/dtos/user_dto'
 import { UserInputValidator } from '@/lib/dtos/user_dto_validator'
 import { createResponse } from '@/utils/http/create_response'
@@ -52,7 +52,7 @@ export const PATCH = async (
 ) => {
   const { id } = await params
 
-  const session = await getCurrentSession()
+  const session = await getSession()
 
   /** The user must be authenticated to update their information. */
   if (!session) {

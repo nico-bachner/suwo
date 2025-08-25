@@ -4,7 +4,7 @@ import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next'
 import { prisma } from '@/utils/prisma'
 
-export const GET: APIRoute<'/api/equipment'> = async () => {
+export const DELETE: APIRoute<'/api/sessions'> = async () => {
   const session = await getSession()
 
   if (!session) {
@@ -14,8 +14,13 @@ export const GET: APIRoute<'/api/equipment'> = async () => {
     })
   }
 
+  await prisma.session.deleteMany({
+    where: {
+      user_id: session.user_id,
+    },
+  })
+
   return createResponse({
-    status: StatusCode.OK,
-    data: await prisma.equipment.findMany(),
+    status: StatusCode.NoContent,
   })
 }

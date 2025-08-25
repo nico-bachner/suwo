@@ -6,13 +6,13 @@ import { StatusCode } from '@/utils/http/status_code'
 
 import { SessionDTO, SessionDTOValidator } from '../dtos/session_dto_validator'
 
-export const currentSessionQueryKey = () => ['sessions', 'current']
+export const sessionQueryKey = () => ['sessions', 'current']
 
-export const currentSessionQuery = (): UseQueryOptions<SessionDTO | null> => ({
-  queryKey: currentSessionQueryKey(),
+export const sessionQuery = (): UseQueryOptions<SessionDTO | null> => ({
+  queryKey: sessionQueryKey(),
   queryFn: async ({ signal }) => {
     const response = await parseResponse(
-      await fetch(createURL({ path: ['api', ...currentSessionQueryKey()] }), {
+      await fetch(createURL({ path: ['api', ...sessionQueryKey()] }), {
         signal,
       }),
     )

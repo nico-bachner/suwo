@@ -14,7 +14,7 @@ import { createSession } from './create_session'
  *
  * @returns The current session if it exists, otherwise null.
  */
-export const getCurrentSession = async (): Promise<SessionDTO | null> => {
+export const getSession = async (): Promise<SessionDTO | null> => {
   const cookieStore = await cookies()
   const sessionCookie = cookieStore.get(SESSION_COOKIE_NAME)
 

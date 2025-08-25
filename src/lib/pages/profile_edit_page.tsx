@@ -25,7 +25,7 @@ export const ProfileEditPage = ({ id }: Pick<UserDTO, 'id'>) => {
     data: session,
     error: sessionError,
     isPending: isSessionPending,
-  } = useQuery(queries.CURRENT_SESSION())
+  } = useQuery(queries.SESSION())
 
   const isPending = isSessionPending || isUserPending
   const error = sessionError || userError

@@ -19,7 +19,7 @@ export const ProfilePage = ({ id }: Pick<UserDTO, 'id'>) => {
     error: userError,
     isPending: isUserPending,
   } = useQuery(queries.USER(id))
-  const { data: session } = useQuery(queries.CURRENT_SESSION())
+  const { data: session } = useQuery(queries.SESSION())
   useQuery(queries.INSTRUMENTS())
   useQuery(queries.EVENTS())
 

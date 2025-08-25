@@ -7,7 +7,7 @@ import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 
 export default function Layout({ children }: LayoutProps<'/auth'>) {
-  const { data: session } = useQuery(queries.CURRENT_SESSION())
+  const { data: session } = useQuery(queries.SESSION())
 
   if (session) {
     redirect(routes.SETTINGS())

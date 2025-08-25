@@ -24,7 +24,7 @@ type TabBarProps = {
 }
 
 export const TabBar = ({ className }: TabBarProps) => {
-  const { data: session } = useQuery(queries.CURRENT_SESSION())
+  const { data: session } = useQuery(queries.SESSION())
   const upcomingEventId = useUpcomingEventId()
 
   return (

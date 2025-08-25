@@ -1,13 +1,13 @@
 import { cookies } from 'next/headers'
 
 import { SESSION_COOKIE_NAME } from '@/features/auth/session/config'
-import { getCurrentSession } from '@/features/auth/session/get_current_session'
+import { getSession } from '@/features/auth/session/get_current_session'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
 
 export const GET = async () => {
-  const session = await getCurrentSession()
+  const session = await getSession()
 
   if (!session) {
     return createResponse({
@@ -24,16 +24,20 @@ export const GET = async () => {
 
 export const DELETE = async () => {
   const cookieStore = await cookies()
+  const session = await getSession()
 
-  const oldSession = await getCurrentSession()
-
-  if (oldSession) {
-    await prisma.session.delete({
-      where: {
-        id: oldSession.id,
-      },
+  if (!session) {
+    return createResponse({
+      status: StatusCode.Unauthorized,
+      error: 'Unauthorized',
     })
   }
+
+  await prisma.session.delete({
+    where: {
+      id: session.id,
+    },
+  })
 
   cookieStore.delete(SESSION_COOKIE_NAME)
 

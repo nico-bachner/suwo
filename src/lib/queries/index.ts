@@ -1,11 +1,8 @@
-import {
-  currentSessionQuery,
-  currentSessionQueryKey,
-} from './current_session_query'
 import { equipmentQuery } from './equipment_query'
 import { eventQuery, eventQueryKey } from './event_query'
 import { eventsQuery, eventsQueryKey } from './events_query'
 import { instrumentsQuery, instrumentsQueryKey } from './instruments_query'
+import { sessionQuery, sessionQueryKey } from './session_query'
 import { userQuery, userQueryKey } from './user_query'
 import { usersQuery, usersQueryKey } from './users_query'
 
@@ -18,7 +15,7 @@ export const queryKeys = {
   INSTRUMENTS: instrumentsQueryKey,
 
   // Session
-  CURRENT_SESSION: currentSessionQueryKey,
+  SESSION: sessionQueryKey,
 
   // User
   USERS: usersQueryKey,
@@ -37,7 +34,7 @@ export const queries = {
   INSTRUMENTS: instrumentsQuery,
 
   // Session
-  CURRENT_SESSION: currentSessionQuery,
+  SESSION: sessionQuery,
 
   // User
   USERS: usersQuery,

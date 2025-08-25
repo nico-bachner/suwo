@@ -9,7 +9,7 @@ export default function Page() {
     data: session,
     error: sessionError,
     isPending: isSessionPending,
-  } = useQuery(queries.CURRENT_SESSION())
+  } = useQuery(queries.SESSION())
   const {
     data: equipment,
     error: equipmentError,

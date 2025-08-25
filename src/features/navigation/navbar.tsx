@@ -18,7 +18,7 @@ type NavbarProps = {
 }
 
 export const Navbar = ({ className }: NavbarProps) => {
-  const { data: session } = useQuery(queries.CURRENT_SESSION())
+  const { data: session } = useQuery(queries.SESSION())
   const upcomingEventId = useUpcomingEventId()
 
   return (
