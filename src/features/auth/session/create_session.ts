@@ -1,8 +1,7 @@
 import { SignJWT } from 'jose'
 import { cookies } from 'next/headers'
 
-import { getSessionDTO } from '@/lib/dtos/session_dto'
-import { SessionDTO } from '@/lib/dtos/session_dto_validator'
+import { Session } from '@/generated/prisma'
 import { prisma } from '@/utils/prisma'
 
 import {
@@ -22,9 +21,7 @@ import {
  */
 export const createSession = async ({
   user_id,
-}: {
-  user_id: string
-}): Promise<SessionDTO> => {
+}: Pick<Session, 'user_id'>): Promise<Session> => {
   const cookieStore = await cookies()
 
   const session = await prisma.session.create({
@@ -51,5 +48,5 @@ export const createSession = async ({
     secure: true,
   })
 
-  return getSessionDTO(session)
+  return session
 }

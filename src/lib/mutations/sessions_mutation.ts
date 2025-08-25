@@ -5,14 +5,15 @@ import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
+import { SessionDTO } from '../dtos/session_dto_validator'
 import { queryKeys } from '../queries'
 
-export const sessionMutation = (
+export const sessionsMutation = (
   queryClient: QueryClient,
-): UseMutationOptions<null, Error, null> => ({
+): UseMutationOptions<SessionDTO | null, Error, null> => ({
   mutationFn: async () => {
     const response = await parseResponse(
-      await fetch(createURL({ path: ['api', ...queryKeys.SESSION()] }), {
+      await fetch(createURL({ path: ['api', ...queryKeys.SESSIONS()] }), {
         method: 'DELETE',
       }),
     )
@@ -34,7 +35,7 @@ export const sessionMutation = (
   },
   onSettled: async () => {
     await queryClient.invalidateQueries({
-      queryKey: queryKeys.SESSION(),
+      queryKey: queryKeys.SESSIONS(),
     })
   },
 })

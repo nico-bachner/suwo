@@ -16,7 +16,9 @@ import { queries } from '../queries'
 
 export const SettingsPage = ({ id }: Pick<UserDTO, 'id'>) => {
   const queryClient = useQueryClient()
-  const { mutate: deleteSession } = useMutation(mutations.SESSION(queryClient))
+  const { mutate: setSessions } = useMutation(mutations.SESSIONS(queryClient))
+  const { mutate: setSession } = useMutation(mutations.SESSION(queryClient))
+
   const {
     data: user,
     error: userError,
@@ -79,12 +81,23 @@ export const SettingsPage = ({ id }: Pick<UserDTO, 'id'>) => {
         <Button
           variant="danger"
           onClick={() => {
-            deleteSession()
+            setSession(null)
             redirect(routes.HOME())
           }}
           className="col-span-1 mx-auto w-full max-w-screen-sm lg:col-span-2"
         >
-          Log Out
+          Log out
+        </Button>
+
+        <Button
+          variant="danger"
+          onClick={() => {
+            setSessions(null)
+            redirect(routes.HOME())
+          }}
+          className="col-span-1 mx-auto w-full max-w-screen-sm lg:col-span-2"
+        >
+          Log out on all devices
         </Button>
       </div>
     </main>

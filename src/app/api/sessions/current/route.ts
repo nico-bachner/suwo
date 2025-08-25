@@ -2,6 +2,7 @@ import { cookies } from 'next/headers'
 
 import { SESSION_COOKIE_NAME } from '@/features/auth/session/config'
 import { getSession } from '@/features/auth/session/get_current_session'
+import { getSessionDTO } from '@/lib/dtos/session_dto'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
@@ -11,14 +12,14 @@ export const GET = async () => {
 
   if (!session) {
     return createResponse({
-      status: StatusCode.NotFound,
-      error: 'Session cookie not found',
+      status: StatusCode.Unauthorized,
+      error: 'Unauthorized',
     })
   }
 
   return createResponse({
     status: StatusCode.OK,
-    data: session,
+    data: getSessionDTO(session),
   })
 }
 
@@ -28,8 +29,8 @@ export const DELETE = async () => {
 
   if (!session) {
     return createResponse({
-      status: StatusCode.Unauthorized,
-      error: 'Unauthorized',
+      status: StatusCode.NotFound,
+      error: 'Session cookie not found',
     })
   }
 

@@ -1,7 +1,7 @@
 import { jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
 
-import { SessionDTO } from '@/lib/dtos/session_dto_validator'
+import { Session } from '@/generated/prisma'
 import { prisma } from '@/utils/prisma'
 
 import { JWT_ALGORITHM, JWT_KEY, SESSION_COOKIE_NAME } from './config'
@@ -14,7 +14,7 @@ import { createSession } from './create_session'
  *
  * @returns The current session if it exists, otherwise null.
  */
-export const getSession = async (): Promise<SessionDTO | null> => {
+export const getSession = async (): Promise<Session | null> => {
   const cookieStore = await cookies()
   const sessionCookie = cookieStore.get(SESSION_COOKIE_NAME)
 

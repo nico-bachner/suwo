@@ -1,4 +1,5 @@
 import { UseQueryOptions } from '@tanstack/react-query'
+import z from 'zod'
 
 import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
@@ -6,27 +7,22 @@ import { StatusCode } from '@/utils/http/status_code'
 
 import { SessionDTO, SessionDTOValidator } from '../dtos/session_dto_validator'
 
-export const sessionQueryKey = () => ['sessions', 'current']
+export const sessionsQueryKey = () => ['sessions']
 
-export const sessionQuery = (): UseQueryOptions<SessionDTO | null> => ({
-  queryKey: sessionQueryKey(),
+export const sessionsQuery = (): UseQueryOptions<SessionDTO[]> => ({
+  queryKey: sessionsQueryKey(),
   queryFn: async ({ signal }) => {
     const response = await parseResponse(
-      await fetch(createURL({ path: ['api', ...sessionQueryKey()] }), {
+      await fetch(createURL({ path: ['api', ...sessionsQueryKey()] }), {
         signal,
       }),
     )
 
     switch (response.status) {
       case StatusCode.OK:
-        return SessionDTOValidator.parse(response.data)
-      /**
-       * If there is no current session, we return null instead of throwing an
-       * error. This allows components using this query to handle the "not
-       * logged in" state gracefully.
-       */
+        return z.array(SessionDTOValidator).parse(response.data)
       case StatusCode.Unauthorized:
-        return null
+        throw new Error('Unauthorized')
       default:
         throw new Error('Failed to fetch data')
     }

@@ -3,6 +3,7 @@ import { eventQuery, eventQueryKey } from './event_query'
 import { eventsQuery, eventsQueryKey } from './events_query'
 import { instrumentsQuery, instrumentsQueryKey } from './instruments_query'
 import { sessionQuery, sessionQueryKey } from './session_query'
+import { sessionsQuery, sessionsQueryKey } from './sessions_query'
 import { userQuery, userQueryKey } from './user_query'
 import { usersQuery, usersQueryKey } from './users_query'
 
@@ -15,6 +16,7 @@ export const queryKeys = {
   INSTRUMENTS: instrumentsQueryKey,
 
   // Session
+  SESSIONS: sessionsQueryKey,
   SESSION: sessionQueryKey,
 
   // User
@@ -34,6 +36,7 @@ export const queries = {
   INSTRUMENTS: instrumentsQuery,
 
   // Session
+  SESSIONS: sessionsQuery,
   SESSION: sessionQuery,
 
   // User
