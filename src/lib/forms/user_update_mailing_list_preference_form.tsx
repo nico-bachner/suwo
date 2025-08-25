@@ -8,13 +8,9 @@ import { UserDTO } from '../dtos/user_dto_validator'
 import { mutations } from '../mutations'
 import { useAppForm } from './context'
 
-type UpdateMailingListPreferenceFormProps = {
-  user: UserDTO
-}
-
-export const UpdateMailingListPreferenceForm = ({
-  user,
-}: UpdateMailingListPreferenceFormProps) => {
+export const UserUpdateMailingListPreferenceForm = (
+  user: Pick<UserDTO, 'id' | 'mailing_list_preference'>,
+) => {
   const queryClient = useQueryClient()
   const { mutate: updateUser } = useMutation(
     mutations.USER(queryClient, user.id),

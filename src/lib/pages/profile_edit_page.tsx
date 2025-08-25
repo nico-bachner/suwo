@@ -13,7 +13,7 @@ import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 
 import { UserDTO } from '../dtos/user_dto_validator'
-import { UpdateUserInstrumentsForm } from '../forms/update_user_instruments_form'
+import { UserUpdateInstrumentsForm } from '../forms/user_update_instruments_form'
 
 export const ProfileEditPage = ({ id }: Pick<UserDTO, 'id'>) => {
   const {
@@ -94,7 +94,7 @@ export const ProfileEditPage = ({ id }: Pick<UserDTO, 'id'>) => {
           title="Instruments"
           description="Tell us what instruments you play"
         >
-          <UpdateUserInstrumentsForm user={user} />
+          <UserUpdateInstrumentsForm {...user} />
         </SettingsSection>
 
         <SettingsSection

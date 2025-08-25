@@ -6,8 +6,8 @@ import { redirect } from 'next/navigation'
 import { Button } from '@/design_system/button'
 import { SettingsSection } from '@/design_system/settings_section'
 import { Heading } from '@/design_system/typography'
-import { UpdateMailingListPreferenceForm } from '@/lib/forms/update_mailing_list_preference_form'
-import { UpdatePasswordForm } from '@/lib/forms/update_password_form'
+import { UserUpdateMailingListPreferenceForm } from '@/lib/forms/user_update_mailing_list_preference_form'
+import { UserUpdatePasswordForm } from '@/lib/forms/user_update_password_form'
 import { mutations } from '@/lib/mutations'
 import { routes } from '@/routes'
 
@@ -68,14 +68,14 @@ export const SettingsPage = ({ id }: Pick<UserDTO, 'id'>) => {
           title="Communications Preferences"
           description="We send weekly emails to all SUWO members to keep you up to date with event scheduling and administrative issues. You can use the form below to set your communications preferences."
         >
-          <UpdateMailingListPreferenceForm user={user} />
+          <UserUpdateMailingListPreferenceForm {...user} />
         </SettingsSection>
 
         <SettingsSection
           title="Password"
           description="If you want to log in using a password, you can set one here. You can also reset your password here. We recommend using a password manager to generate a secure password and keep track of it."
         >
-          <UpdatePasswordForm {...user} />
+          <UserUpdatePasswordForm {...user} />
         </SettingsSection>
 
         <Button

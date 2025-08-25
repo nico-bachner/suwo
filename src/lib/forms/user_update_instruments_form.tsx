@@ -9,13 +9,9 @@ import { UserDTO } from '../dtos/user_dto_validator'
 import { mutations } from '../mutations'
 import { useAppForm } from './context'
 
-type UpdateUserInstrumentsFormProps = {
-  user: UserDTO
-}
-
-export const UpdateUserInstrumentsForm = ({
-  user,
-}: UpdateUserInstrumentsFormProps) => {
+export const UserUpdateInstrumentsForm = (
+  user: Pick<UserDTO, 'id' | 'instruments'>,
+) => {
   const queryClient = useQueryClient()
   const { mutate: updateUser } = useMutation(
     mutations.USER(queryClient, user.id),
