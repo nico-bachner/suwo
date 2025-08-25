@@ -45,9 +45,7 @@ export const getUserDTO = (
  */
 export const createUser = async (
   user: UserInput,
-): Promise<
-  Omit<Prisma.UserCreateArgs['data'], 'id' | 'created_at' | 'updated_at'>
-> => ({
+): Promise<Prisma.UserCreateArgs['data']> => ({
   // Required Attributes
   email: user.email,
   given_name: user.given_name,
@@ -83,11 +81,7 @@ export const createUser = async (
  */
 export const updateUser = async (
   user: Partial<UserInput>,
-): Promise<
-  Partial<
-    Omit<Prisma.UserUpdateArgs['data'], 'id' | 'created_at' | 'updated_at'>
-  >
-> => ({
+): Promise<Partial<Prisma.UserUpdateArgs['data']>> => ({
   // Required Attributes
   email: user.email,
   given_name: user.given_name,
