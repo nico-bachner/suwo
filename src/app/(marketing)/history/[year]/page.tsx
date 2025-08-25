@@ -1,5 +1,4 @@
 import { isFullBlock } from '@notionhq/client'
-import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { fetchHistory } from '@/features/marketing/history/fetch_history'
@@ -7,12 +6,14 @@ import { getHistoryPageTitle } from '@/features/marketing/history/get_history_pa
 import { getHistoryYearPage } from '@/features/marketing/history/get_history_year_page'
 import { getHistoryYears } from '@/features/marketing/history/get_history_years'
 import { HistoryYearPage } from '@/lib/pages/history_year_page'
-import { GenerateStaticParams } from '@/utils/next_types'
+import { GeneratePageMetadata, GenerateStaticParams } from '@/utils/next'
 import { blocks } from '@/utils/notion'
 
 export const dynamic = 'error'
 
-export const generateStaticParams: GenerateStaticParams = async () => {
+export const generateStaticParams: GenerateStaticParams<
+  '/history/[year]'
+> = async () => {
   const history = await fetchHistory()
   const years = getHistoryYears(history)
 
@@ -21,9 +22,9 @@ export const generateStaticParams: GenerateStaticParams = async () => {
   }))
 }
 
-export const generateMetadata = async ({
-  params,
-}: PageProps<'/history/[year]'>): Promise<Metadata> => {
+export const generateMetadata: GeneratePageMetadata<
+  '/history/[year]'
+> = async ({ params }) => {
   const { year } = await params
 
   const history = await fetchHistory()

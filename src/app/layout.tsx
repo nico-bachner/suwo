@@ -8,7 +8,6 @@ import { Navbar } from '@/features/navigation/navbar'
 import { TabBar } from '@/features/navigation/tab_bar'
 import '@/styles/styles.css'
 import { cn } from '@/utils/cn'
-import { LayoutFileProps } from '@/utils/next_types'
 import { QueryProvider } from '@/utils/query_provider'
 
 const fontSans = Raleway({
@@ -32,7 +31,7 @@ export const metadata: Metadata = {
   description: 'The Sydney University Wind Orchestra',
 }
 
-export default function Layout({ children }: LayoutFileProps) {
+export default function Layout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="en">
       <body

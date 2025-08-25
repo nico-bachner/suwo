@@ -5,10 +5,12 @@ import { createSession } from '@/features/auth/session/create_session'
 import { routes } from '@/routes'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
-import { APIRoute } from '@/utils/next_types'
+import { APIRoute } from '@/utils/next'
 import { prisma } from '@/utils/prisma'
 
-export const GET: APIRoute = async ({ nextUrl }) => {
+export const GET: APIRoute<'/api/auth/validate-magic-link'> = async ({
+  nextUrl,
+}) => {
   const { data, error, success } = z
     .object({
       token: z.string(),

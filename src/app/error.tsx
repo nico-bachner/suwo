@@ -3,9 +3,9 @@
 import { useEffect } from 'react'
 
 import { Button } from '@/design_system/button'
-import { ErrorFileProps } from '@/utils/next_types'
+import { ErrorProps } from '@/utils/next'
 
-export default function Error({ error, reset }: ErrorFileProps) {
+export default function Error({ error, reset }: ErrorProps) {
   useEffect(() => {
     // eslint-disable-next-line no-console
     console.error(error)
