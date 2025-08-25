@@ -15,21 +15,28 @@ import { queryKeys } from '../queries'
 export const userMutation = (
   queryClient: QueryClient,
   id: UserDTO['id'],
-): UseMutationOptions<UserDTO, Error, Partial<UserInput>> => ({
+): UseMutationOptions<UserDTO | null, Error, Partial<UserInput> | null> => ({
   mutationFn: async (value) => {
     const response = await parseResponse(
-      await fetch(createURL({ path: ['api', ...queryKeys.USER(id)] }), {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(value),
-      }),
+      await fetch(
+        createURL({ path: ['api', ...queryKeys.USER(id)] }),
+        value
+          ? {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(value),
+            }
+          : { method: 'DELETE' },
+      ),
     )
 
     switch (response.status) {
       case StatusCode.OK:
         return UserDTOValidator.parse(response.data)
+      case StatusCode.NoContent:
+        return null
       case StatusCode.BadRequest:
       case StatusCode.Unauthorized:
       case StatusCode.Forbidden:
@@ -43,7 +50,11 @@ export const userMutation = (
     toast.error(error.message)
   },
   onSuccess: (_, variables) => {
-    toast.success(`Successfully updated ${Object.keys(variables).join(', ')}`)
+    if (variables) {
+      toast.success('Details updated successfully')
+    } else {
+      toast.success('Account deleted successfully')
+    }
   },
   onSettled: async (data) => {
     await queryClient.invalidateQueries({

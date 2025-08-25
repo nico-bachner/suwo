@@ -108,3 +108,38 @@ export const PATCH = async (
     data: getUserDTO(user, events),
   })
 }
+
+export const DELETE = async (
+  _: NextRequest,
+  { params }: RouteContext<'/api/users/[id]'>,
+) => {
+  const { id } = await params
+
+  const session = await getSession()
+
+  /** The user must be authenticated to delete their account. */
+  if (!session) {
+    return createResponse({
+      status: StatusCode.Unauthorized,
+      error: 'Unauthorized',
+    })
+  }
+
+  /** Users can only delete their own account. */
+  if (session.user_id !== id) {
+    return createResponse({
+      status: StatusCode.Forbidden,
+      error: 'Forbidden',
+    })
+  }
+
+  await prisma.user.delete({
+    where: {
+      id,
+    },
+  })
+
+  return createResponse({
+    status: StatusCode.NoContent,
+  })
+}

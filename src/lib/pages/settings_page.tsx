@@ -18,6 +18,7 @@ export const SettingsPage = ({ id }: Pick<UserDTO, 'id'>) => {
   const queryClient = useQueryClient()
   const { mutate: setSessions } = useMutation(mutations.SESSIONS(queryClient))
   const { mutate: setSession } = useMutation(mutations.SESSION(queryClient))
+  const { mutate: setUser } = useMutation(mutations.USER(queryClient, id))
 
   const {
     data: user,
@@ -98,6 +99,17 @@ export const SettingsPage = ({ id }: Pick<UserDTO, 'id'>) => {
           className="col-span-1 mx-auto w-full max-w-screen-sm lg:col-span-2"
         >
           Log out on all devices
+        </Button>
+
+        <Button
+          variant="danger"
+          onClick={() => {
+            setUser(null)
+            redirect(routes.HOME())
+          }}
+          className="col-span-1 mx-auto w-full max-w-screen-sm lg:col-span-2"
+        >
+          Delete account
         </Button>
       </div>
     </main>
