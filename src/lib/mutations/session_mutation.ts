@@ -7,7 +7,7 @@ import { StatusCode } from '@/utils/http/status_code'
 
 import { queryKeys } from '../queries'
 
-export const deleteSessionMutation = (
+export const sessionMutation = (
   queryClient: QueryClient,
 ): UseMutationOptions => ({
   mutationFn: async () => {

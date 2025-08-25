@@ -16,9 +16,7 @@ import { queries } from '../queries'
 
 export const SettingsPage = ({ id }: Pick<UserDTO, 'id'>) => {
   const queryClient = useQueryClient()
-  const { mutate: deleteSession } = useMutation(
-    mutations.DELETE_SESSION(queryClient),
-  )
+  const { mutate: deleteSession } = useMutation(mutations.SESSION(queryClient))
   const {
     data: user,
     error: userError,
