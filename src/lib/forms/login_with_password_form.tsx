@@ -45,7 +45,7 @@ export const LoginWithPasswordForm = () => {
           break
         case StatusCode.OK:
           await queryClient.invalidateQueries({
-            queryKey: queryKeys.SESSION(),
+            queryKey: queryKeys.CURRENT_SESSION(),
           })
 
           redirect(routes.SETTINGS())

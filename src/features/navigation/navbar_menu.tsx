@@ -20,7 +20,7 @@ type NavbarMenuProps = {
 }
 
 export const NavbarMenu = ({ className }: NavbarMenuProps) => {
-  const { data: session } = useQuery(queries.SESSION())
+  const { data: session } = useQuery(queries.CURRENT_SESSION())
   const upcomingEventId = useUpcomingEventId()
   const [open, setOpen] = useState(false)
   const pathname = usePathname()

@@ -13,7 +13,7 @@ export const MailingListPage = () => {
     data: session,
     error: sessionError,
     isPending: isSessionPending,
-  } = useQuery(queries.SESSION())
+  } = useQuery(queries.CURRENT_SESSION())
   const {
     data: users,
     error: usersError,

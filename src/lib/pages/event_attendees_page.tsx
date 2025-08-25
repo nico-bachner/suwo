@@ -20,7 +20,7 @@ export const EventAttendeesPage = ({ id }: Pick<EventDTO, 'id'>) => {
     data: session,
     error: sessionError,
     isPending: isSessionPending,
-  } = useQuery(queries.SESSION())
+  } = useQuery(queries.CURRENT_SESSION())
   const {
     data: event,
     error: eventError,

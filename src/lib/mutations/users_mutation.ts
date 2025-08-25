@@ -46,7 +46,7 @@ export const usersMutation = (
       queryKey: queryKeys.USERS(),
     })
     await queryClient.invalidateQueries({
-      queryKey: queryKeys.SESSION(),
+      queryKey: queryKeys.CURRENT_SESSION(),
     })
   },
 })

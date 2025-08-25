@@ -8,13 +8,13 @@ export const deleteSessionMutation = (
   queryClient: QueryClient,
 ): UseMutationOptions => ({
   mutationFn: async () => {
-    await fetch(createURL({ path: ['api', ...queryKeys.SESSION()] }), {
+    await fetch(createURL({ path: ['api', ...queryKeys.CURRENT_SESSION()] }), {
       method: 'DELETE',
     })
   },
   onSettled: async () => {
     await queryClient.invalidateQueries({
-      queryKey: queryKeys.SESSION(),
+      queryKey: queryKeys.CURRENT_SESSION(),
     })
   },
 })
