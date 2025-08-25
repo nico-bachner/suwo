@@ -36,16 +36,18 @@ export const UserInputValidator = z.object({
   mailing_list_preference: z.boolean(),
 
   // Optional Attributes
-  family_name: z.string().trim(),
-  password: z.string(),
-  usu_number: z.union([
-    z.literal(''),
-    z
-      .string()
-      .trim()
-      .regex(/^\d+$/u, 'USU number must contain only digits')
-      .length(7, `USU number must be exactly 7 characters long`),
-  ]),
+  family_name: z.string().trim().optional(),
+  password: z.string().optional(),
+  usu_number: z
+    .union([
+      z.literal(''),
+      z
+        .string()
+        .trim()
+        .regex(/^\d+$/u, 'USU number must contain only digits')
+        .length(7, `USU number must be exactly 7 characters long`),
+    ])
+    .optional(),
 
   // Relations
   events: z.array(z.uuid()),
