@@ -1,15 +1,15 @@
 import { BlockObjectResponse, PageObjectResponse } from '@notionhq/client'
 
-import { getPageTitle } from '@/utils/notion/get_page_title'
+import { getHistoryPageTitle } from '@/features/marketing/history/get_history_page_title'
 
-type HistoryPageProps = {
+type HistoryYearPageProps = {
   page: PageObjectResponse
   blocks: BlockObjectResponse[]
 }
 
-export const HistoryPage = ({ page, blocks }: HistoryPageProps) => (
+export const HistoryYearPage = ({ page, blocks }: HistoryYearPageProps) => (
   <main className="prose">
-    <h1>{getPageTitle(page)}</h1>
+    <h1>{getHistoryPageTitle(page)}</h1>
 
     {blocks.map((block) => {
       switch (block.type) {

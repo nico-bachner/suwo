@@ -9,3 +9,5 @@ export const getNotionClient = () => {
     auth: process.env.NOTION_TOKEN,
   })
 }
+
+export const { databases, blocks } = getNotionClient()

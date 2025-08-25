@@ -1,12 +1,13 @@
+import { isFullBlock } from '@notionhq/client'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { fetchHistoryYearPage } from '@/features/marketing/history/fetch_history_year_page'
 import { fetchHistoryYears } from '@/features/marketing/history/fetch_history_years'
-import { HistoryPage } from '@/lib/pages/history_page'
+import { getHistoryPageTitle } from '@/features/marketing/history/get_history_page_title'
+import { HistoryYearPage } from '@/lib/pages/history_year_page'
 import { GenerateStaticParams } from '@/utils/next_types'
-import { fetchNotionPageContent } from '@/utils/notion/fetch_page_content'
-import { getPageTitle } from '@/utils/notion/get_page_title'
+import { blocks } from '@/utils/notion'
 
 export const dynamic = 'error'
 
@@ -30,7 +31,7 @@ export const generateMetadata = async ({
   }
 
   return {
-    title: getPageTitle(page),
+    title: getHistoryPageTitle(page),
   }
 }
 
@@ -43,7 +44,9 @@ export default async function Page({ params }: PageProps<'/history/[year]'>) {
     return notFound()
   }
 
-  const blocks = await fetchNotionPageContent(page.id)
+  const { results } = await blocks.children.list({
+    block_id: page.id,
+  })
 
-  return <HistoryPage page={page} blocks={blocks} />
+  return <HistoryYearPage page={page} blocks={results.filter(isFullBlock)} />
 }
