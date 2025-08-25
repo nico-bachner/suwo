@@ -1,0 +1,12 @@
+model Session {
+    // ID
+    id String @id @default(uuid())
+
+    // Relations
+    user_id String
+    user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    // Metadata
+    created_at DateTime @default(now())
+    updated_at DateTime @default(now()) @updatedAt
+}

@@ -2,12 +2,12 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { Button } from '@/design_system/button'
 import { EventDTO } from '@/lib/dtos/event_dto_validator'
+import { SessionDTO } from '@/lib/dtos/session_dto_validator'
 import { mutations } from '@/lib/mutations'
 import { queries } from '@/lib/queries'
-import { Session } from '@/lib/validators/session_validator'
 
 type MarkSelfAsPresentProps = {
-  session: Session
+  session: SessionDTO
   event: EventDTO
   className?: string
 }

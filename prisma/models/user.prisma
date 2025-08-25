@@ -17,6 +17,7 @@ model User {
     instruments        Instrument[]
     payments           Payment[]
     roles              Role[]
+    sessions           Session[]
     verificationTokens VerificationToken[]
 
     // Metadata

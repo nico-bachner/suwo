@@ -1,11 +1,11 @@
+import { jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
 
-import { Session, SessionValidator } from '@/lib/validators/session_validator'
+import { SessionDTO } from '@/lib/dtos/session_dto_validator'
+import { prisma } from '@/utils/prisma'
 
-import { SESSION_COOKIE_NAME } from './config'
+import { JWT_ALGORITHM, JWT_KEY, SESSION_COOKIE_NAME } from './config'
 import { createSession } from './create_session'
-import { deleteSession } from './delete_session'
-import { verifyJWT } from './jwt'
 
 /**
  * **SERVER USE ONLY**
@@ -14,7 +14,7 @@ import { verifyJWT } from './jwt'
  *
  * @returns The current session if it exists, otherwise null.
  */
-export const getSession = async (): Promise<Session | null> => {
+export const getSession = async (): Promise<SessionDTO | null> => {
   const cookieStore = await cookies()
   const sessionCookie = cookieStore.get(SESSION_COOKIE_NAME)
 
@@ -22,19 +22,43 @@ export const getSession = async (): Promise<Session | null> => {
     return null
   }
 
-  const session = SessionValidator.nullable().parse(
-    await verifyJWT(sessionCookie.value),
-  )
+  try {
+    const { payload } = await jwtVerify(sessionCookie.value, JWT_KEY, {
+      algorithms: [JWT_ALGORITHM],
+    })
 
-  if (!session) {
-    // If the session is invalid, delete it
-    await deleteSession()
+    if (!payload.jti) {
+      cookieStore.delete(SESSION_COOKIE_NAME)
+
+      return null
+    }
+
+    const oldSession = await prisma.session.findUnique({
+      where: {
+        id: payload.jti,
+      },
+    })
+
+    if (!oldSession) {
+      cookieStore.delete(SESSION_COOKIE_NAME)
+
+      return null
+    }
+
+    await prisma.session.delete({
+      where: {
+        id: oldSession.id,
+      },
+    })
+
+    // If the session is valid, create a new session cookie to refresh it
+    const session = await createSession({ user_id: oldSession.user_id })
+
+    return session
+  } catch {
+    // If the JWT is invalid, delete the session cookie
+    cookieStore.delete(SESSION_COOKIE_NAME)
 
     return null
   }
-
-  // If the session is valid, create a new session cookie to refresh it
-  await createSession(session)
-
-  return session
 }

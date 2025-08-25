@@ -4,11 +4,11 @@ import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
-import { Session, SessionValidator } from '../validators/session_validator'
+import { SessionDTO, SessionDTOValidator } from '../dtos/session_dto_validator'
 
 export const sessionQueryKey = () => ['auth', 'session']
 
-export const sessionQuery = (): UseQueryOptions<Session | null> => ({
+export const sessionQuery = (): UseQueryOptions<SessionDTO | null> => ({
   queryKey: sessionQueryKey(),
   queryFn: async ({ signal }) => {
     const response = await parseResponse(
@@ -19,7 +19,7 @@ export const sessionQuery = (): UseQueryOptions<Session | null> => ({
 
     switch (response.status) {
       case StatusCode.OK:
-        return SessionValidator.parse(response.data)
+        return SessionDTOValidator.parse(response.data)
       case StatusCode.NotFound:
         return null
       default:
