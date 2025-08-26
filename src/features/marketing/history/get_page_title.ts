@@ -1,7 +1,4 @@
-import {
-  PageObjectResponse,
-  RichTextItemResponse,
-} from '@notionhq/client/build/src/api-endpoints'
+import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 
 /**
  * Extracts the title from a Notion page object.
@@ -10,9 +7,7 @@ import {
  * @returns - If successful, array of Rich Text Items to be consumed by the
  *   RichText component. Otherwise, null.
  */
-export const getPageTitle = (
-  page: PageObjectResponse,
-): RichTextItemResponse[] | null => {
+export const getPageTitle = (page: PageObjectResponse) => {
   const title = Object.values(page.properties).find(
     (property) => property.type === 'title',
   )
@@ -21,5 +16,8 @@ export const getPageTitle = (
     return null
   }
 
-  return title.title
+  return {
+    rich_text: title.title,
+    plain_text: title.title.map((text) => text.plain_text).join(''),
+  }
 }

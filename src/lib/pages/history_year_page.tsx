@@ -13,7 +13,7 @@ export const HistoryYearPage = ({ page, blocks }: HistoryYearPageProps) => {
 
   return (
     <main className="prose">
-      {title && <RichText as="h1" richText={title} />}
+      {title && <RichText as="h1" richText={title.rich_text} />}
 
       {blocks.map((block) => {
         switch (block.type) {

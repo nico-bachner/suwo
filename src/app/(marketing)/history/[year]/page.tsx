@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { fetchHistory } from '@/features/marketing/history/fetch_history'
 import { getHistoryYearPage } from '@/features/marketing/history/get_history_year_page'
 import { getHistoryYears } from '@/features/marketing/history/get_history_years'
-import { getHistoryPageTitle } from '@/features/marketing/history/get_page_title'
+import { getPageTitle } from '@/features/marketing/history/get_page_title'
 import { HistoryYearPage } from '@/lib/pages/history_year_page'
 import { GeneratePageMetadata, GenerateStaticParams } from '@/utils/next'
 import { blocks } from '@/utils/notion'
@@ -34,8 +34,17 @@ export const generateMetadata: GeneratePageMetadata<
     return notFound()
   }
 
+  const title = getPageTitle(page)
+
+  if (!title) {
+    return {
+      title: `History - ${year}`,
+    }
+  }
+
   return {
-    title: getHistoryPageTitle(page),
+    title: `${title.plain_text} - ${year}`,
+    description: `A look back at what Suwo achieved in the year ${year}.`,
   }
 }
 
