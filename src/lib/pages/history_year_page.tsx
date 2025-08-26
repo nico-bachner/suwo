@@ -1,6 +1,7 @@
 import { BlockObjectResponse, PageObjectResponse } from '@notionhq/client'
 
 import { getHistoryPageTitle } from '@/features/marketing/history/get_history_page_title'
+import { RichText } from '@/features/marketing/history/rich_text'
 
 type HistoryYearPageProps = {
   page: PageObjectResponse
@@ -15,17 +16,36 @@ export const HistoryYearPage = ({ page, blocks }: HistoryYearPageProps) => (
       switch (block.type) {
         case 'heading_1':
           return (
-            <h2 key={block.id}>{block.heading_1.rich_text[0]?.plain_text}</h2>
+            <RichText
+              key={block.id}
+              as="h2"
+              richText={block.heading_1.rich_text}
+            />
           )
         case 'heading_2':
           return (
-            <h3 key={block.id}>{block.heading_2.rich_text[0]?.plain_text}</h3>
+            <RichText
+              key={block.id}
+              as="h3"
+              richText={block.heading_2.rich_text}
+            />
           )
         case 'paragraph':
           return (
-            <p key={block.id}>{block.paragraph.rich_text[0]?.plain_text}</p>
+            <RichText
+              key={block.id}
+              as="p"
+              richText={block.paragraph.rich_text}
+            />
           )
-
+        case 'bulleted_list_item':
+          return (
+            <RichText
+              key={block.id}
+              as="p"
+              richText={block.bulleted_list_item.rich_text}
+            />
+          )
         default:
           return null
       }

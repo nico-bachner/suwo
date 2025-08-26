@@ -43,7 +43,6 @@ export default [
     },
     rules: {
       'accessor-pairs': 'error',
-      'array-callback-return': 'error',
       'arrow-body-style': 'error',
       'block-scoped-var': 'error',
       'capitalized-comments': 'error',

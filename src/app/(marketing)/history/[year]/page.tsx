@@ -53,5 +53,7 @@ export default async function Page({ params }: PageProps<'/history/[year]'>) {
     block_id: page.id,
   })
 
+  console.log(results)
+
   return <HistoryYearPage page={page} blocks={results.filter(isFullBlock)} />
 }
