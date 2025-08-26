@@ -3,14 +3,6 @@ import { EventDTO } from './lib/dtos/event_dto_validator'
 import { UserDTO } from './lib/dtos/user_dto_validator'
 import { createURL } from './utils/http/create_url'
 
-export const queryKeys = {
-  EQUIPMENT: () => ['equipment'],
-}
-
-export const apiRoutes = {
-  EQUIPMENT: () => createURL({ path: ['api', 'equipment'] }),
-}
-
 export const routes = {
   // Auth
   REGISTER: () => createURL({ path: ['auth', 'register'] }),
@@ -22,9 +14,6 @@ export const routes = {
 
   // Calendar
   CALENDAR: () => createURL({ path: ['calendar'] }),
-
-  // Equipment
-  EQUIPMENT: () => createURL({ path: ['equipment'] }),
 
   // Events
   EVENTS: () => createURL({ path: ['events'] }),

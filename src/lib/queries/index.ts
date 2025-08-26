@@ -1,4 +1,3 @@
-import { equipmentQuery } from './equipment_query'
 import { eventQuery, eventQueryKey } from './event_query'
 import { eventsQuery, eventsQueryKey } from './events_query'
 import { instrumentsQuery, instrumentsQueryKey } from './instruments_query'
@@ -25,9 +24,6 @@ export const queryKeys = {
 }
 
 export const queries = {
-  // Equipment
-  EQUIPMENT: equipmentQuery,
-
   // Event
   EVENTS: eventsQuery,
   EVENT: eventQuery,

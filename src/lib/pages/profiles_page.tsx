@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import {
   ProfilesScreen,
   ProfilesScreenSkeleton,
-} from '@/features/profile/profiles_screen'
+} from '@/features/user/profiles_screen'
 import { queries } from '@/lib/queries'
 
 export const ProfilesPage = () => {
