@@ -50,6 +50,7 @@
 
 /* Body Text */
 .prose > p {
+  margin-block: 1.2em;
   @apply text-neutral-2 text-lg leading-relaxed;
 }
 .prose > p:not(:last-child) {
