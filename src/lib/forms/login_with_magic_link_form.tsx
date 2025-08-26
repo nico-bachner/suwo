@@ -1,45 +1,26 @@
 'use client'
 
-import {
-  LoginWithMagicLinkFormInput,
-  LoginWithMagicLinkFormInputValidator,
-} from '@/lib/validators/form_input_validators/login_with_magic_link_form_input_validator'
-import { apiRoutes } from '@/routes'
-import { parseResponse } from '@/utils/http/parse_response'
-import { StatusCode } from '@/utils/http/status_code'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { UserInputValidator } from '../dtos/user_dto_validator'
+import { mutations } from '../mutations'
 import { useAppForm } from './context'
 
 export const LoginWithMagicLinkForm = () => {
-  const defaultValues: LoginWithMagicLinkFormInput = {
-    email: '',
-  }
+  const queryClient = useQueryClient()
+  const { mutate } = useMutation(mutations.LOGIN(queryClient))
 
   const form = useAppForm({
-    defaultValues,
-    validators: {
-      onBlur: LoginWithMagicLinkFormInputValidator,
+    defaultValues: {
+      email: '',
     },
-    onSubmit: async ({ value }) => {
-      const response = await parseResponse(
-        await fetch(apiRoutes.LOGIN_WITH_MAGIC_LINK(), {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(value),
-        }),
-      )
-
-      switch (response.status) {
-        case StatusCode.BadRequest:
-          // eslint-disable-next-line no-alert, no-undef
-          alert(`${response.error}\n\nPlease try again`)
-          break
-        case StatusCode.OK:
-          // eslint-disable-next-line no-alert, no-undef
-          alert(`Email with login link has been sent to ${value.email}.`)
-      }
+    validators: {
+      onBlur: UserInputValidator.pick({
+        email: true,
+      }),
+    },
+    onSubmit: ({ value }) => {
+      mutate(value)
     },
   })
 

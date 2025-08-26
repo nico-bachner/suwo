@@ -28,7 +28,7 @@ export const UserDTOValidator = z.object({
 
 export const UserInputValidator = z.object({
   // Required Attributes
-  email: z.email().trim().toLowerCase().min(1, 'Email is required'),
+  email: z.email().trim().toLowerCase(),
   given_name: z.string().trim().min(1, 'Given name is required'),
   mailing_list_preference: z.boolean(),
 

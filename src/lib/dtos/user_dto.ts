@@ -51,14 +51,9 @@ export const createUser = async (
   mailing_list_preference: user.mailing_list_preference,
 
   // Optional Attributes
-  family_name:
-    user.family_name && user.family_name !== '' ? user.family_name : null,
-  password:
-    user.password && user.password !== ''
-      ? await hash(user.password)
-      : undefined,
-  usu_number:
-    user.usu_number && user.usu_number !== '' ? user.usu_number : null,
+  family_name: user.family_name ? user.family_name : null,
+  password: user.password ? await hash(user.password) : null,
+  usu_number: user.usu_number ? user.usu_number : null,
 
   // Relations
   events: user.events && {
@@ -83,14 +78,9 @@ export const updateUser = async (
   mailing_list_preference: user.mailing_list_preference,
 
   // Optional Attributes
-  family_name:
-    user.family_name && user.family_name !== '' ? user.family_name : null,
-  password:
-    user.password && user.password !== ''
-      ? await hash(user.password)
-      : undefined,
-  usu_number:
-    user.usu_number && user.usu_number !== '' ? user.usu_number : null,
+  family_name: user.family_name ? user.family_name : null,
+  password: user.password ? await hash(user.password) : null,
+  usu_number: user.usu_number ? user.usu_number : null,
 
   // Relations
   events: user.events && {

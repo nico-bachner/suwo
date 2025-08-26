@@ -1,23 +1,16 @@
 'use client'
 
-import { useQueryClient } from '@tanstack/react-query'
-import { redirect } from 'next/navigation'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import {
-  LoginWithPasswordFormInput,
-  LoginWithPasswordFormInputValidator,
-} from '@/lib/validators/form_input_validators/login_with_password_form_input_validator'
-import { apiRoutes, routes } from '@/routes'
-import { parseResponse } from '@/utils/http/parse_response'
-import { StatusCode } from '@/utils/http/status_code'
-
-import { queryKeys } from '../queries'
+import { UserInput, UserInputValidator } from '../dtos/user_dto_validator'
+import { mutations } from '../mutations'
 import { useAppForm } from './context'
 
 export const LoginWithPasswordForm = () => {
   const queryClient = useQueryClient()
+  const { mutate } = useMutation(mutations.LOGIN(queryClient))
 
-  const defaultValues: LoginWithPasswordFormInput = {
+  const defaultValues: Pick<UserInput, 'email' | 'password'> = {
     email: '',
     password: '',
   }
@@ -25,31 +18,13 @@ export const LoginWithPasswordForm = () => {
   const form = useAppForm({
     defaultValues,
     validators: {
-      onBlur: LoginWithPasswordFormInputValidator,
+      onBlur: UserInputValidator.pick({
+        email: true,
+        password: true,
+      }),
     },
-    onSubmit: async ({ value }) => {
-      const response = await parseResponse(
-        await fetch(apiRoutes.LOGIN_WITH_PASSWORD(), {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(value),
-        }),
-      )
-
-      switch (response.status) {
-        case StatusCode.BadRequest:
-          // eslint-disable-next-line no-alert, no-undef
-          alert(`${response.error}\n\nPlease try again`)
-          break
-        case StatusCode.OK:
-          await queryClient.invalidateQueries({
-            queryKey: queryKeys.SESSION(),
-          })
-
-          redirect(routes.SETTINGS())
-      }
+    onSubmit: ({ value }) => {
+      mutate(value)
     },
   })
 
