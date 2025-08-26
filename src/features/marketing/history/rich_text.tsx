@@ -25,7 +25,7 @@ export const RichText = ({ as, richText, className }: RichTextProps) => {
                   className={cn(
                     'text-primary-2 outline-none hover:underline',
                     text.annotations.italic && 'italic',
-                    text.annotations.bold && 'font-bold',
+                    text.annotations.bold && 'text-neutral-1 font-semi',
                     text.annotations.underline && 'underline',
                     text.annotations.strikethrough && 'line-through',
                   )}
@@ -40,7 +40,7 @@ export const RichText = ({ as, richText, className }: RichTextProps) => {
                 key={text.text.content}
                 className={cn(
                   text.annotations.italic && 'italic',
-                  text.annotations.bold && 'font-bold',
+                  text.annotations.bold && 'text-neutral-1 font-semibold',
                   text.annotations.underline && 'underline',
                   text.annotations.strikethrough && 'line-through',
                 )}
