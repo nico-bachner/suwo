@@ -26,7 +26,6 @@ export const getUserDTO = (
 
   // Optional Attributes
   family_name: user.family_name,
-  password: null, // No one, not even the user themselves, should be able to see their password
   usu_number: user.usu_number,
 
   // Relations

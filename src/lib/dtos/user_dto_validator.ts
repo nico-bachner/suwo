@@ -14,7 +14,6 @@ export const UserDTOValidator = z.object({
 
   // Optional Attributes
   family_name: z.string().nullable(),
-  password: z.string().nullable(),
   usu_number: z.string().nullable(),
 
   // Relations
