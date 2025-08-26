@@ -1,4 +1,5 @@
 import { eventMutation } from './event_mutation'
+import { eventsMutation } from './events_mutation'
 import { instrumentsMutation } from './instruments_mutation'
 import { sessionMutation } from './session_mutation'
 import { sessionsMutation } from './sessions_mutation'
@@ -7,6 +8,7 @@ import { usersMutation } from './users_mutation'
 
 export const mutations = {
   // Event
+  EVENTS: eventsMutation,
   EVENT: eventMutation,
 
   // Instrument

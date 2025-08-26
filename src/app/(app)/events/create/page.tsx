@@ -1,7 +1,7 @@
 'use client'
 
 import { Heading } from '@/design_system/typography'
-import { CreateEventForm } from '@/lib/forms/create_event_form'
+import { EventCreationForm } from '@/lib/forms/event_creation_form'
 
 export default function Page() {
   return (
@@ -10,7 +10,7 @@ export default function Page() {
         Create Event
       </Heading>
 
-      <CreateEventForm />
+      <EventCreationForm />
     </main>
   )
 }

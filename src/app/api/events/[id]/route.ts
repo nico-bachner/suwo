@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server'
 import z from 'zod'
 
 import { getEventDTO, updateEvent } from '@/lib/dtos/event_dto'
-import { EventDTOValidator } from '@/lib/dtos/event_dto_validator'
+import { EventInputValidator } from '@/lib/dtos/event_dto_validator'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
@@ -41,7 +41,7 @@ export const PATCH = async (
 ) => {
   const { id } = await params
 
-  const { data, error, success } = EventDTOValidator.partial().safeParse(
+  const { data, error, success } = EventInputValidator.partial().safeParse(
     await request.json(),
   )
 

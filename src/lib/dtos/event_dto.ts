@@ -2,7 +2,7 @@ import { Temporal } from '@js-temporal/polyfill'
 
 import { Event, Prisma, User } from '@/generated/prisma'
 
-import { EventDTO } from './event_dto_validator'
+import { EventDTO, EventInput } from './event_dto_validator'
 
 /**
  * Transforms the database representation of an Event (including nested tables
@@ -39,11 +39,8 @@ export const getEventDTO = (
  * for database insertion. Used in POST requests to create a new event.
  */
 export const createEvent = (
-  event: Omit<EventDTO, 'id' | 'created_at' | 'updated_at'>,
-): Omit<
-  Prisma.EventCreateArgs['data'],
-  'id' | 'created_at' | 'updated_at'
-> => ({
+  event: EventInput,
+): Prisma.EventCreateArgs['data'] => ({
   // Required Attributes
   name: event.name,
   starts_at: new Date(
@@ -53,13 +50,13 @@ export const createEvent = (
   ),
 
   // Optional Attributes
-  ends_at:
-    event.ends_at &&
-    new Date(
-      Temporal.PlainDateTime.from(event.ends_at).toZonedDateTime(
-        'Australia/Sydney',
-      ).epochMilliseconds,
-    ),
+  ends_at: event.ends_at
+    ? new Date(
+        Temporal.PlainDateTime.from(event.ends_at).toZonedDateTime(
+          'Australia/Sydney',
+        ).epochMilliseconds,
+      )
+    : null,
   location: event.location,
   notes: event.notes,
   type: event.type,
@@ -71,10 +68,8 @@ export const createEvent = (
  * event.
  */
 export const updateEvent = (
-  event: Partial<Omit<EventDTO, 'id' | 'created_at' | 'updated_at'>>,
-): Partial<
-  Omit<Prisma.EventUpdateArgs['data'], 'id' | 'created_at' | 'updated_at'>
-> => ({
+  event: Partial<EventInput>,
+): Partial<Prisma.EventUpdateArgs['data']> => ({
   // Required Attributes
   name: event.name,
   starts_at:

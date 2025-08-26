@@ -6,18 +6,18 @@ import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'
 
 import {
-  InstrumentDTO,
-  InstrumentDTOValidator,
-  InstrumentInput,
-} from '../dtos/instrument_dto_validator'
+  EventDTO,
+  EventDTOValidator,
+  EventInput,
+} from '../dtos/event_dto_validator'
 import { queryKeys } from '../queries'
 
-export const instrumentsMutation = (
+export const eventsMutation = (
   queryClient: QueryClient,
-): UseMutationOptions<InstrumentDTO, Error, InstrumentInput> => ({
+): UseMutationOptions<EventDTO, Error, EventInput> => ({
   mutationFn: async (value) => {
     const response = await parseResponse(
-      await fetch(createURL({ path: ['api', ...queryKeys.INSTRUMENTS()] }), {
+      await fetch(createURL({ path: ['api', ...queryKeys.EVENTS()] }), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ export const instrumentsMutation = (
 
     switch (response.status) {
       case StatusCode.Created:
-        return InstrumentDTOValidator.parse(response.data)
+        return EventDTOValidator.parse(response.data)
       case StatusCode.BadRequest:
         throw new Error(response.error)
       default:
@@ -39,11 +39,11 @@ export const instrumentsMutation = (
     toast.error(error.message)
   },
   onSuccess: () => {
-    toast.success('Successfully created instrument')
+    toast.success('Successfully created event')
   },
   onSettled: async () => {
     await queryClient.invalidateQueries({
-      queryKey: queryKeys.INSTRUMENTS(),
+      queryKey: queryKeys.EVENTS(),
     })
   },
 })

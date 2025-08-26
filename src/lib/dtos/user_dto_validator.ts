@@ -34,11 +34,18 @@ export const UserInputValidator = z.object({
   mailing_list_preference: z.boolean(),
 
   // Optional Attributes
-  family_name: z.string().trim().optional(),
-  password: z.string().optional(),
+  family_name: z
+    .string()
+    .trim()
+    .transform((val) => (val === '' ? null : val))
+    .optional(),
+  password: z
+    .string()
+    .transform((val) => (val === '' ? null : val))
+    .optional(),
   usu_number: z
     .union([
-      z.literal(''),
+      z.literal('').transform(() => null),
       z
         .string()
         .trim()
