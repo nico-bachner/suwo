@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server'
 import z from 'zod'
 
-import { createSession } from '@/features/auth/session/create_session'
+import { createSession } from '@/features/auth/create_session'
 import { createUser, getUserDTO } from '@/lib/dtos/user_dto'
 import { UserInputValidator } from '@/lib/dtos/user_dto_validator'
 import { createResponse } from '@/utils/http/create_response'

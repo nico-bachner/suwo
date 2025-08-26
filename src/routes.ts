@@ -1,5 +1,4 @@
 import { LoginMethod } from './features/auth/login_method_validator'
-import { apiRoutes as authApiRoutes } from './features/auth/routes'
 import { EventDTO } from './lib/dtos/event_dto_validator'
 import { UserDTO } from './lib/dtos/user_dto_validator'
 import { createURL } from './utils/http/create_url'
@@ -9,18 +8,17 @@ export const queryKeys = {
 }
 
 export const apiRoutes = {
-  ...authApiRoutes,
   EQUIPMENT: () => createURL({ path: ['api', 'equipment'] }),
 }
 
 export const routes = {
   // Auth
+  REGISTER: () => createURL({ path: ['auth', 'register'] }),
   LOGIN: (method?: LoginMethod) =>
     createURL({
       path: ['auth', 'login'],
       query: { method },
     }),
-  REGISTER: () => createURL({ path: ['auth', 'register'] }),
 
   // Calendar
   CALENDAR: () => createURL({ path: ['calendar'] }),

@@ -1,4 +1,4 @@
-import { getSession } from '@/features/auth/session/get_current_session'
+import { getSession } from '@/features/auth/get_current_session'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next'

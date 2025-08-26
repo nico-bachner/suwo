@@ -11,10 +11,12 @@ import {
 } from '@react-email/components'
 
 type MagicLinkTemplateProps = {
-  link: string
+  callbackURL: string
 }
 
-export const MagicLinkEmailTemplate = ({ link }: MagicLinkTemplateProps) => (
+export const MagicLinkEmailTemplate = ({
+  callbackURL,
+}: MagicLinkTemplateProps) => (
   <Html>
     <Head />
 
@@ -30,7 +32,7 @@ export const MagicLinkEmailTemplate = ({ link }: MagicLinkTemplateProps) => (
             </Text>
 
             <Button
-              href={link}
+              href={callbackURL}
               className="rounded-full bg-amber-500 px-4 py-2 text-white"
             >
               Log in to your account

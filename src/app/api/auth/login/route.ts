@@ -4,18 +4,19 @@ import { headers } from 'next/headers'
 import z from 'zod'
 
 import { RESEND_DOMAIN, SHORT_NAME } from '@/config'
+import { createSession } from '@/features/auth/create_session'
 import { MagicLinkEmailTemplate } from '@/features/auth/magic_link_email_template'
-import { createSession } from '@/features/auth/session/create_session'
 import { getUserDTO } from '@/lib/dtos/user_dto'
 import { UserInputValidator } from '@/lib/dtos/user_dto_validator'
-import { apiRoutes } from '@/routes'
 import { createResponse } from '@/utils/http/create_response'
+import { createURL, URLValidator } from '@/utils/http/create_url'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next'
 import { prisma } from '@/utils/prisma'
 import { emails } from '@/utils/resend'
 
 export const POST: APIRoute<'/api/auth/login'> = async (request) => {
+  const headersList = await headers()
   const { data, error, success } = UserInputValidator.pick({
     email: true,
     password: true,
@@ -85,27 +86,30 @@ export const POST: APIRoute<'/api/auth/login'> = async (request) => {
     })
   }
 
-  const verificationToken = await prisma.verificationToken.create({
+  const { token } = await prisma.verificationToken.create({
     data: {
       user_id: user.id,
       token: randomBytes(32).toString('hex'),
     },
   })
 
-  const headersList = await headers()
-  const host = headersList.get('x-forwarded-host') ?? headersList.get('host')
-  const protocol = headersList.get('x-forwarded-proto') ?? 'https'
-  // eslint-disable-next-line typescript/restrict-template-expressions
-  const verificationLink = `${protocol}://${host}${apiRoutes.VALIDATE_MAGIC_LINK(
-    verificationToken.token,
-  )}`
+  const callbackURL = createURL(
+    URLValidator.parse({
+      protocol: headersList.get('x-forwarded-proto'),
+      host: headersList.get('x-forwarded-host') ?? headersList.get('host'),
+      path: ['api', 'auth', 'validate-magic-link'],
+      query: { token },
+    }),
+  )
 
   await emails.send({
     from: `${SHORT_NAME} <magic-link@${RESEND_DOMAIN}>`,
     to: [data.email],
     subject: 'Log in to your SUWO account',
-    text: `Click the link below to log in to your account:\n\n${verificationLink}`,
-    react: MagicLinkEmailTemplate({ link: verificationLink }),
+    text: `Click the link below to log in to your account:\n\n${callbackURL}`,
+    react: MagicLinkEmailTemplate({
+      callbackURL,
+    }),
   })
 
   return createResponse({

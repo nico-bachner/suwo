@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 
-import { SESSION_COOKIE_NAME } from '@/features/auth/session/config'
-import { getSession } from '@/features/auth/session/get_current_session'
+import { SESSION_COOKIE_NAME } from '@/features/auth/config'
+import { getSession } from '@/features/auth/get_current_session'
 import { getSessionDTO } from '@/lib/dtos/session_dto'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
