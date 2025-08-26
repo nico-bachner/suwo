@@ -3,26 +3,25 @@ import Link from 'next/link'
 import { Button } from '@/design_system/button'
 import { LoginWithMagicLinkForm } from '@/lib/forms/login_with_magic_link_form'
 import { LoginWithPasswordForm } from '@/lib/forms/login_with_password_form'
+import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
 
-import { LoginMethod } from './login_method'
-import { LoginScreenSearchParams } from './login_screen_search_params_validator'
-import { routes } from './routes'
+import { LoginMethod } from './login_method_validator'
 
-export const LoginScreen = ({
-  method,
-  className,
-}: LoginScreenSearchParams & {
+type LoginScreenProps = {
+  method?: LoginMethod
   className?: string
-}) => {
+}
+
+export const LoginScreen = ({ method, className }: LoginScreenProps) => {
   switch (method) {
-    case LoginMethod.MAGIC_LINK:
+    case 'magic_link':
       return (
         <div className={cn(className)}>
           <LoginWithMagicLinkForm />
         </div>
       )
-    case LoginMethod.PASSWORD:
+    case 'password':
       return (
         <div className={cn(className)}>
           <LoginWithPasswordForm />
@@ -32,13 +31,13 @@ export const LoginScreen = ({
       return (
         <div className={cn('flex flex-col gap-4', className)}>
           <Button asChild variant="primary">
-            <Link href={routes.LOGIN({ method: LoginMethod.MAGIC_LINK })}>
-              Log in with Magic Link
+            <Link href={routes.LOGIN('magic_link')}>
+              Receive a confirmation link by email
             </Link>
           </Button>
           <Button asChild variant="secondary">
-            <Link href={routes.LOGIN({ method: LoginMethod.PASSWORD })}>
-              Log in with Password
+            <Link href={routes.LOGIN('password')}>
+              Use a Password (if you have set one)
             </Link>
           </Button>
         </div>

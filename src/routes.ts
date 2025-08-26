@@ -1,7 +1,5 @@
-import {
-  apiRoutes as authApiRoutes,
-  routes as authRoutes,
-} from './features/auth/routes'
+import { LoginMethod } from './features/auth/login_method_validator'
+import { apiRoutes as authApiRoutes } from './features/auth/routes'
 import { EventDTO } from './lib/dtos/event_dto_validator'
 import { UserDTO } from './lib/dtos/user_dto_validator'
 import { createURL } from './utils/http/create_url'
@@ -16,19 +14,25 @@ export const apiRoutes = {
 }
 
 export const routes = {
-  ...authRoutes,
+  // Auth
+  LOGIN: (method?: LoginMethod) =>
+    createURL({
+      path: ['auth', 'login'],
+      query: { method },
+    }),
+  REGISTER: () => createURL({ path: ['auth', 'register'] }),
 
   // Calendar
   CALENDAR: () => createURL({ path: ['calendar'] }),
+
+  // Equipment
+  EQUIPMENT: () => createURL({ path: ['equipment'] }),
 
   // Events
   EVENTS: () => createURL({ path: ['events'] }),
   EVENT: (id: EventDTO['id']) => createURL({ path: ['events', id] }),
   EVENT_ATTENDEES: (id: EventDTO['id']) =>
     createURL({ path: ['events', id, 'attendees'] }),
-
-  // Equipment
-  EQUIPMENT: () => createURL({ path: ['equipment'] }),
 
   // History
   HISTORY: () => createURL({ path: ['history'] }),

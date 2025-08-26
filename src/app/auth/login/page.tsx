@@ -2,13 +2,13 @@ import Link from 'next/link'
 
 import { Button } from '@/design_system/button'
 import { Heading } from '@/design_system/typography'
+import { LoginMethodValidator } from '@/features/auth/login_method_validator'
 import { LoginScreen } from '@/features/auth/login_screen'
-import { LoginScreenSearchParamsValidator } from '@/features/auth/login_screen_search_params_validator'
 import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
 
 export default async function Page({ searchParams }: PageProps<'/auth/login'>) {
-  const { method } = LoginScreenSearchParamsValidator.parse(await searchParams)
+  const { method } = await searchParams
 
   return (
     <main
@@ -29,7 +29,10 @@ export default async function Page({ searchParams }: PageProps<'/auth/login'>) {
         </Heading>
       </div>
 
-      <LoginScreen method={method} className="row-span-2 self-center" />
+      <LoginScreen
+        method={LoginMethodValidator.parse(method)}
+        className="row-span-2 self-center"
+      />
 
       <p className="self-end">
         Don&apos;t have an account?{' '}
