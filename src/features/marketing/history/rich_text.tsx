@@ -14,13 +14,13 @@ export const RichText = ({ as, richText, className }: RichTextProps) => {
 
   return (
     <Component className={className}>
-      {richText.map((text) => {
+      {richText.map((text, index) => {
         switch (text.type) {
           case 'text':
             if (text.text.link) {
               return (
                 <a
-                  key={text.text.content}
+                  key={index}
                   href={text.text.link.url}
                   className={cn(
                     'text-primary-2 outline-none hover:underline',
@@ -37,7 +37,7 @@ export const RichText = ({ as, richText, className }: RichTextProps) => {
 
             return (
               <span
-                key={text.text.content}
+                key={index}
                 className={cn(
                   text.annotations.italic && 'italic',
                   text.annotations.bold && 'text-neutral-1 font-semibold',
@@ -49,9 +49,9 @@ export const RichText = ({ as, richText, className }: RichTextProps) => {
               </span>
             )
           case 'mention':
-            return <span key={text.plain_text}>{text.plain_text}</span>
+            return <span key={index}>{text.plain_text}</span>
           case 'equation':
-            return <span key={text.plain_text}>{text.plain_text}</span>
+            return <span key={index}>{text.plain_text}</span>
           default:
             text satisfies never
         }
