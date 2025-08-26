@@ -12,7 +12,7 @@ import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
 
-import { useUpcomingEventId } from '../event/use_upcoming_event_id'
+import { useCurrentEvent } from '../event/use_upcoming_event'
 import { NavbarMenuLink } from './navbar_menu_link'
 
 type NavbarMenuProps = {
@@ -21,7 +21,7 @@ type NavbarMenuProps = {
 
 export const NavbarMenu = ({ className }: NavbarMenuProps) => {
   const { data: session } = useQuery(queries.SESSION())
-  const upcomingEventId = useUpcomingEventId()
+  const currentEvent = useCurrentEvent()
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
 
@@ -48,32 +48,33 @@ export const NavbarMenu = ({ className }: NavbarMenuProps) => {
         <XMarkIcon className="h-8 w-8 stroke-gray-100 stroke-1" />
       </Close>
 
-      <div className="flex flex-col items-center gap-6">
-        {session ? (
-          <>
-            <NavbarMenuLink href={routes.SETTINGS()}>Settings</NavbarMenuLink>
-            <NavbarMenuLink href={routes.PROFILE(session.user_id)}>
-              Profile
-            </NavbarMenuLink>
-          </>
-        ) : (
-          <>
-            <NavbarMenuLink href={routes.REGISTER()}>Join SUWO</NavbarMenuLink>
-            <NavbarMenuLink href={routes.LOGIN()}>Login</NavbarMenuLink>
-          </>
+      <div className="flex flex-col gap-6 text-center">
+        {!session && (
+          <NavbarMenuLink href={routes.HISTORY()}>History</NavbarMenuLink>
+        )}
+        <NavbarMenuLink href={routes.EVENTS()}>Events</NavbarMenuLink>
+        <NavbarMenuLink href={routes.PROFILES()}>Members</NavbarMenuLink>
+
+        {currentEvent && (
+          <NavbarMenuLink href={routes.EVENT_ATTENDEES(currentEvent.id)}>
+            {currentEvent.name} Attendance
+          </NavbarMenuLink>
         )}
       </div>
 
-      <div className="flex flex-col items-center gap-6">
-        <NavbarMenuLink href={routes.HOME()}>Home</NavbarMenuLink>
-        <NavbarMenuLink href={routes.EVENTS()}>Events</NavbarMenuLink>
-        <NavbarMenuLink href={routes.PROFILES()}>Members</NavbarMenuLink>
-        <NavbarMenuLink href={routes.HISTORY()}>History</NavbarMenuLink>
-        <NavbarMenuLink href={routes.CALENDAR()}>Calendar</NavbarMenuLink>
-        <NavbarMenuLink href={routes.EVENT_ATTENDEES(upcomingEventId)}>
-          Attendance
-        </NavbarMenuLink>
-      </div>
+      {session ? (
+        <div className="flex flex-col gap-6 text-center">
+          <NavbarMenuLink href={routes.PROFILE(session.user_id)}>
+            Profile
+          </NavbarMenuLink>
+          <NavbarMenuLink href={routes.SETTINGS()}>Settings</NavbarMenuLink>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-6 text-center">
+          <NavbarMenuLink href={routes.LOGIN()}>Log In</NavbarMenuLink>
+          <NavbarMenuLink href={routes.REGISTER()}>Join SUWO</NavbarMenuLink>
+        </div>
+      )}
 
       <div className="flex flex-row items-center gap-4 self-center">
         {SOCIAL_LINKS.map(({ href, icon: Icon }) => (

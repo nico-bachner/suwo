@@ -33,8 +33,8 @@ export const Footer = ({ className }: FooterProps) => (
 
       <div className="flex flex-1 flex-col gap-2">
         <p className="text-neutral-1 text-lg font-bold">Members</p>
-        <FooterLink href={routes.EVENTS()}>Events</FooterLink>
         <FooterLink href={routes.CALENDAR()}>Calendar</FooterLink>
+        <FooterLink href={routes.LOGIN()}>Log In</FooterLink>
       </div>
 
       <div className="flex flex-1 flex-col gap-2">

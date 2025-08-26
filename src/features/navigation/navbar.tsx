@@ -8,7 +8,7 @@ import { queries } from '@/lib/queries'
 import { routes } from '@/routes'
 import { cn } from '@/utils/cn'
 
-import { useUpcomingEventId } from '../event/use_upcoming_event_id'
+import { useCurrentEvent } from '../event/use_upcoming_event'
 import { NavbarLink } from './navbar_link'
 import { NavbarMenu } from './navbar_menu'
 import { SUWOIcon } from './suwo_icon'
@@ -19,7 +19,7 @@ type NavbarProps = {
 
 export const Navbar = ({ className }: NavbarProps) => {
   const { data: session } = useQuery(queries.SESSION())
-  const upcomingEventId = useUpcomingEventId()
+  const currentEvent = useCurrentEvent()
 
   return (
     <nav
@@ -40,13 +40,14 @@ export const Navbar = ({ className }: NavbarProps) => {
       </Link>
 
       <div className="hidden items-center gap-4 md:flex">
-        <NavbarLink href={routes.HISTORY()}>History</NavbarLink>
+        {!session && <NavbarLink href={routes.HISTORY()}>History</NavbarLink>}
         <NavbarLink href={routes.PROFILES()}>Members</NavbarLink>
         <NavbarLink href={routes.EVENTS()}>Events</NavbarLink>
-        <NavbarLink href={routes.CALENDAR()}>Calendar</NavbarLink>
-        <NavbarLink href={routes.EVENT_ATTENDEES(upcomingEventId)}>
-          Attendance
-        </NavbarLink>
+        {currentEvent && (
+          <NavbarLink href={routes.EVENT_ATTENDEES(currentEvent.id)}>
+            {currentEvent.name} Attendance
+          </NavbarLink>
+        )}
       </div>
 
       <div className="hidden items-center gap-2 md:flex">
@@ -62,7 +63,7 @@ export const Navbar = ({ className }: NavbarProps) => {
         ) : (
           <>
             <Button asChild variant="secondary">
-              <Link href={routes.LOGIN()}>Login</Link>
+              <Link href={routes.LOGIN()}>Log In</Link>
             </Button>
             <Button asChild variant="primary">
               <Link href={routes.REGISTER()}>Join SUWO</Link>
