@@ -12,7 +12,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import { Divider } from '@/design_system/divider'
 import { queries } from '@/lib/queries'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 import { cn } from '@/utils/cn'
 
 import { useCurrentEvent } from '../event/use_upcoming_event'

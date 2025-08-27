@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import { Button } from '@/design_system/button'
 import { queries } from '@/lib/queries'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 import { formatDateRange } from '@/utils/format_date_range'
 
 import { EventDTO } from '../dtos/event_dto_validator'

@@ -10,7 +10,7 @@ import { Heading } from '@/design_system/typography'
 import { EventAttendee } from '@/features/event/event_attendee'
 import { MarkSelfAsPresent } from '@/features/event/mark_self_as_present'
 import { queries } from '@/lib/queries'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 import { search } from '@/utils/search'
 
 import { EventDTO } from '../dtos/event_dto_validator'

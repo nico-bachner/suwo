@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { SkeletonText } from '@/design_system/skeleton'
 import { UserDTO } from '@/lib/dtos/user_dto_validator'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 
 import { getUserDisplayName } from '../user/get_user_display_name'
 import { UserInstruments } from '../user/user_instruments'

@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation'
 import z from 'zod'
 
 import { createSession } from '@/features/auth/create_session'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 import { createResponse } from '@/utils/http/create_response'
 import { StatusCode } from '@/utils/http/status_code'
 import { APIRoute } from '@/utils/next'

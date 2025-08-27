@@ -4,7 +4,7 @@ import { Button } from '@/design_system/button'
 import { Heading } from '@/design_system/typography'
 import { LoginMethodValidator } from '@/features/auth/login_method_validator'
 import { LoginScreen } from '@/features/auth/login_screen'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 import { cn } from '@/utils/cn'
 
 export default async function Page({ searchParams }: PageProps<'/auth/login'>) {

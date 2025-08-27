@@ -9,7 +9,7 @@ import { getUserDisplayName } from '@/features/user/get_user_display_name'
 import { UserEventsAttended } from '@/features/user/user_events_attended'
 import { UserInstruments } from '@/features/user/user_instruments'
 import { queries } from '@/lib/queries'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 
 import { UserDTO } from '../dtos/user_dto_validator'
 

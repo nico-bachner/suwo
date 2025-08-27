@@ -1,7 +1,8 @@
-import { LoginMethod } from './features/auth/login_method_validator'
-import { EventDTO } from './lib/dtos/event_dto_validator'
-import { UserDTO } from './lib/dtos/user_dto_validator'
-import { createURL } from './utils/http/create_url'
+import { LoginMethod } from '@/features/auth/login_method_validator'
+import { createURL } from '@/utils/http/create_url'
+
+import { EventDTO } from './dtos/event_dto_validator'
+import { UserDTO } from './dtos/user_dto_validator'
 
 export const routes = {
   // Auth

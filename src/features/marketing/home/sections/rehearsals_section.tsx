@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { Section } from '@/design_system/section'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 
 export const RehearsalsSection = () => (
   <Section className="prose mx-auto w-full max-w-screen-lg">

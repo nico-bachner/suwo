@@ -2,7 +2,7 @@ import { QueryClient, UseMutationOptions } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
 import { toast } from 'sonner'
 
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 import { createURL } from '@/utils/http/create_url'
 import { parseResponse } from '@/utils/http/parse_response'
 import { StatusCode } from '@/utils/http/status_code'

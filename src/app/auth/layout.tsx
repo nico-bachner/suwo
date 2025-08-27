@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import { redirect } from 'next/navigation'
 
 import { queries } from '@/lib/queries'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 
 export default function Layout({ children }: LayoutProps<'/auth'>) {
   const { data: session } = useQuery(queries.SESSION())

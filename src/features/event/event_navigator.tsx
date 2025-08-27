@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 import { Divider } from '@/design_system/divider'
 import { queries, queryKeys } from '@/lib/queries'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 import { cn } from '@/utils/cn'
 
 type EventNavigatorProps = {

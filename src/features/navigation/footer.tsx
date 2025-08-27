@@ -1,5 +1,5 @@
 import { SOCIAL_LINKS } from '@/config'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 import { cn } from '@/utils/cn'
 
 import { FooterLink } from './footer_link'

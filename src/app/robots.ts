@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 
 export default function robots(): MetadataRoute.Robots {
   return {

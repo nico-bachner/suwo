@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import { Button } from '@/design_system/button'
 import { queries } from '@/lib/queries'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 import { cn } from '@/utils/cn'
 
 import { useCurrentEvent } from '../event/use_upcoming_event'

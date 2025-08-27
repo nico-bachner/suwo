@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { Button } from '@/design_system/button'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 
 export default function NotFound() {
   return (

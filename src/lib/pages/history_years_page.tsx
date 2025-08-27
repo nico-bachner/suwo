@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { getHistoryPagesYearAlignment } from '@/features/marketing/history/get_history_pages_year_alignment'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 import { cn } from '@/utils/cn'
 
 type HistoryYearsPageProps = {

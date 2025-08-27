@@ -9,7 +9,7 @@ import { Heading } from '@/design_system/typography'
 import { UserUpdateMailingListPreferenceForm } from '@/lib/forms/user_update_mailing_list_preference_form'
 import { UserUpdatePasswordForm } from '@/lib/forms/user_update_password_form'
 import { mutations } from '@/lib/mutations'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 
 import { UserDTO } from '../dtos/user_dto_validator'
 import { queries } from '../queries'

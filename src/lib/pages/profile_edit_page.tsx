@@ -10,7 +10,7 @@ import { Heading } from '@/design_system/typography'
 import { getUserDisplayName } from '@/features/user/get_user_display_name'
 import { CreateInstrumentForm } from '@/lib/forms/create_instrument_form'
 import { queries } from '@/lib/queries'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 
 import { UserDTO } from '../dtos/user_dto_validator'
 import { UserUpdateInstrumentsForm } from '../forms/user_update_instruments_form'

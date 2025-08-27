@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Heading } from '@/design_system/typography'
 import { CreateInstrumentForm } from '@/lib/forms/create_instrument_form'
 import { RegisterForm } from '@/lib/forms/register_form'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 
 export default function Page() {
   return (

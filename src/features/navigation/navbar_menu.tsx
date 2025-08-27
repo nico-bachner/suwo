@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
 import { SOCIAL_LINKS } from '@/config'
 import { Dialog } from '@/design_system/dialog'
 import { queries } from '@/lib/queries'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 import { cn } from '@/utils/cn'
 
 import { useCurrentEvent } from '../event/use_upcoming_event'

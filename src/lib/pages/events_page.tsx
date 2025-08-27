@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 
 import { queries, queryKeys } from '@/lib/queries'
-import { routes } from '@/routes'
+import { routes } from '@/lib/routes'
 import { formatDateRange } from '@/utils/format_date_range'
 
 export const EventsPage = () => {
