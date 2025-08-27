@@ -27,7 +27,7 @@ export const Navbar = ({ className }: NavbarProps) => {
         'bg-neutral-5/20 border-neutral-2/20 rounded-full border backdrop-blur',
         'mx-auto w-[calc(100%-16px)] max-w-screen-lg',
         'h-16 pr-3 pl-4 md:h-20 md:pr-5',
-        'flex items-center justify-between',
+        'flex items-center justify-between gap-2',
         className,
       )}
     >

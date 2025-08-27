@@ -1,9 +1,6 @@
 'use client'
 
-import {
-  ChevronDoubleLeftIcon,
-  ChevronDoubleRightIcon,
-} from '@heroicons/react/24/outline'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 
@@ -51,7 +48,7 @@ export const EventNavigator = ({ id, className }: EventNavigatorProps) => {
           href={routes.EVENT(prev.id)}
           className="flex flex-1 items-center gap-3 px-2"
         >
-          <ChevronDoubleLeftIcon className="-m-1 size-4" />
+          <ChevronLeftIcon className="-m-1 size-4" />
 
           <span className="flex-1 text-left text-sm">{prev.name}</span>
         </Link>
@@ -68,7 +65,7 @@ export const EventNavigator = ({ id, className }: EventNavigatorProps) => {
         >
           <span className="flex-1 text-right text-sm">{next.name}</span>
 
-          <ChevronDoubleRightIcon className="-m-1 size-4" />
+          <ChevronRightIcon className="-m-1 size-4" />
         </Link>
       ) : (
         <div />

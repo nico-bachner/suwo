@@ -21,7 +21,7 @@ export const Button = ({
       type={type}
       className={cn(
         'leading-tight font-semibold select-none',
-        'h-10 rounded-full px-5',
+        'h-10 shrink-0 rounded-full px-5',
         'outline-offset-2 focus-visible:outline-4',
         'flex items-center justify-center gap-2',
         getVariant(variant),

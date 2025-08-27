@@ -1,3 +1,4 @@
+import { EventBackButton } from '@/features/event/event_back_button'
 import { EventNavigator } from '@/features/event/event_navigator'
 
 export default async function Layout({
@@ -12,6 +13,8 @@ export default async function Layout({
         id={id}
         className="fixed right-2 bottom-20 left-2 z-30 md:top-24"
       />
+
+      <EventBackButton className="fixed right-2 bottom-32 left-2 z-30 md:top-38" />
 
       {children}
     </div>

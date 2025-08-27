@@ -11,6 +11,7 @@ import { EventAttendee } from '@/features/event/event_attendee'
 import { MarkSelfAsPresent } from '@/features/event/mark_self_as_present'
 import { queries } from '@/lib/queries'
 import { routes } from '@/lib/routes'
+import { formatDateRange } from '@/utils/format_date_range'
 import { search } from '@/utils/search'
 
 import { EventDTO } from '../dtos/event_dto_validator'
@@ -68,6 +69,14 @@ export const EventAttendeesPage = ({ id }: Pick<EventDTO, 'id'>) => {
       >
         {event.name} Attendees
       </Heading>
+
+      <p className="mx-auto w-full max-w-screen-sm">
+        {formatDateRange(
+          new Date(event.starts_at),
+          event.ends_at ? new Date(event.ends_at) : undefined,
+        )}
+        {event.location && ` at ${event.location}`}
+      </p>
 
       <p className="mx-auto w-full max-w-screen-sm text-xl">
         Present: {`${event.attendees.length}/${users.length}`}
