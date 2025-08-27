@@ -2,6 +2,7 @@ import { NextRequest } from 'next/server'
 import z from 'zod'
 
 import { createSession } from '@/features/auth/create_session'
+import { fetchUsers } from '@/lib/data/fetch_users'
 import { createUser, getUserDTO } from '@/lib/dtos/user_dto'
 import { UserInputValidator } from '@/lib/dtos/user_dto_validator'
 import { createResponse } from '@/utils/http/create_response'
@@ -9,25 +10,11 @@ import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
 
 export const GET = async () => {
-  const [users, events] = await Promise.all([
-    prisma.user.findMany({
-      include: {
-        events: true,
-        instruments: true,
-      },
-    }),
-    prisma.event.findMany({
-      where: {
-        starts_at: {
-          lt: new Date(),
-        },
-      },
-    }),
-  ])
+  const users = await fetchUsers()
 
   return createResponse({
     status: StatusCode.OK,
-    data: users.map((user) => getUserDTO(user, events)),
+    data: users,
   })
 }
 
