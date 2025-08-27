@@ -2,6 +2,7 @@ import { NextRequest } from 'next/server'
 import z from 'zod'
 
 import { getSession } from '@/features/auth/get_current_session'
+import { fetchUser } from '@/lib/data/fetch_user'
 import { getUserDTO, updateUser } from '@/lib/dtos/user_dto'
 import { UserInputValidator } from '@/lib/dtos/user_dto_validator'
 import { createResponse } from '@/utils/http/create_response'
@@ -14,24 +15,7 @@ export const GET = async (
 ) => {
   const { id } = await params
 
-  const [user, events] = await Promise.all([
-    prisma.user.findUnique({
-      where: {
-        id,
-      },
-      include: {
-        events: true,
-        instruments: true,
-      },
-    }),
-    prisma.event.findMany({
-      where: {
-        starts_at: {
-          lt: new Date(),
-        },
-      },
-    }),
-  ])
+  const user = await fetchUser(id)
 
   if (!user) {
     return createResponse({
@@ -42,7 +26,7 @@ export const GET = async (
 
   return createResponse({
     status: StatusCode.OK,
-    data: getUserDTO(user, events),
+    data: user,
   })
 }
 
