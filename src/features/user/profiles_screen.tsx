@@ -1,9 +1,7 @@
-import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 
 import { SearchInput } from '@/design_system/input'
 import { UserDTO } from '@/lib/dtos/user_dto_validator'
-import { queryKeys } from '@/lib/queries'
 import { search } from '@/utils/search'
 
 import { ProfilePreview, ProfilePreviewSkeleton } from './profile_preview'
@@ -13,16 +11,7 @@ type ProfilesScreenProps = {
 }
 
 export const ProfilesScreen = ({ users }: ProfilesScreenProps) => {
-  const queryClient = useQueryClient()
   const [query, setQuery] = useState('')
-
-  /**
-   * Prime each individual user's query by pre-populating the query cache with
-   * user data
-   */
-  users.forEach((user) => {
-    queryClient.setQueryData(queryKeys.USER(user.id), user)
-  })
 
   const searchedUsers = search({
     data: users,

@@ -14,7 +14,6 @@ export const ProfilesPage = () => {
     error: usersError,
     isPending: isUsersPending,
   } = useQuery(queries.USERS())
-  useQuery(queries.INSTRUMENTS())
 
   if (isUsersPending) {
     return <ProfilesScreenSkeleton />
