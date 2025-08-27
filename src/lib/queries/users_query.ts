@@ -1,4 +1,4 @@
-import { UseQueryOptions } from '@tanstack/react-query'
+import { UseSuspenseQueryOptions } from '@tanstack/react-query'
 import z from 'zod'
 
 import { createURL } from '@/utils/http/create_url'
@@ -9,7 +9,7 @@ import { UserDTO, UserDTOValidator } from '../dtos/user_dto_validator'
 
 export const usersQueryKey = () => ['users']
 
-export const usersQuery = (): UseQueryOptions<UserDTO[]> => ({
+export const usersQuery = (): UseSuspenseQueryOptions<UserDTO[]> => ({
   queryKey: usersQueryKey(),
   queryFn: async ({ signal }) => {
     const response = await parseResponse(

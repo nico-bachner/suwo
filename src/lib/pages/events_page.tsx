@@ -11,6 +11,14 @@ export const EventsPage = () => {
   const queryClient = useQueryClient()
   const { data: events } = useSuspenseQuery(queries.EVENTS())
 
+  /**
+   * Prime each individual event's query by pre-populating the query cache with
+   * event data
+   */
+  events.forEach((event) => {
+    queryClient.setQueryData(queryKeys.EVENT(event.id), event)
+  })
+
   if (events.length === 0) {
     return (
       <main className="prose">
@@ -19,10 +27,6 @@ export const EventsPage = () => {
       </main>
     )
   }
-
-  events.forEach((event) => {
-    queryClient.setQueryData(queryKeys.EVENT(event.id), event)
-  })
 
   return (
     <main className="prose">
