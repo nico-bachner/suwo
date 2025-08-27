@@ -44,8 +44,8 @@ export const Navbar = ({ className }: NavbarProps) => {
         <NavbarLink href={routes.PROFILES()}>Members</NavbarLink>
         <NavbarLink href={routes.EVENTS()}>Events</NavbarLink>
         {currentEvent && (
-          <NavbarLink href={routes.EVENT_ATTENDEES(currentEvent.id)}>
-            {currentEvent.name} Attendance
+          <NavbarLink href={routes.EVENT(currentEvent.id)}>
+            {currentEvent.name}
           </NavbarLink>
         )}
       </div>

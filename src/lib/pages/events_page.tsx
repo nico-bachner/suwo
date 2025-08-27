@@ -1,6 +1,6 @@
 'use client'
 
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 
 import { queries, queryKeys } from '@/lib/queries'
@@ -9,28 +9,7 @@ import { formatDateRange } from '@/utils/format_date_range'
 
 export const EventsPage = () => {
   const queryClient = useQueryClient()
-  const {
-    data: events,
-    error: eventsError,
-    isPending: isEventsPending,
-  } = useQuery(queries.EVENTS())
-
-  if (isEventsPending) {
-    return (
-      <main className="prose">
-        <h1>Loading...</h1>
-      </main>
-    )
-  }
-
-  if (eventsError) {
-    return (
-      <main className="prose">
-        <h1>Error</h1>
-        <p>{eventsError.message}</p>
-      </main>
-    )
-  }
+  const { data: events } = useSuspenseQuery(queries.EVENTS())
 
   if (events.length === 0) {
     return (

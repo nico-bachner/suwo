@@ -38,7 +38,7 @@ export const TabBar = ({ className }: TabBarProps) => {
       {session ? (
         currentEvent && (
           <TabBarLink
-            href={routes.EVENT_ATTENDEES(currentEvent.id)}
+            href={routes.EVENT(currentEvent.id)}
             icon={ClipboardDocumentCheckIcon}
           >
             Attendance
@@ -83,7 +83,7 @@ export const TabBar = ({ className }: TabBarProps) => {
       ) : (
         currentEvent && (
           <TabBarLink
-            href={routes.EVENT_ATTENDEES(currentEvent.id)}
+            href={routes.EVENT(currentEvent.id)}
             icon={ClipboardDocumentCheckIcon}
           >
             Attendance

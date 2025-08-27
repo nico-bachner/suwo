@@ -1,13 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 
 import { queries } from '@/lib/queries'
 
 export const useCurrentEvent = () => {
-  const { data: events } = useQuery(queries.EVENTS())
-
-  if (!events) {
-    return null
-  }
+  const { data: events } = useSuspenseQuery(queries.EVENTS())
 
   /**
    * The api returns events sorted by start date in ascending order. We want to

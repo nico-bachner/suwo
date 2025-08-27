@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 
 import { UserDTO } from '@/lib/dtos/user_dto_validator'
 import { queries } from '@/lib/queries'
@@ -6,11 +6,7 @@ import { queries } from '@/lib/queries'
 import { UserEventAttended } from './user_event_attended'
 
 export const UserEventsAttended = (user: UserDTO) => {
-  const { data: events } = useQuery(queries.EVENTS())
-
-  if (!events) {
-    return null
-  }
+  const { data: events } = useSuspenseQuery(queries.EVENTS())
 
   return (
     <div className="prose">

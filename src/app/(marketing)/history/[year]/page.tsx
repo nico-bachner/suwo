@@ -9,8 +9,6 @@ import { HistoryYearPage } from '@/lib/pages/history_year_page'
 import { GeneratePageMetadata, GenerateStaticParams } from '@/utils/next'
 import { blocks } from '@/utils/notion'
 
-export const dynamic = 'error'
-
 export const generateStaticParams: GenerateStaticParams<
   '/history/[year]'
 > = async () => {

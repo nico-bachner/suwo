@@ -19,8 +19,6 @@ export const routes = {
   // Events
   EVENTS: () => createURL({ path: ['events'] }),
   EVENT: (id: EventDTO['id']) => createURL({ path: ['events', id] }),
-  EVENT_ATTENDEES: (id: EventDTO['id']) =>
-    createURL({ path: ['events', id, 'attendees'] }),
 
   // History
   HISTORY: () => createURL({ path: ['history'] }),

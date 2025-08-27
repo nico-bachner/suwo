@@ -1,7 +1,7 @@
 'use client'
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 
 import { Divider } from '@/design_system/divider'
@@ -16,11 +16,7 @@ type EventNavigatorProps = {
 
 export const EventNavigator = ({ id, className }: EventNavigatorProps) => {
   const queryClient = useQueryClient()
-  const { data, error, isPending } = useQuery(queries.EVENTS())
-
-  if (error || isPending) {
-    return null
-  }
+  const { data } = useSuspenseQuery(queries.EVENTS())
 
   const index = data.findIndex((event) => event.id === id)
 

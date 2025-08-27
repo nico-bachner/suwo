@@ -56,7 +56,7 @@ export const NavbarMenu = ({ className }: NavbarMenuProps) => {
         <NavbarMenuLink href={routes.PROFILES()}>Members</NavbarMenuLink>
 
         {currentEvent && (
-          <NavbarMenuLink href={routes.EVENT_ATTENDEES(currentEvent.id)}>
+          <NavbarMenuLink href={routes.EVENT(currentEvent.id)}>
             {currentEvent.name} Attendance
           </NavbarMenuLink>
         )}

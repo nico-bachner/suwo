@@ -1,4 +1,4 @@
-import { UseQueryOptions } from '@tanstack/react-query'
+import { UseSuspenseQueryOptions } from '@tanstack/react-query'
 import z from 'zod'
 
 import { createURL } from '@/utils/http/create_url'
@@ -9,7 +9,7 @@ import { EventDTO, EventDTOValidator } from '../dtos/event_dto_validator'
 
 export const eventsQueryKey = () => ['events']
 
-export const eventsQuery = (): UseQueryOptions<EventDTO[]> => ({
+export const eventsQuery = (): UseSuspenseQueryOptions<EventDTO[]> => ({
   queryKey: eventsQueryKey(),
   queryFn: async ({ signal }) => {
     const response = await parseResponse(

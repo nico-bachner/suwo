@@ -4,8 +4,6 @@ import { fetchHistory } from '@/features/marketing/history/fetch_history'
 import { getHistoryYears } from '@/features/marketing/history/get_history_years'
 import { HistoryYearsPage } from '@/lib/pages/history_years_page'
 
-export const dynamic = 'error'
-
 export const metadata: Metadata = {
   title: 'History',
   description: "SUWO's history and milestones over the years.",
