@@ -2,34 +2,51 @@
 
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
+import { useState } from 'react'
 
 import { Button } from '@/design_system/button'
+import { SearchInput } from '@/design_system/input'
+import { Heading } from '@/design_system/typography'
+import { EventAttendee } from '@/features/event/event_attendee'
+import { MarkSelfAsPresent } from '@/features/event/mark_self_as_present'
 import { queries } from '@/lib/queries'
 import { routes } from '@/lib/routes'
 import { formatDateRange } from '@/utils/format_date_range'
+import { search } from '@/utils/search'
 
 import { EventDTO } from '../dtos/event_dto_validator'
 
 export const EventPage = ({ id }: Pick<EventDTO, 'id'>) => {
   const {
+    data: session,
+    error: sessionError,
+    isPending: isSessionPending,
+  } = useQuery(queries.SESSION())
+  const {
     data: event,
     error: eventError,
     isPending: isEventPending,
   } = useQuery(queries.EVENT(id))
+  const {
+    data: users,
+    error: usersError,
+    isPending: isUsersPending,
+  } = useQuery(queries.USERS())
+  const [query, setQuery] = useState('')
 
-  if (isEventPending) {
+  if (sessionError || eventError || usersError) {
     return (
       <main className="prose">
-        <h1>Loading...</h1>
+        <h1>Error</h1>
+        <p>{(sessionError || eventError || usersError)?.message}</p>
       </main>
     )
   }
 
-  if (eventError) {
+  if (isSessionPending || isEventPending || isUsersPending) {
     return (
       <main className="prose">
-        <h1>Error</h1>
-        <p>{eventError.message}</p>
+        <h1>Loading...</h1>
       </main>
     )
   }
@@ -44,25 +61,65 @@ export const EventPage = ({ id }: Pick<EventDTO, 'id'>) => {
   }
 
   return (
-    <main className="prose mx-auto max-w-screen-sm">
-      <h1>{event.name}</h1>
+    <main className="mx-auto flex w-full max-w-screen-lg flex-col gap-8">
+      <Heading
+        as="h1"
+        variant="primary"
+        className="mx-auto w-full max-w-screen-sm"
+      >
+        {event.name}
+      </Heading>
 
-      <p>
+      <p className="mx-auto w-full max-w-screen-sm text-lg">
         {formatDateRange(
           new Date(event.starts_at),
           event.ends_at ? new Date(event.ends_at) : undefined,
         )}
-        {event.location && ` at ${event.location}`}
+        {event.location && ` at ${event.location}`}. <br /> Present:{' '}
+        {`${event.attendees.length}/${users.length}`}
       </p>
 
-      <div className="flex items-center gap-2">
-        <Button variant="primary" asChild className="flex-1">
-          <Link href={routes.EVENTS()}>Back to Events</Link>
+      {session ? (
+        <MarkSelfAsPresent
+          session={session}
+          event={event}
+          className="mx-auto w-full max-w-screen-sm"
+        />
+      ) : (
+        <Button
+          variant="primary"
+          className="mx-auto w-full max-w-screen-sm"
+          asChild
+        >
+          <Link href={routes.LOGIN()}>Login to auto-mark attendance</Link>
         </Button>
+      )}
 
-        <Button variant="primary" asChild className="flex-1">
-          <Link href={routes.EVENT_ATTENDEES(id)}>Attendance Sheet</Link>
-        </Button>
+      <Heading
+        as="h2"
+        variant="secondary"
+        className="mx-auto w-full max-w-screen-sm"
+      >
+        Attendees
+      </Heading>
+
+      <SearchInput
+        value={query}
+        onChange={({ target }) => {
+          setQuery(target.value)
+        }}
+        placeholder="Search by first or last name"
+        className="mx-auto w-full max-w-screen-sm"
+      />
+
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+        {search({
+          data: users.sort((a, b) => b.attendance_rate - a.attendance_rate),
+          keys: ['given_name', 'family_name'],
+          query,
+        }).map((user) => (
+          <EventAttendee key={user.id} event={event} user={user} />
+        ))}
       </div>
     </main>
   )
