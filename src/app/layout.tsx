@@ -12,6 +12,7 @@ import { Footer } from '@/features/navigation/footer'
 import { Navbar } from '@/features/navigation/navbar'
 import { TabBar } from '@/features/navigation/tab_bar'
 import { fetchEvents } from '@/lib/data/fetch_events'
+import { fetchUsers } from '@/lib/data/fetch_users'
 import { queryKeys } from '@/lib/queries'
 import '@/styles/styles.css'
 import { cn } from '@/utils/cn'
@@ -42,10 +43,14 @@ export default async function Layout({ children }: LayoutProps<'/'>) {
   const queryClient = new QueryClient()
 
   /**
-   * Statically prefetch events for the tab bar (to show attendance link for the
-   * current event)
+   * Statically prefetch queries that are commonly used across the app to
+   * improve performance and avoid loading states.
    */
   await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: queryKeys.USERS(),
+      queryFn: fetchUsers,
+    }),
     queryClient.prefetchQuery({
       queryKey: queryKeys.EVENTS(),
       queryFn: fetchEvents,
