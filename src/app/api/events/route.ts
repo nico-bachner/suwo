@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server'
 import z from 'zod'
 
+import { fetchEvents } from '@/lib/data/fetch_events'
 import { createEvent, getEventDTO } from '@/lib/dtos/event_dto'
 import { EventInputValidator } from '@/lib/dtos/event_dto_validator'
 import { createResponse } from '@/utils/http/create_response'
@@ -8,18 +9,11 @@ import { StatusCode } from '@/utils/http/status_code'
 import { prisma } from '@/utils/prisma'
 
 export const GET = async () => {
-  const events = await prisma.event.findMany({
-    orderBy: {
-      starts_at: 'asc',
-    },
-    include: {
-      attendees: true,
-    },
-  })
+  const events = await fetchEvents()
 
   return createResponse({
     status: StatusCode.OK,
-    data: events.map(getEventDTO),
+    data: events,
   })
 }
 
