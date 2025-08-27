@@ -12,6 +12,7 @@ import { Footer } from '@/features/navigation/footer'
 import { Navbar } from '@/features/navigation/navbar'
 import { TabBar } from '@/features/navigation/tab_bar'
 import { fetchEvents } from '@/lib/data/fetch_events'
+import { fetchInstruments } from '@/lib/data/fetch_instruments'
 import { fetchUsers } from '@/lib/data/fetch_users'
 import { queryKeys } from '@/lib/queries'
 import '@/styles/styles.css'
@@ -54,6 +55,10 @@ export default async function Layout({ children }: LayoutProps<'/'>) {
     queryClient.prefetchQuery({
       queryKey: queryKeys.EVENTS(),
       queryFn: fetchEvents,
+    }),
+    queryClient.prefetchQuery({
+      queryKey: queryKeys.INSTRUMENTS(),
+      queryFn: fetchInstruments,
     }),
   ])
 
