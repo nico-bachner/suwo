@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation'
 import { queries } from '@/lib/queries'
 import { routes } from '@/lib/routes'
 
-export default function Layout({ children }: LayoutProps<'/auth'>) {
+export default function Layout({ children }: LayoutProps<'/'>) {
   const { data: session } = useQuery(queries.SESSION())
 
   if (session) {

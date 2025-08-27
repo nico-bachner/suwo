@@ -6,10 +6,10 @@ import { UserDTO } from './dtos/user_dto_validator'
 
 export const routes = {
   // Auth
-  REGISTER: () => createURL({ path: ['auth', 'register'] }),
+  REGISTER: () => createURL({ path: ['register'] }),
   LOGIN: (method?: LoginMethod) =>
     createURL({
-      path: ['auth', 'login'],
+      path: ['login'],
       query: { method },
     }),
 

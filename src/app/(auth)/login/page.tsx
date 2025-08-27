@@ -7,7 +7,7 @@ import { LoginScreen } from '@/features/auth/login_screen'
 import { routes } from '@/lib/routes'
 import { cn } from '@/utils/cn'
 
-export default async function Page({ searchParams }: PageProps<'/auth/login'>) {
+export default async function Page({ searchParams }: PageProps<'/login'>) {
   const { method } = await searchParams
 
   return (
