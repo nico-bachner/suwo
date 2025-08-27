@@ -6,10 +6,18 @@ import {
 
 import { fetchInstruments } from '@/lib/data/fetch_instruments'
 import { fetchUser } from '@/lib/data/fetch_user'
+import { fetchUsers } from '@/lib/data/fetch_users'
 import { ProfileEditPage } from '@/lib/pages/profile_edit_page'
 import { queryKeys } from '@/lib/queries'
+import { GenerateStaticParams } from '@/utils/next'
 
-export const dynamic = 'error'
+export const generateStaticParams: GenerateStaticParams<
+  '/members/[id]/edit'
+> = async () => {
+  const users = await fetchUsers()
+
+  return users
+}
 
 export default async function Page({ params }: PageProps<'/members/[id]'>) {
   const { id } = await params
