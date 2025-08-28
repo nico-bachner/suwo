@@ -31,6 +31,8 @@ export const usersMutation = (
         return UserDTOValidator.parse(response.data)
       case StatusCode.BadRequest:
         throw new Error(response.error)
+      case StatusCode.Conflict:
+        throw new Error(response.error)
       default:
         throw new Error('Failed to fetch data')
     }
