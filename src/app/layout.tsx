@@ -47,12 +47,12 @@ export default async function Layout({ children }: LayoutProps<'/'>) {
    * Statically prefetch queries that are commonly used across the app to
    * improve performance and avoid loading states.
    */
-  const [users, events] = await Promise.all([
-    queryClient.fetchQuery({
+  await Promise.all([
+    queryClient.prefetchQuery({
       queryKey: queryKeys.USERS(),
       queryFn: fetchUsers,
     }),
-    queryClient.fetchQuery({
+    queryClient.prefetchQuery({
       queryKey: queryKeys.EVENTS(),
       queryFn: fetchEvents,
     }),
@@ -61,14 +61,6 @@ export default async function Layout({ children }: LayoutProps<'/'>) {
       queryFn: fetchInstruments,
     }),
   ])
-
-  /** Prime each individual query by pre-populating the query cache with data */
-  users.forEach((user) => {
-    queryClient.setQueryData(queryKeys.USER(user.id), user)
-  })
-  events.forEach((event) => {
-    queryClient.setQueryData(queryKeys.EVENT(event.id), event)
-  })
 
   return (
     <html lang="en">
