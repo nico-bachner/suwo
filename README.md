@@ -58,7 +58,7 @@ life.
 - **Code Quality**: [ESLint](https://eslint.org/),
   [Prettier](https://prettier.io/)
 - **Documentation**: [Storybook](https://storybook.js.org/) for component
-  documentation
+  documentation ([view our Storybook](https://design.suwo.org.au))
 - **Deployment**: [Vercel](https://vercel.com/)
 - **Monitoring**: [Vercel Analytics](https://vercel.com/analytics)
 
@@ -122,6 +122,22 @@ suwo/
 ├── prettier.config.mjs           # Prettier configuration
 └── tsconfig.json                 # TypeScript configuration
 ```
+
+### Design System Directory
+
+Components live under `src/design_system/`. Each primitive or component has its
+own folder (for example, `button`, `checkbox`, or `dialog`) that includes:
+
+- the implementation file (`*.tsx`)
+- an `index.ts` barrel for exports
+- `types.ts` for shared types
+- a `*.stories.tsx` file for Storybook documentation
+- optional helpers in `utils/` or additional variant files
+
+Some folders, such as `input/` or `icons/`, group related variations, while
+shared layout pieces like `section.tsx` and `settings_section.tsx` live directly
+in the directory root. Browse the full catalogue in our
+[Storybook](https://design.suwo.org.au).
 
 ## 🛠️ Development Setup
 
