@@ -5,8 +5,8 @@ import {
   CalendarDaysIcon,
   ClipboardDocumentCheckIcon,
   CogIcon,
+  HomeModernIcon,
   UserIcon,
-  UsersIcon,
 } from '@heroicons/react/24/outline'
 import { useQuery } from '@tanstack/react-query'
 
@@ -35,32 +35,18 @@ export const TabBar = ({ className }: TabBarProps) => {
         className,
       )}
     >
-      {session ? (
-        currentEvent && (
-          <TabBarLink
-            href={routes.EVENT(currentEvent.id)}
-            icon={ClipboardDocumentCheckIcon}
-          >
-            Attendance
-          </TabBarLink>
-        )
-      ) : (
-        <TabBarLink href={routes.HISTORY()} icon={BookOpenIcon}>
-          History
-        </TabBarLink>
-      )}
+      <TabBarLink
+        href={session ? routes.USER_HOME(session.user_id) : routes.HOME()}
+        icon={HomeModernIcon}
+      >
+        Home
+      </TabBarLink>
 
       <Divider orientation="vertical" className="h-1/2" />
 
-      {session ? (
-        <TabBarLink href={routes.EVENTS()} icon={CalendarDaysIcon}>
-          Events
-        </TabBarLink>
-      ) : (
-        <TabBarLink href={routes.PROFILES()} icon={UsersIcon}>
-          Members
-        </TabBarLink>
-      )}
+      <TabBarLink href={routes.HISTORY()} icon={BookOpenIcon}>
+        History
+      </TabBarLink>
 
       <Divider orientation="vertical" className="h-1/2" />
 

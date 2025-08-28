@@ -38,4 +38,7 @@ export const routes = {
 
   // Settings
   SETTINGS: () => createURL({ path: ['settings'] }),
+
+  // User
+  USER_HOME: (id: UserDTO['id']) => createURL({ path: [id] }),
 }

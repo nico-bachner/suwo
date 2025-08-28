@@ -40,7 +40,11 @@ export const Navbar = ({ className }: NavbarProps) => {
       </Link>
 
       <div className="hidden items-center gap-4 md:flex">
-        {!session && <NavbarLink href={routes.HISTORY()}>History</NavbarLink>}
+        {session ? (
+          <NavbarLink href={routes.USER_HOME(session.user_id)}>Home</NavbarLink>
+        ) : (
+          <NavbarLink href={routes.HISTORY()}>History</NavbarLink>
+        )}
         <NavbarLink href={routes.PROFILES()}>Members</NavbarLink>
         <NavbarLink href={routes.EVENTS()}>Events</NavbarLink>
         {currentEvent && (
