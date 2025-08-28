@@ -81,7 +81,7 @@ export const EventPage = ({ id }: Pick<EventDTO, 'id'>) => {
 
       {session ? (
         <MarkSelfAsPresent
-          session={session}
+          user_id={session.id}
           event={event}
           className="mx-auto w-full max-w-screen-sm"
         />
