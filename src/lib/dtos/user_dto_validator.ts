@@ -34,13 +34,10 @@ export const UserInputValidator = z.object({
 
   // Optional Attributes
   family_name: z
-    .string()
-    .trim()
-    .transform((val) => (val === '' ? null : val))
+    .union([z.literal('').transform(() => null), z.string().trim()])
     .optional(),
   password: z
-    .string()
-    .transform((val) => (val === '' ? null : val))
+    .union([z.literal('').transform(() => null), z.string()])
     .optional(),
   usu_number: z
     .union([
