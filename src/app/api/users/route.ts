@@ -32,16 +32,32 @@ export const POST = async (request: NextRequest) => {
 
   const dbUser = await createUser(data)
 
-  const existingUser = await prisma.user.findUnique({
-    where: {
-      email: dbUser.email,
-    },
-  })
+  const [userWithConflictingEmail, userWithConflictingUSUNumber] =
+    await Promise.all([
+      prisma.user.findUnique({
+        where: {
+          email: dbUser.email,
+        },
+      }),
+      dbUser.usu_number &&
+        prisma.user.findUnique({
+          where: {
+            usu_number: dbUser.usu_number,
+          },
+        }),
+    ])
 
-  if (existingUser) {
+  if (userWithConflictingEmail) {
     return createResponse({
       status: StatusCode.Conflict,
-      error: `Email ${existingUser.email} already in use. Please try again with another email address.\n\nIf you are sure the email is correct, try logging in instead.`,
+      error: `Email ${userWithConflictingEmail.email} already in use. Please try again with another email address.\n\nIf you are sure the email is correct, try logging in instead.`,
+    })
+  }
+
+  if (userWithConflictingUSUNumber && userWithConflictingUSUNumber.usu_number) {
+    return createResponse({
+      status: StatusCode.Conflict,
+      error: `USU Number ${userWithConflictingUSUNumber.usu_number} already in use.\n\nIf you are sure the USU Number is correct, you may already have an existing account.`,
     })
   }
 
