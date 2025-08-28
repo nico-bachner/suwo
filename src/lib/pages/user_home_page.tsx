@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 import { Section } from '@/design_system/section'
 import { Heading } from '@/design_system/typography'
+import { getUpcomingEvents } from '@/features/event/get_upcoming_events'
 import { cn } from '@/utils/cn'
 
 import { UserDTO } from '../dtos/user_dto_validator'
@@ -54,14 +55,7 @@ export const UserHomePage = ({ id }: Pick<UserDTO, 'id'>) => {
           Upcoming Events
         </Heading>
 
-        {events
-          .filter((event) => {
-            if (event.ends_at) {
-              return new Date(event.ends_at) >= new Date()
-            }
-
-            return new Date(event.starts_at) >= new Date()
-          })
+        {getUpcomingEvents(events)
           .slice(0, 3)
           .map((event) => (
             <Link
