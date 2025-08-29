@@ -26,7 +26,7 @@ export const Navbar = ({ className }: NavbarProps) => {
       className={cn(
         'bg-neutral-5/20 border-neutral-2/20 rounded-full border backdrop-blur',
         'mx-auto w-[calc(100%-16px)] max-w-screen-lg',
-        'h-16 pr-3 pl-4 md:h-20 md:pr-5',
+        'h-16 px-4 md:h-20 md:px-5',
         'flex items-center justify-between gap-2',
         className,
       )}
@@ -36,7 +36,7 @@ export const Navbar = ({ className }: NavbarProps) => {
         title="Home"
         className="outline-primary-1 rounded-full outline-offset-4 focus-visible:outline-4"
       >
-        <SUWOIcon className="size-12" />
+        <SUWOIcon className="-m-1 size-14 md:size-16" />
       </Link>
 
       <div className="hidden items-center gap-4 md:flex">
