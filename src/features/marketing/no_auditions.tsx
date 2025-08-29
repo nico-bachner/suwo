@@ -35,7 +35,7 @@ export const NoAuditions = () => {
       src={no_auditions}
       alt="No Auditions"
       className={cn(
-        'fixed bottom-0 left-0 z-20 w-[min(70vw,40vh)] transition-transform duration-1000',
+        'fixed bottom-0 left-0 z-20 w-[min(70vw,40vh)] contrast-150 transition-transform duration-1000',
         getPosition(position),
       )}
       onClick={() => {
