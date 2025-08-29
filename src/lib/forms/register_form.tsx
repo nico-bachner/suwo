@@ -6,25 +6,29 @@ import { Button } from '@/design_system/button'
 import { Switch } from '@/design_system/switch'
 import { queries } from '@/lib/queries'
 
+import { UserInput, UserInputValidator } from '../dtos/user_dto_validator'
 import { mutations } from '../mutations'
 import { useAppForm } from './context'
 
 export const RegisterForm = () => {
   const queryClient = useQueryClient()
   const { mutate: createUser } = useMutation(mutations.USERS(queryClient))
-  const { data: instruments, isPending: isInstrumentsPending } = useQuery(
-    queries.INSTRUMENTS(),
-  )
+  const { data: instruments } = useQuery(queries.INSTRUMENTS())
+
+  const defaultValues: UserInput = {
+    email: '',
+    given_name: '',
+    mailing_list_preference: true,
+    family_name: '',
+    password: '',
+    usu_number: '',
+    instruments: [],
+  }
 
   const form = useAppForm({
-    defaultValues: {
-      email: '',
-      given_name: '',
-      mailing_list_preference: true,
-      family_name: '',
-      password: '',
-      usu_number: '',
-      instruments: [] as string[],
+    defaultValues,
+    validators: {
+      onSubmit: UserInputValidator,
     },
     onSubmit: ({ value }) => {
       createUser(value)
@@ -61,7 +65,10 @@ export const RegisterForm = () => {
           )}
         </form.AppField>
 
-        <form.AppField name="email">
+        <form.AppField
+          name="email"
+          validators={{ onBlur: UserInputValidator.shape.email }}
+        >
           {(field) => (
             <field.Email
               label="Email Address"
@@ -71,7 +78,10 @@ export const RegisterForm = () => {
           )}
         </form.AppField>
 
-        <form.AppField name="usu_number">
+        <form.AppField
+          name="usu_number"
+          validators={{ onBlur: UserInputValidator.shape.usu_number }}
+        >
           {(field) => (
             <field.Text
               label="USU Number"
@@ -86,31 +96,29 @@ export const RegisterForm = () => {
       <form.Field name="instruments">
         {({ state, handleChange }) => (
           <div className="grid grid-cols-2 gap-2 @lg:grid-cols-3 @2xl:grid-cols-4 @4xl:grid-cols-5">
-            {isInstrumentsPending
-              ? Array.from({ length: 30 }, (_, index) => (
-                  <Button key={index} variant="secondary">
-                    Loading...
-                  </Button>
-                ))
-              : instruments?.map((instrument) => (
-                  <Button
-                    key={instrument.id}
-                    variant={
-                      state.value.includes(instrument.id)
-                        ? 'success'
-                        : 'secondary'
+            {instruments?.map((instrument) => (
+              <Button
+                key={instrument.id}
+                variant={
+                  state.value?.includes(instrument.id) ? 'success' : 'secondary'
+                }
+                onClick={() => {
+                  handleChange((prev) => {
+                    if (!prev) {
+                      return [instrument.id]
                     }
-                    onClick={() => {
-                      handleChange((prev) =>
-                        prev.includes(instrument.id)
-                          ? prev.filter((id) => id !== instrument.id)
-                          : [...prev, instrument.id],
-                      )
-                    }}
-                  >
-                    {instrument.name}
-                  </Button>
-                ))}
+
+                    if (prev.includes(instrument.id)) {
+                      return prev.filter((id) => id !== instrument.id)
+                    }
+
+                    return [...prev, instrument.id]
+                  })
+                }}
+              >
+                {instrument.name}
+              </Button>
+            ))}
           </div>
         )}
       </form.Field>
