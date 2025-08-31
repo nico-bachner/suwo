@@ -87,8 +87,8 @@ suwo/
 ├── src/
 │   ├── app/                      # Next.js App Router pages
 │   │   ├── (app)/                # Authenticated app pages
-│   │   │   ├── attendance/       # Roll call and attendance management
-│   │   │   ├── equipment/        # Equipment inventory
+│   │   │   ├── calendar/         # Rehearsal calendar
+│   │   │   ├── events/           # Event management
 │   │   │   ├── mailing-list/     # Mailing list admin
 │   │   │   ├── members/          # Member directory
 │   │   │   └── settings/         # Account settings
@@ -97,28 +97,30 @@ suwo/
 │   │   └── api/                  # API routes
 │   ├── design_system/            # Reusable UI components
 │   ├── features/                 # Feature-specific modules
-│   │   ├── attendance/
 │   │   ├── auth/
+│   │   ├── event/
 │   │   ├── marketing/
 │   │   ├── navigation/
-│   │   ├── profile/
-│   │   └── usyd_api_wrapper/     # USYD calendar helpers
-│   ├── icons/                    # SUWO-specific SVG icons
+│   │   └── user/
 │   ├── generated/                # Prisma output – ignore this
 │   ├── lib/
-│   │   ├── forms/                # Tanstack Form forms
-│   │   ├── mutations/            # Tanstack Query mutations
-│   │   ├── queries/              # Tanstack Query queries
-│   │   └── validators/           # Zod schema validators
+│   │   ├── data/                 # Data fetching helpers
+│   │   ├── dtos/                 # Data transfer objects & validators
+│   │   ├── forms/                # TanStack Form forms
+│   │   ├── mutations/            # TanStack Query mutations
+│   │   ├── pages/                # Page-specific helpers
+│   │   └── queries/              # TanStack Query queries
 │   ├── styles/                   # Global styles and design tokens
 │   ├── utils/                    # Utility functions and helpers
 │   ├── config.ts                 # Application configuration
 │   └── routes.ts                 # Application route definitions
-├── .env.local                    # Environment variables (local)
 ├── .gitignore                    # Git ignore rules
 ├── eslint.config.mjs             # ESLint configuration
 ├── next.config.ts                # Next.js configuration
 ├── package.json                  # Project dependencies and scripts
+├── pnpm-lock.yaml                # Lockfile
+├── pnpm-workspace.yaml           # Workspace configuration
+├── postcss.config.mjs            # Tailwind/PostCSS configuration
 ├── prettier.config.mjs           # Prettier configuration
 └── tsconfig.json                 # TypeScript configuration
 ```
