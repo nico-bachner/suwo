@@ -1,5 +1,6 @@
 'use client'
 
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { ReactNode } from 'react'
 
@@ -20,13 +21,15 @@ export const FooterLink = ({ children, href, external }: FooterLinkProps) => {
       <a
         href={href}
         className={cn(
-          'text-lg outline-none hover:underline focus:underline',
+          'flex flex-row items-center gap-2 text-lg outline-none hover:underline focus:underline',
           isActive && 'text-primary-2',
         )}
         target="_blank"
         rel="noopener noreferrer"
       >
         {children}
+
+        <ArrowTopRightOnSquareIcon className="size-4" />
       </a>
     )
   }
