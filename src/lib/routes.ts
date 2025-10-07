@@ -41,4 +41,7 @@ export const routes = {
 
   // User
   USER_HOME: (id: UserDTO['id']) => createURL({ path: [id] }),
+
+  // Static Assets
+  CONSTITUTION: () => createURL({ path: ['constitution.pdf'] }),
 }

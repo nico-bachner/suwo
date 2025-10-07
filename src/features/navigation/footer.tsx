@@ -28,6 +28,9 @@ export const Footer = ({ className }: FooterProps) => (
         <FooterLink href={routes.HOME()}>About Us</FooterLink>
         <FooterLink href={routes.HISTORY()}>Our History</FooterLink>
         <FooterLink href={routes.PROFILES()}>Our Members</FooterLink>
+        <FooterLink href={routes.CONSTITUTION()} external>
+          Our Constitution
+        </FooterLink>
         <FooterLink href={routes.REGISTER()}>Join Us</FooterLink>
       </div>
 
