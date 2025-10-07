@@ -4,6 +4,7 @@ import {
   QueryClient,
 } from '@tanstack/react-query'
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import { Kode_Mono, Limelight, Raleway } from 'next/font/google'
 import { Toaster } from 'sonner'
@@ -84,6 +85,7 @@ export default async function Layout({ children }: LayoutProps<'/'>) {
         <Toaster />
 
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
