@@ -24,3 +24,5 @@ storybook-static/
 
 # Other
 .DS_Store
+.vercel
+.env*.local
