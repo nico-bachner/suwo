@@ -107,7 +107,7 @@ export const FAQsSection = () => (
       <AccordionItem value="q_8">
         <AccordionTrigger>Who is the President?</AccordionTrigger>
         <AccordionContent>
-          The President of SUWO is currently <strong> Yinfan </strong>
+          The President of SUWO is currently <strong> Yinfan</strong>
           {/* The President of SUWO is currently me, <strong>Ambrose</strong>. You
           may know me as the guy holding the <em>no auditions</em> sign. Please
           recommend me a new breakfast cereal at{' '}
