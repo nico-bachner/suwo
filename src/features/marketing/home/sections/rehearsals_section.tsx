@@ -14,7 +14,7 @@ export const RehearsalsSection = () => (
     </p>
 
     <p>
-      <strong> SUBJECT TO CHANGE </strong> <br/>
+      <strong> SUBJECT TO CHANGE - Check our Instagram for updates </strong> <br/>
       Week 3+ - Fridays 17:00-20:00 <br/>
       Holme Building Reading Room
     </p>
