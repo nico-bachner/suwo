@@ -109,7 +109,7 @@ export const FAQsSection = () => (
           <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
             @suwo.syd
           </a>{' '}
-          ,or email us at{' '}
+          , or email us at{' '}
           <a
             href={GENERAL_EMAIL}
             className="text-primary-2 outline-none hover:underline focus:underline"

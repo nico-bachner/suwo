@@ -2,11 +2,21 @@ import { Section } from '@/design_system/section'
 
 export const RehearsalsSection = () => (
   <Section className="prose mx-auto w-full max-w-screen-lg">
-    <h2>Rehearsals</h2>
+    <h2>Rehearsals - Semester 1 2026</h2>
     <p>
-      We rehearse every <strong>Thursday evening at 17:00</strong>, however our
-      current rehearsal venue is TBC for this year. We will provide an update
-      once the venue has been confirmed.
+      Week 1 - Friday 27 February 17:00-20:00 <br/>
+      Holme Building Reading Room
+    </p>
+
+    <p>
+      Week 2 - Thursday 5 March 17:00-20:00 <br/>
+      Sydney Park Pavillion
+    </p>
+
+    <p>
+      <strong> SUBJECT TO CHANGE </strong> <br/>
+      Week 3+ - Fridays 17:00-20:00 <br/>
+      Holme Building Reading Room
     </p>
 
     <p>
