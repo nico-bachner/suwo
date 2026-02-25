@@ -1,5 +1,5 @@
+import { INSTAGRAM_URL } from '@/config'
 import { Section } from '@/design_system/section'
-import { INSTAGRAM_URL } from './faqs_section'
 
 export const RehearsalsSection = () => (
   <Section className="prose mx-auto w-full max-w-screen-lg">
