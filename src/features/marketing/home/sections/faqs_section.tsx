@@ -12,9 +12,9 @@ const SUWO_MYTHS_AND_LEGENDS_URL =
   'https://www.youtube.com/watch?v=tV0wRy84odo&list=PLAFBGwTsPuUE7Zv4iVroEbBGGGpjzRU6W'
 const SUWO_BY_THE_SEA_URL =
   'https://www.youtube.com/watch?v=5lhicfFvAJc&list=PLAFBGwTsPuUEbb-nMoywriv12C_nO7uK3'
-const INSTAGRAM_URL = 'https://www.instagram.com/suwo.syd/'
+export const INSTAGRAM_URL = 'https://www.instagram.com/suwo.syd/'
 const PRESIDENT_EMAIL = 'mailto:president@suwo.org.au'
-const GENERAL_EMAIL = 'mailto:general@swuo.org.au'
+const GENERAL_EMAIL = 'mailto:general@suwo.org.au'
 
 export const FAQsSection = () => (
   <Section className="prose mx-auto w-full max-w-screen-sm">
