@@ -20,6 +20,8 @@ const makeQueryClient = () =>
 let browserQueryClient: QueryClient | undefined
 
 const getQueryClient = () => {
+  // This is an upstream issue with react query itself
+  // eslint-disable-next-line typescript/no-deprecated
   if (isServer) {
     return makeQueryClient()
   }
