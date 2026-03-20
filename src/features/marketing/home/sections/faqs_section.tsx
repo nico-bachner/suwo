@@ -7,13 +7,10 @@ import {
 } from '@/design_system/accordion'
 import { Section } from '@/design_system/section'
 
-// const GOOGLE_MAPS_URL =
-// "https://www.google.com/maps/place/Gillespie+Hall+-+St+Andrew's+College+CG5G/@-33.8899403,151.1850839,20z/data=!3m1!5s0x6b12b02ce82abfc7:0x250933fbe0fcf6b2!4m6!3m5!1s0x6b12b1af5537cc19:0x2dcf6e63ca183361!8m2!3d-33.8898771!4d151.1854906!16s%2Fg%2F11gy07j87q"
 const SUWO_MYTHS_AND_LEGENDS_URL =
   'https://www.youtube.com/watch?v=tV0wRy84odo&list=PLAFBGwTsPuUE7Zv4iVroEbBGGGpjzRU6W'
 const SUWO_BY_THE_SEA_URL =
   'https://www.youtube.com/watch?v=5lhicfFvAJc&list=PLAFBGwTsPuUEbb-nMoywriv12C_nO7uK3'
-const PRESIDENT_EMAIL = 'mailto:president@suwo.org.au'
 const GENERAL_EMAIL = 'mailto:general@suwo.org.au'
 
 export const FAQsSection = () => (

@@ -1,7 +1,7 @@
+import { ActivitiesSection } from '@/features/marketing/home/sections/activities_section'
 import { ConcertExcerptSection } from '@/features/marketing/home/sections/concert_excerpt_section'
 import { FAQsSection } from '@/features/marketing/home/sections/faqs_section'
 import { JoinSection } from '@/features/marketing/home/sections/join_section'
-import { RehearsalsSection } from '@/features/marketing/home/sections/rehearsals_section'
 
 export const HomePage = () => (
   <main className="flex flex-col gap-8">
@@ -18,7 +18,7 @@ export const HomePage = () => (
 
     <JoinSection />
 
-    <RehearsalsSection />
+    <ActivitiesSection />
 
     <ConcertExcerptSection />
 
