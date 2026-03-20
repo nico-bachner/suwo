@@ -9,6 +9,7 @@ export const RESEND_DOMAIN = 'transactional.suwo.org.au'
 // Copy
 export const FULL_NAME = 'The University of Sydney Wind Orchestra'
 export const SHORT_NAME = 'Sydney University Wind Orchestra'
+export const INSTAGRAM_URL = 'https://www.instagram.com/suwo.syd/'
 export const ACRONYM = 'SUWO'
 export const FOUNDING_YEAR = 2003
 
