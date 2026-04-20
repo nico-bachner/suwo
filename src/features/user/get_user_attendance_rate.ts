@@ -6,26 +6,34 @@ export const getUserAttendanceRate = (
   },
   events: Event[],
 ) => {
-  const pastEventsSinceAccountCreation = events.filter((event) => {
+  const pastEventsSinceSemesterStart = events.filter((event) => {
     const eventDate = new Date(event.starts_at).getTime()
-    const accountCreationDate = new Date(user.created_at).getTime()
     const now = Date.now()
 
-    return eventDate > accountCreationDate && eventDate < now
+    const semesterStartCalc = (): Date => {
+      const now = new Date()
+      const month = now.getMonth()
+      const year = now.getFullYear()
+
+      return new Date(year, month <= 5 ? 0 : 6, 1)
+    }
+
+    const semesterStart = semesterStartCalc().getTime()
+
+    return eventDate > semesterStart && eventDate < now
   })
 
-  if (pastEventsSinceAccountCreation.length === 0) {
+  if (pastEventsSinceSemesterStart.length === 0) {
     return 100
   }
 
-  const eventsAttendedSinceAccountCreation =
-    pastEventsSinceAccountCreation.filter((event) =>
-      user.events.some(({ id }) => id === event.id),
-    )
+  const eventsAttendedSinceSemesterStart = pastEventsSinceSemesterStart.filter(
+    (event) => user.events.some(({ id }) => id === event.id),
+  )
 
   const ratio =
-    eventsAttendedSinceAccountCreation.length /
-    pastEventsSinceAccountCreation.length
+    eventsAttendedSinceSemesterStart.length /
+    pastEventsSinceSemesterStart.length
 
   return Math.round(ratio * 100)
 }
