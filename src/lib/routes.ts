@@ -5,6 +5,9 @@ import { EventDTO } from './dtos/event_dto_validator'
 import { UserDTO } from './dtos/user_dto_validator'
 
 export const routes = {
+  // Attendance
+  ATTENDANCE_TRACKER: () => createURL({ path: ['attendance-tracker'] }),
+
   // Auth
   REGISTER: () => createURL({ path: ['register'] }),
   LOGIN: (method?: LoginMethod) =>
