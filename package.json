@@ -62,7 +62,7 @@
     "eslint": "^9.39.4",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
-    "postcss": "^8.5.8",
+    "postcss": "^8.5.10",
     "prettier": "^3.8.1",
     "prettier-plugin-jsdoc": "^1.8.0",
     "prettier-plugin-tailwindcss": "^0.7.2",
