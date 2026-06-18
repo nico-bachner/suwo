@@ -11,7 +11,7 @@ export const ActivitiesSection = () => (
     <p>
       We rehearse every{' '}
       <strong>
-        Friday evening from 17:00 to 20:00 at the Holme Building Reading Room
+        Thursday evening from 17:00 to 20:00 at the Holme Building Reading Room.
       </strong>{' '}
       (see{' '}
       <Link

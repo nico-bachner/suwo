@@ -21,8 +21,8 @@ export const FAQsSection = () => (
       <AccordionItem value="q_1">
         <AccordionTrigger>Where are rehearsals held?</AccordionTrigger>
         <AccordionContent>
-          The rehearsal location for this year is currently TBC, we will update
-          this page once this has been confirmed.
+          The rehearsal location for this year is the Holme Building Reading
+          Room.
         </AccordionContent>
       </AccordionItem>
 
