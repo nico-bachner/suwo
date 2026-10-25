@@ -29,6 +29,8 @@ jobs:
       - run: npm i -g vercel@latest
       - name: Pull Vercel environment
         run: vercel pull --yes --environment=$VERCEL_ENV --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Check unpooled database URL
+        run: grep -q '^DATABASE_URL_UNPOOLED=' .vercel/.env.$VERCEL_ENV.local || { echo "::error::DATABASE_URL_UNPOOLED is not set in the Vercel $VERCEL_ENV environment"; exit 1; }
       - name: Build
         run: vercel build $PROD_FLAG --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy
