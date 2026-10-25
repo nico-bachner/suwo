@@ -2,6 +2,7 @@ import { cn } from '@/utils/cn'
 
 import { TextInputProps } from './types'
 
+// Text input here
 export const TextInput = ({
   issues,
   name,
